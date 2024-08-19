@@ -29,7 +29,21 @@
     - create object with a given handle, checking in case such an object already
     exists<br>
     - available spaces for new objects should be stored in a double-linked list
+<br><br>
+    - fast - prefer macros to small function calls?
+    Features not needed:<br>
+    <br>
+    - thread safety - threads share by communicating, not the reverse<br>
 <br>
+generic function prototypes://TODO
+
+    flag Pool_newPool(void** address, int sizeof, int level1, int level2);
+    flag Pool_deletePool(void* pool);
+    flag Pool_clearPool(void* pool);
+    flag Pool_deleteA(void* pool, void* address);
+    flag Pool_deleteH(void* pool, Handle handle);
+    flag Pool_getAddress(void** address, Handle handle);
+    flag Pool_getHandle(void* handle, void* address);
 
 
 
