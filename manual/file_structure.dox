@@ -1,10 +1,14 @@
 /** \page Directory Structure
 
-/engine - code used in the game engine
-    /data - structures containing mostly game data
+/engine - code used in the game engine, folders represent different systems in
+the Entity-Component-System model, or shared code.
+    /data - structures containing mostly game settings
     /logic - reusable data structures and algorithms
     /userinterface - code to support things like buttons and text boxes
-    /gameworld - code to support things like the player character and monsters
+    /gameworld - code to update things like the player character and monsters
+    /geometry - manipulating coordinates in 2.5d space
+    /graphics - drawing the gameworld to the screen.
+    /
 
 /games - games created to run on the engine
     /game - one such game
