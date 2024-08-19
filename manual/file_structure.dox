@@ -8,8 +8,7 @@ the Entity-Component-System model, or shared code.
     /gameworld - code to update things like the player character and monsters
     /geometry - manipulating coordinates in 2.5d space
     /graphics - drawing the gameworld to the screen.
-    /
-
+    /???
 /games - games created to run on the engine
     /game - one such game
         /graphics - data shared between maps in one game
