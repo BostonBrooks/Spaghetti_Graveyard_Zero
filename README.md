@@ -1,7 +1,6 @@
 # Spaghetti-Graveyard-UI
-This repository contains experimental code the will inform the user interface of the final project
 
-Spaghetti Graveyard Zero will be the third iteration of a project I started around the year 2018.
+Spaghetti Graveyard Zero will be the Nth iteration of a project I started around the year 2018.
 The project is an action RPG game that quizes you on mathematics skills (numeracy).
 
 Spaghetti - Because I did not know much about how write well structured code at the start of this project.
