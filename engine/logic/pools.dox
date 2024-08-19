@@ -1,0 +1,39 @@
+/** \page Pools
+
+    There are a few different options for storing objects in pools<br>
+<br>
+    Do we want to store objects in a flat array or an array of arrays? Do we
+    want to address objects by 64 bit memory locations or an index into the
+    array? Do we wish to include handles with checking bits in case of
+    deallocate-reallocate collisions? How much meta-information is included
+    inside an object in the pool?<br>
+<br>
+    I propose a common interface so different kinds of pool can be implemented
+    and swapped in and out on a per-system basis.<br>
+<br>
+    Necessary actions performed by a pool:<br>
+<br>
+    - create pool<br>
+    - clear / delete pool<br>
+    - create object<br>
+    - delete object<br>
+    - convert between memory address, pool index and handle<br>
+<br>
+    Other features that may come in handy:<br>
+<br>
+    - query object to find out what pool it belongs to<br>
+    - query object to see what map it belongs to (we could just assume
+    everything is in the same map and use thread local variables) <br>
+    - query object to see what system/class it belongs to<br>
+<br>
+    - create object with a given handle, checking in case such an object already
+    exists<br>
+    - available spaces for new objects should be stored in a double-linked list
+<br>
+
+
+
+
+
+*/
+

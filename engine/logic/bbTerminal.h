@@ -49,7 +49,6 @@ static void bbVerbose(const char* format, ...){
 
 }
 
-/// Print warning and exit TODO read pg 134?
 #define bbAssert(expression, ...)                        \
     {                                                    \
         if (!(expression)){                              \
