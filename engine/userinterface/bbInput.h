@@ -1,3 +1,0 @@
-/**
- * @brief sfRenderWindow_pollEvent()
- */
