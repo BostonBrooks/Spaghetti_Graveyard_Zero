@@ -38,17 +38,12 @@
 <br>
 generic function prototypes://TODO
 
-    flag Pool_newPool(void** address, int sizeof, int level1, int level2);
+    flag Pool_newPool(void** pool, int sizeof, int level1, int level2);
     flag Pool_deletePool(void* pool);
     flag Pool_clearPool(void* pool);
     flag Pool_deleteA(void* pool, void* address);
     flag Pool_deleteH(void* pool, Handle handle);
-    flag Pool_getAddress(void** address, Handle handle);
-    flag Pool_getHandle(void* handle, void* address);
-
-
-
-
-
+    flag Pool_getAddress(void* pool, void** address, Handle handle);
+    flag Pool_getHandle(void* pool, void* handle, void* address);
 */
 
