@@ -14,11 +14,12 @@
 #include <stdio.h>
 #include <stdarg.h>
 #include <assert.h>
+#include <stdlib.h>
 #include "engine/logic/bbIntTypes.h"
 #include "engine/logic/bbString.h"
 
 
-static const int stringLength 512;
+static const int stringLength = 512;
 
 ///Same as bbDebug but with the DEBUG: tag
 #define bbPrintf printf
@@ -27,35 +28,49 @@ static const int stringLength 512;
     #define bbVerbose printf
 #endif
 
-
-#define bbAssert(expression, ...)                        \
-    {                                                    \
-        if (!(expression)){                              \
-            char assertstring[stringLength] = "ASSERTION: ";\
-            sprintf(&assertstring[10], __VA_ARGS__);      \
-            printf("%s", asseetstring);                  \
-        }                                                \
-        assert(expression);                              \
+/// Print warning and exit
+#define bbAssert(expression, ...)\
+    {\
+        if (!(expression)){\
+            char string1[stringLength];\
+            char string2[stringLength];\
+	        sprintf (string1, "In FILE: %s, FUNCTION: %s, LINE: %d,"\
+            "\nASSERTION: %s, ", __FILE_NAME__, __func__, __LINE__,\
+            #expression );\
+\
+            sprintf(string2, __VA_ARGS__);\
+\
+            printf("%s%s", string1, string2);\
+            exit(1);\
+        }\
     }
+
 /// Print warning and continue
-#define bbWarning(expression, ...)                   \
-	if (!(expression)){                              \
-		printf("WARNING: ");                         \
-	printf(__VA_ARGS__);                             \
-	}
+#define bbWarning(expression, ...)\
+    {\
+        if (!(expression)){\
+            char string1[stringLength];\
+            char string2[stringLength];\
+	        sprintf (string1, "In FILE: %s, FUNCTION: %s, LINE: %d,"\
+            "\nWARNING: %s, ", __FILE_NAME__, __func__, __LINE__, #expression);\
+\
+            sprintf(string2, __VA_ARGS__);\
+\
+            printf("%s%s", string1, string2);\
+        }\
+    }
 
-#define bbDebug(...) \
-                     \
-	printf ("FILE: %s,\tFUNCTION: %s,\tLINE: %d,\nDEBUG: ", __FILE_NAME__, __func__, __LINE__);\
-	printf (__VA_ARGS__);
+#define bbDebug(...) {\
+    char string1[stringLength];\
+    char string2[stringLength];\
+	sprintf (string1, "In FILE: %s, FUNCTION: %s, LINE: %d,\nDEBUG: ",\
+        __FILE_NAME__, __func__, __LINE__);\
+	sprintf (string2, __VA_ARGS__);\
+    printf("%s%s", string1, string2);\
+    }
 
-#define bbHere() 	printf ("LINE: %d, FILE: %s, FUNCTION: %s\n",\
-                      __LINE__, __FILE_NAME__, __func__);
+#define bbHere() printf ("In FILE: %s, FUNCTION: %s, LINE: %d\n",\
+        __FILE_NAME__, __func__, __LINE__);
 
-//in future, we could enter commands via the console while stopped at a breakpoint
-#define bbBreakPoint(...) \
-	printf ("FILE: %s,\tFUNCTION: %s,\tLINE: %d,\nBREAKPOINT: ", __FILE_NAME__, __func__, __LINE__);\
-	printf (__VA_ARGS__);\
-	getchar();
 
 #endif // BBPRINTF_H

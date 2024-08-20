@@ -20,7 +20,7 @@ static I32 bbStr_setStr(char* dest, char* src, I32 max){
 static I32 bbStr_putStr(char* dest, char* src, I32 max){
     I32 i = 0;
     while(1){
-        if(dest[i] == '\O') break;
+        if(dest[i] == '\0') break;
         i++;
         if (i >= max){
             dest[max - 1] = '\0';
@@ -45,7 +45,7 @@ static I32 bbStr_putStr(char* dest, char* src, I32 max){
 static I32 bbStr_putChar(char* dest, char src, I32 max){
     I32 i = 0;
     while(1){
-        if(dest[i] == '\O') break;
+        if(dest[i] == '\0') break;
         i++;
         //the following:
         if (i >= max){
