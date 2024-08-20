@@ -18,6 +18,7 @@
     - create object<br>
     - delete object<br>
     - convert between memory address, pool index and handle<br>
+    - handles will have some equivalent to null pointers
 <br>
     Other features that may come in handy:<br>
 <br>

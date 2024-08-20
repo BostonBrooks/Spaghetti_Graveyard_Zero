@@ -1,3 +1,9 @@
+/**
+ * @brief Divide two integers and round down
+ *
+*/
+
+
 #include "engine/logic/bbTerminal.h"
 #include <stdlib.h>
 

@@ -18,42 +18,22 @@
 #include "engine/logic/bbString.h"
 
 
-
+static const int stringLength 512;
 
 ///Same as bbDebug but with the DEBUG: tag
-static void bbPrintf(const char* format, ...){
-
-#ifdef BBDEBUG
-
-    va_list args;
-	va_start(args, format);
-	vprintf(format, args);
-	va_end (args);
-
-#endif  // BBDEBUG
-
-}
-
-///If BBVERBOSE is defined, print a verbose message
-static void bbVerbose(const char* format, ...){
+#define bbPrintf printf
 
 #ifdef BBVERBOSE
+    #define bbVerbose printf
+#endif
 
-    printf("VERBOSE: ");
-	va_list args;
-	va_start(args, format);
-	vprintf(format, args);
-	va_end (args);
-
-#endif // BBVERBOSE
-
-}
 
 #define bbAssert(expression, ...)                        \
     {                                                    \
         if (!(expression)){                              \
-            printf("ASSERTION: ");                       \
-        printf(__VA_ARGS__);                             \
+            char assertstring[stringLength] = "ASSERTION: ";\
+            sprintf(&assertstring[10], __VA_ARGS__);      \
+            printf("%s", asseetstring);                  \
         }                                                \
         assert(expression);                              \
     }
@@ -67,7 +47,7 @@ static void bbVerbose(const char* format, ...){
 #define bbDebug(...) \
                      \
 	printf ("FILE: %s,\tFUNCTION: %s,\tLINE: %d,\nDEBUG: ", __FILE_NAME__, __func__, __LINE__);\
-	printf (__VA_ARGS__);                                                                      \
+	printf (__VA_ARGS__);
 
 #define bbHere() 	printf ("LINE: %d, FILE: %s, FUNCTION: %s\n",\
                       __LINE__, __FILE_NAME__, __func__);
