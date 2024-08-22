@@ -1,4 +1,7 @@
-///string manipulation, with safety checks
+/**
+ * @brief String manipulations, with safety checks
+ *
+*/
 
 #ifndef BBSTRING_H
 #define BBSTRING_H

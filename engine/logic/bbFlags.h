@@ -3,5 +3,5 @@
  *
 */
 
-#define f_Success     0;
-#define f_None        -1;
+#define f_Success     0
+#define f_None        -1
