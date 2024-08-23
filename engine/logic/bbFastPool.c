@@ -25,7 +25,7 @@ I32 bbFastPool_newPool(void** pool, I32 sizeOf, I32 num, I32 unused, I32 map) {
     castThis->p_prev = prev;
     castThis->p_next = next;
 
-    for (I32 i = 1; i < num - 1; i++) {
+    for (I32 i = 1; i < num; i++) {
 
         prev = this;
         this = next;
@@ -48,7 +48,7 @@ I32 bbFastPool_newPool(void** pool, I32 sizeOf, I32 num, I32 unused, I32 map) {
     castThis->p_next = next;
 
     Pool->p_availableHead = &Pool->p_objects[0 * size];
-    Pool->p_availableTail = &Pool->p_objects[(num-1) * size];
+    Pool->p_availableTail = this;
 
     *pool = Pool;
 

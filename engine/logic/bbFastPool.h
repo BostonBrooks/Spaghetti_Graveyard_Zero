@@ -60,4 +60,8 @@ I32 bbFastPool_getAddress(void* pool, void** address, bbFastPool_Handle handle);
 /// return the handle of an element given its address
 I32 bbFastPool_getHandle(void* pool, bbFastPool_Handle* handle, void* address);
 
+// Address_getMap(), Address_getPool?
+// Pool_getNum, Pool_getMap;
+//
+
 #endif // FASTPOOL_H

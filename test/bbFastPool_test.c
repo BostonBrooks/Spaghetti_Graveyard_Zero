@@ -30,13 +30,14 @@ typedef struct {
 int main(void){
 
     bbTestPool* Pool;
-    int flag = bbTestPool_newPool(&Pool, sizeof(bbTestStruct), 512, 0, 0);
+    int flag = bbTestPool_newPool(&Pool, sizeof(bbTestStruct), 209600, 0, 0);
 
     bbTestStruct* testStruct;
-    for (I32 i = 0; 1 == 1; i++){
-        bbPrintf("i = %d\n", i);
+    for (I32 i = 1; 1 == 1; i++){
         flag = bbFastPool_newA(Pool, &testStruct);
         bbAssert(flag == f_Success, "pool full\n", i);
+
+        bbPrintf("i = %d\n", i);
     }
 
 }
