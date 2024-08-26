@@ -2,17 +2,18 @@
 #include "engine/logic/bbTerminal.h"
 #include <stdlib.h>
 
-I32 bbFastPool_newPool(void** pool, I32 sizeOf, I32 num, I32 unused, I32 map) {
+I32 bbFastPool_newPool(void** pool, I32 sizeOf, I32 level1, I32 level2, I32
+map) {
 
-    bbAssert (num >= 3, "why such a small pool?");
+    bbAssert (level1 * level2 >= 3, "why such a small pool?");
 
     I32 size = (sizeOf > sizeof(bbFastPool_Available)) ?
             sizeOf : sizeof(bbFastPool_Available);
 
-    bbFastPool *Pool = malloc(sizeof(bbFastPool) + num * size);
+    bbFastPool *Pool = malloc(sizeof(bbFastPool) + level1 * level2 * size);
     bbAssert(Pool != NULL, "malloc failed\n");
     Pool->p_sizeOf = size;
-    Pool->p_num = num;
+    Pool->p_num = level1 * level2;
     Pool->p_map = map;
 
     void* prev = NULL;
@@ -25,7 +26,7 @@ I32 bbFastPool_newPool(void** pool, I32 sizeOf, I32 num, I32 unused, I32 map) {
     castThis->p_prev = prev;
     castThis->p_next = next;
 
-    for (I32 i = 1; i < num; i++) {
+    for (I32 i = 1; i < level1 * level2; i++) {
 
         prev = this;
         this = next;

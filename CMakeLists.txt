@@ -7,4 +7,9 @@ project(myprogram C)
 include_directories( ./ )
 add_executable(myprogram test/bbTerminal_test.c
         engine/logic/bbFastPool.h
-        engine/logic/bbFastPool.c)
+        engine/logic/bbFastPool.c
+        engine/logic/bbDeque.h
+        engine/logic/bbDeque.c
+        engine/logic/bbFloorDivision.h
+        engine/logic/bbSlowPool.h
+        engine/logic/bbSlowPool.c)

@@ -4,7 +4,7 @@
  * @brief Pools pre-allocate space for objects in the game to quickly allocate
  * and de-allocate individual objects. this particular pool is designed for
  * speed and not size or safety
- *
+ * * TODO attach new deque to existing pool
  **/
 #ifndef FASTPOOL_H
 #define FASTPOOL_H
@@ -40,9 +40,11 @@ typedef struct {
 
 /// null handle is just NULL
 #define bbFastPool_HeaderIsNULL(x) (x == NULL ? 1 : 0)
+#define bbFastPool_NULL NULL
 
 /// create a new pool
-I32 bbFastPool_newPool(void** pool, I32 sizeOf, I32 num, I32 unused, I32 map);
+I32 bbFastPool_newPool(void** pool, I32 sizeOf, I32 level1, I32 level2, I32
+map);
 /// delete pool and free memory
 I32 bbFastPool_deletePool(void* pool);
 /// delete everything that's in the pool but keep the reserved data
@@ -55,7 +57,7 @@ I32 bbFastPool_newH(void* pool, bbFastPool_Handle* handle);
 I32 bbFastPool_deleteA(void* pool, void* address);
 /// delete a member from the pool given its handle
 I32 bbFastPool_deleteH(void* pool, bbFastPool_Handle handle);
-/// return the address of an element given its handle
+/// return the address of an element given its handle, or NULL
 I32 bbFastPool_getAddress(void* pool, void** address, bbFastPool_Handle handle);
 /// return the handle of an element given its address
 I32 bbFastPool_getHandle(void* pool, bbFastPool_Handle* handle, void* address);
