@@ -5,6 +5,7 @@
  * and de-allocate individual objects. this particular pool is designed for
  * size and safety and not speed
  * TODO attach new deque to existing pool
+ * TODO 64 bit alignment
  **/
 #ifndef SLOWPOOL_H
 #define SLOWPOOL_H

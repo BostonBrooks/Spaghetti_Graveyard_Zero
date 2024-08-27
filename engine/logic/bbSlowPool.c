@@ -2,9 +2,9 @@
 #include "engine/logic/bbTerminal.h"
 #include <stdlib.h>
 
-#define bbSlowPool_collisionMask 0xE0000000
-#define bbSlowPool_indexMask     0x1FFFFFFF
-#define bbSlowPool_collisionBits 3
+#define bbSlowPool_collisionMask 0xC0000000
+#define bbSlowPool_indexMask     0x3FFFFFFF
+#define bbSlowPool_collisionBits 2
 
 U32 bbSlowPool_Handle_getIndex(bbSlowPool_Handle handle){
     U32 index = handle & bbSlowPool_indexMask;
