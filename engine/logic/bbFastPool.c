@@ -23,11 +23,11 @@ map) {
     void* this = &Pool->p_objects[0 * size];
     void* next = &Pool->p_objects[1 * size];
 
-    bbFastPool_Available* castThis = this;
+    bbFastPool_Available* thisElement = this;
 
-    castThis->p_header.p_pool = Pool;
-    castThis->p_prev = prev;
-    castThis->p_next = next;
+    thisElement->p_header.p_pool = Pool;
+    thisElement->p_prev = prev;
+    thisElement->p_next = next;
 
     for (I32 i = 1; i < level1 * level2; i++) {
 
@@ -35,21 +35,21 @@ map) {
         this = next;
         next = &Pool->p_objects[i * size];
 
-        castThis = this;
+        thisElement = this;
 
-        castThis->p_header.p_pool = Pool;
-        castThis->p_prev = prev;
-        castThis->p_next = next;
+        thisElement->p_header.p_pool = Pool;
+        thisElement->p_prev = prev;
+        thisElement->p_next = next;
     }
     prev = this;
     this = next;
     next = NULL;
 
-    castThis = this;
+    thisElement = this;
 
-    castThis->p_header.p_pool = Pool;
-    castThis->p_prev = prev;
-    castThis->p_next = next;
+    thisElement->p_header.p_pool = Pool;
+    thisElement->p_prev = prev;
+    thisElement->p_next = next;
 
     Pool->p_availableHead = &Pool->p_objects[0 * size];
     Pool->p_availableTail = this;
@@ -64,6 +64,7 @@ I32 bbFastPool_deletePool(void* pool){
     return f_Success;
 }
 
+/// could be problematic when pool is used by multiple deques
 I32 bbFastPool_clearPool(void* pool){
     bbFastPool *Pool = pool;
     I32 size = Pool->p_sizeOf;
@@ -73,11 +74,11 @@ I32 bbFastPool_clearPool(void* pool){
     void* this = &Pool->p_objects[0 * size];
     void* next = &Pool->p_objects[1 * size];
 
-    bbFastPool_Available* castThis = this;
+    bbFastPool_Available* thisElement = this;
 
-    castThis->p_header.p_pool = Pool;
-    castThis->p_prev = prev;
-    castThis->p_next = next;
+    thisElement->p_header.p_pool = Pool;
+    thisElement->p_prev = prev;
+    thisElement->p_next = next;
 
     for (I32 i = 1; i < num - 1; i++) {
 
@@ -85,26 +86,27 @@ I32 bbFastPool_clearPool(void* pool){
         this = next;
         next = &Pool->p_objects[(i+1) * size];
 
-        castThis = this;
+        thisElement = this;
 
-        castThis->p_header.p_pool = Pool;
-        castThis->p_prev = prev;
-        castThis->p_next = next;
+        thisElement->p_header.p_pool = Pool;
+        thisElement->p_prev = prev;
+        thisElement->p_next = next;
     }
     prev = this;
     this = next;
     next = NULL;
 
-    castThis = this;
+    thisElement = this;
 
-    castThis->p_header.p_pool = Pool;
-    castThis->p_prev = prev;
-    castThis->p_next = next;
+    thisElement->p_header.p_pool = Pool;
+    thisElement->p_prev = prev;
+    thisElement->p_next = next;
 
     Pool->p_availableHead = &Pool->p_objects[0 * size];
     Pool->p_availableTail = &Pool->p_objects[(num-1) * size];
 }
-
+/// internal function to support expanding allocated space
+I32 bbFastPool_expand(bbFastPool* pool);
 
 I32 bbFastPool_newA(void* pool, void** address){
     bbFastPool* Pool = pool;
