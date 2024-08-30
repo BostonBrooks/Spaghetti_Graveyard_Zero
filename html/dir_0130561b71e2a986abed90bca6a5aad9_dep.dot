@@ -9,5 +9,5 @@ digraph "games/game/maps/demo/widgets/spells"
   dir_0130561b71e2a986abed90bca6a5aad9 [shape=box, label="spells", style="filled,bold,", fillcolor="#edf0f7", color="grey25", URL="dir_0130561b71e2a986abed90bca6a5aad9.html"];
   }
   dir_7f57b1e41c5acd0e859ae5f3a2b075a9 [shape=box, label="headers", style="", fillcolor="#edf0f7", color="grey25", URL="dir_7f57b1e41c5acd0e859ae5f3a2b075a9.html"];
-  dir_0130561b71e2a986abed90bca6a5aad9->dir_7f57b1e41c5acd0e859ae5f3a2b075a9 [headlabel="6", labeldistance=1.5 headhref="dir_000009_000005.html"];
+  dir_0130561b71e2a986abed90bca6a5aad9->dir_7f57b1e41c5acd0e859ae5f3a2b075a9 [headlabel="6", labeldistance=1.5 headhref="dir_000015_000009.html"];
 }

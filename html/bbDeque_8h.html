@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.4"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Spaghetti Graveyard Zero: headers/bbList.h File Reference</title>
+<title>Spaghetti Graveyard Zero: engine/logic/bbDeque.h File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -62,240 +62,128 @@ $(function() {
 
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><a class="el" href="dir_7f57b1e41c5acd0e859ae5f3a2b075a9.html">headers</a></li>  </ul>
+<li class="navelem"><a class="el" href="dir_996f45160da62e1a3d7f6046fad68f51.html">engine</a></li><li class="navelem"><a class="el" href="dir_2ee12d70d3e2faee9b1ae0478b86e22e.html">logic</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div class="header">
   <div class="summary">
 <a href="#nested-classes">Data Structures</a> &#124;
-<a href="#typedef-members">Typedefs</a> &#124;
+<a href="#define-members">Macros</a> &#124;
 <a href="#func-members">Functions</a>  </div>
-  <div class="headertitle"><div class="title">bbList.h File Reference</div></div>
+  <div class="headertitle"><div class="title">bbDeque.h File Reference</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><code>#include &quot;<a class="el" href="bbIntTypes_8h_source.html">headers/bbIntTypes.h</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="bbPool_8h_source.html">headers/bbPool.h</a>&quot;</code><br />
+
+<p>Objects are allocated in a pool and then can be pushed and popped from either end of the queue.  
+<a href="#details">More...</a></p>
+<div class="textblock"><code>#include &quot;<a class="el" href="engine_2logic_2bbIntTypes_8h_source.html">engine/logic/bbIntTypes.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="engine_2logic_2bbFlags_8h_source.html">engine/logic/bbFlags.h</a>&quot;</code><br />
+<code>#include &quot;engine/logic/bbFastpool.h&quot;</code><br />
 </div><div class="textblock"><div class="dynheader">
-Include dependency graph for bbList.h:</div>
+Include dependency graph for bbDeque.h:</div>
 <div class="dyncontent">
-<div class="center"><img src="bbDeque_8h__incl.png" border="0" usemap="#aheaders_2bbDeque_8h" alt=""/></div>
-</div>
-</div><div class="textblock"><div class="dynheader">
-This graph shows which files directly or indirectly include this file:</div>
-<div class="dyncontent">
-<div class="center"><img src="bbDeque_8h__dep__incl.png" border="0" usemap="#aheaders_2bbDeque_8hdep" alt=""/></div>
+<div class="center"><img src="bbDeque_8h__incl.png" border="0" usemap="#aengine_2logic_2bbDeque_8h" alt=""/></div>
 </div>
 </div>
 <p><a href="bbDeque_8h_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="nested-classes" name="nested-classes"></a>
 Data Structures</h2></td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structbbTestPQNode.html">bbTestDQNode</a></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structbbDeque.html">bbDeque</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structbbPriorityQueue.html">bbList</a></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structtimePtr.html">timePtr</a></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structbbDeque__Element.html">bbDeque_Element</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="typedef-members" name="typedef-members"></a>
-Typedefs</h2></td></tr>
-<tr class="memitem:a14c873e3feded7ef0f3dad89e65163af"><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="bbIntTypes_8h.html#ac7566d6ee1bbf95c1bd8107c15405de4">I32</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="bbDeque_8h.html#a14c873e3feded7ef0f3dad89e65163af">bbListFunction</a>(void *reference, void *node)</td></tr>
-<tr class="memdesc:a14c873e3feded7ef0f3dad89e65163af"><td class="mdescLeft">&#160;</td><td class="mdescRight">for searching through priority queue  <a href="bbDeque_8h.html#a14c873e3feded7ef0f3dad89e65163af">More...</a><br /></td></tr>
-<tr class="separator:a14c873e3feded7ef0f3dad89e65163af"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="define-members" name="define-members"></a>
+Macros</h2></td></tr>
+<tr class="memitem:a1ec5d345a59af4688a45f8010e06fb5e"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="bbDeque_8h.html#a1ec5d345a59af4688a45f8010e06fb5e">f_None</a>&#160;&#160;&#160;-1</td></tr>
+<tr class="separator:a1ec5d345a59af4688a45f8010e06fb5e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:a86f5094aac4076c21fab18a62f4f69c0"><td class="memItemLeft" align="right" valign="top"><a class="el" href="bbIntTypes_8h.html#ac7566d6ee1bbf95c1bd8107c15405de4">I32</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="bbDeque_8h.html#a86f5094aac4076c21fab18a62f4f69c0">bbList_new</a> (void **RBR, <a class="el" href="bbIntTypes_8h.html#ac7566d6ee1bbf95c1bd8107c15405de4">I32</a> map, <a class="el" href="bbIntTypes_8h.html#ac7566d6ee1bbf95c1bd8107c15405de4">I32</a> SizeOf, <a class="el" href="bbIntTypes_8h.html#ac7566d6ee1bbf95c1bd8107c15405de4">I32</a> level1, <a class="el" href="bbIntTypes_8h.html#ac7566d6ee1bbf95c1bd8107c15405de4">I32</a> Level2)</td></tr>
-<tr class="memdesc:a86f5094aac4076c21fab18a62f4f69c0"><td class="mdescLeft">&#160;</td><td class="mdescRight">wrapper to bbPool_NewPool  <a href="bbDeque_8h.html#a86f5094aac4076c21fab18a62f4f69c0">More...</a><br /></td></tr>
-<tr class="separator:a86f5094aac4076c21fab18a62f4f69c0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3589bf2c54de269a1217ab0c56c12c46"><td class="memItemLeft" align="right" valign="top"><a class="el" href="bbIntTypes_8h.html#ac7566d6ee1bbf95c1bd8107c15405de4">I32</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="bbDeque_8h.html#a3589bf2c54de269a1217ab0c56c12c46">bbList_existingPool</a> (void **RBR, <a class="el" href="structbbPool.html">bbPool</a> *pool)</td></tr>
-<tr class="memdesc:a3589bf2c54de269a1217ab0c56c12c46"><td class="mdescLeft">&#160;</td><td class="mdescRight">new priority queue uses objects in existing pool  <a href="bbDeque_8h.html#a3589bf2c54de269a1217ab0c56c12c46">More...</a><br /></td></tr>
-<tr class="separator:a3589bf2c54de269a1217ab0c56c12c46"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad4f68151aab36a173f30a43f043fa3e8"><td class="memItemLeft" align="right" valign="top"><a class="el" href="bbIntTypes_8h.html#ac7566d6ee1bbf95c1bd8107c15405de4">I32</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="bbDeque_8h.html#ad4f68151aab36a173f30a43f043fa3e8">bbListNode_new</a> (void **RBR, <a class="el" href="structbbPriorityQueue.html">bbList</a> *Queue, <a class="el" href="bbIntTypes_8h.html#ac7566d6ee1bbf95c1bd8107c15405de4">I32</a> address)</td></tr>
-<tr class="memdesc:ad4f68151aab36a173f30a43f043fa3e8"><td class="mdescLeft">&#160;</td><td class="mdescRight">wrapper to bbPool_New  <a href="bbDeque_8h.html#ad4f68151aab36a173f30a43f043fa3e8">More...</a><br /></td></tr>
-<tr class="separator:ad4f68151aab36a173f30a43f043fa3e8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8c347c0c05475cd7aa1bb9fa5fb5ff60"><td class="memItemLeft" align="right" valign="top"><a class="el" href="bbIntTypes_8h.html#ac7566d6ee1bbf95c1bd8107c15405de4">I32</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="bbDeque_8h.html#a8c347c0c05475cd7aa1bb9fa5fb5ff60">bbListNode_delete</a> (<a class="el" href="structbbPriorityQueue.html">bbList</a> *Queue, <a class="el" href="bbIntTypes_8h.html#ac7566d6ee1bbf95c1bd8107c15405de4">I32</a> address)</td></tr>
-<tr class="memdesc:a8c347c0c05475cd7aa1bb9fa5fb5ff60"><td class="mdescLeft">&#160;</td><td class="mdescRight">remove from queue and free up data  <a href="bbDeque_8h.html#a8c347c0c05475cd7aa1bb9fa5fb5ff60">More...</a><br /></td></tr>
-<tr class="separator:a8c347c0c05475cd7aa1bb9fa5fb5ff60"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa4d2c671c17d8e9c3c049d9c3f18d850"><td class="memItemLeft" align="right" valign="top"><a class="el" href="bbIntTypes_8h.html#ac7566d6ee1bbf95c1bd8107c15405de4">I32</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="bbDeque_8h.html#aa4d2c671c17d8e9c3c049d9c3f18d850">bbListNode_remove</a> (<a class="el" href="structbbPriorityQueue.html">bbList</a> *Queue, <a class="el" href="bbIntTypes_8h.html#ac7566d6ee1bbf95c1bd8107c15405de4">I32</a> address)</td></tr>
-<tr class="memdesc:aa4d2c671c17d8e9c3c049d9c3f18d850"><td class="mdescLeft">&#160;</td><td class="mdescRight">remove from queue but keep object in pool  <a href="bbDeque_8h.html#aa4d2c671c17d8e9c3c049d9c3f18d850">More...</a><br /></td></tr>
-<tr class="separator:aa4d2c671c17d8e9c3c049d9c3f18d850"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a75dd947fb3c5e7c665f1839e7df678b7"><td class="memItemLeft" align="right" valign="top"><a class="el" href="bbIntTypes_8h.html#ac7566d6ee1bbf95c1bd8107c15405de4">I32</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="bbDeque_8h.html#a75dd947fb3c5e7c665f1839e7df678b7">bbListNode_insertAfter</a> (<a class="el" href="structbbPriorityQueue.html">bbList</a> *Queue, <a class="el" href="bbIntTypes_8h.html#ac7566d6ee1bbf95c1bd8107c15405de4">I32</a> i_node)</td></tr>
-<tr class="separator:a75dd947fb3c5e7c665f1839e7df678b7"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac8ac46713cb8840cf6642607c60c4e30"><td class="memItemLeft" align="right" valign="top"><a class="el" href="bbIntTypes_8h.html#ac7566d6ee1bbf95c1bd8107c15405de4">I32</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="bbDeque_8h.html#ac8ac46713cb8840cf6642607c60c4e30">bbList_ascendingSearch</a> (void *RBR, <a class="el" href="structbbPriorityQueue.html">bbList</a> *queue, <a class="el" href="bbDeque_8h.html#a14c873e3feded7ef0f3dad89e65163af">bbListFunction</a> *myFunc)</td></tr>
-<tr class="memdesc:ac8ac46713cb8840cf6642607c60c4e30"><td class="mdescLeft">&#160;</td><td class="mdescRight">search through nodes, applying myFunc(node) to each node  <a href="bbDeque_8h.html#ac8ac46713cb8840cf6642607c60c4e30">More...</a><br /></td></tr>
-<tr class="separator:ac8ac46713cb8840cf6642607c60c4e30"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab9813ee4b3d99adfdbd028b642f6d4a9"><td class="memItemLeft" align="right" valign="top"><a class="el" href="bbIntTypes_8h.html#ac7566d6ee1bbf95c1bd8107c15405de4">I32</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="bbDeque_8h.html#ab9813ee4b3d99adfdbd028b642f6d4a9">bbListFunction_print</a> (void *UNUSED, void *node)</td></tr>
-<tr class="separator:ab9813ee4b3d99adfdbd028b642f6d4a9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7eafcf6de4e08fade498939225e9fd77"><td class="memItemLeft" align="right" valign="top"><a class="el" href="bbIntTypes_8h.html#ac7566d6ee1bbf95c1bd8107c15405de4">I32</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="bbDeque_8h.html#a7eafcf6de4e08fade498939225e9fd77">bbListFunction_timer</a> (void *time_ptr, void *node)</td></tr>
-<tr class="separator:a7eafcf6de4e08fade498939225e9fd77"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2a2c768ab9aba03e368533031e0d2ebc"><td class="memItemLeft" align="right" valign="top"><a class="el" href="headers_2bbIntTypes_8h.html#ac7566d6ee1bbf95c1bd8107c15405de4">I32</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="bbDeque_8h.html#a2a2c768ab9aba03e368533031e0d2ebc">bbDeque_newDeque</a> (void **deque, <a class="el" href="headers_2bbIntTypes_8h.html#ac7566d6ee1bbf95c1bd8107c15405de4">I32</a> sizeOf, <a class="el" href="headers_2bbIntTypes_8h.html#ac7566d6ee1bbf95c1bd8107c15405de4">I32</a> level1, <a class="el" href="headers_2bbIntTypes_8h.html#ac7566d6ee1bbf95c1bd8107c15405de4">I32</a> level2, <a class="el" href="headers_2bbIntTypes_8h.html#ac7566d6ee1bbf95c1bd8107c15405de4">I32</a> map)</td></tr>
+<tr class="memdesc:a2a2c768ab9aba03e368533031e0d2ebc"><td class="mdescLeft">&#160;</td><td class="mdescRight">initialise new deque  <a href="bbDeque_8h.html#a2a2c768ab9aba03e368533031e0d2ebc">More...</a><br /></td></tr>
+<tr class="separator:a2a2c768ab9aba03e368533031e0d2ebc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a99fa3f4d2ec9bd3b4b93b5d224e3b4aa"><td class="memItemLeft" align="right" valign="top"><a class="el" href="headers_2bbIntTypes_8h.html#ac7566d6ee1bbf95c1bd8107c15405de4">I32</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="bbDeque_8h.html#a99fa3f4d2ec9bd3b4b93b5d224e3b4aa">bbDeque_deleteDeque</a> (void *deque)</td></tr>
+<tr class="memdesc:a99fa3f4d2ec9bd3b4b93b5d224e3b4aa"><td class="mdescLeft">&#160;</td><td class="mdescRight">delete deque entirely  <a href="bbDeque_8h.html#a99fa3f4d2ec9bd3b4b93b5d224e3b4aa">More...</a><br /></td></tr>
+<tr class="separator:a99fa3f4d2ec9bd3b4b93b5d224e3b4aa"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5b43b46ddbf874a86e76727f35e056f5"><td class="memItemLeft" align="right" valign="top"><a class="el" href="headers_2bbIntTypes_8h.html#ac7566d6ee1bbf95c1bd8107c15405de4">I32</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="bbDeque_8h.html#a5b43b46ddbf874a86e76727f35e056f5">bbDeque_clearDeque</a> (void *deque)</td></tr>
+<tr class="memdesc:a5b43b46ddbf874a86e76727f35e056f5"><td class="mdescLeft">&#160;</td><td class="mdescRight">delete everything contained in deque but keep deque alive  <a href="bbDeque_8h.html#a5b43b46ddbf874a86e76727f35e056f5">More...</a><br /></td></tr>
+<tr class="separator:a5b43b46ddbf874a86e76727f35e056f5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a363d5639f339852b585bd4e3723496c9"><td class="memItemLeft" align="right" valign="top"><a class="el" href="headers_2bbIntTypes_8h.html#ac7566d6ee1bbf95c1bd8107c15405de4">I32</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="bbDeque_8h.html#a363d5639f339852b585bd4e3723496c9">bbDeque_new</a> (void *deque, void **element)</td></tr>
+<tr class="memdesc:a363d5639f339852b585bd4e3723496c9"><td class="mdescLeft">&#160;</td><td class="mdescRight">allocate space for new element  <a href="bbDeque_8h.html#a363d5639f339852b585bd4e3723496c9">More...</a><br /></td></tr>
+<tr class="separator:a363d5639f339852b585bd4e3723496c9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a82fc1529e292949ba0c1b0c5aaaa7439"><td class="memItemLeft" align="right" valign="top"><a class="el" href="headers_2bbIntTypes_8h.html#ac7566d6ee1bbf95c1bd8107c15405de4">I32</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="bbDeque_8h.html#a82fc1529e292949ba0c1b0c5aaaa7439">bbDeque_delete</a> (void *deque, void *element)</td></tr>
+<tr class="memdesc:a82fc1529e292949ba0c1b0c5aaaa7439"><td class="mdescLeft">&#160;</td><td class="mdescRight">deallocate space used by element  <a href="bbDeque_8h.html#a82fc1529e292949ba0c1b0c5aaaa7439">More...</a><br /></td></tr>
+<tr class="separator:a82fc1529e292949ba0c1b0c5aaaa7439"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1aff69a50a4fde1a2308f08af3fc6b7c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="headers_2bbIntTypes_8h.html#ac7566d6ee1bbf95c1bd8107c15405de4">I32</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="bbDeque_8h.html#a1aff69a50a4fde1a2308f08af3fc6b7c">bbDeque_pushHead</a> (void *deque, void *element)</td></tr>
+<tr class="memdesc:a1aff69a50a4fde1a2308f08af3fc6b7c"><td class="mdescLeft">&#160;</td><td class="mdescRight">add element to list head  <a href="bbDeque_8h.html#a1aff69a50a4fde1a2308f08af3fc6b7c">More...</a><br /></td></tr>
+<tr class="separator:a1aff69a50a4fde1a2308f08af3fc6b7c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6f4f851754aa7e453dc32345262dad0b"><td class="memItemLeft" align="right" valign="top"><a class="el" href="headers_2bbIntTypes_8h.html#ac7566d6ee1bbf95c1bd8107c15405de4">I32</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="bbDeque_8h.html#a6f4f851754aa7e453dc32345262dad0b">bbDeque_popHead</a> (void *deque, void **element)</td></tr>
+<tr class="memdesc:a6f4f851754aa7e453dc32345262dad0b"><td class="mdescLeft">&#160;</td><td class="mdescRight">remove element from list and return address  <a href="bbDeque_8h.html#a6f4f851754aa7e453dc32345262dad0b">More...</a><br /></td></tr>
+<tr class="separator:a6f4f851754aa7e453dc32345262dad0b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afded3e67ae6609d7d4fffb2ca63b7eed"><td class="memItemLeft" align="right" valign="top"><a class="el" href="headers_2bbIntTypes_8h.html#ac7566d6ee1bbf95c1bd8107c15405de4">I32</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="bbDeque_8h.html#afded3e67ae6609d7d4fffb2ca63b7eed">bbDeque_pushTail</a> (void *deque, void *element)</td></tr>
+<tr class="memdesc:afded3e67ae6609d7d4fffb2ca63b7eed"><td class="mdescLeft">&#160;</td><td class="mdescRight">add element to list tail  <a href="bbDeque_8h.html#afded3e67ae6609d7d4fffb2ca63b7eed">More...</a><br /></td></tr>
+<tr class="separator:afded3e67ae6609d7d4fffb2ca63b7eed"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa3be43517cb1d85957139341921083d8"><td class="memItemLeft" align="right" valign="top"><a class="el" href="headers_2bbIntTypes_8h.html#ac7566d6ee1bbf95c1bd8107c15405de4">I32</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="bbDeque_8h.html#aa3be43517cb1d85957139341921083d8">bbDeque_popTail</a> (void *deque, void **element)</td></tr>
+<tr class="memdesc:aa3be43517cb1d85957139341921083d8"><td class="mdescLeft">&#160;</td><td class="mdescRight">remove element and return address  <a href="bbDeque_8h.html#aa3be43517cb1d85957139341921083d8">More...</a><br /></td></tr>
+<tr class="separator:aa3be43517cb1d85957139341921083d8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Typedef Documentation</h2>
-<a id="a14c873e3feded7ef0f3dad89e65163af" name="a14c873e3feded7ef0f3dad89e65163af"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a14c873e3feded7ef0f3dad89e65163af">&#9670;&nbsp;</a></span>bbListFunction</h2>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p >Objects are allocated in a pool and then can be pushed and popped from either end of the queue. </p>
+</div><h2 class="groupheader">Macro Definition Documentation</h2>
+<a id="a1ec5d345a59af4688a45f8010e06fb5e" name="a1ec5d345a59af4688a45f8010e06fb5e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1ec5d345a59af4688a45f8010e06fb5e">&#9670;&nbsp;</a></span>f_None</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">typedef <a class="el" href="bbIntTypes_8h.html#ac7566d6ee1bbf95c1bd8107c15405de4">I32</a> bbListFunction(void *reference, void *node)</td>
+          <td class="memname">#define f_None&#160;&#160;&#160;-1</td>
         </tr>
       </table>
 </div><div class="memdoc">
-
-<p>for searching through priority queue </p>
 
 </div>
 </div>
 <h2 class="groupheader">Function Documentation</h2>
-<a id="a8c347c0c05475cd7aa1bb9fa5fb5ff60" name="a8c347c0c05475cd7aa1bb9fa5fb5ff60"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a8c347c0c05475cd7aa1bb9fa5fb5ff60">&#9670;&nbsp;</a></span>bbListNode_delete()</h2>
+<a id="a5b43b46ddbf874a86e76727f35e056f5" name="a5b43b46ddbf874a86e76727f35e056f5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5b43b46ddbf874a86e76727f35e056f5">&#9670;&nbsp;</a></span>bbDeque_clearDeque()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="bbIntTypes_8h.html#ac7566d6ee1bbf95c1bd8107c15405de4">I32</a> bbListNode_delete </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="structbbPriorityQueue.html">bbList</a> *&#160;</td>
-          <td class="paramname"><em>Queue</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="bbIntTypes_8h.html#ac7566d6ee1bbf95c1bd8107c15405de4">I32</a>&#160;</td>
-          <td class="paramname"><em>address</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>remove from queue and free up data </p>
-
-</div>
-</div>
-<a id="a75dd947fb3c5e7c665f1839e7df678b7" name="a75dd947fb3c5e7c665f1839e7df678b7"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a75dd947fb3c5e7c665f1839e7df678b7">&#9670;&nbsp;</a></span>bbListNode_insertAfter()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="bbIntTypes_8h.html#ac7566d6ee1bbf95c1bd8107c15405de4">I32</a> bbListNode_insertAfter </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="structbbPriorityQueue.html">bbList</a> *&#160;</td>
-          <td class="paramname"><em>Queue</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="bbIntTypes_8h.html#ac7566d6ee1bbf95c1bd8107c15405de4">I32</a>&#160;</td>
-          <td class="paramname"><em>i_node</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<p >Insert node in queue after the last element greater than or equal itself Other variations on where to place the node in the queue may be defined later </p>
-
-</div>
-</div>
-<a id="ad4f68151aab36a173f30a43f043fa3e8" name="ad4f68151aab36a173f30a43f043fa3e8"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad4f68151aab36a173f30a43f043fa3e8">&#9670;&nbsp;</a></span>bbListNode_new()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="bbIntTypes_8h.html#ac7566d6ee1bbf95c1bd8107c15405de4">I32</a> bbListNode_new </td>
-          <td>(</td>
-          <td class="paramtype">void **&#160;</td>
-          <td class="paramname"><em>RBR</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="structbbPriorityQueue.html">bbList</a> *&#160;</td>
-          <td class="paramname"><em>Queue</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="bbIntTypes_8h.html#ac7566d6ee1bbf95c1bd8107c15405de4">I32</a>&#160;</td>
-          <td class="paramname"><em>address</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>wrapper to bbPool_New </p>
-
-</div>
-</div>
-<a id="aa4d2c671c17d8e9c3c049d9c3f18d850" name="aa4d2c671c17d8e9c3c049d9c3f18d850"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aa4d2c671c17d8e9c3c049d9c3f18d850">&#9670;&nbsp;</a></span>bbListNode_remove()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="bbIntTypes_8h.html#ac7566d6ee1bbf95c1bd8107c15405de4">I32</a> bbListNode_remove </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="structbbPriorityQueue.html">bbList</a> *&#160;</td>
-          <td class="paramname"><em>Queue</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="bbIntTypes_8h.html#ac7566d6ee1bbf95c1bd8107c15405de4">I32</a>&#160;</td>
-          <td class="paramname"><em>address</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>remove from queue but keep object in pool </p>
-
-</div>
-</div>
-<a id="ac8ac46713cb8840cf6642607c60c4e30" name="ac8ac46713cb8840cf6642607c60c4e30"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ac8ac46713cb8840cf6642607c60c4e30">&#9670;&nbsp;</a></span>bbList_ascendingSearch()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="bbIntTypes_8h.html#ac7566d6ee1bbf95c1bd8107c15405de4">I32</a> bbList_ascendingSearch </td>
+          <td class="memname"><a class="el" href="headers_2bbIntTypes_8h.html#ac7566d6ee1bbf95c1bd8107c15405de4">I32</a> bbDeque_clearDeque </td>
           <td>(</td>
           <td class="paramtype">void *&#160;</td>
-          <td class="paramname"><em>RBR</em>, </td>
+          <td class="paramname"><em>deque</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>delete everything contained in deque but keep deque alive </p>
+
+</div>
+</div>
+<a id="a82fc1529e292949ba0c1b0c5aaaa7439" name="a82fc1529e292949ba0c1b0c5aaaa7439"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a82fc1529e292949ba0c1b0c5aaaa7439">&#9670;&nbsp;</a></span>bbDeque_delete()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="headers_2bbIntTypes_8h.html#ac7566d6ee1bbf95c1bd8107c15405de4">I32</a> bbDeque_delete </td>
+          <td>(</td>
+          <td class="paramtype">void *&#160;</td>
+          <td class="paramname"><em>deque</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="structbbPriorityQueue.html">bbList</a> *&#160;</td>
-          <td class="paramname"><em>queue</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="bbDeque_8h.html#a14c873e3feded7ef0f3dad89e65163af">bbListFunction</a> *&#160;</td>
-          <td class="paramname"><em>myFunc</em>&#160;</td>
+          <td class="paramtype">void *&#160;</td>
+          <td class="paramname"><em>element</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -305,27 +193,47 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>search through nodes, applying myFunc(node) to each node </p>
+<p>deallocate space used by element </p>
 
 </div>
 </div>
-<a id="a3589bf2c54de269a1217ab0c56c12c46" name="a3589bf2c54de269a1217ab0c56c12c46"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a3589bf2c54de269a1217ab0c56c12c46">&#9670;&nbsp;</a></span>bbList_existingPool()</h2>
+<a id="a99fa3f4d2ec9bd3b4b93b5d224e3b4aa" name="a99fa3f4d2ec9bd3b4b93b5d224e3b4aa"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a99fa3f4d2ec9bd3b4b93b5d224e3b4aa">&#9670;&nbsp;</a></span>bbDeque_deleteDeque()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="bbIntTypes_8h.html#ac7566d6ee1bbf95c1bd8107c15405de4">I32</a> bbList_existingPool </td>
+          <td class="memname"><a class="el" href="headers_2bbIntTypes_8h.html#ac7566d6ee1bbf95c1bd8107c15405de4">I32</a> bbDeque_deleteDeque </td>
           <td>(</td>
-          <td class="paramtype">void **&#160;</td>
-          <td class="paramname"><em>RBR</em>, </td>
+          <td class="paramtype">void *&#160;</td>
+          <td class="paramname"><em>deque</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>delete deque entirely </p>
+
+</div>
+</div>
+<a id="a363d5639f339852b585bd4e3723496c9" name="a363d5639f339852b585bd4e3723496c9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a363d5639f339852b585bd4e3723496c9">&#9670;&nbsp;</a></span>bbDeque_new()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="headers_2bbIntTypes_8h.html#ac7566d6ee1bbf95c1bd8107c15405de4">I32</a> bbDeque_new </td>
+          <td>(</td>
+          <td class="paramtype">void *&#160;</td>
+          <td class="paramname"><em>deque</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="structbbPool.html">bbPool</a> *&#160;</td>
-          <td class="paramname"><em>pool</em>&#160;</td>
+          <td class="paramtype">void **&#160;</td>
+          <td class="paramname"><em>element</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -335,45 +243,45 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>new priority queue uses objects in existing pool </p>
+<p>allocate space for new element </p>
 
 </div>
 </div>
-<a id="a86f5094aac4076c21fab18a62f4f69c0" name="a86f5094aac4076c21fab18a62f4f69c0"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a86f5094aac4076c21fab18a62f4f69c0">&#9670;&nbsp;</a></span>bbList_new()</h2>
+<a id="a2a2c768ab9aba03e368533031e0d2ebc" name="a2a2c768ab9aba03e368533031e0d2ebc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2a2c768ab9aba03e368533031e0d2ebc">&#9670;&nbsp;</a></span>bbDeque_newDeque()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="bbIntTypes_8h.html#ac7566d6ee1bbf95c1bd8107c15405de4">I32</a> bbList_new </td>
+          <td class="memname"><a class="el" href="headers_2bbIntTypes_8h.html#ac7566d6ee1bbf95c1bd8107c15405de4">I32</a> bbDeque_newDeque </td>
           <td>(</td>
           <td class="paramtype">void **&#160;</td>
-          <td class="paramname"><em>RBR</em>, </td>
+          <td class="paramname"><em>deque</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="bbIntTypes_8h.html#ac7566d6ee1bbf95c1bd8107c15405de4">I32</a>&#160;</td>
-          <td class="paramname"><em>map</em>, </td>
+          <td class="paramtype"><a class="el" href="headers_2bbIntTypes_8h.html#ac7566d6ee1bbf95c1bd8107c15405de4">I32</a>&#160;</td>
+          <td class="paramname"><em>sizeOf</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="bbIntTypes_8h.html#ac7566d6ee1bbf95c1bd8107c15405de4">I32</a>&#160;</td>
-          <td class="paramname"><em>SizeOf</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="bbIntTypes_8h.html#ac7566d6ee1bbf95c1bd8107c15405de4">I32</a>&#160;</td>
+          <td class="paramtype"><a class="el" href="headers_2bbIntTypes_8h.html#ac7566d6ee1bbf95c1bd8107c15405de4">I32</a>&#160;</td>
           <td class="paramname"><em>level1</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="bbIntTypes_8h.html#ac7566d6ee1bbf95c1bd8107c15405de4">I32</a>&#160;</td>
-          <td class="paramname"><em>Level2</em>&#160;</td>
+          <td class="paramtype"><a class="el" href="headers_2bbIntTypes_8h.html#ac7566d6ee1bbf95c1bd8107c15405de4">I32</a>&#160;</td>
+          <td class="paramname"><em>level2</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="headers_2bbIntTypes_8h.html#ac7566d6ee1bbf95c1bd8107c15405de4">I32</a>&#160;</td>
+          <td class="paramname"><em>map</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -383,27 +291,27 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>wrapper to bbPool_NewPool </p>
+<p>initialise new deque </p>
 
 </div>
 </div>
-<a id="ab9813ee4b3d99adfdbd028b642f6d4a9" name="ab9813ee4b3d99adfdbd028b642f6d4a9"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab9813ee4b3d99adfdbd028b642f6d4a9">&#9670;&nbsp;</a></span>bbListFunction_print()</h2>
+<a id="a6f4f851754aa7e453dc32345262dad0b" name="a6f4f851754aa7e453dc32345262dad0b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6f4f851754aa7e453dc32345262dad0b">&#9670;&nbsp;</a></span>bbDeque_popHead()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="bbIntTypes_8h.html#ac7566d6ee1bbf95c1bd8107c15405de4">I32</a> bbListFunction_print </td>
+          <td class="memname"><a class="el" href="headers_2bbIntTypes_8h.html#ac7566d6ee1bbf95c1bd8107c15405de4">I32</a> bbDeque_popHead </td>
           <td>(</td>
           <td class="paramtype">void *&#160;</td>
-          <td class="paramname"><em>UNUSED</em>, </td>
+          <td class="paramname"><em>deque</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">void *&#160;</td>
-          <td class="paramname"><em>node</em>&#160;</td>
+          <td class="paramtype">void **&#160;</td>
+          <td class="paramname"><em>element</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -413,25 +321,27 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>remove element from list and return address </p>
+
 </div>
 </div>
-<a id="a7eafcf6de4e08fade498939225e9fd77" name="a7eafcf6de4e08fade498939225e9fd77"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a7eafcf6de4e08fade498939225e9fd77">&#9670;&nbsp;</a></span>bbListFunction_timer()</h2>
+<a id="aa3be43517cb1d85957139341921083d8" name="aa3be43517cb1d85957139341921083d8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa3be43517cb1d85957139341921083d8">&#9670;&nbsp;</a></span>bbDeque_popTail()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="bbIntTypes_8h.html#ac7566d6ee1bbf95c1bd8107c15405de4">I32</a> bbListFunction_timer </td>
+          <td class="memname"><a class="el" href="headers_2bbIntTypes_8h.html#ac7566d6ee1bbf95c1bd8107c15405de4">I32</a> bbDeque_popTail </td>
           <td>(</td>
           <td class="paramtype">void *&#160;</td>
-          <td class="paramname"><em>time_ptr</em>, </td>
+          <td class="paramname"><em>deque</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">void *&#160;</td>
-          <td class="paramname"><em>node</em>&#160;</td>
+          <td class="paramtype">void **&#160;</td>
+          <td class="paramname"><em>element</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -440,6 +350,68 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>remove element and return address </p>
+
+</div>
+</div>
+<a id="a1aff69a50a4fde1a2308f08af3fc6b7c" name="a1aff69a50a4fde1a2308f08af3fc6b7c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1aff69a50a4fde1a2308f08af3fc6b7c">&#9670;&nbsp;</a></span>bbDeque_pushHead()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="headers_2bbIntTypes_8h.html#ac7566d6ee1bbf95c1bd8107c15405de4">I32</a> bbDeque_pushHead </td>
+          <td>(</td>
+          <td class="paramtype">void *&#160;</td>
+          <td class="paramname"><em>deque</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">void *&#160;</td>
+          <td class="paramname"><em>element</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>add element to list head </p>
+
+</div>
+</div>
+<a id="afded3e67ae6609d7d4fffb2ca63b7eed" name="afded3e67ae6609d7d4fffb2ca63b7eed"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afded3e67ae6609d7d4fffb2ca63b7eed">&#9670;&nbsp;</a></span>bbDeque_pushTail()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="headers_2bbIntTypes_8h.html#ac7566d6ee1bbf95c1bd8107c15405de4">I32</a> bbDeque_pushTail </td>
+          <td>(</td>
+          <td class="paramtype">void *&#160;</td>
+          <td class="paramname"><em>deque</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">void *&#160;</td>
+          <td class="paramname"><em>element</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>add element to list tail </p>
 
 </div>
 </div>

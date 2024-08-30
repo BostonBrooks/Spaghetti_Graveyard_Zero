@@ -1,8 +1,8 @@
 var searchData=
 [
-  ['tail_0',['Tail',['../structbbDictionary__bin.html#aef5edc5a0abb1e596bd630b07b7ba94b',1,'bbDictionary_bin::Tail()'],['../structbbPool__bin.html#a0b8b4dedf0b2d188a4c920b8fea70f9e',1,'bbPool_bin::Tail()'],['../structbbTree__data.html#abe0cd5b09930877938be24b0e73774fb',1,'bbTree_data::Tail()']]],
-  ['textbox_2eh_1',['textBox.h',['../textBox_8h.html',1,'']]],
-  ['textdraw_2eh_2',['TextDraw.h',['../TextDraw_8h.html',1,'']]],
+  ['tail_0',['Tail',['../structbbTree__data.html#abe0cd5b09930877938be24b0e73774fb',1,'bbTree_data::Tail()'],['../structbbDictionary__bin.html#aef5edc5a0abb1e596bd630b07b7ba94b',1,'bbDictionary_bin::Tail()'],['../structbbPool__bin.html#a0b8b4dedf0b2d188a4c920b8fea70f9e',1,'bbPool_bin::Tail()']]],
+  ['textbox_2eh_1',['textBox.h',['../widgets_2textBox_8h.html',1,'(Global Namespace)'],['../_2widgets_2textBox_8h.html',1,'(Global Namespace)']]],
+  ['textdraw_2eh_2',['TextDraw.h',['../widgets_2drawFunctions_2TextDraw_8h.html',1,'(Global Namespace)'],['../_2widgets_2drawFunctions_2TextDraw_8h.html',1,'(Global Namespace)']]],
   ['textures_3',['Textures',['../structbbMapConstants.html#ae7d281a779fb3dfa5daefb79343bf566',1,'bbMapConstants']]],
   ['textures_2ecsv_4',['textures.csv',['../textures_8csv.html',1,'']]],
   ['textures_2ecsv_2edox_5',['textures.csv.dox',['../textures_8csv_8dox.html',1,'']]],

@@ -10,6 +10,7 @@ var searchData=
   ['c_5freturnanswer_7',['c_ReturnAnswer',['../bbCommands_8h.html#a806564238e1f76d79cc288e9cfdee8ef',1,'bbCommands.h']]],
   ['c_5freturnclick_8',['c_ReturnClick',['../bbCommands_8h.html#a200cda965b0e5a3fb4a18ec7c8401284',1,'bbCommands.h']]],
   ['c_5freturncode_9',['c_ReturnCode',['../bbCommands_8h.html#a9bf98b05aacd5c0aee4d92d8ee4904b2',1,'bbCommands.h']]],
-  ['c_5fsetidle_10',['c_SetIdle',['../bbCommands_8h.html#ac4f5e26c870979e04e4aef8651c4b4cc',1,'bbCommands.h']]],
-  ['colour_5fbeige_11',['COLOUR_BEIGE',['../bbEngineConstants_8h.html#a5e482a1366130f07ceac0da7deb56795',1,'bbEngineConstants.h']]]
+  ['c_5fsetcurrentspell_10',['c_SetCurrentSpell',['../bbCommands_8h.html#a232b75dbab0b15ca4aa95b1fea6aa0f7',1,'bbCommands.h']]],
+  ['c_5fsetidle_11',['c_SetIdle',['../bbCommands_8h.html#ac4f5e26c870979e04e4aef8651c4b4cc',1,'bbCommands.h']]],
+  ['colour_5fbeige_12',['COLOUR_BEIGE',['../bbEngineConstants_8h.html#a5e482a1366130f07ceac0da7deb56795',1,'bbEngineConstants.h']]]
 ];
