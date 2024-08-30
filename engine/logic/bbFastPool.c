@@ -1,5 +1,6 @@
 #include "engine/logic/bbFastPool.h"
 #include "engine/logic/bbTerminal.h"
+#include "engine/logic/bbRoundUp.h"
 #include <stdlib.h>
 
 I32 bbFastPool_newPool(void** pool, I32 sizeOf, I32 level1, I32 level2, I32
@@ -7,8 +8,10 @@ map) {
 
     bbAssert (level1 * level2 >= 3, "why such a small pool?");
 
-    I32 size = (sizeOf > sizeof(bbFastPool_Available)) ?
-            sizeOf : sizeof(bbFastPool_Available);
+    I32 size = bbRoundUp(
+			(sizeOf > sizeof(bbFastPool_Available)) ?
+            sizeOf : sizeof(bbFastPool_Available),
+					8);
 
     bbFastPool *Pool = malloc(sizeof(bbFastPool) + level1 * level2 * size);
     bbAssert(Pool != NULL, "malloc failed\n");
@@ -60,6 +63,7 @@ I32 bbFastPool_deletePool(void* pool){
     free(pool);
     return f_Success;
 }
+
 I32 bbFastPool_clearPool(void* pool){
     bbFastPool *Pool = pool;
     I32 size = Pool->p_sizeOf;

@@ -12,6 +12,7 @@
 
 #include "engine/logic/bbIntTypes.h"
 #include "engine/logic/bbFlags.h"
+#include <stdalign.h>
 
 /// elements of pool are addressed by their memory address
 typedef void* bbFastPool_Handle;
@@ -36,7 +37,7 @@ typedef struct {
     U16 p_map;
     void* p_availableHead;
     void* p_availableTail;
-    char p_objects[];
+    alignas(8) char p_objects[];
 }bbFastPool ;
 
 /// null handle is just NULL
