@@ -41,7 +41,6 @@ typedef struct {
 } bbSlowPool;
 
 
-#endif // SLOWPOOL_H
 
 
 I32 bbSlowPool_HandleIsNULL(bbSlowPool_Handle handle);
@@ -70,3 +69,5 @@ I32 bbSlowPool_getHandle(void* pool, bbSlowPool_Handle* handle, void* address);
 // Address_getMap(), Address_getPool?
 // Pool_getNum, Pool_getMap;
 //
+
+#endif // SLOWPOOL_H
