@@ -44,7 +44,7 @@ typedef struct {
 
 
 I32 bbSlowPool_HandleIsNULL(bbSlowPool_Handle handle);
-#define bbSlowPool_NULL 0
+
 
 /// create a new pool
 I32 bbSlowPool_newPool(void** pool, I32 sizeOf, I32 level1, I32 level2, I32
