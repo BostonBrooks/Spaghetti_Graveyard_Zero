@@ -2,21 +2,7 @@
 #include "engine/logic/bbTerminal.h"
 #include <stdlib.h>
 
-#define bbDequePool_Handle          bbFastPool_Handle
-#define bbDequePool_Header          bbFastPool_Header
-#define bbDequePool_Available       bbFastPool_Available
-#define bbDequePool                 bbFastPool
-#define bbDequePool_HeaderIsNULL(x) bbFastPool_HeaderIsNULL(x)
-#define bbDequePool_NULL            bbFastPool_NULL
-#define bbDequePool_newPool         bbFastPool_newPool
-#define bbDequePool_deletePool      bbFastPool_deletePool
-#define bbDequePool_clearPool       bbFastPool_clearPool
-#define bbDequePool_newA            bbFastPool_newA
-#define bbDequePool_newH            bbFastPool_newH
-#define bbDequePool_deleteA         bbFastPool_deleteA
-#define bbDequePool_deleteH         bbFastPool_deleteH
-#define bbDequePool_getAddress      bbFastPool_getAddress
-#define bbDequePool_getHandle       bbFastPool_getHandle
+
 
 I32 bbDeque_newDeque(void** deque, I32 sizeOf, I32 level1, I32 level2, I32 map){
 

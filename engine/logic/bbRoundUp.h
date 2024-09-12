@@ -4,7 +4,7 @@
  **/
 #include "engine/logic/bbIntTypes.h"
 
-U32 bbRoundUp (I32 a, I32 b){
+static U32 bbRoundUp (I32 a, I32 b){
 	I32 c = a % b;
 	if (c == 0) return a;
 	return (a + b - c);

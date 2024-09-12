@@ -15,6 +15,8 @@
 
 typedef U32 bbSlowPool_Handle;
 
+#define bbSlowPool_NULL 0
+
 typedef struct {
     void* p_Pool;
     bbSlowPool_Handle p_Handle;

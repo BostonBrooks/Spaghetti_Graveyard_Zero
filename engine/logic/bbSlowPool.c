@@ -7,7 +7,6 @@
 #define bbSlowPool_indexMask     0x3FFFFFFF
 #define bbSlowPool_collisionBits 2
 #define bbSlowPool_collision1    0x40000000
-#define bbSlowPool_NULL 0
 
 
 U32 bbSlowPool_Handle_getIndex(bbSlowPool_Handle handle){
@@ -96,10 +95,12 @@ I32 bbSlowPool_expand(bbSlowPool* pool){
 			 "expanding non-empty pool");
 
 	U32 i = 0;
-	while (i < pool->p_level1 && pool->p_elements[i] != NULL){
+	while (pool->p_elements[i] != NULL){
 		i++;
+        bbAssert(i < pool->p_level1, "Pool full\n");
+
 	}
-	bbAssert(i < pool->p_level1, "Pool full\n");
+    bbPrintf("lvl1 = %d\n", i);
 	U8* level2 = calloc(pool->p_level2, pool->p_sizeOf);
 	bbAssert(level2 != NULL, "calloc failed");
 
@@ -134,6 +135,7 @@ I32 bbSlowPool_expand(bbSlowPool* pool){
 	}
 
 	level2index = pool->p_level2 - 1;
+    index = i * pool->p_level2 + level2index;
 	elementU8 = &level2[level2index * pool->p_sizeOf];
 	element = elementU8;
 

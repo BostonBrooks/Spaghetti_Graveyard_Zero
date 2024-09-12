@@ -15,6 +15,7 @@
 #include <stdalign.h>
 
 /// elements of pool are addressed by their memory address
+//TODO addressed by their index?
 typedef void* bbFastPool_Handle;
 
 /// members of a pool know what pool they are in

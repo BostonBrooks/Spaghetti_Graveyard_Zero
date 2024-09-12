@@ -11,17 +11,33 @@
 
 #include "engine/logic/bbIntTypes.h"
 #include "engine/logic/bbFlags.h"
-#include "engine/logic/bbFastpool.h"
+#include "engine/logic/bbSlowPool.h"
+
+#define bbDequePool_Handle          bbSlowPool_Handle
+#define bbDequePool_Header          bbSlowPool_Header
+#define bbDequePool_Available       bbSlowPool_Available
+#define bbDequePool                 bbSlowPool
+#define bbDequePool_HeaderIsNULL(x) bbSlowPool_HeaderIsNULL(x)
+#define bbDequePool_NULL            bbSlowPool_NULL
+#define bbDequePool_newPool         bbSlowPool_newPool
+#define bbDequePool_deletePool      bbSlowPool_deletePool
+#define bbDequePool_clearPool       bbSlowPool_clearPool
+#define bbDequePool_newA            bbSlowPool_newA
+#define bbDequePool_newH            bbSlowPool_newH
+#define bbDequePool_deleteA         bbSlowPool_deleteA
+#define bbDequePool_deleteH         bbSlowPool_deleteH
+#define bbDequePool_getAddress      bbSlowPool_getAddress
+#define bbDequePool_getHandle       bbSlowPool_getHandle
 
 typedef struct {
-    bbFastPool* p_pool;
-    bbFastPool_Handle p_head;
-    bbFastPool_Handle p_tail;
+    bbDequePool* p_pool;
+    bbDequePool_Handle p_head;
+    bbDequePool_Handle p_tail;
 } bbDeque;
 
 typedef struct {
-    bbFastPool_Handle p_prev;
-    bbFastPool_Handle p_next;
+    bbDequePool_Handle p_prev;
+    bbDequePool_Handle p_next;
     U8 p_InUse;
 } bbDeque_Element;
 
