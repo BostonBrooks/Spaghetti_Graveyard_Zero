@@ -7,6 +7,6 @@ static int main(void){
 		int a = rand() % 4096;
 		int b = rand() % 16;
 		int c = bbRoundUp(a, b);
-		printf("%d roundup %d = %d, remainder = %d\n", a, b, c, c%b);
+		printf("%d roundup %d = %d, remainder = %d\n", a, b, c, c-a);
 	}
 }

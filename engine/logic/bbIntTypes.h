@@ -13,6 +13,6 @@
 #define U8     uint8_t
 #define U16    uint16_t
 #define U32    uint32_t
-#define U64    unint64_t
+#define U64    uint64_t
 
 #endif //BBINTTYPES

@@ -1,0 +1,20 @@
+/** \page Pools
+
+    There are a few different options for storing objects in pools<br>
+<br>
+    bbPool has similar functionality to malloc / free
+    bbPool uses function pointers allow for different logic
+    can convert between integer handles and memory addresses.
+
+    in the case that handles are just memory addresses, are they 32 or 64 bit?
+    how can we quickly convert between handles and memory addresses when they
+    contain the exact same data?
+
+    bbComplexPool is a realisation of bbPool. it might not work for small
+    pool sizes.
+
+    handles contain collision bits to avoid allocate/free/allocate collisions
+     (optional)
+
+
+

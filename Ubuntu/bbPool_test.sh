@@ -11,7 +11,7 @@ Color_Off='\033[0m'
  if gcc\
    -I ../ \
   ../test/bbPool_test.c\
-  ../source/bbPool.c\
+  ../engine/logic/bbComplexPool.c\
   -lcsfml-system -lcsfml-graphics -lcsfml-window -g -lm -w;
   then
     echo "Compile Succeeded:"
