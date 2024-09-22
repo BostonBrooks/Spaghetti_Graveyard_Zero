@@ -40,7 +40,8 @@ typedef struct{
 typedef struct bbPool_common {
 
 	//null is a public variable, because we might want to specify null element
-	//when we initialise some object
+	//when we initialise some object is would be nice to specify all of the
+    // elements at compile time to skip the de-referencing of function pointers
 	bbPool_Handle null;
 	I32 (*deletePool)(struct bbPool_common* pool);
 	I32 (*clearPool)(struct bbPool_common* pool);
@@ -69,6 +70,8 @@ static I32 bbPool_delete(struct bbPool_common* pool, void* address, bbPool_Handl
 	return pool->delete(pool, address, handle);
 }
 /// return the address of an element given its handle, or NULL
+/// NULL may come in handy, to warn if we are accessing an object that no
+// longer exists
 static I32 bbPool_lookup(struct bbPool_common* pool, void** address, bbPool_Handle handle){
 	return pool->lookup(pool, address, handle);
 }
