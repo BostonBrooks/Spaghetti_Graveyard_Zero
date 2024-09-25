@@ -2,7 +2,7 @@
 #include <stddef.h>
 #include "engine/logic/bbPool.h"
 #include "engine/logic/bbTerminal.h"
-#include "engine/logic/bbRoundUp.h"
+#include "engine/logic/bbArith.h"
 #include "engine/logic/bbComplexPool.h"
 
 
@@ -57,7 +57,7 @@ I32 bbComplexPool_newPool(struct bbPool_common** pool, I32 sizeOf, I32 level1, I
     Pool->common.null.complex.collision = 0;
     Pool->common.null.complex.index = 0;
 	//elements of pools will be 64 bit aligned
-	I32 size = bbRoundUp(sizeOf, 8);
+	I32 size = bbArith_roundUp(sizeOf, 8);
 
 	Pool->common.sizeOf = size;
 	Pool->level1 = level1;
