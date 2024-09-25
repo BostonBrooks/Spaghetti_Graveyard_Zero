@@ -17,7 +17,9 @@
 
 typedef U64 bbPool_Handle;
 
+/* TODO - This is what a union is for!
 static_assert(sizeof(void*) <= sizeof(U64), "bbPool_Handle cannot be cast as void*");
+*/
 
 typedef struct{
     bbPool_Handle head;
