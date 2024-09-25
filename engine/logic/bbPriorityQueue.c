@@ -60,14 +60,70 @@ I32 bbPriorityQueue_delete(bbPriorityQueue* queue,
 }
 
 /// add an element to priority queue
+/*
 I32 bbPriorityQueue_add(bbPriorityQueue* queue,
                                   void* address,
                                   bbPool_Handle handle){
     void* this = address;
+	I32 flag;
     if (this == NULL){
-        bbPool_lookup(queue->pool, &this, handle);
+        flag = bbPool_lookup(queue->pool, &this, handle);
+		bbAssert(flag == f_Success, "bad flag\n");
     }
+	bbPool_Handle Handle;
+	bbPool_reverseLookup(queue->pool, this, &handle);
+
+	if (queue->list.head == queue->pool->null){
+		//Add this to empty list
+		bbAssert(queue->list.tail == queue->pool->null, "head/tail\n");
+		bbPool_ListElement* thisList = queue->getList(this);
+		thisList->prev = queue->pool->null;
+		thisList->next = queue->pool->null;
+		queue->list.head = Handle;
+		queue->list.tail = Handle;
+		return f_Success;
+	}
+
+	void* element;
+	bbPool_ListElement* listElement;
+
+	flag = bbPool_lookup(queue->pool, &element, queue->list.head);
+	bbAssert(flag == f_Success, "bad flag\n");
+
+	while (queue->isGreater(this, element)){
+		listElement = queue->getList(element);
+		if (listElement->next == queue->pool->null){
+			//add this to end of list
+		}
+		flag = bbPool_lookup(queue->pool, &element, listElement->next);
+		bbAssert(flag == f_Success, "bad flag\n");
+	}
+	//insert this before element
+
+	void* next = element;
+	//void* this;
+	void* prev;
+
+	bbPool_ListElement* nextList = queue->getList(next);
+	bbPool_ListElement* thisList = queue->getList(this);
+
+	bbPool_Handle nextHandle = listElement->next; //TODO wild guess
+	bbPool_Handle thisHandle = Handle;
+
+
+
+	if (nextList->prev == queue->pool->null){
+		//insert at beginning of list
+		nextList->prev = thisHandle;
+		thisList->next = nextHandle;
+
+	}
+
+	bbPool_ListElement* prevList = queue->getList(prev);
+	bbPool_Handle prevHandle;
+
 }
+ */
 
 /// remove an element from priority queue
 I32 bbPriorityQueue_remove(bbPriorityQueue* queue,
@@ -137,10 +193,24 @@ I32 bbPriorityQueue_remove(bbPriorityQueue* queue,
     return f_Success;
 }
 
+
+
+
+
 /// re-sort an element in priority queue
 I32 bbPriorityQueue_resort(bbPriorityQueue* queue,
                                   void* address,
-                                  bbPool_Handle handle);
+                                  bbPool_Handle handle){
+	void* this = address;
+	if (this == NULL){
+		bbPool_lookup(queue->pool, &this, handle);
+	}
+	bbPool_ListElement* thisList = queue->getList(this);
+	if(thisList->next == queue->pool->null && thisList->prev == queue->pool->null)
+		return f_Success;
+
+
+}
 
 /// return the address of an element given its handle, or NULL
 /// just a wrapper fo bbPool_lookup

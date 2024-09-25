@@ -6,11 +6,11 @@ cmake_minimum_required(VERSION 2.6.0)
 project(myprogram C)
 include_directories( ./ )
 add_executable(myprogram test/bbTerminal_test.c
-        engine/logic/bbFastPool.h
-        engine/logic/bbFastPool.c
-        engine/logic/bbDeque.h
-        engine/logic/bbDeque.c
         engine/logic/bbFloorDivision.h
-        engine/logic/bbSlowPool.h
-        engine/logic/bbSlowPool.c
-        engine/logic/bbRoundUp.h)
+        engine/logic/bbFlags.h
+        engine/logic/bbComplexPool.c
+        engine/logic/bbRoundUp.h
+        engine/logic/bbComplexPool.c
+        engine/logic/bbPool.h
+        test/bbPool_test.c
+        engine/logic/bbPriorityQueue.c)
