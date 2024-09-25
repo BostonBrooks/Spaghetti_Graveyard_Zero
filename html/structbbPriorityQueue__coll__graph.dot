@@ -1,11 +1,13 @@
-digraph "bbList"
+digraph "bbPriorityQueue"
 {
  // LATEX_PDF_SIZE
   edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
   node [fontname="Helvetica",fontsize="10",shape=record];
-  Node1 [label="bbList",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black",tooltip=" "];
-  Node2 -> Node1 [dir="back",color="darkorchid3",fontsize="10",style="dashed",label=" p_Pool" ,fontname="Helvetica"];
-  Node2 [label="bbPool",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$structbbPool.html",tooltip=" "];
-  Node3 -> Node2 [dir="back",color="darkorchid3",fontsize="10",style="dashed",label=" m_Available\nm_InUse" ,fontname="Helvetica"];
-  Node3 [label="bbPool_bin",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$structbbPool__bin.html",tooltip=" "];
+  Node1 [label="bbPriorityQueue",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black",tooltip=" "];
+  Node2 -> Node1 [dir="back",color="darkorchid3",fontsize="10",style="dashed",label=" pool" ,fontname="Helvetica"];
+  Node2 [label="bbPool_common",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$structbbPool__common.html",tooltip=" "];
+  Node3 -> Node1 [dir="back",color="darkorchid3",fontsize="10",style="dashed",label=" list" ,fontname="Helvetica"];
+  Node3 [label="bbPool_List",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$structbbPool__List.html",tooltip=" "];
+  Node4 -> Node1 [dir="back",color="darkorchid3",fontsize="10",style="dashed",label=" getList" ,fontname="Helvetica"];
+  Node4 [label="bbPool_ListElement",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$structbbPool__ListElement.html",tooltip=" "];
 }

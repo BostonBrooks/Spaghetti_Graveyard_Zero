@@ -1,20 +1,20 @@
-digraph "games/game/maps/demo/widgets/widget_null(old).h"
+digraph "recycle/games/game/maps/demo/widgets/widget_null(old).h"
 {
  // LATEX_PDF_SIZE
   edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
   node [fontname="Helvetica",fontsize="10",shape=record];
-  Node1 [label="games/game/maps/demo\l/widgets/widget_null\l(old).h",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black",tooltip="The functions in this folder define the behavior of an object with class bbWidget and type NULL."];
+  Node1 [label="recycle/games/game\l/maps/demo/widgets/widget\l_null(old).h",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black",tooltip="The functions in this folder define the behavior of an object with class bbWidget and type NULL."];
   Node1 -> Node2 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
-  Node2 [label="headers/bbGeometry.h",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$bbGeometry_8h.html",tooltip=" "];
+  Node2 [label="recycle/headers/bbGeometry.h",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$bbGeometry_8h.html",tooltip=" "];
   Node2 -> Node3 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
   Node3 [label="inttypes.h",height=0.2,width=0.4,color="grey75", fillcolor="white", style="filled",tooltip=" "];
   Node2 -> Node4 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
-  Node4 [label="headers/bbMapConstants.h",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$bbMapConstants_8h.html",tooltip=" "];
+  Node4 [label="bbMapConstants.h",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$bbMapConstants_8h.html",tooltip=" "];
   Node4 -> Node5 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
-  Node5 [label="headers/bbIntTypes.h",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$headers_2bbIntTypes_8h.html",tooltip=" "];
+  Node5 [label="bbIntTypes.h",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$recycle_2headers_2bbIntTypes_8h.html",tooltip=" "];
   Node5 -> Node3 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
   Node4 -> Node6 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
-  Node6 [label="headers/bbSystemIncludes.h",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$bbSystemIncludes_8h.html",tooltip="libraries included in every file"];
+  Node6 [label="bbSystemIncludes.h",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$bbSystemIncludes_8h.html",tooltip="libraries included in every file"];
   Node6 -> Node7 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
   Node7 [label="SFML/System.h",height=0.2,width=0.4,color="grey75", fillcolor="white", style="filled",tooltip=" "];
   Node6 -> Node8 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
@@ -37,9 +37,9 @@ digraph "games/game/maps/demo/widgets/widget_null(old).h"
   Node16 [label="stdbool.h",height=0.2,width=0.4,color="grey75", fillcolor="white", style="filled",tooltip=" "];
   Node6 -> Node3 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
   Node6 -> Node17 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
-  Node17 [label="headers/bbFlags.h",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$headers_2bbFlags_8h.html",tooltip="This header file contains flags passed by functions."];
+  Node17 [label="bbFlags.h",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$recycle_2headers_2bbFlags_8h.html",tooltip="This header file contains flags passed by functions."];
   Node6 -> Node18 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
-  Node18 [label="headers/bbPrintf.h",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$bbPrintf_8h.html",tooltip="This header file contains definitions of some wrappers to printf functions. Functions are defined sta..."];
+  Node18 [label="bbPrintf.h",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$bbPrintf_8h.html",tooltip="This header file contains definitions of some wrappers to printf functions. Functions are defined sta..."];
   Node18 -> Node13 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
   Node18 -> Node19 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
   Node19 [label="stdarg.h",height=0.2,width=0.4,color="grey75", fillcolor="white", style="filled",tooltip=" "];
@@ -48,30 +48,30 @@ digraph "games/game/maps/demo/widgets/widget_null(old).h"
   Node6 -> Node5 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
   Node2 -> Node5 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
   Node1 -> Node20 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
-  Node20 [label="headers/bbWidget.h",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$bbWidget_8h.html",tooltip="bbWidgets are things like menu buttons, text prompts, click to cast spells etc."];
+  Node20 [label="recycle/headers/bbWidget.h",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$bbWidget_8h.html",tooltip="bbWidgets are things like menu buttons, text prompts, click to cast spells etc."];
   Node20 -> Node16 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
   Node20 -> Node6 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
   Node20 -> Node21 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
-  Node21 [label="headers/bbPool.h",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$bbPool_8h.html",tooltip="Pools pre-allocate space for objects in the game to quickly allocate and de-allocate individual objec..."];
+  Node21 [label="bbPool.h",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$recycle_2headers_2bbPool_8h.html",tooltip="Pools pre-allocate space for objects in the game to quickly allocate and de-allocate individual objec..."];
   Node21 -> Node3 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
   Node21 -> Node11 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
   Node21 -> Node18 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
   Node21 -> Node5 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
   Node20 -> Node22 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
-  Node22 [label="headers/bbTree.h",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$bbTree_8h.html",tooltip="bbTree defines a structure where each member has a parent and a list of daughter nodes...."];
+  Node22 [label="bbTree.h",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$bbTree_8h.html",tooltip="bbTree defines a structure where each member has a parent and a list of daughter nodes...."];
   Node22 -> Node16 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
   Node22 -> Node3 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
   Node22 -> Node21 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
   Node22 -> Node5 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
   Node20 -> Node23 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
-  Node23 [label="headers/bbDictionary.h",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$bbDictionary_8h.html",tooltip="bbDictionary stores a number of key-value pairs for fast lookup. Keys should be up to 32 characters...."];
+  Node23 [label="bbDictionary.h",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$bbDictionary_8h.html",tooltip="bbDictionary stores a number of key-value pairs for fast lookup. Keys should be up to 32 characters...."];
   Node23 -> Node6 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
   Node23 -> Node24 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
-  Node24 [label="headers/bbEngineConstants.h",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$bbEngineConstants_8h.html",tooltip="Compile time constants. Run-time loading of constants on a per-map basis is preferred...."];
+  Node24 [label="bbEngineConstants.h",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$bbEngineConstants_8h.html",tooltip="Compile time constants. Run-time loading of constants on a per-map basis is preferred...."];
   Node23 -> Node5 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
   Node20 -> Node2 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
   Node20 -> Node25 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
-  Node25 [label="headers/bbMouse.h",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$bbMouse_8h.html",tooltip=" "];
+  Node25 [label="bbMouse.h",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$bbMouse_8h.html",tooltip=" "];
   Node25 -> Node16 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
   Node25 -> Node6 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
   Node25 -> Node2 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];

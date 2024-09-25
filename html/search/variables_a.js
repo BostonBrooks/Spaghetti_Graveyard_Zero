@@ -1,9 +1,8 @@
 var searchData=
 [
-  ['oncommand_5favailable_0',['OnCommand_available',['../structbbWidgetFunctions.html#a93e2226f0ad8dc81c464124736e584c9',1,'bbWidgetFunctions']]],
-  ['oncommand_5fdict_1',['OnCommand_dict',['../structbbWidgetFunctions.html#aaa2ef8268b51161fa287770e3f4234e4',1,'bbWidgetFunctions']]],
-  ['oncommands_2',['OnCommands',['../structbbWidgetFunctions.html#a77f4e24ac09863bce8bc64a2a9c6ebef',1,'bbWidgetFunctions']]],
-  ['ontimers_3',['OnTimers',['../structbbWidgetFunctions.html#ad740a5687bc48bb8745ddf48a73da78e',1,'bbWidgetFunctions']]],
-  ['ontimers_5favailable_4',['OnTimers_available',['../structbbWidgetFunctions.html#ac85c2fd645f89d560d60469297916de5',1,'bbWidgetFunctions']]],
-  ['ontimers_5fdict_5',['OnTimers_dict',['../structbbWidgetFunctions.html#afddcd1154dc2148b70d6b9b003a30409',1,'bbWidgetFunctions']]]
+  ['n_5fnumfonts_0',['n_NumFonts',['../structbbFonts.html#a6fa4b820555e5046740b80e3c2bedd86',1,'bbFonts']]],
+  ['new_1',['new',['../structbbPool__common.html#ad98ca44375d95f8a9b7fcaf770346d24',1,'bbPool_common']]],
+  ['next_2',['Next',['../structbbPool__data.html#a9dea86a1f11a1641432361674194be21',1,'bbPool_data::Next()'],['../structbbTree__data.html#a058c6562681cb5b974ab8fd74a50502e',1,'bbTree_data::Next()']]],
+  ['next_3',['next',['../structbbPool__ListElement.html#a9add8b8f3eb9a12a01739568d5d4cb6a',1,'bbPool_ListElement::next()'],['../structbbPool__Element.html#a82d668ae97fb5b525220c27fcbaf9528',1,'bbPool_Element::next()']]],
+  ['null_4',['null',['../structbbPool__common.html#add8f43b636cc349546ec35d5f3b01500',1,'bbPool_common']]]
 ];

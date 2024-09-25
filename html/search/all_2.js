@@ -12,11 +12,12 @@ var searchData=
   ['c_5freturncode_9',['c_ReturnCode',['../bbCommands_8h.html#a9bf98b05aacd5c0aee4d92d8ee4904b2',1,'bbCommands.h']]],
   ['c_5fsetcurrentspell_10',['c_SetCurrentSpell',['../bbCommands_8h.html#a232b75dbab0b15ca4aa95b1fea6aa0f7',1,'bbCommands.h']]],
   ['c_5fsetidle_11',['c_SetIdle',['../bbCommands_8h.html#ac4f5e26c870979e04e4aef8651c4b4cc',1,'bbCommands.h']]],
-  ['coding_2dconventions_12',['Coding-Conventions',['../Coding-Conventions.html',1,'']]],
-  ['coding_2dconventions_2edox_13',['Coding-Conventions.dox',['../Coding-Conventions_8dox.html',1,'']]],
-  ['colour_5fbeige_14',['COLOUR_BEIGE',['../bbEngineConstants_8h.html#a5e482a1366130f07ceac0da7deb56795',1,'bbEngineConstants.h']]],
-  ['constructor_5favailable_15',['Constructor_available',['../structbbWidgetFunctions.html#a33acf258ae8279d2d06c435baaf53478',1,'bbWidgetFunctions']]],
-  ['constructor_5fdict_16',['Constructor_dict',['../structbbWidgetFunctions.html#a37a2ed9642ba3e06c98b6986ba64499b',1,'bbWidgetFunctions']]],
-  ['constructors_17',['Constructors',['../structbbWidgetFunctions.html#aaf718289fb64029cf4ad23627eb0946e',1,'bbWidgetFunctions']]],
-  ['cooldowndraw_2eh_18',['CoolDownDraw.h',['../_2widgets_2drawFunctions_2CoolDownDraw_8h.html',1,'(Global Namespace)'],['../widgets_2drawFunctions_2CoolDownDraw_8h.html',1,'(Global Namespace)']]]
+  ['clearpool_12',['clearPool',['../structbbPool__common.html#a0049b02e956d905e991357d0eb664e75',1,'bbPool_common']]],
+  ['coding_2dconventions_13',['Coding-Conventions',['../Coding-Conventions.html',1,'']]],
+  ['coding_2dconventions_2edox_14',['Coding-Conventions.dox',['../Coding-Conventions_8dox.html',1,'']]],
+  ['colour_5fbeige_15',['COLOUR_BEIGE',['../bbEngineConstants_8h.html#a5e482a1366130f07ceac0da7deb56795',1,'bbEngineConstants.h']]],
+  ['constructor_5favailable_16',['Constructor_available',['../structbbWidgetFunctions.html#a33acf258ae8279d2d06c435baaf53478',1,'bbWidgetFunctions']]],
+  ['constructor_5fdict_17',['Constructor_dict',['../structbbWidgetFunctions.html#a37a2ed9642ba3e06c98b6986ba64499b',1,'bbWidgetFunctions']]],
+  ['constructors_18',['Constructors',['../structbbWidgetFunctions.html#aaf718289fb64029cf4ad23627eb0946e',1,'bbWidgetFunctions']]],
+  ['cooldowndraw_2eh_19',['CoolDownDraw.h',['../_2widgets_2drawFunctions_2CoolDownDraw_8h.html',1,'(Global Namespace)'],['../widgets_2drawFunctions_2CoolDownDraw_8h.html',1,'(Global Namespace)']]]
 ];

@@ -262,7 +262,7 @@ I32 bbComplexPool_Handle_incrementCollision(bbComplexPool_Handle* handle){
 I32 bbComplexPool_delete(struct bbPool_common* pool, void* address, bbPool_Handle handle){
 	bbComplexPool* Pool = pool;
 	bbPool_Element* element;
-	if (handle != NULL){
+	if (handle != NULL){ //TODO if address != NULL
 		I32 flag = bbComplexPool_lookup(pool, &element, handle);
 		bbAssert(flag == f_Success, "bad flag\n");
 	} else {

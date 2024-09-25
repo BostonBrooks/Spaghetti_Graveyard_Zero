@@ -1,0 +1,17 @@
+digraph "recycle/games"
+{
+ // LATEX_PDF_SIZE
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  compound=true
+  subgraph clusterdir_0e74c8a95ce5ab471c07695d2980ed46 {
+    graph [ bgcolor="#edf0f7", pencolor="grey25", style="filled,dashed,", label="recycle", fontname="Helvetica", fontsize="10", URL="dir_0e74c8a95ce5ab471c07695d2980ed46.html"]
+  dir_a3372fbbb64f30926046ee52ee3fdb43 [shape=box, label="headers", style="filled,", fillcolor="#a2b4d6", color="grey25", URL="dir_a3372fbbb64f30926046ee52ee3fdb43.html"];
+  subgraph clusterdir_c3abff0d2da30bfa4350cbffb1b77dde {
+    graph [ bgcolor="#edf0f7", pencolor="grey25", style="filled,bold,", label="", fontname="Helvetica", fontsize="10", URL="dir_c3abff0d2da30bfa4350cbffb1b77dde.html"]
+    dir_c3abff0d2da30bfa4350cbffb1b77dde [shape=plaintext, label="games"];
+  dir_2290aa1ec3c272b2fa765b36ab7ea1ff [shape=box, label="game", style="filled,", fillcolor="#a2b4d6", color="grey25", URL="dir_2290aa1ec3c272b2fa765b36ab7ea1ff.html"];
+  }
+  }
+  dir_2290aa1ec3c272b2fa765b36ab7ea1ff->dir_a3372fbbb64f30926046ee52ee3fdb43 [headlabel="232", labeldistance=1.5 headhref="dir_000007_000009.html"];
+}
