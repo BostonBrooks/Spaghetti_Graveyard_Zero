@@ -14,12 +14,14 @@
 #include <assert.h>
 #include "engine/logic/bbIntTypes.h"
 #include "engine/logic/bbFlags.h"
+#include "engine/logic/bbComplexPool.h"
 
-typedef U64 bbPool_Handle;
+typedef union {
+    void* ptr;
+    bbComplexPool_Handle complex;
+    U64 u64;
+} bbPool_Handle;
 
-/* TODO - This is what a union is for!
-static_assert(sizeof(void*) <= sizeof(U64), "bbPool_Handle cannot be cast as void*");
-*/
 
 typedef struct{
     bbPool_Handle head;
@@ -82,5 +84,4 @@ static I32 bbPool_reverseLookup(struct bbPool_common* pool, void* address, bbPoo
 	return pool->reverseLookup(pool, address, handle);
 }
 
-I32 bbComplexPool_newPool(struct bbPool_common** pool, I32 sizeOf, I32 level1, I32 level2);
 #endif // POOL_H

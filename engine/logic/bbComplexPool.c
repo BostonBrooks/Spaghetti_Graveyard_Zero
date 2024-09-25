@@ -3,16 +3,10 @@
 #include "engine/logic/bbPool.h"
 #include "engine/logic/bbTerminal.h"
 #include "engine/logic/bbRoundUp.h"
+#include "engine/logic/bbComplexPool.h"
 
 
 
-typedef struct {
-	U32 collision;
-	U32 index;
-} bbComplexPool_Handle;
-
-static_assert(sizeof(bbComplexPool_Handle) <= sizeof(U64),
-		"bbPool_Handle cannot be cast as bbComplexPool_Handle");
 
 typedef struct {
 	bbPool_common common;
@@ -23,9 +17,6 @@ typedef struct {
 	void* elements[];
 } bbComplexPool;
 
-// declared in bbPool.h
-//I32 bbComplexPool_newPool(struct bbPool_common** pool, I32 sizeOf, I32 level1, I32 level2);
-
 
 
 
@@ -35,6 +26,11 @@ I32 bbComplexPool_new(struct bbPool_common* pool, void** address, bbPool_Handle*
 I32 bbComplexPool_delete(struct bbPool_common* pool, void* address, bbPool_Handle handle);
 I32 bbComplexPool_lookup(struct bbPool_common* pool, void** address, bbPool_Handle handle);
 I32 bbComplexPool_reverseLookup(struct bbPool_common* pool, void* address, bbPool_Handle* handle);
+
+static I32 Handle_isEqual(bbPool_Handle A, bbPool_Handle B){
+    return (A.complex.collision == B.complex.collision) &&
+            (A.complex.index == B.complex.index);
+}
 
 void* bbComplexPool_getHeader(void* address){
 	//size_t offset =  offsetof(struct bbPool_Element, userData);
@@ -58,7 +54,8 @@ I32 bbComplexPool_newPool(struct bbPool_common** pool, I32 sizeOf, I32 level1, I
 	Pool->common.delete = bbComplexPool_delete;
 	Pool->common.lookup = bbComplexPool_lookup;
 	Pool->common.reverseLookup = bbComplexPool_reverseLookup;
-
+    Pool->common.null.complex.collision = 0;
+    Pool->common.null.complex.index = 0;
 	//elements of pools will be 64 bit aligned
 	I32 size = bbRoundUp(sizeOf, 8);
 
@@ -98,28 +95,25 @@ I32 bbComplexPool_clearPool(bbPool_common* pool){
 	return f_Success;
 }
 
-/// internal function to pack bbComplexPool_handle
-bbComplexPool_Handle bbComplexPool_packHandle(U32 index, U32 collision){
-	bbComplexPool_Handle handle;
-	handle.index = index;
-	handle.collision = collision;
-	return handle;
-}
 
-I32 bbComplexPool_newHandle(bbComplexPool* Pool, U32 lvl1index, U32 lvl2index, void* handle){
+I32 bbComplexPool_newHandle(bbComplexPool* Pool, U32 lvl1index, U32 lvl2index, bbPool_Handle* handle){
 	U32 index = lvl1index * Pool->level2 + lvl2index;
 	U32 randint = rand();
 	if (randint == 0) randint++;
 	U32 collision = randint;
-	bbComplexPool_Handle* Handle = handle;
-	*Handle = bbComplexPool_packHandle(index, collision);
+	bbPool_Handle Handle;
+    Handle.complex.index = index;
+    Handle.complex.collision = collision;
+	*handle = Handle;
 	return f_Success;
 }
 
 /// internal function to support expanding allocated space
 I32 bbComplexPool_expand(bbComplexPool* pool){
-	bbAssert((pool->available.head == pool->common.null)
-			 && (pool->available.head == pool->common.null),
+	bbAssert(Handle_isEqual(pool->available.head,
+                                          pool->common.null)
+			 && Handle_isEqual(pool->available.tail,
+                                             pool->common.null),
 			 "expanding non-empty pool");
 
 	U32 i = 0;
@@ -179,7 +173,7 @@ I32 bbComplexPool_expand(bbComplexPool* pool){
 	bbPool_Element *element_A;
 	bbPool_Element *element_B;
 	U32 index;
-	bbComplexPool_Handle* handle;
+	bbPool_Handle* handle;
 
 	element_A = &level2[j * (sizeof(bbPool_Element) + pool->common.sizeOf)];
 	element_A->prev = pool->common.null;
@@ -211,17 +205,20 @@ I32 bbComplexPool_expand(bbComplexPool* pool){
 I32 bbComplexPool_new(struct bbPool_common* pool, void** address, bbPool_Handle* handle){
 	bbAssert(address != NULL || handle != NULL, "where do we return the new element?\n");
 	bbComplexPool* Pool = pool;
-	if(Pool->available.head == Pool->common.null){
-		bbAssert(Pool->available.tail == Pool->common.null, "head/tail\n");
+	if(Handle_isEqual(Pool->available.head,
+                                    Pool->common.null)){
+		bbAssert(Handle_isEqual(Pool->available.tail,
+                                              Pool->common.null), "head/tail\n");
 		bbComplexPool_expand(Pool);
 	}
-	if (Pool->available.head == Pool->available.tail){
+	if (Handle_isEqual(Pool->available.head,
+                                     Pool->available.tail)){
 		bbPool_Element* element;
 		bbPool_Handle elementHandle = Pool->available.head;
 		I32 flag = bbComplexPool_lookupHeader(Pool, &element, elementHandle);
 		bbAssert(flag == f_Success, "bad flag\n");
-		bbAssert(element->prev == Pool->common.null
-		         && element->next == Pool->common.null,
+		bbAssert(Handle_isEqual(element->prev, Pool->common.null)
+		         && Handle_isEqual(element->next, Pool->common.null),
 				 "last element in list\n");
 		Pool->available.head = Pool->common.null;
 		Pool->available.tail = Pool->common.null;
@@ -251,11 +248,11 @@ I32 bbComplexPool_new(struct bbPool_common* pool, void** address, bbPool_Handle*
 	return f_Success;
 }
 
-I32 bbComplexPool_Handle_incrementCollision(bbComplexPool_Handle* handle){
-	U32 collision = handle->collision;
+I32 bbComplexPool_Handle_incrementCollision(bbPool_Handle* handle){
+	U32 collision = handle->complex.collision;
 	collision++;
 	if (collision == 0) collision++;
-	handle->collision = collision;
+	handle->complex.collision = collision;
 	return f_Success;
 }
 
@@ -269,7 +266,7 @@ I32 bbComplexPool_delete(struct bbPool_common* pool, void* address, bbPool_Handl
 		element = bbComplexPool_getHeader(address);
 	}
 
-	bbComplexPool_Handle* Handle = &element->self;
+	bbPool_Handle* Handle = &element->self;
 	bbComplexPool_Handle_incrementCollision(Handle);
 
 	bbPool_Element* head;
@@ -286,17 +283,17 @@ I32 bbComplexPool_delete(struct bbPool_common* pool, void* address, bbPool_Handl
 
 I32 bbComplexPool_lookupHeader(struct bbPool_common* pool, void** address, bbPool_Handle handle){
 	bbComplexPool* Pool = pool;
-	bbComplexPool_Handle* Handle = &handle; //may or may not work :P
-	U32 index = Handle->index;
-	U32 collision = Handle->collision;
+	U32 index = handle.complex.index;
+	U32 collision = handle.complex.collision;
 	U32 lvl1index = index / Pool->level2;
 	U32 lvl2index = index % Pool->level2;
 
 	U8* lvl2 = Pool->elements[lvl1index];
 	bbPool_Element *element = &lvl2[lvl2index * (sizeof(bbPool_Element) + Pool->common.sizeOf)];
-	bbComplexPool_Handle* elementHandle = &element->self; //may or may not work :P
+	bbPool_Handle* elementHandle = &element->self; //may or may not work :P
 
-	bbAssert(Handle->collision == elementHandle->collision, "handle collision\n");
+	bbAssert(handle.complex.collision == elementHandle->complex.collision, "handle "
+                                                            "collision\n");
 
 	*address = element;
 	return f_Success;
