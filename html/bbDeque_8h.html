@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.4"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Spaghetti Graveyard Zero: engine/logic/bbDeque.h File Reference</title>
+<title>Spaghetti Graveyard Zero: engine/logic/recycle/bbDeque.h File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -62,27 +62,26 @@ $(function() {
 
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><a class="el" href="dir_996f45160da62e1a3d7f6046fad68f51.html">engine</a></li><li class="navelem"><a class="el" href="dir_2ee12d70d3e2faee9b1ae0478b86e22e.html">logic</a></li>  </ul>
+<li class="navelem"><a class="el" href="dir_996f45160da62e1a3d7f6046fad68f51.html">engine</a></li><li class="navelem"><a class="el" href="dir_2ee12d70d3e2faee9b1ae0478b86e22e.html">logic</a></li><li class="navelem"><a class="el" href="dir_7c06c3402b61eb477463cd303b47a660.html">recycle</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div class="header">
   <div class="summary">
 <a href="#nested-classes">Data Structures</a> &#124;
-<a href="#define-members">Macros</a> &#124;
 <a href="#func-members">Functions</a>  </div>
   <div class="headertitle"><div class="title">bbDeque.h File Reference</div></div>
 </div><!--header-->
 <div class="contents">
 
-<p>Objects are allocated in a pool and then can be pushed and popped from either end of the queue.  
+<p>A deque is a linked list where elements can be pushed and popped from each end The deque is used to implement the reactor pattern EG the main loop is one reactor every entity in the gameworld is a reactor attached to the same pool.  
 <a href="#details">More...</a></p>
 <div class="textblock"><code>#include &quot;<a class="el" href="engine_2logic_2bbIntTypes_8h_source.html">engine/logic/bbIntTypes.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="engine_2logic_2bbFlags_8h_source.html">engine/logic/bbFlags.h</a>&quot;</code><br />
-<code>#include &quot;engine/logic/bbFastpool.h&quot;</code><br />
+<code>#include &quot;<a class="el" href="engine_2logic_2bbPool_8h_source.html">engine/logic/bbPool.h</a>&quot;</code><br />
 </div><div class="textblock"><div class="dynheader">
 Include dependency graph for bbDeque.h:</div>
 <div class="dyncontent">
-<div class="center"><img src="bbDeque_8h__incl.png" border="0" usemap="#aengine_2logic_2bbDeque_8h" alt=""/></div>
+<div class="center"><img src="bbDeque_8h__incl.png" border="0" usemap="#aengine_2logic_2recycle_2bbDeque_8h" alt=""/></div>
 </div>
 </div>
 <p><a href="bbDeque_8h_source.html">Go to the source code of this file.</a></p>
@@ -94,101 +93,102 @@ Data Structures</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structbbDeque__Element.html">bbDeque_Element</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="define-members" name="define-members"></a>
-Macros</h2></td></tr>
-<tr class="memitem:a1ec5d345a59af4688a45f8010e06fb5e"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="bbDeque_8h.html#a1ec5d345a59af4688a45f8010e06fb5e">f_None</a>&#160;&#160;&#160;-1</td></tr>
-<tr class="separator:a1ec5d345a59af4688a45f8010e06fb5e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:a2a2c768ab9aba03e368533031e0d2ebc"><td class="memItemLeft" align="right" valign="top"><a class="el" href="headers_2bbIntTypes_8h.html#ac7566d6ee1bbf95c1bd8107c15405de4">I32</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="bbDeque_8h.html#a2a2c768ab9aba03e368533031e0d2ebc">bbDeque_newDeque</a> (void **deque, <a class="el" href="headers_2bbIntTypes_8h.html#ac7566d6ee1bbf95c1bd8107c15405de4">I32</a> sizeOf, <a class="el" href="headers_2bbIntTypes_8h.html#ac7566d6ee1bbf95c1bd8107c15405de4">I32</a> level1, <a class="el" href="headers_2bbIntTypes_8h.html#ac7566d6ee1bbf95c1bd8107c15405de4">I32</a> level2, <a class="el" href="headers_2bbIntTypes_8h.html#ac7566d6ee1bbf95c1bd8107c15405de4">I32</a> map)</td></tr>
-<tr class="memdesc:a2a2c768ab9aba03e368533031e0d2ebc"><td class="mdescLeft">&#160;</td><td class="mdescRight">initialise new deque  <a href="bbDeque_8h.html#a2a2c768ab9aba03e368533031e0d2ebc">More...</a><br /></td></tr>
-<tr class="separator:a2a2c768ab9aba03e368533031e0d2ebc"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a99fa3f4d2ec9bd3b4b93b5d224e3b4aa"><td class="memItemLeft" align="right" valign="top"><a class="el" href="headers_2bbIntTypes_8h.html#ac7566d6ee1bbf95c1bd8107c15405de4">I32</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="bbDeque_8h.html#a99fa3f4d2ec9bd3b4b93b5d224e3b4aa">bbDeque_deleteDeque</a> (void *deque)</td></tr>
-<tr class="memdesc:a99fa3f4d2ec9bd3b4b93b5d224e3b4aa"><td class="mdescLeft">&#160;</td><td class="mdescRight">delete deque entirely  <a href="bbDeque_8h.html#a99fa3f4d2ec9bd3b4b93b5d224e3b4aa">More...</a><br /></td></tr>
-<tr class="separator:a99fa3f4d2ec9bd3b4b93b5d224e3b4aa"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5b43b46ddbf874a86e76727f35e056f5"><td class="memItemLeft" align="right" valign="top"><a class="el" href="headers_2bbIntTypes_8h.html#ac7566d6ee1bbf95c1bd8107c15405de4">I32</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="bbDeque_8h.html#a5b43b46ddbf874a86e76727f35e056f5">bbDeque_clearDeque</a> (void *deque)</td></tr>
-<tr class="memdesc:a5b43b46ddbf874a86e76727f35e056f5"><td class="mdescLeft">&#160;</td><td class="mdescRight">delete everything contained in deque but keep deque alive  <a href="bbDeque_8h.html#a5b43b46ddbf874a86e76727f35e056f5">More...</a><br /></td></tr>
-<tr class="separator:a5b43b46ddbf874a86e76727f35e056f5"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a363d5639f339852b585bd4e3723496c9"><td class="memItemLeft" align="right" valign="top"><a class="el" href="headers_2bbIntTypes_8h.html#ac7566d6ee1bbf95c1bd8107c15405de4">I32</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="bbDeque_8h.html#a363d5639f339852b585bd4e3723496c9">bbDeque_new</a> (void *deque, void **element)</td></tr>
-<tr class="memdesc:a363d5639f339852b585bd4e3723496c9"><td class="mdescLeft">&#160;</td><td class="mdescRight">allocate space for new element  <a href="bbDeque_8h.html#a363d5639f339852b585bd4e3723496c9">More...</a><br /></td></tr>
-<tr class="separator:a363d5639f339852b585bd4e3723496c9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a82fc1529e292949ba0c1b0c5aaaa7439"><td class="memItemLeft" align="right" valign="top"><a class="el" href="headers_2bbIntTypes_8h.html#ac7566d6ee1bbf95c1bd8107c15405de4">I32</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="bbDeque_8h.html#a82fc1529e292949ba0c1b0c5aaaa7439">bbDeque_delete</a> (void *deque, void *element)</td></tr>
-<tr class="memdesc:a82fc1529e292949ba0c1b0c5aaaa7439"><td class="mdescLeft">&#160;</td><td class="mdescRight">deallocate space used by element  <a href="bbDeque_8h.html#a82fc1529e292949ba0c1b0c5aaaa7439">More...</a><br /></td></tr>
-<tr class="separator:a82fc1529e292949ba0c1b0c5aaaa7439"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1aff69a50a4fde1a2308f08af3fc6b7c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="headers_2bbIntTypes_8h.html#ac7566d6ee1bbf95c1bd8107c15405de4">I32</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="bbDeque_8h.html#a1aff69a50a4fde1a2308f08af3fc6b7c">bbDeque_pushHead</a> (void *deque, void *element)</td></tr>
-<tr class="memdesc:a1aff69a50a4fde1a2308f08af3fc6b7c"><td class="mdescLeft">&#160;</td><td class="mdescRight">add element to list head  <a href="bbDeque_8h.html#a1aff69a50a4fde1a2308f08af3fc6b7c">More...</a><br /></td></tr>
-<tr class="separator:a1aff69a50a4fde1a2308f08af3fc6b7c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6f4f851754aa7e453dc32345262dad0b"><td class="memItemLeft" align="right" valign="top"><a class="el" href="headers_2bbIntTypes_8h.html#ac7566d6ee1bbf95c1bd8107c15405de4">I32</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="bbDeque_8h.html#a6f4f851754aa7e453dc32345262dad0b">bbDeque_popHead</a> (void *deque, void **element)</td></tr>
-<tr class="memdesc:a6f4f851754aa7e453dc32345262dad0b"><td class="mdescLeft">&#160;</td><td class="mdescRight">remove element from list and return address  <a href="bbDeque_8h.html#a6f4f851754aa7e453dc32345262dad0b">More...</a><br /></td></tr>
-<tr class="separator:a6f4f851754aa7e453dc32345262dad0b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:afded3e67ae6609d7d4fffb2ca63b7eed"><td class="memItemLeft" align="right" valign="top"><a class="el" href="headers_2bbIntTypes_8h.html#ac7566d6ee1bbf95c1bd8107c15405de4">I32</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="bbDeque_8h.html#afded3e67ae6609d7d4fffb2ca63b7eed">bbDeque_pushTail</a> (void *deque, void *element)</td></tr>
-<tr class="memdesc:afded3e67ae6609d7d4fffb2ca63b7eed"><td class="mdescLeft">&#160;</td><td class="mdescRight">add element to list tail  <a href="bbDeque_8h.html#afded3e67ae6609d7d4fffb2ca63b7eed">More...</a><br /></td></tr>
-<tr class="separator:afded3e67ae6609d7d4fffb2ca63b7eed"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa3be43517cb1d85957139341921083d8"><td class="memItemLeft" align="right" valign="top"><a class="el" href="headers_2bbIntTypes_8h.html#ac7566d6ee1bbf95c1bd8107c15405de4">I32</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="bbDeque_8h.html#aa3be43517cb1d85957139341921083d8">bbDeque_popTail</a> (void *deque, void **element)</td></tr>
-<tr class="memdesc:aa3be43517cb1d85957139341921083d8"><td class="mdescLeft">&#160;</td><td class="mdescRight">remove element and return address  <a href="bbDeque_8h.html#aa3be43517cb1d85957139341921083d8">More...</a><br /></td></tr>
-<tr class="separator:aa3be43517cb1d85957139341921083d8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ababfd41a89dd848b6bd1982a24fac2df"><td class="memItemLeft" align="right" valign="top"><a class="el" href="recycle_2headers_2bbIntTypes_8h.html#ac7566d6ee1bbf95c1bd8107c15405de4">I32</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="bbDeque_8h.html#ababfd41a89dd848b6bd1982a24fac2df">bbDeque_newPool</a> (<a class="el" href="structbbDeque.html">bbDeque</a> *deque, <a class="el" href="recycle_2headers_2bbIntTypes_8h.html#a8f953f379d243081b950adb7f194b2e8">U32</a> sizeOf, <a class="el" href="recycle_2headers_2bbIntTypes_8h.html#a8f953f379d243081b950adb7f194b2e8">U32</a> level1, <a class="el" href="recycle_2headers_2bbIntTypes_8h.html#a8f953f379d243081b950adb7f194b2e8">U32</a> level2)</td></tr>
+<tr class="memdesc:ababfd41a89dd848b6bd1982a24fac2df"><td class="mdescLeft">&#160;</td><td class="mdescRight">create an new pool and attach to existing deque, init deque to empty  <a href="bbDeque_8h.html#ababfd41a89dd848b6bd1982a24fac2df">More...</a><br /></td></tr>
+<tr class="separator:ababfd41a89dd848b6bd1982a24fac2df"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adf375603c9346f4435968b5b4ea5e2b8"><td class="memItemLeft" align="right" valign="top"><a class="el" href="recycle_2headers_2bbIntTypes_8h.html#ac7566d6ee1bbf95c1bd8107c15405de4">I32</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="bbDeque_8h.html#adf375603c9346f4435968b5b4ea5e2b8">bbDeque_deletePool</a> (<a class="el" href="structbbDeque.html">bbDeque</a> *deque)</td></tr>
+<tr class="memdesc:adf375603c9346f4435968b5b4ea5e2b8"><td class="mdescLeft">&#160;</td><td class="mdescRight">delete pool from existing deque  <a href="bbDeque_8h.html#adf375603c9346f4435968b5b4ea5e2b8">More...</a><br /></td></tr>
+<tr class="separator:adf375603c9346f4435968b5b4ea5e2b8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9d2a6e0cd66bba2a04d62661144d688b"><td class="memItemLeft" align="right" valign="top"><a class="el" href="recycle_2headers_2bbIntTypes_8h.html#ac7566d6ee1bbf95c1bd8107c15405de4">I32</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="bbDeque_8h.html#a9d2a6e0cd66bba2a04d62661144d688b">bbDeque_attachPool</a> (<a class="el" href="structbbDeque.html">bbDeque</a> *deque)</td></tr>
+<tr class="memdesc:a9d2a6e0cd66bba2a04d62661144d688b"><td class="mdescLeft">&#160;</td><td class="mdescRight">attach pool to existing deque and init deque as empty  <a href="bbDeque_8h.html#a9d2a6e0cd66bba2a04d62661144d688b">More...</a><br /></td></tr>
+<tr class="separator:a9d2a6e0cd66bba2a04d62661144d688b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af34acf9955d2735761067d8200eee837"><td class="memItemLeft" align="right" valign="top"><a class="el" href="recycle_2headers_2bbIntTypes_8h.html#ac7566d6ee1bbf95c1bd8107c15405de4">I32</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="bbDeque_8h.html#af34acf9955d2735761067d8200eee837">bbDeque_new</a> (<a class="el" href="structbbDeque.html">bbDeque</a> *deque, <a class="el" href="structbbDeque__Element.html">bbDeque_Element</a> **element)</td></tr>
+<tr class="memdesc:af34acf9955d2735761067d8200eee837"><td class="mdescLeft">&#160;</td><td class="mdescRight">allocate space for new element  <a href="bbDeque_8h.html#af34acf9955d2735761067d8200eee837">More...</a><br /></td></tr>
+<tr class="separator:af34acf9955d2735761067d8200eee837"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a96dd3967e8516e7863745f26b9b7e502"><td class="memItemLeft" align="right" valign="top"><a class="el" href="recycle_2headers_2bbIntTypes_8h.html#ac7566d6ee1bbf95c1bd8107c15405de4">I32</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="bbDeque_8h.html#a96dd3967e8516e7863745f26b9b7e502">bbDeque_delete</a> (<a class="el" href="structbbDeque.html">bbDeque</a> *deque)</td></tr>
+<tr class="memdesc:a96dd3967e8516e7863745f26b9b7e502"><td class="mdescLeft">&#160;</td><td class="mdescRight">deallocate space used by element  <a href="bbDeque_8h.html#a96dd3967e8516e7863745f26b9b7e502">More...</a><br /></td></tr>
+<tr class="separator:a96dd3967e8516e7863745f26b9b7e502"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abd64c2526f9c8a96c82e9a8164dd7e16"><td class="memItemLeft" align="right" valign="top"><a class="el" href="recycle_2headers_2bbIntTypes_8h.html#ac7566d6ee1bbf95c1bd8107c15405de4">I32</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="bbDeque_8h.html#abd64c2526f9c8a96c82e9a8164dd7e16">bbDeque_clearDeque</a> (<a class="el" href="structbbDeque.html">bbDeque</a> *deque)</td></tr>
+<tr class="memdesc:abd64c2526f9c8a96c82e9a8164dd7e16"><td class="mdescLeft">&#160;</td><td class="mdescRight">remove all elements in deque  <a href="bbDeque_8h.html#abd64c2526f9c8a96c82e9a8164dd7e16">More...</a><br /></td></tr>
+<tr class="separator:abd64c2526f9c8a96c82e9a8164dd7e16"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6fc062583d6746d212244f70dc8d582c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="recycle_2headers_2bbIntTypes_8h.html#ac7566d6ee1bbf95c1bd8107c15405de4">I32</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="bbDeque_8h.html#a6fc062583d6746d212244f70dc8d582c">bbDeque_pushHead</a> (<a class="el" href="structbbDeque.html">bbDeque</a> *deque, <a class="el" href="structbbDeque__Element.html">bbDeque_Element</a> *element)</td></tr>
+<tr class="memdesc:a6fc062583d6746d212244f70dc8d582c"><td class="mdescLeft">&#160;</td><td class="mdescRight">add element to list head  <a href="bbDeque_8h.html#a6fc062583d6746d212244f70dc8d582c">More...</a><br /></td></tr>
+<tr class="separator:a6fc062583d6746d212244f70dc8d582c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aee662a140a6fdce513cf8a487492a69f"><td class="memItemLeft" align="right" valign="top"><a class="el" href="recycle_2headers_2bbIntTypes_8h.html#ac7566d6ee1bbf95c1bd8107c15405de4">I32</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="bbDeque_8h.html#aee662a140a6fdce513cf8a487492a69f">bbDeque_popHead</a> (<a class="el" href="structbbDeque.html">bbDeque</a> *deque, <a class="el" href="structbbDeque__Element.html">bbDeque_Element</a> **element)</td></tr>
+<tr class="memdesc:aee662a140a6fdce513cf8a487492a69f"><td class="mdescLeft">&#160;</td><td class="mdescRight">remove element from list and return address  <a href="bbDeque_8h.html#aee662a140a6fdce513cf8a487492a69f">More...</a><br /></td></tr>
+<tr class="separator:aee662a140a6fdce513cf8a487492a69f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af1b5bef7be2a0dd0543e6f11ed8aee33"><td class="memItemLeft" align="right" valign="top"><a class="el" href="recycle_2headers_2bbIntTypes_8h.html#ac7566d6ee1bbf95c1bd8107c15405de4">I32</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="bbDeque_8h.html#af1b5bef7be2a0dd0543e6f11ed8aee33">bbDeque_pushTail</a> (<a class="el" href="structbbDeque.html">bbDeque</a> *deque, <a class="el" href="structbbDeque__Element.html">bbDeque_Element</a> *element)</td></tr>
+<tr class="memdesc:af1b5bef7be2a0dd0543e6f11ed8aee33"><td class="mdescLeft">&#160;</td><td class="mdescRight">add element to list tail  <a href="bbDeque_8h.html#af1b5bef7be2a0dd0543e6f11ed8aee33">More...</a><br /></td></tr>
+<tr class="separator:af1b5bef7be2a0dd0543e6f11ed8aee33"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8cddfc514d58432b29b26f9954980fe7"><td class="memItemLeft" align="right" valign="top"><a class="el" href="recycle_2headers_2bbIntTypes_8h.html#ac7566d6ee1bbf95c1bd8107c15405de4">I32</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="bbDeque_8h.html#a8cddfc514d58432b29b26f9954980fe7">bbDeque_popTail</a> (<a class="el" href="structbbDeque.html">bbDeque</a> *deque, <a class="el" href="structbbDeque__Element.html">bbDeque_Element</a> **element)</td></tr>
+<tr class="memdesc:a8cddfc514d58432b29b26f9954980fe7"><td class="mdescLeft">&#160;</td><td class="mdescRight">remove element and return address  <a href="bbDeque_8h.html#a8cddfc514d58432b29b26f9954980fe7">More...</a><br /></td></tr>
+<tr class="separator:a8cddfc514d58432b29b26f9954980fe7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p >Objects are allocated in a pool and then can be pushed and popped from either end of the queue. </p>
-</div><h2 class="groupheader">Macro Definition Documentation</h2>
-<a id="a1ec5d345a59af4688a45f8010e06fb5e" name="a1ec5d345a59af4688a45f8010e06fb5e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a1ec5d345a59af4688a45f8010e06fb5e">&#9670;&nbsp;</a></span>f_None</h2>
+<div class="textblock"><p >A deque is a linked list where elements can be pushed and popped from each end The deque is used to implement the reactor pattern EG the main loop is one reactor every entity in the gameworld is a reactor attached to the same pool. </p>
+<p >thoughts on entities:</p><ul>
+<li>one loop looks at the surrounding entities and posts updates to itself</li>
+<li><p class="startli">another loop looks at the list of updates and applies them to itself</p><ul>
+<li>in the second loop, an entity can (re)post updates to itself to be handled on the next iteration</li>
+</ul>
+<p class="startli">We avoid malloc-ing many deques by storing the deque as part of an existing struct. otherwise we'd need to draw from a pool of deques </p>
+</li>
+</ul>
+</div><h2 class="groupheader">Function Documentation</h2>
+<a id="a9d2a6e0cd66bba2a04d62661144d688b" name="a9d2a6e0cd66bba2a04d62661144d688b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9d2a6e0cd66bba2a04d62661144d688b">&#9670;&nbsp;</a></span>bbDeque_attachPool()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">#define f_None&#160;&#160;&#160;-1</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<h2 class="groupheader">Function Documentation</h2>
-<a id="a5b43b46ddbf874a86e76727f35e056f5" name="a5b43b46ddbf874a86e76727f35e056f5"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a5b43b46ddbf874a86e76727f35e056f5">&#9670;&nbsp;</a></span>bbDeque_clearDeque()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="headers_2bbIntTypes_8h.html#ac7566d6ee1bbf95c1bd8107c15405de4">I32</a> bbDeque_clearDeque </td>
+          <td class="memname"><a class="el" href="recycle_2headers_2bbIntTypes_8h.html#ac7566d6ee1bbf95c1bd8107c15405de4">I32</a> bbDeque_attachPool </td>
           <td>(</td>
-          <td class="paramtype">void *&#160;</td>
+          <td class="paramtype"><a class="el" href="structbbDeque.html">bbDeque</a> *&#160;</td>
           <td class="paramname"><em>deque</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p>delete everything contained in deque but keep deque alive </p>
+<p>attach pool to existing deque and init deque as empty </p>
 
 </div>
 </div>
-<a id="a82fc1529e292949ba0c1b0c5aaaa7439" name="a82fc1529e292949ba0c1b0c5aaaa7439"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a82fc1529e292949ba0c1b0c5aaaa7439">&#9670;&nbsp;</a></span>bbDeque_delete()</h2>
+<a id="abd64c2526f9c8a96c82e9a8164dd7e16" name="abd64c2526f9c8a96c82e9a8164dd7e16"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abd64c2526f9c8a96c82e9a8164dd7e16">&#9670;&nbsp;</a></span>bbDeque_clearDeque()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="headers_2bbIntTypes_8h.html#ac7566d6ee1bbf95c1bd8107c15405de4">I32</a> bbDeque_delete </td>
+          <td class="memname"><a class="el" href="recycle_2headers_2bbIntTypes_8h.html#ac7566d6ee1bbf95c1bd8107c15405de4">I32</a> bbDeque_clearDeque </td>
           <td>(</td>
-          <td class="paramtype">void *&#160;</td>
-          <td class="paramname"><em>deque</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
+          <td class="paramtype"><a class="el" href="structbbDeque.html">bbDeque</a> *&#160;</td>
+          <td class="paramname"><em>deque</em></td><td>)</td>
           <td></td>
-          <td class="paramtype">void *&#160;</td>
-          <td class="paramname"><em>element</em>&#160;</td>
         </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>remove all elements in deque </p>
+
+</div>
+</div>
+<a id="a96dd3967e8516e7863745f26b9b7e502" name="a96dd3967e8516e7863745f26b9b7e502"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a96dd3967e8516e7863745f26b9b7e502">&#9670;&nbsp;</a></span>bbDeque_delete()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
         <tr>
+          <td class="memname"><a class="el" href="recycle_2headers_2bbIntTypes_8h.html#ac7566d6ee1bbf95c1bd8107c15405de4">I32</a> bbDeque_delete </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structbbDeque.html">bbDeque</a> *&#160;</td>
+          <td class="paramname"><em>deque</em></td><td>)</td>
           <td></td>
-          <td>)</td>
-          <td></td><td></td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -197,42 +197,42 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="a99fa3f4d2ec9bd3b4b93b5d224e3b4aa" name="a99fa3f4d2ec9bd3b4b93b5d224e3b4aa"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a99fa3f4d2ec9bd3b4b93b5d224e3b4aa">&#9670;&nbsp;</a></span>bbDeque_deleteDeque()</h2>
+<a id="adf375603c9346f4435968b5b4ea5e2b8" name="adf375603c9346f4435968b5b4ea5e2b8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adf375603c9346f4435968b5b4ea5e2b8">&#9670;&nbsp;</a></span>bbDeque_deletePool()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="headers_2bbIntTypes_8h.html#ac7566d6ee1bbf95c1bd8107c15405de4">I32</a> bbDeque_deleteDeque </td>
+          <td class="memname"><a class="el" href="recycle_2headers_2bbIntTypes_8h.html#ac7566d6ee1bbf95c1bd8107c15405de4">I32</a> bbDeque_deletePool </td>
           <td>(</td>
-          <td class="paramtype">void *&#160;</td>
+          <td class="paramtype"><a class="el" href="structbbDeque.html">bbDeque</a> *&#160;</td>
           <td class="paramname"><em>deque</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p>delete deque entirely </p>
+<p>delete pool from existing deque </p>
 
 </div>
 </div>
-<a id="a363d5639f339852b585bd4e3723496c9" name="a363d5639f339852b585bd4e3723496c9"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a363d5639f339852b585bd4e3723496c9">&#9670;&nbsp;</a></span>bbDeque_new()</h2>
+<a id="af34acf9955d2735761067d8200eee837" name="af34acf9955d2735761067d8200eee837"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af34acf9955d2735761067d8200eee837">&#9670;&nbsp;</a></span>bbDeque_new()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="headers_2bbIntTypes_8h.html#ac7566d6ee1bbf95c1bd8107c15405de4">I32</a> bbDeque_new </td>
+          <td class="memname"><a class="el" href="recycle_2headers_2bbIntTypes_8h.html#ac7566d6ee1bbf95c1bd8107c15405de4">I32</a> bbDeque_new </td>
           <td>(</td>
-          <td class="paramtype">void *&#160;</td>
+          <td class="paramtype"><a class="el" href="structbbDeque.html">bbDeque</a> *&#160;</td>
           <td class="paramname"><em>deque</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">void **&#160;</td>
+          <td class="paramtype"><a class="el" href="structbbDeque__Element.html">bbDeque_Element</a> **&#160;</td>
           <td class="paramname"><em>element</em>&#160;</td>
         </tr>
         <tr>
@@ -247,41 +247,35 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="a2a2c768ab9aba03e368533031e0d2ebc" name="a2a2c768ab9aba03e368533031e0d2ebc"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a2a2c768ab9aba03e368533031e0d2ebc">&#9670;&nbsp;</a></span>bbDeque_newDeque()</h2>
+<a id="ababfd41a89dd848b6bd1982a24fac2df" name="ababfd41a89dd848b6bd1982a24fac2df"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ababfd41a89dd848b6bd1982a24fac2df">&#9670;&nbsp;</a></span>bbDeque_newPool()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="headers_2bbIntTypes_8h.html#ac7566d6ee1bbf95c1bd8107c15405de4">I32</a> bbDeque_newDeque </td>
+          <td class="memname"><a class="el" href="recycle_2headers_2bbIntTypes_8h.html#ac7566d6ee1bbf95c1bd8107c15405de4">I32</a> bbDeque_newPool </td>
           <td>(</td>
-          <td class="paramtype">void **&#160;</td>
+          <td class="paramtype"><a class="el" href="structbbDeque.html">bbDeque</a> *&#160;</td>
           <td class="paramname"><em>deque</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="headers_2bbIntTypes_8h.html#ac7566d6ee1bbf95c1bd8107c15405de4">I32</a>&#160;</td>
+          <td class="paramtype"><a class="el" href="recycle_2headers_2bbIntTypes_8h.html#a8f953f379d243081b950adb7f194b2e8">U32</a>&#160;</td>
           <td class="paramname"><em>sizeOf</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="headers_2bbIntTypes_8h.html#ac7566d6ee1bbf95c1bd8107c15405de4">I32</a>&#160;</td>
+          <td class="paramtype"><a class="el" href="recycle_2headers_2bbIntTypes_8h.html#a8f953f379d243081b950adb7f194b2e8">U32</a>&#160;</td>
           <td class="paramname"><em>level1</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="headers_2bbIntTypes_8h.html#ac7566d6ee1bbf95c1bd8107c15405de4">I32</a>&#160;</td>
-          <td class="paramname"><em>level2</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="headers_2bbIntTypes_8h.html#ac7566d6ee1bbf95c1bd8107c15405de4">I32</a>&#160;</td>
-          <td class="paramname"><em>map</em>&#160;</td>
+          <td class="paramtype"><a class="el" href="recycle_2headers_2bbIntTypes_8h.html#a8f953f379d243081b950adb7f194b2e8">U32</a>&#160;</td>
+          <td class="paramname"><em>level2</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -291,26 +285,26 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>initialise new deque </p>
+<p>create an new pool and attach to existing deque, init deque to empty </p>
 
 </div>
 </div>
-<a id="a6f4f851754aa7e453dc32345262dad0b" name="a6f4f851754aa7e453dc32345262dad0b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a6f4f851754aa7e453dc32345262dad0b">&#9670;&nbsp;</a></span>bbDeque_popHead()</h2>
+<a id="aee662a140a6fdce513cf8a487492a69f" name="aee662a140a6fdce513cf8a487492a69f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aee662a140a6fdce513cf8a487492a69f">&#9670;&nbsp;</a></span>bbDeque_popHead()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="headers_2bbIntTypes_8h.html#ac7566d6ee1bbf95c1bd8107c15405de4">I32</a> bbDeque_popHead </td>
+          <td class="memname"><a class="el" href="recycle_2headers_2bbIntTypes_8h.html#ac7566d6ee1bbf95c1bd8107c15405de4">I32</a> bbDeque_popHead </td>
           <td>(</td>
-          <td class="paramtype">void *&#160;</td>
+          <td class="paramtype"><a class="el" href="structbbDeque.html">bbDeque</a> *&#160;</td>
           <td class="paramname"><em>deque</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">void **&#160;</td>
+          <td class="paramtype"><a class="el" href="structbbDeque__Element.html">bbDeque_Element</a> **&#160;</td>
           <td class="paramname"><em>element</em>&#160;</td>
         </tr>
         <tr>
@@ -325,22 +319,22 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="aa3be43517cb1d85957139341921083d8" name="aa3be43517cb1d85957139341921083d8"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aa3be43517cb1d85957139341921083d8">&#9670;&nbsp;</a></span>bbDeque_popTail()</h2>
+<a id="a8cddfc514d58432b29b26f9954980fe7" name="a8cddfc514d58432b29b26f9954980fe7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8cddfc514d58432b29b26f9954980fe7">&#9670;&nbsp;</a></span>bbDeque_popTail()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="headers_2bbIntTypes_8h.html#ac7566d6ee1bbf95c1bd8107c15405de4">I32</a> bbDeque_popTail </td>
+          <td class="memname"><a class="el" href="recycle_2headers_2bbIntTypes_8h.html#ac7566d6ee1bbf95c1bd8107c15405de4">I32</a> bbDeque_popTail </td>
           <td>(</td>
-          <td class="paramtype">void *&#160;</td>
+          <td class="paramtype"><a class="el" href="structbbDeque.html">bbDeque</a> *&#160;</td>
           <td class="paramname"><em>deque</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">void **&#160;</td>
+          <td class="paramtype"><a class="el" href="structbbDeque__Element.html">bbDeque_Element</a> **&#160;</td>
           <td class="paramname"><em>element</em>&#160;</td>
         </tr>
         <tr>
@@ -355,22 +349,22 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="a1aff69a50a4fde1a2308f08af3fc6b7c" name="a1aff69a50a4fde1a2308f08af3fc6b7c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a1aff69a50a4fde1a2308f08af3fc6b7c">&#9670;&nbsp;</a></span>bbDeque_pushHead()</h2>
+<a id="a6fc062583d6746d212244f70dc8d582c" name="a6fc062583d6746d212244f70dc8d582c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6fc062583d6746d212244f70dc8d582c">&#9670;&nbsp;</a></span>bbDeque_pushHead()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="headers_2bbIntTypes_8h.html#ac7566d6ee1bbf95c1bd8107c15405de4">I32</a> bbDeque_pushHead </td>
+          <td class="memname"><a class="el" href="recycle_2headers_2bbIntTypes_8h.html#ac7566d6ee1bbf95c1bd8107c15405de4">I32</a> bbDeque_pushHead </td>
           <td>(</td>
-          <td class="paramtype">void *&#160;</td>
+          <td class="paramtype"><a class="el" href="structbbDeque.html">bbDeque</a> *&#160;</td>
           <td class="paramname"><em>deque</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">void *&#160;</td>
+          <td class="paramtype"><a class="el" href="structbbDeque__Element.html">bbDeque_Element</a> *&#160;</td>
           <td class="paramname"><em>element</em>&#160;</td>
         </tr>
         <tr>
@@ -385,22 +379,22 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="afded3e67ae6609d7d4fffb2ca63b7eed" name="afded3e67ae6609d7d4fffb2ca63b7eed"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#afded3e67ae6609d7d4fffb2ca63b7eed">&#9670;&nbsp;</a></span>bbDeque_pushTail()</h2>
+<a id="af1b5bef7be2a0dd0543e6f11ed8aee33" name="af1b5bef7be2a0dd0543e6f11ed8aee33"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af1b5bef7be2a0dd0543e6f11ed8aee33">&#9670;&nbsp;</a></span>bbDeque_pushTail()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="headers_2bbIntTypes_8h.html#ac7566d6ee1bbf95c1bd8107c15405de4">I32</a> bbDeque_pushTail </td>
+          <td class="memname"><a class="el" href="recycle_2headers_2bbIntTypes_8h.html#ac7566d6ee1bbf95c1bd8107c15405de4">I32</a> bbDeque_pushTail </td>
           <td>(</td>
-          <td class="paramtype">void *&#160;</td>
+          <td class="paramtype"><a class="el" href="structbbDeque.html">bbDeque</a> *&#160;</td>
           <td class="paramname"><em>deque</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">void *&#160;</td>
+          <td class="paramtype"><a class="el" href="structbbDeque__Element.html">bbDeque_Element</a> *&#160;</td>
           <td class="paramname"><em>element</em>&#160;</td>
         </tr>
         <tr>

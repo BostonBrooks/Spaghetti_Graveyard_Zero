@@ -1,0 +1,28 @@
+digraph "engine/logic/bbFlags.h"
+{
+ // LATEX_PDF_SIZE
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  Node1 [label="engine/logic/bbFlags.h",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black",tooltip=" "];
+  Node1 -> Node2 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node2 [label="engine/logic/bbPool.h",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$engine_2logic_2bbPool_8h.html",tooltip="Pools pre-allocate space for objects in the game to quickly allocate and de-allocate individual objec..."];
+  Node2 -> Node3 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node3 [label="engine/logic/bbPriorityQueue.h",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$bbPriorityQueue_8h.html",tooltip="A priority queue is a sorted list of objects that are defined by the pool that contains them...."];
+  Node2 -> Node4 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node4 [label="engine/logic/recycle\l/bbDeque.h",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$bbDeque_8h.html",tooltip="A deque is a linked list where elements can be pushed and popped from each end The deque is used to i..."];
+  Node1 -> Node5 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node5 [label="engine/logic/bbString.h",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$engine_2logic_2bbString_8h.html",tooltip=" "];
+  Node5 -> Node6 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node6 [label="engine/logic/bbTerminal.h",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$bbTerminal_8h.html",tooltip=" "];
+  Node6 -> Node7 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node7 [label="engine/logic/bbArith.h",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$bbArith_8h.html",tooltip="We assume built in integer arithmetic rounds to zero Define new arithmetic that rounds toward -infini..."];
+  Node6 -> Node8 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node8 [label="engine/logic/bbFloorDivision.h",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$bbFloorDivision_8h.html",tooltip=" "];
+  Node1 -> Node9 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node9 [label="engine/logic/recycle\l/bbDeque(deprecated).h",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$bbDeque_07deprecated_08_8h.html",tooltip="Objects are allocated in a pool and then can be pushed and popped from either end of the queue."];
+  Node1 -> Node4 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node1 -> Node10 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node10 [label="engine/logic/recycle\l/bbFastPool(deprecated).h",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$bbFastPool_07deprecated_08_8h.html",tooltip="Pools pre-allocate space for objects in the game to quickly allocate and de-allocate individual objec..."];
+  Node1 -> Node11 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node11 [label="engine/logic/recycle\l/bbSlowPool(deprecated).h",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$bbSlowPool_07deprecated_08_8h.html",tooltip="Pools pre-allocate space for objects in the game to quickly allocate and de-allocate individual objec..."];
+}

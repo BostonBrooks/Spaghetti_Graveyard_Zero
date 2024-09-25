@@ -1,0 +1,19 @@
+digraph "recycle/games/game/maps/demo2"
+{
+ // LATEX_PDF_SIZE
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  compound=true
+  subgraph clusterdir_d6fbb1804a1122c56d3a3fe5fd2d7025 {
+    graph [ bgcolor="#edf0f7", pencolor="grey50", style="filled,dashed,", label="maps", fontname="Helvetica", fontsize="10", URL="dir_d6fbb1804a1122c56d3a3fe5fd2d7025.html"]
+  subgraph clusterdir_61dde0dd7aaa05697042dee33fe25066 {
+    graph [ bgcolor="#edf0f7", pencolor="grey25", style="filled,bold,", label="", fontname="Helvetica", fontsize="10", URL="dir_61dde0dd7aaa05697042dee33fe25066.html"]
+    dir_61dde0dd7aaa05697042dee33fe25066 [shape=plaintext, label="demo2"];
+  dir_7c9e7b24e1ce12c6e9be581efc78b71e [shape=box, label="actors", style="filled,", fillcolor="#a2b4d6", color="grey25", URL="dir_7c9e7b24e1ce12c6e9be581efc78b71e.html"];
+  dir_37954c4c76eb4fe035688613272076c2 [shape=box, label="widgets", style="filled,", fillcolor="#a2b4d6", color="grey25", URL="dir_37954c4c76eb4fe035688613272076c2.html"];
+  }
+  }
+  dir_a3372fbbb64f30926046ee52ee3fdb43 [shape=box, label="headers", style="", fillcolor="#edf0f7", color="grey50", URL="dir_a3372fbbb64f30926046ee52ee3fdb43.html"];
+  dir_7c9e7b24e1ce12c6e9be581efc78b71e->dir_a3372fbbb64f30926046ee52ee3fdb43 [headlabel="3", labeldistance=1.5 headhref="dir_000001_000009.html"];
+  dir_37954c4c76eb4fe035688613272076c2->dir_a3372fbbb64f30926046ee52ee3fdb43 [headlabel="96", labeldistance=1.5 headhref="dir_000019_000009.html"];
+}

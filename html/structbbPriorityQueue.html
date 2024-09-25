@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.4"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Spaghetti Graveyard Zero: bbList Struct Reference</title>
+<title>Spaghetti Graveyard Zero: bbPriorityQueue Struct Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -64,63 +64,79 @@ $(function() {
 <div class="header">
   <div class="summary">
 <a href="#pub-attribs">Data Fields</a>  </div>
-  <div class="headertitle"><div class="title">bbList Struct Reference</div></div>
+  <div class="headertitle"><div class="title">bbPriorityQueue Struct Reference</div></div>
 </div><!--header-->
 <div class="contents">
 
-<p><code>#include &lt;<a class="el" href="bbDeque_8h_source.html">bbList.h</a>&gt;</code></p>
+<p><code>#include &lt;<a class="el" href="bbPriorityQueue_8h_source.html">bbPriorityQueue.h</a>&gt;</code></p>
 <div class="dynheader">
-Collaboration diagram for bbList:</div>
+Collaboration diagram for bbPriorityQueue:</div>
 <div class="dyncontent">
 <div class="center"><img src="structbbPriorityQueue__coll__graph.png" border="0" usemap="#abbPriorityQueue_coll__map" alt="Collaboration graph"/></div>
 <center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
 Data Fields</h2></td></tr>
-<tr class="memitem:abd5a29286f3e9000dac7cb5d2aee0555"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structbbPool.html">bbPool</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structbbPriorityQueue.html#abd5a29286f3e9000dac7cb5d2aee0555">p_Pool</a></td></tr>
-<tr class="separator:abd5a29286f3e9000dac7cb5d2aee0555"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:acf6d20f9adc0b1dde1cd68fcc42bf998"><td class="memItemLeft" align="right" valign="top"><a class="el" href="bbIntTypes_8h.html#ac7566d6ee1bbf95c1bd8107c15405de4">I32</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structbbPriorityQueue.html#acf6d20f9adc0b1dde1cd68fcc42bf998">m_Highest</a></td></tr>
-<tr class="separator:acf6d20f9adc0b1dde1cd68fcc42bf998"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8a1832b11007a177c850ba658c344e73"><td class="memItemLeft" align="right" valign="top"><a class="el" href="bbIntTypes_8h.html#ac7566d6ee1bbf95c1bd8107c15405de4">I32</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structbbPriorityQueue.html#a8a1832b11007a177c850ba658c344e73">m_Lowest</a></td></tr>
-<tr class="separator:a8a1832b11007a177c850ba658c344e73"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0178d3a3eee20e2972b7e5d3f9339b6c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structbbPool__common.html">bbPool_common</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structbbPriorityQueue.html#a0178d3a3eee20e2972b7e5d3f9339b6c">pool</a></td></tr>
+<tr class="separator:a0178d3a3eee20e2972b7e5d3f9339b6c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aef3ec57012946b290646d2dbf09a67da"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structbbPool__List.html">bbPool_List</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structbbPriorityQueue.html#aef3ec57012946b290646d2dbf09a67da">list</a></td></tr>
+<tr class="separator:aef3ec57012946b290646d2dbf09a67da"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aadfb03da1b283373cedb50ec61676ce9"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structbbPool__ListElement.html">bbPool_ListElement</a> *(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structbbPriorityQueue.html#aadfb03da1b283373cedb50ec61676ce9">getList</a> )(void *)</td></tr>
+<tr class="separator:aadfb03da1b283373cedb50ec61676ce9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a54a6b8cb250f03afc00f8e5193704b61"><td class="memItemLeft" align="right" valign="top"><a class="el" href="recycle_2headers_2bbIntTypes_8h.html#ac7566d6ee1bbf95c1bd8107c15405de4">I32</a>(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structbbPriorityQueue.html#a54a6b8cb250f03afc00f8e5193704b61">isGreater</a> )(void *, void *)</td></tr>
+<tr class="separator:a54a6b8cb250f03afc00f8e5193704b61"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Field Documentation</h2>
-<a id="acf6d20f9adc0b1dde1cd68fcc42bf998" name="acf6d20f9adc0b1dde1cd68fcc42bf998"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#acf6d20f9adc0b1dde1cd68fcc42bf998">&#9670;&nbsp;</a></span>m_Highest</h2>
+<a id="aadfb03da1b283373cedb50ec61676ce9" name="aadfb03da1b283373cedb50ec61676ce9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aadfb03da1b283373cedb50ec61676ce9">&#9670;&nbsp;</a></span>getList</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="bbIntTypes_8h.html#ac7566d6ee1bbf95c1bd8107c15405de4">I32</a> bbList::m_Highest</td>
+          <td class="memname"><a class="el" href="structbbPool__ListElement.html">bbPool_ListElement</a> *(* bbPriorityQueue::getList) (void *)</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
 </div>
 </div>
-<a id="a8a1832b11007a177c850ba658c344e73" name="a8a1832b11007a177c850ba658c344e73"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a8a1832b11007a177c850ba658c344e73">&#9670;&nbsp;</a></span>m_Lowest</h2>
+<a id="a54a6b8cb250f03afc00f8e5193704b61" name="a54a6b8cb250f03afc00f8e5193704b61"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a54a6b8cb250f03afc00f8e5193704b61">&#9670;&nbsp;</a></span>isGreater</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="bbIntTypes_8h.html#ac7566d6ee1bbf95c1bd8107c15405de4">I32</a> bbList::m_Lowest</td>
+          <td class="memname"><a class="el" href="recycle_2headers_2bbIntTypes_8h.html#ac7566d6ee1bbf95c1bd8107c15405de4">I32</a>(* bbPriorityQueue::isGreater) (void *, void *)</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
 </div>
 </div>
-<a id="abd5a29286f3e9000dac7cb5d2aee0555" name="abd5a29286f3e9000dac7cb5d2aee0555"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#abd5a29286f3e9000dac7cb5d2aee0555">&#9670;&nbsp;</a></span>p_Pool</h2>
+<a id="aef3ec57012946b290646d2dbf09a67da" name="aef3ec57012946b290646d2dbf09a67da"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aef3ec57012946b290646d2dbf09a67da">&#9670;&nbsp;</a></span>list</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="structbbPool.html">bbPool</a>* bbList::p_Pool</td>
+          <td class="memname"><a class="el" href="structbbPool__List.html">bbPool_List</a> bbPriorityQueue::list</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a0178d3a3eee20e2972b7e5d3f9339b6c" name="a0178d3a3eee20e2972b7e5d3f9339b6c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0178d3a3eee20e2972b7e5d3f9339b6c">&#9670;&nbsp;</a></span>pool</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structbbPool__common.html">bbPool_common</a>* bbPriorityQueue::pool</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -128,7 +144,7 @@ Data Fields</h2></td></tr>
 </div>
 </div>
 <hr/>The documentation for this struct was generated from the following file:<ul>
-<li>headers/<a class="el" href="bbDeque_8h_source.html">bbList.h</a></li>
+<li>engine/logic/<a class="el" href="bbPriorityQueue_8h_source.html">bbPriorityQueue.h</a></li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->

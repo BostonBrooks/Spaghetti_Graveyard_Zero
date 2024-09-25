@@ -1,0 +1,13 @@
+digraph "recycle/games/game/maps/demo/widgets/spells"
+{
+ // LATEX_PDF_SIZE
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  compound=true
+  subgraph clusterdir_f7b8884fffee55449d00c6bcb8ad2b0d {
+    graph [ bgcolor="#edf0f7", pencolor="grey50", style="filled,dashed,", label="widgets", fontname="Helvetica", fontsize="10", URL="dir_f7b8884fffee55449d00c6bcb8ad2b0d.html"]
+  dir_a4890983e8bdb40523b4528dbe01bbc1 [shape=box, label="spells", style="filled,bold,", fillcolor="#edf0f7", color="grey25", URL="dir_a4890983e8bdb40523b4528dbe01bbc1.html"];
+  }
+  dir_a3372fbbb64f30926046ee52ee3fdb43 [shape=box, label="headers", style="", fillcolor="#edf0f7", color="grey50", URL="dir_a3372fbbb64f30926046ee52ee3fdb43.html"];
+  dir_a4890983e8bdb40523b4528dbe01bbc1->dir_a3372fbbb64f30926046ee52ee3fdb43 [headlabel="6", labeldistance=1.5 headhref="dir_000017_000009.html"];
+}

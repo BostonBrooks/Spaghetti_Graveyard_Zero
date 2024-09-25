@@ -1,15 +1,15 @@
-digraph "headers/bbMapConstants.h"
+digraph "recycle/headers/bbMapConstants.h"
 {
  // LATEX_PDF_SIZE
   edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
   node [fontname="Helvetica",fontsize="10",shape=record];
-  Node1 [label="headers/bbMapConstants.h",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black",tooltip=" "];
+  Node1 [label="recycle/headers/bbMapConstants.h",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black",tooltip=" "];
   Node1 -> Node2 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
-  Node2 [label="headers/bbIntTypes.h",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$headers_2bbIntTypes_8h.html",tooltip=" "];
+  Node2 [label="bbIntTypes.h",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$recycle_2headers_2bbIntTypes_8h.html",tooltip=" "];
   Node2 -> Node3 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
   Node3 [label="inttypes.h",height=0.2,width=0.4,color="grey75", fillcolor="white", style="filled",tooltip=" "];
   Node1 -> Node4 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
-  Node4 [label="headers/bbSystemIncludes.h",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$bbSystemIncludes_8h.html",tooltip="libraries included in every file"];
+  Node4 [label="bbSystemIncludes.h",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$bbSystemIncludes_8h.html",tooltip="libraries included in every file"];
   Node4 -> Node5 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
   Node5 [label="SFML/System.h",height=0.2,width=0.4,color="grey75", fillcolor="white", style="filled",tooltip=" "];
   Node4 -> Node6 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
@@ -32,9 +32,9 @@ digraph "headers/bbMapConstants.h"
   Node14 [label="stdbool.h",height=0.2,width=0.4,color="grey75", fillcolor="white", style="filled",tooltip=" "];
   Node4 -> Node3 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
   Node4 -> Node15 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
-  Node15 [label="headers/bbFlags.h",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$headers_2bbFlags_8h.html",tooltip="This header file contains flags passed by functions."];
+  Node15 [label="bbFlags.h",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$recycle_2headers_2bbFlags_8h.html",tooltip="This header file contains flags passed by functions."];
   Node4 -> Node16 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
-  Node16 [label="headers/bbPrintf.h",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$bbPrintf_8h.html",tooltip="This header file contains definitions of some wrappers to printf functions. Functions are defined sta..."];
+  Node16 [label="bbPrintf.h",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$bbPrintf_8h.html",tooltip="This header file contains definitions of some wrappers to printf functions. Functions are defined sta..."];
   Node16 -> Node11 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
   Node16 -> Node17 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
   Node17 [label="stdarg.h",height=0.2,width=0.4,color="grey75", fillcolor="white", style="filled",tooltip=" "];
