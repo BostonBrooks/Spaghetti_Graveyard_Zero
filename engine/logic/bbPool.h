@@ -4,6 +4,14 @@
  * and de-allocate individual objects. this provides an interface for different
  * pools using different strategies
  *
+ * I'm not sure if I should use both address and handle in every function
+ *
+ * How to quickly check if handle is null? should this be part of the
+ * interface?
+ *
+ * check if pointers are void.
+ * check if pointers to pointers are void when used as input
+ *
  */
 
 #ifndef POOL_H
