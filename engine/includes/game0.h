@@ -10,6 +10,8 @@
 #ifndef GAME_H
 #define GAME_H
 
+#define GAME_NAME "game0"
+
 #define STR_IMPL(A) #A
 #define STR(A) STR_IMPL(A)
 
