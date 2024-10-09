@@ -10,7 +10,17 @@
 #ifndef GAME_H
 #define GAME_H
 
-#include "games/game0/bbConstants.h"
+#define STR_IMPL(A) #A
+#define STR(A) STR_IMPL(A)
 
+#define RESOURCE_FILE bbConstants.h
+#define PROJECT_DIRECTORY games/game0
+#define RESOURCE_PATH STR(PROJECT_DIRECTORY/RESOURCE_FILE)
+
+#include RESOURCE_PATH
+
+#undef STR_IMPL()
+#undef STR()
+#undef RESOURCE_FILE
 
 #endif //GAME_H
