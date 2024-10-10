@@ -55,6 +55,7 @@ typedef struct bbPool_common {
     I32 (*delete)(struct bbPool_common* pool, void* address);
     I32 (*lookup)(struct bbPool_common* pool, void** address, bbPool_Handle handle);
     I32 (*reverseLookup)(struct bbPool_common* pool, void* address, bbPool_Handle* handle);
+    I32 (*handleIsEqual)(bbPool_Handle A, bbPool_Handle B);
     U32 sizeOf;
 
 } bbPool_common;
@@ -84,6 +85,12 @@ static I32 bbPool_lookup(struct bbPool_common* pool, void** address, bbPool_Hand
 /// return the handle of an element given its address
 static I32 bbPool_reverseLookup(struct bbPool_common* pool, void* address, bbPool_Handle* handle){
     return pool->reverseLookup(pool, address, handle);
+}
+
+/// return the handle of an element given its address
+static I32 bbPool_handleIsEqual(struct bbPool_common* pool,
+                                     bbPool_Handle A, bbPool_Handle B){
+    return pool->handleIsEqual(A, B);
 }
 
 #endif // POOL_H

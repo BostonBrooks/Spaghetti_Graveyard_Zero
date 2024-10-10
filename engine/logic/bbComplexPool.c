@@ -21,7 +21,7 @@ I32 bbComplexPool_delete(struct bbPool_common* pool, void* address);
 I32 bbComplexPool_lookup(struct bbPool_common* pool, void** address, bbPool_Handle handle);
 I32 bbComplexPool_reverseLookup(struct bbPool_common* pool, void* address, bbPool_Handle* handle);
 
-I32 Handle_isEqual(bbPool_Handle A, bbPool_Handle B){
+I32 bbComplexPool_handleIsEqual(bbPool_Handle A, bbPool_Handle B){
     return (A.complex.collision == B.complex.collision) &&
            (A.complex.index == B.complex.index);
 }
@@ -50,6 +50,7 @@ I32 bbComplexPool_newPool(struct bbPool_common** pool, I32 sizeOf, I32 level1, I
     Pool->common.delete = bbComplexPool_delete;
     Pool->common.lookup = bbComplexPool_lookup;
     Pool->common.reverseLookup = bbComplexPool_reverseLookup;
+    Pool->common.handleIsEqual = bbComplexPool_handleIsEqual;
     Pool->common.null.complex.collision = 0;
     Pool->common.null.complex.index = 0;
     //elements of pools will be 64 bit aligned
@@ -105,9 +106,9 @@ I32 bbComplexPool_newHandle(bbComplexPool* Pool, U32 lvl1index, U32 lvl2index, b
 }
 /// internal function to support expanding allocated space
 I32 bbComplexPool_expand(bbComplexPool* pool){
-    bbAssert(Handle_isEqual(pool->available.head,
+    bbAssert(bbComplexPool_handleIsEqual(pool->available.head,
                             pool->common.null)
-             && Handle_isEqual(pool->available.tail,
+             && bbComplexPool_handleIsEqual(pool->available.tail,
                                pool->common.null),
              "expanding non-empty pool");
 
@@ -201,13 +202,13 @@ I32 bbComplexPool_expand(bbComplexPool* pool){
 I32 bbComplexPool_new(struct bbPool_common* pool, void** address){
     bbAssert(address != NULL, "where do we return the new element?\n");
     bbComplexPool* Pool = pool;
-    if(Handle_isEqual(Pool->available.head,
+    if(bbComplexPool_handleIsEqual(Pool->available.head,
                       Pool->common.null)){
-        bbAssert(Handle_isEqual(Pool->available.tail,
+        bbAssert(bbComplexPool_handleIsEqual(Pool->available.tail,
                                 Pool->common.null), "head/tail\n");
         bbComplexPool_expand(Pool);
     }
-    if (Handle_isEqual(Pool->available.head,
+    if (bbComplexPool_handleIsEqual(Pool->available.head,
                        Pool->available.tail)){
         bbPool_Header* element;
         void* address;
@@ -215,8 +216,8 @@ I32 bbComplexPool_new(struct bbPool_common* pool, void** address){
         bbComplexPool_lookup(Pool, &address, elementHandle);
         bbComplexPool_getHeader(&element, address);
 
-        bbAssert(Handle_isEqual(element->list.prev, Pool->common.null)
-                 && Handle_isEqual(element->list.next, Pool->common.null),
+        bbAssert(bbComplexPool_handleIsEqual(element->list.prev, Pool->common.null)
+                 && bbComplexPool_handleIsEqual(element->list.next, Pool->common.null),
                  "last element in list\n");
         Pool->available.head = Pool->common.null;
         Pool->available.tail = Pool->common.null;
