@@ -15,4 +15,7 @@ add_executable(myprogram test/bbTerminal_test.c
         engine/geometry/bbMesh.h
         engine/geometry/bbCoordinates.h
         engine/geometry/bbMesh.c
-        engine/geometry/bbCoordinates.c)
+        engine/geometry/bbCoordinates.c
+        engine/logic/bbScatter.h
+        engine/logic/bbDictionary.h
+        engine/logic/bbDictionary.c)

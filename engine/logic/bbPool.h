@@ -68,11 +68,11 @@ static I32 bbPool_clearPool(bbPool_common* pool){
     return pool->clearPool(pool);
 }
 /// create a new object and return the address / handle
-static I32 bbPool_new(struct bbPool_common* pool, void** address, bbPool_Handle* handle){
+static I32 bbPool_new(struct bbPool_common* pool, void** address){
     return pool->new(pool, address);
 }
 /// delete a member from the pool given its memory address / handle
-static I32 bbPool_delete(struct bbPool_common* pool, void* address, bbPool_Handle handle){
+static I32 bbPool_delete(struct bbPool_common* pool, void* address){
     return pool->delete(pool, address);
 }
 /// return the address of an element given its handle, or NULL
