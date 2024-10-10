@@ -21,6 +21,8 @@ typedef struct {
 	float rotation;
 	// a bbDrawable can be either on its own, or the first element of a bbInteractable
 	U8 is_interactable;
+	// some composition draw functions can select a frame based on state
+	U8 state;
 	bbComposition composition;
 
 } bbDrawable;
