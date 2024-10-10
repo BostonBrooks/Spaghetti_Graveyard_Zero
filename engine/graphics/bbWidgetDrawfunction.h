@@ -5,5 +5,6 @@
  *
  * draw function needs access to bbSprites/bbAnimations/bbCompositions
  *
- * bbWidget borrows heavily from bbDrawable
+ * bbWidget borrows heavily from bbDrawable, but widgets are drawn to the screen,
+ * where drawables are drawn to the viewport
  **/
