@@ -28,6 +28,7 @@ typedef bbFlag bbTreeFunction(bbTree* tree, void* node, void* cl);
 
 bbFlag bbTree_new (bbTree** tree, void* pool, size_t offset);
 
+bbFlag bbNode_setEmpty(bbTree* tree, void* element);
 /// add a new node as a daughter node to parent;
 bbFlag bbNode_setParent(bbTree* tree, void* node, void* parent);
 ///recursively search through nodes until myFunc(node, cl); returns f_Break

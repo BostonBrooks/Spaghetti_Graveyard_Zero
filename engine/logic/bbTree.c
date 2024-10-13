@@ -14,6 +14,20 @@ bbFlag bbTree_new (bbTree** tree, void* pool, size_t offset){
     return Success;
 }
 
+
+bbFlag bbNode_setEmpty(bbTree* tree, void* element){
+    bbTree_Node* node = element+tree->offset;
+    node->parent = tree->pool->null;
+    node->peers.prev = tree->pool->null;
+    node->peers.next = tree->pool->null;
+    node->children.head = tree->pool->null;
+    node->children.tail = tree->pool->null;
+    node->numchildren = 0;
+    node->visible = 1;
+    node->childrenvisible = 1;
+    return Success;
+}
+
 bbFlag bbNode_setParent(bbTree* tree, void* element, void* parent){
 
     bbVPool* pool = tree->pool;
@@ -27,8 +41,8 @@ bbFlag bbNode_setParent(bbTree* tree, void* element, void* parent){
     bbTree_Node* elementNode = element + tree->offset;
     bbTree_Node* parentNode = parent + tree->offset;
 
-    bbPool_Handle headHandle = elementNode->children.head;
-    bbPool_Handle tailHandle = elementNode->children.tail;
+    bbPool_Handle headHandle = parentNode->children.head;
+    bbPool_Handle tailHandle = parentNode->children.tail;
 
     if (bbVPool_handleIsEqual(pool, headHandle, pool->null)){
         bbAssert(bbVPool_handleIsEqual(pool, tailHandle, pool->null),
@@ -72,6 +86,11 @@ bbFlag descending_search(bbTree* tree, void* root, bbTreeFunction* myFunc,
     bbTree_Node* elementNode;
 
     //TODO if elementNode->peers.next == elementNode, infinite loop
+    // element.next == element indicates only element in list
+    // element.next == NULL indicates not in any list
+
+
+
     while(!bbVPool_handleIsEqual(pool, elementHandle, pool->null)){
         bbVPool_lookup(pool, &element, elementHandle);
         elementNode = element + tree->offset;
