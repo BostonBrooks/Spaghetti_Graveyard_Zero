@@ -20,13 +20,13 @@ typedef struct {
 
 typedef struct {
 	bbVPool* pool;
-	bbTree_Node* (*get_node)(void* element);
+	size_t offset;
 	bbPool_Handle root;
 } bbTree;
 
 typedef bbFlag bbTreeFunction(bbTree* tree, void* node, void* cl);
 
-bbFlag bbTree_new (bbTree** tree, void* pool, bbTree_Node* (*get_node)(void* element));
+bbFlag bbTree_new (bbTree** tree, void* pool, size_t offset);
 
 /// add a new node as a daughter node to parent;
 bbFlag bbNode_setParent(bbTree* tree, void* node, void* parent);

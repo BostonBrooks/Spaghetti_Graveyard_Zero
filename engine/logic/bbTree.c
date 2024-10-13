@@ -3,13 +3,12 @@
 #include "engine/logic/bbTerminal.h"
 #include <stdlib.h>
 
-bbFlag bbTree_new (bbTree** tree, void* pool, bbTree_Node* (*get_node)(void*
-element)){
+bbFlag bbTree_new (bbTree** tree, void* pool, size_t offset){
     bbTree* Tree = malloc(sizeof(*Tree));
     bbVPool* Pool = pool;
     Tree->pool = Pool;
     Tree->root = Pool->null;
-    Tree->get_node = get_node;
+    Tree->offset = offset;
     *tree = Tree;
 
     return Success;
@@ -25,8 +24,8 @@ bbFlag bbNode_setParent(bbTree* tree, void* element, void* parent){
     bbVPool_reverseLookup(pool, element, &elementHandle);
     bbVPool_reverseLookup(pool, parent, &parentHandle);
 
-    bbTree_Node* elementNode = tree->get_node(element);
-    bbTree_Node* parentNode = tree->get_node(parent);
+    bbTree_Node* elementNode = element + tree->offset;
+    bbTree_Node* parentNode = parent + tree->offset;
 
     bbPool_Handle headHandle = elementNode->children.head;
     bbPool_Handle tailHandle = elementNode->children.tail;
@@ -48,7 +47,7 @@ bbFlag bbNode_setParent(bbTree* tree, void* element, void* parent){
     void* tailElement;
     bbVPool_lookup(pool, &tailElement, tailHandle);
 
-    bbTree_Node* tailNode = tree->get_node(tailElement);
+    bbTree_Node* tailNode = tailElement + tree->offset;
     parentNode->numchildren += 1;
     tailNode->peers.next = elementHandle;
     elementNode->peers.prev = tailHandle;
@@ -63,7 +62,7 @@ bbFlag descending_search(bbTree* tree, void* root, bbTreeFunction* myFunc,
                          void* cl)
 {
     bbVPool* pool = tree->pool;
-    bbTree_Node* rootNode = tree->get_node(root);
+    bbTree_Node* rootNode = root + tree->offset;
     bbFlag flag = myFunc(tree, root, cl);
     //TODO switch on bbFlag
     if(flag == Break) return Break;
@@ -75,7 +74,7 @@ bbFlag descending_search(bbTree* tree, void* root, bbTreeFunction* myFunc,
     //TODO if elementNode->peers.next == elementNode, infinite loop
     while(!bbVPool_handleIsEqual(pool, elementHandle, pool->null)){
         bbVPool_lookup(pool, &element, elementHandle);
-        elementNode = tree->get_node(element);
+        elementNode = element + tree->offset;
         flag = descending_search(tree, element,myFunc,cl);
         switch (flag) {
             case Break:
@@ -97,7 +96,7 @@ bbFlag descending_search(bbTree* tree, void* root, bbTreeFunction* myFunc,
 bbFlag ascending_search(bbTree* tree, void* root, bbTreeFunction* myFunc,
                          void* cl) {
     bbVPool *pool = tree->pool;
-    bbTree_Node *rootNode = tree->get_node(root);
+    bbTree_Node *rootNode = root  + tree->offset;
     bbFlag flag;
 
     bbPool_Handle elementHandle = rootNode->children.tail;
@@ -107,7 +106,7 @@ bbFlag ascending_search(bbTree* tree, void* root, bbTreeFunction* myFunc,
     //TODO if elementNode->peers.next == elementNode, infinite loop
     while(!bbVPool_handleIsEqual(pool, elementHandle, pool->null)){
         bbVPool_lookup(pool, &element, elementHandle);
-        elementNode = tree->get_node(element);
+        elementNode = element  + tree->offset;
         flag = descending_search(tree, element,myFunc,cl);
         switch (flag) {
             case Break:
