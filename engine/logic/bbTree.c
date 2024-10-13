@@ -107,7 +107,7 @@ bbFlag ascending_search(bbTree* tree, void* root, bbTreeFunction* myFunc,
     while(!bbVPool_handleIsEqual(pool, elementHandle, pool->null)){
         bbVPool_lookup(pool, &element, elementHandle);
         elementNode = element  + tree->offset;
-        flag = descending_search(tree, element,myFunc,cl);
+        flag = ascending_search(tree, element,myFunc,cl);
         switch (flag) {
             case Break:
                 return Break;
