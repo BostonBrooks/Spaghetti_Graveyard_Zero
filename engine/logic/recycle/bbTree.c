@@ -1,4 +1,4 @@
-#include "engine/logic/bbTree.h"
+#include "bbTree.h"
 #include "engine/logic/bbTerminal.h"
 #include "engine/logic/bbFlags.h"
 
