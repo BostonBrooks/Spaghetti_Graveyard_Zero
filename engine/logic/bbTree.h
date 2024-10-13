@@ -19,7 +19,7 @@ typedef struct {
 
 typedef struct {
 	bbVPool* pool;
-	bbTree_Node (*get_node)(void* element);
+	bbTree_Node* (*get_node)(void* element);
 	bbPool_Handle root;
 } bbTree;
 
