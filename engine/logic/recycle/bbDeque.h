@@ -16,9 +16,15 @@
  *  existing struct. otherwise we'd need to draw from a pool of deques
  **/
 
+
+/*TODO a usage is in message queues for drawables.
+there will be a message that tells the aicontroller to stop inspecting new messages
+there will be a message that tells the drawable to stop inspecting old messages
+*/
+
 #include "engine/logic/bbIntTypes.h"
 #include "engine/logic/bbFlags.h"
-#include "engine/logic/bbPool.h"
+#include "bbPool.h"
 
 typedef struct {
     bbPool* p_pool;
