@@ -114,6 +114,7 @@ I32 bbLeanPool_allocImpl(bbLeanPool* pool, void** address, char* file, int line)
 		pool->available.head.ptr = NULL;
 		pool->available.tail.ptr = NULL;
 
+        *address = element;
 		return f_Success;
 	}
 	bbLeanPool_Header* headHeader = pool->available.head.ptr;
@@ -121,7 +122,7 @@ I32 bbLeanPool_allocImpl(bbLeanPool* pool, void** address, char* file, int line)
 	pool->available.head.ptr = nextHeader;
 	nextHeader->prev.ptr = NULL;
 
-	if (pool->available.tail.ptr == nextHeader){
+	if (pool->available.head.ptr == pool->available.tail.ptr){
 		nextHeader->prev.ptr = nextHeader;
 		nextHeader->next.ptr = nextHeader;
 	}
