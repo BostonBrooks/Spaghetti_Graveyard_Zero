@@ -16,7 +16,7 @@
 #include <assert.h>
 #include "engine/logic/bbIntTypes.h"
 #include "engine/logic/bbFlags.h"
-#include "engine/logic/bbComplexPool.h"
+#include "bbComplexPool.h"
 
 typedef union {
     void* ptr;

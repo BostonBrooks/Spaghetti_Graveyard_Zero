@@ -10,7 +10,7 @@
 
 
 #include "engine/logic/bbIntTypes.h"
-#include "engine/logic/bbPool.h"
+#include "bbPool.h"
 
 typedef struct bbPool_common bbPool_common;
 
