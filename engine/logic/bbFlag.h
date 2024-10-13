@@ -17,6 +17,7 @@ typedef enum {
     None,
     Full,
     Break,
+    Repeat,
     Continue,
     Delete
 } bbFlag;

@@ -6,6 +6,7 @@
 #include "engine/logic/bbIntTypes.h"
 #include "engine/logic/bbPoolHandle.h"
 #include "engine/logic/bbVPool.h"
+#include "engine/logic/bbFlag.h"
 
 typedef struct {
 	bbPool_Handle parent;
@@ -23,28 +24,30 @@ typedef struct {
 	bbPool_Handle root;
 } bbTree;
 
-typedef I32 bbTreeFunction(bbTree* tree, void* node, void* cl);
+typedef bbFlag bbTreeFunction(bbTree* tree, void* node, void* cl);
+
+bbFlag bbTree_new (bbTree** tree, void* pool, bbTree_Node* (*get_node)(void* element));
 
 /// add a new node as a daughter node to parent;
-I32 bbNode_setParent(bbTree* tree, void* node, void* parent);
+bbFlag bbNode_setParent(bbTree* tree, void* node, void* parent);
 ///recursively search through nodes until myFunc(node, cl); returns f_Break
-I32 descending_search(bbTree* tree,
+bbFlag descending_search(bbTree* tree,
 					  void* root,
 					  bbTreeFunction* myFunc,
 					  void* cl);
 ///recursively search through nodes until myFunc(node, cl); returns f_Break
-I32 ascending_search(bbTree* tree,
+bbFlag ascending_search(bbTree* tree,
 					 void* root,
 					 bbTreeFunction* myFunc,
 					 void* cl);
 
 ///recursively search through nodes until myFunc(node, cl); returns f_Break
-I32 descending_searchVisible(bbTree* tree,
+bbFlag descending_searchVisible(bbTree* tree,
 							 void* root,
 							 bbTreeFunction* myFunc,
 							 void* cl);
 ///recursively search through nodes until myFunc(node, cl); returns f_Break
-I32 ascending_searchVisible(bbTree* tree,
+bbFlag ascending_searchVisible(bbTree* tree,
 							void* root,
 							bbTreeFunction* myFunc,
 							void* cl);
