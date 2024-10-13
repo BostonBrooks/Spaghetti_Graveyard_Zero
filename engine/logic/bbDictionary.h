@@ -24,6 +24,7 @@ typedef struct {
 	I32 m_InUse;
 
 	char m_Key[KEY_LENGTH];
+	//TODO value is bbPoolHandle;
 	I32 m_Value;
 
 } bbDictionary_entry;
