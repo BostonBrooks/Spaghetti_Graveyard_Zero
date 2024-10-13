@@ -3,7 +3,7 @@
 #include "engine/logic/bbLeanPool.h"
 #include "engine/logic/bbBloatedPool.h"
 #include "engine/logic/bbFlag.h"
-I32 bbVPool_newLean(bbVPool** pool, I32 sizeOf, I32 num){
+bbFlag bbVPool_newLean(bbVPool** pool, I32 sizeOf, I32 num){
 	bbLeanPool* LeanPool;
 	bbLeanPool_new(&LeanPool, sizeOf, num);
 	bbVPool* Pool = malloc(sizeof(*Pool));
@@ -18,10 +18,10 @@ I32 bbVPool_newLean(bbVPool** pool, I32 sizeOf, I32 num){
 	Pool->reverseLookup = bbLeanPool_reverseLookup;
 	Pool->handleIsEqual = bbLeanPool_handleIsEqual;
 	*pool = Pool;
-	return f_Success;
+	return Success;
 }
 
-I32 bbVPool_newBloated(bbVPool** pool, I32 sizeOf, I32 level1, I32 level2){
+bbFlag bbVPool_newBloated(bbVPool** pool, I32 sizeOf, I32 level1, I32 level2){
 	bbBloatedPool* BloatedPool;
 	bbBloatedPool_new(&BloatedPool, sizeOf, level1, level2);
 	bbVPool* Pool = malloc(sizeof(*Pool));
@@ -36,32 +36,32 @@ I32 bbVPool_newBloated(bbVPool** pool, I32 sizeOf, I32 level1, I32 level2){
 	Pool->reverseLookup = bbBloatedPool_reverseLookup;
 	Pool->handleIsEqual = bbBloatedPool_handleIsEqual;
 	*pool = Pool;
-	return f_Success;
+	return Success;
 }
 
 //TODO small functions, consider using static functions in the header
-I32 bbVPool_delete(bbVPool* pool){
-	I32 flag = pool->delete(pool->pool);
+bbFlag bbVPool_delete(bbVPool* pool){
+    bbFlag flag = pool->delete(pool->pool);
 	free(pool);
 	return flag;
 }
 
 
-I32 bbVPool_clear(bbVPool* pool) {
+bbFlag bbVPool_clear(bbVPool* pool) {
 	return pool->clear(pool->pool);
 }
 
-I32 bbVPool_allocImpl(bbVPool* pool, void** address, char* file, int line) {
+bbFlag bbVPool_allocImpl(bbVPool* pool, void** address, char* file, int line) {
 	return pool->allocImpl(pool->pool, address, file, line);
 }
 
-I32 bbVPool_free(bbVPool* pool, void* address) {
+bbFlag bbVPool_free(bbVPool* pool, void* address) {
 	return pool->free(pool->pool, address);
 }
-I32 bbVPool_lookup(bbVPool* pool, void** address, bbPool_Handle handle) {
+bbFlag bbVPool_lookup(bbVPool* pool, void** address, bbPool_Handle handle) {
 	return pool->lookup(pool->pool, address, handle);
 }
-I32 bbVPool_reverseLookup(bbVPool* pool, void* address, bbPool_Handle* handle){
+bbFlag bbVPool_reverseLookup(bbVPool* pool, void* address, bbPool_Handle* handle){
 	return pool->reverseLookup(pool->pool, address, handle);
 }
 I32 bbVPool_handleIsEqual(bbVPool* pool, bbPool_Handle A, bbPool_Handle B){

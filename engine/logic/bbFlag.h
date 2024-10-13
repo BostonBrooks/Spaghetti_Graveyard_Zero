@@ -11,7 +11,7 @@
 #define f_None        (-1)
 
 // the vast majority of functions return bbFlag, and other values are
-// returned by reference
+// returned by reference. names had better not overwrite other C keywords
 typedef enum {
     Success,
     None,
