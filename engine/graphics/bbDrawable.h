@@ -6,7 +6,7 @@
 #ifndef BBDRAWABLE_H
 #define BBDRAWABLE_H
 
-#include "engine/logic/bbPool.h"
+#include "engine/logic/recycle/bbPool.h"
 #include "engine/logic/bbIntTypes.h"
 #include "engine/geometry/bbCoordinates.h"
 #include "engine/graphics/bbViewport.h"

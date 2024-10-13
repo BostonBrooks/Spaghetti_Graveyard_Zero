@@ -20,12 +20,13 @@
 #include "engine/logic/bbDictionary.h"
 #include "engine/graphics/bbSprites.h"
 #include "engine/graphics/bbAnimation.h"
+#include "engine/logic/bbPoolHandle.h"
 #define FRAMES_PER_COMPOSITION 8
 
 // a bbFrame contains the data used to draw a sprite, animation or composition
 typedef struct {
+	bbPool_Handle handle;
 	I32 drawfunction;
-	I32 identifier;
 	U32 starttime;
 	//multiply by the framerate of the animation
 	float framerate;
@@ -33,6 +34,9 @@ typedef struct {
 
 typedef struct {
 	bbFrame frame[FRAMES_PER_COMPOSITION];
+	//lets hope that if the composition is dynamically allocated,
+	// we know which pool to look in
+	U8 is_dynamically_allocated;
 } bbComposition;
 
 typedef struct {
