@@ -14,7 +14,7 @@
  */
 
 #include "engine/logic/bbIntTypes.h"
-#include "engine/logic/bbPool.h"
+#include "engine/logic/recycle/bbPool.h"
 
 typedef struct {
     bbPool_common* pool;

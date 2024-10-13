@@ -1,5 +1,5 @@
 #include "engine/logic/bbIntTypes.h"
-#include "engine/logic/bbPool.h"
+#include "engine/logic/recycle/bbPool.h"
 #include "engine/logic/bbPriorityQueue.h"
 #include "engine/logic/bbTerminal.h"
 #include <stdlib.h>
