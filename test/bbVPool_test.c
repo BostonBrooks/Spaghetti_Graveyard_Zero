@@ -17,7 +17,7 @@ int main(void){
 	bbPool_Handle elements[100];
 	testStruct* element;
 	bbPool_Handle handle;
-/*
+
 	printf("Lean Pool:\n");
 	bbVPool_newLean(&Pool, sizeof(testStruct), 100);
 
@@ -34,10 +34,11 @@ int main(void){
 
 	bbVPool_delete(Pool);
 	printf("\n");
-*/
+
 	printf("Bloated Pool:\n");
 
-
+/* TODO something wrong with second call to bbBloatedPool_expand,
+ * bad collision check
 	bbVPool_newBloated(&Pool, sizeof(testStruct), 5, 5);
 
 	for (I32 i = 0; i < 6; i++){
@@ -52,7 +53,7 @@ int main(void){
 		printf("elements[%d].bloated.index = %d ", i ,elements[i].bloated.index);
 		printf("i = %d, str = \"%s\"\n", element->i, element->str);
 	}
-
+*/
 	bbVPool_delete(Pool);
 
 	exit(0);

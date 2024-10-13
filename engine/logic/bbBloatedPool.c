@@ -73,6 +73,7 @@ I32 bbBloatedPool_newHandle(bbBloatedPool* Pool, U32 lvl1index, U32 lvl2index, b
 }
 
 I32 bbBloatedPool_expand(bbBloatedPool* pool){
+	bbHere();
 	bbAssert(IS_NULL(pool->available.head)
 			 && IS_NULL(pool->available.tail),
 			 "expanding non-empty pool");
@@ -251,7 +252,7 @@ I32 bbBloatedPool_lookupHeader(bbBloatedPool* pool, void** address, bbPool_Handl
 	U8* lvl2 = pool->elements[lvl1index];
 	bbBloatedPool_Header *element = &lvl2[lvl2index * (sizeof(bbBloatedPool_Header) + pool->sizeOf)];
 	bbPool_Handle elementHandle = element->self;
-	printf("col1 = %d, col2 = %d\n",handle.bloated.collision, elementHandle.bloated.collision);
+	printf("col1 = %d, col2 = %d\n",handle.bloated.collision%100, elementHandle.bloated.collision%100);
 	bbAssert(handle.bloated.collision == elementHandle.bloated.collision,
 			 "handle collision\n");
 
