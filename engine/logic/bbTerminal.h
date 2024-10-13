@@ -15,6 +15,7 @@
 #include <stdarg.h>
 #include <assert.h>
 #include <stdlib.h>
+//TODO #include <backtrace.h>
 #include "engine/logic/bbIntTypes.h"
 #include "engine/logic/bbString.h"
 
@@ -28,7 +29,7 @@ static const int stringLength = 512;
     #define bbVerbose printf
 #endif
 
-/// Print warning and exit
+/// Print warning and exit, but preserve the stack for gdb
 #define bbAssert(expression, ...)\
     {\
         if (!(expression)){\
@@ -40,8 +41,8 @@ static const int stringLength = 512;
 \
             sprintf(string2, __VA_ARGS__);\
 \
-            printf("%s%s", string1, string2);\
-            exit(1);\
+            printf("%s%s", string1, string2);                    \
+            *((char *) NULL) = 0;\
         }\
     }
 
