@@ -19,15 +19,16 @@ int main(void){
 	bbPool_Handle handle;
 
 	printf("Lean Pool:\n");
-	bbVPool_newLean(&Pool, sizeof(testStruct), 100);
+	bbVPool_newLean(&Pool, sizeof(testStruct), 5);
 
-	for (I32 i = 0; i < 100; i++){
+	for (I32 i = 0; i < 5; i++){
 		bbVPool_alloc(Pool, &element);
+		printf("element @%d\n", (U64)element%32);
 		element->i = i;
 		sprintf(element->str, "i = %d", i);
 		bbVPool_reverseLookup(Pool, element, &elements[i]);
 	}
-	for (I32 i = 0; i < 100; i++){
+	for (I32 i = 0; i < 5; i++){
 		bbVPool_lookup(Pool, &element, elements[i]);
 		printf("i = %d, str = \"%s\"\n", element->i, element->str);
 	}
