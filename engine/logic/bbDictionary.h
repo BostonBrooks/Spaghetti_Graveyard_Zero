@@ -8,6 +8,8 @@
 #define BBDICTIONARY_H
 
 #include "engine/logic/bbIntTypes.h"
+#include "engine/logic/bbPoolHandle.h"
+#include "engine/logic/bbFlag.h"
 
 #define KEY_LENGTH 32
 
@@ -24,8 +26,7 @@ typedef struct {
 	I32 m_InUse;
 
 	char m_Key[KEY_LENGTH];
-	//TODO value is bbPoolHandle;
-	I32 m_Value;
+	bbPool_Handle m_Value;
 
 } bbDictionary_entry;
 
@@ -39,19 +40,20 @@ typedef struct {
 } bbDictionary;
 
 /// create a new dictionary
-I32 bbDictionary_new(bbDictionary** dict, I32 n_bins);
+bbFlag bbDictionary_new(bbDictionary** dict, I32 n_bins);
 /// delete an existing dictionary
-I32 bbDictionary_delete(bbDictionary* dict);
+bbFlag bbDictionary_delete(bbDictionary* dict);
 /// add key/value pair to dictionary and overwrite if duplicate
-I32 bbDictionary_add(bbDictionary* dict, char* key, int value);
+//(TODO bbFlag and rbr)
+I32 bbDictionary_add(bbDictionary* dict, char* key, bbPool_Handle value);
 /// remove a key from dictionary
-I32 bbDictionary_remove(bbDictionary* dict, char* key);
-/// lookup a key in dictionary
-I32 bbDictionary_lookup(bbDictionary* dict, char* key);
+bbFlag bbDictionary_remove(bbDictionary* dict, char* key);
+/// lookup a key in dictionary (TODO bbFlag and rbr)
+bbPool_Handle bbDictionary_lookup(bbDictionary* dict, char* key);
 /// remove all key/value pairs in dictionary
-I32 bbDictionary_clear(bbDictionary* dict);
+bbFlag bbDictionary_clear(bbDictionary* dict);
 /// print all data in dictionary
-I32 bbDictionary_print(bbDictionary* dict);
+bbFlag bbDictionary_print(bbDictionary* dict);
 
 
 #endif //BBDICTIONARY_H

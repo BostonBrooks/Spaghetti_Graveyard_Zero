@@ -1,5 +1,5 @@
 #include "engine/logic/bbBloatedPool.h"
-#include "engine/logic/bbFlags.h"
+#include "engine/logic/bbFlag.h"
 #include "engine/logic/bbArith.h"
 #include "engine/logic/bbString.h"
 #include <stddef.h>
@@ -15,13 +15,13 @@ I32 bbBloatedPool_handleIsEqual(bbBloatedPool* UNUSED, bbPool_Handle A, bbPool_H
 
 #define IS_NULL(A) bbBloatedPool_handleIsEqual(NULL, A, pool->null)
 
-I32 bbBloatedPool_getHeader(bbBloatedPool_Header** header, void* address){
+bbFlag bbBloatedPool_getHeader(bbBloatedPool_Header** header, void* address){
 	size_t offset = offsetof(bbBloatedPool_Header, userData);
 	*header = address - offset;
-	return f_Success;
+	return Success;
 }
 
-I32 bbBloatedPool_new(bbBloatedPool** pool, I32 sizeOf, I32 level1, I32 level2){
+bbFlag bbBloatedPool_new(bbBloatedPool** pool, I32 sizeOf, I32 level1, I32 level2){
 //We might get errors if leve1, level2 are too small
     if (level1 < 1) level1 = 1;
 	if (level2 < 5) level2 = 5;
@@ -40,27 +40,27 @@ I32 bbBloatedPool_new(bbBloatedPool** pool, I32 sizeOf, I32 level1, I32 level2){
 		Pool->elements[i] = NULL;
 	}
 	*pool = Pool;
-	return f_Success;
+	return Success;
 }
 
-I32 bbBloatedPool_delete(bbBloatedPool* pool){
+bbFlag bbBloatedPool_delete(bbBloatedPool* pool){
 	for(I32 i = 0; i < pool->level1; i++){
 		free(pool->elements[i]);
 	}
 	free(pool);
-	return f_Success;
+	return Success;
 }
 
-I32 bbBloatedPool_clear(bbBloatedPool* pool){
+bbFlag bbBloatedPool_clear(bbBloatedPool* pool){
 	for(I32 i = 0; i < pool->level1; i++){
 		free(pool->elements[i]);
 		pool->elements[i] = NULL;
 	}
 	pool->available.head = pool->null;
 	pool->available.tail = pool->null;
-	return f_Success;
+	return Success;
 }
-I32 bbBloatedPool_newHandle(bbBloatedPool* Pool, U32 lvl1index, U32 lvl2index, bbPool_Handle* handle){
+bbFlag bbBloatedPool_newHandle(bbBloatedPool* Pool, U32 lvl1index, U32 lvl2index, bbPool_Handle* handle){
 	U32 index = lvl1index * Pool->level2 + lvl2index;
 	U32 randint = rand();
 	if (randint == 0) randint++;
@@ -69,10 +69,10 @@ I32 bbBloatedPool_newHandle(bbBloatedPool* Pool, U32 lvl1index, U32 lvl2index, b
 	Handle.bloated.index = index;
 	Handle.bloated.collision = collision;
 	*handle = Handle;
-	return f_Success;
+	return Success;
 }
 
-I32 bbBloatedPool_expand(bbBloatedPool* pool){
+bbFlag bbBloatedPool_expand(bbBloatedPool* pool){
 	bbHere();
 	bbAssert(IS_NULL(pool->available.head)
 			 && IS_NULL(pool->available.tail),
@@ -138,10 +138,10 @@ I32 bbBloatedPool_expand(bbBloatedPool* pool){
 
 	}
 
-	return f_Success;
+	return Success;
 }
 
-I32 bbBloatedPool_allocImpl(bbBloatedPool* pool, void** address, char* file, int line) {
+bbFlag bbBloatedPool_allocImpl(bbBloatedPool* pool, void** address, char* file, int line) {
 	bbAssert(address != NULL, "null return address\n");
 	if (IS_NULL(pool->available.head)) {
 		bbAssert(IS_NULL(pool->available.tail), "head/tail\n");
@@ -173,7 +173,7 @@ I32 bbBloatedPool_allocImpl(bbBloatedPool* pool, void** address, char* file, int
 		element->list.next = pool->null;
 
 		*address = &element->userData;
-		return f_Success;
+		return Success;
 	}
 
 
@@ -206,18 +206,18 @@ I32 bbBloatedPool_allocImpl(bbBloatedPool* pool, void** address, char* file, int
 
 	*address = headAddress;
 
-	return f_Success;
+	return Success;
 }
 
-I32 bbBloatedPool_Handle_incrementCollision(bbPool_Handle* handle){
+bbFlag bbBloatedPool_Handle_incrementCollision(bbPool_Handle* handle){
 	U32 collision = handle->bloated.collision;
 	collision++;
 	if(collision == 0) collision++;
 	handle->bloated.collision = collision;
-	return f_Success;
+	return Success;
 }
 
-I32 bbBloatedPool_free(bbBloatedPool* pool, void* address){
+bbFlag bbBloatedPool_free(bbBloatedPool* pool, void* address){
 	bbBloatedPool_Header* header;
 	bbBloatedPool_getHeader(&header, address);
 	bbBloatedPool_Handle_incrementCollision(&header->self);
@@ -229,7 +229,7 @@ I32 bbBloatedPool_free(bbBloatedPool* pool, void* address){
 		pool->available.tail = header->self;
 		header->list.prev = header->self;
 		header->list.next = header->self;
-		return f_Success;
+		return Success;
 	}
 
 	bbBloatedPool_Header* availableHeader;
@@ -241,9 +241,10 @@ I32 bbBloatedPool_free(bbBloatedPool* pool, void* address){
 	pool->available.head = header->self;
 	header->list.next = availableHeader->self;
 	header->list.prev = pool->null;
-	return f_Success;
+	return Success;
 }
-I32 bbBloatedPool_lookupHeader(bbBloatedPool* pool, void** address, bbPool_Handle handle){
+
+bbFlag bbBloatedPool_lookupHeader(bbBloatedPool* pool, void** address, bbPool_Handle handle){
 	U32 index = handle.bloated.index;
 	U32 collision = handle.bloated.collision;
 	U32 lvl1index = index / pool->level2;
@@ -257,20 +258,21 @@ I32 bbBloatedPool_lookupHeader(bbBloatedPool* pool, void** address, bbPool_Handl
 			 "handle collision\n");
 
 	*address = element;
-
+    return Success;
 }
 
-I32 bbBloatedPool_lookup(bbBloatedPool* pool, void** address, bbPool_Handle handle){
+bbFlag bbBloatedPool_lookup(bbBloatedPool* pool, void** address, bbPool_Handle
+handle){
 	bbBloatedPool_Header* element;
 	bbBloatedPool_lookupHeader(pool, &element, handle);
 	*address = &element->userData;
 
-	return f_Success;
+	return Success;
 }
 
-I32 bbBloatedPool_reverseLookup(bbBloatedPool* pool, void* address, bbPool_Handle* handle){
+bbFlag bbBloatedPool_reverseLookup(bbBloatedPool* pool, void* address, bbPool_Handle* handle){
 	bbBloatedPool_Header* element;
 	bbBloatedPool_getHeader(&element, address);
 	*handle = element->self;
-	return f_Success;
+	return Success;
 }

@@ -1,5 +1,5 @@
 #include "engine/logic/bbLeanPool.h"
-#include "engine/logic/bbFlags.h"
+#include "engine/logic/bbFlag.h"
 #include "engine/logic/bbArith.h"
 #include <stdlib.h>
 

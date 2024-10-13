@@ -2,7 +2,7 @@
 #include "engine/logic/bbVPool.h"
 #include "engine/logic/bbLeanPool.h"
 #include "engine/logic/bbBloatedPool.h"
-#include "engine/logic/bbFlags.h"
+#include "engine/logic/bbFlag.h"
 I32 bbVPool_newLean(bbVPool** pool, I32 sizeOf, I32 num){
 	bbLeanPool* LeanPool;
 	bbLeanPool_new(&LeanPool, sizeOf, num);

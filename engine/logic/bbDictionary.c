@@ -1,9 +1,10 @@
 #include <stdlib.h>
 #include <string.h>
 #include "engine/logic/bbDictionary.h"
-#include "engine/logic/bbFlags.h"
+#include "engine/logic/bbFlag.h"
 #include "engine/logic/bbTerminal.h"
 #include "engine/logic/bbScatter.h"
+#include "engine/logic/bbPoolHandle.h"
 
 I32 hash(unsigned char *str, I32 n_bins)
 {
@@ -26,7 +27,7 @@ I32 hash(unsigned char *str, I32 n_bins)
 	return hash_value;
 }
 
-I32 bbDictionary_new (bbDictionary** self, I32 n_bins){
+bbFlag bbDictionary_new (bbDictionary** self, I32 n_bins){
 	bbDictionary* dict = malloc(sizeof(bbDictionary) + n_bins * sizeof(bbDictionary_bin)); //sizeof (bbDictionary) + 2*sizeof (int) * NUM_BINS;?
 	assert( dict!= NULL);
 	dict->m_NumBins = n_bins;
@@ -44,23 +45,24 @@ I32 bbDictionary_new (bbDictionary** self, I32 n_bins){
 
 	*self = dict;
 
-	return f_Success;
+	return Success;
 }
 
-I32 bbDictionary_delete(bbDictionary* dict){
+bbFlag bbDictionary_delete(bbDictionary* dict){
 	for (I32 i = 0; i < 100; i++){
 		if (dict->m_Pool[i] != NULL) free (dict->m_Pool[i]);
 	}
 	free(dict);
+    return Success;
 }
 
-I32 bbDictionary_increase(bbDictionary* dict){
+bbFlag bbDictionary_increase(bbDictionary* dict){
 	I32 i = 0;
 	while (i < 100 && dict->m_Pool[i] != NULL) {
 		i++;
 	}
 	if (i == 100) {
-		return f_None;
+		return Full;
 	}
 
 	bbDictionary_entry* entry = calloc(100, sizeof(bbDictionary_entry));
@@ -86,10 +88,10 @@ I32 bbDictionary_increase(bbDictionary* dict){
 		dict->m_Available.Head = i * 100;
 		dict->m_Available.Tail = (i+1) * 100 - 1;
 
-		return f_Success;
+		return Success;
 	}
 
-	bbAssert(0==1, "Feature not needed / implemented\n");
+	bbAssert(0==1, "increasing non-empty pool\n");
 }
 
 bbDictionary_entry* bbDictionary_indexLookup(bbDictionary* dict, I32 index){
@@ -114,7 +116,7 @@ I32 bbDictionary_lookupIndex(bbDictionary* dict, char* key){
 	return f_None;
 }
 
-I32 bbDictionary_lookup(bbDictionary* dict, char* key){
+bbPool_Handle bbDictionary_lookup(bbDictionary* dict, char* key){
 	I32 index = bbDictionary_lookupIndex(dict, key);
 	if (index == f_None) return f_None;
 	bbDictionary_entry* entry = bbDictionary_indexLookup(dict, index);
@@ -160,7 +162,7 @@ bbDictionary_entry* grab_entry (bbDictionary* dict){
 	return entry;
 }
 
-I32 bbDictionary_add(bbDictionary* dict, char* key, I32 value){
+I32 bbDictionary_add(bbDictionary* dict, char* key, bbPool_Handle value){
 	I32 index = bbDictionary_lookupIndex(dict, key);
 	if (index != f_None) {
 		bbDictionary_entry* entry = bbDictionary_indexLookup(dict, index);
@@ -204,7 +206,7 @@ I32 bbDictionary_add(bbDictionary* dict, char* key, I32 value){
 	return entry->m_Self;
 }
 
-I32 bbDictionary_print(bbDictionary* dict){
+bbFlag bbDictionary_print(bbDictionary* dict){
 	for (I32 i = 0; i < dict->m_NumBins; i++){
 		printf("\nBin # %d:\n", i);
 		printf("Dict_Self,\tDict_Prev,\tDict_Next,\tDict_In_Use,\tkey,\tvalue\n");
@@ -224,5 +226,6 @@ I32 bbDictionary_print(bbDictionary* dict){
 		}
 	}
 	printf("\n");
-	return f_Success;
+	return Success;
+
 }

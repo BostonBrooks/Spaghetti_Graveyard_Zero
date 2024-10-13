@@ -7,7 +7,7 @@
 #define BBSTRING_H
 
 #include "engine/logic/bbIntTypes.h"
-#include "engine/logic/bbFlags.h"
+#include "engine/logic/bbFlag.h"
 
 /// strcpy()
 static I32 bbStr_setStr(char* dest, char* src, I32 max){
