@@ -23,14 +23,16 @@ int main(void){
 
 	for (I32 i = 0; i < 5; i++){
 		bbVPool_alloc(Pool, &element);
-		printf("element @%d\n", (U64)element%32);
 		element->i = i;
 		sprintf(element->str, "i = %d", i);
+
 		bbVPool_reverseLookup(Pool, element, &elements[i]);
+		printf("i = %d, element @%d\n", i, (U64)element%32);
+
 	}
 	for (I32 i = 0; i < 5; i++){
 		bbVPool_lookup(Pool, &element, elements[i]);
-		printf("i = %d, str = \"%s\"\n", element->i, element->str);
+		printf("i = %d, element->i = %d, str = \"%s\"\n", i, element->i, element->str);
 	}
 
 	bbVPool_delete(Pool);
