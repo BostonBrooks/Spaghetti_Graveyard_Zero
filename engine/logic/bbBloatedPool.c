@@ -15,6 +15,8 @@ I32 bbBloatedPool_handleIsEqual(bbBloatedPool* UNUSED, bbPool_Handle A, bbPool_H
 
 #define IS_NULL(A) bbBloatedPool_handleIsEqual(NULL, A, pool->null)
 
+bbFlag bbBloatedPool_print (bbBloatedPool* pool);
+
 bbFlag bbBloatedPool_getHeader(bbBloatedPool_Header** header, void* address){
 	size_t offset = offsetof(bbBloatedPool_Header, userData);
 	*header = address - offset;
@@ -65,6 +67,7 @@ bbFlag bbBloatedPool_newHandle(bbBloatedPool* Pool, U32 lvl1index, U32 lvl2index
 	U32 randint = rand();
 	if (randint == 0) randint++;
 	U32 collision = randint;
+    //bbDebug("collision = %d\n", collision);
 	bbPool_Handle Handle;
 	Handle.bloated.index = index;
 	Handle.bloated.collision = collision;
@@ -73,18 +76,29 @@ bbFlag bbBloatedPool_newHandle(bbBloatedPool* Pool, U32 lvl1index, U32 lvl2index
 }
 
 bbFlag bbBloatedPool_expand(bbBloatedPool* pool){
-	bbHere();
 	bbAssert(IS_NULL(pool->available.head)
 			 && IS_NULL(pool->available.tail),
 			 "expanding non-empty pool");
 	U32 i = 0;
 	while (pool->elements[i] != NULL){
 		i++;
-		bbAssert(i<pool->level1, "Pool full");
+		bbAssert(i<pool->level1, "Pool full\n");
 	}
-	U8* level2 = calloc(pool->level2, sizeof(bbBloatedPool) + pool->sizeOf * sizeof(U8));
-	bbAssert(level2 != NULL, "calloc failed\n");
 
+bbHere();
+    int* array = calloc(23, sizeof (int));
+    printf("pointer = %p\n", array);
+
+    bbPrintf("level2 = %d, sizeof = %d\n", pool->level2,
+             sizeof(bbBloatedPool) + pool->sizeOf * sizeof(U8));
+
+	U8* level2 = calloc(pool->level2,
+                                sizeof(bbBloatedPool_Header)
+                                + pool->sizeOf * sizeof(U8)); //why is
+                                // this?
+bbHere();
+	bbAssert(level2 != NULL, "calloc failed\n");
+bbHere();
 	U32 j = 0;
 	bbBloatedPool_Header* element_A;
 	bbBloatedPool_Header* element_B;
@@ -93,17 +107,19 @@ bbFlag bbBloatedPool_expand(bbBloatedPool* pool){
 	element_A->list.prev = pool->null;
 	bbBloatedPool_newHandle(pool, i, j, &element_A->self);
 	bbBloatedPool_newHandle(pool, i, j+1, &element_A->list.next);
-	//printf("a.self = %d\n", element_A->self.bloated.index);
+	printf("a.self = %d\n", element_A->self.bloated.index);
 	j++;
+
 	while(j<pool->level2 - 1){
 		element_B = (bbBloatedPool_Header *) &level2[j * (sizeof(bbBloatedPool_Header) + pool->sizeOf)];
 		element_B->list.prev = element_A->self;
 		element_B->self = element_A->list.next;
 		bbBloatedPool_newHandle(pool, i, j+1, &element_B->list.next);
 		element_A = element_B;
-		//printf("a.self = %d\n", element_A->self.bloated.index);
+		printf("a.self = %d\n", element_A->self.bloated.index);
 		j++;
 	}
+
 	element_B = (bbBloatedPool_Header *) &level2[j * (sizeof(bbBloatedPool_Header) + pool->sizeOf)];
 	element_B->list.prev = element_A->self;
 	//TODO the next line is a guess
@@ -111,11 +127,12 @@ bbFlag bbBloatedPool_expand(bbBloatedPool* pool){
 	element_B->list.next = pool->null;
 	element_A = (bbBloatedPool_Header *)&level2[0 * (sizeof(bbBloatedPool_Header) + pool->sizeOf)];
 
-	//printf("b.self = %d\n", element_B->self.bloated.index);
+	printf("b.self = %d\n", element_B->self.bloated.index);
 	pool->elements[i] = level2;
 	pool->available.head = element_A->self;
 	pool->available.tail = element_B->self;
 
+    /* print indices and collisions
 	for (int k = 0; k < pool->level2; k++){
 
 		element_A = (bbBloatedPool_Header *)&level2[k * (sizeof(bbBloatedPool_Header) + pool->sizeOf)];
@@ -137,11 +154,14 @@ bbFlag bbBloatedPool_expand(bbBloatedPool* pool){
 			   element_A->list.next.bloated.collision %100);
 
 	}
+*/
+
 
 	return Success;
 }
 
 bbFlag bbBloatedPool_allocImpl(bbBloatedPool* pool, void** address, char* file, int line) {
+    //bbBloatedPool_print (pool);
 	bbAssert(address != NULL, "null return address\n");
 	if (IS_NULL(pool->available.head)) {
 		bbAssert(IS_NULL(pool->available.tail), "head/tail\n");
@@ -253,7 +273,8 @@ bbFlag bbBloatedPool_lookupHeader(bbBloatedPool* pool, void** address, bbPool_Ha
 	U8* lvl2 = pool->elements[lvl1index];
 	bbBloatedPool_Header *element = &lvl2[lvl2index * (sizeof(bbBloatedPool_Header) + pool->sizeOf)];
 	bbPool_Handle elementHandle = element->self;
-	printf("col1 = %d, col2 = %d\n",handle.bloated.collision%100, elementHandle.bloated.collision%100);
+	//printf("col1 = %d, col2 = %d\n",handle.bloated.collision%100,
+    //        elementHandle.bloated.collision%100);
 	bbAssert(handle.bloated.collision == elementHandle.bloated.collision,
 			 "handle collision\n");
 
@@ -275,4 +296,34 @@ bbFlag bbBloatedPool_reverseLookup(bbBloatedPool* pool, void* address, bbPool_Ha
 	bbBloatedPool_getHeader(&element, address);
 	*handle = element->self;
 	return Success;
+}
+/*
+ * typedef struct {
+	bbPool_Handle null;
+	U32 level1;
+	U32 level2;
+	U32 sizeOf;
+	bbPool_List available;
+	void* elements[];
+} bbBloatedPool;
+ */
+bbFlag bbBloatedPool_print (bbBloatedPool* pool){
+    bbPrintf("bbBloatedPool_print:\n");
+    bbPrintf("null.index =               %d\n"
+                       "null.collision =           %d\n", pool->null.bloated
+    .index, pool->null.bloated.collision);
+    bbPrintf("level1 =                   %d\n"
+                       "level2 =                   %d\n", pool->level1,
+             pool->level2);
+    bbPrintf("sizeOf =                   %d\n", pool->sizeOf);
+    bbPrintf("available.head.index =     %d\n", pool->available.head.bloated
+    .index);
+    bbPrintf("available.head.collision = %d\n", pool->available.head.bloated
+    .collision);
+    bbPrintf("available.tail.index =     %d\n", pool->available.tail.bloated
+    .index);
+    bbPrintf("available.tail.collision = %d\n", pool->available.tail.bloated
+    .collision);
+
+    return Success;
 }

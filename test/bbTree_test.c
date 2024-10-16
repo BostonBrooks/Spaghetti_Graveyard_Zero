@@ -3,6 +3,7 @@
 #include "engine/logic/bbPoolHandle.h"
 #include "engine/logic/bbVPool.h"
 #include "engine/logic/bbTree.h"
+#include "engine/logic/bbTerminal.h"
 
 typedef struct {
     char str[64];
@@ -18,7 +19,8 @@ bbFlag testFunc(bbTree* tree, void* node, void* cl){
 
 int main(void){
     bbVPool* pool;
-    bbVPool_newLean(&pool, sizeof(testStruct), 1024);
+    //bbVPool_newLean(&pool, sizeof(testStruct), 76);
+    bbVPool_newBloated(&pool, sizeof(testStruct), 4, 19);
 
     bbTree* tree;
     bbTree_new(&tree, pool, offsetof(testStruct, tree));
@@ -32,11 +34,13 @@ int main(void){
 
     tree->root = handle;
 
+    bbPrintf("Constructing Tree\n");
     for (I32 i = 0; i < 3; i++){
         testStruct* elementI;
         bbVPool_alloc(pool, &elementI);
         bbNode_setEmpty(tree, elementI);
         sprintf(elementI->str, "    i = %d", i);
+        printf("    i = %d\n", i);
         bbNode_setParent(tree, elementI, element);
 
         for (I32 j = 0; j < 4; j++){
@@ -44,13 +48,15 @@ int main(void){
             bbVPool_alloc(pool, &elementJ);
             bbNode_setEmpty(tree, elementJ);
             sprintf(elementJ->str, "        j = %d", j);
+            printf("        j = %d\n", j);
             bbNode_setParent(tree, elementJ, elementI);
 
-            for (I32 k = 0; k < 0; k++){
+            for (I32 k = 0; k < 5; k++){
                 testStruct* elementK;
                 bbVPool_alloc(pool, &elementK);
                 bbNode_setEmpty(tree, elementK);
                 sprintf(elementK->str, "            k = %d", k);
+                printf("            k = %d\n", k);
                 bbNode_setParent(tree, elementK, elementJ);
 
             }
@@ -58,7 +64,7 @@ int main(void){
         }
 
     }
-
+    bbPrintf("Performing Array Map\n");
     descending_search(tree, element, testFunc, NULL);
-
+    exit(EXIT_SUCCESS);
 }

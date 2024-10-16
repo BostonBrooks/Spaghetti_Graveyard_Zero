@@ -99,6 +99,9 @@ bbFlag descending_search(bbTree* tree, void* root, bbTreeFunction* myFunc,
             case Break:
                 return Break;
             case Continue:
+                if(bbVPool_handleIsEqual(
+                        pool, elementHandle, elementNode->peers.next))
+                    return Continue;
                 elementHandle = elementNode->peers.next;
                 break;
             case Repeat:
@@ -131,6 +134,9 @@ bbFlag ascending_search(bbTree* tree, void* root, bbTreeFunction* myFunc,
             case Break:
                 return Break;
             case Continue:
+                if(bbVPool_handleIsEqual(
+                        pool, elementHandle, elementNode->peers.prev))
+                    return Continue;
                 elementHandle = elementNode->peers.prev;
                 break;
             case Repeat:
