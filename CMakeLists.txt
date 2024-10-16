@@ -35,4 +35,5 @@ add_executable(myprogram test/bbTerminal_test.c
         engine/logic/bbTree.h
         engine/logic/bbLeanPool.c
         engine/logic/bbTree.c
-        test/bbTree_test.c)
+        test/bbTree_test.c
+        engine/logic/bbList.h)
