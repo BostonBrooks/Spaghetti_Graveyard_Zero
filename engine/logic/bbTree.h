@@ -3,6 +3,7 @@
  * @brief bbTree defines a structure where each member has a parent and a list of daughter nodes.
  *
  */
+#include <stddef.h>
 #include "engine/logic/bbIntTypes.h"
 #include "engine/logic/bbPoolHandle.h"
 #include "engine/logic/bbVPool.h"
@@ -32,12 +33,12 @@ bbFlag bbNode_setEmpty(bbTree* tree, void* element);
 /// add a new node as a daughter node to parent;
 bbFlag bbNode_setParent(bbTree* tree, void* node, void* parent);
 ///recursively search through nodes until myFunc(node, cl); returns f_Break
-bbFlag descending_search(bbTree* tree,
+bbFlag descending_map(bbTree* tree,
 					  void* root,
 					  bbTreeFunction* myFunc,
 					  void* cl);
 ///recursively search through nodes until myFunc(node, cl); returns f_Break
-bbFlag ascending_search(bbTree* tree,
+bbFlag ascending_map(bbTree* tree,
 					 void* root,
 					 bbTreeFunction* myFunc,
 					 void* cl);

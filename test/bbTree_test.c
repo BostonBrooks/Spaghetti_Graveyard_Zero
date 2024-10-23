@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <stddef.h>
 #include "engine/logic/bbPoolHandle.h"
 #include "engine/logic/bbVPool.h"
 #include "engine/logic/bbTree.h"
@@ -19,8 +20,8 @@ bbFlag testFunc(bbTree* tree, void* node, void* cl){
 
 int main(void){
     bbVPool* pool;
-    //bbVPool_newLean(&pool, sizeof(testStruct), 76);
-    bbVPool_newBloated(&pool, sizeof(testStruct), 4, 19);
+    bbVPool_newLean(&pool, sizeof(testStruct), 76);
+    //bbVPool_newBloated(&pool, sizeof(testStruct), 4, 19);
 
     bbTree* tree;
     bbTree_new(&tree, pool, offsetof(testStruct, tree));
@@ -64,7 +65,10 @@ int main(void){
         }
 
     }
-    bbPrintf("Performing Array Map\n");
-    descending_search(tree, element, testFunc, NULL);
+    bbPrintf("Descending Tree Map\n");
+	descending_map(tree, element, testFunc, NULL);
+	bbPrintf("Ascending Tree Map\n");
+
+	ascending_map(tree, element, testFunc, NULL);
     exit(EXIT_SUCCESS);
 }

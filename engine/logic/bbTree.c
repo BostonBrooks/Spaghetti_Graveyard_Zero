@@ -72,8 +72,8 @@ bbFlag bbNode_setParent(bbTree* tree, void* element, void* parent){
     return Success;
 }
 
-bbFlag descending_search(bbTree* tree, void* root, bbTreeFunction* myFunc,
-                         void* cl)
+bbFlag descending_map(bbTree* tree, void* root, bbTreeFunction* myFunc,
+					  void* cl)
 {
     bbVPool* pool = tree->pool;
     bbTree_Node* rootNode = root + tree->offset;
@@ -94,7 +94,7 @@ bbFlag descending_search(bbTree* tree, void* root, bbTreeFunction* myFunc,
     while(!bbVPool_handleIsEqual(pool, elementHandle, pool->null)){
         bbVPool_lookup(pool, &element, elementHandle);
         elementNode = element + tree->offset;
-        flag = descending_search(tree, element,myFunc,cl);
+        flag = descending_map(tree, element, myFunc, cl);
         switch (flag) {
             case Break:
                 return Break;
@@ -115,8 +115,8 @@ bbFlag descending_search(bbTree* tree, void* root, bbTreeFunction* myFunc,
     return Continue;
 }
 
-bbFlag ascending_search(bbTree* tree, void* root, bbTreeFunction* myFunc,
-                         void* cl) {
+bbFlag ascending_map(bbTree* tree, void* root, bbTreeFunction* myFunc,
+					 void* cl) {
     bbVPool *pool = tree->pool;
     bbTree_Node *rootNode = root  + tree->offset;
     bbFlag flag;
@@ -125,18 +125,18 @@ bbFlag ascending_search(bbTree* tree, void* root, bbTreeFunction* myFunc,
     void* element;
     bbTree_Node* elementNode;
 
-    //TODO if elementNode->peers.next == elementNode, infinite loop
+    //If elementNode->peers.next == elementNode, infinite loop
     while(!bbVPool_handleIsEqual(pool, elementHandle, pool->null)){
         bbVPool_lookup(pool, &element, elementHandle);
         elementNode = element  + tree->offset;
-        flag = ascending_search(tree, element,myFunc,cl);
+        flag = ascending_map(tree, element, myFunc, cl);
         switch (flag) {
             case Break:
-                return Break;
+                goto label;
             case Continue:
                 if(bbVPool_handleIsEqual(
                         pool, elementHandle, elementNode->peers.prev))
-                    return Continue;
+					goto label;
                 elementHandle = elementNode->peers.prev;
                 break;
             case Repeat:
@@ -148,8 +148,9 @@ bbFlag ascending_search(bbTree* tree, void* root, bbTreeFunction* myFunc,
 
     }
 
-    flag = myFunc(tree, element, cl);
-    //TODO switch on bbFlag
+	label:
+    flag = myFunc(tree, root, cl);
+    //TODO switch on bbFlag / return flag
     if(flag == Break) return Break;
     return Continue;
 

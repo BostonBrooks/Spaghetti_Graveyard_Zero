@@ -85,20 +85,17 @@ bbFlag bbBloatedPool_expand(bbBloatedPool* pool){
 		bbAssert(i<pool->level1, "Pool full\n");
 	}
 
-bbHere();
     int* array = calloc(23, sizeof (int));
-    printf("pointer = %p\n", array);
 
-    bbPrintf("level2 = %d, sizeof = %d\n", pool->level2,
-             sizeof(bbBloatedPool) + pool->sizeOf * sizeof(U8));
+
 
 	U8* level2 = calloc(pool->level2,
                                 sizeof(bbBloatedPool_Header)
                                 + pool->sizeOf * sizeof(U8)); //why is
                                 // this?
-bbHere();
+
 	bbAssert(level2 != NULL, "calloc failed\n");
-bbHere();
+
 	U32 j = 0;
 	bbBloatedPool_Header* element_A;
 	bbBloatedPool_Header* element_B;
@@ -107,7 +104,7 @@ bbHere();
 	element_A->list.prev = pool->null;
 	bbBloatedPool_newHandle(pool, i, j, &element_A->self);
 	bbBloatedPool_newHandle(pool, i, j+1, &element_A->list.next);
-	printf("a.self = %d\n", element_A->self.bloated.index);
+
 	j++;
 
 	while(j<pool->level2 - 1){
@@ -116,7 +113,7 @@ bbHere();
 		element_B->self = element_A->list.next;
 		bbBloatedPool_newHandle(pool, i, j+1, &element_B->list.next);
 		element_A = element_B;
-		printf("a.self = %d\n", element_A->self.bloated.index);
+
 		j++;
 	}
 
@@ -127,7 +124,7 @@ bbHere();
 	element_B->list.next = pool->null;
 	element_A = (bbBloatedPool_Header *)&level2[0 * (sizeof(bbBloatedPool_Header) + pool->sizeOf)];
 
-	printf("b.self = %d\n", element_B->self.bloated.index);
+
 	pool->elements[i] = level2;
 	pool->available.head = element_A->self;
 	pool->available.tail = element_B->self;
