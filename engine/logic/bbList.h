@@ -82,6 +82,8 @@ bbFlag bbList_remove(bbList* list, void* element);
 bbFlag bbList_insertAfter(bbList* list, void* A, void* B);
 bbFlag bbList_insertBefore(bbList* list, void* B, void* A);
 
+//bbList is empty?
+
 //bbList may be an element of an existing struct
 bbFlag bbList_init(bbList* list, bbVPool* pool, void* listPtr, size_t offsetof,
                   I32 (*comparator)(bbPool_Handle A, bbPool_Handle B)){
