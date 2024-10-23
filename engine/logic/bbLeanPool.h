@@ -8,6 +8,7 @@
 #include <stdalign.h>
 #include "engine/logic/bbIntTypes.h"
 #include "engine/logic/bbPoolHandle.h"
+#include "engine/logic/bbFlag.h"
 
 typedef struct {
 	bbPool_Handle null;
@@ -22,13 +23,15 @@ typedef bbPool_ListElement bbLeanPool_Header;
 #define bbLeanPool_alloc(pool, address)\
 bbLeanPool_allocImpl(pool, address, NULL, 0);
 
-I32 bbLeanPool_new(bbLeanPool** pool, I32 sizeOf, I32 num);
-I32 bbLeanPool_delete(bbLeanPool* pool);
-I32 bbLeanPool_clear(bbLeanPool* pool);
-I32 bbLeanPool_allocImpl(bbLeanPool* pool, void** address, char* file, int line);
-I32 bbLeanPool_free(bbLeanPool* pool, void* address);
-I32 bbLeanPool_lookup(bbLeanPool* UNUSED, void** address, bbPool_Handle handle);
-I32 bbLeanPool_reverseLookup(bbLeanPool* UNUSED, void* address, bbPool_Handle* handle);
+bbFlag bbLeanPool_new(bbLeanPool** pool, I32 sizeOf, I32 num);
+bbFlag bbLeanPool_delete(bbLeanPool* pool);
+bbFlag bbLeanPool_clear(bbLeanPool* pool);
+bbFlag bbLeanPool_allocImpl(bbLeanPool* pool, void** address, char* file, int
+line);
+bbFlag bbLeanPool_free(bbLeanPool* pool, void* address);
+bbFlag bbLeanPool_lookup(bbLeanPool* UNUSED, void** address, bbPool_Handle handle);
+bbFlag bbLeanPool_reverseLookup(bbLeanPool* UNUSED, void* address, bbPool_Handle*
+handle);
 I32 bbLeanPool_handleIsEqual(bbLeanPool* USUSED, bbPool_Handle A, bbPool_Handle B);
 
 

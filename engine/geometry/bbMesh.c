@@ -100,7 +100,7 @@ I32 bbMesh_getElevation_point (bbMesh* Mesh, I32 point_i, I32 point_j){
         I64 a = (right_elevation - middle_elevation) * residual_i;
         I64 b = (middle_elevation - left_elevation) * residual_j;
 
-        I64 c = bbArith_div64((a+b), POINTS_PER_TILE);
+        I64 c = bbArith64_div((a + b), POINTS_PER_TILE);
 
         return (c + left_elevation);
 
@@ -116,7 +116,7 @@ I32 bbMesh_getElevation_point (bbMesh* Mesh, I32 point_i, I32 point_j){
     I64 a = (middle_elevation - left_elevation) * residual_i;
     I64 b = (right_elevation - middle_elevation) * residual_j;
 
-    I64 c = bbArith_div64((a+b), POINTS_PER_TILE);
+    I64 c = bbArith64_div((a + b), POINTS_PER_TILE);
 
     return (c + left_elevation);
 }

@@ -7,7 +7,7 @@ project(myprogram C)
 include_directories( ./ )
 add_executable(myprogram test/bbTerminal_test.c
         engine/logic/recycle/bbComplexPool.c
-        engine/logic/bbFloorDivision.h
+        engine/logic/recycle/bbFloorDivision.h
         engine/logic/bbScatter.h
         engine/logic/bbDictionary.h
         engine/logic/bbDictionary.c
@@ -32,4 +32,8 @@ add_executable(myprogram test/bbTerminal_test.c
         engine/logic/bbVPool.h
         engine/logic/bbVPool.c
         test/bbVPool_test.c
-        engine/logic/bbTree.h)
+        engine/logic/bbTree.h
+        engine/logic/bbLeanPool.c
+        engine/logic/bbTree.c
+        test/bbTree_test.c
+        engine/logic/bbList.h)

@@ -1,21 +1,21 @@
 #include "engine/logic/bbLeanPool.h"
-#include "engine/logic/bbFlags.h"
+#include "engine/logic/bbFlag.h"
 #include "engine/logic/bbArith.h"
 #include <stdlib.h>
 
 #define address_in_bounds(pool, address)\
     (pool->elements <= address && address < pool->elements + pool->num * pool->sizeOf)
 
-I32 bbLeanPool_lookup(bbLeanPool* UNUSED, void** address, bbPool_Handle handle){
+bbFlag bbLeanPool_lookup(bbLeanPool* UNUSED, void** address, bbPool_Handle handle){
 	
 	*address = handle.ptr;
-	return f_Success;
+	return Success;
 }
 
-I32 bbLeanPool_reverseLookup(bbLeanPool* UNUSED, void* address, bbPool_Handle* handle){
+bbFlag bbLeanPool_reverseLookup(bbLeanPool* UNUSED, void* address, bbPool_Handle* handle){
 	
 	handle->ptr = address;
-	return f_Success;
+	return Success;
 }
 
 void* bbLeanPool_fromInt(bbLeanPool* pool, int i){
@@ -26,7 +26,7 @@ void* bbLeanPool_fromInt(bbLeanPool* pool, int i){
 
 }
 
-I32 bbLeanPool_new(bbLeanPool** pool, I32 sizeOf, I32 num){
+bbFlag bbLeanPool_new(bbLeanPool** pool, I32 sizeOf, I32 num){
 
 	//we might get an error if num is too small
 	if (num < 2) num = 2;
@@ -69,15 +69,15 @@ I32 bbLeanPool_new(bbLeanPool** pool, I32 sizeOf, I32 num){
 
 	*pool = Pool;
 
-	return f_Success;
+	return Success;
  }
-I32 bbLeanPool_delete(bbLeanPool* pool){
+bbFlag bbLeanPool_delete(bbLeanPool* pool){
 	
 	free(pool);
-	return f_Success;
+	return Success;
 }
 
-I32 bbLeanPool_clear(bbLeanPool* pool){
+bbFlag bbLeanPool_clear(bbLeanPool* pool){
 	
 	I32 num = pool->num;
 	bbLeanPool_Header* element;
@@ -98,10 +98,10 @@ I32 bbLeanPool_clear(bbLeanPool* pool){
 	pool->available.head.ptr = bbLeanPool_fromInt(pool, 0);
 	pool->available.tail.ptr = bbLeanPool_fromInt(pool, num-1);
 
-	return f_Success;
+	return Success;
 }
 
-I32 bbLeanPool_allocImpl(bbLeanPool* pool, void** address, char* file, int line){
+bbFlag bbLeanPool_allocImpl(bbLeanPool* pool, void** address, char* file, int line){
 	
 
 	bbAssert(address != NULL, "null return address\n");
@@ -114,25 +114,26 @@ I32 bbLeanPool_allocImpl(bbLeanPool* pool, void** address, char* file, int line)
 		pool->available.head.ptr = NULL;
 		pool->available.tail.ptr = NULL;
 
-		return f_Success;
+        *address = element;
+		return Success;
 	}
 	bbLeanPool_Header* headHeader = pool->available.head.ptr;
 	bbLeanPool_Header* nextHeader = headHeader->next.ptr;
 	pool->available.head.ptr = nextHeader;
 	nextHeader->prev.ptr = NULL;
 
-	if (pool->available.tail.ptr == nextHeader){
+	if (pool->available.head.ptr == pool->available.tail.ptr){
 		nextHeader->prev.ptr = nextHeader;
 		nextHeader->next.ptr = nextHeader;
 	}
 
 	*address = headHeader;
 
-	return f_Success;
+	return Success;
 
 }
 
-I32 bbLeanPool_free(bbLeanPool* pool, void* address){
+bbFlag bbLeanPool_free(bbLeanPool* pool, void* address){
 	
 	bbLeanPool_Header* element = address;
 	bbLeanPool_Header* available = pool->available.head.ptr;
@@ -145,7 +146,7 @@ I32 bbLeanPool_free(bbLeanPool* pool, void* address){
 		element->prev.ptr = element;
 		element->next.ptr = element;
 
-		return f_Success;
+		return Success;
 	}
 
 	available->prev.ptr = element;
@@ -153,7 +154,7 @@ I32 bbLeanPool_free(bbLeanPool* pool, void* address){
 	element->prev.ptr = NULL;
 	pool->available.head.ptr = element;
 
-	return f_Success;
+	return Success;
 }
 
 I32 bbLeanPool_handleIsEqual(bbLeanPool* USUSED, bbPool_Handle A, bbPool_Handle B){
