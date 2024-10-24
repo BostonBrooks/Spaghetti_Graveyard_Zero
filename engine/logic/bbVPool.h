@@ -34,6 +34,8 @@ bbFlag bbVPool_allocImpl(bbVPool* pool, void** address, char* file, int line);
 bbFlag bbVPool_free(bbVPool* pool, void* address);
 bbFlag bbVPool_lookup(bbVPool* pool, void** address, bbPool_Handle handle);
 bbFlag bbVPool_reverseLookup(bbVPool* pool, void* address, bbPool_Handle* handle);
+
+//returns result of ==
 I32 bbVPool_handleIsEqual(bbVPool* pool, bbPool_Handle A, bbPool_Handle B);
 
 #endif // BBVPOOL_H

@@ -22,6 +22,10 @@
  *
  * comparator had better return > or < and never ==
  * ie if A < B iff B > A
+ *
+ *
+ * As a rule, try not to move or remove current from list,
+ * bbWarning
  */
 #include <stdlib.h>
 #include "engine/logic/bbPoolHandle.h"
@@ -38,15 +42,21 @@ typedef struct {
     bbPool_List list;
     //offset of bbPool_ListElement from beginning of element
     size_t offsetOf;
-    bbPool_Handle prev;
-    bbPool_Handle self;
-    bbPool_Handle next;
     I32 (*comparator)(bbPool_Handle A, bbPool_Handle B);
+	bbPool_Handle current;
+	bbPool_Handle prev;
+	bbPool_Handle next;
 } bbList;
-
+/*
 bbPool_ListElement* getListElement (bbList list, void* element){
     return element + list.offsetOf;
 }
+*/
+bbFlag bbList_init(bbList* list, bbVPool* pool, void* listPtr, size_t offsetOf,
+				   I32 (*comparator)(bbPool_Handle A, bbPool_Handle B));
+
+bbFlag bbList_new(bbList** list, bbVPool* pool, void* listPtr, size_t offsetOf,
+				   I32 (*comparator)(bbPool_Handle A, bbPool_Handle B));
 
 bbFlag bbList_pushL(bbList* list, void* element);
 bbFlag bbList_pushR(bbList* list, void* element);
@@ -56,6 +66,7 @@ bbFlag bbList_popR(bbList* list, void** element);
 
 bbFlag bbList_sortL(bbList* list, void* element);
 bbFlag bbList_sortR(bbList* list, void* element);
+
 
 ///point the iterator to the head of the list
 bbFlag bbList_setHead(bbList* list);
@@ -71,40 +82,20 @@ bbFlag bbList_decrement(bbList* list, void** element);
 bbFlag bbList_getCurrent(bbList* list, void** element);
 /// point the iterator at element;
 bbFlag bbList_setCurrent(bbList* list, void* element);
-/// take the current object pointed to by iterator and sort back into the list
-bbFlag bbList_sortCurrent(bbList* list, void* element);
 
-/// remove current object pointed to by iterator from list and return by ref
-bbFlag bbList_popCurrent(bbList* list, void** element);
+/// take the element and sort back into the list,
+/// starting from it's current location
+/// if element == current, this could be problematic, bbWarning
+bbFlag bbList_sortElement(bbList* list, void* element);
+
+// remove current object pointed to by iterator from list and return by ref
+// current becomes current.next? could be problematic, do not implement
+//bbFlag bbList_popCurrent(bbList* list, void** element);
+
 /// remove object from list
+/// if current, current becomes current.next? could be problematic bbWarning
 bbFlag bbList_remove(bbList* list, void* element);
 
 bbFlag bbList_insertAfter(bbList* list, void* A, void* B);
-bbFlag bbList_insertBefore(bbList* list, void* B, void* A);
+bbFlag bbList_insertBefore(bbList* list, void* A, void* B);
 
-//bbList is empty?
-
-//bbList may be an element of an existing struct
-bbFlag bbList_init(bbList* list, bbVPool* pool, void* listPtr, size_t offsetof,
-                  I32 (*comparator)(bbPool_Handle A, bbPool_Handle B)){
-    list->pool = pool;
-    list->listPtr = listPtr;
-    list->list.head = pool->null;
-    list->list.tail = pool->null;
-    list->offsetOf = offsetof;
-
-    if (list->listPtr != NULL){
-        list->prev = pool->null;
-        list->self = list->listPtr->head;
-
-    }
-
-    list->comparator = comparator;
-}
-
-//bbList may be placed on the heap
-bbFlag bbList_new(void* pool, void* listPtr, size_t offsetof,
-                  I32 (*comparator)(bbPool_Handle A, bbPool_Handle B)){
-    bbList* list = malloc(sizeof *list);
-    return bbList_init(list, pool, listPtr, offsetof, comparator);
-}
