@@ -19,7 +19,9 @@ typedef enum {
     Break,
     Repeat,
     Continue,
-    Delete
+    Delete,
+    Head,
+    Tail,
 } bbFlag;
 
 #endif // BBFLAG_H

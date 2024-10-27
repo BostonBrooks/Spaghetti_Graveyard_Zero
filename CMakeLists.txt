@@ -41,4 +41,5 @@ add_executable(myprogram test/bbTerminal_test.c
         test/bbList_test.c
         engine/logic/bbList.c
         engine/logic/bbList_sort.c
-        test/bbList_testMerge.c)
+        test/bbList_testMerge.c
+        test/bbList_testSplit.c)

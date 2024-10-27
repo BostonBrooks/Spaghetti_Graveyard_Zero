@@ -173,9 +173,52 @@ bbPool_List merge(bbList* list, bbPool_List* A, bbPool_List* B){
 	return C;
 }
 
+///if the list has an element N, starting at 1, return that element,
+///else return the nearest element ie the head or the tail
+
+bbFlag getNth (bbList* list, bbPool_List tmpList, void** element, I32 N){
+
+    bbPool_Handle handle = tmpList.head;
+    void* Element;
+    bbVPool_lookup(list->pool, &Element, handle);
+    bbPool_ListElement* listElement = Element + list->offsetOf;
+
+    if (N <= 1){
+        *element = Element;
+        return Head;
+    }
+
+    for(I32 i = 1; i < N; i++){
+        handle = listElement->next;
+        bbVPool_lookup(list->pool, &Element, handle);
+        if(isEqual(handle,tmpList.tail)) {
+            *element = Element;
+            return Tail;
+        };
+        listElement = Element + list->offsetOf;
+
+    }
+
+    *element = Element;
+
+    return Success;
+
+}
+
 /// take the first num elements and put in A, the rest go in C
 bbFlag split(bbList* list, bbPool_List A, bbPool_List* B, bbPool_List* C, I32 num){
 
+
+    if (isNULL(A.head)){
+        bbAssert(isNULL(A.tail), "split empty list?\n");
+
+
+        B->head = list->pool->null;
+        B->tail = list->pool->null;
+
+        C->head = list->pool->null;
+        C->tail = list->pool->null;
+    }
 	if (num == 0) {
 		*C = A;
 		B->head = list->pool->null;
@@ -185,6 +228,14 @@ bbFlag split(bbList* list, bbPool_List A, bbPool_List* B, bbPool_List* C, I32 nu
 	}
 
 	if (num == 1){
+
+        if(isEqual(A.head, A.tail)){
+            *B = A;
+            C->head = list->pool->null;
+            C->tail = list->pool->null;
+
+            return f_Success;
+        }
 
 		void *BHead, *BTail, *CHead, *CTail;
 		bbPool_ListElement *BHead_list, *BTail_list, *CHead_list, *CTail_list;
@@ -218,8 +269,129 @@ bbFlag split(bbList* list, bbPool_List A, bbPool_List* B, bbPool_List* C, I32 nu
 
 	}
 
+    if (num == 2){
+        if(isEqual(A.head, A.tail)){
+            *B = A;
+            C->head = list->pool->null;
+            C->tail = list->pool->null;
 
-	for(I32 i)
+            return Success;
+        }
+
+        bbPool_Handle AHeadHandle = A.head;
+        void* AHead;
+        bbVPool_lookup(list->pool, &AHead, AHeadHandle);
+        bbPool_ListElement* AHeadList = AHead + list->offsetOf;
+
+        bbPool_Handle A2Handle = AHeadList->next;
+
+        //list has only 2 elements
+        if (isEqual(A2Handle, A.tail)){
+            *B = A;
+            C->head = list->pool->null;
+            C->tail = list->pool->null;
+
+            return Success;
+        }
+
+        void* A2;
+        bbVPool_lookup(list->pool, &A2, A2Handle);
+        bbPool_ListElement* A2List = A2 + list->offsetOf;
+
+        //B contains AHead, A2,
+        //C contains A3 to A.Tail
+
+        bbPool_Handle A3Handle = A2List->next;
+        void* A3;
+        bbVPool_lookup(list->pool, &A3, A3Handle);
+        bbPool_ListElement* A3List = A3 + list->offsetOf;
+
+        B->head = A.head;
+        B->tail = A2Handle;
+        AHeadList->prev = A2Handle;
+        A2List->next = AHeadHandle;
+
+        if(isEqual(A3Handle, A.tail)){
+            C->head = A3Handle;
+            C->tail = A3Handle;
+            A3List->prev = A3Handle;
+            A3List->next = A3Handle;
+
+            return Success;
+        }
+
+        bbPool_Handle ATailHandle = A.tail;
+        void* ATail;
+        bbVPool_lookup(list->pool, &ATail, ATailHandle);
+        bbPool_ListElement* ATailList = ATail + list->offsetOf;
+
+        C->head = A3Handle;
+        C->tail = A.tail;
+        A3List->prev = A.tail;
+        ATailList->next = A3Handle;
+
+        return Success;
+
+    }
+
+    //if (num == 3)
+    {
+        bbHere();
+        void* Nth;
+        bbFlag flag = getNth(list, A, &Nth, num);
+
+        if (flag == Tail){
+            B->head = A.head;
+            B->tail = A.tail;
+            C->head = list->pool->null;
+            C->tail = list->pool->null;
+
+            return Success;
+        }
+
+        bbPool_Handle NthHandle;
+        bbVPool_reverseLookup(list->pool, Nth, &NthHandle);
+        bbPool_ListElement* NthList = Nth + list->offsetOf;
+
+        bbPool_Handle AHeadHandle = A.head;
+        void* AHead;
+        bbVPool_lookup(list->pool, &AHead, AHeadHandle);
+        bbPool_ListElement* AHeadList = AHead + list->offsetOf;
+
+        bbPool_Handle NthNextHandle = NthList->next;
+
+        B->head = A.head;
+        B->tail = NthHandle;
+        NthList->next = A.head;
+        AHeadList->prev = NthHandle;
+
+        void* NthNext;
+        bbVPool_lookup(list->pool, &NthNext, NthNextHandle);
+        bbPool_ListElement* NthNextList = NthNext + list->offsetOf;
+
+        if(isEqual(NthNextHandle, A.tail)){
+            // one element in A;
 
 
+            C->head = NthNextHandle;
+            C->tail = NthNextHandle;
+            NthNextList->prev = NthNextHandle;
+            NthNextList->next = NthNextHandle;
+
+            return Success;
+
+        }
+
+        bbPool_Handle ATailHandle = A.tail;
+        void* ATail;
+        bbVPool_lookup(list->pool, &ATail, ATailHandle);
+        bbPool_ListElement* ATailList = ATail + list->offsetOf;
+
+        C->head = NthNextHandle;
+        C->tail = ATailHandle;
+        NthNextList->prev = ATailHandle;
+        ATailList->next = NthNextHandle;
+
+        return Success;
+    }
 }
