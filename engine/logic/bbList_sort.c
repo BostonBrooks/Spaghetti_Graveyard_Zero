@@ -10,6 +10,31 @@
 #define isEqual(A, B) bbVPool_handleIsEqual(list->pool, A, B)
 #define isNULL(A) bbVPool_handleIsEqual(list->pool, A, list->pool->null)
 
+I32 getLength(bbList* list, bbPool_List tmpList){
+    if(isNULL(tmpList.head)){
+        bbAssert(isNULL(tmpList.tail), "head / tail mismatch\n");
+        return 0;
+    }
+
+    if (isEqual(tmpList.head, tmpList.tail)){
+        return 1;
+    }
+    I32 len = 2;
+    bbPool_Handle handleElement = tmpList.head;
+    void* element;
+    bbVPool_lookup(list->pool, &element, handleElement);
+    bbPool_ListElement* listElement = element + list->offsetOf;
+
+    while (!isEqual(listElement->next, tmpList.tail)){
+        handleElement = listElement->next;
+        bbVPool_lookup(list->pool, &element, handleElement);
+        listElement = element + list->offsetOf;
+        len++;
+    }
+    return len;
+}
+
+
 bbFlag popL (bbList* list, void** element, bbPool_List* tmpList){
 	//cases: empty, 1 element, more than 1 element;
 	if (isNULL(tmpList->head)){
@@ -219,7 +244,7 @@ bbFlag split(bbList* list, bbPool_List A, bbPool_List* B, bbPool_List* C, I32 nu
         C->head = list->pool->null;
         C->tail = list->pool->null;
     }
-	if (num == 0) {
+	if (num <= 0) {
 		*C = A;
 		B->head = list->pool->null;
 		B->tail = list->pool->null;
@@ -394,4 +419,56 @@ bbFlag split(bbList* list, bbPool_List A, bbPool_List* B, bbPool_List* C, I32 nu
 
         return Success;
     }
+}
+
+bbFlag sort(bbList* list, bbPool_List* tmpList, I32 len){
+    printf("sort: len = %d\n", len);
+    if (len == 1){
+        return Success;
+    }
+
+    if (len == 2){
+        void *head, *tail;
+        bbVPool_lookup(list->pool, &head, tmpList->head);
+        bbVPool_lookup(list->pool, &tail, tmpList->tail);
+
+        if(!list->compare(head, tail)){
+            bbPool_Handle tmp = tmpList->head;
+            tmpList->head = tmpList->tail;
+            tmpList->tail = tmp;
+            return Success;
+        }
+        return Success;
+
+    }
+
+    bbPool_List B,C;
+    I32 lenB = len/2;
+    I32 lenC = len - lenB;
+
+    split(list, *tmpList, &B, &C, lenB);
+
+
+
+    printf("lenB = %d, len(B) = %d, lenC = %d, len(C) = %d\n",
+           lenB, getLength(list, B),
+           lenC, getLength(list, C));
+
+    sort(list, &B, lenB);
+    sort(list, &C, lenC);
+
+    bbPool_List tmp;
+
+    tmp = merge(list, &B, &C);
+
+    *tmpList = tmp;
+    return None;
+}
+bbFlag bbList_sort(bbList* list) {
+    I32 len = bbList_getLength(list);
+    printf("initial len = %d\n", len);
+    bbPool_List tmpList = *list->listPtr;
+    sort(list, &tmpList, len);
+    *list->listPtr = tmpList;
+    return Success;
 }

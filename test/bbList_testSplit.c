@@ -54,10 +54,10 @@ int main(void){
     }
 	printf("processing:\n");
 
-    split(&listA, *listA.listPtr, listB.listPtr, listC.listPtr, 7);
+    split(&listA, *listA.listPtr, listB.listPtr, listC.listPtr, 6);
 
 
-    printf("list B: (first 7 elements)\n");
+    printf("list B: (first 6 elements)\n");
 
 	while(Success == bbList_popL(&listB, &aStruct)){
 
@@ -66,7 +66,7 @@ int main(void){
 	}
 
 
-    printf("list C:\n");
+    printf("list C: (remaining elements)\n");
 
     while(Success == bbList_popL(&listC, &aStruct)){
 
