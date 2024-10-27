@@ -11,19 +11,19 @@
 #define isNULL(A) bbVPool_handleIsEqual(list->pool, A, list->pool->null)
 
 bbFlag bbList_new(bbList** list, bbVPool* pool, void* listPtr, size_t offsetOf,
-				  I32 (*comparator)(bbPool_Handle A, bbPool_Handle B)){
+				  I32 (*compare)(void* A, void* B)){
 
 	bbList* List = malloc(sizeof(*list));
 	bbAssert(NULL != list, "malloc failed\n");
 
-	bbFlag flag = bbList_init(List, pool, listPtr, offsetOf, comparator);
+	bbFlag flag = bbList_init(List, pool, listPtr, offsetOf, compare);
 
 	*list = List;
 	return flag;
 }
 
 bbFlag bbList_init(bbList* list, bbVPool* pool, void* listPtr, size_t offsetOf,
-				   I32 (*comparator)(bbPool_Handle A, bbPool_Handle B)){
+				   I32 (*compare)(void* A, void* B)){
 	list->pool = pool;
 	if(listPtr != NULL){
 		list->listPtr = listPtr;
@@ -33,7 +33,7 @@ bbFlag bbList_init(bbList* list, bbVPool* pool, void* listPtr, size_t offsetOf,
 		list->list.tail = pool->null;
 	}
 	list->offsetOf = offsetOf;
-	list->comparator = comparator;
+	list->compare = compare;
 	list->prev = list->pool->null;
 	list->current = list->pool->null;
 	list->next = list->pool->null;
@@ -248,4 +248,28 @@ bbFlag bbList_popR(bbList* list, void** element){
 		*element = tail;
 	}
 	return Success;
+}
+
+I32 bbList_getLength(bbList* list){
+	if(isNULL(list->listPtr->head)){
+		bbAssert(isNULL(list->listPtr->tail), "head / tail mismatch\n");
+		return 0;
+	}
+
+	if (isEqual(list->listPtr->head, list->listPtr->tail)){
+		return 1;
+	}
+	I32 len = 2;
+	bbPool_Handle handleElement = list->listPtr->head;
+	void* element;
+	bbVPool_lookup(list->pool, &element, handleElement);
+	bbPool_ListElement* listElement = element + list->offsetOf;
+
+	while (!isEqual(listElement->next, list->listPtr->tail)){
+		handleElement = listElement->next;
+		bbVPool_lookup(list->pool, &element, handleElement);
+		listElement = element + list->offsetOf;
+		len++;
+	}
+	return len;
 }

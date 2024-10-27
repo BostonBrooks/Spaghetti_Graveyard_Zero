@@ -20,13 +20,21 @@ int main(void){
 
 	printf("Push Left:\n");
 	for (I32 i = 0; i < 8; i++) {
+		I32 len = bbList_getLength(&list);
+		printf("len = %d\n", len);
+
 		bbVPool_alloc(pool, &aStruct);
 		sprintf(aStruct->str, "i = %d", i);
 		printf("i = %d\n", i);
 		aStruct->listElement.prev = pool->null;
 		aStruct->listElement.next = pool->null;
 		bbList_pushL(&list, aStruct);
+
+
 	}
+
+	I32 len = bbList_getLength(&list);
+	printf("len = %d\n", len);
 
 	printf("Pop Left:\n");
 	while(Success == bbList_popL(&list, &aStruct)){
@@ -43,6 +51,8 @@ int main(void){
 		aStruct->listElement.next = pool->null;
 		bbList_pushR(&list, aStruct);
 	}
+
+
 
 	printf("Pop Right:\n");
 	while(Success == bbList_popR(&list, &aStruct)){

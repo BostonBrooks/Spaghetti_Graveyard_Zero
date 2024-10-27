@@ -20,7 +20,7 @@
  * come across the same object again! its not too big of a problem, but might
  * need to guard against
  *
- * comparator had better return > or < and never ==
+ * compare had better return > or < and never ==
  * ie if A < B iff B > A
  *
  *
@@ -42,7 +42,7 @@ typedef struct {
     bbPool_List list;
     //offset of bbPool_ListElement from beginning of element
     size_t offsetOf;
-    I32 (*comparator)(bbPool_Handle A, bbPool_Handle B);
+    I32 (*compare)(void* A, void* B);
 	bbPool_Handle current;
 	bbPool_Handle prev;
 	bbPool_Handle next;
@@ -53,10 +53,10 @@ bbPool_ListElement* getListElement (bbList list, void* element){
 }
 */
 bbFlag bbList_init(bbList* list, bbVPool* pool, void* listPtr, size_t offsetOf,
-				   I32 (*comparator)(bbPool_Handle A, bbPool_Handle B));
+				   I32 (*compare)(void* A, void* B));
 
 bbFlag bbList_new(bbList** list, bbVPool* pool, void* listPtr, size_t offsetOf,
-				   I32 (*comparator)(bbPool_Handle A, bbPool_Handle B));
+				   I32 (*compare)(void* A, void* B));
 
 bbFlag bbList_pushL(bbList* list, void* element);
 bbFlag bbList_pushR(bbList* list, void* element);
@@ -67,6 +67,8 @@ bbFlag bbList_popR(bbList* list, void** element);
 bbFlag bbList_sortL(bbList* list, void* element);
 bbFlag bbList_sortR(bbList* list, void* element);
 
+I32 bbList_getLength(bbList* list);
+bbFlag bbList_sort(bbList* list);
 
 ///point the iterator to the head of the list
 bbFlag bbList_setHead(bbList* list);
@@ -98,4 +100,6 @@ bbFlag bbList_remove(bbList* list, void* element);
 
 bbFlag bbList_insertAfter(bbList* list, void* A, void* B);
 bbFlag bbList_insertBefore(bbList* list, void* A, void* B);
+
+
 
