@@ -98,8 +98,8 @@ bbFlag bbList_sortElement(bbList* list, void* element);
 /// if current, current becomes current.next? could be problematic bbWarning
 bbFlag bbList_remove(bbList* list, void* element);
 
-bbFlag bbList_insertAfter(bbList* list, void* A, void* B);
-bbFlag bbList_insertBefore(bbList* list, void* A, void* B);
+bbFlag bbList_insertAfter(bbList* list, void* Node, void* Key);
+bbFlag bbList_insertBefore(bbList* list, void* Node, void* Key);
 
 
 
