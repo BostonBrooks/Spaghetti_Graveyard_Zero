@@ -91,11 +91,11 @@ bbFlag bbList_setCurrent(bbList* list, void* element);
 bbFlag bbList_sortElement(bbList* list, void* element);
 
 // remove current object pointed to by iterator from list and return by ref
-// current becomes current.next? could be problematic, do not implement
+// store current.prev and current.next
 //bbFlag bbList_popCurrent(bbList* list, void** element);
 
 /// remove object from list
-/// if current, current becomes current.next? could be problematic bbWarning
+
 bbFlag bbList_remove(bbList* list, void* element);
 
 bbFlag bbList_insertAfter(bbList* list, void* Node, void* Key);

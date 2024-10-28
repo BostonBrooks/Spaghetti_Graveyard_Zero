@@ -472,3 +472,73 @@ bbFlag bbList_sort(bbList* list) {
     *list->listPtr = tmpList;
     return Success;
 }
+
+bbFlag bbList_sortL(bbList* list, void* element){
+    bbPool_Handle elementHandle;
+    bbVPool_reverseLookup(list->pool, element, &elementHandle);
+    bbPool_ListElement* elementList = element + list->offsetOf;
+
+    bbAssert(isNULL(elementList->prev), "element already in a list\n");
+    bbAssert(isNULL(elementList->next), "element already in a list\n");
+
+    if(isNULL(list->listPtr->head)){
+        bbAssert(isNULL(list->listPtr->tail), "head / tail mismatch\n");
+        bbList_pushL(list, element);
+        return Success;
+    }
+
+    bbPool_Handle nextHandle = list->listPtr->head;
+    void *next;
+    bbPool_ListElement *nextList;
+    while(1) {
+
+        bbVPool_lookup(list->pool, &next, nextHandle);
+        nextList = next + list->offsetOf;
+
+        if (list->compare(element, next)) {
+            bbList_insertBefore(list, element, next);
+            return Success;
+        }
+        if (isEqual(nextHandle,list->listPtr->tail)) {
+            bbList_pushR(list, element);
+            return Success;
+        }
+        nextHandle = nextList->next;
+    }
+
+
+
+}
+bbFlag bbList_sortR(bbList* list, void* element) {
+    bbPool_Handle elementHandle;
+    bbVPool_reverseLookup(list->pool, element, &elementHandle);
+    bbPool_ListElement *elementList = element + list->offsetOf;
+
+    bbAssert(isNULL(elementList->prev), "element already in a list\n");
+    bbAssert(isNULL(elementList->next), "element already in a list\n");
+
+    if(isNULL(list->listPtr->head)){
+        bbAssert(isNULL(list->listPtr->tail), "head / tail mismatch\n");
+        bbList_pushR(list, element);
+        return Success;
+    }
+
+    bbPool_Handle prevHandle = list->listPtr->tail;
+    void *prev;
+    bbPool_ListElement *prevList;
+
+    while(1) {
+        bbVPool_lookup(list->pool, &prev, prevHandle);
+        prevList = prev + list->offsetOf;
+
+        if (!list->compare(element, prev)) {
+            bbList_insertAfter(list, element, prev);
+            return Success;
+        }
+        if (isEqual(prevHandle,list->listPtr->head)) {
+            bbList_pushL(list, element);
+            return Success;
+        }
+        prevHandle = prevList->prev;
+    }
+}

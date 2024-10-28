@@ -273,3 +273,109 @@ I32 bbList_getLength(bbList* list){
 	}
 	return len;
 }
+
+bbFlag bbList_insertAfter(bbList* list, void* Node, void* Key){
+
+    if (Key == NULL){
+        bbList_pushR(list, Node);
+        return Success;
+    }
+
+    bbPool_Handle NodeHandle;
+    bbVPool_reverseLookup(list->pool, Node, &NodeHandle);
+    bbPool_ListElement* NodeList = Node + list->offsetOf;
+
+    bbPool_Handle KeyHandle;
+    bbVPool_reverseLookup(list->pool, Key, &KeyHandle);
+    bbPool_ListElement* KeyList = Key + list->offsetOf;
+
+    bbPool_Handle NextHandle = KeyList->next;
+    void* Next;
+    bbVPool_lookup(list->pool, &Next, NextHandle);
+    bbPool_ListElement* NextList = Next + list->offsetOf;
+
+    KeyList->next = NodeHandle;
+    NodeList->prev = KeyHandle;
+    NodeList->next = NextHandle;
+    NextList->prev = NodeHandle;
+
+    if (isEqual(KeyHandle, list->listPtr->tail)){
+        list->listPtr->tail = NodeHandle;
+    }
+
+    return Success;
+}
+
+bbFlag bbList_insertBefore(bbList* list, void* Node, void* Key){
+
+    if (Key == NULL){
+        bbList_pushL(list, Node);
+        return Success;
+    }
+    bbPool_Handle NodeHandle;
+    bbVPool_reverseLookup(list->pool, Node, &NodeHandle);
+    bbPool_ListElement* NodeList = Node + list->offsetOf;
+
+    bbPool_Handle KeyHandle;
+    bbVPool_reverseLookup(list->pool, Key, &KeyHandle);
+    bbPool_ListElement* KeyList = Key + list->offsetOf;
+
+    bbPool_Handle PrevHandle = KeyList->prev;
+    void* Prev;
+    bbVPool_lookup(list->pool, &Prev, PrevHandle);
+    bbPool_ListElement* PrevList = Prev + list->offsetOf;
+
+    PrevList->next = NodeHandle;
+    NodeList->prev = PrevHandle;
+    NodeList->next = KeyHandle;
+    KeyList->prev = NodeHandle;
+
+    if(isEqual(KeyHandle, list->listPtr->head)){
+        list->listPtr->head = NodeHandle;
+    }
+
+    return Success;
+}
+
+bbFlag bbList_remove(bbList* list, void* element){
+    bbPool_Handle elementHandle;
+    bbPool_ListElement* elementList = element + list->offsetOf;
+    bbVPool_reverseLookup(list->pool, element, &elementHandle);
+
+    if (isEqual(elementHandle, elementList->next)){
+        bbAssert(isEqual(elementHandle, elementList->prev)
+                 && isEqual(elementHandle, list->listPtr->head)
+                 && isEqual(elementHandle, list->listPtr->tail),
+                 "all things being equal\n");
+        elementList->next = list->pool->null;
+        elementList->prev = list->pool->null;
+        list->listPtr->head = list->pool->null;
+        list->listPtr->tail = list->pool->null;
+
+        return Success;
+
+    }
+
+    bbPool_Handle PrevHandle = elementList->prev;
+    void* Prev;
+    bbVPool_lookup(list->pool, &Prev, PrevHandle);
+    bbPool_ListElement* PrevList = Prev + list->offsetOf;
+
+    bbPool_Handle NextHandle = elementList->prev;
+    void* Next;
+    bbVPool_lookup(list->pool, &Next, NextHandle);
+    bbPool_ListElement* NextList = Next + list->offsetOf;
+
+    NextList->prev = PrevHandle;
+    PrevList->next = NextHandle;
+
+    elementList->next = list->pool->null;
+    elementList->prev = list->pool->null;
+
+    if(isEqual(list->listPtr->head, elementHandle)){
+        list->listPtr->head = NextHandle;
+    } else if(isEqual(list->listPtr->tail, elementHandle)){
+        list->listPtr->head = PrevHandle;
+    }
+    return Success;
+}
