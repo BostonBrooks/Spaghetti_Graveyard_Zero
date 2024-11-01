@@ -432,13 +432,14 @@ bbFlag sort(bbList* list, bbPool_List* tmpList, I32 len){
         bbVPool_lookup(list->pool, &head, tmpList->head);
         bbVPool_lookup(list->pool, &tail, tmpList->tail);
 
-        if(!list->compare(head, tail)){
-            bbPool_Handle tmp = tmpList->head;
-            tmpList->head = tmpList->tail;
-            tmpList->tail = tmp;
-            return Success;
-        }
+        if(list->compare(head, tail)) return Success;
+
+
+        bbPool_Handle tmp = tmpList->head;
+        tmpList->head = tmpList->tail;
+        tmpList->tail = tmp;
         return Success;
+
 
     }
 
@@ -541,4 +542,137 @@ bbFlag bbList_sortR(bbList* list, void* element) {
         }
         prevHandle = prevList->prev;
     }
+}
+
+bbFlag bbList_sortElement(bbList* list, void* element){
+    bbPool_Handle elementHandle;
+    bbVPool_reverseLookup(list->pool, element, &elementHandle);
+    bbPool_ListElement *elementList = element + list->offsetOf;
+
+    bbAssert(!isNULL(list->listPtr->head), "list should not ne empty\n");
+    bbAssert(!isNULL(list->listPtr->tail), "list should not ne empty\n");
+
+    //Is this the only element in the list?
+    if (isEqual(elementHandle, list->listPtr->head )
+        && isEqual(elementHandle, list->listPtr->tail ) ){
+        return Success;
+    }
+
+    //Is this the head element?
+    if (isEqual(elementHandle, list->listPtr->head )){
+
+
+        bbPool_Handle nextHandle = elementList->next;
+        void* next;
+        bbVPool_lookup(list->pool, &next, nextHandle);
+        bbPool_ListElement* nextList = next + list->offsetOf;
+
+        //Is the element already sorted?
+        if(list->compare(element, next)) return Success;
+
+        //remove element from list
+        bbPool_Handle tailHandle = list->listPtr->tail;
+        void* tail;
+        bbVPool_lookup(list->pool, &tail, tailHandle);
+        bbPool_ListElement* tailList = tail + list->offsetOf;
+
+        nextList->prev = tailHandle;
+        tailList->next = nextHandle;
+        elementList->prev = list->pool->null;
+        elementList->next = list->pool->null;
+
+        list->listPtr->head = nextHandle;
+
+        return bbList_sortL(list, element);
+    }
+
+    //Is this the tail element?
+    if (isEqual(elementHandle, list->listPtr->tail )){
+
+        bbPool_Handle prevHandle = elementList->prev;
+        void* prev;
+        bbVPool_lookup(list->pool, &prev, prevHandle);
+        bbPool_ListElement* prevList = prev + list->offsetOf;
+
+        //Is the element already sorted?
+        if(list->compare(prev, element)) return Success;
+
+        //remove element from list
+        bbPool_Handle headHandle = list->listPtr->head;
+        void* head;
+        bbVPool_lookup(list->pool, &head, headHandle);
+        bbPool_ListElement* headList = head + list->offsetOf;
+
+        prevList->next = headHandle;
+        headList->prev = prevHandle;
+        elementList->prev = list->pool->null;
+        elementList->next = list->pool->null;
+
+        list->listPtr->tail = prevHandle;
+
+        return bbList_sortR(list, element);
+    }
+
+
+    bbPool_Handle prevHandle = elementList->prev;
+    void* prev;
+    bbVPool_lookup(list->pool, &prev, prevHandle);
+    bbPool_ListElement* prevList = prev + list->offsetOf;
+
+    bbPool_Handle nextHandle = elementList->next;
+    void* next;
+    bbVPool_lookup(list->pool, &next, nextHandle);
+    bbPool_ListElement* nextList = next + list->offsetOf;
+
+    //Is the element already sorted?
+    if (list->compare(prev, element) && list->compare(element, next))
+        return Success;
+
+
+    nextList->prev = prevHandle;
+    prevList->next = nextHandle;
+    elementList->prev = list->pool->null;
+    elementList->next = list->pool->null;
+
+    //move element left
+    if (!list->compare(prev, element)){
+
+        while(1) {
+            bbVPool_lookup(list->pool, &prev, prevHandle);
+            prevList = prev + list->offsetOf;
+
+            if (list->compare(prev, element)) {
+                bbList_insertAfter(list, element, prev);
+                return Success;
+            }
+            if (isEqual(prevHandle,list->listPtr->head)) {
+                bbList_pushL(list, element);
+                return Success;
+            }
+            prevHandle = prevList->prev;
+        }
+
+        //move element left
+
+        return Success;
+    }
+
+    //if (!list->compare(element, next)){
+        //move element right
+    while(1) {
+
+        bbVPool_lookup(list->pool, &next, nextHandle);
+        nextList = next + list->offsetOf;
+
+        if (list->compare(element, next)) {
+            bbList_insertBefore(list, element, next);
+            return Success;
+        }
+        if (isEqual(nextHandle,list->listPtr->tail)) {
+            bbList_pushR(list, element);
+            return Success;
+        }
+        nextHandle = nextList->next;
+    }
+
 }
