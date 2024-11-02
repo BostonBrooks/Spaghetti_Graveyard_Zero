@@ -20,13 +20,13 @@
 #include "engine/logic/bbIntTypes.h"
 
 typedef struct { //bbTextures
-	I32 m_NumTextures;
-	sfTexture** m_Textures;
-	bbDictionary* m_Dictionary;
+	I32 numTextures;
+	bbDictionary* Dictionary;
+	sfTexture* textures[];
 
 } bbTextures;
 
-I32 bbTextures_new(bbTextures** self, char* filepath, I32 numTextures);
+I32 bbTextures_new(bbTextures** self, char* filepath);
 I32 bbTextures_delete(bbTextures* textures);
 
 //if key is int, return texture at that address

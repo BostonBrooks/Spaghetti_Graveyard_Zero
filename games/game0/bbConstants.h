@@ -9,7 +9,7 @@
 #ifndef CONSTANTS_H
 #define CONSTANTS_H
 
-
+#define KEY_LENGTH            33
 
 #define POINTS_PER_PIXEL      8
 #define PIXELS_PER_TILE       16

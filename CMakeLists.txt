@@ -35,4 +35,8 @@ add_executable(myprogram
         test/bbVPool_test.c
         test/dowhile_test.c
         engine/logic/bbList_iterate.c
-        test/bbList_testIterate.c)
+        test/bbList_testIterate.c
+        engine/graphics/bbTextures.h
+        engine/graphics/bbTextures.c
+        engine/logic/bbPrime.h
+        test/bbPrime_test.c)
