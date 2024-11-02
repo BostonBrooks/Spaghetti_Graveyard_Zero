@@ -5,47 +5,34 @@ cmake_minimum_required(VERSION 2.6.0)
 
 project(myprogram C)
 include_directories( ./ )
-add_executable(myprogram test/bbTerminal_test.c
-        engine/logic/recycle/bbComplexPool.c
-        engine/logic/recycle/bbFloorDivision.h
-        engine/logic/bbScatter.h
-        engine/logic/bbDictionary.h
+add_executable(myprogram
+        test/bbList_testSortElement.c
+        engine/logic/bbArith.h
+        engine/logic/bbBloatedPool.c
+        engine/logic/bbBloatedPool.h
         engine/logic/bbDictionary.c
+        engine/logic/bbDictionary.h
+        engine/logic/bbLeanPool.c
+        engine/logic/bbLeanPool.h
+        engine/logic/bbList.c
         engine/logic/bbPriorityQueue.c
         engine/logic/bbPriorityQueue.h
-        engine/includes/csfml.h
-        engine/includes/game0.h
-        engine/graphics/bbAnimation.h
-        engine/graphics/bbComposition.h
-        engine/graphics/bbDrawable.h
-        engine/graphics/bbSprites.h
-        engine/graphics/bbTextures.h
-        engine/graphics/bbViewport.h
-        engine/geometry/bbCoordinates.c
-        engine/geometry/bbCoordinates.h
-        engine/geometry/bbMesh.c
-        engine/geometry/bbMesh.h
-        engine/logic/bbBloatedPool.h
-        engine/logic/bbBloatedPool.c
-        engine/logic/bbLeanPool.h
-        engine/logic/bbLeanPool.c
-        engine/logic/bbVPool.h
-        engine/logic/bbVPool.c
-        test/bbVPool_test.c
-        engine/logic/bbTree.h
-        engine/logic/bbLeanPool.c
+        engine/logic/bbScatter.h
         engine/logic/bbTree.c
-        test/bbTree_test.c
-        engine/logic/bbList.h
-        engine/logic/bbList.c
+        engine/logic/bbTree.h
+        engine/logic/bbVPool.c
+        test/bbConstants_test.c
+        test/bbFloorDivision_test.c
         test/bbList_test.c
-        engine/logic/bbList.c
-        engine/logic/bbList_sort.c
-        test/bbList_testMerge.c
-        test/bbList_testSplit.c
-        test/bbList_testSort.c
-        engine/logic/bbList_sortedInsert.c
         test/bbList_testInsert.c
-        engine/logic/bbList_insert.c
+        test/bbList_testMerge.c
+        test/bbList_testSort.c
         test/bbList_testSortedInsert.c
-        test/bbList_testSortElement.c)
+        test/bbList_testSplit.c
+        test/bbRoundUp_test.c
+        test/bbTerminal_test.c
+        test/bbTree_test.c
+        test/bbVPool_test.c
+        test/dowhile_test.c
+        engine/logic/bbList_iterate.c
+        test/bbList_testIterate.c)

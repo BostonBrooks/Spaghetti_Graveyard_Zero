@@ -352,6 +352,10 @@ bbFlag bbList_remove(bbList* list, void* element){
         list->listPtr->head = list->pool->null;
         list->listPtr->tail = list->pool->null;
 
+        list->prev = list->pool->null;
+        list->current = list->pool->null;
+        list->next = list->pool->null;
+
         return Success;
 
     }
@@ -361,7 +365,7 @@ bbFlag bbList_remove(bbList* list, void* element){
     bbVPool_lookup(list->pool, &Prev, PrevHandle);
     bbPool_ListElement* PrevList = Prev + list->offsetOf;
 
-    bbPool_Handle NextHandle = elementList->prev;
+    bbPool_Handle NextHandle = elementList->next;
     void* Next;
     bbVPool_lookup(list->pool, &Next, NextHandle);
     bbPool_ListElement* NextList = Next + list->offsetOf;
@@ -372,10 +376,25 @@ bbFlag bbList_remove(bbList* list, void* element){
     elementList->next = list->pool->null;
     elementList->prev = list->pool->null;
 
+
+
+    if(isEqual(elementHandle, list->current)){
+        list->prev = PrevHandle;
+        list->current = list->pool->null;
+        list->next = NextHandle;
+    } else if (isEqual(elementHandle, list->prev)){
+        list->prev = PrevHandle;
+    } else if (isEqual(elementHandle, list->next)){
+        list->next = NextHandle;
+    }
+
     if(isEqual(list->listPtr->head, elementHandle)){
         list->listPtr->head = NextHandle;
+        list->prev = list->pool->null;
     } else if(isEqual(list->listPtr->tail, elementHandle)){
-        list->listPtr->head = PrevHandle;
+        list->listPtr->tail = PrevHandle;
+        list->next = list->pool->null;
     }
+
     return Success;
 }

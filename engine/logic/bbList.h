@@ -71,9 +71,9 @@ I32 bbList_getLength(bbList* list);
 bbFlag bbList_sort(bbList* list);
 
 ///point the iterator to the head of the list
-bbFlag bbList_setHead(bbList* list);
+bbFlag bbList_setHead(bbList* list, void** element);
 ///point the iterator to the tail of the list
-bbFlag bbList_setTail(bbList* list);
+bbFlag bbList_setTail(bbList* list, void** element);
 
 /// move the iterator to the right and return pointer by reference
 bbFlag bbList_increment(bbList* list, void** element);
