@@ -36,12 +36,15 @@ typedef struct { //bbSprites
 
 } bbSprites;
 
-I32 bbSprites_new(bbSprites** self, bbTextures* textures, char* filePath,
+bbFlag bbSprites_new(bbSprites** self, bbTextures* textures, char* filePath,
 				  float widgetscale, float drawablescale, float groundscale);
 
 ///when closing one map before opening another
-I32 bbSprites_delete(bbSprites* sprites);
+bbFlag bbSprites_delete(bbSprites* sprites);
 
-I32 bbSprites_lookupInt(bbSprites* sprites, char* key);
+bbFlag bbSprites_lookup (sfSprite** self, bbSprites* sprites, char* key);
+
+
+bbFlag bbSprites_lookupInt(bbSprites* sprites, I32* address, char* key);
 
 #endif //BBSPRITES_H

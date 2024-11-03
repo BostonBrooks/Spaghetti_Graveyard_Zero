@@ -44,12 +44,12 @@ bbFlag bbDictionary_new(bbDictionary** dict, I32 n_bins);
 /// delete an existing dictionary
 bbFlag bbDictionary_delete(bbDictionary* dict);
 /// add key/value pair to dictionary and overwrite if duplicate
-//(TODO bbFlag and rbr)
-I32 bbDictionary_add(bbDictionary* dict, char* key, bbPool_Handle value);
+bbFlag bbDictionary_add(bbDictionary* dict, char* key, bbPool_Handle value);
 /// remove a key from dictionary
 bbFlag bbDictionary_remove(bbDictionary* dict, char* key);
-/// lookup a key in dictionary (TODO bbFlag and rbr)
-bbPool_Handle bbDictionary_lookup(bbDictionary* dict, char* key);
+/// get value from key
+bbFlag bbDictionary_lookup(bbDictionary* dict, char* key, bbPool_Handle* value);
+
 /// remove all key/value pairs in dictionary
 bbFlag bbDictionary_clear(bbDictionary* dict);
 /// print all data in dictionary

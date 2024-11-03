@@ -13,15 +13,16 @@
 #include "engine/logic/bbIntTypes.h"
 
 typedef struct {
-	char m_Key[KEY_LENGTH];
-
-	I32 v_DrawFunction; // default draw function for the given animation
-	I32 m_Angles;
-	I32 m_Frames;
-	I32 m_Framerate;
-	bbSprites* m_Sprites;
-	//list of length m_Angles * m_Sprites
-	I32 i_Sprites[];
+	char key[KEY_LENGTH];
+	I32 radius;
+	I32 height;
+	I32 drawFunction; // default draw function for the given animation
+	I32 angles;
+	I32 frames;
+	I32 framerate;
+	bbSprites* sprites; //the container where sprites are found
+	//list of length angles * sprites, integer addresses into a bbSprites container
+	I32 Sprites[];
 
 } bbAnimation;
 

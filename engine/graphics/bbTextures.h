@@ -26,11 +26,11 @@ typedef struct { //bbTextures
 
 } bbTextures;
 
-I32 bbTextures_new(bbTextures** self, char* filepath);
-I32 bbTextures_delete(bbTextures* textures);
+bbFlag bbTextures_new(bbTextures** self, char* filepath);
+bbFlag bbTextures_delete(bbTextures* textures);
 
 //if key is int, return texture at that address
 //otherwise, look up key in dictionary and return the texture pointed to.
-I32 bbTextures_lookup (sfTexture** self, bbTextures* textures, char* key);
+bbFlag bbTextures_lookup (sfTexture** self, bbTextures* textures, char* key);
 
 #endif //BBTEXTURES_H

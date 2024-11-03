@@ -116,11 +116,12 @@ I32 bbDictionary_lookupIndex(bbDictionary* dict, char* key){
 	return f_None;
 }
 
-bbPool_Handle bbDictionary_lookup(bbDictionary* dict, char* key){
+bbFlag bbDictionary_lookup(bbDictionary* dict, char* key, bbPool_Handle* value){
 	I32 index = bbDictionary_lookupIndex(dict, key);
-	if (index == f_None) return f_None;
+	if (index == f_None) return None;
 	bbDictionary_entry* entry = bbDictionary_indexLookup(dict, index);
-	return entry->m_Value;
+	*value = entry->m_Value;
+	return Success;
 }
 
 /// get an unused entry from pool
@@ -162,12 +163,12 @@ bbDictionary_entry* grab_entry (bbDictionary* dict){
 	return entry;
 }
 
-I32 bbDictionary_add(bbDictionary* dict, char* key, bbPool_Handle value){
+bbFlag bbDictionary_add(bbDictionary* dict, char* key, bbPool_Handle value){
 	I32 index = bbDictionary_lookupIndex(dict, key);
 	if (index != f_None) {
 		bbDictionary_entry* entry = bbDictionary_indexLookup(dict, index);
 		entry->m_Value = value;
-		return index;
+		return Success;
 	}
 
 	//create new entry
@@ -188,7 +189,7 @@ I32 bbDictionary_add(bbDictionary* dict, char* key, bbPool_Handle value){
 		entry->m_Next = f_None;
 		entry->m_Prev = f_None;
 
-		return entry->m_Self;
+		return Success;
 	}
 	//*head != f_None
 	bbAssert(*tail != f_None, "Head/Tail mismatch\n");
@@ -203,7 +204,7 @@ I32 bbDictionary_add(bbDictionary* dict, char* key, bbPool_Handle value){
 	*tail = entry->m_Self;
 
 
-	return entry->m_Self;
+	return Success;
 }
 
 bbFlag bbDictionary_print(bbDictionary* dict){

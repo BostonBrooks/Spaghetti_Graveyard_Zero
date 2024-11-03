@@ -9,7 +9,7 @@
 #include "engine/logic/bbPrime.h"
 
 
-I32 bbTextures_new(bbTextures** self, char* filepath){
+bbFlag bbTextures_new(bbTextures** self, char* filepath){
 
 	FILE* file = fopen(filepath, "r");
 
@@ -44,11 +44,32 @@ I32 bbTextures_new(bbTextures** self, char* filepath){
         sfTexture_createFromFile(file_path, NULL);
         sfTexture_setSmooth(texture, smooth == 'T' ? sfTrue : sfFalse);
         handle.u64 = address;
-        bbDictionary_add(textures->Dictionary, key, handle);
+        bbDictionary_add(textures->dictionary, key, handle);
         textures->textures[address] = texture;
 
 	}
 
     *self = textures;
     return Success;
+}
+
+bbFlag bbTextures_lookup (sfTexture** self, bbTextures* textures, char* key){
+
+	I32 len = strlen(key);
+	char digits[] = "0123456789";
+	I32 int_len = strspn(key, digits);
+	I32 address;
+	if(len == int_len){
+		address = atoi(key);
+
+	} else {
+		bbPool_Handle handle;
+		bbDictionary_lookup(textures->dictionary, key, &handle);
+		address = handle.u64;
+	}
+	bbAssert(address < textures->numTextures, "address out of bounds\n");
+
+	*self = textures->textures[address];
+
+	return Success;
 }
