@@ -2,6 +2,7 @@
 #include "engine/logic/bbIntTypes.h"
 #include "engine/graphics/bbTextures.h"
 #include "engine/logic/bbTerminal.h"
+#include "engine/logic/bbPrime.h"
 #include "engine/includes/csfml.h"
 #include "games/game0/bbConstants.h"
 
@@ -21,10 +22,22 @@ I32 bbTextures_new(bbTextures** self, char* filepath){
 
 	char key[KEY_LENGTH];
 	int address;
-	char file_path[256]; //path to file relative to games/game0/
+    bbPool_Handle handle;
+    //path to file relative to games/game0/
+	char file_path[256];
 	char smooth;
+    struct sfTexture* texture;
 
 	while (fscanf(file, "%[^,],%d,%[^,],%c,%*[^\n]\n", key, &address, file_path, &smooth) == 4){
+        //What do I pass as area?
+        sfTexture_createFromFile(file_path, NULL);
+        sfTexture_setSmooth(texture, smooth == 'T' ? sfTrue : sfFalse);
+        handle.u64 = address;
+        bbDictionary_add(textures->Dictionary, key, handle);
+        textures->textures[address] = texture;
 
 	}
+
+    *self = textures;
+    return Success;
 }
