@@ -1,4 +1,4 @@
-Number of Textures,3,,,
+Number of Textures:,3,,,
 Label:,Integer Address:,File:,Smooth:,Comment:
 LAYOUT_480,0,./graphics/Layout_480.png,F,The root of the widget tree
 LAYOUT_720,1,./graphics/Layout_720.png,F,The root of the widget tree

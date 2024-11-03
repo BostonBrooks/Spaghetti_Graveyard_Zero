@@ -57,7 +57,7 @@ bbFlag bbSprites_new(bbSprites** self, bbTextures* textures, char* filePath,
 	bbAssert(file!= NULL, "bad fopen\n");
 
 	I32 num;
-	fscanf(file, "Number of Sprites,%d%*[^\n]\n", &num);
+	fscanf(file, "Number of Sprites:,%d%*[^\n]\n", &num);
 
 	bbSprites* sprites = malloc(sizeof(sprites) + num * sizeof (sfSprite*));
 

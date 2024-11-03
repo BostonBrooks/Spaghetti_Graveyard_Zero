@@ -41,4 +41,5 @@ add_executable(myprogram
         engine/logic/bbPrime.h
         test/bbPrime_test.c
         engine/graphics/bbSprites.c
-        engine/graphics/bbAnimation.h)
+        engine/graphics/bbAnimation.h
+        engine/graphics/bbAnimation.c)

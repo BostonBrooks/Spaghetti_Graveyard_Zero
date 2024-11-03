@@ -22,20 +22,19 @@ typedef struct {
 	I32 framerate;
 	bbSprites* sprites; //the container where sprites are found
 	//list of length angles * sprites, integer addresses into a bbSprites container
-	I32 Sprites[];
+	bbPool_Handle Sprites[];
 
 } bbAnimation;
 
 typedef struct { //bbAnimations
-	I32 m_NumAnimations;
+	I32 numAnimations;
 	//pointer to array of pointers to variable sized animations
-	bbAnimation** m_Animations;
-	bbDictionary* m_Dictionary;
+	bbDictionary* dictionary;
+	bbAnimation* animations[];
 
 } bbAnimations;
 
-I32 bbAnimations_new(bbAnimations** self, bbSprites* Sprites, char* folderPath,
-		I32 numAnimations);
+I32 bbAnimations_new(bbAnimations** self, bbSprites* Sprites, char* filePath);
 
 I32 bbAnimations_delete(bbAnimations* animations);
 

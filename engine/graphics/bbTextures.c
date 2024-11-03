@@ -15,7 +15,7 @@ bbFlag bbTextures_new(bbTextures** self, char* filepath){
 
 	bbAssert(file != NULL, "bad fopen\n");
 	I32 num;
-	fscanf(file, "Number of Textures,%d%*[^\n]\n", &num);
+	fscanf(file, "Number of Textures:,%d%*[^\n]\n", &num);
 
 	bbTextures* textures = malloc(sizeof( bbTextures) + num * sizeof (sfTexture*));
 	textures->numTextures = num;
