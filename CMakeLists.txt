@@ -39,4 +39,5 @@ add_executable(myprogram
         engine/graphics/bbTextures.h
         engine/graphics/bbTextures.c
         engine/logic/bbPrime.h
-        test/bbPrime_test.c)
+        test/bbPrime_test.c
+        engine/graphics/bbSprites.c)

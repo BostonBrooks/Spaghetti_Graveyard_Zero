@@ -30,13 +30,13 @@
 #include "engine/logic/bbIntTypes.h"
 
 typedef struct { //bbSprites
-	I32 m_NumSprites;
-	sfSprite** m_Sprites;
-	bbDictionary* m_Dictionary;
+	I32 numSprites;
+	bbDictionary* dictionary;
+	sfSprite* sprites[];
 
 } bbSprites;
 
-I32 bbSprites_new(bbSprites** self, bbTextures* textures, char* folderPath,
+I32 bbSprites_new(bbSprites** self, bbTextures* textures, char* filePath,
 				  float widgetscale, float drawablescale, float groundscale);
 
 ///when closing one map before opening another

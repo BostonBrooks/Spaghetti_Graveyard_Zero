@@ -21,7 +21,7 @@
 
 typedef struct { //bbTextures
 	I32 numTextures;
-	bbDictionary* Dictionary;
+	bbDictionary* dictionary;
 	sfTexture* textures[];
 
 } bbTextures;
