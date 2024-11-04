@@ -21,33 +21,36 @@
 #include "engine/graphics/bbSprites.h"
 #include "engine/graphics/bbAnimation.h"
 #include "engine/logic/bbPoolHandle.h"
+#include "engine/geometry/bbCoordinates.h"
 #define FRAMES_PER_COMPOSITION 8
 
 // a bbFrame contains the data used to draw a sprite, animation or composition
 typedef struct {
+	//handle is usually an integer address of the sprite/animation
 	bbPool_Handle handle;
+	//I32 angle - angle supplied in radians by drawable/widget
+	//I32 frame - calculated based on framerate (times framerate of animation)
+	//            and startTime
 	I32 drawfunction;
-	U32 starttime;
+	U32 startTime;
+	bbScreenPoints offset;
 	//multiply by the framerate of the animation
 	float framerate;
 } bbFrame;
 
 typedef struct {
-	bbFrame frame[FRAMES_PER_COMPOSITION];
-	//lets hope that if the composition is dynamically allocated,
-	// we know which pool to look in
-	U8 is_dynamically_allocated;
+	I32 num_frames;
+	bbFrame frame[];
+	//U8 is_dynamically_allocated; - all compositions are statically allocated
 } bbComposition;
 
 typedef struct {
-	I32 num_composition;
-	//pointer to array of equal sized compositions
-	bbComposition* compositions;
+	I32 num;
 	bbDictionary* dictionary;
+	bbComposition* compositions[];
 } bbCompositions;
 
-I32 bbComposition_new(bbComposition** self, bbSprites* sprites, bbAnimations* animations, char* folderPath,
-					 I32 numAnimations);
+I32 bbComposition_new(bbComposition** self, bbSprites* sprites, bbAnimations* animations, char* filePath);
 
 I32 bbCompositions_delete(bbCompositions* compositions);
 

@@ -22,13 +22,9 @@ bbFlag bbTextures_new(bbTextures** self, char* filepath){
 
 	bbDictionary_new(&textures->dictionary, nextPrime(num));
 
-	{
-		char string[64];
-		fscanf(file, "%[^\n]\n", string);
-		bbAssert(strcmp(string, "Label:,Integer Address:,File:,Smooth:,Comment:") == 0,
-				 "bad file\n");
 
-	}
+		fscanf(file, "%*[^\n]\n");
+
 
 	char key[KEY_LENGTH];
 	int address;
@@ -41,7 +37,7 @@ bbFlag bbTextures_new(bbTextures** self, char* filepath){
 
 	while (fscanf(file, "%[^,],%d,%[^,],%c,%*[^\n]\n", key, &address, file_path, &smooth) == 4){
         //What do I pass as area?
-        sfTexture_createFromFile(file_path, NULL);
+        texture = sfTexture_createFromFile(file_path, NULL);
         sfTexture_setSmooth(texture, smooth == 'T' ? sfTrue : sfFalse);
         handle.u64 = address;
         bbDictionary_add(textures->dictionary, key, handle);
@@ -49,6 +45,7 @@ bbFlag bbTextures_new(bbTextures** self, char* filepath){
 
 	}
 
+	fclose(file);
     *self = textures;
     return Success;
 }

@@ -21,6 +21,7 @@ typedef struct {
 
 bbFlag bbSprite_new(bbSprites* sprites, char* key, I32 address, sfTexture* texture, sprite_dimensions* dimensions){
 
+	bbHere();
 	sfSprite* sprite = sfSprite_create();
 	sfSprite_setTexture(sprite, texture, sfTrue);
 
@@ -53,24 +54,21 @@ bbFlag bbSprite_new(bbSprites* sprites, char* key, I32 address, sfTexture* textu
 bbFlag bbSprites_new(bbSprites** self, bbTextures* textures, char* filePath,
 				  float widgetscale, float drawablescale, float groundscale)
 {
+	bbHere();
 	FILE* file = fopen(filePath, "r");
 	bbAssert(file!= NULL, "bad fopen\n");
 
 	I32 num;
 	fscanf(file, "Number of Sprites:,%d%*[^\n]\n", &num);
 
-	bbSprites* sprites = malloc(sizeof(sprites) + num * sizeof (sfSprite*));
+	bbSprites* sprites = malloc(sizeof(bbSprites) + num * sizeof (sfSprite*));
 
 	sprites->numSprites = num;
 	bbDictionary_new(&sprites->dictionary, nextPrime(num));
 
-	{
-		char string[64];
-		fscanf(file, "%[^\n]\n", string);
-		bbAssert(strcmp(string, "Label:,Integer Address:,Texture:,Left:,Top:,Width:,Height:,Origin X:,Origin Y:,Scale X:,Scale Y:,Scale By:,Comment:") == 0,
-				 "bad file\n");
 
-	}
+	fscanf(file, "%*[^\n]\n");
+
 
 	char key[KEY_LENGTH];
 	I32 address;
@@ -102,7 +100,10 @@ bbFlag bbSprites_new(bbSprites** self, bbTextures* textures, char* filePath,
 		bbSprite_new(sprites, key, address, texturePtr, &dimensions);
 	}
 
+	fclose(file);
 	*self = sprites;
+	bbHere();
+
 	return Success;
 }
 

@@ -3,3 +3,4 @@ Label:,Integer Address:,Texture:,Left:,Top:,Width:,Height:,Origin X:,Origin Y:,S
 LAYOUT_480,0,LAYOUT_480,0,0,720,480,0,0,1,1,None,The root of the widget tree
 LAYOUT_720,1,LAYOUT_720,0,0,1280,720,0,0,1,1,None,The root of the widget tree
 LAYOUT_1080,2,LAYOUT_1080,0,0,1920,1080,0,0,1,1,None,The root of the widget tree
+SPHERE,3,SPHERE,0,0,52,52,26,26,1,1,Widget,A simple asset

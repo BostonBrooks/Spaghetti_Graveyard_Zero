@@ -8,8 +8,9 @@
 #define BBANIMATION_H
 
 #include "engine/includes/csfml.h"
-#include "engine/logic/bbDictionary.h"
 #include "engine/graphics/bbSprites.h"
+#include "engine/graphics/bbDrawfunctions.h"
+#include "engine/logic/bbDictionary.h"
 #include "engine/logic/bbIntTypes.h"
 
 typedef struct {
@@ -34,7 +35,7 @@ typedef struct { //bbAnimations
 
 } bbAnimations;
 
-I32 bbAnimations_new(bbAnimations** self, bbSprites* Sprites, char* filePath);
+I32 bbAnimations_new(bbAnimations** self, bbSprites* Sprites, bbDrawfunctions* drawfunctions,  char* filePath);
 
 I32 bbAnimations_delete(bbAnimations* animations);
 

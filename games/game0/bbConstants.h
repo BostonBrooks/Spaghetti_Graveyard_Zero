@@ -22,5 +22,6 @@
 #define PIXELS_PER_MAP        (PIXELS_PER_TILE * TILES_PER_MAP)
 #define POINTS_PER_MAP        (POINTS_PER_PIXEL * PIXELS_PER_MAP)
 
+#define SCREEN_PPP            8.0
 
 #endif //CONSTANTS_H

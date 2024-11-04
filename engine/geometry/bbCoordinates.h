@@ -1,4 +1,8 @@
+#ifndef BBCOORDINATES_H
+#define BBCOORDINATES_H
+
 #include "engine/includes/game0.h"
+#include "engine/includes/csfml.h"
 #include "engine/logic/bbArith.h"
 #include <math.h>
 
@@ -43,6 +47,15 @@ typedef struct {
 
 } bbIntRect;
 
+typedef struct {
+
+	I32 top;
+	I32 left;
+	I32 height;
+	I32 width;
+
+} bbScreenPointsRect;
+
 bbTileCoords bbMapCoords_getTileCoords(bbMapCoords MC);
 
 bbSquareCoords bbMapCoords_getSquareCoords(bbMapCoords MC);
@@ -54,3 +67,7 @@ bbScreenPoints bbMapCoords_getScreenPoints_relative (bbMapCoords A,
                                                      bbMapCoords B);
 
 bbFloat3D bbFloat3D_normalise (bbFloat3D foo);
+
+sfVector2f bbScreenPoints_getV2f(bbScreenPoints SP);
+
+#endif // BBCOORDINATES_H

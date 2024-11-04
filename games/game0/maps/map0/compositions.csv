@@ -1,0 +1,11 @@
+Number of Compositions:,2,,,,
+,,,,,
+Label:,A_COMPOSITION,Integer Address:,0,num:,3,Comment:,This is a composition
+Type:,Asset:,Drawfunction:,Start Time:,Frame Rate:,
+SPRITE,TREE,SPRITE_DRAW,0,0,
+ANIMATION,LIGHTS,ANIMATION_DRAW,0,1,
+ANIMATION,SHADOW,DEFAULT_DRAW,0,0,
+,,,,,
+Label:,B_COMPOSITION,Integer Address:,1,num:,1,Comment:,This is another composition 
+Type:,Asset:,Drawfunction:,Start Time:,Frame Rate:,
+COMPOSITION,A_COMPOSITION,COMPOSITION_DRAW,0,1,

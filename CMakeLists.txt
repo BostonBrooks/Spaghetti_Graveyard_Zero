@@ -42,4 +42,13 @@ add_executable(myprogram
         test/bbPrime_test.c
         engine/graphics/bbSprites.c
         engine/graphics/bbAnimation.h
-        engine/graphics/bbAnimation.c)
+        engine/graphics/bbAnimation.c
+        engine/graphics/bbDrawfunctions.h
+        engine/graphics/bbComposition.h
+        engine/graphics/bbComposition.c
+        engine/widgets/bbWidget.h
+        engine/graphics/bbGraphics.h
+        engine/graphics/bbDrawfunctions.c
+        engine/geometry/bbCoordinates.h
+        engine/geometry/bbCoordinates.c
+        test/Incremental_test.c)
