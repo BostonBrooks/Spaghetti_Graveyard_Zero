@@ -122,7 +122,7 @@ bbFlag bbList_pushR(bbList* list, void* element){
 	bbVPool_lookup(list->pool, &head, list->listPtr->head);
 	bbPool_ListElement* headListElement = head + list->offsetOf;
 
-	//set element to tail, tail to head
+	//set element to tail
 	if(isEqual(list->listPtr->head, list->listPtr->tail)){
 
 
@@ -131,7 +131,7 @@ bbFlag bbList_pushR(bbList* list, void* element){
 		listElement->next = list->listPtr->head;
 		listElement->prev = list->listPtr->head;
 
-		list->listPtr->head = list->listPtr->tail;
+		//list->listPtr->head = list->listPtr->tail; redundant?
 		list->listPtr->tail = handleElement;
 
 		return Success;

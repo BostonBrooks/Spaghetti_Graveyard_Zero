@@ -95,11 +95,16 @@ bbFlag bbList_sortElement(bbList* list, void* element);
 //bbFlag bbList_popCurrent(bbList* list, void** element);
 
 /// remove object from list
-
 bbFlag bbList_remove(bbList* list, void* element);
 
 bbFlag bbList_insertAfter(bbList* list, void* Node, void* Key);
 bbFlag bbList_insertBefore(bbList* list, void* Node, void* Key);
 
+
+typedef bbFlag bbListFunction(bbList* list, void* node, void* cl);
+/// map function to list, going left-to-right
+
+/// map function to list, going right-to-left
+bbFlag bbList_mapR(bbList* list, bbListFunction* myFunc, void* cl);
 
 

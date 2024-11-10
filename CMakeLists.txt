@@ -51,4 +51,6 @@ add_executable(myprogram
         engine/graphics/bbDrawfunctions.c
         engine/geometry/bbCoordinates.h
         engine/geometry/bbCoordinates.c
-        test/Incremental_test.c)
+        test/Incremental_test.c
+        engine/logic/bbTree2.c
+        engine/logic/bbList_map.c)
