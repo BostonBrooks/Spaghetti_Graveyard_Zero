@@ -29,15 +29,17 @@ int main (void){
 	bbWidgets_init(&widgets);
 
 
-	bbWidget* widget;
+	bbWidget* layout;
+	bbWidget_layoutNew(&layout, &graphics, &widgets, NULL);
 
-	bbWidget_testNew(&widget, &graphics, &widgets, NULL);
+	bbWidget* viewport;
+	bbWidget_viewportNew(&viewport, &graphics, &widgets, layout);
 
 	targets cl;
 	cl.target = window;
 	cl.graphics = &graphics;
 
-	descending_map(widgets.tree, widget, drawFunc, &cl);
+	descending_map(widgets.tree, layout, drawFunc, &cl);
 
 	sfRenderWindow_display(window);
 
@@ -45,5 +47,6 @@ int main (void){
 	sfSleep(time);
 	sfRenderWindow_destroy(window);
 
-
+	bbHere();
+	exit(EXIT_SUCCESS);
 }

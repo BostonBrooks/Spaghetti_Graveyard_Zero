@@ -1,5 +1,8 @@
-Number of Animations:,3,,,,,,,,,
-Label:,Integer Address:,Radius:,Height:,Draw Function:,Angles:,Frames:,Framerate:,Sprites:,...,Comment:
+Number of Animations:,6,,,,,,,,,
+Label:,Integer Address:,Width:,Height:,Draw Function:,Angles:,Frames:,Framerate:,Sprites:,...,Comment:
 LAYOUT_480,0,0,0,TEST,1,1,0,LAYOUT_480,,
 LAYOUT_720,1,0,0,TEST,1,1,0,LAYOUT_720,,
 LAYOUT_1080,2,0,0,TEST,1,1,0,LAYOUT_1080,,
+VIEWPORT_480,3,0,0,TEST,1,1,0,VIEWPORT_480,,
+VIEWPORT_720,4,0,0,TEST,1,1,0,VIEWPORT_720,,
+VIEWPORT_1080,5,0,0,TEST,1,1,0,VIEWPORT_1080,,

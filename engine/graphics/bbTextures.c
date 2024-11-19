@@ -39,6 +39,7 @@ bbFlag bbTextures_new(bbTextures** self, char* filepath){
         //What do I pass as area?
         texture = sfTexture_createFromFile(file_path, NULL);
         sfTexture_setSmooth(texture, smooth == 'T' ? sfTrue : sfFalse);
+		//bbDebug("address = %d\n", address);
         handle.u64 = address;
         bbDictionary_add(textures->dictionary, key, handle);
         textures->textures[address] = texture;
@@ -56,6 +57,7 @@ bbFlag bbTextures_lookup (sfTexture** self, bbTextures* textures, char* key){
 	char digits[] = "0123456789";
 	I32 int_len = strspn(key, digits);
 	I32 address;
+	//bbDebug("key = %s\n", key);
 	if(len == int_len){
 		address = atoi(key);
 
@@ -64,7 +66,8 @@ bbFlag bbTextures_lookup (sfTexture** self, bbTextures* textures, char* key){
 		bbDictionary_lookup(textures->dictionary, key, &handle);
 		address = handle.u64;
 	}
-	bbAssert(address < textures->numTextures, "address out of bounds\n");
+	bbAssert(address < textures->numTextures,
+			 "address = %d, numTextures = %d\n", address, textures->numTextures);
 
 	*self = textures->textures[address];
 

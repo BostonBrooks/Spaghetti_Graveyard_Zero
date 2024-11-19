@@ -121,6 +121,8 @@ bbFlag bbDictionary_lookup(bbDictionary* dict, char* key, bbPool_Handle* value){
 	if (index == f_None) return None;
 	bbDictionary_entry* entry = bbDictionary_indexLookup(dict, index);
 	*value = entry->m_Value;
+
+	bbDebug("key = %s, value = %lu\n", key, entry->m_Value.u64);
 	return Success;
 }
 
@@ -170,6 +172,8 @@ bbFlag bbDictionary_add(bbDictionary* dict, char* key, bbPool_Handle value){
 		entry->m_Value = value;
 		return Success;
 	}
+
+	bbDebug("key = %s, value = %lu\n", key, value.u64);
 
 	//create new entry
 	I32 hash_value = hash(key, dict->m_NumBins);

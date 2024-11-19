@@ -61,10 +61,10 @@ typedef struct {
 
 bbFlag bbWidget_newEmpty(bbWidget** self, bbWidgets* widgets, bbWidget* parent);
 bbFlag bbWidget_draw(bbGraphics* graphics, bbWidget* widget, void* target);
-bbFlag bbWidget_testNew(bbWidget** self, bbGraphics* graphics, bbWidgets* widgets, bbWidget* parent);
+bbFlag bbWidget_layoutNew(bbWidget** self, bbGraphics* graphics, bbWidgets* widgets, bbWidget* parent);
 bbFlag bbWidgets_init(bbWidgets* widgets);
 
-
+bbFlag bbWidget_viewportNew(bbWidget** self, bbGraphics* graphics, bbWidgets* widgets, bbWidget* parent);
 
 typedef struct {
 	bbGraphics* graphics;
