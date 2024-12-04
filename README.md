@@ -1,5 +1,9 @@
 # Spaghetti-Graveyard-UI
 
+Note: I am using this distro as a usb drive to switch between my laptop and 
+my workstation, as such this work in progress will likely not compile and 
+run properly.
+
 Spaghetti Graveyard Zero will be the Nth iteration of a project I started around the year 2018.
 The project is an action RPG game that quizes you on mathematics skills (numeracy).
 

@@ -67,7 +67,8 @@ bbFlag bbTextures_lookup (sfTexture** self, bbTextures* textures, char* key){
 		address = handle.u64;
 	}
 	bbAssert(address < textures->numTextures,
-			 "address = %d, numTextures = %d\n", address, textures->numTextures);
+			 "key = %s, address = %d, numTextures = %d\n",key, address,
+             textures->numTextures);
 
 	*self = textures->textures[address];
 

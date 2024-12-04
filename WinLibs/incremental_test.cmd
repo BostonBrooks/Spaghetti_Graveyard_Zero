@@ -1,6 +1,6 @@
 echo off
-echo [32m
 echo Look, a Tortoise:
+echo [32m
 echo:
 echo   _____     ____
 echo  /      \  ^|  o ^|

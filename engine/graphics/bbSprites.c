@@ -21,7 +21,6 @@ typedef struct {
 
 bbFlag bbSprite_new(bbSprites* sprites, char* key, I32 address, sfTexture* texture, sprite_dimensions* dimensions){
 
-	bbHere();
 	sfSprite* sprite = sfSprite_create();
 	sfSprite_setTexture(sprite, texture, sfTrue);
 
@@ -54,7 +53,7 @@ bbFlag bbSprite_new(bbSprites* sprites, char* key, I32 address, sfTexture* textu
 bbFlag bbSprites_new(bbSprites** self, bbTextures* textures, char* filePath,
 				  float widgetscale, float drawablescale, float groundscale)
 {
-	bbHere();
+
 	FILE* file = fopen(filePath, "r");
 	bbAssert(file!= NULL, "bad fopen\n");
 
@@ -102,7 +101,7 @@ bbFlag bbSprites_new(bbSprites** self, bbTextures* textures, char* filePath,
 
 	fclose(file);
 	*self = sprites;
-	bbHere();
+
 
 	return Success;
 }
