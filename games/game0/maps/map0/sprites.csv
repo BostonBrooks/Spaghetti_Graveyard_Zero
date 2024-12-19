@@ -1,9 +1,10 @@
-Number of Sprites:,7,,,,,,,,,,,
+Number of Sprites:,8,,,,,,,,,,,
 Label:,Integer Address:,Texture:,Left:,Top:,Width:,Height:,Origin X:,Origin Y:,Scale X:,Scale Y:,Scale By:,Comment:
-LAYOUT_480,0,LAYOUT_480,0,0,720,480,0,0,1,1,None,The root of the widget tree
-LAYOUT_720,1,LAYOUT_720,0,0,1280,720,0,0,1,1,None,The root of the widget tree
-LAYOUT_1080,2,LAYOUT_1080,0,0,1920,1080,0,0,1,1,None,The root of the widget tree
-SPHERE,3,SPHERE,0,0,52,52,26,26,1,1,Widget,A simple asset
-VIEWPORT_480,4,VIEWPORT_480,0,0,466,456,0,0,1,1,None,Window into game world
-VIEWPORT_720,5,VIEWPORT_720,0,0,829,678,0,0,1,1,None,Window into game world
-VIEWPORT_1080,6,VIEWPORT_1080,0,0,1260,1038,0,0,1,1,None,Window into game world
+NULL,0,NULL,0,0,128,128,0,0,1,1,None,Sprite not found
+LAYOUT_480,1,LAYOUT_480,0,0,720,480,0,0,1,1,None,The root of the widget tree
+LAYOUT_720,2,LAYOUT_720,0,0,1280,720,0,0,1,1,None,The root of the widget tree
+LAYOUT_1080,3,LAYOUT_1080,0,0,1920,1080,0,0,1,1,None,The root of the widget tree
+SPHERE,4,SPHERE,0,0,52,52,26,26,1,1,Widget,A simple asset
+VIEWPORT_480,5,VIEWPORT_480,0,0,466,456,0,0,1,1,None,Window into game world
+VIEWPORT_720,6,VIEWPORT_720,0,0,829,678,0,0,1,1,None,Window into game world
+VIEWPORT_1080,7,VIEWPORT_1080,0,0,1260,1038,0,0,1,1,None,Window into game world

@@ -12,14 +12,14 @@ echo [0m
 echo:
 echo Attempting to compile:
 SET PATH=C:\winlibs\mingw64\bin
-gcc    -I ../^
+gcc   -D SFML_STATIC -I ../^
        ../test/Incremental_test.c^
        ../engine/graphics/bbTextures.c^
        ../engine/graphics/bbSprites.c^
        ../engine/graphics/bbDrawfunctions.c^
        ../engine/graphics/bbAnimation.c^
        ../engine/logic/bbDictionary.c^
-       ../engine/logic/bbTree.c^
+       ../engine/logic/bbTree2.c^
        ../engine/logic/bbVPool.c^
        ../engine/logic/bbBloatedPool.c^
        ../engine/logic/bbLeanPool.c^
@@ -29,5 +29,5 @@ gcc    -I ../^
     -o ../games/game0/game.exe
 IF %errorlevel% == 0 (    echo Compile Succeeded:
                           cd ../games/game0/
-                          gdb ./game.exe)^
+                          gdb -ex=r ./game.exe)^
  ELSE (echo compile failed!)

@@ -106,10 +106,12 @@ bbFlag bbNode_setParent(bbTree* tree, void* element, void* parent){
 bbFlag descending_map(bbTree* tree, void* root, bbTreeFunction* myFunc,
 					  void* cl)
 {
+
 	bbAssert(root != NULL, "null object address\n");
 	bbTree_Node* rootNode = root + tree->offset;
 	bbFlag flag = myFunc(tree, root, cl);
 	//TODO flag == Repeat?
+
 	if (flag == Break) return Break;
 
 	if(isNULL(rootNode->children.head)){
@@ -122,6 +124,7 @@ bbFlag descending_map(bbTree* tree, void* root, bbTreeFunction* myFunc,
 	bbTree_Node* elementNode;
 
 	while(1){
+
 		bbVPool_lookup(tree->pool, &element, elementHandle);
 		elementNode = element + tree->offset;
 		flag = descending_map(tree, element, myFunc, cl);
@@ -138,6 +141,7 @@ bbFlag descending_map(bbTree* tree, void* root, bbTreeFunction* myFunc,
 				break;
 			default:
 				bbHere();
+                break;
 		}
 	}
 
@@ -179,7 +183,7 @@ bbFlag ascending_map(bbTree* tree, void* root, bbTreeFunction* myFunc,
 				bbHere();
 		}
 	}
-	label:
+label:
 
 	flag = myFunc(tree, root, cl);
 	if(flag == Break) return Break;

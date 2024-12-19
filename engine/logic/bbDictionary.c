@@ -118,7 +118,10 @@ I32 bbDictionary_lookupIndex(bbDictionary* dict, char* key){
 
 bbFlag bbDictionary_lookup(bbDictionary* dict, char* key, bbPool_Handle* value){
 	I32 index = bbDictionary_lookupIndex(dict, key);
-	if (index == f_None) return None;
+	if (index == f_None) {
+        value->u64 = 0;
+        return None;
+    }
 	bbDictionary_entry* entry = bbDictionary_indexLookup(dict, index);
 	*value = entry->m_Value;
 

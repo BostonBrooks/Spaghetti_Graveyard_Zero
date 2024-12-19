@@ -53,4 +53,5 @@ add_executable(myprogram
         engine/geometry/bbCoordinates.c
         test/Incremental_test.c
         engine/logic/bbTree2.c
-        engine/logic/bbList_map.c)
+        engine/logic/bbList_map.c
+        test/bbDictionary_test.c)
