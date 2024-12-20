@@ -80,11 +80,11 @@ bbHere() //sometimes we get here
 //bbHere() //sometimes we get here
 	sfRenderWindow_display(window);
 //bbHere()
-
+    bbDebug("We made it!\n");
 	sfTime time = sfSeconds(5);
 	sfSleep(time);
 	sfRenderWindow_destroy(window);
 
-    bbDebug("We made it!\n");
+
 	exit(EXIT_SUCCESS);
 }

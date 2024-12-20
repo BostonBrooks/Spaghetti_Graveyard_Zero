@@ -19,8 +19,8 @@ bbFlag bbDrawFunction_sprite(struct bbGraphics* graphics, void* drawable, void* 
 	sfSprite* sprite = graphics->sprites->sprites[spriteInt];
 
 
-    bbDebug("spriteInt = %d, sprite = %p, target = %p, window = %p\n",
-            spriteInt, sprite, target, testWindow);
+    //bbDebug("spriteInt = %d, sprite = %p, target = %p, window = %p\n",
+    //        spriteInt, sprite, target, testWindow);
 	bbScreenPoints SP;
 	SP.x = widget->rect.left + frame->offset.x;
 	SP.y = widget->rect.top + frame->offset.y;
@@ -31,12 +31,12 @@ bbFlag bbDrawFunction_sprite(struct bbGraphics* graphics, void* drawable, void* 
 
     bbAssert(target == testWindow, "wrong target\n"); //target is good
     sfVector2f pos = sfSprite_getPosition(sprite); //sprite is good
-    bbDebug("pos = (%f,%f)\n", pos.x, pos.y);
+    //bbDebug("pos = (%f,%f)\n", pos.x, pos.y);
     //Causes exit when not run in gdb
     //TODO TODO TODO WARNING XXXXXXXX
 	sfRenderWindow_drawSprite(target, sprite, NULL);
 
-bbHere();
+//bbHere();
 	return Success;
 }
 

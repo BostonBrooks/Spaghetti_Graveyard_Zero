@@ -52,6 +52,7 @@ bbFlag bbSprite_new(bbSprites* sprites, char* key, I32 address, sfTexture* textu
 
 	bbDictionary_add(sprites->dictionary, key, handle);
 // Test code seems to work
+    printf("address = %d\n", address);
     sfRenderWindow_clear(testWindow, sfBlue);
     sfRenderWindow_drawSprite(testWindow, sprite,NULL);
     sfRenderWindow_display(testWindow);
@@ -114,7 +115,7 @@ bbFlag bbSprites_new(bbSprites** self, bbTextures* textures, char* filePath,
 	fclose(file);
 	*self = sprites;
 
-    bbDictionary_print(sprites->dictionary);
+    //bbDictionary_print(sprites->dictionary);
 	return Success;
 }
 

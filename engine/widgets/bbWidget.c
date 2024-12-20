@@ -40,12 +40,12 @@ bbFlag bbWidget_draw(bbGraphics* graphics, bbWidget* widget, void* target){
 	for (I32 i = 0; i < FRAMES_PER_WIDGET; i++){
 		bbFrame* frame = &widget->frames[i];
 
-        bbDebug("frame->drawfunction = %d\n", frame->drawfunction);
+        //bbDebug("frame->drawfunction = %d\n", frame->drawfunction);
 		if (frame->drawfunction >= 0) {
 			bbDrawFunction *drawFunction = graphics->drawfunctions->functions[frame->drawfunction];
-            bbDebug("drawfunction = %p\n", drawFunction);
+            //bbDebug("drawfunction = %p\n", drawFunction);
 			drawFunction(graphics, widget, frame, target);
-            bbHere();
+            //bbHere();
 		}
 	}
 }

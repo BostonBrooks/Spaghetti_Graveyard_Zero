@@ -60,7 +60,7 @@ bbFlag bbTextures_new(bbTextures** self, char* filepath){
 	fclose(file);
     *self = textures;
 
-    bbDictionary_print(textures->dictionary);
+    //bbDictionary_print(textures->dictionary);
     return Success;
 }
 

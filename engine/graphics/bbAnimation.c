@@ -71,6 +71,6 @@ I32 bbAnimations_new(bbAnimations** self, bbSprites* Sprites, bbDrawfunctions* d
 
 	*self = animations;
 
-    bbDictionary_print(animations->dictionary);
+    // bbDictionary_print(animations->dictionary);
 	return Success;
 }

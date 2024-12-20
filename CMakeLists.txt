@@ -54,4 +54,5 @@ add_executable(myprogram
         test/Incremental_test.c
         engine/logic/bbTree2.c
         engine/logic/bbList_map.c
-        test/bbDictionary_test.c)
+        test/bbDictionary_test.c
+        engine/widgets/bbWidget.c)
