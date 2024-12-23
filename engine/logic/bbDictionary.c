@@ -120,6 +120,7 @@ bbFlag bbDictionary_lookup(bbDictionary* dict, char* key, bbPool_Handle* value){
 	I32 index = bbDictionary_lookupIndex(dict, key);
 	if (index == f_None) {
         value->u64 = 0;
+		bbDebug("key not found: %s", key);
         return None;
     }
 	bbDictionary_entry* entry = bbDictionary_indexLookup(dict, index);
@@ -212,14 +213,15 @@ bbFlag bbDictionary_add(bbDictionary* dict, char* key, bbPool_Handle value){
 }
 
 bbFlag bbDictionary_print(bbDictionary* dict){
+
+	printf("Bin #:\tDict_Self,\tDict_Prev,\tDict_Next,\tDict_In_Use,\tkey,\tvalue\n");
 	for (I32 i = 0; i < dict->m_NumBins; i++){
-		printf("\nBin # %d:\n", i);
-		printf("Dict_Self,\tDict_Prev,\tDict_Next,\tDict_In_Use,\tkey,\tvalue\n");
 		I32 index = dict->m_Bins[i].Head;
 		while (index != f_None){
 			bbDictionary_entry* entry = bbDictionary_indexLookup(dict, index);
 
-			printf("%d\t\t%d\t\t%d\t\t%d\t\t%s\t\t%d\n",
+			printf("%d\t\t%d\t\t%d\t\t%d\t\t%d\t\t%s\t\t%d\n",
+				   i,
 				   entry->m_Self,
 				   entry->m_Prev,
 				   entry->m_Next,

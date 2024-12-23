@@ -69,6 +69,8 @@ bbFlag bbWidget_viewportNew(bbWidget** self, bbGraphics* graphics, bbWidgets* wi
 typedef struct {
 	bbGraphics* graphics;
 	void* target;
+	I32 GUI_time;
+	I32 mapTime;
 } targets;
 bbFlag drawFunc(bbTree* tree, void* node, void* cl);
 

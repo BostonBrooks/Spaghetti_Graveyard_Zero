@@ -18,41 +18,45 @@ int main (void){
 	mode.bitsPerPixel = 32;
 	sfRenderWindow* window = sfRenderWindow_create(mode, "early demo", sfResize | sfClose, NULL);
 	sfRenderWindow_setFramerateLimit(window, 60);
-    bbHere();
+//bbHere();
 	bbGraphics graphics;
 	bbTextures_new(&graphics.textures, "./maps/map0/textures.csv");
 
-    bbHere();
+	bbDictionary_print(graphics.textures->dictionary);
+//bbHere();
 	bbSprites_new(&graphics.sprites, graphics.textures, "./maps/map0/sprites.csv",1,1,1);
 
 
-    bbHere();
+//bbHere();
 	bbDrawfunctions_new(&graphics.drawfunctions);
 
-    bbHere();
+	bbDictionary_print(graphics.sprites->dictionary);
+//bbHere();
 	bbAnimations_new(&graphics.animations, graphics.sprites, graphics.drawfunctions, "./maps/map0/animations.csv");
 
+	bbDictionary_print(graphics.animations->dictionary);
 
-    bbHere();
+
+//bbHere();
 	bbWidgets widgets;
 	bbWidgets_init(&widgets);
 
 
-    bbHere();
+//bbHere();
 	bbWidget* layout;
 	bbWidget_layoutNew(&layout, &graphics, &widgets, NULL);
 
-    bbHere();
+//bbHere();
 	bbWidget* viewport;
 	bbWidget_viewportNew(&viewport, &graphics, &widgets, layout);
 
-    bbHere();
+//bbHere();
 	targets cl;
 	cl.target = window;
 	cl.graphics = &graphics;
 
 
-    bbHere();
+//bbHere();
 
 	for (mapTime = 0; ; mapTime++) {
 
@@ -63,7 +67,7 @@ int main (void){
 		sfRenderWindow_pollEvent(window, &event);
 		if (event.type == sfEvtKeyPressed) break;
 	}
-    bbHere();
+//bbHere();
 
 	sfRenderWindow_destroy(window);
 

@@ -135,7 +135,7 @@ bbFlag bbWidget_viewportNew(bbWidget** self, bbGraphics* graphics, bbWidgets* wi
 	widget->frames[0].offset.y = 0;
 
 
-	bbDictionary_lookup(graphics->drawfunctions->dictionary, "ANIMATION", &drawfunctionHandle);
+	bbDictionary_lookup(graphics->drawfunctions->dictionary, "DEFAULT", &drawfunctionHandle);
 	widget->frames[1].drawfunction = drawfunctionHandle.u64;
 	bbDictionary_lookup(graphics->animations->dictionary,
 						"KITTY", &widget->frames[1].handle);
@@ -144,7 +144,7 @@ bbFlag bbWidget_viewportNew(bbWidget** self, bbGraphics* graphics, bbWidgets* wi
 	widget->frames[1].offset.y = 200 * SCREEN_PPP;
 	widget->frames[1].startTime = 0;
 
-	bbDictionary_lookup(graphics->drawfunctions->dictionary, "DEFAULT", &drawfunctionHandle);
+	bbDictionary_lookup(graphics->drawfunctions->dictionary, "TEST", &drawfunctionHandle);
 
 
 

@@ -21,8 +21,8 @@ I32 bbAnimations_new(bbAnimations** self, bbSprites* Sprites, bbDrawfunctions* d
 	bbAnimations *animations = malloc(
 			sizeof(bbAnimations) + num * sizeof(bbPool_Handle));
 	animations->numAnimations = num;
-    //bbDictionary_new(&animations->dictionary, nextPrime(num));
-    bbDictionary_new(&animations->dictionary, 1);
+    bbDictionary_new(&animations->dictionary, nextPrime(num));
+    //bbDictionary_new(&animations->dictionary, 1);
 
 	fscanf(file, "%*[^\n]\n");
 
@@ -56,8 +56,8 @@ I32 bbAnimations_new(bbAnimations** self, bbSprites* Sprites, bbDrawfunctions* d
 		animation->frames = frames;
 		animation->framerate = framerate;
 
-		bbDebug("label = %s, angles = %d, frames = %d, framerate = %f\n",
-				animation->key, animation->angles, animation->frames, animation->framerate);
+		//bbDebug("label = %s, angles = %d, frames = %d, framerate = %f\n",
+		//		animation->key, animation->angles, animation->frames, animation->framerate);
 		for(I32 i = 0; i < angles*frames; i++){
 
 			fscanf(file, ",%[^,]", key);

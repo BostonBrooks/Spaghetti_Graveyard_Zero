@@ -21,8 +21,8 @@ bbFlag bbTextures_new(bbTextures** self, char* filepath){
     bbAssert(textures != NULL, "bad malloc\n");
 	textures->numTextures = num;
 
-    //bbDictionary_new(&textures->dictionary, nextPrime(num));
-    bbDictionary_new(&textures->dictionary, 1);
+    bbDictionary_new(&textures->dictionary, nextPrime(num));
+    //bbDictionary_new(&textures->dictionary, 1);
 
 
 	fscanf(file, "%*[^\n]\n");

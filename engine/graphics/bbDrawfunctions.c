@@ -5,7 +5,7 @@
 #include "engine/graphics/bbDrawfunctions.h"
 #include "engine/logic/bbTerminal.h"
 #include "engine/widgets/bbWidget.h"
-extern sfRenderWindow* testWindow;
+//extern sfRenderWindow* testWindow;
 
 //TODO cleanup global value
 extern int mapTime;
@@ -33,11 +33,11 @@ bbFlag bbDrawFunction_sprite(struct bbGraphics* graphics, void* drawable, void* 
 	sfSprite_setPosition(sprite, position);
 //bbHere();
 
-    bbAssert(target == testWindow, "wrong target\n"); //target is good
+    //bbAssert(target == testWindow, "wrong target\n"); //target is good
     sfVector2f pos = sfSprite_getPosition(sprite); //sprite is good
     //bbDebug("pos = (%f,%f)\n", pos.x, pos.y);
     //Causes exit when not run in gdb
-    //TODO TODO TODO WARNING XXXXXXXX
+    //TODO TODO TODO WARNING  - works now?
 	sfRenderWindow_drawSprite(target, sprite, NULL);
 
 //bbHere();
@@ -56,8 +56,8 @@ bbFlag bbDrawFunction_animation(struct bbGraphics* graphics, void* drawable, voi
 	I32 frames = animation->frames;
 
 
-	bbDebug("key = %s, maptime = %d, starttime= %d, framerate = %f, frames = %d\n",
-			animation->key, mapTime, frame_descriptor->startTime,animation->framerate, animation->frames );
+	//bbDebug("key = %s, maptime = %d, starttime= %d, framerate = %f, frames = %d\n",
+	//		animation->key, mapTime, frame_descriptor->startTime,animation->framerate, animation->frames );
 	I32 frame = (int)((double)(mapTime - frame_descriptor->startTime) * (double)animation->framerate) % animation->frames;
 	I32 sprite_int = animation->Sprites[angle*frames+frame].u64;
 	sfSprite* sprite = animation->sprites->sprites[sprite_int];
