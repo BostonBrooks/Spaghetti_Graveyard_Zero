@@ -52,7 +52,11 @@ I32 bbAnimations_new(bbAnimations** self, bbSprites* Sprites, bbDrawfunctions* d
 		animation->drawFunction = drawfunctionHandle.u64;
 		animation->angles = angles;
 		animation->sprites = Sprites;
+		animation->frames = frames;
+		animation->framerate = framerate;
 
+		bbDebug("label = %s, angles = %d, frames = %d, framerate = %f\n",
+				animation->key, animation->angles, animation->frames, animation->framerate);
 		for(I32 i = 0; i < angles*frames; i++){
 
 			fscanf(file, ",%[^,]", key);

@@ -5,14 +5,19 @@
 #include "engine/logic/bbTerminal.h"
 #include "engine/logic/bbTree.h"
 
+//TODO cleanup global value
+int mapTime;
+
 int main (void){
+
+
 	printf("Hello World!\n");
 	sfVideoMode mode;
 	mode.height = 480;
 	mode.width = 720;
 	mode.bitsPerPixel = 32;
 	sfRenderWindow* window = sfRenderWindow_create(mode, "early demo", sfResize | sfClose, NULL);
-
+	sfRenderWindow_setFramerateLimit(window, 60);
     bbHere();
 	bbGraphics graphics;
 	bbTextures_new(&graphics.textures, "./maps/map0/textures.csv");
@@ -46,14 +51,20 @@ int main (void){
 	cl.target = window;
 	cl.graphics = &graphics;
 
-	descending_map(widgets.tree, layout, drawFunc, &cl);
 
     bbHere();
-	sfRenderWindow_display(window);
 
+	for (mapTime = 0; ; mapTime++) {
+
+		descending_map(widgets.tree, layout, drawFunc, &cl);
+		sfRenderWindow_display(window);
+
+		sfEvent event;
+		sfRenderWindow_pollEvent(window, &event);
+		if (event.type == sfEvtKeyPressed) break;
+	}
     bbHere();
-	sfTime time = sfSeconds(5);
-	sfSleep(time);
+
 	sfRenderWindow_destroy(window);
 
     bbDebug("We made it!\n");

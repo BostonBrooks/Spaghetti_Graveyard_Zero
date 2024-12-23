@@ -1,9 +1,86 @@
-Number of Sprites:,7,,,,,,,,,,,
-Label:,Integer Address:,Texture:,Left:,Top:,Width:,Height:,Origin X:,Origin Y:,Scale X:,Scale Y:,Scale By:,Comment:
-LAYOUT_480,0,LAYOUT_480,0,0,720,480,0,0,1,1,None,The root of the widget tree
-LAYOUT_720,1,LAYOUT_720,0,0,1280,720,0,0,1,1,None,The root of the widget tree
-LAYOUT_1080,2,LAYOUT_1080,0,0,1920,1080,0,0,1,1,None,The root of the widget tree
-SPHERE,3,SPHERE,0,0,52,52,26,26,1,1,Widget,A simple asset
-VIEWPORT_480,4,VIEWPORT_480,0,0,466,456,0,0,1,1,None,Window into game world
-VIEWPORT_720,5,VIEWPORT_720,0,0,829,678,0,0,1,1,None,Window into game world
-VIEWPORT_1080,6,VIEWPORT_1080,0,0,1260,1038,0,0,1,1,None,Window into game world
+Number of Sprites:,84,,,,,,,,,,,,
+Label:,Integer Address:,Texture:,Left:,Top:,Width:,Height:,Origin X:,Origin Y:,Scale X:,Scale Y:,Scale By:,Comment:,
+LAYOUT_480,0,LAYOUT_480,0,0,720,480,0,0,1,1,None,The root of the widget tree,
+LAYOUT_720,1,LAYOUT_720,0,0,1280,720,0,0,1,1,None,The root of the widget tree,
+LAYOUT_1080,2,LAYOUT_1080,0,0,1920,1080,0,0,1,1,None,The root of the widget tree,
+SPHERE,3,SPHERE,0,0,52,52,26,26,1,1,Widget,A simple asset,
+VIEWPORT_480,4,VIEWPORT_480,0,0,466,456,0,0,1,1,None,Window into game world,
+VIEWPORT_720,5,VIEWPORT_720,0,0,829,678,0,0,1,1,None,Window into game world,
+VIEWPORT_1080,6,VIEWPORT_1080,0,0,1260,1038,0,0,1,1,None,Window into game world,
+KITTY_0,7,KITTY,0,0,480,461,242,440,0.5,0.5,Widget,Sample,Animation
+KITTY_1,8,KITTY,480,0,480,461,242,440,0.5,0.5,Widget,Sample,Animation
+KITTY_2,9,KITTY,960,0,480,461,242,440,0.5,0.5,Widget,Sample,Animation
+KITTY_3,10,KITTY,1440,0,480,461,242,440,0.5,0.5,Widget,Sample,Animation
+KITTY_4,11,KITTY,1920,0,480,461,242,440,0.5,0.5,Widget,Sample,Animation
+KITTY_5,12,KITTY,2400,0,480,461,242,440,0.5,0.5,Widget,Sample,Animation
+KITTY_6,13,KITTY,2880,0,480,461,242,440,0.5,0.5,Widget,Sample,Animation
+KITTY_7,14,KITTY,3360,0,480,461,242,440,0.5,0.5,Widget,Sample,Animation
+KITTY_8,15,KITTY,3840,0,480,461,242,440,0.5,0.5,Widget,Sample,Animation
+KITTY_9,16,KITTY,0,461,480,461,242,440,0.5,0.5,Widget,Sample,Animation
+KITTY_10,17,KITTY,480,461,480,461,242,440,0.5,0.5,Widget,Sample,Animation
+KITTY_11,18,KITTY,960,461,480,461,242,440,0.5,0.5,Widget,Sample,Animation
+KITTY_12,19,KITTY,1440,461,480,461,242,440,0.5,0.5,Widget,Sample,Animation
+KITTY_13,20,KITTY,1920,461,480,461,242,440,0.5,0.5,Widget,Sample,Animation
+KITTY_14,21,KITTY,2400,461,480,461,242,440,0.5,0.5,Widget,Sample,Animation
+KITTY_15,22,KITTY,2880,461,480,461,242,440,0.5,0.5,Widget,Sample,Animation
+KITTY_16,23,KITTY,3360,461,480,461,242,440,0.5,0.5,Widget,Sample,Animation
+KITTY_17,24,KITTY,3840,461,480,461,242,440,0.5,0.5,Widget,Sample,Animation
+KITTY_18,25,KITTY,0,922,480,461,242,440,0.5,0.5,Widget,Sample,Animation
+KITTY_19,26,KITTY,480,922,480,461,242,440,0.5,0.5,Widget,Sample,Animation
+KITTY_20,27,KITTY,960,922,480,461,242,440,0.5,0.5,Widget,Sample,Animation
+KITTY_21,28,KITTY,1440,922,480,461,242,440,0.5,0.5,Widget,Sample,Animation
+KITTY_22,29,KITTY,1920,922,480,461,242,440,0.5,0.5,Widget,Sample,Animation
+KITTY_23,30,KITTY,2400,922,480,461,242,440,0.5,0.5,Widget,Sample,Animation
+KITTY_24,31,KITTY,2880,922,480,461,242,440,0.5,0.5,Widget,Sample,Animation
+KITTY_25,32,KITTY,3360,922,480,461,242,440,0.5,0.5,Widget,Sample,Animation
+KITTY_26,33,KITTY,3840,922,480,461,242,440,0.5,0.5,Widget,Sample,Animation
+KITTY_27,34,KITTY,0,1383,480,461,242,440,0.5,0.5,Widget,Sample,Animation
+KITTY_28,35,KITTY,480,1383,480,461,242,440,0.5,0.5,Widget,Sample,Animation
+KITTY_29,36,KITTY,960,1383,480,461,242,440,0.5,0.5,Widget,Sample,Animation
+KITTY_30,37,KITTY,1440,1383,480,461,242,440,0.5,0.5,Widget,Sample,Animation
+KITTY_31,38,KITTY,1920,1383,480,461,242,440,0.5,0.5,Widget,Sample,Animation
+KITTY_32,39,KITTY,2400,1383,480,461,242,440,0.5,0.5,Widget,Sample,Animation
+KITTY_33,40,KITTY,2880,1383,480,461,242,440,0.5,0.5,Widget,Sample,Animation
+KITTY_34,41,KITTY,3360,1383,480,461,242,440,0.5,0.5,Widget,Sample,Animation
+KITTY_35,42,KITTY,3840,1383,480,461,242,440,0.5,0.5,Widget,Sample,Animation
+KITTY_36,43,KITTY,0,1844,480,461,242,440,0.5,0.5,Widget,Sample,Animation
+KITTY_37,44,KITTY,480,1844,480,461,242,440,0.5,0.5,Widget,Sample,Animation
+KITTY_38,45,KITTY,960,1844,480,461,242,440,0.5,0.5,Widget,Sample,Animation
+KITTY_39,46,KITTY,1440,1844,480,461,242,440,0.5,0.5,Widget,Sample,Animation
+KITTY_40,47,KITTY,1920,1844,480,461,242,440,0.5,0.5,Widget,Sample,Animation
+KITTY_41,48,KITTY,2400,1844,480,461,242,440,0.5,0.5,Widget,Sample,Animation
+KITTY_42,49,KITTY,2880,1844,480,461,242,440,0.5,0.5,Widget,Sample,Animation
+KITTY_43,50,KITTY,3360,1844,480,461,242,440,0.5,0.5,Widget,Sample,Animation
+KITTY_44,51,KITTY,3840,1844,480,461,242,440,0.5,0.5,Widget,Sample,Animation
+KITTY_45,52,KITTY,0,2305,480,461,242,440,0.5,0.5,Widget,Sample,Animation
+KITTY_46,53,KITTY,480,2305,480,461,242,440,0.5,0.5,Widget,Sample,Animation
+KITTY_47,54,KITTY,960,2305,480,461,242,440,0.5,0.5,Widget,Sample,Animation
+KITTY_48,55,KITTY,1440,2305,480,461,242,440,0.5,0.5,Widget,Sample,Animation
+KITTY_49,56,KITTY,1920,2305,480,461,242,440,0.5,0.5,Widget,Sample,Animation
+KITTY_50,57,KITTY,2400,2305,480,461,242,440,0.5,0.5,Widget,Sample,Animation
+KITTY_51,58,KITTY,2880,2305,480,461,242,440,0.5,0.5,Widget,Sample,Animation
+KITTY_52,59,KITTY,3360,2305,480,461,242,440,0.5,0.5,Widget,Sample,Animation
+KITTY_53,60,KITTY,3840,2305,480,461,242,440,0.5,0.5,Widget,Sample,Animation
+KITTY_54,61,KITTY,0,2766,480,461,242,440,0.5,0.5,Widget,Sample,Animation
+KITTY_55,62,KITTY,480,2766,480,461,242,440,0.5,0.5,Widget,Sample,Animation
+KITTY_56,63,KITTY,960,2766,480,461,242,440,0.5,0.5,Widget,Sample,Animation
+KITTY_57,64,KITTY,1440,2766,480,461,242,440,0.5,0.5,Widget,Sample,Animation
+KITTY_58,65,KITTY,1920,2766,480,461,242,440,0.5,0.5,Widget,Sample,Animation
+KITTY_59,66,KITTY,2400,2766,480,461,242,440,0.5,0.5,Widget,Sample,Animation
+KITTY_60,67,KITTY,2880,2766,480,461,242,440,0.5,0.5,Widget,Sample,Animation
+KITTY_61,68,KITTY,3360,2766,480,461,242,440,0.5,0.5,Widget,Sample,Animation
+KITTY_62,69,KITTY,3840,2766,480,461,242,440,0.5,0.5,Widget,Sample,Animation
+KITTY_63,70,KITTY,0,3227,480,461,242,440,0.5,0.5,Widget,Sample,Animation
+KITTY_64,71,KITTY,480,3227,480,461,242,440,0.5,0.5,Widget,Sample,Animation
+KITTY_65,72,KITTY,960,3227,480,461,242,440,0.5,0.5,Widget,Sample,Animation
+KITTY_66,73,KITTY,1440,3227,480,461,242,440,0.5,0.5,Widget,Sample,Animation
+KITTY_67,74,KITTY,1920,3227,480,461,242,440,0.5,0.5,Widget,Sample,Animation
+KITTY_68,75,KITTY,2400,3227,480,461,242,440,0.5,0.5,Widget,Sample,Animation
+KITTY_69,76,KITTY,2880,3227,480,461,242,440,0.5,0.5,Widget,Sample,Animation
+KITTY_70,77,KITTY,3360,3227,480,461,242,440,0.5,0.5,Widget,Sample,Animation
+KITTY_71,78,KITTY,3840,3227,480,461,242,440,0.5,0.5,Widget,Sample,Animation
+KITTY_72,79,KITTY,0,3688,480,461,242,440,0.5,0.5,Widget,Sample,Animation
+KITTY_73,80,KITTY,480,3688,480,461,242,440,0.5,0.5,Widget,Sample,Animation
+KITTY_74,81,KITTY,960,3688,480,461,242,440,0.5,0.5,Widget,Sample,Animation
+KITTY_75,82,KITTY,1440,3688,480,461,242,440,0.5,0.5,Widget,Sample,Animation
+KITTY_76,83,KITTY,1920,3688,480,461,242,440,0.5,0.5,Widget,Sample,Animation

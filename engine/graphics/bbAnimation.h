@@ -20,9 +20,10 @@ typedef struct {
 	I32 drawFunction; // default draw function for the given animation
 	I32 angles;
 	I32 frames;
-	I32 framerate;
+	float framerate;
 	bbSprites* sprites; //the container where sprites are found
 	//list of length angles * sprites, integer addresses into a bbSprites container
+
 	bbPool_Handle Sprites[];
 
 } bbAnimation;

@@ -6,11 +6,15 @@
 #include "engine/logic/bbTerminal.h"
 #include "engine/widgets/bbWidget.h"
 
+//TODO cleanup global value
+extern int mapTime;
+
 bbFlag bbDrawFunction_test(struct bbGraphics* graphics, void* drawable, void* frameDescriptor, void* target) {
 	bbHere();
 	return Success;
 }
 
+//Draw a sprite belonging to a widget
 bbFlag bbDrawFunction_sprite(struct bbGraphics* graphics, void* drawable, void* frameDescriptor, void* target){
 	bbWidget* widget = drawable;
 	bbFrame* frame = frameDescriptor;
@@ -29,8 +33,50 @@ bbFlag bbDrawFunction_sprite(struct bbGraphics* graphics, void* drawable, void* 
 	return Success;
 }
 
+// Draw an animation belonging to a widget;
+bbFlag bbDrawFunction_animation(struct bbGraphics* graphics, void* drawable, void* frameDescriptor, void* target){
+
+	bbWidget* widget = drawable;
+	bbFrame* frame_descriptor = frameDescriptor;
+
+	bbAnimation* animation = graphics->animations->animations[frame_descriptor->handle.u64];
+
+	I32 angle = 0;
+	I32 frames = animation->frames;
+
+
+	bbDebug("key = %s, maptime = %d, starttime= %d, framerate = %f, frames = %d\n",
+			animation->key, mapTime, frame_descriptor->startTime,animation->framerate, animation->frames );
+	I32 frame = (int)((double)(mapTime - frame_descriptor->startTime) * (double)animation->framerate) % animation->frames;
+	I32 sprite_int = animation->Sprites[angle*frames+frame].u64;
+	sfSprite* sprite = animation->sprites->sprites[sprite_int];
+
+
+
+	bbScreenPoints SP;
+	SP.x = widget->rect.left + frame_descriptor->offset.x;
+	SP.y = widget->rect.top + frame_descriptor->offset.y;
+	sfVector2f position = bbScreenPoints_getV2f(SP);
+
+	sfSprite_setPosition(sprite, position);
+	sfRenderWindow_drawSprite(target, sprite, NULL);
+
+	return Success;
+}
+
+//Look up default draw function for a given animation
+bbFlag bbDrawfunction_default(struct bbGraphics* graphics, void* drawable, void* frameDescriptor, void* target){
+	bbWidget* widget = drawable;
+	bbFrame* frame_descriptor = frameDescriptor;
+	bbAnimation* animation = graphics->animations->animations[frame_descriptor->handle.u64];
+	I32 drawFunctionInt = animation->drawFunction;
+	bbDrawFunction *drawFunction = graphics->drawfunctions->functions[drawFunctionInt];
+	return drawFunction(graphics, drawable, frameDescriptor, target);
+
+}
+
 bbFlag bbDrawfunctions_new(bbDrawfunctions** drawfunctions){
-	I32 num = 2;
+	I32 num = 4;
 	bbDrawfunctions* functions = malloc(sizeof(bbDrawfunctions) + num * sizeof(bbDrawFunction));
 	bbDictionary_new(&functions->dictionary, nextPrime(num));
 
@@ -44,6 +90,14 @@ bbFlag bbDrawfunctions_new(bbDrawfunctions** drawfunctions){
 	functions->functions[1] = bbDrawFunction_sprite;
 	handle.u64 = 1;
 	bbDictionary_add(functions->dictionary, "SPRITE", handle);
+
+	functions->functions[2] = bbDrawFunction_animation;
+	handle.u64 = 2;
+	bbDictionary_add(functions->dictionary, "ANIMATION", handle);
+
+	functions->functions[3] = bbDrawfunction_default;
+	handle.u64 = 3;
+	bbDictionary_add(functions->dictionary, "DEFAULT", handle);
 
 	*drawfunctions = functions;
 	return Success;
