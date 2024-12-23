@@ -21,7 +21,8 @@ I32 bbAnimations_new(bbAnimations** self, bbSprites* Sprites, bbDrawfunctions* d
 	bbAnimations *animations = malloc(
 			sizeof(bbAnimations) + num * sizeof(bbPool_Handle));
 	animations->numAnimations = num;
-	bbDictionary_new(&animations->dictionary, nextPrime(num));
+    //bbDictionary_new(&animations->dictionary, nextPrime(num));
+    bbDictionary_new(&animations->dictionary, 1);
 
 	fscanf(file, "%*[^\n]\n");
 
@@ -73,5 +74,7 @@ I32 bbAnimations_new(bbAnimations** self, bbSprites* Sprites, bbDrawfunctions* d
 	}
 
 	*self = animations;
+
+    // bbDictionary_print(animations->dictionary);
 	return Success;
 }

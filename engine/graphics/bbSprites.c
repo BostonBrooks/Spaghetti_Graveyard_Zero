@@ -7,6 +7,7 @@
 #include "engine/logic/bbPrime.h"
 #include "engine/logic/bbString.h"
 
+extern sfRenderWindow* testWindow;
 
 typedef struct {
 	I32 left;
@@ -22,6 +23,10 @@ typedef struct {
 bbFlag bbSprite_new(bbSprites* sprites, char* key, I32 address, sfTexture* texture, sprite_dimensions* dimensions){
 
 	sfSprite* sprite = sfSprite_create();
+    bbAssert(sprite != NULL, "sfSprite_create() returned NULL\n");
+
+    //bbDebug("spriteInt = %d, sprite = %p\n", address, sprite);
+
 	sfSprite_setTexture(sprite, texture, sfTrue);
 
 	sfIntRect rect;
@@ -46,6 +51,13 @@ bbFlag bbSprite_new(bbSprites* sprites, char* key, I32 address, sfTexture* textu
 	handle.u64 = address;
 
 	bbDictionary_add(sprites->dictionary, key, handle);
+// Test code seems to work
+    printf("address = %d\n", address);
+    sfRenderWindow_clear(testWindow, sfBlue);
+    sfRenderWindow_drawSprite(testWindow, sprite,NULL);
+    sfRenderWindow_display(testWindow);
+    sfTime delay = sfMilliseconds(500);
+    sfSleep(delay);
 
 	return Success;
 }
@@ -63,7 +75,8 @@ bbFlag bbSprites_new(bbSprites** self, bbTextures* textures, char* filePath,
 	bbSprites* sprites = malloc(sizeof(bbSprites) + num * sizeof (sfSprite*));
 
 	sprites->numSprites = num;
-	bbDictionary_new(&sprites->dictionary, nextPrime(num));
+    //bbDictionary_new(&sprites->dictionary, nextPrime(num));
+    bbDictionary_new(&sprites->dictionary, 1);
 
 
 	fscanf(file, "%*[^\n]\n");
@@ -102,7 +115,7 @@ bbFlag bbSprites_new(bbSprites** self, bbTextures* textures, char* filePath,
 	fclose(file);
 	*self = sprites;
 
-
+    //bbDictionary_print(sprites->dictionary);
 	return Success;
 }
 
@@ -141,7 +154,8 @@ bbFlag bbSprites_lookupInt(bbSprites* sprites, I32* address, char* key){
 		bbDictionary_lookup(sprites->dictionary, key, &handle);
 		address1 = handle.u64;
 	}
-	bbAssert(address1 < sprites->numSprites, "address out of bounds\n");
+	bbAssert(address1 < sprites->numSprites,
+             "address (%d) out of bounds (%d)\n", address1,sprites->numSprites);
 
 	*address = address1;
 

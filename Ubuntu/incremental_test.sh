@@ -15,7 +15,7 @@ if gcc    -I ../\
        ../engine/graphics/bbDrawfunctions.c\
        ../engine/graphics/bbAnimation.c\
        ../engine/logic/bbDictionary.c\
-       ../engine/logic/bbTree.c\
+       ../engine/logic/bbTree2.c\
        ../engine/logic/bbVPool.c\
        ../engine/logic/bbBloatedPool.c\
        ../engine/logic/bbLeanPool.c\
