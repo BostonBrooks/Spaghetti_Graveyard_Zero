@@ -24,9 +24,17 @@
 #include "engine/geometry/bbCoordinates.h"
 #define FRAMES_PER_COMPOSITION 8
 
+
+typedef enum {
+	Sprite,
+	Animation,
+	Composition,
+} bbType;
+
 // a bbFrame contains the data used to draw a sprite, animation or composition
 typedef struct {
 	//handle is usually an integer address of the sprite/animation
+	bbType type;
 	bbPool_Handle handle;
 	//I32 angle - angle supplied in radians by drawable/widget
 	//I32 frame - calculated based on framerate (times framerate of animation)
@@ -50,7 +58,7 @@ typedef struct {
 	bbComposition* compositions[];
 } bbCompositions;
 
-I32 bbComposition_new(bbComposition** self, bbSprites* sprites, bbAnimations* animations, char* filePath);
+I32 bbCompositions_new(bbCompositions** self, bbSprites* sprites, bbAnimations* animations, bbDrawfunctions* drawfunctions, char* filePath);
 
 I32 bbCompositions_delete(bbCompositions* compositions);
 

@@ -120,11 +120,15 @@ bbFlag bbDictionary_lookup(bbDictionary* dict, char* key, bbPool_Handle* value){
 	I32 index = bbDictionary_lookupIndex(dict, key);
 	if (index == f_None) {
         value->u64 = 0;
-		bbDebug("key not found: %s", key);
+		//bbDebug("key not found: %s\n", key);
         return None;
     }
 	bbDictionary_entry* entry = bbDictionary_indexLookup(dict, index);
 	*value = entry->m_Value;
+
+	if (entry->m_Value.u64 == 5){
+		bbDebug("value = 5 -> key = %s\n", key);
+	}
 
 	return Success;
 }

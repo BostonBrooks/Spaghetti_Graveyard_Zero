@@ -60,7 +60,7 @@ typedef struct {
 } bbWidgetFunctions;
 
 bbFlag bbWidget_newEmpty(bbWidget** self, bbWidgets* widgets, bbWidget* parent);
-bbFlag bbWidget_draw(bbGraphics* graphics, bbWidget* widget, void* target);
+bbFlag bbWidget_draw(bbGraphics* graphics, bbWidget* widget, void* target, I32 mapTime);
 bbFlag bbWidget_layoutNew(bbWidget** self, bbGraphics* graphics, bbWidgets* widgets, bbWidget* parent);
 bbFlag bbWidgets_init(bbWidgets* widgets);
 

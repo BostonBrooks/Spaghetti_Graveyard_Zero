@@ -10,13 +10,13 @@
 //TODO cleanup global value
 extern int mapTime;
 
-bbFlag bbDrawFunction_test(struct bbGraphics* graphics, void* drawable, void* frameDescriptor, void* target) {
+bbFlag bbDrawFunction_test(struct bbGraphics* graphics, void* drawable, void* frameDescriptor, void* target, I32 mapTime) {
 	//bbHere();
 	return Success;
 }
 
 //Draw a sprite belonging to a widget
-bbFlag bbDrawFunction_sprite(struct bbGraphics* graphics, void* drawable, void* frameDescriptor, void* target){
+bbFlag bbDrawFunction_sprite(struct bbGraphics* graphics, void* drawable, void* frameDescriptor, void* target, I32 mapTime){
 	bbWidget* widget = drawable;
 	bbFrame* frame = frameDescriptor;
 	I32 spriteInt = frame->handle.u64;
@@ -45,7 +45,7 @@ bbFlag bbDrawFunction_sprite(struct bbGraphics* graphics, void* drawable, void* 
 }
 
 // Draw an animation belonging to a widget;
-bbFlag bbDrawFunction_animation(struct bbGraphics* graphics, void* drawable, void* frameDescriptor, void* target){
+bbFlag bbDrawFunction_animation(struct bbGraphics* graphics, void* drawable, void* frameDescriptor, void* target,  I32 mapTime){
 
 	bbWidget* widget = drawable;
 	bbFrame* frame_descriptor = frameDescriptor;
@@ -58,7 +58,7 @@ bbFlag bbDrawFunction_animation(struct bbGraphics* graphics, void* drawable, voi
 
 	//bbDebug("key = %s, maptime = %d, starttime= %d, framerate = %f, frames = %d\n",
 	//		animation->key, mapTime, frame_descriptor->startTime,animation->framerate, animation->frames );
-	I32 frame = (int)((double)(mapTime - frame_descriptor->startTime) * (double)animation->framerate) % animation->frames;
+	I32 frame = (int)((double)(mapTime - frame_descriptor->startTime) * (double)animation->framerate * frame_descriptor->framerate) % animation->frames;
 	I32 sprite_int = animation->Sprites[angle*frames+frame].u64;
 	sfSprite* sprite = animation->sprites->sprites[sprite_int];
 
@@ -76,18 +76,50 @@ bbFlag bbDrawFunction_animation(struct bbGraphics* graphics, void* drawable, voi
 }
 
 //Look up default draw function for a given animation
-bbFlag bbDrawfunction_default(struct bbGraphics* graphics, void* drawable, void* frameDescriptor, void* target){
+bbFlag bbDrawfunction_default(struct bbGraphics* graphics, void* drawable, void* frameDescriptor, void* target,  I32 mapTime){
 	bbWidget* widget = drawable;
 	bbFrame* frame_descriptor = frameDescriptor;
 	bbAnimation* animation = graphics->animations->animations[frame_descriptor->handle.u64];
 	I32 drawFunctionInt = animation->drawFunction;
 	bbDrawFunction *drawFunction = graphics->drawfunctions->functions[drawFunctionInt];
-	return drawFunction(graphics, drawable, frameDescriptor, target);
+	return drawFunction(graphics, drawable, frameDescriptor, target, mapTime);
 
 }
 
+bbFlag bbDrawfunction_composition(struct bbGraphics* graphics, void* drawable, void* frameDescriptor, void* target,  I32 mapTime){
+
+	bbFrame* self_frame = frameDescriptor;
+	bbComposition* composition = graphics->compositions->compositions[self_frame->handle.u64];
+	bbFrame* input_frame;
+	bbFrame output_frame;
+	//void* output_object;
+
+	bbDebug("composition->num_frames = %d\n", composition->num_frames);
+	for (int i = 0; i < composition->num_frames; i++){
+		input_frame = &composition->frame[i];
+
+		output_frame.type = input_frame->type;
+		output_frame.handle = input_frame->handle;
+		output_frame.offset.x = input_frame->offset.x + self_frame->offset.x;
+		output_frame.offset.y = input_frame->offset.y + self_frame->offset.y;
+		output_frame.framerate = input_frame->framerate * self_frame->framerate;
+		output_frame.startTime = input_frame->startTime + self_frame->startTime;
+		output_frame.drawfunction = input_frame->drawfunction;
+
+
+		if (output_frame.drawfunction <0 || output_frame.drawfunction> 4){
+			//bbDebug ("drawfunction == %d, type = %d\n",
+			//		 output_frame.drawfunction, output_frame.type);
+		} else {
+
+			bbDrawFunction *drawFunction = graphics->drawfunctions->functions[output_frame.drawfunction];
+			drawFunction(graphics, drawable, &output_frame, target, mapTime);
+		}
+	}
+}
+
 bbFlag bbDrawfunctions_new(bbDrawfunctions** drawfunctions){
-	I32 num = 4;
+	I32 num = 5;
 	bbDrawfunctions* functions = malloc(sizeof(bbDrawfunctions) + num * sizeof(bbDrawFunction));
 	bbDictionary_new(&functions->dictionary, nextPrime(num));
 
@@ -109,6 +141,11 @@ bbFlag bbDrawfunctions_new(bbDrawfunctions** drawfunctions){
 	functions->functions[3] = bbDrawfunction_default;
 	handle.u64 = 3;
 	bbDictionary_add(functions->dictionary, "DEFAULT", handle);
+
+	functions->functions[4] = bbDrawfunction_composition;
+	handle.u64 = 4;
+	bbDictionary_add(functions->dictionary, "COMPOSITION", handle);
+
 
 	*drawfunctions = functions;
 	return Success;

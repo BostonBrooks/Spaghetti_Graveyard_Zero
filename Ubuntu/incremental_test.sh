@@ -14,6 +14,7 @@ if gcc    -I ../\
        ../engine/graphics/bbSprites.c\
        ../engine/graphics/bbDrawfunctions.c\
        ../engine/graphics/bbAnimation.c\
+       ../engine/graphics/bbComposition.c\
        ../engine/logic/bbDictionary.c\
        ../engine/logic/bbTree2.c\
        ../engine/logic/bbVPool.c\

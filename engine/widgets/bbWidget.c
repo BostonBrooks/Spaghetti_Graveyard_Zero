@@ -31,12 +31,12 @@ bbFlag bbWidgets_init(bbWidgets* widgets){
 bbFlag drawFunc(bbTree* tree, void* node, void* cl){
 	targets* tg = cl;
 	bbWidget* widget = node;
-	bbWidget_draw(tg->graphics, widget, tg->target);
+	bbWidget_draw(tg->graphics, widget, tg->target, tg->mapTime);
 
 	return Success;
 }
 
-bbFlag bbWidget_draw(bbGraphics* graphics, bbWidget* widget, void* target){
+bbFlag bbWidget_draw(bbGraphics* graphics, bbWidget* widget, void* target, I32 mapTime){
 	for (I32 i = 0; i < FRAMES_PER_WIDGET; i++){
 		bbFrame* frame = &widget->frames[i];
 
@@ -44,7 +44,7 @@ bbFlag bbWidget_draw(bbGraphics* graphics, bbWidget* widget, void* target){
 		if (frame->drawfunction >= 0) {
 			bbDrawFunction *drawFunction = graphics->drawfunctions->functions[frame->drawfunction];
             //bbDebug("drawfunction = %p\n", drawFunction);
-			drawFunction(graphics, widget, frame, target);
+			drawFunction(graphics, widget, frame, target, mapTime);
             //bbHere();
 		}
 	}
@@ -133,16 +133,22 @@ bbFlag bbWidget_viewportNew(bbWidget** self, bbGraphics* graphics, bbWidgets* wi
 
 	widget->frames[0].offset.x = 0;
 	widget->frames[0].offset.y = 0;
+	widget->frames[0].framerate = 1.0;
+
+	widget->frames[0].type = Sprite;
 
 
-	bbDictionary_lookup(graphics->drawfunctions->dictionary, "DEFAULT", &drawfunctionHandle);
+	bbDictionary_lookup(graphics->drawfunctions->dictionary, "COMPOSITION", &drawfunctionHandle);
 	widget->frames[1].drawfunction = drawfunctionHandle.u64;
-	bbDictionary_lookup(graphics->animations->dictionary,
-						"KITTY", &widget->frames[1].handle);
+	bbDictionary_lookup(graphics->compositions->dictionary,
+						"KITTIESX", &widget->frames[1].handle);
+
 
 	widget->frames[1].offset.x = 150 * SCREEN_PPP;
-	widget->frames[1].offset.y = 200 * SCREEN_PPP;
+	widget->frames[1].offset.y = 100 * SCREEN_PPP;
 	widget->frames[1].startTime = 0;
+	widget->frames[1].framerate = 1.0;
+	widget->frames[1].type = Composition;
 
 	bbDictionary_lookup(graphics->drawfunctions->dictionary, "TEST", &drawfunctionHandle);
 

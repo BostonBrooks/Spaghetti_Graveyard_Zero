@@ -6,7 +6,7 @@
 #include "engine/logic/bbTree.h"
 
 //TODO cleanup global value
-int mapTime;
+
 
 int main (void){
 
@@ -22,7 +22,7 @@ int main (void){
 	bbGraphics graphics;
 	bbTextures_new(&graphics.textures, "./maps/map0/textures.csv");
 
-	bbDictionary_print(graphics.textures->dictionary);
+	//bbDictionary_print(graphics.textures->dictionary);
 //bbHere();
 	bbSprites_new(&graphics.sprites, graphics.textures, "./maps/map0/sprites.csv",1,1,1);
 
@@ -30,11 +30,14 @@ int main (void){
 //bbHere();
 	bbDrawfunctions_new(&graphics.drawfunctions);
 
-	bbDictionary_print(graphics.sprites->dictionary);
+	//bbDictionary_print(graphics.sprites->dictionary);
 //bbHere();
 	bbAnimations_new(&graphics.animations, graphics.sprites, graphics.drawfunctions, "./maps/map0/animations.csv");
 
-	bbDictionary_print(graphics.animations->dictionary);
+	//bbDictionary_print(graphics.animations->dictionary);
+
+	bbCompositions_new(&graphics.compositions, graphics.sprites, graphics.animations, graphics.drawfunctions, "./maps/map0/compositions.csv");
+	//bbDictionary_print(graphics.compositions->dictionary);
 
 
 //bbHere();
@@ -57,9 +60,10 @@ int main (void){
 
 
 //bbHere();
-
+	int mapTime;
 	for (mapTime = 0; ; mapTime++) {
 
+		cl.mapTime = mapTime;
 		descending_map(widgets.tree, layout, drawFunc, &cl);
 		sfRenderWindow_display(window);
 
