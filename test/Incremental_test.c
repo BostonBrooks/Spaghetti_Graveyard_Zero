@@ -54,7 +54,7 @@ int main (void){
 	bbWidget_viewportNew(&viewport, &graphics, &widgets, layout);
 
 //bbHere();
-	targets cl;
+    drawFuncClosure cl;
 	cl.target = window;
 	cl.graphics = &graphics;
 
@@ -64,6 +64,7 @@ int main (void){
 	for (mapTime = 0; ; mapTime++) {
 
 		cl.mapTime = mapTime;
+        cl.GUI_time = mapTime;
 		descending_map(widgets.tree, layout, drawFunc, &cl);
 		sfRenderWindow_display(window);
 

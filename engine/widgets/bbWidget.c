@@ -29,22 +29,22 @@ bbFlag bbWidgets_init(bbWidgets* widgets){
 
 
 bbFlag drawFunc(bbTree* tree, void* node, void* cl){
-	targets* tg = cl;
 	bbWidget* widget = node;
-	bbWidget_draw(tg->graphics, widget, tg->target, tg->mapTime);
+	bbWidget_draw(widget, cl);
 
 	return Success;
 }
 
-bbFlag bbWidget_draw(bbGraphics* graphics, bbWidget* widget, void* target, I32 mapTime){
+bbFlag bbWidget_draw(bbWidget* widget, drawFuncClosure* cl){
 	for (I32 i = 0; i < FRAMES_PER_WIDGET; i++){
 		bbFrame* frame = &widget->frames[i];
 
         //bbDebug("frame->drawfunction = %d\n", frame->drawfunction);
 		if (frame->drawfunction >= 0) {
-			bbDrawFunction *drawFunction = graphics->drawfunctions->functions[frame->drawfunction];
+			bbDrawFunction *drawFunction =
+                    cl->graphics->drawfunctions->functions[frame->drawfunction];
             //bbDebug("drawfunction = %p\n", drawFunction);
-			drawFunction(graphics, widget, frame, target, mapTime);
+			drawFunction(widget, frame, cl);
             //bbHere();
 		}
 	}

@@ -41,6 +41,13 @@ typedef struct {
 	bbTree* tree;
 } bbWidgets;
 
+typedef struct {
+    bbGraphics* graphics;
+    void* target;
+    I32 GUI_time;
+    I32 mapTime;
+} drawFuncClosure;
+
 //typedef bbFlag bbDrawFunction(graphics,void* drawable, void* frameDescriptor, void* target);
 //typedef bbFlag bWidget_DrawFunction(graphics,void* drawable, void* frameDescriptor, void* target);
 typedef bbFlag bbWidget_Constructor (bbWidget** reference, void* widgets, bbScreenPoints screen_coords, bbWidget* parent);
@@ -60,18 +67,12 @@ typedef struct {
 } bbWidgetFunctions;
 
 bbFlag bbWidget_newEmpty(bbWidget** self, bbWidgets* widgets, bbWidget* parent);
-bbFlag bbWidget_draw(bbGraphics* graphics, bbWidget* widget, void* target, I32 mapTime);
+bbFlag bbWidget_draw(bbWidget* widget, drawFuncClosure* cl);
 bbFlag bbWidget_layoutNew(bbWidget** self, bbGraphics* graphics, bbWidgets* widgets, bbWidget* parent);
 bbFlag bbWidgets_init(bbWidgets* widgets);
 
 bbFlag bbWidget_viewportNew(bbWidget** self, bbGraphics* graphics, bbWidgets* widgets, bbWidget* parent);
 
-typedef struct {
-	bbGraphics* graphics;
-	void* target;
-	I32 GUI_time;
-	I32 mapTime;
-} targets;
 bbFlag drawFunc(bbTree* tree, void* node, void* cl);
 
 #endif // BBWIDGET_H

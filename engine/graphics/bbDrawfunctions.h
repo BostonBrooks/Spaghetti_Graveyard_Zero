@@ -6,7 +6,7 @@
 #ifndef BBDRAWFUNCTIONS_H
 #define BBDRAWFUNCTIONS_H
 
-typedef bbFlag bbDrawFunction(struct bbGraphics* graphics, void* drawable, void* frameDescriptor, void* target, I32 mapTime);
+typedef bbFlag bbDrawFunction(void* drawable, void* frameDescriptor, void* cl);
 
 
 typedef struct {

@@ -7,20 +7,21 @@
 #include "engine/widgets/bbWidget.h"
 //extern sfRenderWindow* testWindow;
 
-//TODO cleanup global value
-extern int mapTime;
 
-bbFlag bbDrawFunction_test(struct bbGraphics* graphics, void* drawable, void* frameDescriptor, void* target, I32 mapTime) {
+
+//typedef bbFlag bbDrawFunction(void* drawable, void* frameDescriptor, void* cl);
+bbFlag bbDrawFunction_test(void* drawable, void* frameDescriptor, void* cl) {
 	//bbHere();
 	return Success;
 }
 
 //Draw a sprite belonging to a widget
-bbFlag bbDrawFunction_sprite(struct bbGraphics* graphics, void* drawable, void* frameDescriptor, void* target, I32 mapTime){
+bbFlag bbDrawFunction_sprite(void* drawable, void* frameDescriptor, void* cl){
 	bbWidget* widget = drawable;
 	bbFrame* frame = frameDescriptor;
+    drawFuncClosure* closure = cl;
 	I32 spriteInt = frame->handle.u64;
-	sfSprite* sprite = graphics->sprites->sprites[spriteInt];
+	sfSprite* sprite = closure->graphics->sprites->sprites[spriteInt];
 
 
     //bbDebug("spriteInt = %d, sprite = %p, target = %p, window = %p\n",
@@ -38,19 +39,20 @@ bbFlag bbDrawFunction_sprite(struct bbGraphics* graphics, void* drawable, void* 
     //bbDebug("pos = (%f,%f)\n", pos.x, pos.y);
     //Causes exit when not run in gdb
     //TODO TODO TODO WARNING  - works now?
-	sfRenderWindow_drawSprite(target, sprite, NULL);
+	sfRenderWindow_drawSprite(closure->target, sprite, NULL);
 
 //bbHere();
 	return Success;
 }
 
 // Draw an animation belonging to a widget;
-bbFlag bbDrawFunction_animation(struct bbGraphics* graphics, void* drawable, void* frameDescriptor, void* target,  I32 mapTime){
+bbFlag bbDrawFunction_animation(void* drawable, void* frameDescriptor, void* cl){
 
 	bbWidget* widget = drawable;
 	bbFrame* frame_descriptor = frameDescriptor;
+    drawFuncClosure* closure = cl;
 
-	bbAnimation* animation = graphics->animations->animations[frame_descriptor->handle.u64];
+	bbAnimation* animation = closure->graphics->animations->animations[frame_descriptor->handle.u64];
 
 	I32 angle = 0;
 	I32 frames = animation->frames;
@@ -58,7 +60,8 @@ bbFlag bbDrawFunction_animation(struct bbGraphics* graphics, void* drawable, voi
 
 	//bbDebug("key = %s, maptime = %d, starttime= %d, framerate = %f, frames = %d\n",
 	//		animation->key, mapTime, frame_descriptor->startTime,animation->framerate, animation->frames );
-	I32 frame = (int)((double)(mapTime - frame_descriptor->startTime) * (double)animation->framerate * frame_descriptor->framerate) % animation->frames;
+	I32 frame = (int)((double)(closure->mapTime - frame_descriptor->startTime) *
+            (double)animation->framerate * frame_descriptor->framerate) % animation->frames;
 	I32 sprite_int = animation->Sprites[angle*frames+frame].u64;
 	sfSprite* sprite = animation->sprites->sprites[sprite_int];
 
@@ -70,31 +73,33 @@ bbFlag bbDrawFunction_animation(struct bbGraphics* graphics, void* drawable, voi
 	sfVector2f position = bbScreenPoints_getV2f(SP);
 
 	sfSprite_setPosition(sprite, position);
-	sfRenderWindow_drawSprite(target, sprite, NULL);
+	sfRenderWindow_drawSprite(closure->target, sprite, NULL);
 
 	return Success;
 }
 
 //Look up default draw function for a given animation
-bbFlag bbDrawfunction_default(struct bbGraphics* graphics, void* drawable, void* frameDescriptor, void* target,  I32 mapTime){
+bbFlag bbDrawfunction_default(void* drawable, void* frameDescriptor, void* cl){
 	bbWidget* widget = drawable;
 	bbFrame* frame_descriptor = frameDescriptor;
-	bbAnimation* animation = graphics->animations->animations[frame_descriptor->handle.u64];
+    drawFuncClosure* closure = cl;
+	bbAnimation* animation = closure->graphics->animations->animations[frame_descriptor->handle.u64];
 	I32 drawFunctionInt = animation->drawFunction;
-	bbDrawFunction *drawFunction = graphics->drawfunctions->functions[drawFunctionInt];
-	return drawFunction(graphics, drawable, frameDescriptor, target, mapTime);
+	bbDrawFunction *drawFunction = closure->graphics->drawfunctions->functions[drawFunctionInt];
+	return drawFunction(drawable, frame_descriptor, cl);
 
 }
 
-bbFlag bbDrawfunction_composition(struct bbGraphics* graphics, void* drawable, void* frameDescriptor, void* target,  I32 mapTime){
+bbFlag bbDrawfunction_composition(void* drawable, void* frameDescriptor, void* cl){
 
 	bbFrame* self_frame = frameDescriptor;
-	bbComposition* composition = graphics->compositions->compositions[self_frame->handle.u64];
+    drawFuncClosure* closure = cl;
+	bbComposition* composition = closure->graphics->compositions->compositions[self_frame->handle.u64];
 	bbFrame* input_frame;
 	bbFrame output_frame;
 	//void* output_object;
 
-	bbDebug("composition->num_frames = %d\n", composition->num_frames);
+	//bbDebug("composition->num_frames = %d\n", composition->num_frames);
 	for (int i = 0; i < composition->num_frames; i++){
 		input_frame = &composition->frame[i];
 
@@ -112,8 +117,8 @@ bbFlag bbDrawfunction_composition(struct bbGraphics* graphics, void* drawable, v
 			//		 output_frame.drawfunction, output_frame.type);
 		} else {
 
-			bbDrawFunction *drawFunction = graphics->drawfunctions->functions[output_frame.drawfunction];
-			drawFunction(graphics, drawable, &output_frame, target, mapTime);
+			bbDrawFunction *drawFunction =closure->graphics->drawfunctions->functions[output_frame.drawfunction];
+			drawFunction(drawable, &output_frame, cl);
 		}
 	}
 }
