@@ -1,0 +1,7 @@
+Game Configuration:
+ElevationScale: 32
+MaxPixelValue: 256
+PointsPerPixel: 64
+PixelsPerTile: 16
+TilesPerSquare: 32
+ScreenPointsPerPixel: 8

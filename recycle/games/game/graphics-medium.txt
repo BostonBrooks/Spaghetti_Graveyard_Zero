@@ -1,0 +1,20 @@
+Medium definition settings:
+Width:                      1280
+Height:                     720
+Drawable Scale:             1.0
+Widget Scale:               1.0
+Layout:                     LAYOUT_720
+Viewport.mock:              VIEWPORT_720
+Viewport.top:               21.0
+Viewport.left:              21.0
+Viewport.width:              829.0
+Viewport.height:            678.0
+Spellbar.left:              20.0
+Spellbar.bottom:            700.0
+Text.size:					30.0
+Text.columns:				23
+Text.left:                  881.0
+Dialogue.top:               24.0
+Dialogue.rows:              17
+Query.top:                  494.0
+Input.top:                  606.0
