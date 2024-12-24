@@ -26,7 +26,6 @@
 #include "engine/includes/csfml.h"
 #include "engine/logic/bbDictionary.h"
 #include "engine/graphics/bbTextures.h"
-//#include "recycle/headers/bbMapConstants.h"
 #include "engine/logic/bbIntTypes.h"
 
 typedef struct { //bbSprites
