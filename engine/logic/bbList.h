@@ -23,9 +23,6 @@
  * compare had better return > or < and never ==
  * ie if A < B iff B > A
  *
- *
- * As a rule, try not to move or remove current from list,
- * bbWarning
  */
 #include <stdlib.h>
 #include "engine/logic/bbPoolHandle.h"
