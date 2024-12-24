@@ -8,6 +8,12 @@
 
 typedef bbFlag bbDrawFunction(void* drawable, void* frameDescriptor, void* cl);
 
+typedef struct {
+    void* graphics;
+    void* target;
+    I32 GUI_time;
+    I32 mapTime;
+} drawFuncClosure;
 
 typedef struct {
 	I32 num;

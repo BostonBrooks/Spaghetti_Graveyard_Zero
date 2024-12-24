@@ -41,12 +41,7 @@ typedef struct {
 	bbTree* tree;
 } bbWidgets;
 
-typedef struct {
-    bbGraphics* graphics;
-    void* target;
-    I32 GUI_time;
-    I32 mapTime;
-} drawFuncClosure;
+
 
 //typedef bbFlag bbDrawFunction(graphics,void* drawable, void* frameDescriptor, void* target);
 //typedef bbFlag bWidget_DrawFunction(graphics,void* drawable, void* frameDescriptor, void* target);
