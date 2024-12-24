@@ -34,6 +34,7 @@ typedef enum {
 // a bbFrame contains the data used to draw a sprite, animation or composition
 typedef struct {
 	//handle is usually an integer address of the sprite/animation
+    //TODO do we need this or let drawfunction decide?
 	bbType type;
 	bbPool_Handle handle;
 	//I32 angle - angle supplied in radians by drawable/widget
