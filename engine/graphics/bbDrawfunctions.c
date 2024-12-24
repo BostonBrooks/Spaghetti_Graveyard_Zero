@@ -131,6 +131,7 @@ bbFlag bbDrawfunction_composition(void* drawable, void* frameDescriptor, void* c
 bbFlag bbDrawfunctions_new(bbDrawfunctions** drawfunctions){
 	I32 num = 5;
 	bbDrawfunctions* functions = malloc(sizeof(bbDrawfunctions) + num * sizeof(bbDrawFunction));
+    bbAssert(functions!=NULL, "bad malloc");
 	bbDictionary_new(&functions->dictionary, nextPrime(num));
 
 	functions->num = num;
