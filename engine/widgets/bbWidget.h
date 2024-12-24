@@ -14,6 +14,7 @@
 #include "engine/graphics/bbGraphics.h"
 #include "engine/logic/bbTree.h"
 #include "engine/geometry/bbCoordinates.h"
+#include "engine/user_input/bbMouse.h"
 
 
 
@@ -31,6 +32,8 @@ typedef struct {
 	I32 state;
 
 	void* extra_data;
+
+    bbOnMouse onMouse;
 
 	bbFrame frames[FRAMES_PER_WIDGET];
 

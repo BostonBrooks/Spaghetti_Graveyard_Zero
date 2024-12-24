@@ -15,3 +15,4 @@ bbFlag bbInput_poll(bbInput* input, sfRenderWindow* window);
 
 
 #endif //BBINPUT_H
+

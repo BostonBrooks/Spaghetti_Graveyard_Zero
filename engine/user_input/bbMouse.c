@@ -13,6 +13,7 @@ bbFlag bbMouse_new(bbMouse* mouse, sfRenderWindow* window,bbGraphics* graphics)
     mouse->cursor = graphics->sprites->sprites[4];
 }
 bbFlag bbMouse_update(bbMouse* mouse, sfEvent* event){
+
     switch (event->type){
         case sfEvtMouseMoved:
             mouse->position = pixel_getScreenPoints(event->mouseMove.x,
