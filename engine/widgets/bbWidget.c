@@ -41,8 +41,9 @@ bbFlag bbWidget_draw(bbWidget* widget, drawFuncClosure* cl){
 
         //bbDebug("frame->drawfunction = %d\n", frame->drawfunction);
 		if (frame->drawfunction >= 0) {
+            bbGraphics* graphics = cl->graphics;
 			bbDrawFunction *drawFunction =
-                    cl->graphics->drawfunctions->functions[frame->drawfunction];
+                    graphics->drawfunctions->functions[frame->drawfunction];
             //bbDebug("drawfunction = %p\n", drawFunction);
 			drawFunction(widget, frame, cl);
             //bbHere();

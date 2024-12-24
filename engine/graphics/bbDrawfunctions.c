@@ -20,8 +20,10 @@ bbFlag bbDrawFunction_sprite(void* drawable, void* frameDescriptor, void* cl){
 	bbWidget* widget = drawable;
 	bbFrame* frame = frameDescriptor;
     drawFuncClosure* closure = cl;
+    bbGraphics* graphics = closure->graphics;
+
 	I32 spriteInt = frame->handle.u64;
-	sfSprite* sprite = closure->graphics->sprites->sprites[spriteInt];
+	sfSprite* sprite = graphics->sprites->sprites[spriteInt];
 
 
     //bbDebug("spriteInt = %d, sprite = %p, target = %p, window = %p\n",
@@ -51,8 +53,9 @@ bbFlag bbDrawFunction_animation(void* drawable, void* frameDescriptor, void* cl)
 	bbWidget* widget = drawable;
 	bbFrame* frame_descriptor = frameDescriptor;
     drawFuncClosure* closure = cl;
+    bbGraphics* graphics = closure->graphics;
 
-	bbAnimation* animation = closure->graphics->animations->animations[frame_descriptor->handle.u64];
+	bbAnimation* animation = graphics->animations->animations[frame_descriptor->handle.u64];
 
 	I32 angle = 0;
 	I32 frames = animation->frames;
@@ -83,9 +86,10 @@ bbFlag bbDrawfunction_default(void* drawable, void* frameDescriptor, void* cl){
 	bbWidget* widget = drawable;
 	bbFrame* frame_descriptor = frameDescriptor;
     drawFuncClosure* closure = cl;
-	bbAnimation* animation = closure->graphics->animations->animations[frame_descriptor->handle.u64];
+    bbGraphics* graphics = closure->graphics;
+	bbAnimation* animation = graphics->animations->animations[frame_descriptor->handle.u64];
 	I32 drawFunctionInt = animation->drawFunction;
-	bbDrawFunction *drawFunction = closure->graphics->drawfunctions->functions[drawFunctionInt];
+	bbDrawFunction *drawFunction = graphics->drawfunctions->functions[drawFunctionInt];
 	return drawFunction(drawable, frame_descriptor, cl);
 
 }
@@ -94,7 +98,8 @@ bbFlag bbDrawfunction_composition(void* drawable, void* frameDescriptor, void* c
 
 	bbFrame* self_frame = frameDescriptor;
     drawFuncClosure* closure = cl;
-	bbComposition* composition = closure->graphics->compositions->compositions[self_frame->handle.u64];
+    bbGraphics* graphics = closure->graphics;
+	bbComposition* composition = graphics->compositions->compositions[self_frame->handle.u64];
 	bbFrame* input_frame;
 	bbFrame output_frame;
 	//void* output_object;
@@ -117,7 +122,7 @@ bbFlag bbDrawfunction_composition(void* drawable, void* frameDescriptor, void* c
 			//		 output_frame.drawfunction, output_frame.type);
 		} else {
 
-			bbDrawFunction *drawFunction =closure->graphics->drawfunctions->functions[output_frame.drawfunction];
+			bbDrawFunction *drawFunction =graphics->drawfunctions->functions[output_frame.drawfunction];
 			drawFunction(drawable, &output_frame, cl);
 		}
 	}
