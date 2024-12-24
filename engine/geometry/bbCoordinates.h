@@ -71,4 +71,6 @@ bbFloat3D bbFloat3D_normalise (bbFloat3D foo);
 sfVector2f bbScreenPoints_getV2f(bbScreenPoints SP);
 bbScreenPoints pixel_getScreenPoints(I32 x, I32 y);
 
+I32 bbScreenPoints_inScreenPointsRect(bbScreenPoints SP, bbScreenPointsRect rect);
+
 #endif // BBCOORDINATES_H
