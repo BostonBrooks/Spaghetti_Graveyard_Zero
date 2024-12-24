@@ -15,8 +15,6 @@ add_executable(myprogram
         engine/logic/bbLeanPool.c
         engine/logic/bbLeanPool.h
         engine/logic/bbList.c
-        engine/logic/bbPriorityQueue.c
-        engine/logic/bbPriorityQueue.h
         engine/logic/bbScatter.h
         engine/logic/bbTree.c
         engine/logic/bbTree.h
@@ -54,4 +52,13 @@ add_executable(myprogram
         test/Incremental_test.c
         engine/logic/bbTree2.c
         engine/logic/bbList_map.c
-        engine/widgets/bbWidget.c)
+        engine/widgets/bbWidget.c
+        engine/user_input/bbInput.h
+        engine/user_input/bbInput.c
+        engine/user_input/bbInput.h
+        engine/user_input/bbInput.c
+        engine/user_input/bbMouse.c
+        engine/user_input/bbMouse.c
+        engine/user_input/bbInput.c
+        engine/user_input/bbInput.c
+        engine/user_input/bbInput.c)

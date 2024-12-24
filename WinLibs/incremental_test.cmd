@@ -26,6 +26,8 @@ gcc   -D SFML_STATIC -I ../^
        ../engine/logic/bbLeanPool.c^
        ../engine/widgets/bbWidget.c^
        ../engine/geometry/bbCoordinates.c^
+       ../engine/user_input/bbInput.c^
+       ../engine/user_input/bbMouse.c^
   -lcsfml-system -lcsfml-graphics -lcsfml-window -g -lm -w^
     -o ../games/game0/game.exe
 IF %errorlevel% == 0 (    echo Compile Succeeded:

@@ -4,8 +4,10 @@
 #include "engine/widgets/bbWidget.h"
 #include "engine/logic/bbTerminal.h"
 #include "engine/logic/bbTree.h"
+#include "engine/user_input/bbInput.h"
+#include "engine/user_input/bbMouse.h"
 
-//TODO cleanup global value
+
 
 
 int main (void){
@@ -39,7 +41,11 @@ int main (void){
 	bbCompositions_new(&graphics.compositions, graphics.sprites, graphics.animations, graphics.drawfunctions, "./maps/map0/compositions.csv");
 	//bbDictionary_print(graphics.compositions->dictionary);
 
+    bbMouse mouse;
+    bbMouse_new(&mouse, window, &graphics);
 
+    bbInput input;
+    bbInput_new(&input,window, &mouse);
 //bbHere();
 	bbWidgets widgets;
 	bbWidgets_init(&widgets);
@@ -66,16 +72,17 @@ int main (void){
 		cl.mapTime = mapTime;
         cl.GUI_time = mapTime;
 		descending_map(widgets.tree, layout, drawFunc, &cl);
+        bbMouse_draw(&mouse, window);
 		sfRenderWindow_display(window);
 
-		sfEvent event;
-		sfRenderWindow_pollEvent(window, &event);
-		if (event.type == sfEvtKeyPressed) break;
+        bbFlag flag = bbInput_poll(&input, window);
+        if (flag == Break) break;
 	}
-//bbHere();
 
-	sfRenderWindow_destroy(window);
+    sfRenderWindow_destroy(window);
 
     bbDebug("We made it!\n");
-	exit(EXIT_SUCCESS);
+    exit(EXIT_SUCCESS);
+
+
 }

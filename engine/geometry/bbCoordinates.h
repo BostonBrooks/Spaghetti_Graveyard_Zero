@@ -69,5 +69,6 @@ bbScreenPoints bbMapCoords_getScreenPoints_relative (bbMapCoords A,
 bbFloat3D bbFloat3D_normalise (bbFloat3D foo);
 
 sfVector2f bbScreenPoints_getV2f(bbScreenPoints SP);
+bbScreenPoints pixel_getScreenPoints(I32 x, I32 y);
 
 #endif // BBCOORDINATES_H
