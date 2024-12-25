@@ -12,7 +12,6 @@
 
 #include "engine/logic/bbFlag.h"
 #include "engine/geometry/bbCoordinates.h"
-#include "engine/widgets/bbWidget.h"
 
 
 
