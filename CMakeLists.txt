@@ -63,4 +63,6 @@ add_executable(myprogram
         engine/user_input/bbInput.c
         engine/user_input/bbInput.c
         engine/user_input/bbMouseHandlers.h
-        engine/user_input/bbMouseHandlers.c)
+        engine/user_input/bbMouseHandlers.c
+        engine/2point5D/bbViewport.h
+        engine/2point5D/bbViewport.c)
