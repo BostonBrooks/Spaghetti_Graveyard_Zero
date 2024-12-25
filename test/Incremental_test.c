@@ -1,11 +1,12 @@
 #include <stdio.h>
-#include "engine/includes/csfml.h"
+#include "engine/includes/CSFML.h"
 #include "engine/graphics/bbGraphics.h"
 #include "engine/widgets/bbWidget.h"
 #include "engine/logic/bbTerminal.h"
 #include "engine/logic/bbTree.h"
 #include "engine/user_input/bbInput.h"
 #include "engine/user_input/bbMouse.h"
+#include "engine/2point5D/bbViewport.h"
 
 
 
@@ -56,14 +57,17 @@ int main (void){
 	bbWidget_layoutNew(&layout, &graphics, &widgets, NULL);
 
 //bbHere();
-	bbWidget* viewport;
-	bbWidget_viewportNew(&viewport, &graphics, &widgets, layout);
+	bbWidget* mockViewport;
+    bbWidget_mockViewportNew(&mockViewport, &graphics, &widgets, layout);
 
 //bbHere();
     drawFuncClosure cl;
 	cl.target = window;
 	cl.graphics = &graphics;
 
+    bbViewport* viewport;
+
+    bbViewport_new(&viewport, 456, 466);
 
 //bbHere();
 	int mapTime;
@@ -73,6 +77,9 @@ int main (void){
         cl.GUI_time = mapTime;
 		descending_map(widgets.tree, layout, drawFunc, &cl);
         bbMouse_draw(&mouse, window);
+
+        bbViewport_draw(window, viewport);
+
 		sfRenderWindow_display(window);
 
         bbFlag flag = bbInput_poll(&input, window);
