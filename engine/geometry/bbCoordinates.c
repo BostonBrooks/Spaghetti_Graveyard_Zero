@@ -1,5 +1,5 @@
 #include "engine/geometry/bbCoordinates.h"
-#include "engine/includes/csfml.h"
+#include "engine/includes/CSFML.h"
 
 bbTileCoords bbMapCoords_getTileCoords(bbMapCoords MC){
     bbTileCoords TC;

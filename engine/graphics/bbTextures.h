@@ -15,7 +15,7 @@
 #ifndef BBTEXTURES_H
 #define BBTEXTURES_H
 
-#include "engine/includes/csfml.h"
+#include "engine/includes/CSFML.h"
 #include "engine/logic/bbDictionary.h"
 #include "engine/logic/bbIntTypes.h"
 

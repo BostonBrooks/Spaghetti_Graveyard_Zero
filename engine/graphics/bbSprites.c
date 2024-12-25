@@ -2,7 +2,7 @@
 #include <string.h>
 #include "engine/graphics/bbSprites.h"
 #include "engine/logic/bbIntTypes.h"
-#include "engine/includes/csfml.h"
+#include "engine/includes/CSFML.h"
 #include "engine/logic/bbTerminal.h"
 #include "engine/logic/bbPrime.h"
 #include "engine/logic/bbString.h"

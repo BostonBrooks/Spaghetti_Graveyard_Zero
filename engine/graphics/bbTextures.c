@@ -4,7 +4,7 @@
 #include "engine/graphics/bbTextures.h"
 #include "engine/logic/bbTerminal.h"
 #include "engine/logic/bbPrime.h"
-#include "engine/includes/csfml.h"
+#include "engine/includes/CSFML.h"
 #include "games/game0/bbConstants.h"
 #include "engine/logic/bbPrime.h"
 

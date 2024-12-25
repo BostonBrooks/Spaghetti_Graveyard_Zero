@@ -7,7 +7,7 @@
 #ifndef BBANIMATION_H
 #define BBANIMATION_H
 
-#include "engine/includes/csfml.h"
+#include "engine/includes/CSFML.h"
 #include "engine/graphics/bbSprites.h"
 #include "engine/graphics/bbDrawfunctions.h"
 #include "engine/logic/bbDictionary.h"

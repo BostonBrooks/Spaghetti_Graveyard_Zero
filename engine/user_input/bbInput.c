@@ -1,5 +1,5 @@
 #include "engine/logic/bbFlag.h"
-#include "engine/includes/csfml.h"
+#include "engine/includes/CSFML.h"
 #include "engine/user_input/bbInput.h"
 #include "engine/logic/bbTerminal.h"
 

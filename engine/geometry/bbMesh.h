@@ -9,7 +9,7 @@
 
 #include <stdlib.h>
 #include "engine/includes/game0.h"
-#include "engine/includes/csfml.h"
+#include "engine/includes/CSFML.h"
 #include "engine/logic/bbIntTypes.h"
 #include "engine/logic/bbTerminal.h"
 #include "engine/logic/bbArith.h"

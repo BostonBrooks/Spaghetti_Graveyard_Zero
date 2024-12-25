@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <string.h>
-#include "engine/includes/csfml.h"
+#include "engine/includes/CSFML.h"
 #include "engine/logic/bbString.h"
 #include "engine/logic/bbIntTypes.h"
 #include "engine/logic/bbTerminal.h"

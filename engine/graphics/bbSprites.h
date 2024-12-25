@@ -23,7 +23,7 @@
 #ifndef BBSPRITES_H
 #define BBSPRITES_H
 
-#include "engine/includes/csfml.h"
+#include "engine/includes/CSFML.h"
 #include "engine/logic/bbDictionary.h"
 #include "engine/graphics/bbTextures.h"
 #include "engine/logic/bbIntTypes.h"
