@@ -31,11 +31,11 @@ typedef struct {
 	I32 text_columns;
 	I32 state;
 
+    bbOnMouse onMouse;
+    bbFrame frames[FRAMES_PER_WIDGET];
+
 	void* extra_data;
 
-    bbOnMouse onMouse;
-
-	bbFrame frames[FRAMES_PER_WIDGET];
 
 } bbWidget;
 
@@ -69,8 +69,9 @@ bbFlag bbWidget_draw(bbWidget* widget, drawFuncClosure* cl);
 bbFlag bbWidget_layoutNew(bbWidget** self, bbGraphics* graphics, bbWidgets* widgets, bbWidget* parent);
 bbFlag bbWidgets_init(bbWidgets* widgets);
 
-bbFlag bbWidget_viewportNew(bbWidget** self, bbGraphics* graphics, bbWidgets* widgets, bbWidget* parent);
+bbFlag bbWidget_mockViewportNew(bbWidget** self, bbGraphics* graphics, bbWidgets* widgets, bbWidget* parent);
 
 bbFlag drawFunc(bbTree* tree, void* node, void* cl);
+
 
 #endif // BBWIDGET_H

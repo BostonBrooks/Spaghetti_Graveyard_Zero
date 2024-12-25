@@ -77,17 +77,10 @@ bbFlag bbWidget_layoutNew(bbWidget** self, bbGraphics* graphics, bbWidgets* widg
 	widget->frames[0].offset.y = 0;
 
 
-	widget->frames[1].drawfunction = drawfunctionHandle.u64;
-
-	bbDictionary_lookup(graphics->sprites->dictionary,
-						"SPHERE", &widget->frames[1].handle);
-
-	widget->frames[1].offset.x = 2400;
-	widget->frames[1].offset.y = 1600;
 
 	bbDictionary_lookup(graphics->drawfunctions->dictionary, "TEST", &drawfunctionHandle);
 
-	for (I32 i = 2; i < FRAMES_PER_WIDGET; i++) {
+	for (I32 i = 1; i < FRAMES_PER_WIDGET; i++) {
 	    widget->frames[i].drawfunction = drawfunctionHandle.u64;
 	}
 
@@ -111,7 +104,7 @@ bbFlag bbWidget_newEmpty(bbWidget** self, bbWidgets* widgets, bbWidget* parent){
 	return Success;
 }
 
-bbFlag bbWidget_viewportNew(bbWidget** self, bbGraphics* graphics, bbWidgets* widgets, bbWidget* parent){
+bbFlag bbWidget_mockViewportNew(bbWidget** self, bbGraphics* graphics, bbWidgets* widgets, bbWidget* parent){
 	bbWidget* widget;
 
 	bbWidget_newEmpty(&widget, widgets, parent);
@@ -138,25 +131,9 @@ bbFlag bbWidget_viewportNew(bbWidget** self, bbGraphics* graphics, bbWidgets* wi
 
 	widget->frames[0].type = Sprite;
 
-
-	bbDictionary_lookup(graphics->drawfunctions->dictionary, "COMPOSITION", &drawfunctionHandle);
-	widget->frames[1].drawfunction = drawfunctionHandle.u64;
-	bbDictionary_lookup(graphics->compositions->dictionary,
-						"KITTIESX", &widget->frames[1].handle);
-
-
-	widget->frames[1].offset.x = 150 * SCREEN_PPP;
-	widget->frames[1].offset.y = 100 * SCREEN_PPP;
-	widget->frames[1].startTime = 0;
-	widget->frames[1].framerate = 1.0;
-	widget->frames[1].type = Composition;
-
 	bbDictionary_lookup(graphics->drawfunctions->dictionary, "TEST", &drawfunctionHandle);
 
-
-
-
-	for (I32 i = 2; i < FRAMES_PER_WIDGET; i++) {
+	for (I32 i = 1; i < FRAMES_PER_WIDGET; i++) {
 		widget->frames[i].drawfunction = drawfunctionHandle.u64;
 	}
 
