@@ -1,6 +1,6 @@
 
 #include "engine/logic/bbFlag.h"
-#include "engine/includes/csfml.h"
+#include "engine/includes/CSFML.h"
 #include "engine/user_input/bbInput.h"
 #include "engine/user_input/bbMouse.h"
 #include "engine/graphics/bbGraphics.h"
@@ -10,7 +10,7 @@
 bbFlag bbMouse_new(bbMouse* mouse, sfRenderWindow* window,bbGraphics* graphics)
 {
     sfRenderWindow_setMouseCursorVisible(window, sfFalse);
-    mouse->cursor = graphics->sprites->sprites[4];
+    mouse->cursor = graphics->sprites->sprites[85];
 }
 bbFlag bbMouse_update(bbMouse* mouse, sfEvent* event){
 
