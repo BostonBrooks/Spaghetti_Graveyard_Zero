@@ -51,7 +51,7 @@ bbFlag bbWidget_draw(bbWidget* widget, drawFuncClosure* cl){
 	}
 }
 
-bbFlag bbWidget_layoutNew(bbWidget** self, bbGraphics* graphics, bbWidgets* widgets, bbWidget* parent){
+bbFlag bbWidget_newLayout(bbWidget** self, bbGraphics* graphics, bbWidgets* widgets, bbWidget* parent){
 
 	bbWidget* widget;
 
@@ -104,7 +104,7 @@ bbFlag bbWidget_newEmpty(bbWidget** self, bbWidgets* widgets, bbWidget* parent){
 	return Success;
 }
 
-bbFlag bbWidget_mockViewportNew(bbWidget** self, bbGraphics* graphics, bbWidgets* widgets, bbWidget* parent){
+bbFlag bbWidget_newMockViewport(bbWidget** self, bbGraphics* graphics, bbWidgets* widgets, bbWidget* parent){
 	bbWidget* widget;
 
 	bbWidget_newEmpty(&widget, widgets, parent);
@@ -138,4 +138,33 @@ bbFlag bbWidget_mockViewportNew(bbWidget** self, bbGraphics* graphics, bbWidgets
 	}
 
 	*self = widget;
+}
+
+bbFlag bbWidget_newViewport(bbWidget** self, bbGraphics* graphics,
+                            bbWidgets* widgets, bbWidget* parent,
+                            void* viewport){
+
+    bbWidget* widget;
+    bbWidget_newEmpty(&widget, widgets, parent);
+    widget->extra_data = viewport;
+
+    bbScreenPointsRect rect;
+    rect.left = 12 * POINTS_PER_PIXEL;
+    rect.top = 12 * POINTS_PER_PIXEL;
+    rect.width = 466 * POINTS_PER_PIXEL;
+    rect.height = 456 * POINTS_PER_PIXEL;
+
+    widget->rect = rect;
+
+    bbPool_Handle drawfunctionHandle;
+
+    bbDictionary_lookup(graphics->drawfunctions->dictionary, "VIEWPORT",
+                        &drawfunctionHandle);
+
+    widget->frames[0].drawfunction = drawfunctionHandle.u64;
+
+    bbDictionary_lookup(graphics->drawfunctions->dictionary, "TEST", &drawfunctionHandle);
+    for (I32 i = 1; i < FRAMES_PER_WIDGET; i++) {
+        widget->frames[i].drawfunction = drawfunctionHandle.u64;
+    }
 }

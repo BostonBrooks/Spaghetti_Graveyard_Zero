@@ -54,20 +54,23 @@ int main (void){
 
 //bbHere();
 	bbWidget* layout;
-	bbWidget_layoutNew(&layout, &graphics, &widgets, NULL);
+    bbWidget_newLayout(&layout, &graphics, &widgets, NULL);
 
+
+    bbViewport* viewport;
+    bbViewport_new(&viewport, 456, 466);
+
+    bbViewport_draw(window, viewport);
 //bbHere();
-	bbWidget* mockViewport;
-    bbWidget_mockViewportNew(&mockViewport, &graphics, &widgets, layout);
+	bbWidget* Viewport;
+    bbWidget_newViewport(&Viewport, &graphics, &widgets, layout, viewport);
 
 //bbHere();
     drawFuncClosure cl;
 	cl.target = window;
 	cl.graphics = &graphics;
 
-    bbViewport* viewport;
 
-    bbViewport_new(&viewport, 456, 466);
 
 //bbHere();
 	int mapTime;
@@ -78,7 +81,7 @@ int main (void){
 		descending_map(widgets.tree, layout, drawFunc, &cl);
         bbMouse_draw(&mouse, window);
 
-        bbViewport_draw(window, viewport);
+        //bbViewport_draw(window, viewport);
 
 		sfRenderWindow_display(window);
 

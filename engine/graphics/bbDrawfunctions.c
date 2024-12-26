@@ -5,6 +5,7 @@
 #include "engine/graphics/bbDrawfunctions.h"
 #include "engine/logic/bbTerminal.h"
 #include "engine/widgets/bbWidget.h"
+#include "engine/2point5D/bbViewport.h"
 //extern sfRenderWindow* testWindow;
 
 
@@ -92,6 +93,7 @@ bbFlag bbDrawfunction_default(void* drawable, void* frameDescriptor, void* cl){
 	bbDrawFunction *drawFunction = graphics->drawfunctions->functions[drawFunctionInt];
 	return drawFunction(drawable, frame_descriptor, cl);
 
+
 }
 
 bbFlag bbDrawfunction_composition(void* drawable, void* frameDescriptor, void* cl){
@@ -126,10 +128,28 @@ bbFlag bbDrawfunction_composition(void* drawable, void* frameDescriptor, void* c
 			drawFunction(drawable, &output_frame, cl);
 		}
 	}
+    return Success;
+}
+
+bbFlag bbDrawfunction_viewport(void* drawable, void* frameDescriptor, void* cl){
+    bbWidget* widget = drawable;
+    bbFrame* frame_descriptor = frameDescriptor;
+    drawFuncClosure* closure = cl;
+    bbViewport* viewport = widget->extra_data;
+
+    bbScreenPoints SP;
+    SP.x = widget->rect.left;
+    SP.y = widget->rect.top;
+    sfVector2f pos = bbScreenPoints_getV2f(SP);
+
+    sfSprite_setPosition(viewport->background.sprite, pos);
+
+    bbViewport_draw(closure->target, viewport);
+    return Success;
 }
 
 bbFlag bbDrawfunctions_new(bbDrawfunctions** drawfunctions){
-	I32 num = 5;
+	I32 num = 6;
 	bbDrawfunctions* functions = malloc(sizeof(bbDrawfunctions) + num * sizeof(bbDrawFunction));
     bbAssert(functions!=NULL, "bad malloc");
 	bbDictionary_new(&functions->dictionary, nextPrime(num));
@@ -156,6 +176,10 @@ bbFlag bbDrawfunctions_new(bbDrawfunctions** drawfunctions){
 	functions->functions[4] = bbDrawfunction_composition;
 	handle.u64 = 4;
 	bbDictionary_add(functions->dictionary, "COMPOSITION", handle);
+
+    functions->functions[5] = bbDrawfunction_viewport;
+    handle.u64 = 5;
+    bbDictionary_add(functions->dictionary, "VIEWPORT", handle);
 
 
 	*drawfunctions = functions;

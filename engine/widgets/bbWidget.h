@@ -66,10 +66,13 @@ typedef struct {
 
 bbFlag bbWidget_newEmpty(bbWidget** self, bbWidgets* widgets, bbWidget* parent);
 bbFlag bbWidget_draw(bbWidget* widget, drawFuncClosure* cl);
-bbFlag bbWidget_layoutNew(bbWidget** self, bbGraphics* graphics, bbWidgets* widgets, bbWidget* parent);
+bbFlag bbWidget_newLayout(bbWidget** self, bbGraphics* graphics, bbWidgets* widgets, bbWidget* parent);
 bbFlag bbWidgets_init(bbWidgets* widgets);
 
-bbFlag bbWidget_mockViewportNew(bbWidget** self, bbGraphics* graphics, bbWidgets* widgets, bbWidget* parent);
+bbFlag bbWidget_newMockViewport(bbWidget** self, bbGraphics* graphics, bbWidgets* widgets, bbWidget* parent);
+bbFlag bbWidget_newViewport(bbWidget** self, bbGraphics* graphics,
+                            bbWidgets* widgets, bbWidget* parent,
+                            void* viewport);
 
 bbFlag drawFunc(bbTree* tree, void* node, void* cl);
 
