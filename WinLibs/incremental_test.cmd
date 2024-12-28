@@ -15,6 +15,7 @@ SET PATH=C:\winlibs\mingw64\bin
 gcc   -D SFML_STATIC -I ../^
        ../test/Incremental_test.c^
        ../engine/2point5D/bbViewport.c^
+       ../engine/2point5D/bbMapIcon.c^
        ../engine/graphics/bbTextures.c^
        ../engine/graphics/bbSprites.c^
        ../engine/graphics/bbDrawfunctions.c^
@@ -25,6 +26,10 @@ gcc   -D SFML_STATIC -I ../^
        ../engine/logic/bbVPool.c^
        ../engine/logic/bbBloatedPool.c^
        ../engine/logic/bbLeanPool.c^
+       ../engine/logic/bbList.c^
+       ../engine/logic/bbList_iterate.c^
+       ../engine/logic/bbList_map.c^
+       ../engine/logic/bbList_sort.c^
        ../engine/widgets/bbWidget.c^
        ../engine/geometry/bbCoordinates.c^
        ../engine/user_input/bbInput.c^

@@ -1,12 +1,12 @@
-Number of Textures:,10,,,
-Label:,Integer Address:,File:,Smooth:,Comment:
-NULL,0,./graphics/NULL.png,F,Exception
-LAYOUT_480,1,./graphics/Layout_480.png,F,The root of the widget tree
-LAYOUT_720,2,./graphics/Layout_720.png,F,The root of the widget tree
-LAYOUT_1080,3,./graphics/Layout_1080.png,F,The root of the widget tree
-SPHERE,4,./graphics/Sphere.png,T,A simple asset
-VIEWPORT_480,5,./graphics/Viewport_480.png,F,Window into game world
-VIEWPORT_720,6,./graphics/Viewport_720.png,F,Window into game world
-VIEWPORT_1080,7,./graphics/Viewport_1080.png,F,Window into game world
-KITTY,8,./graphics/Hello_Kitty.png,F,Example of bbAnimation
-GLOVE,9,./graphics/rw-designer/Glove.png,F,Glove cursor
+Number of Textures:,10,,,,
+Label:,Integer Address:,File:,Smooth:,Comment:,
+NULL,0,./graphics/NULL.png,F,Exception,
+LAYOUT_480,1,./graphics/Layout_480.png,F,The root of the widget tree,
+LAYOUT_720,2,./graphics/Layout_720.png,F,The root of the widget tree,
+LAYOUT_1080,3,./graphics/Layout_1080.png,F,The root of the widget tree,
+SPHERE,4,./graphics/Sphere.png,T,A simple asset,
+VIEWPORT_480,5,./graphics/Viewport_480.png,F,Window into game world,
+VIEWPORT_720,6,./graphics/Viewport_720.png,F,Window into game world,
+VIEWPORT_1080,7,./graphics/Viewport_1080.png,F,Window into game world,
+KITTY,8,./graphics/Hello_Kitty.png,F,Example of bbAnimation,
+GLOVE,9,./graphics/rw-designer/Glove.png,F,Glove cursor,end

@@ -6,7 +6,7 @@
 #include "engine/logic/bbTerminal.h"
 #include "engine/widgets/bbWidget.h"
 #include "engine/2point5D/bbViewport.h"
-//extern sfRenderWindow* testWindow;
+extern sfRenderWindow* testWindow;
 
 
 
@@ -24,6 +24,7 @@ bbFlag bbDrawFunction_sprite(void* drawable, void* frameDescriptor, void* cl){
     bbGraphics* graphics = closure->graphics;
 
 	I32 spriteInt = frame->handle.u64;
+    bbDebug("spriteInt %d\n", spriteInt);
 	sfSprite* sprite = graphics->sprites->sprites[spriteInt];
 
 
@@ -35,14 +36,9 @@ bbFlag bbDrawFunction_sprite(void* drawable, void* frameDescriptor, void* cl){
 
 	sfVector2f position = bbScreenPoints_getV2f(SP);
 	sfSprite_setPosition(sprite, position);
-//bbHere();
 
-    //bbAssert(target == testWindow, "wrong target\n"); //target is good
-    sfVector2f pos = sfSprite_getPosition(sprite); //sprite is good
-    //bbDebug("pos = (%f,%f)\n", pos.x, pos.y);
-    //Causes exit when not run in gdb
-    //TODO TODO TODO WARNING  - works now?
-	sfRenderWindow_drawSprite(closure->target, sprite, NULL);
+
+    sfRenderWindow_drawSprite(closure->target, sprite, NULL);
 
 //bbHere();
 	return Success;

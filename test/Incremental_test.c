@@ -7,8 +7,9 @@
 #include "engine/user_input/bbInput.h"
 #include "engine/user_input/bbMouse.h"
 #include "engine/2point5D/bbViewport.h"
+#include "engine/2point5D/bbMapIcon.h"
 
-
+sfRenderWindow* testWindow;
 
 
 int main (void){
@@ -20,8 +21,11 @@ int main (void){
 	mode.width = 720;
 	mode.bitsPerPixel = 32;
 	sfRenderWindow* window = sfRenderWindow_create(mode, "early demo", sfResize | sfClose, NULL);
+    testWindow = window;
 	sfRenderWindow_setFramerateLimit(window, 60);
-//bbHere();
+
+    sfRenderWindow_clear(window, sfGreen);
+    sfRenderWindow_display(window);
 	bbGraphics graphics;
 	bbTextures_new(&graphics.textures, "./maps/map0/textures.csv");
 
@@ -29,11 +33,11 @@ int main (void){
 //bbHere();
 	bbSprites_new(&graphics.sprites, graphics.textures, "./maps/map0/sprites.csv",1,1,1);
 
+    //bbDictionary_print(graphics.sprites->dictionary);
 
 //bbHere();
 	bbDrawfunctions_new(&graphics.drawfunctions);
 
-	//bbDictionary_print(graphics.sprites->dictionary);
 //bbHere();
 	bbAnimations_new(&graphics.animations, graphics.sprites, graphics.drawfunctions, "./maps/map0/animations.csv");
 
@@ -65,17 +69,21 @@ int main (void){
 	bbWidget* Viewport;
     bbWidget_newViewport(&Viewport, &graphics, &widgets, layout, viewport);
 
-//bbHere();
+    bbMapIcons mapIcons;
+    bbMapIcons_new(&mapIcons, 69, 69);
+
+
+bbHere();
     drawFuncClosure cl;
 	cl.target = window;
 	cl.graphics = &graphics;
 
+    sfRenderWindow_clear(cl.target, sfYellow);
+    sfRenderWindow_display(cl.target);
 
-
-//bbHere();
 	int mapTime;
 	for (mapTime = 0; ; mapTime++) {
-
+bbPrintf("mapTime = %d\n", mapTime);
 		cl.mapTime = mapTime;
         cl.GUI_time = mapTime;
 		descending_map(widgets.tree, layout, drawFunc, &cl);

@@ -20,7 +20,7 @@ bbFlag bbViewport_new(bbViewport** viewport, I32 height, I32 width){
     bbRenderable_new(&VP->background, height, width);
     bbRenderable_new(&VP->ground, height, width);
     bbRenderable_new(&VP->main, height, width);
-    bbRenderable_new(&VP->map, height, width);
+    bbRenderable_new(&VP->minimap, height, width);
 
 
     sfRenderTexture_clear(VP->background.renderTexture, sfBlue);
@@ -43,18 +43,18 @@ bbFlag bbViewport_new(bbViewport** viewport, I32 height, I32 width){
         uniform sampler2D Background;\
         uniform sampler2D Ground;\
         uniform sampler2D Main;\
-        uniform sampler2D Map;\
+        uniform sampler2D MiniMap;\
         \
         void main()\
         {\
             vec4 background = texture2D(Background, gl_TexCoord[0].xy);\
             vec4 ground     = texture2D(Ground,     gl_TexCoord[0].xy);\
             vec4 main       = texture2D(Main,       gl_TexCoord[0].xy);\
-            vec4 map        = texture2D(Map,        gl_TexCoord[0].xy);\
+            vec4 minimap    = texture2D(MiniMap,    gl_TexCoord[0].xy);\
         \
-            vec4 mix1 = mix(background, ground, ground.a);\
-            vec4 mix2 = mix(mix1,       main,   main.a  );\
-            vec4 mix3 = mix(mix2,       map,    map.a   );\
+            vec4 mix1 = mix(background, ground,  ground.a);\
+            vec4 mix2 = mix(mix1,       main,    main.a  );\
+            vec4 mix3 = mix(mix2,       minimap, minimap.a   );\
 \
             gl_FragColor =  mix3;\
             \
@@ -71,7 +71,7 @@ bbFlag bbViewport_new(bbViewport** viewport, I32 height, I32 width){
     sfShader_setTextureUniform(VP->shader,"Background", VP->background.texture);
     sfShader_setTextureUniform(VP->shader,"Ground", VP->ground.texture);
     sfShader_setTextureUniform(VP->shader,"Main", VP->main.texture);
-    sfShader_setTextureUniform(VP->shader,"Map", VP->map.texture);
+    sfShader_setTextureUniform(VP->shader,"MiniMap", VP->minimap.texture);
 
     *viewport = VP;
 
@@ -83,7 +83,7 @@ bbFlag bbViewport_draw(sfRenderWindow* window, bbViewport* viewport){
     sfRenderTexture_display(viewport->background.renderTexture);
     sfRenderTexture_display(viewport->ground.renderTexture);
     sfRenderTexture_display(viewport->main.renderTexture);
-    sfRenderTexture_display(viewport->map.renderTexture);
+    sfRenderTexture_display(viewport->minimap.renderTexture);
 
     sfRenderWindow_drawSprite(window, viewport->background.sprite,
                               &viewport->renderStates);

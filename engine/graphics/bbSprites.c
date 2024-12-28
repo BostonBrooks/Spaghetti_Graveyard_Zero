@@ -7,7 +7,7 @@
 #include "engine/logic/bbPrime.h"
 #include "engine/logic/bbString.h"
 
-//extern sfRenderWindow* testWindow;
+extern sfRenderWindow* testWindow;
 
 typedef struct {
 	I32 left;
@@ -52,13 +52,15 @@ bbFlag bbSprite_new(bbSprites* sprites, char* key, I32 address, sfTexture* textu
 
 	bbDictionary_add(sprites->dictionary, key, handle);
 // Test code seems to work
-    //printf("address = %d\n", address);
-    //sfRenderWindow_clear(testWindow, sfBlue);
-    //sfRenderWindow_drawSprite(testWindow, sprite,NULL);
-    //sfRenderWindow_display(testWindow);
-    //sfTime delay = sfMilliseconds(500);
-    //sfSleep(delay);
-
+/*    printf("address = %d\n", address);
+    sfVector2f pos;
+    pos.x = 150;
+    pos.y = 100;
+    sfRenderWindow_clear(testWindow, sfBlue);
+    sfSprite_setPosition(sprite, pos);
+    sfRenderWindow_drawSprite(testWindow, sprite,NULL);
+    sfRenderWindow_display(testWindow);
+*/
 	return Success;
 }
 
@@ -76,7 +78,7 @@ bbFlag bbSprites_new(bbSprites** self, bbTextures* textures, char* filePath,
 
 	sprites->numSprites = num;
     bbDictionary_new(&sprites->dictionary, nextPrime(num));
-    //bbDictionary_new(&sprites->dictionary, 1);
+
 
 
 	fscanf(file, "%*[^\n]\n");

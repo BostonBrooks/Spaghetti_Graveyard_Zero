@@ -127,7 +127,7 @@ bbFlag bbDictionary_lookup(bbDictionary* dict, char* key, bbPool_Handle* value){
 	*value = entry->m_Value;
 
 	if (entry->m_Value.u64 == 5){
-		bbDebug("value = 5 -> key = %s\n", key);
+		//bbDebug("value = 5 -> key = %s\n", key);
 	}
 
 	return Success;

@@ -15,6 +15,7 @@
 #include <stdarg.h>
 #include <assert.h>
 #include <stdlib.h>
+#include <stddef.h>
 #include <signal.h>
 #include "engine/logic/bbIntTypes.h"
 #include "engine/logic/bbString.h"
@@ -43,7 +44,7 @@ static const int stringLength = 512;
             sprintf(string2, __VA_ARGS__);\
 \
             printf("%s%s", string1, string2);                    \
-            raise(SIGABRT);\
+            exit(1);\
         }\
     }
 

@@ -40,13 +40,13 @@ bbFlag bbWidget_draw(bbWidget* widget, drawFuncClosure* cl){
 		bbFrame* frame = &widget->frames[i];
 
         //bbDebug("frame->drawfunction = %d\n", frame->drawfunction);
-		if (frame->drawfunction >= 0) {
+		if (frame->drawfunction >= 0 && frame->drawfunction < 6) {
             bbGraphics* graphics = cl->graphics;
 			bbDrawFunction *drawFunction =
                     graphics->drawfunctions->functions[frame->drawfunction];
-            //bbDebug("drawfunction = %p\n", drawFunction);
+
 			drawFunction(widget, frame, cl);
-            //bbHere();
+            bbHere()
 		}
 	}
 }
@@ -73,15 +73,15 @@ bbFlag bbWidget_newLayout(bbWidget** self, bbGraphics* graphics, bbWidgets* widg
 	bbDictionary_lookup(graphics->sprites->dictionary,
 						"LAYOUT_480", &widget->frames[0].handle);
 
+    //bbDebug("LAYOUT_480 = %d\n", widget->frames[0].handle.u64);
 	widget->frames[0].offset.x = 0;
 	widget->frames[0].offset.y = 0;
 
 
 
-	bbDictionary_lookup(graphics->drawfunctions->dictionary, "TEST", &drawfunctionHandle);
 
 	for (I32 i = 1; i < FRAMES_PER_WIDGET; i++) {
-	    widget->frames[i].drawfunction = drawfunctionHandle.u64;
+	    widget->frames[i].drawfunction = -1;
 	}
 
 	*self = widget;
@@ -131,10 +131,9 @@ bbFlag bbWidget_newMockViewport(bbWidget** self, bbGraphics* graphics, bbWidgets
 
 	widget->frames[0].type = Sprite;
 
-	bbDictionary_lookup(graphics->drawfunctions->dictionary, "TEST", &drawfunctionHandle);
 
 	for (I32 i = 1; i < FRAMES_PER_WIDGET; i++) {
-		widget->frames[i].drawfunction = drawfunctionHandle.u64;
+		widget->frames[i].drawfunction = -1;
 	}
 
 	*self = widget;
@@ -163,8 +162,7 @@ bbFlag bbWidget_newViewport(bbWidget** self, bbGraphics* graphics,
 
     widget->frames[0].drawfunction = drawfunctionHandle.u64;
 
-    bbDictionary_lookup(graphics->drawfunctions->dictionary, "TEST", &drawfunctionHandle);
     for (I32 i = 1; i < FRAMES_PER_WIDGET; i++) {
-        widget->frames[i].drawfunction = drawfunctionHandle.u64;
+        widget->frames[i].drawfunction = -1;
     }
 }
