@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include "engine/includes/CSFML.h"
 #include "engine/graphics/bbGraphics.h"
+#include "engine/graphics/bbColours.h"
 #include "engine/widgets/bbWidget.h"
 #include "engine/logic/bbTerminal.h"
 #include "engine/logic/bbTree.h"
@@ -14,6 +15,7 @@ sfRenderWindow* testWindow;
 
 int main (void){
 
+    bbColours_init();
 
 	printf("Hello World!\n");
 	sfVideoMode mode;
@@ -24,10 +26,12 @@ int main (void){
     testWindow = window;
 	sfRenderWindow_setFramerateLimit(window, 60);
 
-    sfRenderWindow_clear(window, sfGreen);
-    sfRenderWindow_display(window);
+CLEARWINDOW(bbRed);
+
 	bbGraphics graphics;
 	bbTextures_new(&graphics.textures, "./maps/map0/textures.csv");
+
+
 
 	//bbDictionary_print(graphics.textures->dictionary);
 //bbHere();
@@ -35,51 +39,73 @@ int main (void){
 
     //bbDictionary_print(graphics.sprites->dictionary);
 
-//bbHere();
+CLEARWINDOW(bbRedOrange);
+
 	bbDrawfunctions_new(&graphics.drawfunctions);
 
 //bbHere();
+CLEARWINDOW(bbOrange);
+
 	bbAnimations_new(&graphics.animations, graphics.sprites, graphics.drawfunctions, "./maps/map0/animations.csv");
 
 	//bbDictionary_print(graphics.animations->dictionary);
+CLEARWINDOW(bbYellowOrange);
 
 	bbCompositions_new(&graphics.compositions, graphics.sprites, graphics.animations, graphics.drawfunctions, "./maps/map0/compositions.csv");
 	//bbDictionary_print(graphics.compositions->dictionary);
 
+CLEARWINDOW(bbYellow);
+
     bbMouse mouse;
     bbMouse_new(&mouse, window, &graphics);
 
+CLEARWINDOW(bbChartreuse);
+
     bbInput input;
     bbInput_new(&input,window, &mouse);
+
+CLEARWINDOW(bbGreen);
 //bbHere();
 	bbWidgets widgets;
 	bbWidgets_init(&widgets);
 
+CLEARWINDOW(bbTeal);
 
 //bbHere();
 	bbWidget* layout;
     bbWidget_newLayout(&layout, &graphics, &widgets, NULL);
 
+CLEARWINDOW(bbBlue);
 
     bbViewport* viewport;
     bbViewport_new(&viewport, 456, 466);
+    bbAssert(viewport != NULL, "bad bbViewport_new\n");
 
-    bbViewport_draw(window, viewport);
+    //bbViewport_draw(window, viewport);
+    CLEARWINDOW(bbViolet);
+
+
+
+
+
 //bbHere();
 	bbWidget* Viewport;
     bbWidget_newViewport(&Viewport, &graphics, &widgets, layout, viewport);
 
+CLEARWINDOW(bbPurple);
+
     bbMapIcons mapIcons;
-    bbMapIcons_new(&mapIcons, 69, 69);
+    //bbMapIcons_new(&mapIcons, 69, 69);
 
 
-bbHere();
+
     drawFuncClosure cl;
 	cl.target = window;
 	cl.graphics = &graphics;
 
-    sfRenderWindow_clear(cl.target, sfYellow);
-    sfRenderWindow_display(cl.target);
+CLEARWINDOW(bbMagenta);
+
+    bbHere();
 
 	int mapTime;
 	for (mapTime = 0; ; mapTime++) {

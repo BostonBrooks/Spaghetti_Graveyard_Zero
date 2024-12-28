@@ -21,6 +21,7 @@ gcc   -D SFML_STATIC -I ../^
        ../engine/graphics/bbDrawfunctions.c^
        ../engine/graphics/bbAnimation.c^
        ../engine/graphics/bbComposition.c^
+       ../engine/graphics/bbColours.c^
        ../engine/logic/bbDictionary.c^
        ../engine/logic/bbTree2.c^
        ../engine/logic/bbVPool.c^

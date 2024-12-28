@@ -5,10 +5,13 @@ bbFlag bbRenderable_new(bbRenderable* renderable, I32 height, I32 width){
     renderable->renderTexture
     = sfRenderTexture_create(width, height, sfFalse);
     sfRenderTexture_clear(renderable->renderTexture, sfTransparent);
-
+    bbAssert(renderable->renderTexture != NULL, "bad sfml\n");
     renderable->texture = sfRenderTexture_getTexture(renderable->renderTexture);
 
+    bbAssert(renderable->texture != NULL, "bad sfml\n");
     renderable->sprite = sfSprite_create();
+
+    bbAssert(renderable->sprite != NULL, "bad sfml\n");
     sfSprite_setTexture(renderable->sprite, renderable->texture, sfTrue);
 
     return Success;
@@ -16,6 +19,7 @@ bbFlag bbRenderable_new(bbRenderable* renderable, I32 height, I32 width){
 
 bbFlag bbViewport_new(bbViewport** viewport, I32 height, I32 width){
     bbViewport* VP = malloc(sizeof *VP);
+    bbAssert(VP != NULL, "bad malloc\n");
 
     bbRenderable_new(&VP->background, height, width);
     bbRenderable_new(&VP->ground, height, width);

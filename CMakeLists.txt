@@ -67,4 +67,5 @@ add_executable(myprogram
         engine/2point5D/bbViewport.h
         engine/2point5D/bbViewport.c
         engine/2point5D/bbMapIcon.h
-        engine/2point5D/bbMapIcon.c)
+        engine/2point5D/bbMapIcon.c
+        engine/graphics/bbColours.c)
