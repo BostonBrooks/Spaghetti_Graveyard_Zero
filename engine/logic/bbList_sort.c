@@ -361,7 +361,7 @@ bbFlag split(bbList* list, bbPool_List A, bbPool_List* B, bbPool_List* C, I32 nu
 
     //if (num == 3)
     {
-        bbHere();
+//bbHere();
         void* Nth;
         bbFlag flag = getNth(list, A, &Nth, num);
 
@@ -422,7 +422,7 @@ bbFlag split(bbList* list, bbPool_List A, bbPool_List* B, bbPool_List* C, I32 nu
 }
 
 bbFlag sort(bbList* list, bbPool_List* tmpList, I32 len){
-    printf("sort: len = %d\n", len);
+//printf("sort: len = %d\n", len);
     if (len == 1){
         return Success;
     }
@@ -451,9 +451,9 @@ bbFlag sort(bbList* list, bbPool_List* tmpList, I32 len){
 
 
 
-    printf("lenB = %d, len(B) = %d, lenC = %d, len(C) = %d\n",
-           lenB, getLength(list, B),
-           lenC, getLength(list, C));
+//printf("lenB = %d, len(B) = %d, lenC = %d, len(C) = %d\n",
+//       lenB, getLength(list, B),
+//       lenC, getLength(list, C));
 
     sort(list, &B, lenB);
     sort(list, &C, lenC);
@@ -467,7 +467,7 @@ bbFlag sort(bbList* list, bbPool_List* tmpList, I32 len){
 }
 bbFlag bbList_sort(bbList* list) {
     I32 len = bbList_getLength(list);
-    printf("initial len = %d\n", len);
+//printf("initial len = %d\n", len);
     bbPool_List tmpList = *list->listPtr;
     sort(list, &tmpList, len);
     *list->listPtr = tmpList;
