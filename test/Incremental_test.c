@@ -95,7 +95,7 @@ CLEARWINDOW(bbBlue);
 CLEARWINDOW(bbPurple);
 
     bbMapIcons mapIcons;
-    //bbMapIcons_new(&mapIcons, 69, 69);
+    bbMapIcons_new(&mapIcons, 6, 6);
 
 
 
