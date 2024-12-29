@@ -11,11 +11,11 @@
 #define KEY_LENGTH 32
 
 typedef struct {
-    char label[KEY_LENGTH];
     bbMapCoords coords;
+    bbPool_ListElement listElement;
+    char label[KEY_LENGTH];
     sfText* txt;
     I32 sprite;
-    bbPool_ListElement listElement;
 
 } bbMapIcon;
 
