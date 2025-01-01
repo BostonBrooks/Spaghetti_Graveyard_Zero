@@ -74,6 +74,7 @@ int main(void){
 			bbList_pushL(&listBArray[i].listB, element1);
 		}
 		bbList_sort(&listBArray[i].listB);
+        bbList_setHead(&listBArray[i].listB, NULL);
 	}
 
 	// this represents populating a list of visible squares
@@ -91,7 +92,7 @@ int main(void){
 
 	bbList_sort(&listA);
 
-	//this is to check if the lists were populated correctly
+	/* this is to check if the lists were populated correctly
 
 	for (int i = 0; i<16;i++){
 		bbList_popL(&listA, &listB1);
@@ -102,6 +103,8 @@ int main(void){
 			printf("value = %d, i = %d, j = %d\n", element1->value, element1->i, element1->j);
 		}
 	}
+
+    */
 
 
 

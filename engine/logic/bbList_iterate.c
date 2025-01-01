@@ -17,7 +17,9 @@ bbFlag bbList_setHead(bbList* list, void** element){
     list->prev = list->pool->null;
     list->next = list->pool->null;
 
-    bbVPool_lookup(list->pool, element, list->current);
+    if (element!=NULL) {
+        bbVPool_lookup(list->pool, element, list->current);
+    }
     return Success;
 }
 ///point the iterator to the tail of the list
@@ -26,7 +28,9 @@ bbFlag bbList_setTail(bbList* list, void** element){
     list->prev = list->pool->null;
     list->next = list->pool->null;
 
-    bbVPool_lookup(list->pool, element, list->current);
+    if (element!=NULL) {
+        bbVPool_lookup(list->pool, element, list->current);
+    }
     return Success;
 }
 
