@@ -59,6 +59,7 @@ bbFlag bbList_increment(bbList* list, void** element){
         list->prev = list->pool->null;
         list->next = list->pool->null;
 
+        if (element!=NULL)
         bbVPool_lookup(list->pool, element, list->current);
 
         return Success;
@@ -71,6 +72,7 @@ bbFlag bbList_increment(bbList* list, void** element){
     list->prev = list->pool->null;
     list->next = list->pool->null;
 
+    if (element!=NULL)
     bbVPool_lookup(list->pool, element, list->current);
 
     return Success;
@@ -96,6 +98,7 @@ bbFlag bbList_decrement(bbList* list, void** element){
         list->prev = list->pool->null;
         list->next = list->pool->null;
 
+        if (element!=NULL)
         bbVPool_lookup(list->pool, element, list->current);
 
         return Success;
@@ -108,6 +111,7 @@ bbFlag bbList_decrement(bbList* list, void** element){
     list->prev = list->pool->null;
     list->next = list->pool->null;
 
+    if (element!=NULL)
     bbVPool_lookup(list->pool, element, list->current);
 
     return Success;

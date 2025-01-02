@@ -103,6 +103,7 @@ int main(void){
 
     */
 
+    /*
     while(1){
         bbList_popL(&listA,&listB1);
         element* element1;
@@ -111,6 +112,20 @@ int main(void){
         if(Success == bbList_setHead(&listB1->listB, NULL)) {
             bbList_sortL(&listA, listB1);
         }
+
+    }
+*/
+
+
+    while(1){
+        bbList_popL(&listA,&listB1);
+        element* element1;
+        bbList_getCurrent(&listB1->listB, &element1);
+        printf("value = %d, i = %d, j = %d\n", element1->value, element1->i, element1->j);
+        bbFlag flag = bbList_increment(&listB1->listB, NULL);
+
+        if(flag == Success)
+            bbList_sortL(&listA, listB1);
 
     }
 
