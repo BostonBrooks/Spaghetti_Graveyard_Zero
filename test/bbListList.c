@@ -9,9 +9,6 @@
  */
 
 
-#ifndef BBLISTLIST_H
-#define BBLISTLIST_H
-
 #include "engine/logic/bbList.h"
 #include <stdio.h>
 #include <stddef.h>
@@ -106,8 +103,16 @@ int main(void){
 
     */
 
+    while(1){
+        bbList_popL(&listA,&listB1);
+        element* element1;
+        bbList_popL(&listB1->listB, &element1);
+        printf("value = %d, i = %d, j = %d\n", element1->value, element1->i, element1->j);
+        if(Success == bbList_setHead(&listB1->listB, NULL)) {
+            bbList_sortL(&listA, listB1);
+        }
 
+    }
 
 }
 
-#endif //BBLISTLIST_H

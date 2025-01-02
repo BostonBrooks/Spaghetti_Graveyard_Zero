@@ -13,6 +13,9 @@
 
 ///point the iterator to the head of the list
 bbFlag bbList_setHead(bbList* list, void** element){
+
+    if(isNULL(list->listPtr->head)) return None;
+
     list->current = list->listPtr->head;
     list->prev = list->pool->null;
     list->next = list->pool->null;
@@ -24,6 +27,9 @@ bbFlag bbList_setHead(bbList* list, void** element){
 }
 ///point the iterator to the tail of the list
 bbFlag bbList_setTail(bbList* list, void** element){
+
+    if(isNULL(list->listPtr->tail)) return None;
+
     list->current = list->listPtr->tail;
     list->prev = list->pool->null;
     list->next = list->pool->null;
