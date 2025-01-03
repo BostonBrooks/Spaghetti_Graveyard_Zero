@@ -100,8 +100,11 @@ bbFlag bbList_insertBefore(bbList* list, void* Node, void* Key);
 
 typedef bbFlag bbListFunction(bbList* list, void* node, void* cl);
 /// map function to list, going left-to-right
+bbFlag bbList_mapL(bbList* list, bbListFunction* myFunc, void* cl);
 
 /// map function to list, going right-to-left
 bbFlag bbList_mapR(bbList* list, bbListFunction* myFunc, void* cl);
+
+bbFlag bbList_isEmpty(bbList* list);
 
 

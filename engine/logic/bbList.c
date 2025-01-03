@@ -398,3 +398,8 @@ bbFlag bbList_remove(bbList* list, void* element){
 
     return Success;
 }
+
+bbFlag bbList_isEmpty(bbList* list){
+    if (isNULL(list->listPtr->head)) return 1;
+    return 0;
+}
