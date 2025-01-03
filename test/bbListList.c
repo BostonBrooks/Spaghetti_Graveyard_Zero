@@ -10,6 +10,7 @@
 
 
 #include "engine/logic/bbList.h"
+#include "engine/logic/bbTerminal.h"
 #include <stdio.h>
 #include <stddef.h>
 #include <stdlib.h>
@@ -49,19 +50,20 @@ I32 compare_list(void* one, void* two){
 }
 
 int main(void){
-	printf("playing with a list of lists\n");
+
     bbVPool* poolB;
     bbVPool_newLean(&poolB, sizeof(element), 1000);
     bbVPool* poolA;
     bbVPool_newLean(&poolA, sizeof(listB), 16);
 
 	// this represents populating the map with drawables
+    bbDebug("Creating lists:\n");
 	listB listBArray[16];
-	for (int i=0;i<16;i++){
+	for (int i=0;i<3;i++){
 		bbList_init(&listBArray[i].listB, poolB, NULL, offsetof(element, listElement),compare);
 		element* element1;
 
-		for (int j = 0; j < 8; j++) {
+		for (int j = 0; j < 4; j++) {
 			bbVPool_alloc(poolB, &element1);
 			element1->listElement.prev = poolB->null;
 			element1->listElement.next = poolB->null;
@@ -75,58 +77,66 @@ int main(void){
 	}
 
 	// this represents populating a list of visible squares
+
 	bbList listA;
 	bbList_init(&listA, poolA, NULL, offsetof(listB, listElement),compare_list);
 
 	listB* listB1;
-	for (int i=0;i<16;i++){
-		bbVPool_alloc(poolA, &listB1);
-		listB1->listB = listBArray[i].listB;
-		listB1->listElement.prev = poolA->null;
-		listB1->listElement.next = poolA->null;
-		bbList_pushL(&listA, listB1);
-	}
-
-	bbList_sort(&listA);
-
-	/* this is to check if the lists were populated correctly
-
-	for (int i = 0; i<16;i++){
-		bbList_popL(&listA, &listB1);
-		element* element1;
-		for (int j = 0; j < 1; j++){
-			bbList_popL(&listB1->listB, &element1);
-
-			printf("value = %d, i = %d, j = %d\n", element1->value, element1->i, element1->j);
-		}
-	}
-
-    */
-
-    /*
-    while(1){
-        bbList_popL(&listA,&listB1);
-        element* element1;
-        bbList_popL(&listB1->listB, &element1);
-        printf("value = %d, i = %d, j = %d\n", element1->value, element1->i, element1->j);
-        if(Success == bbList_setHead(&listB1->listB, NULL)) {
-            bbList_sortL(&listA, listB1);
+    for (int n = 0; n < 3; n++){
+        bbDebug("Creating list of lists:\n");
+        for (int i=0;i<3;i++){
+            bbVPool_alloc(poolA, &listB1);
+            listB1->listB = listBArray[i].listB;
+            listB1->listElement.prev = poolA->null;
+            listB1->listElement.next = poolA->null;
+            bbList_pushL(&listA, listB1);
         }
 
-    }
-*/
+        bbList_sort(&listA);
 
+        /* this is to check if the lists were populated correctly
 
-    while(1){
-        bbList_popL(&listA,&listB1);
-        element* element1;
-        bbList_getCurrent(&listB1->listB, &element1);
-        printf("value = %d, i = %d, j = %d\n", element1->value, element1->i, element1->j);
-        bbFlag flag = bbList_increment(&listB1->listB, NULL);
+        for (int i = 0; i<16;i++){
+            bbList_popL(&listA, &listB1);
+            element* element1;
+            for (int j = 0; j < 1; j++){
+                bbList_popL(&listB1->listB, &element1);
 
-        if(flag == Success)
-            bbList_sortL(&listA, listB1);
+                printf("value = %d, i = %d, j = %d\n", element1->value, element1->i, element1->j);
+            }
+        }
 
+        */
+
+        /*
+        while(1){
+            bbList_popL(&listA,&listB1);
+            element* element1;
+            bbList_popL(&listB1->listB, &element1);
+            printf("value = %d, i = %d, j = %d\n", element1->value, element1->i, element1->j);
+            if(Success == bbList_setHead(&listB1->listB, NULL)) {
+                bbList_sortL(&listA, listB1);
+            }
+
+        }
+    */
+
+        bbDebug("Iterating lists\n");
+        while(1) {
+            bbList_popL(&listA, &listB1);
+            element *element1;
+            bbList_getCurrent(&listB1->listB, &element1);
+            printf("value = %d, i = %d, j = %d\n", element1->value, element1->i,
+                   element1->j);
+            bbFlag flag = bbList_increment(&listB1->listB, NULL);
+
+            if (flag == Success) {
+                bbList_sortL(&listA, listB1);
+            } else {
+                bbVPool_free(poolA, listB1);
+                if (bbList_isEmpty(&listA)) break;
+            }
+        }
     }
 
 }
