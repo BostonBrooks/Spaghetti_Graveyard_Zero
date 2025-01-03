@@ -16,6 +16,7 @@ typedef enum {
     Success,
     None,
     Full,
+    Empty,
     Break,
     Repeat,
     Continue,
