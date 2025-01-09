@@ -8,7 +8,7 @@
 #include "engine/user_input/bbInput.h"
 #include "engine/user_input/bbMouse.h"
 #include "engine/2point5D/bbViewport.h"
-#include "engine/2point5D/bbMapIcon.h"
+#include "engine/2point5D/bbOverlay.h"
 
 sfRenderWindow* testWindow;
 
@@ -94,7 +94,7 @@ CLEARWINDOW(bbBlue);
 
 CLEARWINDOW(bbPurple);
 
-    bbMapIcons mapIcons;
+    bbOverLay mapIcons;
     bbMapIcons_new(&mapIcons, 6, 6);
 
 

@@ -18,20 +18,20 @@ typedef struct {
     sfText* txt;
     I32 sprite;
 
-} bbMapIcon;
+} bbOverlayIcon;
 
 typedef struct {
     bbSquareCoords coords;
     bbVPool* pool;
     bbList list;
-} bbMapIconSquare;
+} bbOverlaySquare;
 
 typedef struct {
     I32 squares_i;
     I32 squares_j;
 	sfFont* font;
-    bbMapIconSquare squares[];
-} bbMapIcons;
+    bbOverlaySquare squares[];
+} bbOverLay;
 
 
 bbFlag bbMapIcons_new(void** self, I32 squares_i, I32 squares_j);

@@ -10,18 +10,27 @@ Color_Off='\033[0m'
 
 if gcc    -I ../\
        ../test/Incremental_test.c\
+       ../engine/2point5D/bbViewport.c\
+       ../engine/2point5D/bbOverlay.c\
        ../engine/graphics/bbTextures.c\
        ../engine/graphics/bbSprites.c\
        ../engine/graphics/bbDrawfunctions.c\
        ../engine/graphics/bbAnimation.c\
        ../engine/graphics/bbComposition.c\
+       ../engine/graphics/bbColours.c\
        ../engine/logic/bbDictionary.c\
        ../engine/logic/bbTree2.c\
        ../engine/logic/bbVPool.c\
        ../engine/logic/bbBloatedPool.c\
        ../engine/logic/bbLeanPool.c\
+       ../engine/logic/bbList.c\
+       ../engine/logic/bbList_iterate.c\
+       ../engine/logic/bbList_map.c\
+       ../engine/logic/bbList_sort.c\
        ../engine/widgets/bbWidget.c\
        ../engine/geometry/bbCoordinates.c\
+       ../engine/user_input/bbInput.c\
+       ../engine/user_input/bbMouse.c\
   -lcsfml-system -lcsfml-graphics -lcsfml-window -g -lm -w\
   -o ../games/game0/game.out;
 then

@@ -24,7 +24,7 @@ typedef struct {
 	bbRenderable background;
 	bbRenderable ground;
 	bbRenderable main;
-    bbRenderable minimap;
+    bbRenderable overlay;
 
     sfRenderStates renderStates;
 	sfShader* shader;

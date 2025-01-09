@@ -24,7 +24,7 @@ bbFlag bbViewport_new(bbViewport** viewport, I32 height, I32 width){
     bbRenderable_new(&VP->background, height, width);
     bbRenderable_new(&VP->ground, height, width);
     bbRenderable_new(&VP->main, height, width);
-    bbRenderable_new(&VP->minimap, height, width);
+    bbRenderable_new(&VP->overlay, height, width);
 
 
     sfRenderTexture_clear(VP->background.renderTexture, sfBlue);
@@ -47,18 +47,18 @@ bbFlag bbViewport_new(bbViewport** viewport, I32 height, I32 width){
         uniform sampler2D Background;\
         uniform sampler2D Ground;\
         uniform sampler2D Main;\
-        uniform sampler2D MiniMap;\
+        uniform sampler2D Overlay;\
         \
         void main()\
         {\
             vec4 background = texture2D(Background, gl_TexCoord[0].xy);\
             vec4 ground     = texture2D(Ground,     gl_TexCoord[0].xy);\
             vec4 main       = texture2D(Main,       gl_TexCoord[0].xy);\
-            vec4 minimap    = texture2D(MiniMap,    gl_TexCoord[0].xy);\
+            vec4 overlay    = texture2D(Overlay,    gl_TexCoord[0].xy);\
         \
             vec4 mix1 = mix(background, ground,  ground.a);\
             vec4 mix2 = mix(mix1,       main,    main.a  );\
-            vec4 mix3 = mix(mix2,       minimap, minimap.a   );\
+            vec4 mix3 = mix(mix2,       overlay, overlay.a   );\
 \
             gl_FragColor =  mix3;\
             \
@@ -75,7 +75,7 @@ bbFlag bbViewport_new(bbViewport** viewport, I32 height, I32 width){
     sfShader_setTextureUniform(VP->shader,"Background", VP->background.texture);
     sfShader_setTextureUniform(VP->shader,"Ground", VP->ground.texture);
     sfShader_setTextureUniform(VP->shader,"Main", VP->main.texture);
-    sfShader_setTextureUniform(VP->shader,"MiniMap", VP->minimap.texture);
+    sfShader_setTextureUniform(VP->shader,"Overlay", VP->overlay.texture);
 
     *viewport = VP;
 
@@ -87,7 +87,7 @@ bbFlag bbViewport_draw(sfRenderWindow* window, bbViewport* viewport){
     sfRenderTexture_display(viewport->background.renderTexture);
     sfRenderTexture_display(viewport->ground.renderTexture);
     sfRenderTexture_display(viewport->main.renderTexture);
-    sfRenderTexture_display(viewport->minimap.renderTexture);
+    sfRenderTexture_display(viewport->overlay.renderTexture);
 
     sfRenderWindow_drawSprite(window, viewport->background.sprite,
                               &viewport->renderStates);
