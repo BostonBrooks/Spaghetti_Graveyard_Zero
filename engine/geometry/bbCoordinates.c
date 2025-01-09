@@ -1,5 +1,6 @@
 #include "engine/geometry/bbCoordinates.h"
 #include "engine/includes/CSFML.h"
+#include "engine/includes/game0.h"
 
 bbTileCoords bbMapCoords_getTileCoords(bbMapCoords MC){
     bbTileCoords TC;
@@ -49,6 +50,15 @@ bbFloat3D bbFloat3D_normalise (bbFloat3D foo){
     return foo;
 }
 
+
+bbMapCoords bbSquareCoords_getMapCoords(bbSquareCoords SC){
+	bbMapCoords MC;
+	MC.i = SC.i * POINTS_PER_SQUARE;
+	MC.j = SC.j * POINTS_PER_SQUARE;
+	MC.k = 0;
+
+	return MC;
+}
 
 sfVector2f bbScreenPoints_getV2f(bbScreenPoints SP){
 	sfVector2f V2f;
