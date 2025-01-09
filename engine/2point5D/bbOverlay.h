@@ -9,6 +9,7 @@
 #include "engine/logic/bbFlag.h"
 #include "engine/graphics/bbComposition.h"
 #include "engine/2point5D/bbViewport.h"
+#include "engine/graphics/bbGraphics.h"
 
 #define KEY_LENGTH 32
 
@@ -38,6 +39,6 @@ typedef struct {
 bbFlag bbOverlay_new(void** self, I32 squares_i, I32 squares_j);
 I32 bbOverlayIcon_isCloser(void* one, void* two);
 
-bbFlag bbOverlay_draw(bbOverlay* overlay, bbViewport* viewport);
+bbFlag bbOverlay_draw(bbOverlay* overlay, bbViewport* viewport,  bbGraphics* graphics);
 #endif //MINIMAP_H
 
