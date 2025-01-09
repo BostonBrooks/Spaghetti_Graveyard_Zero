@@ -12,53 +12,28 @@ Structures will be given names like "bbStructName", and will be found in files w
 It may make sense to define a \em namespace containing zero or more than one object.
 These will be defined in files with names like "bbNameSpace.h" and "bbNameSpace.c"
 
-2. Prefixes
-========================
 
-Prefixes will be used to describe the type of data stored in a variable, or defined constant used in lieu of an enum.
-
- - m_ for members of a struct containing data.
- - v_ for vtable indices.
- - i_ for container indices.
- - p_ for private data (such as Self, Prev, Next, InUse and Map for objects in a Pool).
- These should not be modified except through predetermined functions (such as those in bbPool.h) 
- - g_ for globals.
- - f_ for #defined return flags.
- - c_ for #defined commands.
- - a_ for #defined types of class bbActor (finite state machine) to be stored in a variable with v_ prefix.
- - f_Pool for #defined return flags used by bbPool objects
- - void_ for void pointers
- - s_ for #defined states in a state machine
- 
-Some structures, such as those representing vector coordinates, need not use prefixes.
-This makes sense for simple objects that are meant only to be members of more complex objects.
 
 3. Flags
 ========================
 
-As mentioned above, defined constants will be used in lieu of enums.
-Definitions with prefix f_ will be defined as negative integers.
-This is done for flexibility.
-Functions may return a negative f_ value OR a non-negative i_ or v_ value.
-Most functions will return integers like these, and return other data types by reference.
+Most functions return type bbFlag, an enum describing the status of the funciton call, a successful function execution will return 'Success'
 
 4. Virtual Method Tables
 ========================
 
-Consider an object bbDrawable with member v_onDraw.
-
-The function bbDrawable_onDraw(self); will look up the method in a predefined vtable at location v_onDraw and execute it.
+We use a lot of v-tables to store the behaviour of an object using an integer value
 
 5. Fixed Point Mathematics:
 ========================
 
 Floating point mathematics will be avoided where possible.
 Instead fixed point mathematics will be achieved using "conversion factors" with names like:
-m_PointsPerPixel, m_PixelsPerTile, and m_TilesPerSquare found in the bbMapConstants struct.
+Points per pixel, pixels per tile, and tiles per square, for assets being drawn to the viewport and points per pixel for widgets being drawn to the screen.
 
-One exception to this would be setting the scale of a sprite to be drawn to the viewport or screen.
+One exception to this would be setting the scale of a sprite to be drawn to the viewport or screen. Information flows one way from CPU to graphics card, so using floating point values here will not lead to non-determinism in the main program.
 
-The coordinates of such a sprite on-screen will also be a fixed point, with each pixel being divided up into, say, 8 points.
+
 
 6. Member Functions:
 ========================
