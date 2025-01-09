@@ -21,6 +21,7 @@ typedef struct {
 
 
 typedef struct {
+	bbMapCoords viewpoint;
 	bbRenderable background;
 	bbRenderable ground;
 	bbRenderable main;

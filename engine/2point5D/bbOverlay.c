@@ -2,9 +2,9 @@
 #include "engine/logic/bbString.h"
 #include "engine/includes/CSFML.h"
 
-bbFlag bbMapIcons_new(void** self, I32 squares_i, I32 squares_j){
+bbFlag bbOverlay_new(void** self, I32 squares_i, I32 squares_j){
 
-    bbOverLay* mapIcons = malloc(sizeof(bbOverLay)
+    bbOverlay* mapIcons = malloc(sizeof(bbOverlay)
 								 + sizeof(bbOverlaySquare) * squares_i * squares_j);
     bbAssert(mapIcons != NULL, "bad malloc\n");
 
@@ -25,11 +25,11 @@ bbFlag bbMapIcons_new(void** self, I32 squares_i, I32 squares_j){
 			mapSquare->coords.j = j;
 			mapSquare->coords.k = 0;
             mapSquare->pool = pool;
-            bbList_init(&mapSquare->list,
+			bbList_init(&mapSquare->list,
 						pool,
 						NULL,
-                        offsetof(bbOverlayIcon, listElement),
-                        bbMapIcon_compare);
+						offsetof(bbOverlayIcon, listElement),
+						bbOverlayIcon_isCloser);
 
 			bbOverlayIcon* overlayIcon;
 			bbVPool_alloc(pool, &overlayIcon);
@@ -47,9 +47,10 @@ bbFlag bbMapIcons_new(void** self, I32 squares_i, I32 squares_j){
     }
 }
 
+bbFlag bbOverlay_draw(bbOverlay* overlay, bbViewport* viewport);
 
 
-I32 bbMapIcon_compare(void* one, void* two){
+I32 bbOverlayIcon_isCloser(void* one, void* two){
     bbOverlayIcon* iconOne = one;
     bbOverlayIcon* iconTwo = two;
 

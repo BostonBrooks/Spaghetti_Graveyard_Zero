@@ -94,8 +94,8 @@ CLEARWINDOW(bbBlue);
 
 CLEARWINDOW(bbPurple);
 
-    bbOverLay mapIcons;
-    bbMapIcons_new(&mapIcons, 6, 6);
+    bbOverlay mapIcons;
+	bbOverlay_new(&mapIcons, 6, 6);
 
 
 
