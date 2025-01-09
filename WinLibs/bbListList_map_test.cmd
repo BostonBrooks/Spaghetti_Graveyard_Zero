@@ -1,6 +1,6 @@
 SET PATH=C:\winlibs\mingw64\bin
 gcc    -I ../^
-       ../test/bbListList_test.c^
+       ../test/bbListList_map_test.c^
        ../engine/logic/bbListList.c^
       ../engine/logic/bbList.c^
       ../engine/logic/bbList_sort.c^

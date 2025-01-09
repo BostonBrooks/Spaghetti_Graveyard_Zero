@@ -55,13 +55,6 @@ add_executable(myprogram
         engine/widgets/bbWidget.c
         engine/user_input/bbInput.h
         engine/user_input/bbInput.c
-        engine/user_input/bbInput.h
-        engine/user_input/bbInput.c
-        engine/user_input/bbMouse.c
-        engine/user_input/bbMouse.c
-        engine/user_input/bbInput.c
-        engine/user_input/bbInput.c
-        engine/user_input/bbInput.c
         engine/user_input/bbMouseHandlers.h
         engine/user_input/bbMouseHandlers.c
         engine/2point5D/bbViewport.h
@@ -70,4 +63,8 @@ add_executable(myprogram
         engine/2point5D/bbMapIcon.c
         engine/graphics/bbColours.c
         test/bbListList.c
-        test/bbList_pushpop.c)
+        test/bbList_pushpop.c
+        engine/logic/bbListList.h
+        engine/logic/bbListList.c
+        test/bbListList_test.c
+        test/bbListList_map_test.c)
