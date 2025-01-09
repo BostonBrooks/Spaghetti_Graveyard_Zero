@@ -31,17 +31,17 @@ bbFlag bbMapIcons_new(void** self, I32 squares_i, I32 squares_j){
                         offsetof(bbOverlayIcon, listElement),
                         bbMapIcon_compare);
 
-			bbOverlayIcon* mapIcon;
-			bbVPool_alloc(pool, &mapIcon);
-			//mapIcon->coords = bbSquareCoords_getMapCoords(mapSquare->coords);
-			mapIcon->listElement.prev = pool->null;
-			mapIcon->listElement.next = pool->null;
-			bbStr_setStr(mapIcon->label, "An Icon", KEY_LENGTH);
-			mapIcon->txt = sfText_create();
-			sfText_setFont(mapIcon->txt, mapIcons->font);
-			sfText_setString(mapIcon->txt, mapIcon->label);
-			sfText_setCharacterSize(mapIcon->txt, 50);
-			mapIcon->sprite = 4;
+			bbOverlayIcon* overlayIcon;
+			bbVPool_alloc(pool, &overlayIcon);
+			overlayIcon->coords = bbSquareCoords_getMapCoords(mapSquare->coords);
+			overlayIcon->listElement.prev = pool->null;
+			overlayIcon->listElement.next = pool->null;
+			bbStr_setStr(overlayIcon->label, "An Icon", KEY_LENGTH);
+			overlayIcon->txt = sfText_create();
+			sfText_setFont(overlayIcon->txt, mapIcons->font);
+			sfText_setString(overlayIcon->txt, overlayIcon->label);
+			sfText_setCharacterSize(overlayIcon->txt, 50);
+			overlayIcon->sprite = 4;
 
         }
     }
