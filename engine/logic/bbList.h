@@ -24,6 +24,10 @@
  * ie if A < B iff B > A
  *
  */
+
+#ifndef BBLIST_H
+#define BBLIST_H
+
 #include <stdlib.h>
 #include "engine/logic/bbPoolHandle.h"
 #include "engine/logic/bbVPool.h"
@@ -108,3 +112,4 @@ bbFlag bbList_mapR(bbList* list, bbListFunction* myFunc, void* cl);
 bbFlag bbList_isEmpty(bbList* list);
 
 
+#endif //BBLIST_H
