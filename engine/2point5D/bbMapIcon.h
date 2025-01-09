@@ -21,8 +21,7 @@ typedef struct {
 } bbMapIcon;
 
 typedef struct {
-    I32 square_i;
-    I32 square_j;
+    bbSquareCoords coords;
     bbVPool* pool;
     bbList list;
 } bbMapIconSquare;
@@ -30,7 +29,7 @@ typedef struct {
 typedef struct {
     I32 squares_i;
     I32 squares_j;
-
+	sfFont* font;
     bbMapIconSquare squares[];
 } bbMapIcons;
 

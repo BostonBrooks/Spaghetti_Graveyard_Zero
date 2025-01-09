@@ -62,6 +62,11 @@ bbSquareCoords bbMapCoords_getSquareCoords(bbMapCoords MC);
 
 bbSquareCoords bbTileCoords_getSquareCoords(bbTileCoords TC);
 
+bbMapCoords bbSquareCoords_getMapCoords(bbSquareCoords SC);
+
+/// for lack of a better name. position of map icon within viewport
+bbScreenPoints bbMapCoords_getScreenPoints(bbMapCoords MC);
+
 /// get a vector from A to B, as seen on the 2d isometric projection
 bbScreenPoints bbMapCoords_getScreenPoints_relative (bbMapCoords A,
                                                      bbMapCoords B);
