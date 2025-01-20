@@ -29,6 +29,11 @@ typedef struct {
 
     sfRenderStates renderStates;
 	sfShader* shader;
+
+    bbMapCoords viewpoint;
+    int height;
+    int width;
+
 } bbViewport;
 
 bbFlag bbRenderable_new(bbRenderable* renderable, I32 height, I32 width);
