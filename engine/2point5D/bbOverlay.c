@@ -89,7 +89,7 @@ bbFlag print_overlayIcon (void* node, void* cl){
 	bbOverlayIcon* overlayIcon = node;
     drawFuncClosure_overlay* foo = cl;
 	printf("overlay label: %s\n", overlayIcon->label);
-    I32 spriteInt = 4;
+    I32 spriteInt = 8;
 
     bbGraphics* graphics = foo->graphics;
     sfSprite* sprite = graphics->sprites->sprites[spriteInt];
@@ -145,5 +145,5 @@ I32 bbOverlayIcon_isCloser(void* one, void* two){
     I32 foo = iconTwo->coords.i - iconOne->coords.i
               -iconTwo->coords.j + iconOne->coords.j;
 
-    return (foo < 0);
+    return (foo > 0);
 }

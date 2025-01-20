@@ -106,7 +106,7 @@ CLEARWINDOW(bbPurple);
 CLEARWINDOW(bbMagenta);
 
     bbOverlay *overlay;
-    bbOverlay_new(&overlay, 2, 3);
+    bbOverlay_new(&overlay, 7, 9);
 
     bbHere();
 

@@ -33,8 +33,8 @@ bbFlag bbViewport_new(bbViewport** viewport, I32 height, I32 width){
 
     sfRenderTexture_clear(VP->background.renderTexture, sfBlue);
 
-    VP->viewpoint.i = 0;
-    VP->viewpoint.j = 0;
+    VP->viewpoint.i = 10000;
+    VP->viewpoint.j = 10000;
     VP->viewpoint.k = 0;
 
     char vertShader[] = "\
