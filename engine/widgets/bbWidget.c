@@ -46,7 +46,7 @@ bbFlag bbWidget_draw(bbWidget* widget, drawFuncClosure* cl){
                     graphics->drawfunctions->functions[frame->drawfunction];
 
 			drawFunction(widget, frame, cl);
-            bbHere()
+
 		}
 	}
 }

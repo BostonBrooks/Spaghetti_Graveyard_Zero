@@ -105,6 +105,9 @@ CLEARWINDOW(bbPurple);
 
 CLEARWINDOW(bbMagenta);
 
+    bbOverlay *overlay;
+    bbOverlay_new(&overlay, 2, 3);
+
     bbHere();
 
 	int mapTime;
@@ -113,13 +116,13 @@ bbPrintf("mapTime = %d\n", mapTime);
 		cl.mapTime = mapTime;
         cl.GUI_time = mapTime;
 
+        bbOverlay_draw(overlay, viewport, &graphics);
+
 		descending_map(widgets.tree, layout, drawFunc, &cl);
         bbMouse_draw(&mouse, window);
 
-
-
 		sfRenderWindow_display(window);
-
+        bbViewport_clear(viewport);
         bbFlag flag = bbInput_poll(&input, window);
         if (flag == Break) break;
 	}

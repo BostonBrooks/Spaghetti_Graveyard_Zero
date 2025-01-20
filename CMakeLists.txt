@@ -67,4 +67,6 @@ add_executable(myprogram
         engine/logic/bbListList.h
         engine/logic/bbListList.c
         test/bbListList_test.c
-        test/bbListList_map_test.c)
+        test/bbListList_map_test.c
+        engine/2point5D/bbViewportCoords.h
+        test/bbOverlay_test.c)

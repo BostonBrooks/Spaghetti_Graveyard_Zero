@@ -25,6 +25,12 @@ extern sfColor bbViolet;
 extern sfColor bbPurple;
 extern sfColor bbMagenta;
 
+extern sfColor bbWhite;
+extern sfColor bbLight;
+extern sfColor bbGrey;
+extern sfColor bbDark;
+extern sfColor bbBlack;
+
 void bbColours_init(void);
 
 #endif //BBCOLOURS_H

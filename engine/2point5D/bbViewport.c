@@ -1,4 +1,5 @@
 #include "engine/2point5D/bbViewport.h"
+#include "engine/graphics/bbColours.h"
 
 bbFlag bbRenderable_new(bbRenderable* renderable, I32 height, I32 width){
 
@@ -26,10 +27,15 @@ bbFlag bbViewport_new(bbViewport** viewport, I32 height, I32 width){
     bbRenderable_new(&VP->main, height, width);
     bbRenderable_new(&VP->overlay, height, width);
 
+    VP->height = height;
+    VP->width = width;
+
 
     sfRenderTexture_clear(VP->background.renderTexture, sfBlue);
 
-
+    VP->viewpoint.i = 0;
+    VP->viewpoint.j = 0;
+    VP->viewpoint.k = 0;
 
     char vertShader[] = "\
         uniform vec2 offset;\
@@ -95,4 +101,13 @@ bbFlag bbViewport_draw(sfRenderWindow* window, bbViewport* viewport){
                               &viewport->renderStates);
 
     return Success;
+}
+
+
+bbFlag bbViewport_clear(bbViewport* viewport){
+
+    sfRenderTexture_clear(viewport->background.renderTexture, bbDark);
+    sfRenderTexture_clear(viewport->ground.renderTexture, sfTransparent);
+    sfRenderTexture_clear(viewport->main.renderTexture, sfTransparent);
+    sfRenderTexture_clear(viewport->overlay.renderTexture, sfTransparent);
 }

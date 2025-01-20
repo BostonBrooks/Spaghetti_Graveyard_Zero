@@ -13,6 +13,12 @@ sfColor bbViolet;
 sfColor bbPurple;
 sfColor bbMagenta;
 
+sfColor bbWhite;
+sfColor bbLight;
+sfColor bbGrey;
+sfColor bbDark;
+sfColor bbBlack;
+
 
 
 void bbColours_init(void){
@@ -30,4 +36,12 @@ void bbColours_init(void){
     bbPurple = sfColor_fromRGB(109,57, 139);
     bbMagenta = sfColor_fromRGB(197,3, 125);
 
+
+    bbWhite = sfColor_fromRGB(255,255, 255);
+    bbLight = sfColor_fromRGB(192,192, 192);
+    bbGrey = sfColor_fromRGB(128,128, 128);
+    bbDark = sfColor_fromRGB(64,64, 64);
+    bbBlack = sfColor_fromRGB(0,0, 0);
+
 }
+
