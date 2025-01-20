@@ -9,6 +9,14 @@ bbFlag myFunc (bbList* list, void* node, void* cl){
 	return Continue;
 }
 
+typedef struct {
+    void* graphics;
+    void* target;
+    I32 GUI_time;
+    I32 mapTime;
+} drawFuncClosure_overlay;
+
+
 bbFlag bbOverlay_new(void** self, I32 squares_i, I32 squares_j){
 
     bbOverlay* overlay = malloc(sizeof(bbOverlay)
@@ -77,7 +85,9 @@ bbFlag bbOverlay_new(void** self, I32 squares_i, I32 squares_j){
 
 bbFlag print_overlayIcon (void* node, void* cl){
 	bbOverlayIcon* overlayIcon = node;
+    drawFuncClosure_overlay* foo = cl;
 	printf ("label: %s\n", overlayIcon->label);
+
 	return Continue;
 }
 
@@ -96,9 +106,13 @@ bbFlag bbOverlay_draw(bbOverlay* overlay, bbViewport* viewport, bbGraphics* grap
 		}
 
 	}
+    drawFuncClosure_overlay cl;
+    cl.graphics = graphics;
+    cl.target = viewport;
+    cl.mapTime = 696969;
+    cl.GUI_time = 6969696969;
 
-
-	bbListList_map(&list, print_overlayIcon, NULL);
+	bbListList_map(&list, print_overlayIcon, &cl);
 
 
 

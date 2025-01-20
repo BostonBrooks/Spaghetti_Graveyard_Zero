@@ -112,10 +112,11 @@ CLEARWINDOW(bbMagenta);
 bbPrintf("mapTime = %d\n", mapTime);
 		cl.mapTime = mapTime;
         cl.GUI_time = mapTime;
+
 		descending_map(widgets.tree, layout, drawFunc, &cl);
         bbMouse_draw(&mouse, window);
 
-        //bbViewport_draw(window, viewport);
+
 
 		sfRenderWindow_display(window);
 

@@ -29,6 +29,8 @@ bbFlag bbViewport_new(bbViewport** viewport, I32 height, I32 width){
 
     sfRenderTexture_clear(VP->background.renderTexture, sfBlue);
 
+
+
     char vertShader[] = "\
         uniform vec2 offset;\
         void main()\
