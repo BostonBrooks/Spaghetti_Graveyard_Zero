@@ -66,7 +66,7 @@ bbFlag bbViewport_new(bbViewport** viewport, I32 height, I32 width){
         \
             vec4 mix1 = mix(background, ground,  ground.a);\
             vec4 mix2 = mix(mix1,       main,    main.a  );\
-            vec4 mix3 = mix(mix2,       overlay, overlay.a   );\
+            vec4 mix3 = mix(mix2,       overlay, overlay.a / 2.0  );\
 \
             gl_FragColor =  mix3;\
             \
@@ -106,7 +106,7 @@ bbFlag bbViewport_draw(sfRenderWindow* window, bbViewport* viewport){
 
 bbFlag bbViewport_clear(bbViewport* viewport){
 
-    sfRenderTexture_clear(viewport->background.renderTexture, bbDark);
+    sfRenderTexture_clear(viewport->background.renderTexture, bbGreen);
     sfRenderTexture_clear(viewport->ground.renderTexture, sfTransparent);
     sfRenderTexture_clear(viewport->main.renderTexture, sfTransparent);
     sfRenderTexture_clear(viewport->overlay.renderTexture, sfTransparent);
