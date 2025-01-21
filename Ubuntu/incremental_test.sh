@@ -12,6 +12,7 @@ if gcc    -I ../\
        ../test/Incremental_test.c\
        ../engine/2point5D/bbViewport.c\
        ../engine/2point5D/bbOverlay.c\
+       ../engine/2point5D/bbViewportCoords.c\
        ../engine/graphics/bbTextures.c\
        ../engine/graphics/bbSprites.c\
        ../engine/graphics/bbDrawfunctions.c\
@@ -27,6 +28,7 @@ if gcc    -I ../\
        ../engine/logic/bbList_iterate.c\
        ../engine/logic/bbList_map.c\
        ../engine/logic/bbList_sort.c\
+       ../engine/logic/bbListList.c\
        ../engine/widgets/bbWidget.c\
        ../engine/geometry/bbCoordinates.c\
        ../engine/user_input/bbInput.c\
