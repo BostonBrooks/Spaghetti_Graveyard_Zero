@@ -28,3 +28,11 @@ sfVector2f bbMapCoords_getV2f_overlay(bbMapCoords MC, bbViewport* VP){
 
     return V2F;
 }
+
+bbMapCoords V2f_overlay_getMapCoords(sfVector2f V2F, bbViewport* VP){
+	bbMapCoords MC;
+	MC.i = ((V2F.x / 2 + V2F.y - VP->height/2 - VP->width / 4) * POINTS_PER_PIXEL * OVERLAY_SCALE) + VP->viewpoint.i;
+	MC.j = ((V2F.x / 2 - V2F.y + VP->height/2 - VP->width / 4) * POINTS_PER_PIXEL * OVERLAY_SCALE) + VP->viewpoint.j;
+	MC.k = 0;
+	return MC;
+}
