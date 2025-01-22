@@ -140,8 +140,30 @@ bbFlag bbOverlays_draw(bbOverlays* overlays, drawFuncClosure* cl){
     }
 
 
-    bbListList_map(&list, print_overlayIcon, cl);
+    bbListList_map(&list, bbOverlay_drawFunc, cl);
 
     return Success;
 }
 
+///typedef bbFlag bListList_mapFunction(void* node, void* cl);
+bbFlag bbOverlay_drawFunc(void* node, void* cl){
+    bbOverlay_draw(node, cl);
+}
+
+bbFlag bbOverlay_draw(bbOverlay* overlay, drawFuncClosure* cl){
+    for (I32 i = 0; i < FRAMES_PER_OVERLAY; i++){
+        bbFrame* frame = &overlay->frames[i];
+
+        bbDebug("overlay: %s\n", overlay->label);
+        /* TODO: write drawfunction
+         *
+         * if (frame->drawfunction >= 0 && frame->drawfunction < 6) {
+            bbGraphics* graphics = cl->graphics;
+            bbDrawFunction *drawFunction =
+                    graphics->drawfunctions->functions[frame->drawfunction];
+
+            drawFunction(overlay, frame, cl);
+
+        }*/
+    }
+}
