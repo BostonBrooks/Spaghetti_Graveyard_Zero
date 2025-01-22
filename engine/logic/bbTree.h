@@ -36,19 +36,19 @@ bbFlag bbTree_new (bbTree** tree, void* pool, size_t offset);
 
 bbFlag bbTree_init (bbTree* tree, void* pool, size_t offset);
 
-bbFlag bbNode_setEmpty(bbTree* tree, void* element);
+bbFlag bbTreeNode_setEmpty(bbTree* tree, void* element);
 /// add a new node as a daughter node to parent;
-bbFlag bbNode_setParent(bbTree* tree, void* node, void* parent);
+bbFlag bbTreeNode_setParent(bbTree* tree, void* element, void* parent);
 ///recursively search through nodes until myFunc(node, cl); returns f_Break
-bbFlag descending_map(bbTree* tree,
-					  void* root,
-					  bbTreeFunction* myFunc,
-					  void* cl);
+bbFlag bbTree_descendingMap(bbTree* tree,
+                            void* root,
+                            bbTreeFunction* myFunc,
+                            void* cl);
 ///recursively search through nodes until myFunc(node, cl); returns f_Break
-bbFlag ascending_map(bbTree* tree,
-					 void* root,
-					 bbTreeFunction* myFunc,
-					 void* cl);
+bbFlag bbTree_ascendingMap(bbTree* tree,
+                           void* root,
+                           bbTreeFunction* myFunc,
+                           void* cl);
 
 ///recursively search through nodes until myFunc(node, cl); returns f_Break
 bbFlag descending_searchVisible(bbTree* tree,

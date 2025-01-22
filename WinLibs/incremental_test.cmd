@@ -24,7 +24,7 @@ gcc   -D SFML_STATIC -I ../^
        ../engine/graphics/bbComposition.c^
        ../engine/graphics/bbColours.c^
        ../engine/logic/bbDictionary.c^
-       ../engine/logic/bbTree2.c^
+       ../engine/logic/bbTree.c^
        ../engine/logic/bbVPool.c^
        ../engine/logic/bbBloatedPool.c^
        ../engine/logic/bbLeanPool.c^

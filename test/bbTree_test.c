@@ -28,7 +28,7 @@ int main(void){
 
     testStruct* element;
     bbVPool_alloc(pool, &element);
-    bbNode_setEmpty(tree, element);
+    bbTreeNode_setEmpty(tree, element);
     sprintf(element->str, "ROOT ELEMENT");
     bbPool_Handle handle;
     bbVPool_reverseLookup(pool, element, &handle);
@@ -39,26 +39,26 @@ int main(void){
     for (I32 i = 0; i < 3; i++){
         testStruct* elementI;
         bbVPool_alloc(pool, &elementI);
-        bbNode_setEmpty(tree, elementI);
+        bbTreeNode_setEmpty(tree, elementI);
         sprintf(elementI->str, "    i = %d", i);
         printf("    i = %d\n", i);
-        bbNode_setParent(tree, elementI, element);
+        bbTreeNode_setParent(tree, elementI, element);
 
         for (I32 j = 0; j < 4; j++){
             testStruct* elementJ;
             bbVPool_alloc(pool, &elementJ);
-            bbNode_setEmpty(tree, elementJ);
+            bbTreeNode_setEmpty(tree, elementJ);
             sprintf(elementJ->str, "        j = %d", j);
             printf("        j = %d\n", j);
-            bbNode_setParent(tree, elementJ, elementI);
+            bbTreeNode_setParent(tree, elementJ, elementI);
 
             for (I32 k = 0; k < 5; k++){
                 testStruct* elementK;
                 bbVPool_alloc(pool, &elementK);
-                bbNode_setEmpty(tree, elementK);
+                bbTreeNode_setEmpty(tree, elementK);
                 sprintf(elementK->str, "            k = %d", k);
                 printf("            k = %d\n", k);
-                bbNode_setParent(tree, elementK, elementJ);
+                bbTreeNode_setParent(tree, elementK, elementJ);
 
             }
 
@@ -66,9 +66,9 @@ int main(void){
 
     }
     bbPrintf("Descending Tree Map\n");
-	descending_map(tree, element, testFunc, NULL);
+    bbTree_descendingMap(tree, element, testFunc, NULL);
 	bbPrintf("Ascending Tree Map\n");
 
-	ascending_map(tree, element, testFunc, NULL);
+    bbTree_ascendingMap(tree, element, testFunc, NULL);
     exit(EXIT_SUCCESS);
 }

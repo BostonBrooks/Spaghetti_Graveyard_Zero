@@ -50,7 +50,7 @@ add_executable(myprogram
         engine/geometry/bbCoordinates.h
         engine/geometry/bbCoordinates.c
         test/Incremental_test.c
-        engine/logic/bbTree2.c
+        engine/logic/bbTree.c
         engine/logic/bbList_map.c
         engine/widgets/bbWidget.c
         engine/user_input/bbInput.h

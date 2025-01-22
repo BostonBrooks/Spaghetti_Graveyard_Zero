@@ -28,7 +28,7 @@ bbFlag bbWidgets_init(bbWidgets* widgets){
 //TODO - massage bbWidget_draw so it looks like testfunc
 
 
-bbFlag drawFunc(bbTree* tree, void* node, void* cl){
+bbFlag bbWidget_drawFunc(bbTree* tree, void* node, void* cl){
 	bbWidget* widget = node;
 	bbWidget_draw(widget, cl);
 
@@ -94,7 +94,7 @@ bbFlag bbWidget_newEmpty(bbWidget** self, bbWidgets* widgets, bbWidget* parent){
 	if (parent == NULL){
 		widgets->tree->root = widgetHandle;
 	} else {
-		bbNode_setParent(widgets->tree, widget, parent);
+        bbTreeNode_setParent(widgets->tree, widget, parent);
 	}
 
 	for (I32 i = 0; i < FRAMES_PER_WIDGET; i++) {
