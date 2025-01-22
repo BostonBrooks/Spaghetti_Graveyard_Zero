@@ -51,6 +51,8 @@ squares_j){
 			bbOverlay* overlayIcon;
 			bbVPool_alloc(pool, &overlayIcon);
 			overlayIcon->coords = bbSquareCoords_getMapCoords(overlaySquare->coords);
+            overlayIcon->coords.i += rand() % (400 * POINTS_PER_PIXEL);
+            overlayIcon->coords.j += rand() % (400 * POINTS_PER_PIXEL);
 
 			overlayIcon->listElement.prev = pool->null;
 			overlayIcon->listElement.next = pool->null;
@@ -73,30 +75,6 @@ squares_j){
             }
 
 			//TODO should be sortL
-			bbList_pushL(&overlaySquare->list, overlayIcon);
-
-
-			bbVPool_alloc(pool, &overlayIcon);
-			overlayIcon->coords = bbSquareCoords_getMapCoords(overlaySquare->coords);
-			overlayIcon->listElement.prev = pool->null;
-			overlayIcon->listElement.next = pool->null;
-			bbStr_setStr(overlayIcon->label, "Another Icon", KEY_LENGTH);
-			overlayIcon->txt = sfText_create();
-			//sfText_setFont(overlayIcon->txt, overlay->font);
-			sfText_setString(overlayIcon->txt, overlayIcon->label);
-			sfText_setCharacterSize(overlayIcon->txt, 50);
-			overlayIcon->sprite = 4;
-			//TODO should be sortL
-
-            bbDictionary_lookup(graphics->drawfunctions->dictionary, "OVERLAY",
-                                &drawfunctionHandle);
-
-            overlayIcon->frames[0].drawfunction = drawfunctionHandle.u64;
-
-            for (I32 k = 1; k < FRAMES_PER_OVERLAY; k++){
-                overlayIcon->frames[k].drawfunction = -1;
-            }
-
 
 			bbList_pushL(&overlaySquare->list, overlayIcon);
 

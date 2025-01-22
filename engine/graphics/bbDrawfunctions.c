@@ -7,6 +7,7 @@
 #include "engine/widgets/bbWidget.h"
 #include "engine/2point5D/bbViewport.h"
 #include "engine/2point5D/bbOverlays.h"
+#include "engine/2point5D/bbViewportCoords.h"
 
 extern sfRenderWindow* testWindow;
 
@@ -150,6 +151,23 @@ bbFlag bbDrawfunction_overlay(void* drawable, void* frameDescriptor, void* cl){
     drawFuncClosure* foo = cl;
 
     bbDebug("overlay label: %s\n", overlay->label);
+    I32 spriteInt = 8;
+
+    bbGraphics* graphics = foo->graphics;
+    sfSprite* sprite = graphics->sprites->sprites[spriteInt];
+
+
+    bbViewport* VP = foo->target;
+
+    sfRenderTexture* renderTexture = VP->overlay.renderTexture;
+
+    sfVector2f V2F = bbMapCoords_getV2f_overlay(overlay->coords, VP);
+
+    bbDebug("V2F.x = %f, V2F.y = %f\n", V2F.x, V2F.y);
+
+
+    sfSprite_setPosition(sprite, V2F);
+    sfRenderTexture_drawSprite(renderTexture, sprite, NULL);
 
     return Success;
 
