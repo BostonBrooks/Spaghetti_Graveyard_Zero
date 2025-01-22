@@ -94,8 +94,7 @@ CLEARWINDOW(bbBlue);
 
 CLEARWINDOW(bbPurple);
 
-    bbOverlays mapIcons;
-    bbOverlays_new(&mapIcons, 6, 6);
+
 
 
 
@@ -105,12 +104,12 @@ CLEARWINDOW(bbPurple);
 CLEARWINDOW(bbMagenta);
 
     bbOverlays *overlays;
-    bbOverlays_new(&overlays, 7, 9);
+    bbOverlays_new(&overlays, &graphics, 7, 9);
 
     bbHere();
 
 	int mapTime;
-	for (mapTime = 0; ; mapTime++) {
+	for (mapTime = 0; mapTime < 180; mapTime++) {
 bbPrintf("mapTime = %d\n", mapTime);
 		cl.mapTime = mapTime;
         cl.GUI_time = mapTime;

@@ -30,9 +30,8 @@ bbFlag bbWidgets_init(bbWidgets* widgets){
 
 bbFlag bbWidget_drawFunc(bbTree* tree, void* node, void* cl){
 	bbWidget* widget = node;
-	bbWidget_draw(widget, cl);
+	return bbWidget_draw(widget, cl);
 
-	return Success;
 }
 
 bbFlag bbWidget_draw(bbWidget* widget, drawFuncClosure* cl){

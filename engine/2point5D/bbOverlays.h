@@ -45,7 +45,8 @@ typedef struct {
 } bbOverlays;
 
 
-bbFlag bbOverlays_new(void** self, I32 squares_i, I32 squares_j);
+bbFlag bbOverlays_new(void** self, bbGraphics* graphics, I32 squares_i, I32
+squares_j);
 I32 bbOverlay_isCloser(void* one, void* two);
 
 bbFlag bbOverlay_drawTest(bbOverlays* overlays, bbViewport* viewport,

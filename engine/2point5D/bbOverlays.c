@@ -13,15 +13,11 @@ bbFlag myFunc (bbList* list, void* node, void* cl){
 	return Continue;
 }
 
-typedef struct {
-    void* graphics;
-    void* target;
-    I32 GUI_time;
-    I32 mapTime;
-} drawFuncClosure_overlay;
 
 
-bbFlag bbOverlays_new(void** self, I32 squares_i, I32 squares_j){
+
+bbFlag bbOverlays_new(void** self, bbGraphics* graphics, I32 squares_i, I32
+squares_j){
 
     bbOverlays* overlay = malloc(sizeof(bbOverlays)
                                  + sizeof(bbOverlaySquare) * squares_i * squares_j);
@@ -64,7 +60,19 @@ bbFlag bbOverlays_new(void** self, I32 squares_i, I32 squares_j){
 			sfText_setString(overlayIcon->txt, overlayIcon->label);
 			sfText_setCharacterSize(overlayIcon->txt, 50);
 			overlayIcon->sprite = 4;
-			//should be sortL
+
+            bbPool_Handle drawfunctionHandle;
+
+            bbDictionary_lookup(graphics->drawfunctions->dictionary, "OVERLAY",
+                                &drawfunctionHandle);
+
+            overlayIcon->frames[0].drawfunction = drawfunctionHandle.u64;
+
+            for (I32 k = 1; k < FRAMES_PER_OVERLAY; k++){
+                overlayIcon->frames[k].drawfunction = -1;
+            }
+
+			//TODO should be sortL
 			bbList_pushL(&overlaySquare->list, overlayIcon);
 
 
@@ -78,7 +86,18 @@ bbFlag bbOverlays_new(void** self, I32 squares_i, I32 squares_j){
 			sfText_setString(overlayIcon->txt, overlayIcon->label);
 			sfText_setCharacterSize(overlayIcon->txt, 50);
 			overlayIcon->sprite = 4;
-			//should be sortL
+			//TODO should be sortL
+
+            bbDictionary_lookup(graphics->drawfunctions->dictionary, "OVERLAY",
+                                &drawfunctionHandle);
+
+            overlayIcon->frames[0].drawfunction = drawfunctionHandle.u64;
+
+            for (I32 k = 1; k < FRAMES_PER_OVERLAY; k++){
+                overlayIcon->frames[k].drawfunction = -1;
+            }
+
+
 			bbList_pushL(&overlaySquare->list, overlayIcon);
 
 			bbList_mapL(&overlaySquare->list, myFunc, NULL);
@@ -90,7 +109,7 @@ bbFlag bbOverlays_new(void** self, I32 squares_i, I32 squares_j){
 
 bbFlag print_overlayIcon (void* node, void* cl){
 	bbOverlay* overlayIcon = node;
-    drawFuncClosure_overlay* foo = cl;
+    drawFuncClosure* foo = cl;
 	printf("overlay label: %s\n", overlayIcon->label);
     I32 spriteInt = 8;
 
@@ -147,23 +166,22 @@ bbFlag bbOverlays_draw(bbOverlays* overlays, drawFuncClosure* cl){
 
 ///typedef bbFlag bListList_mapFunction(void* node, void* cl);
 bbFlag bbOverlay_drawFunc(void* node, void* cl){
-    bbOverlay_draw(node, cl);
+    return bbOverlay_draw(node, cl);
 }
 
 bbFlag bbOverlay_draw(bbOverlay* overlay, drawFuncClosure* cl){
     for (I32 i = 0; i < FRAMES_PER_OVERLAY; i++){
         bbFrame* frame = &overlay->frames[i];
 
-        bbDebug("overlay: %s\n", overlay->label);
-        /* TODO: write drawfunction
-         *
-         * if (frame->drawfunction >= 0 && frame->drawfunction < 6) {
+
+
+        if (frame->drawfunction >= 0 && frame->drawfunction < 7) {
             bbGraphics* graphics = cl->graphics;
             bbDrawFunction *drawFunction =
                     graphics->drawfunctions->functions[frame->drawfunction];
 
             drawFunction(overlay, frame, cl);
 
-        }*/
+        }
     }
 }

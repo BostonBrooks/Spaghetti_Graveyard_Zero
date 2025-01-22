@@ -6,6 +6,8 @@
 #include "engine/logic/bbTerminal.h"
 #include "engine/widgets/bbWidget.h"
 #include "engine/2point5D/bbViewport.h"
+#include "engine/2point5D/bbOverlays.h"
+
 extern sfRenderWindow* testWindow;
 
 
@@ -24,7 +26,6 @@ bbFlag bbDrawFunction_sprite(void* drawable, void* frameDescriptor, void* cl){
     bbGraphics* graphics = closure->graphics;
 
 	I32 spriteInt = frame->handle.u64;
-    bbDebug("spriteInt %d\n", spriteInt);
 	sfSprite* sprite = graphics->sprites->sprites[spriteInt];
 
 
@@ -144,8 +145,18 @@ bbFlag bbDrawfunction_viewport(void* drawable, void* frameDescriptor, void* cl){
     return Success;
 }
 
+bbFlag bbDrawfunction_overlay(void* drawable, void* frameDescriptor, void* cl){
+    bbOverlay* overlay = drawable;
+    drawFuncClosure* foo = cl;
+
+    bbDebug("overlay label: %s\n", overlay->label);
+
+    return Success;
+
+}
+
 bbFlag bbDrawfunctions_new(bbDrawfunctions** drawfunctions){
-	I32 num = 6;
+	I32 num = 7;
 	bbDrawfunctions* functions = malloc(sizeof(bbDrawfunctions) + num * sizeof(bbDrawFunction));
     bbAssert(functions!=NULL, "bad malloc");
 	bbDictionary_new(&functions->dictionary, nextPrime(num));
@@ -177,7 +188,11 @@ bbFlag bbDrawfunctions_new(bbDrawfunctions** drawfunctions){
     handle.u64 = 5;
     bbDictionary_add(functions->dictionary, "VIEWPORT", handle);
 
+    functions->functions[6] = bbDrawfunction_overlay;
+    handle.u64 = 6;
+    bbDictionary_add(functions->dictionary, "OVERLAY", handle);
 
-	*drawfunctions = functions;
+
+    *drawfunctions = functions;
 	return Success;
 }
