@@ -1,12 +1,12 @@
-#include "engine/2point5D/bbOverlay.h"
+#include "engine/2point5D/bbOverlays.h"
 
 
 int main (void){
 
 	bbDebug("Creating overlay:\n");
-	bbOverlay *overlay;
-	bbOverlay_new(&overlay, 2, 3);
+	bbOverlays *overlay;
+    bbOverlays_new(&overlay, 2, 3);
 
 	bbDebug("Outputting overlay:\n");
-	bbOverlay_draw(overlay, NULL, NULL);
+    bbOverlay_drawTest(overlay, NULL, NULL);
 }

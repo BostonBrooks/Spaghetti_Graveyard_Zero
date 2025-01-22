@@ -167,14 +167,11 @@ bbFlag bbWidget_newViewport(bbWidget** self, bbGraphics* graphics,
     }
 }
 
-bbFlag bbWidgets_draw(bbWidgets* widgets,
-                      bbTreeFunction* myFunc,
-                      void* cl)
-{
+bbFlag bbWidgets_draw(bbWidgets* widgets, void* cl) {
 
     bbTree* tree = widgets->tree;
     bbVPool* pool = tree->pool;
     void* root;
     bbVPool_lookup(pool, &root, tree->root);
-    return bbTree_descendingMap(tree, root, myFunc, cl);
+    return bbTree_descendingMap(tree, root, bbWidget_drawFunc, cl);
 }

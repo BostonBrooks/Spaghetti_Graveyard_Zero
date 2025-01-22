@@ -16,12 +16,12 @@ typedef struct {
 } bbListList;
 
 
-typedef bbFlag bbMapFunction(void* node, void* cl);
+typedef bbFlag bListList_mapFunction(void* node, void* cl);
 
 bbFlag bbListList_init(bbListList* listList);
 bbFlag bbListList_attach(bbListList* listList, bbList* list);
 bbFlag bbListList_getNext(bbListList* listList, void** element);
-bbFlag bbListList_map(bbListList* list, bbMapFunction* fn, void* cl);
+bbFlag bbListList_map(bbListList* list, bListList_mapFunction* fn, void* cl);
 
 
 I32 compare_list(void* one, void* two);

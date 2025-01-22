@@ -65,7 +65,7 @@ bbFlag bbListList_getNext(bbListList* listList, void** element){
 }
 
 
-bbFlag bbListList_map(bbListList* list, bbMapFunction* fn, void* cl){
+bbFlag bbListList_map(bbListList* list, bListList_mapFunction* fn, void* cl){
     void* element;
 
     while(1){

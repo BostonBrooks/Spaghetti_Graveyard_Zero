@@ -35,7 +35,7 @@ I32 compare (void* A, void* B){
 }
 
 
-//typedef bbFlag bbMapFunction(void* node, void* cl);
+//typedef bbFlag bListList_mapFunction(void* node, void* cl);
 bbFlag print_element (void* node, void* cl){
     element* element1 = node;
     printf ("values = %d, i = %d, j = %d\n", element1->value, element1->i,

@@ -59,8 +59,8 @@ add_executable(myprogram
         engine/user_input/bbMouseHandlers.c
         engine/2point5D/bbViewport.h
         engine/2point5D/bbViewport.c
-        engine/2point5D/bbOverlay.h
-        engine/2point5D/bbOverlay.c
+        engine/2point5D/bbOverlays.h
+        engine/2point5D/bbOverlays.c
         engine/graphics/bbColours.c
         test/bbListList.c
         test/bbList_pushpop.c

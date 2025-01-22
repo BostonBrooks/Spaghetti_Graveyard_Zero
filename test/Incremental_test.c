@@ -8,7 +8,7 @@
 #include "engine/user_input/bbInput.h"
 #include "engine/user_input/bbMouse.h"
 #include "engine/2point5D/bbViewport.h"
-#include "engine/2point5D/bbOverlay.h"
+#include "engine/2point5D/bbOverlays.h"
 
 sfRenderWindow* testWindow;
 
@@ -94,19 +94,18 @@ CLEARWINDOW(bbBlue);
 
 CLEARWINDOW(bbPurple);
 
-    bbOverlay mapIcons;
-	bbOverlay_new(&mapIcons, 6, 6);
+    bbOverlays mapIcons;
+    bbOverlays_new(&mapIcons, 6, 6);
 
 
 
     drawFuncClosure cl;
-	cl.target = window;
-	cl.graphics = &graphics;
+
 
 CLEARWINDOW(bbMagenta);
 
-    bbOverlay *overlay;
-    bbOverlay_new(&overlay, 7, 9);
+    bbOverlays *overlays;
+    bbOverlays_new(&overlays, 7, 9);
 
     bbHere();
 
@@ -115,10 +114,17 @@ CLEARWINDOW(bbMagenta);
 bbPrintf("mapTime = %d\n", mapTime);
 		cl.mapTime = mapTime;
         cl.GUI_time = mapTime;
+        cl.graphics = &graphics;
 
-        bbOverlay_draw(overlay, viewport, &graphics);
+        cl.target = viewport;
+        //bbOverlay_drawTest(overlays, viewport, &graphics);
 
-        bbWidgets_draw(&widgets, bbWidget_drawFunc, &cl);
+
+        bbOverlays_draw(overlays, &cl);
+
+
+        cl.target = window;
+        bbWidgets_draw(&widgets, &cl);
         bbMouse_draw(&mouse, window);
 
 		sfRenderWindow_display(window);

@@ -14,7 +14,7 @@ echo Attempting to compile:
 SET PATH=C:\winlibs\mingw64\bin
 gcc   -D SFML_STATIC -I ../^
        ../test/bbOverlay_test.c^
-       ../engine/2point5D/bbOverlay.c^
+       ../engine/2point5D/bbOverlays.c^
        ../engine/logic/bbVPool.c^
        ../engine/logic/bbLeanPool.c^
        ../engine/logic/bbBloatedPool.c^

@@ -1,11 +1,14 @@
-#include "engine/2point5D/bbOverlay.h"
+#include "engine/2point5D/bbOverlays.h"
 #include "engine/logic/bbString.h"
 #include "engine/includes/CSFML.h"
 #include "engine/logic/bbListList.h"
 #include "engine/2point5D/bbViewportCoords.h"
 
+extern sfRenderWindow* testWindow;
+
+
 bbFlag myFunc (bbList* list, void* node, void* cl){
-	bbOverlayIcon* overlayIcon = node;
+	bbOverlay* overlayIcon = node;
 	printf ("label = %s\n", overlayIcon->label);
 	return Continue;
 }
@@ -18,15 +21,15 @@ typedef struct {
 } drawFuncClosure_overlay;
 
 
-bbFlag bbOverlay_new(void** self, I32 squares_i, I32 squares_j){
+bbFlag bbOverlays_new(void** self, I32 squares_i, I32 squares_j){
 
-    bbOverlay* overlay = malloc(sizeof(bbOverlay)
-								+ sizeof(bbOverlaySquare) * squares_i * squares_j);
+    bbOverlays* overlay = malloc(sizeof(bbOverlays)
+                                 + sizeof(bbOverlaySquare) * squares_i * squares_j);
     bbAssert(overlay != NULL, "bad malloc\n");
 
     bbVPool* pool;
 
-    bbVPool_newBloated(&pool, sizeof(bbOverlayIcon), 1000, 1000);
+    bbVPool_newBloated(&pool, sizeof(bbOverlay), 1000, 1000);
 
 
 	overlay->squares_i = squares_i;
@@ -43,13 +46,13 @@ bbFlag bbOverlay_new(void** self, I32 squares_i, I32 squares_j){
 			overlaySquare->coords.j = j;
 			overlaySquare->coords.k = 0;
 			overlaySquare->pool = pool;
-			bbList_init(&overlaySquare->list,
-						pool,
-						NULL,
-						offsetof(bbOverlayIcon, listElement),
-						bbOverlayIcon_isCloser);
+            bbList_init(&overlaySquare->list,
+                        pool,
+                        NULL,
+                        offsetof(bbOverlay, listElement),
+                        bbOverlay_isCloser);
 
-			bbOverlayIcon* overlayIcon;
+			bbOverlay* overlayIcon;
 			bbVPool_alloc(pool, &overlayIcon);
 			overlayIcon->coords = bbSquareCoords_getMapCoords(overlaySquare->coords);
 
@@ -86,13 +89,14 @@ bbFlag bbOverlay_new(void** self, I32 squares_i, I32 squares_j){
 }
 
 bbFlag print_overlayIcon (void* node, void* cl){
-	bbOverlayIcon* overlayIcon = node;
+	bbOverlay* overlayIcon = node;
     drawFuncClosure_overlay* foo = cl;
 	printf("overlay label: %s\n", overlayIcon->label);
     I32 spriteInt = 8;
 
     bbGraphics* graphics = foo->graphics;
     sfSprite* sprite = graphics->sprites->sprites[spriteInt];
+
 
     bbViewport* VP = foo->target;
 
@@ -102,48 +106,42 @@ bbFlag print_overlayIcon (void* node, void* cl){
 
     bbDebug("V2F.x = %f, V2F.y = %f\n", V2F.x, V2F.y);
 
+
     sfSprite_setPosition(sprite, V2F);
     sfRenderTexture_drawSprite(renderTexture, sprite, NULL);
 
 	return Continue;
 }
 
-bbFlag bbOverlay_draw(bbOverlay* overlay, bbViewport* viewport, bbGraphics* graphics){
-
-	bbListList list;
-	bbListList_init(&list);
-
-	I32 squares_i = overlay->squares_i;
-	I32 squares_j = overlay->squares_j;
-
-	for (int i = 0; i < squares_i; ++i) {
-		for (int j = 0; j < squares_j; ++j) {
-			I32 n = i + squares_i * j;
-			bbListList_attach(&list, &overlay->squares[n].list);
-		}
-
-	}
-    drawFuncClosure_overlay cl;
-    cl.graphics = graphics;
-    cl.target = viewport;
-    cl.mapTime = 696969;
-    cl.GUI_time = 69696969;
-
-	bbListList_map(&list, print_overlayIcon, &cl);
 
 
-
-
-
-}
-
-
-I32 bbOverlayIcon_isCloser(void* one, void* two){
-    bbOverlayIcon* iconOne = one;
-    bbOverlayIcon* iconTwo = two;
+I32 bbOverlay_isCloser(void* one, void* two){
+    bbOverlay* iconOne = one;
+    bbOverlay* iconTwo = two;
 
     I32 foo = iconTwo->coords.i - iconOne->coords.i
               -iconTwo->coords.j + iconOne->coords.j;
 
     return (foo > 0);
 }
+
+bbFlag bbOverlays_draw(bbOverlays* overlays, drawFuncClosure* cl){
+    bbListList list;
+    bbListList_init(&list);
+    I32 squares_i = overlays->squares_i;
+    I32 squares_j = overlays->squares_j;
+
+    for (int i = 0; i < squares_i; ++i) {
+        for (int j = 0; j < squares_j; ++j) {
+            I32 n = i + squares_i * j;
+            bbListList_attach(&list, &overlays->squares[n].list);
+        }
+
+    }
+
+
+    bbListList_map(&list, print_overlayIcon, cl);
+
+    return Success;
+}
+
