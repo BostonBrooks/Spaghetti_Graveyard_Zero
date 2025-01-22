@@ -118,7 +118,7 @@ bbPrintf("mapTime = %d\n", mapTime);
 
         bbOverlay_draw(overlay, viewport, &graphics);
 
-        bbWidgets_draw(widgets.tree, layout, bbWidget_drawFunc, &cl);
+        bbWidgets_draw(&widgets, bbWidget_drawFunc, &cl);
         bbMouse_draw(&mouse, window);
 
 		sfRenderWindow_display(window);
