@@ -166,3 +166,11 @@ bbFlag bbWidget_newViewport(bbWidget** self, bbGraphics* graphics,
         widget->frames[i].drawfunction = -1;
     }
 }
+
+bbFlag bbWidgets_draw(bbTree* tree,
+                      void* root,
+                      bbTreeFunction* myFunc,
+                      void* cl)
+{
+    return bbTree_descendingMap(tree, root, myFunc, cl);
+}

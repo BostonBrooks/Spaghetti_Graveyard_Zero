@@ -75,6 +75,9 @@ bbFlag bbWidget_newViewport(bbWidget** self, bbGraphics* graphics,
                             void* viewport);
 
 bbFlag bbWidget_drawFunc(bbTree* tree, void* node, void* cl);
-
+bbFlag bbWidgets_draw(bbTree* tree,
+                            void* root,
+                            bbTreeFunction* myFunc,
+                            void* cl);
 
 #endif // BBWIDGET_H
