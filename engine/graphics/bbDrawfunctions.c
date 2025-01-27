@@ -12,15 +12,14 @@
 extern sfRenderWindow* testWindow;
 
 
-
 //typedef bbFlag bbDrawFunction(void* drawable, void* frameDescriptor, void* cl);
-bbFlag bbDrawFunction_test(void* drawable, void* frameDescriptor, void* cl) {
+bbFlag bbDF_test(void* drawable, void* frameDescriptor, void* cl) {
 	//bbHere();
 	return Success;
 }
 
 //Draw a sprite belonging to a widget
-bbFlag bbDrawFunction_sprite(void* drawable, void* frameDescriptor, void* cl){
+bbFlag bbDF_widgetSprite(void* drawable, void* frameDescriptor, void* cl){
 	bbWidget* widget = drawable;
 	bbFrame* frame = frameDescriptor;
     drawFuncClosure* closure = cl;
@@ -47,7 +46,7 @@ bbFlag bbDrawFunction_sprite(void* drawable, void* frameDescriptor, void* cl){
 }
 
 // Draw an animation belonging to a widget;
-bbFlag bbDrawFunction_animation(void* drawable, void* frameDescriptor, void* cl){
+bbFlag bbDF_widgetAnimation(void* drawable, void* frameDescriptor, void* cl){
 
 	bbWidget* widget = drawable;
 	bbFrame* frame_descriptor = frameDescriptor;
@@ -81,7 +80,7 @@ bbFlag bbDrawFunction_animation(void* drawable, void* frameDescriptor, void* cl)
 }
 
 //Look up default draw function for a given animation
-bbFlag bbDrawfunction_default(void* drawable, void* frameDescriptor, void* cl){
+bbFlag bbDF_widgetAnimationDefault(void* drawable, void* frameDescriptor, void* cl){
 	bbWidget* widget = drawable;
 	bbFrame* frame_descriptor = frameDescriptor;
     drawFuncClosure* closure = cl;
@@ -94,7 +93,7 @@ bbFlag bbDrawfunction_default(void* drawable, void* frameDescriptor, void* cl){
 
 }
 
-bbFlag bbDrawfunction_composition(void* drawable, void* frameDescriptor, void* cl){
+bbFlag bbDF_composition(void* drawable, void* frameDescriptor, void* cl){
 
 	bbFrame* self_frame = frameDescriptor;
     drawFuncClosure* closure = cl;
@@ -129,7 +128,9 @@ bbFlag bbDrawfunction_composition(void* drawable, void* frameDescriptor, void* c
     return Success;
 }
 
-bbFlag bbDrawfunction_viewport(void* drawable, void* frameDescriptor, void* cl){
+
+///draw the viewport to the screen
+bbFlag bbDF_widgetViewport(void* drawable, void* frameDescriptor, void* cl){
     bbWidget* widget = drawable;
     bbFrame* frame_descriptor = frameDescriptor;
     drawFuncClosure* closure = cl;
@@ -146,7 +147,7 @@ bbFlag bbDrawfunction_viewport(void* drawable, void* frameDescriptor, void* cl){
     return Success;
 }
 
-bbFlag bbDrawfunction_overlay(void* drawable, void* frameDescriptor, void* cl){
+bbFlag bbDF_overlayTest(void* drawable, void* frameDescriptor, void* cl){
     bbOverlay* overlay = drawable;
     drawFuncClosure* foo = cl;
 
@@ -182,33 +183,33 @@ bbFlag bbDrawfunctions_new(bbDrawfunctions** drawfunctions){
 	functions->num = num;
 	bbPool_Handle handle;
 
-	functions->functions[0] = bbDrawFunction_test;
+	functions->functions[0] = bbDF_test;
 	handle.u64 = 0;
 	bbDictionary_add(functions->dictionary, "TEST", handle);
 
-	functions->functions[1] = bbDrawFunction_sprite;
+	functions->functions[1] = bbDF_widgetSprite;
 	handle.u64 = 1;
-	bbDictionary_add(functions->dictionary, "SPRITE", handle);
+	bbDictionary_add(functions->dictionary, "WIDGETSPRITE", handle);
 
-	functions->functions[2] = bbDrawFunction_animation;
+	functions->functions[2] = bbDF_widgetAnimation;
 	handle.u64 = 2;
-	bbDictionary_add(functions->dictionary, "ANIMATION", handle);
+	bbDictionary_add(functions->dictionary, "WIDGETANIMATION", handle);
 
-	functions->functions[3] = bbDrawfunction_default;
+	functions->functions[3] = bbDF_widgetAnimationDefault;
 	handle.u64 = 3;
 	bbDictionary_add(functions->dictionary, "DEFAULT", handle);
 
-	functions->functions[4] = bbDrawfunction_composition;
+	functions->functions[4] = bbDF_composition;
 	handle.u64 = 4;
 	bbDictionary_add(functions->dictionary, "COMPOSITION", handle);
 
-    functions->functions[5] = bbDrawfunction_viewport;
+    functions->functions[5] = bbDF_widgetViewport;
     handle.u64 = 5;
-    bbDictionary_add(functions->dictionary, "VIEWPORT", handle);
+    bbDictionary_add(functions->dictionary, "WIDGETVIEWPORT", handle);
 
-    functions->functions[6] = bbDrawfunction_overlay;
+    functions->functions[6] = bbDF_overlayTest;
     handle.u64 = 6;
-    bbDictionary_add(functions->dictionary, "OVERLAY", handle);
+    bbDictionary_add(functions->dictionary, "OVERLAYTEST", handle);
 
 
     *drawfunctions = functions;

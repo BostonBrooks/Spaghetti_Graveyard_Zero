@@ -14,7 +14,7 @@
 #include <stdlib.h>
 #include "engine/logic/bbList.h"
 #include "engine/logic/bbTerminal.h"
-#include "engine/logic/bbListList.h"
+#include "engine/logic/bbNestedList.h"
 
 
 typedef struct {
@@ -84,18 +84,18 @@ int main(void){
     }
 
     bbDebug("Creating list of list\n");
-    bbListList listA;
-    bbListList_init(&listA);
+    bbNestedList listA;
+    bbNestedList_init(&listA);
 
     bbDebug("Populating list of list\n");
     for(int i = 0; i < 3; i++){
-        bbListList_attach(&listA, &listArray1[i]);
+        bbNestedList_attach(&listA, &listArray1[i]);
     }
 
     bbDebug("Populating list of list 2: electric boogaloo\n");
 
     for(int i = 0; i < 3; i++){
-        bbListList_attach(&listA, &listArray2[i]);
+        bbNestedList_attach(&listA, &listArray2[i]);
     }
 
 
@@ -103,7 +103,7 @@ int main(void){
 
     while (1){
         element* element1;
-        bbFlag flag = bbListList_getNext(&listA, &element1);
+        bbFlag flag = bbNestedList_getNext(&listA, &element1);
         if (flag != Success) break;
         printf("value = %d, i = %d, j = %d\n",
                element1->value, element1->i, element1->j);

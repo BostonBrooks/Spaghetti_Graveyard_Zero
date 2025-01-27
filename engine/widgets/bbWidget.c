@@ -65,7 +65,7 @@ bbFlag bbWidget_newLayout(bbWidget** self, bbGraphics* graphics, bbWidgets* widg
 	widget->rect = rect;
 
 	bbPool_Handle drawfunctionHandle;
-	bbDictionary_lookup(graphics->drawfunctions->dictionary, "SPRITE", &drawfunctionHandle);
+	bbDictionary_lookup(graphics->drawfunctions->dictionary, "WIDGETSPRITE", &drawfunctionHandle);
 
 	widget->frames[0].drawfunction = drawfunctionHandle.u64;
 
@@ -117,7 +117,7 @@ bbFlag bbWidget_newMockViewport(bbWidget** self, bbGraphics* graphics, bbWidgets
 	widget->rect = rect;
 
 	bbPool_Handle drawfunctionHandle;
-	bbDictionary_lookup(graphics->drawfunctions->dictionary, "SPRITE", &drawfunctionHandle);
+	bbDictionary_lookup(graphics->drawfunctions->dictionary, "WIDGETSPRITE", &drawfunctionHandle);
 
 	widget->frames[0].drawfunction = drawfunctionHandle.u64;
 
@@ -156,7 +156,7 @@ bbFlag bbWidget_newViewport(bbWidget** self, bbGraphics* graphics,
 
     bbPool_Handle drawfunctionHandle;
 
-    bbDictionary_lookup(graphics->drawfunctions->dictionary, "VIEWPORT",
+    bbDictionary_lookup(graphics->drawfunctions->dictionary, "WIDGETVIEWPORT",
                         &drawfunctionHandle);
 
     widget->frames[0].drawfunction = drawfunctionHandle.u64;

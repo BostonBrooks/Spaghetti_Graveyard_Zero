@@ -64,8 +64,8 @@ add_executable(myprogram
         engine/graphics/bbColours.c
         test/bbListList.c
         test/bbList_pushpop.c
-        engine/logic/bbListList.h
-        engine/logic/bbListList.c
+        engine/logic/bbNestedList.h
+        engine/logic/bbNestedList.c
         test/bbListList_test.c
         test/bbListList_map_test.c
         engine/2point5D/bbViewportCoords.h

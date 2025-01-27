@@ -14,7 +14,7 @@
 #include <stdlib.h>
 #include "engine/logic/bbList.h"
 #include "engine/logic/bbTerminal.h"
-#include "engine/logic/bbListList.h"
+#include "engine/logic/bbNestedList.h"
 
 
 typedef struct {
@@ -35,7 +35,7 @@ I32 compare (void* A, void* B){
 }
 
 
-//typedef bbFlag bListList_mapFunction(void* node, void* cl);
+//typedef bbFlag bbNestedList_mapFunction(void* node, void* cl);
 bbFlag print_element (void* node, void* cl){
     element* element1 = node;
     printf ("values = %d, i = %d, j = %d\n", element1->value, element1->i,
@@ -93,24 +93,24 @@ int main(void){
     }
 
     bbDebug("Creating list of list\n");
-    bbListList listA;
-    bbListList_init(&listA);
+    bbNestedList listA;
+    bbNestedList_init(&listA);
 
     bbDebug("Populating list of list\n");
     for(int i = 0; i < 3; i++){
-        bbListList_attach(&listA, &listArray1[i]);
+        bbNestedList_attach(&listA, &listArray1[i]);
     }
 
     bbDebug("Populating list of list 2: electric boogaloo\n");
 
     for(int i = 0; i < 3; i++){
-        bbListList_attach(&listA, &listArray2[i]);
+        bbNestedList_attach(&listA, &listArray2[i]);
     }
 
 
     bbDebug("Iterating list of list\n");
 
-    bbListList_map(&listA, print_element, NULL);
+    bbNestedList_map(&listA, print_element, NULL);
 
     bbDebug("We made it to the end\n");
 }

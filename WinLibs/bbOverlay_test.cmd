@@ -18,7 +18,7 @@ gcc   -D SFML_STATIC -I ../^
        ../engine/logic/bbVPool.c^
        ../engine/logic/bbLeanPool.c^
        ../engine/logic/bbBloatedPool.c^
-       ../engine/logic/bbListList.c^
+       ../engine/logic/bbNestedList.c^
       ../engine/logic/bbList.c^
       ../engine/logic/bbList_sort.c^
       ../engine/logic/bbList_iterate.c^

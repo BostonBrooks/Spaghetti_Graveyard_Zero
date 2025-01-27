@@ -32,7 +32,7 @@ gcc   -D SFML_STATIC -I ../^
        ../engine/logic/bbList_iterate.c^
        ../engine/logic/bbList_map.c^
        ../engine/logic/bbList_sort.c^
-       ../engine/logic/bbListList.c^
+       ../engine/logic/bbNestedList.c^
        ../engine/widgets/bbWidget.c^
        ../engine/geometry/bbCoordinates.c^
        ../engine/user_input/bbInput.c^

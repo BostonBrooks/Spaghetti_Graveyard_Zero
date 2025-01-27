@@ -1,7 +1,7 @@
 #include "engine/2point5D/bbOverlays.h"
 #include "engine/logic/bbString.h"
 #include "engine/includes/CSFML.h"
-#include "engine/logic/bbListList.h"
+#include "engine/logic/bbNestedList.h"
 #include "engine/2point5D/bbViewportCoords.h"
 
 extern sfRenderWindow* testWindow;
@@ -65,7 +65,8 @@ squares_j){
 
             bbPool_Handle drawfunctionHandle;
 
-            bbDictionary_lookup(graphics->drawfunctions->dictionary, "OVERLAY",
+            bbDictionary_lookup(graphics->drawfunctions->dictionary,
+                                "OVERLAYTEST",
                                 &drawfunctionHandle);
 
             overlayIcon->frames[0].drawfunction = drawfunctionHandle.u64;
@@ -123,26 +124,26 @@ I32 bbOverlay_isCloser(void* one, void* two){
 }
 
 bbFlag bbOverlays_draw(bbOverlays* overlays, drawFuncClosure* cl){
-    bbListList list;
-    bbListList_init(&list);
+    bbNestedList list;
+    bbNestedList_init(&list);
     I32 squares_i = overlays->squares_i;
     I32 squares_j = overlays->squares_j;
 
     for (int i = 0; i < squares_i; ++i) {
         for (int j = 0; j < squares_j; ++j) {
             I32 n = i + squares_i * j;
-            bbListList_attach(&list, &overlays->squares[n].list);
+            bbNestedList_attach(&list, &overlays->squares[n].list);
         }
 
     }
 
 
-    bbListList_map(&list, bbOverlay_drawFunc, cl);
+    bbNestedList_map(&list, bbOverlay_drawFunc, cl);
 
     return Success;
 }
 
-///typedef bbFlag bListList_mapFunction(void* node, void* cl);
+///typedef bbFlag bbNestedList_mapFunction(void* node, void* cl);
 bbFlag bbOverlay_drawFunc(void* node, void* cl){
     return bbOverlay_draw(node, cl);
 }

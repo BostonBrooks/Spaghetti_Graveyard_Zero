@@ -56,7 +56,7 @@ bbFlag bbOverlay_drawTest(bbOverlays* overlays, bbViewport* viewport,
 bbFlag bbOverlays_draw(bbOverlays* overlays, drawFuncClosure* cl);
 /// calls bbOverlay_draw()
 
-///typedef bbFlag bListList_mapFunction(void* node, void* cl);
+///typedef bbFlag bbNestedList_mapFunction(void* node, void* cl);
 bbFlag bbOverlay_drawFunc(void* node, void* cl);
 /// draws individual overlay
 bbFlag bbOverlay_draw(bbOverlay* overlay, drawFuncClosure* cl);
