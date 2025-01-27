@@ -151,8 +151,8 @@ bbFlag bbDF_overlayTest(void* drawable, void* frameDescriptor, void* cl){
     bbOverlay* overlay = drawable;
     drawFuncClosure* foo = cl;
 
-    bbDebug("overlay label: %s\n", overlay->label);
-    I32 spriteInt = 8;
+    bbDebug("overlay\n", overlay->label);
+    I32 spriteInt = 86;
 
     bbGraphics* graphics = foo->graphics;
     sfSprite* sprite = graphics->sprites->sprites[spriteInt];
@@ -164,7 +164,32 @@ bbFlag bbDF_overlayTest(void* drawable, void* frameDescriptor, void* cl){
 
     sfVector2f V2F = bbMapCoords_getV2f_overlay(overlay->coords, VP);
 
-    bbDebug("V2F.x = %f, V2F.y = %f\n", V2F.x, V2F.y);
+
+
+    sfSprite_setPosition(sprite, V2F);
+    sfRenderTexture_drawSprite(renderTexture, sprite, NULL);
+
+    return Success;
+
+}
+
+bbFlag bbDF_eyeCandyTest(void* drawable, void* frameDescriptor, void* cl){
+    bbOverlay* overlay = drawable;
+    drawFuncClosure* foo = cl;
+
+    bbDebug("eye candy\n", overlay->label);
+    I32 spriteInt = 8;
+
+    bbGraphics* graphics = foo->graphics;
+    sfSprite* sprite = graphics->sprites->sprites[spriteInt];
+
+
+    bbViewport* VP = foo->target;
+
+    sfRenderTexture* renderTexture = VP->main.renderTexture;
+
+    sfVector2f V2F = bbMapCoords_getV2f(overlay->coords, VP);
+
 
 
     sfSprite_setPosition(sprite, V2F);
@@ -175,7 +200,7 @@ bbFlag bbDF_overlayTest(void* drawable, void* frameDescriptor, void* cl){
 }
 
 bbFlag bbDrawfunctions_new(bbDrawfunctions** drawfunctions){
-	I32 num = 7;
+	I32 num = 8;
 	bbDrawfunctions* functions = malloc(sizeof(bbDrawfunctions) + num * sizeof(bbDrawFunction));
     bbAssert(functions!=NULL, "bad malloc");
 	bbDictionary_new(&functions->dictionary, nextPrime(num));
@@ -210,6 +235,11 @@ bbFlag bbDrawfunctions_new(bbDrawfunctions** drawfunctions){
     functions->functions[6] = bbDF_overlayTest;
     handle.u64 = 6;
     bbDictionary_add(functions->dictionary, "OVERLAYTEST", handle);
+
+
+    functions->functions[7] = bbDF_eyeCandyTest;
+    handle.u64 = 7;
+    bbDictionary_add(functions->dictionary, "EYECANDYTEST", handle);
 
 
     *drawfunctions = functions;

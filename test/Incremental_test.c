@@ -44,7 +44,7 @@ CLEARWINDOW(bbRedOrange);
 	bbDrawfunctions_new(&graphics.drawfunctions);
 
 //bbHere();
-CLEARWINDOW(bbOrange);
+//CLEARWINDOW(bbOrange);
 
 	bbAnimations_new(&graphics.animations, graphics.sprites, graphics.drawfunctions, "./maps/map0/animations.csv");
 

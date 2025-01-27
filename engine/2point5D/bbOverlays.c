@@ -71,7 +71,14 @@ squares_j){
 
             overlayIcon->frames[0].drawfunction = drawfunctionHandle.u64;
 
-            for (I32 k = 1; k < FRAMES_PER_OVERLAY; k++){
+            bbDictionary_lookup(graphics->drawfunctions->dictionary,
+                                "EYECANDYTEST",
+                                &drawfunctionHandle);
+
+
+            overlayIcon->frames[1].drawfunction = drawfunctionHandle.u64;
+
+            for (I32 k = 2; k < FRAMES_PER_OVERLAY; k++){
                 overlayIcon->frames[k].drawfunction = -1;
             }
 
@@ -153,8 +160,8 @@ bbFlag bbOverlay_draw(bbOverlay* overlay, drawFuncClosure* cl){
         bbFrame* frame = &overlay->frames[i];
 
 
-
-        if (frame->drawfunction >= 0 && frame->drawfunction < 7) {
+/// the 8 in the next line refers to the number of draw functions in bbDrawfunctions
+        if (frame->drawfunction >= 0 && frame->drawfunction < 8) {
             bbGraphics* graphics = cl->graphics;
             bbDrawFunction *drawFunction =
                     graphics->drawfunctions->functions[frame->drawfunction];
