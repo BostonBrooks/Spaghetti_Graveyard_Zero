@@ -109,7 +109,11 @@ CLEARWINDOW(bbMagenta);
     bbHere();
 
 	int mapTime;
-	for (mapTime = 0; mapTime < 180; mapTime++) {
+	for (mapTime = 0; ; mapTime++) {
+
+        viewport->viewpoint.i = 5120 * sin(mapTime / 360.0) + 7000;
+        viewport->viewpoint.j = 5120 * cos(mapTime / 360.0) + 7000;
+
 bbPrintf("mapTime = %d\n", mapTime);
 		cl.mapTime = mapTime;
         cl.GUI_time = mapTime;
