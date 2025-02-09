@@ -151,7 +151,7 @@ bbFlag bbDF_overlayTest(void* drawable, void* frameDescriptor, void* cl){
     bbOverlay* overlay = drawable;
     drawFuncClosure* foo = cl;
 
-    bbDebug("overlay\n", overlay->label);
+    //bbDebug("overlay\n", overlay->label);
     I32 spriteInt = 86;
 
     bbGraphics* graphics = foo->graphics;
@@ -177,7 +177,7 @@ bbFlag bbDF_eyeCandyTest(void* drawable, void* frameDescriptor, void* cl){
     bbOverlay* overlay = drawable;
     drawFuncClosure* foo = cl;
 
-    bbDebug("eye candy\n", overlay->label);
+    //bbDebug("eye candy\n", overlay->label);
     I32 spriteInt = 8;
 
     bbGraphics* graphics = foo->graphics;
