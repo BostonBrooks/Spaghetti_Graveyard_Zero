@@ -2,12 +2,14 @@
 #define BBCOLOURS_H
 
 #include "engine/includes/CSFML.h"
+#include "engine/logic/bbTerminal.h"
 
 ///Clear the window to a given colour.
 /// Used to see if the graphics library is functioning, because the graphics
 /// library may crash long before the main thread realises
 
 #define CLEARWINDOW(COLOUR) \
+        bbHere();                    \
         sfRenderWindow_clear(testWindow, COLOUR);\
         sfRenderWindow_display(testWindow);
 

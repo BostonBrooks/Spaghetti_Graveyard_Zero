@@ -43,9 +43,10 @@ CLEARWINDOW(bbRedOrange);
 
 	bbDrawfunctions_new(&graphics.drawfunctions);
 
-//bbHere();
-//CLEARWINDOW(bbOrange);
 
+CLEARWINDOW(bbOrange);
+
+	void* memtest = malloc(sizeof(char) * 1028);
 	bbAnimations_new(&graphics.animations, graphics.sprites, graphics.drawfunctions, "./maps/map0/animations.csv");
 
 	//bbDictionary_print(graphics.animations->dictionary);
