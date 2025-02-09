@@ -201,7 +201,7 @@ bbFlag bbDF_eyeCandyTest(void* drawable, void* frameDescriptor, void* cl){
 
 bbFlag bbDrawfunctions_new(bbDrawfunctions** drawfunctions){
 	I32 num = 8;
-	bbDrawfunctions* functions = malloc(sizeof(bbDrawfunctions) + num * sizeof(bbDrawFunction));
+	bbDrawfunctions* functions = malloc(sizeof(bbDrawfunctions) + num * sizeof(bbDrawFunction*));
     bbAssert(functions!=NULL, "bad malloc");
 	bbDictionary_new(&functions->dictionary, nextPrime(num));
 
