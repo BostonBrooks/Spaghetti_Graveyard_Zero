@@ -51,12 +51,12 @@ bbFlag bbTree_ascendingMap(bbTree* tree,
                            void* cl);
 
 ///recursively search through nodes until myFunc(node, cl); returns f_Break
-bbFlag descending_searchVisible(bbTree* tree,
-							 void* root,
-							 bbTreeFunction* myFunc,
-							 void* cl);
+bbFlag bbTree_descendingMapVisible(bbTree* tree,
+							void* root,
+							bbTreeFunction* myFunc,
+							void* cl);
 ///recursively search through nodes until myFunc(node, cl); returns f_Break
-bbFlag ascending_searchVisible(bbTree* tree,
+bbFlag bbTree_ascendingMapVisible(bbTree* tree,
 							void* root,
 							bbTreeFunction* myFunc,
 							void* cl);

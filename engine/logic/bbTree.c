@@ -191,3 +191,97 @@ label:
 	return Continue;
 
 }
+
+bbFlag bbTree_descendingMapVisible(bbTree* tree, void* root, bbTreeFunction* myFunc,
+							void* cl)
+{
+
+	bbAssert(root != NULL, "null object address\n");
+	bbTree_Node* rootNode = root + tree->offset;
+
+	if(rootNode->visible) {
+		bbFlag flag = myFunc(tree, root, cl);
+		if (flag == Break) return Break;
+	}
+
+	if(isNULL(rootNode->children.head)){
+		bbAssert(isNULL(rootNode->children.tail), "head/tail\n");
+		return Continue;
+	}
+
+	bbPool_Handle elementHandle = rootNode->children.head;
+	void* element;
+	bbTree_Node* elementNode;
+	bbFlag flag;
+
+	if (rootNode->childrenvisible == false) return Continue;
+	while(1){
+
+		bbVPool_lookup(tree->pool, &element, elementHandle);
+		elementNode = element + tree->offset;
+		flag = bbTree_descendingMapVisible(tree, element, myFunc, cl);
+		switch(flag){
+			case Break:
+				return Break;
+			case Continue:
+				if(isEqual(elementHandle, rootNode->children.tail))
+					return Continue;
+				elementHandle = elementNode->peers.next;
+				break;
+			case Repeat:
+				bbHere();
+				break;
+			default:
+				bbHere();
+				break;
+		}
+	}
+
+}
+
+bbFlag bbTree_ascendingMapVisible(bbTree* tree, void* root, bbTreeFunction* myFunc,
+						   void* cl) {
+
+	bbAssert(root != NULL, "null object address\n");
+	bbTree_Node* rootNode = root + tree->offset;
+	bbFlag flag;
+
+	if(isNULL(rootNode->children.head)){
+		bbAssert(isNULL(rootNode->children.tail), "head/tail\n");
+		goto label;
+	}
+
+	bbPool_Handle elementHandle = rootNode->children.tail;
+	void* element;
+	bbTree_Node* elementNode;
+
+	if(rootNode->childrenvisible == false) goto label;
+	while(1){
+		bbVPool_lookup(tree->pool, &element, elementHandle);
+		elementNode = element + tree->offset;
+		flag = bbTree_ascendingMapVisible(tree, element, myFunc, cl);
+		switch(flag){
+			case Break:
+				return Break;
+			case Continue:
+				if(isEqual(elementHandle, rootNode->children.head))
+					goto label;
+				elementHandle = elementNode->peers.prev;
+				break;
+			case Repeat:
+				bbHere();
+				break;
+			default:
+				bbHere();
+		}
+	}
+	label:
+
+	if(rootNode->visible) {
+		flag = myFunc(tree, root, cl);
+		if (flag == Break) return Break;
+	}
+
+	return Continue;
+
+}

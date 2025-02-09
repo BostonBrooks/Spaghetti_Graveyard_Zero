@@ -90,6 +90,10 @@ bbFlag bbWidget_newEmpty(bbWidget** self, bbWidgets* widgets, bbWidget* parent){
 	bbWidget* widget; bbPool_Handle widgetHandle;
 	bbVPool_alloc(widgets->pool, &widget);
 	bbVPool_reverseLookup(widgets->pool, widget, &widgetHandle);
+
+	widget->tree.visible = true;
+	widget->tree.childrenvisible = true;
+
 	if (parent == NULL){
 		widgets->tree->root = widgetHandle;
 	} else {
