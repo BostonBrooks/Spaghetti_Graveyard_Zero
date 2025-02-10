@@ -9,9 +9,11 @@
 #include "engine/user_input/bbMouse.h"
 #include "engine/2point5D/bbViewport.h"
 #include "engine/2point5D/bbOverlays.h"
+#include "engine/widgets/bbWidgetMouse.h"
 
 sfRenderWindow* testWindow;
-
+bbWidgets* testWidgets;
+bbWidgetFunctions* testFunctions;
 
 int main (void){
 
@@ -67,8 +69,15 @@ CLEARWINDOW(bbChartreuse);
 
 CLEARWINDOW(bbGreen);
 //bbHere();
+
+	bbWidgetFunctions functions;
+	bbWidgetMouse_new(&functions);
+	testFunctions = &functions;
+
+
 	bbWidgets widgets;
 	bbWidgets_init(&widgets);
+	testWidgets = &widgets;
 
 CLEARWINDOW(bbTeal);
 
@@ -115,7 +124,7 @@ CLEARWINDOW(bbMagenta);
         viewport->viewpoint.i = 5120 * sin(mapTime / 360.0) + 7000;
         viewport->viewpoint.j = 5120 * cos(mapTime / 360.0) + 7000;
 
-bbPrintf("mapTime = %d\n", mapTime);
+	if (mapTime % 50 == 0) bbPrintf("mapTime = %d\n", mapTime);
 		cl.mapTime = mapTime;
         cl.GUI_time = mapTime;
         cl.graphics = &graphics;

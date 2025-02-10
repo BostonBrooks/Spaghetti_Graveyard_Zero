@@ -13,7 +13,10 @@
 #include "engine/logic/bbFlag.h"
 #include "engine/geometry/bbCoordinates.h"
 
-
+typedef enum {
+	mouseMove,
+	mouseClick,
+} bbMouseAction;
 
 typedef struct {
     bbScreenPoints position;
@@ -22,12 +25,17 @@ typedef struct {
 } bbMouse;
 
 typedef struct {
-    I32 state;
     I32 onMouse;
     I32 onMouseEntered;
     I32 onMouseLeft;
 
 } bbOnMouse;
+
+typedef struct {
+	bbScreenPoints ScreenCoords;
+	bbMouseAction action;
+} bbMouseEvent;
+
 
 bbFlag bbMouse_new(bbMouse* mouse, sfRenderWindow* window, bbGraphics* graphics);
 

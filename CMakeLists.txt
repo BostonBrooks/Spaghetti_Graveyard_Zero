@@ -55,8 +55,6 @@ add_executable(myprogram
         engine/widgets/bbWidget.c
         engine/user_input/bbInput.h
         engine/user_input/bbInput.c
-        engine/user_input/bbMouseHandlers.h
-        engine/user_input/bbMouseHandlers.c
         engine/2point5D/bbViewport.h
         engine/2point5D/bbViewport.c
         engine/2point5D/bbOverlays.h
@@ -70,4 +68,7 @@ add_executable(myprogram
         test/bbListList_map_test.c
         engine/2point5D/bbViewportCoords.h
         test/bbOverlay_test.c
-        test/automorphicNumbers.c)
+        test/automorphicNumbers.c
+        engine/user_input/bbMouse.c
+        engine/user_input/bbMouse.c
+        engine/user_input/bbMouse.c)

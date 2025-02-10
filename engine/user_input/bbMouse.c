@@ -5,6 +5,10 @@
 #include "engine/user_input/bbMouse.h"
 #include "engine/graphics/bbGraphics.h"
 #include "engine/geometry/bbCoordinates.h"
+#include "engine/widgets/bbWidget.h"
+
+extern bbWidgets* testWidgets;
+extern bbWidgetFunctions* testFunctions;
 
 
 bbFlag bbMouse_new(bbMouse* mouse, sfRenderWindow* window,bbGraphics* graphics)
@@ -18,6 +22,17 @@ bbFlag bbMouse_update(bbMouse* mouse, sfEvent* event){
         case sfEvtMouseMoved:
             mouse->position = pixel_getScreenPoints(event->mouseMove.x,
                                                     event->mouseMove.y);
+
+			bbMouseEvent mouseEvent;
+			mouseEvent.ScreenCoords = mouse->position;
+			mouseEvent.action = 0;
+
+			mouseActionClosure cl;
+			cl.event = &mouseEvent;
+			cl.functions = testFunctions;
+
+
+			bbWidgets_onMouse(testWidgets, &cl);
             break;
         default:{
             bbDebug("input not recognised\n");

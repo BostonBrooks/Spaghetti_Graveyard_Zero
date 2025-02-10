@@ -44,7 +44,11 @@ typedef struct {
 	bbTree* tree;
 } bbWidgets;
 
+typedef struct {
+	bbMouseEvent* event;
+	struct bbWidgetFunctions* functions;
 
+} mouseActionClosure;
 
 //typedef bbFlag bbDrawFunction(graphics,void* drawable, void* frameDescriptor, void* target);
 //typedef bbFlag bWidget_DrawFunction(graphics,void* drawable, void* frameDescriptor, void* target);
@@ -57,15 +61,17 @@ typedef bbFlag bbWidget_OnTimer (bbWidget* widget, void* void_timerNode);
 
 
 
-typedef struct {
+typedef struct bbWidgetFunctions{
 	bbWidget_Constructor** Constructors;  //functions to create a widget
 	bbDictionary* Constructor_dict;       //create widget by label
 	I32 Constructor_available;            //where to initialise new function
 
+	bbWidget_Mouse** Mouse;
 } bbWidgetFunctions;
 
 bbFlag bbWidget_newEmpty(bbWidget** self, bbWidgets* widgets, bbWidget* parent);
 bbFlag bbWidget_draw(bbWidget* widget, drawFuncClosure* cl);
+bbFlag bbWidget_mouse(bbWidget* widget, bbMouseEvent* mouseEvent, bbWidgetFunctions* functions);
 bbFlag bbWidget_newLayout(bbWidget** self, bbGraphics* graphics, bbWidgets* widgets, bbWidget* parent);
 bbFlag bbWidgets_init(bbWidgets* widgets);
 
@@ -74,7 +80,11 @@ bbFlag bbWidget_newViewport(bbWidget** self, bbGraphics* graphics,
                             bbWidgets* widgets, bbWidget* parent,
                             void* viewport);
 
+//bbFlag testFunc(bbTree* tree, void* node, void* cl);
 bbFlag bbWidget_drawFunc(bbTree* tree, void* node, void* cl);
+bbFlag bbWidget_mouseFunc(bbTree* tree, void* node, void* cl);
+
 bbFlag bbWidgets_draw(bbWidgets* widgets, void* cl);
+bbFlag bbWidgets_onMouse(bbWidgets* widgets, void* cl);
 
 #endif // BBWIDGET_H

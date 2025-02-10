@@ -25,9 +25,24 @@ bbFlag bbWidgets_init(bbWidgets* widgets){
 
 
 //bbFlag testFunc(bbTree* tree, void* node, void* cl)
-//TODO - massage bbWidget_draw so it looks like testfunc
+bbFlag bbWidget_mouseFunc(bbTree* tree, void* node, void* cl){
+	bbWidget* widget = node;
+	mouseActionClosure* closure = cl;
+	return bbWidget_mouse(widget, closure->event, closure->functions);
+}
 
+bbFlag bbWidget_mouse(bbWidget* widget, bbMouseEvent* mouseEvent, bbWidgetFunctions* functions){
+	I32 mouseInt = widget->onMouse.onMouse;
 
+	bbWidget_Mouse* func = functions->Mouse[mouseInt];
+
+	return func(mouseEvent, widget);
+
+	bbHere();
+	return Continue;
+}
+
+//bbFlag testFunc(bbTree* tree, void* node, void* cl)
 bbFlag bbWidget_drawFunc(bbTree* tree, void* node, void* cl){
 	bbWidget* widget = node;
 	return bbWidget_draw(widget, cl);
@@ -93,6 +108,8 @@ bbFlag bbWidget_newEmpty(bbWidget** self, bbWidgets* widgets, bbWidget* parent){
 
 	widget->tree.visible = true;
 	widget->tree.childrenvisible = true;
+
+	widget->onMouse.onMouse = 0;
 
 	if (parent == NULL){
 		widgets->tree->root = widgetHandle;
@@ -176,5 +193,14 @@ bbFlag bbWidgets_draw(bbWidgets* widgets, void* cl) {
     bbVPool* pool = tree->pool;
     void* root;
     bbVPool_lookup(pool, &root, tree->root);
-    return bbTree_descendingMap(tree, root, bbWidget_drawFunc, cl);
+    return bbTree_descendingMapVisible(tree, root, bbWidget_drawFunc, cl);
+}
+
+//in the following function, cl contains fields such as mouse coordinates, mouse action
+bbFlag bbWidgets_onMouse(bbWidgets* widgets, void* cl) {
+	bbTree* tree = widgets->tree;
+	bbVPool* pool = tree->pool;
+	void* root;
+	bbVPool_lookup(pool, &root, tree->root);
+	return bbTree_ascendingMapVisible(tree, root, bbWidget_mouseFunc, cl);
 }
