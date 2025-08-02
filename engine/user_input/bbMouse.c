@@ -5,10 +5,10 @@
 #include "engine/user_input/bbMouse.h"
 #include "engine/graphics/bbGraphics.h"
 #include "engine/geometry/bbCoordinates.h"
-#include "engine/widgets/bbWidget.h"
+#include "engine/wodgets/bbWodget.h"
 
-extern bbWidgets* testWidgets;
-extern bbWidgetFunctions* testFunctions;
+extern bbWodgets* testWodgets;
+extern bbWodgetFunctions* testFunctions;
 
 
 bbFlag bbMouse_new(bbMouse* mouse, sfRenderWindow* window,bbGraphics* graphics)
@@ -32,7 +32,7 @@ bbFlag bbMouse_update(bbMouse* mouse, sfEvent* event){
 			cl.functions = testFunctions;
 
 
-			bbWidgets_onMouse(testWidgets, &cl);
+			bbWodgets_onMouse(testWodgets, &cl);
             break;
         default:{
             bbDebug("input not recognised\n");

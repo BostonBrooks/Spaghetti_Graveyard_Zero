@@ -1,7 +1,7 @@
 /**
  * @file
- * @brief when a mouse moves, we search through widgets with the onMouse
- * function. If the mouse is found to have moved over a new widget,
+ * @brief when a mouse moves, we search through wodgets with the onMouse
+ * function. If the mouse is found to have moved over a new wodget,
  * onMouse calls bbMouse_leave, which calls onMouseLeft and then onMouse
  * calls onMouseEntered
  *
@@ -21,7 +21,7 @@ typedef enum {
 typedef struct {
     bbScreenPoints position;
     sfSprite* cursor;
-    bbPool_Handle current_widget;
+    bbPool_Handle current_wodget;
 } bbMouse;
 
 typedef struct {

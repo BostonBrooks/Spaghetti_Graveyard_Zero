@@ -2,18 +2,18 @@
 #include "engine/includes/CSFML.h"
 #include "engine/graphics/bbGraphics.h"
 #include "engine/graphics/bbColours.h"
-#include "engine/widgets/bbWidget.h"
+#include "engine/wodgets/bbWodget.h"
 #include "engine/logic/bbTerminal.h"
 #include "engine/logic/bbTree.h"
 #include "engine/user_input/bbInput.h"
 #include "engine/user_input/bbMouse.h"
 #include "engine/2point5D/bbViewport.h"
 #include "engine/2point5D/bbOverlays.h"
-#include "engine/widgets/bbWidgetMouse.h"
+#include "engine/wodgets/bbWodgetMouse.h"
 
 sfRenderWindow* testWindow;
-bbWidgets* testWidgets;
-bbWidgetFunctions* testFunctions;
+bbWodgets* testWodgets;
+bbWodgetFunctions* testFunctions;
 
 int main (void){
 
@@ -70,20 +70,20 @@ CLEARWINDOW(bbChartreuse);
 CLEARWINDOW(bbGreen);
 //bbHere();
 
-	bbWidgetFunctions functions;
-	bbWidgetMouse_new(&functions);
+	bbWodgetFunctions functions;
+	bbWodgetMouse_new(&functions);
 	testFunctions = &functions;
 
 
-	bbWidgets widgets;
-	bbWidgets_init(&widgets);
-	testWidgets = &widgets;
+	bbWodgets wodgets;
+	bbWodgets_init(&wodgets);
+	testWodgets = &wodgets;
 
 CLEARWINDOW(bbTeal);
 
 //bbHere();
-	bbWidget* layout;
-    bbWidget_newLayout(&layout, &graphics, &widgets, NULL);
+	bbWodget* layout;
+    bbWodget_newLayout(&layout, &graphics, &wodgets, NULL);
 
 CLEARWINDOW(bbBlue);
 
@@ -99,8 +99,8 @@ CLEARWINDOW(bbBlue);
 
 
 //bbHere();
-	bbWidget* Viewport;
-    bbWidget_newViewport(&Viewport, &graphics, &widgets, layout, viewport);
+	bbWodget* Viewport;
+    bbWodget_newViewport(&Viewport, &graphics, &wodgets, layout, viewport);
 
 CLEARWINDOW(bbPurple);
 
@@ -137,7 +137,7 @@ CLEARWINDOW(bbMagenta);
 
 
         cl.target = window;
-        bbWidgets_draw(&widgets, &cl);
+        bbWodgets_draw(&wodgets, &cl);
         bbMouse_draw(&mouse, window);
 
 		sfRenderWindow_display(window);

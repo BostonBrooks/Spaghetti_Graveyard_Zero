@@ -37,7 +37,7 @@ typedef struct {
     //TODO do we need this or let drawfunction decide?
 	bbType type;
 	bbPool_Handle handle;
-	//I32 angle - angle supplied in radians by drawable/widget
+	//I32 angle - angle supplied in radians by drawable/wodget
 	//I32 frame - calculated based on framerate (times framerate of animation)
 	//            and startTime
 	I32 drawfunction;

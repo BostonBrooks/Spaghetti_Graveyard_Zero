@@ -29,7 +29,7 @@ We use a lot of v-tables to store the behaviour of an object using an integer va
 
 Floating point mathematics will be avoided where possible.
 Instead fixed point mathematics will be achieved using "conversion factors" with names like:
-Points per pixel, pixels per tile, and tiles per square, for assets being drawn to the viewport and points per pixel for widgets being drawn to the screen.
+Points per pixel, pixels per tile, and tiles per square, for assets being drawn to the viewport and points per pixel for wodgets being drawn to the screen.
 
 One exception to this would be setting the scale of a sprite to be drawn to the viewport or screen. Information flows one way from CPU to graphics card, so using floating point values here will not lead to non-determinism in the main program.
 
