@@ -58,15 +58,15 @@ typedef struct
 } bbWidget;
 
 // Numbers represent widget function types
-#define f_WidgetConstructor     0
-#define f_WidgetUpdate          1
-#define f_WidgetDestructor      2
-#define f_WidgetOnCommand       3
-#define f_WidgetDrawFunction    4
-#define f_WidgetMouseHandler    5
-#define f_WidgetOnTimer         6
+//#define f_WidgetConstructor     0
+//#define f_WidgetUpdate          1
+//#define f_WidgetDestructor      2
+//#define f_WidgetOnCommand       3
+//#define f_WidgetDrawFunction    4
+//#define f_WidgetMouseHandler    5
+//#define f_WidgetOnTimer         6
 
-enum bbWidget_fnType
+typedef enum
 {
     Constructor,
     Update,
@@ -75,14 +75,16 @@ enum bbWidget_fnType
     DrawFunction,
     MouseHandler,
     OnTimer
-};
+} bbWidget_fnType;
 
 //types of member functions for class bbWidget
 typedef bbFlag bbWidget_Constructor (bbWidget** reference, void* widgets, bbScreenPoints screen_coords, bbWidget* parent);
 typedef bbFlag bbWidget_Update (bbWidget* widget, void* unused);
 typedef bbFlag bbWidget_Destructor (bbWidget* widget, void* unused);
 typedef bbFlag bbWidget_OnCommand (bbWidget* widget, void* data);
-typedef bbFlag bbWidget_DrawFunction (bbWidget* widget, I32 i);
+typedef bbFlag bbWidget_DrawFunction (bbWidget* widget, bbFrame* frame, void* cl);
+
+//change to bbWidget_MouseHandler?
 typedef bbFlag bbWidget_Mouse(void* void_mouseEvent, void* void_widget);
 typedef bbFlag bbWidget_OnTimer (bbWidget* widget, void* void_timerNode);
 
@@ -105,16 +107,16 @@ typedef struct
     bbDictionary* onCommand_dict;
     I32 num_onCommands;
 
-    bbWidget_DrawFunction** drawFunction;
+    bbWidget_DrawFunction** drawFunctions;
     bbDictionary* drawFunction_dict;
     I32 num_drawFunctions;
 
-    bbWidget_Mouse** mouseHandler;
+    bbWidget_Mouse** mouseHandlers;
     bbDictionary* mouseHandler_dict;
     I32 num_mouseHandlers;
 
     bbWidget_OnTimer** onTimers;
-    bbDictionary* onTimers_dict;
+    bbDictionary* onTimer_dict;
     I32 num_onTimers;
 
 
@@ -138,24 +140,38 @@ typedef struct
     bbWidget* viewport;
 } bbWidgets;
 
+bbFlag bbWidgets_new(bbWidgets** self);
+
 //defined in /games/game0/maps/map0/widgets
 bbFlag bbWidgetFunctions_new(bbWidgetFunctions** self);
 bbFlag bbWidgetFunctions_add(bbWidgetFunctions* functions, bbWidget_fnType fnType, void* fnPtr, char* key);
-bbFlag bbWidgetFunctions_getFunction(void** function, bbWidgetFunctions* functions, I32 fnType, char* key);
+bbFlag bbWidgetFunctions_getFunction(void** function, bbWidgetFunctions* functions, bbWidget_fnType type, char* key)
 
 // find value to be stored in "I32 onMouse;" in bbWidget
-bbFlag bbWidgetFunctions_getInt(bbWidgetFunctions* functions, bbWidget_fnType fnType, char* key);
+bbFlag bbWidgetFunctions_getInt(I32* funcInt, bbWidgetFunctions* functions, bbWidget_fnType fnType, char* key);
 
 
-bbWidget_new_int(bbWidgets** self, bbWidgets* widgets, I32 type, bbWidget* parent, bbScreenPoints screen_coords);
-bbWidget_new_key(bbWidgets** self, bbWidgets* widgets, char* type, bbWidget* parent, bbScreenPoints screen_coords);
+bbFlag bbWidget_new_int(bbWidget** self, bbWidgets* widgets, I32 type, bbWidget* parent, bbScreenPoints screen_coords);
+bbFlag bbWidget_new_key(bbWidget** self, bbWidgets* widgets, char* type, bbWidget* parent, bbScreenPoints screen_coords);
+
+
+typedef struct
+{
+    bbWidgetFunctions functions;
+    bbGraphics* graphics;
+    void* target;
+    I64 GUI_time;
+    I64 mapTime;
+} bbWidget_drawFuncClosure;
+
+bbFlag bbWidget_draw(bbWidget* widget, drawFuncClosure_new* cl);
+//bbFlag bbWidget_mouse(bbWidget* widget, mouseFuncClosure* cl);
 
 
 //the following functions are "typedef bbFlag bbTreeFunction(bbTree* tree, void* node, void* cl);"
 //PS bbTreeFunctions are used to search a tree, applying the given function to all nodes
-I32 bbWidget_draw(bbTree* tree, void* node, void* cl);
-I32 bbWidget_mouse(bbTree* tree, void* node, void* cl);
-I32 bbWidget_onUpdate(bbTree* tree, void* node, void* cl);
+bbFlag  bbWidget_drawTree(bbTree* tree, void* node, void* cl);
+//bbFlag  bbWidget_mouseTree(bbTree* tree, void* node, void* cl);
 
 
 /*
@@ -166,3 +182,5 @@ I32 bbWidget_onUpdate(bbTree* tree, void* node, void* cl);
  * ...
  *
  */
+
+#endif //#BBWIDGET_H
