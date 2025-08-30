@@ -11,7 +11,6 @@
 #include "engine/user_input/bbMouse.h"
 #include "engine/logic/bbLeanPool.h"
 
-//select pool type at compile time
 #define bbWidgetPool bbLeanPool
 #define bbWidgetPool_new bbLeanPool_new
 #define bbWidgetPool_delete bbLeanPool_delete
@@ -65,17 +64,6 @@ typedef struct
 #define f_WidgetDrawFunction    4
 #define f_WidgetMouseHandler    5
 #define f_WidgetOnTimer         6
-
-enum bbWidget_fnType
-{
-    Constructor,
-    Update,
-    Destructor,
-    OnCommand,
-    DrawFunction,
-    MouseHandler,
-    OnTimer
-};
 
 //types of member functions for class bbWidget
 typedef bbFlag bbWidget_Constructor (bbWidget** reference, void* widgets, bbScreenPoints screen_coords, bbWidget* parent);
@@ -140,26 +128,18 @@ typedef struct
 
 //defined in /games/game0/maps/map0/widgets
 bbFlag bbWidgetFunctions_new(bbWidgetFunctions** self);
-bbFlag bbWidgetFunctions_add(bbWidgetFunctions* functions, bbWidget_fnType fnType, void* fnPtr, char* key);
+bbFlag bbWidgetFunctions_add(bbWidgetFunctions* functions, I32 fnType, void* fnPtr, char* key);
 bbFlag bbWidgetFunctions_getFunction(void** function, bbWidgetFunctions* functions, I32 fnType, char* key);
 
 // find value to be stored in "I32 onMouse;" in bbWidget
-bbFlag bbWidgetFunctions_getInt(bbWidgetFunctions* functions, bbWidget_fnType fnType, char* key);
-
-
-bbWidget_new_int(bbWidgets** self, bbWidgets* widgets, I32 type, bbWidget* parent, bbScreenPoints screen_coords);
-bbWidget_new_key(bbWidgets** self, bbWidgets* widgets, char* type, bbWidget* parent, bbScreenPoints screen_coords);
-
-
-//the following functions are "typedef bbFlag bbTreeFunction(bbTree* tree, void* node, void* cl);"
-//PS bbTreeFunctions are used to search a tree, applying the given function to all nodes
-I32 bbWidget_draw(bbTree* tree, void* node, void* cl);
-I32 bbWidget_mouse(bbTree* tree, void* node, void* cl);
-I32 bbWidget_onUpdate(bbTree* tree, void* node, void* cl);
-
+bbFlag bbWidgetFunctions_getInt(bbWidgetFunctions* functions, I32 fnType, char* key);
 
 /*
+ * bbWidget_new
+ * bbWidget_draw
+ * bbWidget_mouse
  * bbWidget_onCommand
+ * bbWidget_onUpdate
  * bbWidget_onTimer
  * bbWidget_newEmpty
  *
