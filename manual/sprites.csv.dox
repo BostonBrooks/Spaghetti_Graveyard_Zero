@@ -9,6 +9,6 @@ The file makes use of the following fields:
  - Left, Top, Width, Height: Location of sprite in the pixel data
  - Origin_X, Origin_Y: The sprite is drawn to window or viewport relative to this point on sprite?
  - Scale_X, Scale_Y: Adjust the size of the sprite displayed on screen
- - Scale_By: How is the sprite effected by changes in the map's graphics settings. [VIEWPORT/WODGET/NONE]
+ - Scale_By: How is the sprite effected by changes in the map's graphics settings. [VIEWPORT/WIDGET/NONE]
  - Comment: Any extra text will be ignored.
 */

@@ -16,7 +16,7 @@ come online
             /demo2 - one such map
                 /actors - code for controlling things like player character and
                           monsters
-                /wodgets - code for controlling things like buttons and text
+                /widgets - code for controlling things like buttons and text
                           boxes
 
 /html - doxygen output

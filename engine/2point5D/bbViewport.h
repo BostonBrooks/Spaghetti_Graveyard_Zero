@@ -1,6 +1,6 @@
 /**
  * @file
- * @brief the viewport is a wodget that can be drawn to the screen,
+ * @brief the viewport is a widget that can be drawn to the screen,
  * and can be clicked by the player.
  * viewport has a bbViewport object which does the actual rendering of
  * the ground surface and bbDrawables

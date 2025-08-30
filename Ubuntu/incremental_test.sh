@@ -8,7 +8,7 @@ Color_Off='\033[0m'
 
  echo -e "Look, a Tortoise:\n${BGreen}\n       _____     ____\n     /      \  |  o |\n    |        |/ ___\| \n    |_________/     \n    |_|_| |_|_|\n//////////////////////////////////////////////////////////////${Color_Off}\n\nAttempting to compile:\n"
 
-if gcc   -Wno-incompatible-pointer-types -I ../\
+if gcc    -I ../\
        ../test/Incremental_test.c\
        ../engine/2point5D/bbViewport.c\
        ../engine/2point5D/bbOverlays.c\
@@ -29,7 +29,7 @@ if gcc   -Wno-incompatible-pointer-types -I ../\
        ../engine/logic/bbList_map.c\
        ../engine/logic/bbList_sort.c\
        ../engine/logic/bbNestedList.c\
-       ../engine/wodgets/bbWodget.c\
+       ../engine/widgets/bbWidget.c\
        ../engine/geometry/bbCoordinates.c\
        ../engine/user_input/bbInput.c\
        ../engine/user_input/bbMouse.c\

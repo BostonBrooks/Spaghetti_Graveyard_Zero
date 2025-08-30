@@ -3,7 +3,7 @@
  * @brief sfTexture is define in SFML as raw pixel data
  * bbTextures is a container for sfTextures
  * sprites are used to draw images to render targets such as:
- * the screen, where sprites are scaled by wodgetscale
+ * the screen, where sprites are scaled by widgetscale
  * the viewport, where sprites are scaled by drawavlescale
  * the ground, where sprites are scaled by groundscale
  * NONE, sprites that are not scaled
@@ -36,7 +36,7 @@ typedef struct { //bbSprites
 } bbSprites;
 
 bbFlag bbSprites_new(bbSprites** self, bbTextures* textures, char* filePath,
-				  float wodgetscale, float drawablescale, float groundscale);
+				  float widgetscale, float drawablescale, float groundscale);
 
 ///when closing one map before opening another
 bbFlag bbSprites_delete(bbSprites* sprites);

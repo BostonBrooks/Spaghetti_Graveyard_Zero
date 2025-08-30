@@ -4,7 +4,7 @@
 #include "engine/logic/bbPrime.h"
 #include "engine/graphics/bbDrawfunctions.h"
 #include "engine/logic/bbTerminal.h"
-#include "engine/wodgets/bbWodget.h"
+#include "engine/widgets/bbWidget.h"
 #include "engine/2point5D/bbViewport.h"
 #include "engine/2point5D/bbOverlays.h"
 #include "engine/2point5D/bbViewportCoords.h"
@@ -18,9 +18,9 @@ bbFlag bbDF_test(void* drawable, void* frameDescriptor, void* cl) {
 	return Success;
 }
 
-//Draw a sprite belonging to a wodget
-bbFlag bbDF_wodgetSprite(void* drawable, void* frameDescriptor, void* cl){
-	bbWodget* wodget = drawable;
+//Draw a sprite belonging to a widget
+bbFlag bbDF_widgetSprite(void* drawable, void* frameDescriptor, void* cl){
+	bbWidget* widget = drawable;
 	bbFrame* frame = frameDescriptor;
     drawFuncClosure* closure = cl;
     bbGraphics* graphics = closure->graphics;
@@ -32,8 +32,8 @@ bbFlag bbDF_wodgetSprite(void* drawable, void* frameDescriptor, void* cl){
     //bbDebug("spriteInt = %d, sprite = %p, target = %p, window = %p\n",
     //        spriteInt, sprite, target, testWindow);
 	bbScreenPoints SP;
-	SP.x = wodget->rect.left + frame->offset.x;
-	SP.y = wodget->rect.top + frame->offset.y;
+	SP.x = widget->rect.left + frame->offset.x;
+	SP.y = widget->rect.top + frame->offset.y;
 
 	sfVector2f position = bbScreenPoints_getV2f(SP);
 	sfSprite_setPosition(sprite, position);
@@ -45,10 +45,10 @@ bbFlag bbDF_wodgetSprite(void* drawable, void* frameDescriptor, void* cl){
 	return Success;
 }
 
-// Draw an animation belonging to a wodget;
-bbFlag bbDF_wodgetAnimation(void* drawable, void* frameDescriptor, void* cl){
+// Draw an animation belonging to a widget;
+bbFlag bbDF_widgetAnimation(void* drawable, void* frameDescriptor, void* cl){
 
-	bbWodget* wodget = drawable;
+	bbWidget* widget = drawable;
 	bbFrame* frame_descriptor = frameDescriptor;
     drawFuncClosure* closure = cl;
     bbGraphics* graphics = closure->graphics;
@@ -69,8 +69,8 @@ bbFlag bbDF_wodgetAnimation(void* drawable, void* frameDescriptor, void* cl){
 
 
 	bbScreenPoints SP;
-	SP.x = wodget->rect.left + frame_descriptor->offset.x;
-	SP.y = wodget->rect.top + frame_descriptor->offset.y;
+	SP.x = widget->rect.left + frame_descriptor->offset.x;
+	SP.y = widget->rect.top + frame_descriptor->offset.y;
 	sfVector2f position = bbScreenPoints_getV2f(SP);
 
 	sfSprite_setPosition(sprite, position);
@@ -80,8 +80,8 @@ bbFlag bbDF_wodgetAnimation(void* drawable, void* frameDescriptor, void* cl){
 }
 
 //Look up default draw function for a given animation
-bbFlag bbDF_wodgetAnimationDefault(void* drawable, void* frameDescriptor, void* cl){
-	bbWodget* wodget = drawable;
+bbFlag bbDF_widgetAnimationDefault(void* drawable, void* frameDescriptor, void* cl){
+	bbWidget* widget = drawable;
 	bbFrame* frame_descriptor = frameDescriptor;
     drawFuncClosure* closure = cl;
     bbGraphics* graphics = closure->graphics;
@@ -130,15 +130,15 @@ bbFlag bbDF_composition(void* drawable, void* frameDescriptor, void* cl){
 
 
 ///draw the viewport to the screen
-bbFlag bbDF_wodgetViewport(void* drawable, void* frameDescriptor, void* cl){
-    bbWodget* wodget = drawable;
+bbFlag bbDF_widgetViewport(void* drawable, void* frameDescriptor, void* cl){
+    bbWidget* widget = drawable;
     bbFrame* frame_descriptor = frameDescriptor;
     drawFuncClosure* closure = cl;
-    bbViewport* viewport = wodget->extra_data;
+    bbViewport* viewport = widget->extra_data;
 
     bbScreenPoints SP;
-    SP.x = wodget->rect.left;
-    SP.y = wodget->rect.top;
+    SP.x = widget->rect.left;
+    SP.y = widget->rect.top;
     sfVector2f pos = bbScreenPoints_getV2f(SP);
 
     sfSprite_setPosition(viewport->background.sprite, pos);
@@ -212,15 +212,15 @@ bbFlag bbDrawfunctions_new(bbDrawfunctions** drawfunctions){
 	handle.u64 = 0;
 	bbDictionary_add(functions->dictionary, "TEST", handle);
 
-	functions->functions[1] = bbDF_wodgetSprite;
+	functions->functions[1] = bbDF_widgetSprite;
 	handle.u64 = 1;
-	bbDictionary_add(functions->dictionary, "WODGETSPRITE", handle);
+	bbDictionary_add(functions->dictionary, "WIDGETSPRITE", handle);
 
-	functions->functions[2] = bbDF_wodgetAnimation;
+	functions->functions[2] = bbDF_widgetAnimation;
 	handle.u64 = 2;
-	bbDictionary_add(functions->dictionary, "WODGETANIMATION", handle);
+	bbDictionary_add(functions->dictionary, "WIDGETANIMATION", handle);
 
-	functions->functions[3] = bbDF_wodgetAnimationDefault;
+	functions->functions[3] = bbDF_widgetAnimationDefault;
 	handle.u64 = 3;
 	bbDictionary_add(functions->dictionary, "DEFAULT", handle);
 
@@ -228,9 +228,9 @@ bbFlag bbDrawfunctions_new(bbDrawfunctions** drawfunctions){
 	handle.u64 = 4;
 	bbDictionary_add(functions->dictionary, "COMPOSITION", handle);
 
-    functions->functions[5] = bbDF_wodgetViewport;
+    functions->functions[5] = bbDF_widgetViewport;
     handle.u64 = 5;
-    bbDictionary_add(functions->dictionary, "WODGETVIEWPORT", handle);
+    bbDictionary_add(functions->dictionary, "WIDGETVIEWPORT", handle);
 
     functions->functions[6] = bbDF_overlayTest;
     handle.u64 = 6;

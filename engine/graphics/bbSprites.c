@@ -65,7 +65,7 @@ bbFlag bbSprite_new(bbSprites* sprites, char* key, I32 address, sfTexture* textu
 }
 
 bbFlag bbSprites_new(bbSprites** self, bbTextures* textures, char* filePath,
-				  float wodgetscale, float drawablescale, float groundscale)
+				  float widgetscale, float drawablescale, float groundscale)
 {
 
 	FILE* file = fopen(filePath, "r");
@@ -96,9 +96,9 @@ bbFlag bbSprites_new(bbSprites** self, bbTextures* textures, char* filePath,
 				 &dimensions.height, &dimensions.originx, &dimensions.originy, &dimensions.scalex,
 				 &dimensions.scaley, scale_by) == 12) {
 
-		if(0 == strcmp(scale_by, "Wodget")){
-			dimensions.scalex *= wodgetscale;
-			dimensions.scaley *= wodgetscale;
+		if(0 == strcmp(scale_by, "Widget")){
+			dimensions.scalex *= widgetscale;
+			dimensions.scaley *= widgetscale;
 		} else if(0 == strcmp(scale_by, "Drawable")){
 			dimensions.scalex *= drawablescale;
 			dimensions.scaley *= drawablescale;

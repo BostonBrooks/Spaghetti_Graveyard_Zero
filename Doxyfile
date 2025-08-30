@@ -136,11 +136,11 @@ REPEAT_BRIEF           = YES
 # and the result, after processing the whole list, is used as the annotated
 # text. Otherwise, the brief description is used as-is. If left blank, the
 # following values are used ($name is automatically replaced with the name of
-# the entity):The $name class, The $name wodget, The $name file, is, provides,
+# the entity):The $name class, The $name widget, The $name file, is, provides,
 # specifies, contains, represents, a, an and the.
 
 ABBREVIATE_BRIEF       = "The $name class" \
-                         "The $name wodget" \
+                         "The $name widget" \
                          "The $name file" \
                          is \
                          provides \
