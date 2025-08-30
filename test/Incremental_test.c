@@ -10,6 +10,7 @@
 #include "engine/2point5D/bbViewport.h"
 #include "engine/2point5D/bbOverlays.h"
 #include "engine/widgets/bbWidgetMouse.h"
+#include "engine/widgets/bbWidgetFunctions.h"
 
 sfRenderWindow* testWindow;
 bbWidgets* testWidgets;
@@ -117,6 +118,12 @@ CLEARWINDOW(bbMagenta);
     bbOverlays_new((void**)&overlays, &graphics, 7, 9);
 
     bbHere();
+
+    bbWidgetFunctions0* functions0;
+
+	bbWidgetFunctions_new(&functions0);
+
+
 
 	int mapTime;
 	for (mapTime = 0; ; mapTime++) {

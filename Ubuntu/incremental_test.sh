@@ -33,6 +33,8 @@ if gcc    -I ../\
        ../engine/geometry/bbCoordinates.c\
        ../engine/user_input/bbInput.c\
        ../engine/user_input/bbMouse.c\
+       ../engine/widgets/bbWidgetFunctions.c\
+       ../games/game0/maps/map0/widgets/widgets.c\
   -lcsfml-system -lcsfml-graphics -lcsfml-window -g -lm -w\
   -o ../games/game0/game.out;
 then

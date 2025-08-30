@@ -2,6 +2,10 @@
 #define BBWIDGETFUNCTIONS_H
 
 #include "engine/widgets/bbWidget.h"
+#include "engine/geometry/bbCoordinates.h"
+#include "engine/logic/bbFlag.h"
+#include "engine/logic/bbIntTypes.h"
+#include "engine/logic/bbDictionary.h"
 
 typedef enum
 {
@@ -12,6 +16,8 @@ typedef enum
      WidgetMouseHandler,
      WidgetOnTimer
 } WidgetFunctionType;
+
+//typedef struct bbWidget bbWidget;
 
 typedef bbFlag bbWidget_Constructor (bbWidget** reference, void* widgets, bbScreenPoints screen_coords, bbWidget* parent);
 typedef bbFlag bbWidget_Update (bbWidget* widget, void* unused);
@@ -47,11 +53,12 @@ typedef struct bbWidgetFunctions0 {
      I32 OnTimers_available;
 } bbWidgetFunctions0;
 
-#endif //BBWIDGETFUNCTIONS_H
 
 
 bbFlag bbWidgetFunctions_new(bbWidgetFunctions0** self);
-bbFlag bbWidgetFunctions_populate(bbWidgetFunctions0** self);
-bbFlag bbWidgetFunctions_add(bbWidgetFunctions0** self, WidgetFunctionType fnType, void* fnPointer, char* key );
-bbFlag bbWidgetFunctions_getFunction(void** function, bbWidgetFunctions* functions, WidgetFunctionType fnType, char* key);
-bbFlag bbWidgetFunctions_getInt(bbWidgetFunctions* functions, WidgetFunctionType fnType, char* key);
+bbFlag bbWidgetFunctions_populate(bbWidgetFunctions0* self);
+bbFlag bbWidgetFunctions_add(bbWidgetFunctions0* functions, WidgetFunctionType fnType, void* fnPointer, char* key );
+bbFlag bbWidgetFunctions_getFunction(void** function, bbWidgetFunctions0* functions, WidgetFunctionType fnType, char* key);
+bbFlag bbWidgetFunctions_getInt(bbWidgetFunctions0* functions, WidgetFunctionType fnType, char* key);
+
+#endif //BBWIDGETFUNCTIONS_H

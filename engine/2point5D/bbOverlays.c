@@ -9,7 +9,7 @@ extern sfRenderWindow* testWindow;
 
 bbFlag myFunc (bbList* list, void* node, void* cl){
 	bbOverlay* overlayIcon = node;
-	printf ("label = %s\n", overlayIcon->label);
+	//printf ("label = %s\n", overlayIcon->label);
 	return Continue;
 }
 
