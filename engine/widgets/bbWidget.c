@@ -36,7 +36,7 @@ bbFlag bbWidget_mouse(bbWidget* widget, bbMouseEvent* mouseEvent, bbWidgetFuncti
 
 	bbWidget_Mouse* func = functions->Mouse[mouseInt];
 
-	return func(mouseEvent, widget);
+	return func(widget,mouseEvent);
 
 	bbHere();
 	return Continue;

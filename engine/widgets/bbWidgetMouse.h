@@ -5,12 +5,11 @@
 
 //TODO split into .h and .c files
 
-//typedef bbFlag bbWidget_Mouse(void* void_mouseEvent, void* void_widget);
+//typedef bbFlag bbWidget_Mouse (bbWidget* widget, void* void_mouseEvent);
 
-bbFlag bbWM_Viewport(void* void_mouseEvent, void* void_widget){
+bbFlag bbWM_Viewport(bbWidget* widget, void* void_mouseEvent){
 
 	bbMouseEvent* event = void_mouseEvent;
-	bbWidget* widget = void_widget;
 
 	bbScreenPointsRect rect =  widget->rect;
 	bbScreenPoints point = event->ScreenCoords;

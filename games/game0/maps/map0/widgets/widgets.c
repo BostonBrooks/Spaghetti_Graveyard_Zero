@@ -15,7 +15,7 @@ bbFlag bbWidgetFunctions_populate(bbWidgetFunctions0** self)
     //typedef bbFlag bbWidget_OnCommand (bbWidget* widget, void* data);
     bbWidgetFunctions_add(self, WidgetOnCommand, NULL, "OnCommand");
 
-    //typedef bbFlag bbWidget_Mouse (void* void_mouseEvent, void* void_widget);
+    //typedef bbFlag bbWidget_Mouse (bbWidget* widget, void* void_mouseEvent);
     bbWidgetFunctions_add(self, WidgetMouseHandler, NULL, "aMouseHandler");
 
     //typedef bbFlag bbWidget_OnTimer (bbWidget* widget, void* void_timerNode)

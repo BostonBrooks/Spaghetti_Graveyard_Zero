@@ -17,7 +17,7 @@ typedef bbFlag bbWidget_Constructor (bbWidget** reference, void* widgets, bbScre
 typedef bbFlag bbWidget_Update (bbWidget* widget, void* unused);
 typedef bbFlag bbWidget_Destructor (bbWidget* widget, void* unused);
 typedef bbFlag bbWidget_OnCommand (bbWidget* widget, void* data);
-typedef bbFlag bbWidget_Mouse (void* void_mouseEvent, void* void_widget);
+typedef bbFlag bbWidget_Mouse (bbWidget* widget, void* void_mouseEvent);
 typedef bbFlag bbWidget_OnTimer (bbWidget* widget, void* void_timerNode);
 
 typedef struct bbWidgetFunctions0 {
@@ -54,4 +54,4 @@ bbFlag bbWidgetFunctions_new(bbWidgetFunctions0** self);
 bbFlag bbWidgetFunctions_populate(bbWidgetFunctions0** self);
 bbFlag bbWidgetFunctions_add(bbWidgetFunctions0** self, WidgetFunctionType fnType, void* fnPointer, char* key );
 bbFlag bbWidgetFunctions_getFunction(void** function, bbWidgetFunctions* functions, WidgetFunctionType fnType, char* key);
-bbFlag bbWidgetFunctions_getInt(bbWidgetFunctions* WFS, WidgetFunctionType fnType, char* key);
+bbFlag bbWidgetFunctions_getInt(bbWidgetFunctions* functions, WidgetFunctionType fnType, char* key);
