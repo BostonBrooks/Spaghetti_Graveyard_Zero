@@ -103,7 +103,7 @@ bbFlag bbWidget_newLayout(bbWidget** self, bbGraphics* graphics, bbWidgets* widg
 
 bbFlag bbWidget_newEmpty(bbWidget** self, bbWidgets* widgets, bbWidget* parent){
 	bbWidget* widget; bbPool_Handle widgetHandle;
-	bbVPool_alloc(widgets->pool, &widget);
+	bbVPool_alloc(widgets->pool, (void**) &widget);
 	bbVPool_reverseLookup(widgets->pool, widget, &widgetHandle);
 
 	widget->tree.visible = true;

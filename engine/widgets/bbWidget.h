@@ -42,12 +42,16 @@ typedef struct {
 typedef struct {
 	bbVPool* pool;
 	bbTree* tree;
+
+
+	struct bbWidgetFunctions0* m_Functions;
 } bbWidgets;
 
 typedef struct {
 	bbMouseEvent* event;
 	struct bbWidgetFunctions* functions;
 
+	struct bbWidgetFunctions0* functions0;
 } mouseActionClosure;
 
 //typedef bbFlag bbDrawFunction(graphics,void* drawable, void* frameDescriptor, void* target);
