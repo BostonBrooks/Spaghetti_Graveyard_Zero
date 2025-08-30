@@ -268,7 +268,7 @@ bbFlag bbBloatedPool_lookupHeader(bbBloatedPool* pool, void** address, bbPool_Ha
 	bbAssert(lvl1index < pool->level1, "index out of bounds\n");
 	U32 lvl2index = index % pool->level2;
 	U8* lvl2 = pool->elements[lvl1index];
-	bbBloatedPool_Header *element = &lvl2[lvl2index * (sizeof(bbBloatedPool_Header) + pool->sizeOf)];
+	bbBloatedPool_Header *element = (bbBloatedPool_Header *)&lvl2[lvl2index * (sizeof(bbBloatedPool_Header) + pool->sizeOf)];
 	bbPool_Handle elementHandle = element->self;
 	//printf("col1 = %d, col2 = %d\n",handle.bloated.collision%100,
     //        elementHandle.bloated.collision%100);
@@ -282,7 +282,7 @@ bbFlag bbBloatedPool_lookupHeader(bbBloatedPool* pool, void** address, bbPool_Ha
 bbFlag bbBloatedPool_lookup(bbBloatedPool* pool, void** address, bbPool_Handle
 handle){
 	bbBloatedPool_Header* element;
-	bbBloatedPool_lookupHeader(pool, &element, handle);
+	bbBloatedPool_lookupHeader(pool, (void**)&element, handle);
 	*address = &element->userData;
 
 	return Success;

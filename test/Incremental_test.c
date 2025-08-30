@@ -114,7 +114,7 @@ CLEARWINDOW(bbPurple);
 CLEARWINDOW(bbMagenta);
 
     bbOverlays *overlays;
-    bbOverlays_new(&overlays, &graphics, 7, 9);
+    bbOverlays_new((void**)&overlays, &graphics, 7, 9);
 
     bbHere();
 

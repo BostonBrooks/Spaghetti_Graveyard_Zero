@@ -10,13 +10,13 @@ bbFlag bbVPool_newLean(bbVPool** pool, I32 sizeOf, I32 num){
 	Pool->pool = LeanPool;
 	Pool->null = LeanPool->null;
 	Pool->sizeOf = LeanPool->sizeOf;
-	Pool->delete = bbLeanPool_delete;
-	Pool->clear = bbLeanPool_clear;
-	Pool->allocImpl = bbLeanPool_allocImpl;
-	Pool->free = bbLeanPool_free;
-	Pool->lookup = bbLeanPool_lookup;
-	Pool->reverseLookup = bbLeanPool_reverseLookup;
-	Pool->handleIsEqual = bbLeanPool_handleIsEqual;
+	Pool->delete = (bbFlag (*)(void* pool)) bbLeanPool_delete;
+	Pool->clear = (bbFlag (*)(void* pool)) bbLeanPool_clear;
+	Pool->allocImpl = (bbFlag(*)(void* pool, void** address, char* file, int line)) bbLeanPool_allocImpl;
+	Pool->free = (bbFlag(*)(void* pool, void* address)) bbLeanPool_free;
+	Pool->lookup = (bbFlag (*)(void* pool, void** address, bbPool_Handle handle)) bbLeanPool_lookup;
+	Pool->reverseLookup = (bbFlag (*)(void* pool, void* address, bbPool_Handle* handle)) bbLeanPool_reverseLookup;
+	Pool->handleIsEqual = (I32 (*)(void* USUSED, bbPool_Handle A, bbPool_Handle B)) bbLeanPool_handleIsEqual;
 	*pool = Pool;
 	return Success;
 }
@@ -28,13 +28,13 @@ bbFlag bbVPool_newBloated(bbVPool** pool, I32 sizeOf, I32 level1, I32 level2){
 	Pool->pool = BloatedPool;
 	Pool->null = BloatedPool->null;
 	Pool->sizeOf = BloatedPool->sizeOf;
-	Pool->delete = bbBloatedPool_delete;
-	Pool->clear = bbBloatedPool_clear;
-	Pool->allocImpl = bbBloatedPool_allocImpl;
-	Pool->free = bbBloatedPool_free;
-	Pool->lookup = bbBloatedPool_lookup;
-	Pool->reverseLookup = bbBloatedPool_reverseLookup;
-	Pool->handleIsEqual = bbBloatedPool_handleIsEqual;
+	Pool->delete = (bbFlag (*)(void* pool)) bbBloatedPool_delete;
+	Pool->clear = (bbFlag (*)(void* pool)) bbBloatedPool_clear;
+	Pool->allocImpl = (bbFlag(*)(void* pool, void** address, char* file, int line)) bbBloatedPool_allocImpl;
+	Pool->free = (bbFlag(*)(void* pool, void* address)) bbBloatedPool_free;
+	Pool->lookup = (bbFlag (*)(void* pool, void** address, bbPool_Handle handle)) bbBloatedPool_lookup;
+	Pool->reverseLookup = (bbFlag (*)(void* pool, void* address, bbPool_Handle* handle)) bbBloatedPool_reverseLookup;
+	Pool->handleIsEqual = (I32 (*)(void* USUSED, bbPool_Handle A, bbPool_Handle B)) bbBloatedPool_handleIsEqual;
 	*pool = Pool;
 	return Success;
 }

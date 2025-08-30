@@ -49,7 +49,7 @@ squares_j){
                         bbOverlay_isCloser);
 
 			bbOverlay* overlayIcon;
-			bbVPool_alloc(pool, &overlayIcon);
+			bbVPool_alloc(pool, (void**)&overlayIcon);
 			overlayIcon->coords = bbSquareCoords_getMapCoords(overlaySquare->coords);
             overlayIcon->coords.i += rand() % (400 * POINTS_PER_PIXEL);
             overlayIcon->coords.j += rand() % (400 * POINTS_PER_PIXEL);
@@ -87,7 +87,7 @@ squares_j){
 			bbList_pushL(&overlaySquare->list, overlayIcon);
 
 
-            bbVPool_alloc(pool, &overlayIcon);
+            bbVPool_alloc(pool, (void**)&overlayIcon);
             overlayIcon->coords = bbSquareCoords_getMapCoords(overlaySquare->coords);
             overlayIcon->coords.i += rand() % (400 * POINTS_PER_PIXEL);
             overlayIcon->coords.j += rand() % (400 * POINTS_PER_PIXEL);

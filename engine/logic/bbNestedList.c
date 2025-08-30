@@ -30,7 +30,7 @@ bbFlag bbNestedList_attach(bbNestedList* nestedList, bbList* list){
 
 
     bbNestedListElement* nestedListElement;
-    bbVPool_alloc(bbNestedList_pool, &nestedListElement);
+    bbVPool_alloc(bbNestedList_pool, (void**) &nestedListElement);
     nestedListElement->list = list;
     nestedListElement->listElement.prev = bbNestedList_pool->null;
     nestedListElement->listElement.next = bbNestedList_pool->null;
@@ -45,7 +45,7 @@ bbFlag bbNestedList_attach(bbNestedList* nestedList, bbList* list){
 
 bbFlag bbNestedList_getNext(bbNestedList* nestedList, void** element){
     bbNestedListElement* nestedListElement;
-    bbFlag flag = bbList_popL(&nestedList->list, &nestedListElement);
+    bbFlag flag = bbList_popL(&nestedList->list, (void**) &nestedListElement);
     if(flag != Success) return flag;
 
 
