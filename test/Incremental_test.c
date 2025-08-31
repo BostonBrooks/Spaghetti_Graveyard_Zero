@@ -22,8 +22,8 @@ int main (void){
 
 	printf("Hello World!\n");
 	sfVideoMode mode;
+    mode.width = 720;
 	mode.height = 480;
-	mode.width = 720;
 	mode.bitsPerPixel = 32;
 	sfRenderWindow* window = sfRenderWindow_create(mode, "early demo", sfResize | sfClose, NULL);
     testWindow = window;
@@ -83,8 +83,16 @@ CLEARWINDOW(bbGreen);
 CLEARWINDOW(bbTeal);
 
 //bbHere();
-	bbWidget* layout;
+	bbWidget *layout;
+    bbWidget_Constructor* function0;
+    bbScreenPoints SP;
+    SP.x = 600*8;
+    SP.y = 50*8;
+
     bbWidget_newLayout(&layout, &graphics, &widgets, NULL);
+
+
+
 
 CLEARWINDOW(bbBlue);
 
@@ -100,12 +108,22 @@ CLEARWINDOW(bbBlue);
 
 
 //bbHere();
-	bbWidget* Viewport;
-    bbWidget_newViewport(&Viewport, &graphics, &widgets, layout, viewport);
+	bbWidget* viewportWidget;
+    bbWidget_newViewport(&viewportWidget, &graphics, &widgets, layout,
+                         viewport);
 
 CLEARWINDOW(bbPurple);
 
+    bbWidgetFunctions_getFunction((void**)&function0,
+                                  testWidgets->functions,
+                                  WidgetConstructor, "Sphere");
 
+//typedef bbFlag bbWidget_Constructor (bbWidget** reference, void* graphics,
+//                                     void* widgets, bbScreenPoints
+//                                     screen_coords, bbWidget* parent);
+
+    bbWidget *sphere;
+    function0(&sphere, &graphics, &widgets, SP, layout);
 
 
 
@@ -119,14 +137,16 @@ CLEARWINDOW(bbMagenta);
 
     bbHere();
 
-    bbWidgetFunctions0* functions0;
 
-	bbWidgetFunctions_new(&functions0);
+
 
 
 
 	int mapTime;
 	for (mapTime = 0; ; mapTime++) {
+
+        sphere->rect.left = rand()%(720*8);
+        sphere->rect.top = rand()%(480*8);
 
         viewport->viewpoint.i = 5120 * sin(mapTime / 360.0) + 7000;
         viewport->viewpoint.j = 5120 * cos(mapTime / 360.0) + 7000;

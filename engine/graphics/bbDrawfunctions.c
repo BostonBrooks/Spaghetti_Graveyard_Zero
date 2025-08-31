@@ -14,7 +14,7 @@ extern sfRenderWindow* testWindow;
 
 //typedef bbFlag bbDrawFunction(void* drawable, void* frameDescriptor, void* cl);
 bbFlag bbDF_test(void* drawable, void* frameDescriptor, void* cl) {
-	//bbHere();
+	bbHere();
 	return Success;
 }
 
@@ -41,7 +41,6 @@ bbFlag bbDF_widgetSprite(void* drawable, void* frameDescriptor, void* cl){
 
     sfRenderWindow_drawSprite(closure->target, sprite, NULL);
 
-//bbHere();
 	return Success;
 }
 

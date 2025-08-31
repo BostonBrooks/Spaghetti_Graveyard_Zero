@@ -9,6 +9,7 @@
 I32 hash(unsigned char *str, I32 n_bins)
 {
 
+    bbDebug("str = %s\n", str);
     U32 hash_value = 5381;
     U32 next;
 	I32 i = 0;

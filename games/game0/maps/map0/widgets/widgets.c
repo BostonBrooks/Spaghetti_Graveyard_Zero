@@ -2,27 +2,37 @@
 #include "engine/widgets/bbWidgetFunctions.h"
 
 #include "games/game0/maps/map0/widgets/nullfunctions.h"
+#include "games/game0/maps/map0/widgets/sphere.h"
 
 
 bbFlag bbWidgetFunctions_populate(bbWidgetFunctions0* self)
 {
     //typedef bbFlag bbWidget_Constructor (bbWidget** reference, void* widgets, bbScreenPoints screen_coords, bbWidget* parent);
-    bbWidgetFunctions_add(self, WidgetConstructor, NULL_Constructor, "NULL");
+    bbWidgetFunctions_add(self, WidgetConstructor,
+                          NULL_Constructor, "NULL Constructor");
+
+    bbWidgetFunctions_add(self, WidgetConstructor,
+                          Sphere_Constructor, "Sphere");
 
     //typedef bbFlag bbWidget_Update (bbWidget* widget, void* unused);
-    bbWidgetFunctions_add(self, WidgetUpdate, NULL_Update, "NULL");
+    bbWidgetFunctions_add(self, WidgetUpdate,
+                          NULL_Update, "NULL Update");
 
     //typedef bbFlag bbWidget_Destructor (bbWidget* widget, void* unused);
-    bbWidgetFunctions_add(self, WidgetDestructor, NULL_Destructor, "NULL");
+    bbWidgetFunctions_add(self, WidgetDestructor,
+                          NULL_Destructor, "NULL Destructor");
 
     //typedef bbFlag bbWidget_OnCommand (bbWidget* widget, void* data);
-    bbWidgetFunctions_add(self, WidgetOnCommand, NULL_OnCommand, "NULL");
+    bbWidgetFunctions_add(self, WidgetOnCommand,
+                          NULL_OnCommand, "NULL OnCommand");
 
     //typedef bbFlag bbWidget_Mouse (bbWidget* widget, void* void_mouseEvent);
-    bbWidgetFunctions_add(self, WidgetMouseHandler, NULL_Mouse, "NULL");
+    bbWidgetFunctions_add(self, WidgetMouseHandler,
+                          NULL_Mouse, "NULL Mouse");
 
     //typedef bbFlag bbWidget_OnTimer (bbWidget* widget, void* void_timerNode)
-    bbWidgetFunctions_add(self, WidgetOnTimer, NULL_OnTimer, "NULL");
+    bbWidgetFunctions_add(self, WidgetOnTimer,
+                          NULL_OnTimer, "NULL OnTimer");
 
     return Success;
 }

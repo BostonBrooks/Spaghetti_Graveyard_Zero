@@ -19,7 +19,8 @@ typedef enum
 
 //typedef struct bbWidget bbWidget;
 
-typedef bbFlag bbWidget_Constructor (bbWidget** reference, void* widgets, bbScreenPoints screen_coords, bbWidget* parent);
+typedef bbFlag bbWidget_Constructor (bbWidget** reference, void* graphics,
+                                     void* widgets, bbScreenPoints screen_coords, bbWidget* parent);
 typedef bbFlag bbWidget_Update (bbWidget* widget, void* unused);
 typedef bbFlag bbWidget_Destructor (bbWidget* widget, void* unused);
 typedef bbFlag bbWidget_OnCommand (bbWidget* widget, void* data);
@@ -59,6 +60,7 @@ bbFlag bbWidgetFunctions_new(bbWidgetFunctions0** self);
 bbFlag bbWidgetFunctions_populate(bbWidgetFunctions0* self);
 bbFlag bbWidgetFunctions_add(bbWidgetFunctions0* functions, WidgetFunctionType fnType, void* fnPointer, char* key );
 bbFlag bbWidgetFunctions_getFunction(void** function, bbWidgetFunctions0* functions, WidgetFunctionType fnType, char* key);
-bbFlag bbWidgetFunctions_getInt(bbWidgetFunctions0* functions, WidgetFunctionType fnType, char* key);
+I32 bbWidgetFunctions_getInt(bbWidgetFunctions0* functions, WidgetFunctionType
+fnType, char* key);
 
 #endif //BBWIDGETFUNCTIONS_H

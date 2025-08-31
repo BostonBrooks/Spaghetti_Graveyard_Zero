@@ -71,4 +71,7 @@ add_executable(myprogram
         test/automorphicNumbers.c
         engine/user_input/bbMouse.c
         engine/user_input/bbMouse.c
-        engine/user_input/bbMouse.c)
+        engine/user_input/bbMouse.c
+        games/game0/maps/map0/widgets/nullfunctions.h
+        engine/widgets/bbWidgetFunctions.c
+        games/game0/maps/map0/widgets/sphere.h)

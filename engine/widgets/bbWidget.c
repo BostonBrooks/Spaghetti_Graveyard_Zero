@@ -14,12 +14,13 @@
 #include "engine/widgets/bbWidget.h"
 #include "engine/logic/bbTree.h"
 #include "engine/geometry/bbCoordinates.h"
+#include "engine/widgets/bbWidgetFunctions.h"
 
 bbFlag bbWidgets_init(bbWidgets* widgets){
 	bbVPool_newBloated(&widgets->pool, sizeof(bbWidget), 1024, 1024);
 	bbTree_new(&widgets->tree, widgets->pool, offsetof(bbWidget, tree));
 
-
+    bbWidgetFunctions_new(&widgets->functions);
 }
 
 
@@ -38,7 +39,6 @@ bbFlag bbWidget_mouse(bbWidget* widget, bbMouseEvent* mouseEvent, bbWidgetFuncti
 
 	return func(widget,mouseEvent);
 
-	bbHere();
 	return Continue;
 }
 
@@ -99,6 +99,8 @@ bbFlag bbWidget_newLayout(bbWidget** self, bbGraphics* graphics, bbWidgets* widg
 	}
 
 	*self = widget;
+
+    return Success;
 }
 
 bbFlag bbWidget_newEmpty(bbWidget** self, bbWidgets* widgets, bbWidget* parent){

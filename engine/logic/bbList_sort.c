@@ -361,7 +361,7 @@ bbFlag split(bbList* list, bbPool_List A, bbPool_List* B, bbPool_List* C, I32 nu
 
     //if (num == 3)
     {
-//bbHere();
+
         void* Nth;
         bbFlag flag = getNth(list, A, &Nth, num);
 
