@@ -21,6 +21,17 @@
 #define FRAMES_PER_WIDGET 8
 
 typedef struct {
+    I32 Constructor;
+    I32 Update;
+    I32 Destructor;
+    I32 OnCommand;
+    I32 MouseHandler;
+    I32 OnTimer;
+} bbWidgetFunctionTable;
+
+typedef struct {
+
+
 	bbTree_Node tree;
 	bbScreenPointsRect rect;
 	char label[KEY_LENGTH];
@@ -30,6 +41,9 @@ typedef struct {
 	I32 text_rows;
 	I32 text_columns;
 	I32 state;
+
+
+    bbWidgetFunctionTable ftable;
 
     bbOnMouse onMouse;
     bbFrame frames[FRAMES_PER_WIDGET];
