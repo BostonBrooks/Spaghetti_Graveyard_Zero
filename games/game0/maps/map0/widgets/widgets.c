@@ -7,12 +7,17 @@
 
 bbFlag bbWidgetFunctions_populate(bbWidgetFunctions0* self)
 {
-    //typedef bbFlag bbWidget_Constructor (bbWidget** reference, void* widgets, bbScreenPoints screen_coords, bbWidget* parent);
+    //typedef bbFlag bbWidget_Constructor (bbWidget** reference, void* graphics,
+    //                                     bbWidgets* widgets, bbScreenPoints
+    //                                     screen_coords, bbWidget* parent);
     bbWidgetFunctions_add(self, WidgetConstructor,
                           NULL_Constructor, "NULL Constructor");
 
     bbWidgetFunctions_add(self, WidgetConstructor,
                           Sphere_Constructor, "Sphere");
+
+    bbWidgetFunctions_add(self, WidgetConstructor,
+                          SPHERE_Constructor, "SPHERE");
 
     //typedef bbFlag bbWidget_Update (bbWidget* widget, void* unused);
     bbWidgetFunctions_add(self, WidgetUpdate,

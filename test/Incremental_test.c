@@ -119,7 +119,7 @@ CLEARWINDOW(bbPurple);
                                   WidgetConstructor, "Sphere");
 
 //typedef bbFlag bbWidget_Constructor (bbWidget** reference, void* graphics,
-//                                     void* widgets, bbScreenPoints
+//                                     bbWidgets* widgets, bbScreenPoints
 //                                     screen_coords, bbWidget* parent);
 
     bbWidget *sphere;
@@ -138,9 +138,46 @@ CLEARWINDOW(bbMagenta);
     bbHere();
 
 
+////////////New Code to replace widgets /////////////////
 
+	bbWidgets widgets0;
+	bbWidgets_init(&widgets0);
+	bbWidget* widget0;
+	bbWidget* widget1;
 
+	bbScreenPoints SP0;
 
+	SP0.x = rand()%(720*8); SP0.y = rand()%(480*8);
+	bbWidget_constructor(&widget0, &widgets0, &graphics, SP0, NULL, "SPHERE");
+
+	bbDebug("address = %p/n", (void*) widget0);
+
+	SP0.x = rand()%(720*8); SP0.y = rand()%(480*8);
+	bbWidget_constructor(&widget1, &widgets0, &graphics, SP0, widget0, "SPHERE");
+
+	bbDebug("address = %p/n", (void*) widget0);
+	bbDebug("address = %p/n", (void*) widget1);
+
+	SP0.x = rand()%(720*8); SP0.y = rand()%(480*8);
+	bbWidget_constructor(&widget1, &widgets0, &graphics, SP0, widget0, "SPHERE");
+
+	bbDebug("address = %p/n", (void*) widget0);
+	bbDebug("address = %p/n", (void*) widget1);
+
+	SP0.x = rand()%(720*8); SP0.y = rand()%(480*8);
+	bbWidget_constructor(&widget1, &widgets0, &graphics, SP0, widget0, "SPHERE");
+
+	bbDebug("address = %p/n", (void*) widget0);
+	bbDebug("address = %p/n", (void*) widget1);
+
+	SP0.x = rand()%(720*8); SP0.y = rand()%(480*8);
+	bbWidget_constructor(&widget1, &widgets0, &graphics, SP0, widget0, "SPHERE");
+
+	bbDebug("address = %p/n", (void*) widget0);
+	bbDebug("address = %p/n", (void*) widget1);
+
+	//TODO what if "SPHERE" not found?
+////////////////////////////////////////////////////////
 
 	int mapTime;
 	for (mapTime = 0; ; mapTime++) {
@@ -165,6 +202,7 @@ CLEARWINDOW(bbMagenta);
 
         cl.target = window;
         bbWidgets_draw(&widgets, &cl);
+        bbWidgets_draw(&widgets0, &cl);
         bbMouse_draw(&mouse, window);
 
 		sfRenderWindow_display(window);

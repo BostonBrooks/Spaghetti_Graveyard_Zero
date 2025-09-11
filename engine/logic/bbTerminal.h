@@ -76,4 +76,42 @@ static const int stringLength = 512;
         __FILE_NAME__, __func__, __LINE__);
 
 
+#define bbFlag_print(flag)\
+{\
+    switch ((bbFlag)flag)\
+    {\
+    case Success:\
+        bbDebug ("Flag = Success\n");\
+        break;\
+    case None:\
+        bbDebug ("Flag = None\n");\
+        break;\
+    case Full:\
+        bbDebug ("Flag = Full\n");\
+        break;\
+    case Empty:\
+        bbDebug ("Flag = Empty\n");\
+        break;\
+    case Break:\
+        bbDebug ("Flag = Break\n");\
+        break;\
+    case Repeat:\
+        bbDebug ("Flag = Repeat\n");\
+        break;\
+    case Continue:\
+        bbDebug ("Flag = Continue\n");\
+        break;\
+    case Delete:\
+        bbDebug ("Flag = Delete\n");\
+        break;\
+    case Head:\
+        bbDebug ("Flag = Head\n");\
+        break;\
+    case Tail:\
+        bbDebug ("Flag = Tail\n");\
+        break;\
+    }\
+}\
+
+
 #endif // BBPRINTF_H

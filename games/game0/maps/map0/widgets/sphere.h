@@ -2,11 +2,11 @@
 #include "engine/widgets/bbWidget.h"
 
 //typedef bbFlag bbWidget_Constructor (bbWidget** reference, void* graphics,
-//                                     void* widgets, bbScreenPoints
+//                                     bbWidgets* widgets, bbScreenPoints
 //                                     screen_coords, bbWidget* parent);
 
 bbFlag Sphere_Constructor (bbWidget** self, void* graphics,
-                           void* widgets, bbScreenPoints screen_coords, bbWidget* parent){
+                           bbWidgets* widgets, bbScreenPoints screen_coords, bbWidget* parent){
     bbWidget* widget;
 
     bbWidget_newEmpty(&widget, widgets, parent);
@@ -27,6 +27,61 @@ bbFlag Sphere_Constructor (bbWidget** self, void* graphics,
     widget->frames[0].drawfunction = drawfunctionHandle.u64;
 
     bbDictionary_lookup(Graphics->sprites->dictionary, "SPHERE",
+                        &widget->frames[0].handle);
+
+    widget->frames[0].offset.x = 0;
+    widget->frames[0].offset.y = 0;
+
+    for (I32 i = 1; i < FRAMES_PER_WIDGET; i++) {
+        widget->frames[i].drawfunction = -1;
+    }
+
+    *self = widget;
+
+    return Success;
+}
+
+bbFlag SPHERE_Constructor (bbWidget** self, void* graphics,
+                           bbWidgets* widgets, bbScreenPoints screen_coords, bbWidget* parent)
+{
+
+    bbDebug("SPHERE Constructor\n");
+    bbWidget* widget; bbPool_Handle widgetHandle;
+    bbFlag flag = bbVPool_alloc(widgets->pool, (void**) &widget);
+    bbFlag_print(flag);
+    bbVPool_reverseLookup(widgets->pool, widget, &widgetHandle);
+    widget->tree.visible = true;
+    widget->tree.childrenvisible = true;
+    //  widget->ftable.MouseHandler =
+    //  bbWidgetFunctions_getInt(bbWidgetFunctions0* functions,
+    //    WidgetFunctionType fnType, char * key);
+    widget->ftable.MouseHandler = 0;
+
+    if (parent == NULL){
+        widgets->tree->root = widgetHandle;
+    } else {
+        bbTreeNode_setParent(widgets->tree, widget, parent);
+    }
+
+    for (I32 i = 0; i < FRAMES_PER_WIDGET; i++) {
+        widget->frames[i].drawfunction = -1;
+    }
+    bbScreenPointsRect rect;
+
+    rect.left = screen_coords.x;
+    rect.top = screen_coords.y;
+    rect.width = 1;
+    rect.height = 1;
+
+    widget->rect = rect;
+
+    bbGraphics* Graphics = graphics;
+    bbPool_Handle drawfunctionHandle;
+    bbDictionary_lookup(Graphics->drawfunctions->dictionary, "WIDGETSPRITE",
+                        &drawfunctionHandle);
+    widget->frames[0].drawfunction = drawfunctionHandle.u64;
+
+    bbDictionary_lookup(Graphics->sprites->dictionary, "KITTY_1",
                         &widget->frames[0].handle);
 
     widget->frames[0].offset.x = 0;
