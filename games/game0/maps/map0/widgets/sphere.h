@@ -1,5 +1,6 @@
 #include "engine/logic/bbFlag.h"
 #include "engine/widgets/bbWidget.h"
+#include "engine/widgets/bbWidgetFunctions.h"
 
 //typedef bbFlag bbWidget_Constructor (bbWidget** reference, void* graphics,
 //                                     bbWidgets* widgets, bbScreenPoints
@@ -45,10 +46,10 @@ bbFlag SPHERE_Constructor (bbWidget** self, void* graphics,
                            bbWidgets* widgets, bbScreenPoints screen_coords, bbWidget* parent)
 {
 
-    bbDebug("SPHERE Constructor\n");
+
     bbWidget* widget; bbPool_Handle widgetHandle;
     bbFlag flag = bbVPool_alloc(widgets->pool, (void**) &widget);
-    bbFlag_print(flag);
+
     bbVPool_reverseLookup(widgets->pool, widget, &widgetHandle);
     widget->tree.visible = true;
     widget->tree.childrenvisible = true;
@@ -84,6 +85,11 @@ bbFlag SPHERE_Constructor (bbWidget** self, void* graphics,
     bbDictionary_lookup(Graphics->sprites->dictionary, "KITTY_1",
                         &widget->frames[0].handle);
 
+    int funcInt = bbWidgetFunctions_getInt(widgets->functions,
+    WidgetMouseHandler, "SPHERE");
+
+    widget->ftable.MouseHandler = funcInt;
+
     widget->frames[0].offset.x = 0;
     widget->frames[0].offset.y = 0;
 
@@ -93,5 +99,16 @@ bbFlag SPHERE_Constructor (bbWidget** self, void* graphics,
 
     *self = widget;
 
+    bbAssert(widget != NULL, "null address\n");
+
     return Success;
+}
+
+//If the mouse is over the widget, move the widget.
+bbFlag SPHERE_Mouse (bbWidget* widget, void* void_mouseEvent)
+{
+    bbDebug("SPHERE Mouse\n");
+
+
+    return Continue;
 }
