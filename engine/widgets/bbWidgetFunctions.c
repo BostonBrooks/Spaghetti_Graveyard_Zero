@@ -102,6 +102,8 @@ bbFlag bbWidgetFunctions_add(bbWidgetFunctions0* functions, WidgetFunctionType f
         functions->MouseHandler[available] = fnPointer;
         handle.u64 = available;
         bbDictionary_add(functions->MouseHandler_dict, key, handle);
+
+
         return Success;
 
     case WidgetOnTimer:

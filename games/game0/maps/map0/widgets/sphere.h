@@ -89,7 +89,10 @@ bbFlag SPHERE_Constructor (bbWidget** self, void* graphics,
     int funcInt = bbWidgetFunctions_getInt(widgets->functions,
     WidgetMouseHandler, "SPHERE");
 
-    widget->ftable.MouseHandler = funcInt;
+    //bbDebug("funcInt = %d\n", funcInt);
+
+    // TODO funcInt is hardcoded for debugging
+    widget->ftable.MouseHandler = 0;
 
     widget->frames[0].offset.x = 0;
     widget->frames[0].offset.y = 0;
