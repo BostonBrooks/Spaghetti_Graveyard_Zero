@@ -35,6 +35,10 @@ bbFlag bbWidgetFunctions_populate(bbWidgetFunctions0* self)
     bbWidgetFunctions_add(self, WidgetMouseHandler,
                           NULL_Mouse, "NULL Mouse");
 
+    //typedef bbFlag bbWidget_Mouse (bbWidget* widget, void* void_mouseEvent);
+    bbWidgetFunctions_add(self, WidgetMouseHandler,
+                          SPHERE_Mouse, "SPHERE");
+
     //typedef bbFlag bbWidget_OnTimer (bbWidget* widget, void* void_timerNode)
     bbWidgetFunctions_add(self, WidgetOnTimer,
                           NULL_OnTimer, "NULL OnTimer");
