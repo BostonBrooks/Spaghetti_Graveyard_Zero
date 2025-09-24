@@ -42,7 +42,6 @@ bbFlag bbWidgetFunctions_new(bbWidgetFunctions0** self)
 
 
 
-    bbWidgetFunctions_populate(functions);
 
     *self = functions;
     return Success;

@@ -20,6 +20,11 @@ bbFlag bbBloatedPool_print (bbBloatedPool* pool);
 bbFlag bbBloatedPool_getHeader(bbBloatedPool_Header** header, void* address){
 	size_t offset = offsetof(bbBloatedPool_Header, userData);
 	*header = address - offset;
+
+	bbDebug ("address = %p\n", address);
+// TODO variable header not valid!
+	bbBloatedPool_Header* hdr= address - offset;
+	hdr->file[1] = 'z';
 	return Success;
 }
 
@@ -289,8 +294,13 @@ handle){
 }
 
 bbFlag bbBloatedPool_reverseLookup(bbBloatedPool* pool, void* address, bbPool_Handle* handle){
+	bbAssert(handle != NULL, "handle is NULL\n");
+	bbAssert(address != NULL, "address is NULL\n");
+	bbAssert(pool != NULL, "pool is NULL\n");
 	bbBloatedPool_Header* element;
 	bbBloatedPool_getHeader(&element, address);
+	//handle->u64 = 0; handle is good, element is questionable
+	//element->file[0] = 'z'; element is bad, cannot write to element
 	*handle = element->self;
 	return Success;
 }

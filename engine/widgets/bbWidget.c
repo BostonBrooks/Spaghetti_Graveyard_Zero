@@ -21,6 +21,8 @@ bbFlag bbWidgets_init(bbWidgets* widgets){
 	bbTree_new(&widgets->tree, widgets->pool, offsetof(bbWidget, tree));
 
     bbWidgetFunctions_new(&widgets->functions);
+
+	bbWidgetFunctions_populate(widgets->functions);
 }
 
 
@@ -205,4 +207,15 @@ bbFlag bbWidgets_onMouse(bbWidgets* widgets, void* cl) {
 	void* root;
 	bbVPool_lookup(pool, &root, tree->root);
 	return bbTree_ascendingMapVisible(tree, root, bbWidget_mouseFunc, cl);
+}
+
+bbFlag bbWidget_constructor(bbWidget** self, bbWidgets* widgets, bbGraphics* graphics,
+	bbScreenPoints location, bbWidget* parent, char* key)
+{
+	bbWidget_Constructor* function;
+	bbWidgetFunctions_getFunction((void**)&function,widgets->functions,WidgetConstructor, key);
+	bbWidget* widget;
+	function(&widget, graphics,widgets,location, parent);
+
+	return Success;
 }

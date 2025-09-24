@@ -20,7 +20,7 @@ typedef enum
 //typedef struct bbWidget bbWidget;
 
 typedef bbFlag bbWidget_Constructor (bbWidget** reference, void* graphics,
-                                     void* widgets, bbScreenPoints screen_coords, bbWidget* parent);
+                                     bbWidgets* widgets, bbScreenPoints screen_coords, bbWidget* parent);
 typedef bbFlag bbWidget_Update (bbWidget* widget, void* unused);
 typedef bbFlag bbWidget_Destructor (bbWidget* widget, void* unused);
 typedef bbFlag bbWidget_OnCommand (bbWidget* widget, void* data);

@@ -9,7 +9,6 @@
 I32 hash(unsigned char *str, I32 n_bins)
 {
 
-    bbDebug("str = %s\n", str);
     U32 hash_value = 5381;
     U32 next;
 	I32 i = 0;
@@ -127,9 +126,7 @@ bbFlag bbDictionary_lookup(bbDictionary* dict, char* key, bbPool_Handle* value){
 	bbDictionary_entry* entry = bbDictionary_indexLookup(dict, index);
 	*value = entry->m_Value;
 
-	if (entry->m_Value.u64 == 5){
-		//bbDebug("value = 5 -> key = %s\n", key);
-	}
+
 
 	return Success;
 }
