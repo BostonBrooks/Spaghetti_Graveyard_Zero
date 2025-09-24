@@ -31,8 +31,9 @@ bbFlag bbMouse_update(bbMouse* mouse, sfEvent* event){
 			cl.event = &mouseEvent;
 			cl.functions = testFunctions;
 
+            //TODO call onMouse in main?
+			//bbWidgets_onMouse(testWidgets, &cl);
 
-			bbWidgets_onMouse(testWidgets, &cl);
             break;
         default:{
             bbDebug("input not recognised\n");

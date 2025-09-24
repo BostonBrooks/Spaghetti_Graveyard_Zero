@@ -50,6 +50,7 @@ bbFlag SPHERE_Constructor (bbWidget** self, void* graphics,
     bbWidget* widget; bbPool_Handle widgetHandle;
     bbFlag flag = bbVPool_alloc(widgets->pool, (void**) &widget);
 
+    bbAssert(widget != NULL, "null address\n");
     bbVPool_reverseLookup(widgets->pool, widget, &widgetHandle);
     widget->tree.visible = true;
     widget->tree.childrenvisible = true;

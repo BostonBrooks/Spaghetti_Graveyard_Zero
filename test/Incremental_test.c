@@ -155,31 +155,26 @@ CLEARWINDOW(bbMagenta);
 	SP0.x = rand()%(720*8); SP0.y = rand()%(480*8);
 	bbWidget_constructor(&widget1, &widgets0, &graphics, SP0, widget0, "SPHERE");
 
-    bbAssert(widget0 != NULL, "Returned NULL address\n");
     bbAssert(widget1 != NULL, "Returned NULL address\n");
 
 	SP0.x = rand()%(720*8); SP0.y = rand()%(480*8);
 	bbWidget_constructor(&widget1, &widgets0, &graphics, SP0, widget0, "SPHERE");
 
-    bbAssert(widget0 != NULL, "Returned NULL address\n");
     bbAssert(widget1 != NULL, "Returned NULL address\n");
 
 	SP0.x = rand()%(720*8); SP0.y = rand()%(480*8);
 	bbWidget_constructor(&widget1, &widgets0, &graphics, SP0, widget0, "SPHERE");
 
-    bbAssert(widget0 != NULL, "Returned NULL address\n");
     bbAssert(widget1 != NULL, "Returned NULL address\n");
 
 	SP0.x = rand()%(720*8); SP0.y = rand()%(480*8);
 	bbWidget_constructor(&widget1, &widgets0, &graphics, SP0, widget0, "SPHERE");
 
-
-    bbAssert(widget0 != NULL, "Returned NULL address\n");
     bbAssert(widget1 != NULL, "Returned NULL address\n");
 
 	//TODO what if "SPHERE" not found?
 ////////////////////////////////////////////////////////
-
+    CLEARWINDOW(bbRed);
 
 
 	int mapTime;
@@ -190,6 +185,12 @@ CLEARWINDOW(bbMagenta);
 
         viewport->viewpoint.i = 5120 * sin(mapTime / 360.0) + 7000;
         viewport->viewpoint.j = 5120 * cos(mapTime / 360.0) + 7000;
+
+        mouseActionClosure closure;
+
+        closure.event = NULL;
+        closure.functions = widgets0.functions;
+        bbWidgets_onMouse(&widgets0, &closure);
 
 	if (mapTime % 50 == 0) bbPrintf("mapTime = %d\n", mapTime);
 		cl.mapTime = mapTime;

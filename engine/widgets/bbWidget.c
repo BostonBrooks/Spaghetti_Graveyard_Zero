@@ -29,13 +29,15 @@ bbFlag bbWidgets_init(bbWidgets* widgets){
 
 //bbFlag testFunc(bbTree* tree, void* node, void* cl)
 bbFlag bbWidget_mouseFunc(bbTree* tree, void* node, void* cl){
+    bbHere();
 	bbWidget* widget = node;
 	mouseActionClosure* closure = cl;
 	return bbWidget_mouse(widget, closure->event, closure->functions);
 }
 
 bbFlag bbWidget_mouse(bbWidget* widget, bbMouseEvent* mouseEvent, bbWidgetFunctions* functions){
-	I32 mouseInt = widget->onMouse.onMouse;
+    bbHere();
+	I32 mouseInt = widget->ftable.MouseHandler;
 
 	bbWidget_Mouse* func = functions->Mouse[mouseInt];
 
@@ -202,6 +204,7 @@ bbFlag bbWidgets_draw(bbWidgets* widgets, void* cl) {
 
 //in the following function, cl contains fields such as mouse coordinates, mouse action
 bbFlag bbWidgets_onMouse(bbWidgets* widgets, void* cl) {
+    bbHere();
 	bbTree* tree = widgets->tree;
 	bbVPool* pool = tree->pool;
 	void* root;
@@ -217,5 +220,6 @@ bbFlag bbWidget_constructor(bbWidget** self, bbWidgets* widgets, bbGraphics* gra
 	bbWidget* widget;
 	function(&widget, graphics,widgets,location, parent);
 
+    *self = widget;
 	return Success;
 }
