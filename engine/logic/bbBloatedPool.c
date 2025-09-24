@@ -21,8 +21,7 @@ bbFlag bbBloatedPool_getHeader(bbBloatedPool_Header** header, void* address){
 	size_t offset = offsetof(bbBloatedPool_Header, userData);
 	*header = address - offset;
 
-	bbDebug ("address = %p\n", address);
-// TODO variable header not valid!
+
 	bbBloatedPool_Header* hdr= address - offset;
 	hdr->file[1] = 'z';
 	return Success;
