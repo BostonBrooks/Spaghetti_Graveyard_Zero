@@ -30,8 +30,7 @@ typedef struct {
 } bbWidgetFunctionTable;
 
 typedef struct {
-
-
+    //It is important that "bbTree_Node tree;" is the first element
 	bbTree_Node tree;
 	bbScreenPointsRect rect;
 	char label[KEY_LENGTH];
