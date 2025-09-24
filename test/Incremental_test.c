@@ -150,34 +150,37 @@ CLEARWINDOW(bbMagenta);
 	SP0.x = rand()%(720*8); SP0.y = rand()%(480*8);
 	bbWidget_constructor(&widget0, &widgets0, &graphics, SP0, NULL, "SPHERE");
 
-	bbDebug("address = %p/n", (void*) widget0);
+    bbAssert(widget0 != NULL, "Returned NULL address\n");
 
 	SP0.x = rand()%(720*8); SP0.y = rand()%(480*8);
 	bbWidget_constructor(&widget1, &widgets0, &graphics, SP0, widget0, "SPHERE");
 
-	bbDebug("address = %p/n", (void*) widget0);
-	bbDebug("address = %p/n", (void*) widget1);
+    bbAssert(widget0 != NULL, "Returned NULL address\n");
+    bbAssert(widget1 != NULL, "Returned NULL address\n");
 
 	SP0.x = rand()%(720*8); SP0.y = rand()%(480*8);
 	bbWidget_constructor(&widget1, &widgets0, &graphics, SP0, widget0, "SPHERE");
 
-	bbDebug("address = %p/n", (void*) widget0);
-	bbDebug("address = %p/n", (void*) widget1);
+    bbAssert(widget0 != NULL, "Returned NULL address\n");
+    bbAssert(widget1 != NULL, "Returned NULL address\n");
 
 	SP0.x = rand()%(720*8); SP0.y = rand()%(480*8);
 	bbWidget_constructor(&widget1, &widgets0, &graphics, SP0, widget0, "SPHERE");
 
-	bbDebug("address = %p/n", (void*) widget0);
-	bbDebug("address = %p/n", (void*) widget1);
+    bbAssert(widget0 != NULL, "Returned NULL address\n");
+    bbAssert(widget1 != NULL, "Returned NULL address\n");
 
 	SP0.x = rand()%(720*8); SP0.y = rand()%(480*8);
 	bbWidget_constructor(&widget1, &widgets0, &graphics, SP0, widget0, "SPHERE");
 
-	bbDebug("address = %p/n", (void*) widget0);
-	bbDebug("address = %p/n", (void*) widget1);
+
+    bbAssert(widget0 != NULL, "Returned NULL address\n");
+    bbAssert(widget1 != NULL, "Returned NULL address\n");
 
 	//TODO what if "SPHERE" not found?
 ////////////////////////////////////////////////////////
+
+
 
 	int mapTime;
 	for (mapTime = 0; ; mapTime++) {
