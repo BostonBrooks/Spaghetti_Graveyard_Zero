@@ -132,19 +132,19 @@ I32 bbWidgetFunctions_getInt(bbWidgetFunctions0* functions,
             dict = functions->Constructor_dict;
             break;
         case WidgetUpdate:
-            dict = functions->Constructor_dict;
+            dict = functions->Update_dict;
             break;
         case WidgetDestructor:
-            dict = functions->Constructor_dict;
+            dict = functions->Destructor_dict;
             break;
         case WidgetOnCommand:
-            dict = functions->Constructor_dict;
+            dict = functions->OnCommand_dict;
             break;
         case WidgetMouseHandler:
-            dict = functions->Constructor_dict;
+            dict = functions->MouseHandler_dict;
             break;
         case WidgetOnTimer:
-            dict = functions->Constructor_dict;
+            dict = functions->OnTimers_dict;
             break;
     }
 

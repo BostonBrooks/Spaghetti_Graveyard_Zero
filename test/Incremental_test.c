@@ -190,7 +190,7 @@ bbDebug("Doing mouse action\n");
         mouseActionClosure closure;
 
         closure.event = NULL;
-        closure.functions = widgets0.functions;
+        closure.functions0 = widgets0.functions;
         bbWidgets_onMouse(&widgets0, &closure);
 
 	if (mapTime % 50 == 0) bbPrintf("mapTime = %d\n", mapTime);

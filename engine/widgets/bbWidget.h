@@ -88,7 +88,8 @@ typedef struct bbWidgetFunctions{
 bbFlag bbWidget_newEmpty(bbWidget** self, bbWidgets* widgets, bbWidget* parent);
 bbFlag bbWidget_constructor(bbWidget** self, bbWidgets* widgets, bbGraphics* graphics, bbScreenPoints location, bbWidget* parent, char* key);
 bbFlag bbWidget_draw(bbWidget* widget, drawFuncClosure* cl);
-bbFlag bbWidget_mouse(bbWidget* widget, bbMouseEvent* mouseEvent, bbWidgetFunctions* functions);
+bbFlag bbWidget_mouse(bbWidget* widget, bbMouseEvent* mouseEvent,
+                      struct bbWidgetFunctions0* functions);
 bbFlag bbWidget_newLayout(bbWidget** self, bbGraphics* graphics, bbWidgets* widgets, bbWidget* parent);
 bbFlag bbWidgets_init(bbWidgets* widgets);
 

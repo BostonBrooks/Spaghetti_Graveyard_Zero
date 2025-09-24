@@ -32,14 +32,16 @@ bbFlag bbWidget_mouseFunc(bbTree* tree, void* node, void* cl){
 
 	bbWidget* widget = node;
 	mouseActionClosure* closure = cl;
-	return bbWidget_mouse(widget, closure->event, closure->functions);
+	return bbWidget_mouse(widget, closure->event, closure->functions0);
 }
 
-bbFlag bbWidget_mouse(bbWidget* widget, bbMouseEvent* mouseEvent, bbWidgetFunctions* functions){
+bbFlag bbWidget_mouse(bbWidget* widget, bbMouseEvent* mouseEvent,
+                      bbWidgetFunctions0* functions){
 
 	I32 mouseInt = widget->ftable.MouseHandler;
 
-	bbWidget_Mouse* func = functions->Mouse[mouseInt];
+
+	bbWidget_Mouse* func = functions->MouseHandler[mouseInt];
     bbAssert(func != NULL, "Bad bbWidget_Mouse* func\n");
 	return func(widget,mouseEvent);
 
