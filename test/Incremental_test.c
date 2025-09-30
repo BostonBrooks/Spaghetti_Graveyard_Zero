@@ -122,8 +122,7 @@ CLEARWINDOW(bbPurple);
 //                                     bbWidgets* widgets, bbScreenPoints
 //                                     screen_coords, bbWidget* parent);
 
-    bbWidget *sphere;
-    function0(&sphere, &graphics, &widgets, SP, layout);
+
 
 
 
@@ -180,8 +179,6 @@ CLEARWINDOW(bbMagenta);
 	int mapTime;
 	for (mapTime = 0; ; mapTime++) {
 
-        sphere->rect.left = rand()%(720*8);
-        sphere->rect.top = rand()%(480*8);
 
         viewport->viewpoint.i = 5120 * sin(mapTime / 360.0) + 7000;
         viewport->viewpoint.j = 5120 * cos(mapTime / 360.0) + 7000;
