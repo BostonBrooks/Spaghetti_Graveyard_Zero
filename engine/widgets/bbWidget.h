@@ -63,6 +63,7 @@ typedef struct {
 	struct bbWidgetFunctions* functions;
 
 	struct bbWidgetFunctions0* functions0;
+	bbMouse* mouse;
 } mouseActionClosure;
 
 //typedef bbFlag bbDrawFunction(graphics,void* drawable, void* frameDescriptor, void* target);
@@ -72,7 +73,7 @@ typedef bbFlag bbWidget_Constructor (bbWidget** reference, void* graphics,
 typedef bbFlag bbWidget_Update (bbWidget* widget, void* unused);
 typedef bbFlag bbWidget_Destructor (bbWidget* widget, void* unused);
 typedef bbFlag bbWidget_OnCommand (bbWidget* widget, void* data);
-typedef bbFlag bbWidget_Mouse(bbWidget* widget, void* void_mouseEvent);
+typedef bbFlag bbWidget_Mouse(bbWidget* widget, void* cl);
 typedef bbFlag bbWidget_OnTimer (bbWidget* widget, void* void_timerNode);
 
 
@@ -88,8 +89,7 @@ typedef struct bbWidgetFunctions{
 bbFlag bbWidget_newEmpty(bbWidget** self, bbWidgets* widgets, bbWidget* parent);
 bbFlag bbWidget_constructor(bbWidget** self, bbWidgets* widgets, bbGraphics* graphics, bbScreenPoints location, bbWidget* parent, char* key);
 bbFlag bbWidget_draw(bbWidget* widget, drawFuncClosure* cl);
-bbFlag bbWidget_mouse(bbWidget* widget, bbMouseEvent* mouseEvent,
-                      struct bbWidgetFunctions0* functions);
+bbFlag bbWidget_mouse(bbWidget* widget, struct bbWidgetFunctions0* functions, void* cl);
 bbFlag bbWidget_newLayout(bbWidget** self, bbGraphics* graphics, bbWidgets* widgets, bbWidget* parent);
 bbFlag bbWidgets_init(bbWidgets* widgets);
 
