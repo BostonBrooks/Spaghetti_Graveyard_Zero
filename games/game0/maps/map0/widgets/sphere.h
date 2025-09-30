@@ -72,8 +72,8 @@ bbFlag SPHERE_Constructor (bbWidget** self, void* graphics,
 
     rect.left = screen_coords.x;
     rect.top = screen_coords.y;
-    rect.width = 1;
-    rect.height = 1;
+    rect.width = SCREEN_PPP * 52;
+    rect.height = SCREEN_PPP * 52;
 
     widget->rect = rect;
 
@@ -83,7 +83,7 @@ bbFlag SPHERE_Constructor (bbWidget** self, void* graphics,
                         &drawfunctionHandle);
     widget->frames[0].drawfunction = drawfunctionHandle.u64;
 
-    bbDictionary_lookup(Graphics->sprites->dictionary, "KITTY_1",
+    bbDictionary_lookup(Graphics->sprites->dictionary, "SPHERE",
                         &widget->frames[0].handle);
 
     int funcInt = bbWidgetFunctions_getInt(widgets->functions,
