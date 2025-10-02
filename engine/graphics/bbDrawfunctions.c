@@ -177,10 +177,16 @@ bbFlag bbDF_eyeCandyTest(void* drawable, void* frameDescriptor, void* cl){
     drawFuncClosure* foo = cl;
 
     //bbDebug("eye candy\n", overlay->label);
-    I32 spriteInt = 8;
+	I32 animationInt = 7;
 
     bbGraphics* graphics = foo->graphics;
-    sfSprite* sprite = graphics->sprites->sprites[spriteInt];
+	I32 time = foo->mapTime;
+	bbAnimation* animation = graphics->animations->animations[animationInt];
+	I32 frames = animation->frames;
+	I32 frame = time % frames;
+	I32 spriteInt = animation->Sprites[frame].u64;
+	bbSprites* sprites = animation->sprites;
+	sfSprite* sprite = sprites->sprites[spriteInt];
 
 
     bbViewport* VP = foo->target;
@@ -197,6 +203,7 @@ bbFlag bbDF_eyeCandyTest(void* drawable, void* frameDescriptor, void* cl){
     return Success;
 
 }
+
 
 bbFlag bbDrawfunctions_new(bbDrawfunctions** drawfunctions){
 	I32 num = 8;
