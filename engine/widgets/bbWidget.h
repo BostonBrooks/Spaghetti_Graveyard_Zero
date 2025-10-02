@@ -41,6 +41,7 @@ typedef struct {
 	I32 text_columns;
 	I32 state;
 
+    I32 pointer;
 
     bbWidgetFunctionTable ftable;
 
