@@ -73,22 +73,23 @@ CLEARWINDOW(bbGreen);
 
 	bbWidgetFunctions functions;
 	bbWidgetMouse_new(&functions);
-	testFunctions = &functions;
+	//testFunctions = &functions;
 
 
 	bbWidgets widgets;
 	bbWidgets_init(&widgets);
-	testWidgets = &widgets;
+	//testWidgets = &widgets;
 
 CLEARWINDOW(bbTeal);
 
 //bbHere();
 	bbWidget *layout;
-    bbWidget_Constructor* function0;
+//    bbWidget_Constructor* function0;
     bbScreenPoints SP;
     SP.x = 600*8;
     SP.y = 50*8;
 
+	//Does not need to be listed in constructor table
     bbWidget_newLayout(&layout, &graphics, &widgets, NULL);
 
 
@@ -109,14 +110,15 @@ CLEARWINDOW(bbBlue);
 
 //bbHere();
 	bbWidget* viewportWidget;
+	//Does not need to be listed in constructor table
     bbWidget_newViewport(&viewportWidget, &graphics, &widgets, layout,
                          viewport);
 
 CLEARWINDOW(bbPurple);
 
-    bbWidgetFunctions_getFunction((void**)&function0,
-                                  testWidgets->functions,
-                                  WidgetConstructor, "Sphere");
+//    bbWidgetFunctions_getFunction((void**)&function0,
+//                                  testWidgets->functions,
+//                                  WidgetConstructor, "Sphere");
 
 //typedef bbFlag bbWidget_Constructor (bbWidget** reference, void* graphics,
 //                                     bbWidgets* widgets, bbScreenPoints
@@ -139,35 +141,35 @@ CLEARWINDOW(bbMagenta);
 
 ////////////New Code to replace widgets /////////////////
 
-	bbWidgets widgets0;
-	bbWidgets_init(&widgets0);
+	//bbWidgets widgets0;
+	//bbWidgets_init(&widgets0);
 	bbWidget* widget0;
 	bbWidget* widget1;
 
 	bbScreenPoints SP0;
 
 	SP0.x = rand()%(720*8); SP0.y = rand()%(480*8);
-	bbWidget_constructor(&widget0, &widgets0, &graphics, SP0, NULL, "SPHERE");
+	bbWidget_constructor(&widget0, &widgets, &graphics, SP0, layout, "SPHERE");
 
     bbAssert(widget0 != NULL, "Returned NULL address\n");
 
 	SP0.x = rand()%(720*8); SP0.y = rand()%(480*8);
-	bbWidget_constructor(&widget1, &widgets0, &graphics, SP0, widget0, "SPHERE");
+	bbWidget_constructor(&widget1, &widgets, &graphics, SP0, widget0, "SPHERE");
 
     bbAssert(widget1 != NULL, "Returned NULL address\n");
 
 	SP0.x = rand()%(720*8); SP0.y = rand()%(480*8);
-	bbWidget_constructor(&widget1, &widgets0, &graphics, SP0, widget0, "SPHERE");
+	bbWidget_constructor(&widget1, &widgets, &graphics, SP0, widget0, "SPHERE");
 
     bbAssert(widget1 != NULL, "Returned NULL address\n");
 
 	SP0.x = rand()%(720*8); SP0.y = rand()%(480*8);
-	bbWidget_constructor(&widget1, &widgets0, &graphics, SP0, widget0, "SPHERE");
+	bbWidget_constructor(&widget1, &widgets, &graphics, SP0, widget0, "SPHERE");
 
     bbAssert(widget1 != NULL, "Returned NULL address\n");
 
 	SP0.x = rand()%(720*8); SP0.y = rand()%(480*8);
-	bbWidget_constructor(&widget1, &widgets0, &graphics, SP0, widget0, "SPHERE");
+	bbWidget_constructor(&widget1, &widgets, &graphics, SP0, widget0, "SPHERE");
 
     bbAssert(widget1 != NULL, "Returned NULL address\n");
 
@@ -186,9 +188,9 @@ CLEARWINDOW(bbMagenta);
         mouseActionClosure closure;
 
         closure.event = NULL;
-        closure.functions0 = widgets0.functions;
+        closure.functions0 = widgets.functions;
 		closure.mouse = &mouse;
-        bbWidgets_onMouse(&widgets0, &closure);
+        bbWidgets_onMouse(&widgets, &closure);
 
 	if (mapTime % 50 == 0) bbPrintf("mapTime = %d\n", mapTime);
 		cl.mapTime = mapTime;
@@ -196,7 +198,6 @@ CLEARWINDOW(bbMagenta);
         cl.graphics = &graphics;
 
         cl.target = viewport;
-        //bbOverlay_drawTest(overlays, viewport, &graphics);
 
 
         bbOverlays_draw(overlays, &cl);
@@ -204,7 +205,6 @@ CLEARWINDOW(bbMagenta);
 
         cl.target = window;
         bbWidgets_draw(&widgets, &cl);
-        bbWidgets_draw(&widgets0, &cl);
         bbMouse_draw(&mouse, window);
 
 		sfRenderWindow_display(window);

@@ -97,7 +97,10 @@ bbFlag bbWidget_newLayout(bbWidget** self, bbGraphics* graphics, bbWidgets* widg
 	widget->frames[0].offset.x = 0;
 	widget->frames[0].offset.y = 0;
 
-
+	int funcInt = bbWidgetFunctions_getInt(widgets->functions,
+	WidgetMouseHandler, "NULL Mouse");
+	bbDebug("funcInt = %d\n", funcInt);
+	widget->ftable.MouseHandler = funcInt;
 
 
 	for (I32 i = 1; i < FRAMES_PER_WIDGET; i++) {
@@ -180,6 +183,11 @@ bbFlag bbWidget_newViewport(bbWidget** self, bbGraphics* graphics,
     rect.top = 12 * POINTS_PER_PIXEL;
     rect.width = 466 * POINTS_PER_PIXEL;
     rect.height = 456 * POINTS_PER_PIXEL;
+
+	int funcInt = bbWidgetFunctions_getInt(widgets->functions,
+	WidgetMouseHandler, "NULL Mouse");
+	bbDebug("funcInt = %d\n", funcInt);
+	widget->ftable.MouseHandler = funcInt;
 
     widget->rect = rect;
 

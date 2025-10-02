@@ -28,8 +28,8 @@ bbFlag NULL_OnCommand (bbWidget* widget, void* data)
 
 bbFlag NULL_Mouse (bbWidget* widget, void* void_mouseEvent)
 {
-    bbDebug("NULL Mouse\n");
-    return Continue;
+    //bbDebug("NULL Mouse\n");
+    return Break;
 }
 
 bbFlag NULL_OnTimer (bbWidget* widget, void* void_timerNode)
