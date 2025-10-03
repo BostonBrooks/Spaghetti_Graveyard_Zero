@@ -1,4 +1,4 @@
-Number of Sprites:,87,,,,,,,,,,,,
+Number of Sprites:,94,,,,,,,,,,,,
 Label:,Integer Address:,Texture:,Left:,Top:,Width:,Height:,Origin X:,Origin Y:,Scale X:,Scale Y:,Scale By:,Comment:,
 NULL,0,NULL,0,0,128,128,0,0,1,1,None,Exception,
 LAYOUT_480,1,LAYOUT_480,0,0,720,480,0,0,1,1,None,The root of the widget tree,
@@ -86,4 +86,11 @@ KITTY_74,82,KITTY,960,3688,480,461,242,440,0.2,0.2,Widget,Animation,
 KITTY_75,83,KITTY,1440,3688,480,461,242,440,0.2,0.2,Widget,Animation,
 KITTY_76,84,KITTY,1920,3688,480,461,242,440,0.2,0.2,Widget,Animation,
 GLOVE,85,GLOVE,0,0,32,32,0,0,0.8,0.8,None,Mouse pointer,
-KITTY_SMALL,86,KITTY,0,0,480,461,242,440,0.025,0.025,Widget,Overlay,end
+KITTY_SMALL,86,KITTY,0,0,480,461,242,440,0.025,0.025,Widget,Overlay,
+POINTER_RED,87,POINTER,0,0,12,19,0,0,1.0,1.0,None, Coloured Pointer,
+POINTER_YELLOW,88,POINTER,13,0,12,19,0,0,1.0,1.0,None, Coloured Pointer,
+POINTER_GREEN,89,POINTER,26,0,12,19,0,0,1.0,1.0,None, Coloured Pointer,
+POINTER_CYAN,90,POINTER,39,0,12,19,0,0,1.0,1.0,None, Coloured Pointer,
+POINTER_BLUE,91,POINTER,52,0,12,19,0,0,1.0,1.0,None, Coloured Pointer,
+POINTER_MAGENTA,92,POINTER,65,0,12,19,0,0,1.0,1.0,None, Coloured Pointer,
+BOX,93,BOX,0,0,52,52,0,0,1.0,1.0,None, A simple asset,end

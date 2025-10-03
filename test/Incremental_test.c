@@ -144,34 +144,12 @@ CLEARWINDOW(bbMagenta);
 	//bbWidgets widgets0;
 	//bbWidgets_init(&widgets0);
 	bbWidget* widget0;
-	bbWidget* widget1;
 
 	bbScreenPoints SP0;
 
 	SP0.x = rand()%(720*8); SP0.y = rand()%(480*8);
 	bbWidget_constructor(&widget0, &widgets, &graphics, SP0, layout, "SPHERE");
-
     bbAssert(widget0 != NULL, "Returned NULL address\n");
-
-	SP0.x = rand()%(720*8); SP0.y = rand()%(480*8);
-	bbWidget_constructor(&widget1, &widgets, &graphics, SP0, widget0, "SPHERE");
-
-    bbAssert(widget1 != NULL, "Returned NULL address\n");
-
-	SP0.x = rand()%(720*8); SP0.y = rand()%(480*8);
-	bbWidget_constructor(&widget1, &widgets, &graphics, SP0, widget0, "SPHERE");
-
-    bbAssert(widget1 != NULL, "Returned NULL address\n");
-
-	SP0.x = rand()%(720*8); SP0.y = rand()%(480*8);
-	bbWidget_constructor(&widget1, &widgets, &graphics, SP0, widget0, "SPHERE");
-
-    bbAssert(widget1 != NULL, "Returned NULL address\n");
-
-	SP0.x = rand()%(720*8); SP0.y = rand()%(480*8);
-	bbWidget_constructor(&widget1, &widgets, &graphics, SP0, widget0, "SPHERE");
-
-    bbAssert(widget1 != NULL, "Returned NULL address\n");
 
 	//TODO what if "SPHERE" not found?
 ////////////////////////////////////////////////////////

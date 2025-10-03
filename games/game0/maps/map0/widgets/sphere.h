@@ -1,3 +1,6 @@
+//sphere is a test bbWidget. when the mouse passes over the object, the
+// object teleports to a new location.
+
 #include "engine/logic/bbFlag.h"
 #include "engine/widgets/bbWidget.h"
 #include "engine/widgets/bbWidgetFunctions.h"
@@ -37,6 +40,7 @@ bbFlag Sphere_Constructor (bbWidget** self, void* graphics,
         widget->frames[i].drawfunction = -1;
     }
 
+    widget->pointer = 85;
     *self = widget;
 
     return Success;
@@ -100,6 +104,7 @@ bbFlag SPHERE_Constructor (bbWidget** self, void* graphics,
         widget->frames[i].drawfunction = -1;
     }
 
+    widget->pointer = 85;
     *self = widget;
 
     bbAssert(widget != NULL, "null address\n");

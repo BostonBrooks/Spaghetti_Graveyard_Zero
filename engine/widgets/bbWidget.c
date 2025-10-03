@@ -107,6 +107,8 @@ bbFlag bbWidget_newLayout(bbWidget** self, bbGraphics* graphics, bbWidgets* widg
 	    widget->frames[i].drawfunction = -1;
 	}
 
+    widget->pointer = 85;
+
 	*self = widget;
 
     return Success;
@@ -131,6 +133,9 @@ bbFlag bbWidget_newEmpty(bbWidget** self, bbWidgets* widgets, bbWidget* parent){
 	for (I32 i = 0; i < FRAMES_PER_WIDGET; i++) {
 		widget->frames[i].drawfunction = -1;
 	}
+
+
+    widget->pointer = 85;
 	*self = widget;
 	return Success;
 }
@@ -167,7 +172,10 @@ bbFlag bbWidget_newMockViewport(bbWidget** self, bbGraphics* graphics, bbWidgets
 		widget->frames[i].drawfunction = -1;
 	}
 
+    widget->pointer = 85;
 	*self = widget;
+
+    return Success;
 }
 
 bbFlag bbWidget_newViewport(bbWidget** self, bbGraphics* graphics,
@@ -201,6 +209,14 @@ bbFlag bbWidget_newViewport(bbWidget** self, bbGraphics* graphics,
     for (I32 i = 1; i < FRAMES_PER_WIDGET; i++) {
         widget->frames[i].drawfunction = -1;
     }
+
+
+    widget->pointer = 85;
+
+    *self = widget;
+
+    return Success;
+
 }
 
 bbFlag bbWidgets_draw(bbWidgets* widgets, void* cl) {
