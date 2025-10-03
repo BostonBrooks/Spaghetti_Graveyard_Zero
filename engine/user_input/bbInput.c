@@ -3,7 +3,7 @@
 #include "engine/user_input/bbInput.h"
 #include "engine/logic/bbTerminal.h"
 
-bbFlag bbInput_new(bbInput* input, sfRenderWindow* window, bbMouse* mouse){
+bbFlag bbInput_new(bbInput* input, sfRenderWindow* window, bbMouse* mouse, bbMoose* moose){
 
     input->mouse = mouse;
 

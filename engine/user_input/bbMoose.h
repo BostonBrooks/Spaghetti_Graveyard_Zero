@@ -6,7 +6,7 @@
 #include "engine/graphics/bbGraphics.h"
 #include "engine/logic/bbTree.h"
 #include "engine/geometry/bbCoordinates.h"
-#include "engine/widgets/bbWidget.h"
+//#include "engine/widgets/bbWidget.h"
 #include "engine/logic/bbIntTypes.h"
 #include "engine/logic/bbDictionary.h"
 #include "engine/logic/bbVPool.h"
@@ -55,7 +55,7 @@ typedef struct bbMoose
 
 
 //Needs to know the pool used for widgets...
-bbFlag bbMoose_Init(bbMoose* moose, bbWidgets* widgets, bbGraphics* graphics);
+bbFlag bbMoose_Init(bbMoose* moose, struct bbWidgets* widgets, bbGraphics* graphics);
 
 
 

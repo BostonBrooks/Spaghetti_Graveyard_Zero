@@ -63,10 +63,11 @@ CLEARWINDOW(bbYellow);
     bbMouse mouse;
     bbMouse_new(&mouse, window, &graphics);
 
+	bbMoose moose;
 CLEARWINDOW(bbChartreuse);
 
     bbInput input;
-    bbInput_new(&input,window, &mouse);
+    bbInput_new(&input,window, &mouse,&moose);
 
 CLEARWINDOW(bbGreen);
 //bbHere();

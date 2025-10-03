@@ -40,7 +40,6 @@ bbFlag Sphere_Constructor (bbWidget** self, void* graphics,
         widget->frames[i].drawfunction = -1;
     }
 
-    widget->pointer = 85;
     *self = widget;
 
     return Success;
@@ -104,7 +103,6 @@ bbFlag SPHERE_Constructor (bbWidget** self, void* graphics,
         widget->frames[i].drawfunction = -1;
     }
 
-    widget->pointer = 85;
     *self = widget;
 
     bbAssert(widget != NULL, "null address\n");
