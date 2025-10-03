@@ -1,0 +1,86 @@
+#include "engine/user_input/bbMooseFunctions.h"
+
+#include <stdlib.h>
+
+#include "engine/logic/bbDictionary.h"
+#include "engine/logic/bbFlag.h"
+#include "engine/logic/bbIntTypes.h"
+#include "engine/logic/bbPoolHandle.h"
+#include "engine/logic/bbTerminal.h"
+
+
+bbFlag bbMooseFunctions_new(bbMooseFunctions** self)
+{
+    bbMooseFunctions* functions = calloc(1,sizeof(bbMooseFunctions));
+    I32 magic_number = 256;
+
+    functions->IsOver = calloc(magic_number, sizeof(bbMoose_IsOver));
+    bbAssert(functions->IsOver != NULL, "bad calloc\n");
+    bbDictionary_new(&functions->IsOver_dict, magic_number);
+    functions->IsOver_available = 0;
+
+    //bbMooseFunctions_populate(*self);
+
+    *self = functions;
+
+    return Success;
+}
+
+bbFlag bbMooseFunctions_add(bbMooseFunctions* functions, MooseFunctionType fnType, void* fnPointer, char* key )
+{
+
+
+    I32 available;
+    bbPool_Handle handle;
+    I32 magic_number = 256;
+    switch (fnType)
+    {
+    case MooseIsOver:
+
+        available = functions->IsOver_available++;
+        bbAssert(available < magic_number, "out of bounds error\n");
+        functions->IsOver[available] = fnPointer;
+        handle.u64 = available;
+        bbDictionary_add(functions->IsOver_dict, key, handle);
+        return Success;
+
+
+
+    default:
+        bbAssert(0, "bad widget function type\n");
+    }
+
+}
+
+I32 bbMooseFunctions_getInt(bbMooseFunctions* functions,
+                                MooseFunctionType fnType, char* key){
+    bbDictionary* dict;
+    switch (fnType){
+    case MooseIsOver:
+        dict = functions->IsOver_dict;
+        break;
+
+    default:
+        bbAssert(0, "bad widget function type\n");
+    }
+
+    bbPool_Handle handle;
+    bbDictionary_lookup(dict,key,&handle);
+    return handle.u64;
+}
+
+bbFlag bbMooseFunctions_getFunction(void** function, bbMooseFunctions* functions,
+                                     MooseFunctionType fnType, char* key){
+    bbPool_Handle handle;
+
+    switch (fnType){
+    case MooseIsOver:
+        bbDictionary_lookup(functions->IsOver_dict,key,&handle);
+        *function = functions->IsOver[handle.u64];
+        return Success;
+    default:
+        bbAssert(0, "bad widget function type\n");
+
+    }
+
+}

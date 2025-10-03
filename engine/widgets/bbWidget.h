@@ -16,6 +16,8 @@
 #include "engine/geometry/bbCoordinates.h"
 #include "engine/user_input/bbMouse.h"
 
+#include "engine/user_input/bbMoose.h"
+
 
 
 #define FRAMES_PER_WIDGET 8
@@ -29,7 +31,7 @@ typedef struct {
     I32 OnTimer;
 } bbWidgetFunctionTable;
 
-typedef struct {
+typedef struct bbWidget{
     //It is important that "bbTree_Node tree;" is the first element
 	bbTree_Node tree;
 	bbScreenPointsRect rect;
@@ -41,7 +43,7 @@ typedef struct {
 	I32 text_columns;
 	I32 state;
 
-
+	bbMooseTable mtable;
     bbWidgetFunctionTable ftable;
 
     bbOnMouse onMouse;
@@ -52,10 +54,12 @@ typedef struct {
 
 } bbWidget;
 
-typedef struct {
+typedef struct bbWidgets {
 	bbVPool* pool;
 	bbTree* tree;
 	struct bbWidgetFunctions0* functions;
+
+	bbMoose* moose;
 } bbWidgets;
 
 typedef struct {

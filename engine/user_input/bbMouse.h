@@ -22,6 +22,7 @@ typedef struct {
     bbScreenPoints position;
     sfSprite* cursor;
     bbPool_Handle current_widget;
+
 } bbMouse;
 
 typedef struct {
