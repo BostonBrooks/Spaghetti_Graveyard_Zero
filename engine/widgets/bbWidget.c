@@ -103,6 +103,7 @@ bbFlag bbWidget_newLayout(bbWidget** self, bbGraphics* graphics, bbWidgets* widg
 	widget->ftable.MouseHandler = funcInt;
 
 	funcInt = bbMooseFunctions_getInt(&widgets->moose->functions,MooseIsOver, "ALWAYS");
+	bbDebug("funcInt = %d\n", funcInt);
 	widget->mtable.isOver = funcInt;
 
 	for (I32 i = 1; i < FRAMES_PER_WIDGET; i++) {

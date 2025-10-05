@@ -74,6 +74,8 @@ bbFlag bbMoose_Update(bbMoose* moose, void* widgets, bbGraphics* graphics);
 //Draw mouse to screen, depending on what widget is selected and what is under the mouse
 bbFlag bbMoose_Draw(bbMoose* moose, struct bbWidgets* widgets, bbGraphics* graphics);
 
+//Function to be called recursively
+bbFlag bbMoose_isOverFunc(bbTree* tree, void* node, void* cl);
 #endif // BBMOOSE_H
 
 

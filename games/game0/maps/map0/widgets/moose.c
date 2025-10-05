@@ -52,5 +52,9 @@ bbFlag bbMooseFunctions_populate(bbMooseFunctions* self)
     bbMooseFunctions_add(self, MooseIsOver, IsOver_Always, "ALWAYS");
     bbMooseFunctions_add(self, MooseIsOver, IsOver_Teleport, "TELEPORT");
     bbMooseFunctions_add(self, MooseIsOver, IsOver_Hover, "HOVER");
+
+    //test:
+
+
     return Success;
 }

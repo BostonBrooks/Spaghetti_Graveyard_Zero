@@ -17,6 +17,7 @@ bbFlag bbMoose_Init(bbMoose* moose, void* widgets, bbGraphics* graphics)
     moose->isOver = Widgets->pool->null;
     moose->selected = Widgets->pool->null;
 
+    Widgets->moose = moose;
     return Success;
 }
 
@@ -37,17 +38,26 @@ bbFlag bbMoose_Event(bbMoose* moose, sfEvent* event)
 
 bbFlag bbMoose_isOver(bbMoose* moose, void* widgets)
 {
+    bbWidgets* Widgets = (bbWidgets*)widgets;
 
-
-    bbAssert(0==1, "we made it\n");
+    bbTree* tree = Widgets->tree;
+    bbVPool* pool = tree->pool;
+    void* root;
+    bbVPool_lookup(pool, &root, tree->root);
+    return bbTree_ascendingMapVisible(tree, root, bbMoose_isOverFunc, NULL);
     return Success;
 }
 
 bbFlag bbMoose_Update(bbMoose* moose, void* widgets, bbGraphics* graphics)
 {
-    bbWidgets* Widgets = (bbWidgets*)widgets;
-
 
 
     return Success;
+}
+
+bbFlag bbMoose_isOverFunc(bbTree* tree, void* node, void* cl)
+{
+    bbHere();
+//TODO print pool element header
+    return Continue;
 }

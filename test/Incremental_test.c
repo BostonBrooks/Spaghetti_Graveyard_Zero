@@ -80,13 +80,21 @@ CLEARWINDOW(bbGreen);
 	bbWidgets_init(&widgets);
 	//testWidgets = &widgets;
 
-	bbMooseFunctions mooseFunctions;
 	bbMoose moose;
 
-	bbMooseFunctions_init(&mooseFunctions);
-	bbMooseFunctions_populate(&mooseFunctions);
-
 	bbMoose_Init(&moose, &widgets, &graphics);
+
+	bbMooseFunctions_init(&moose.functions);
+	bbMooseFunctions_populate(&moose.functions);
+
+
+	int tst = bbMooseFunctions_getInt(&moose.functions,MooseIsOver, "ALWAYS");
+	bbDebug("tst = %d\n", tst);
+	tst = bbMooseFunctions_getInt(&moose.functions,MooseIsOver, "TELEPORT");
+	bbDebug("tst = %d\n", tst);
+	tst = bbMooseFunctions_getInt(&moose.functions,MooseIsOver, "HOVER");
+	bbDebug("tst = %d\n", tst);
+
 
 	bbInput input;
 	bbInput_new(&input,window, &mouse,&moose);
