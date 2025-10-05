@@ -38,6 +38,7 @@ bbFlag bbMoose_Event(bbMoose* moose, sfEvent* event)
 bbFlag bbMoose_isOver(bbMoose* moose, void* widgets)
 {
 
+
     bbAssert(0==1, "we made it\n");
     return Success;
 }
@@ -46,7 +47,7 @@ bbFlag bbMoose_Update(bbMoose* moose, void* widgets, bbGraphics* graphics)
 {
     bbWidgets* Widgets = (bbWidgets*)widgets;
 
-    bbMoose_isOver(moose, widgets);
+
 
     return Success;
 }

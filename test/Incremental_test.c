@@ -181,6 +181,7 @@ CLEARWINDOW(bbMagenta);
 		closure.mouse = &mouse;
         bbWidgets_onMouse(&widgets, &closure);
 
+		bbMoose_isOver(&moose, &widgets);
 		bbMoose_Update(&moose, &widgets, &graphics);
 
 

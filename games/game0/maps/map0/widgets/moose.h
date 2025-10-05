@@ -8,6 +8,7 @@
 //catch all, eg Layout widget
 bbFlag IsOver_Always(bbMoose* moose, bbWidgets* widgets, bbWidget* widget)
 {
+    bbHere();
     bbVPool* pool = widgets->pool;
     bbPool_Handle handle;
     bbVPool_reverseLookup(pool,widget,&handle);
@@ -24,6 +25,7 @@ bbFlag IsOver_Always(bbMoose* moose, bbWidgets* widgets, bbWidget* widget)
 //if the mouse is over the widget, it teleports to somewhere else, execution continues
 bbFlag IsOver_Teleport(bbMoose* moose, bbWidgets* widgets, bbWidget* widget)
 {
+    bbHere();
     bbScreenPointsRect rect = widget->rect;
     bbScreenPoints point = moose->position;
 
@@ -42,7 +44,7 @@ bbFlag IsOver_Teleport(bbMoose* moose, bbWidgets* widgets, bbWidget* widget)
 //mouse hovers over widget, uses pointer defined by widget
 bbFlag IsOver_Hover(bbMoose* moose, bbWidgets* widgets, bbWidget* widget)
 {
-
+    bbHere();
     bbScreenPointsRect rect = widget->rect;
     bbScreenPoints point = moose->position;
 

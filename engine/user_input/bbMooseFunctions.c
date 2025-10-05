@@ -18,7 +18,6 @@ bbFlag bbMooseFunctions_init(bbMooseFunctions* functions)
     bbDictionary_new(&functions->IsOver_dict, magic_number);
     functions->IsOver_available = 0;
 
-    //bbMooseFunctions_populate(*self);
 
 
     return Success;
