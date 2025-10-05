@@ -24,6 +24,7 @@ typedef struct
     I32 LeftUp;
     I32 RightUp;
     I32 Drag;
+    I32 Drop;
     I32 MouseIcon;
     I32 DragIcon;
 } bbMooseTable;
@@ -36,6 +37,7 @@ typedef struct
 typedef struct bbMoose
 {
     bbScreenPoints position;
+    bbScreenPoints previousPosition;
     unsigned int leftDown : 1;
     unsigned int rightDown : 1;
     unsigned int leftChanged : 1;
@@ -53,18 +55,21 @@ typedef struct bbMoose
     bbMooseFunctions functions;
 } bbMoose;
 
+//cl contains pointers to whatever systems are needed
+typedef struct
+{
+    int unused;
+} bbMoose_isOver_cl;
 
 //Needs to know the pool used for widgets...
-bbFlag bbMoose_Init(bbMoose* moose, struct bbWidgets* widgets, bbGraphics* graphics);
-
-
-
+bbFlag bbMoose_Init(bbMoose* moose, void* widgets, bbGraphics* graphics);
 
 //Figure out what widget the mouse is over
-bbFlag bbMoose_isOver(bbMoose* moose, struct bbWidgets* widgets);
+bbFlag bbMoose_isOver(bbMoose* moose, void* widgets);
 
+bbFlag bbMoose_Event(bbMoose* moose, sfEvent* event);
 //Interact with widgets, may have to look up sprite int in dictionary
-bbFlag bbMoose_Update(bbMoose* moose, struct bbWidgets* widgets, bbGraphics* graphics);
+bbFlag bbMoose_Update(bbMoose* moose, void* widgets, bbGraphics* graphics);
 
 //Draw mouse to screen, depending on what widget is selected and what is under the mouse
 bbFlag bbMoose_Draw(bbMoose* moose, struct bbWidgets* widgets, bbGraphics* graphics);
@@ -74,7 +79,10 @@ bbFlag bbMoose_Draw(bbMoose* moose, struct bbWidgets* widgets, bbGraphics* graph
 
 /*
  * bbFlag bbInput_poll(bbInput* input, sfRenderWindow* window, bbMouse* mouse, bbMoose* moose);
- *     updates bbMoose
+ *     updates bbMoose bbFlag bbMoose_Event(bbMoose* moose, sfEvent* event)
+ *
+ * bbFlag bbMoose_Update(bbMoose* moose, struct bbWidgets* widgets, bbGraphics* graphics);
+ *     calls bbFlag bbMoose_isOver(bbMoose* moose, struct bbWidgets* widgets);
  *
  * bbFlag bbMoose_isOver(bbMoose* moose, struct bbWidgets* widgets);
  *     calls bbTree_ascendingMapVisible with bbMoose_isOverFunc and cl

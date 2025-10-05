@@ -10,8 +10,8 @@
 #include "engine/logic/bbIntTypes.h"
 #include "engine/logic/bbPoolHandle.h"
 #include "engine/logic/bbFlag.h"
+#include "games/game0/bbConstants.h"
 
-#define KEY_LENGTH 32
 
 typedef struct {
 	I32 Head;

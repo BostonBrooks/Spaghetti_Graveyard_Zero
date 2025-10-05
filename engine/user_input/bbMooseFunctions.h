@@ -2,6 +2,9 @@
 #ifndef BBMOOSEFUNCTIONS_H
 #define BBMOOSEFUNCTIONS_H
 
+#include "engine/logic/bbDictionary.h"
+#include "engine/logic/bbIntTypes.h"
+
 typedef enum
 {
     MooseIsOver,
@@ -18,7 +21,7 @@ typedef struct
 
 }bbMooseFunctions;
 
-bbFlag bbMooseFunctions_new(bbMooseFunctions** self);
+bbFlag bbMooseFunctions_init(bbMooseFunctions* functions);
 bbFlag bbMooseFunctions_populate(bbMooseFunctions* self);
 bbFlag bbMooseFunctions_add(bbMooseFunctions* functions, MooseFunctionType fnType, void* fnPointer, char* key );
 bbFlag bbMooseFunctions_getFunction(void** function, bbMooseFunctions* functions, MooseFunctionType fnType, char* key);

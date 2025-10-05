@@ -6,6 +6,7 @@
 bbFlag bbInput_new(bbInput* input, sfRenderWindow* window, bbMouse* mouse, bbMoose* moose){
 
     input->mouse = mouse;
+    input->moose = moose;
 
 }
 
@@ -21,6 +22,7 @@ bbFlag bbInput_poll(bbInput* input, sfRenderWindow* window){
 
             case sfEvtMouseMoved:{
                 bbMouse_update(input->mouse, &event);
+                bbMoose_Event(input->moose, &event);
                 break;
             }
             default:{

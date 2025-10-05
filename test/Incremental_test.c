@@ -63,11 +63,10 @@ CLEARWINDOW(bbYellow);
     bbMouse mouse;
     bbMouse_new(&mouse, window, &graphics);
 
-	bbMoose moose;
+
+
 CLEARWINDOW(bbChartreuse);
 
-    bbInput input;
-    bbInput_new(&input,window, &mouse,&moose);
 
 CLEARWINDOW(bbGreen);
 //bbHere();
@@ -80,6 +79,17 @@ CLEARWINDOW(bbGreen);
 	bbWidgets widgets;
 	bbWidgets_init(&widgets);
 	//testWidgets = &widgets;
+
+	bbMooseFunctions mooseFunctions;
+	bbMoose moose;
+
+	bbMooseFunctions_init(&mooseFunctions);
+	bbMooseFunctions_populate(&mooseFunctions);
+
+	bbMoose_Init(&moose, &widgets, &graphics);
+
+	bbInput input;
+	bbInput_new(&input,window, &mouse,&moose);
 
 CLEARWINDOW(bbTeal);
 
@@ -170,6 +180,10 @@ CLEARWINDOW(bbMagenta);
         closure.functions0 = widgets.functions;
 		closure.mouse = &mouse;
         bbWidgets_onMouse(&widgets, &closure);
+
+		bbMoose_Update(&moose, &widgets, &graphics);
+
+
 
 	if (mapTime % 50 == 0) bbPrintf("mapTime = %d\n", mapTime);
 		cl.mapTime = mapTime;

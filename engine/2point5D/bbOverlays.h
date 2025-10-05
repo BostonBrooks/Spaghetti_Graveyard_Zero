@@ -18,7 +18,7 @@
 #include "engine/graphics/bbDrawfunctions.h"
 
 
-#define KEY_LENGTH 32
+
 #define FRAMES_PER_OVERLAY 8
 
 typedef struct {

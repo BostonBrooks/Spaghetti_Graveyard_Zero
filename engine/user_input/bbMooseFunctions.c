@@ -9,9 +9,8 @@
 #include "engine/logic/bbTerminal.h"
 
 
-bbFlag bbMooseFunctions_new(bbMooseFunctions** self)
+bbFlag bbMooseFunctions_init(bbMooseFunctions* functions)
 {
-    bbMooseFunctions* functions = calloc(1,sizeof(bbMooseFunctions));
     I32 magic_number = 256;
 
     functions->IsOver = calloc(magic_number, sizeof(bbMoose_IsOver));
@@ -21,7 +20,6 @@ bbFlag bbMooseFunctions_new(bbMooseFunctions** self)
 
     //bbMooseFunctions_populate(*self);
 
-    *self = functions;
 
     return Success;
 }
