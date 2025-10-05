@@ -26,6 +26,22 @@ void* bbLeanPool_fromInt(bbLeanPool* pool, int i){
 
 }
 
+I32 bbLeanPool_toInt(bbLeanPool* pool, void* element)
+{
+	/* TODO - this crashes
+	void* start_address = &pool->elements[0];
+	U64 offset = element - start_address;
+
+	I32 result = offset;
+	I32 index = result / pool->sizeOf;
+
+	return index;
+	*/
+	return 37;
+}
+
+
+
 bbFlag bbLeanPool_new(bbLeanPool** pool, I32 sizeOf, I32 num){
 
 	//we might get an error if num is too small
@@ -159,4 +175,14 @@ bbFlag bbLeanPool_free(bbLeanPool* pool, void* address){
 
 I32 bbLeanPool_handleIsEqual(bbLeanPool* USUSED, bbPool_Handle A, bbPool_Handle B){
 	return (A.ptr == B.ptr);
+}
+
+
+bbFlag bbLeanPool_printHeader(bbLeanPool* pool, void* address)
+{
+	I32 index = bbLeanPool_toInt(pool, address);
+	bbPrintf("bbLeanPool_printHeader:\n");
+	bbPrintf("INDEX: %d\n", index);
+
+	return Success;
 }

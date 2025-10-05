@@ -41,6 +41,7 @@ bbFlag bbBloatedPool_allocImpl(bbBloatedPool* pool, void** address, char* file, 
 bbFlag bbBloatedPool_free(bbBloatedPool* pool, void* address);
 bbFlag bbBloatedPool_lookup(bbBloatedPool* pool, void** address, bbPool_Handle handle);
 bbFlag bbBloatedPool_reverseLookup(bbBloatedPool* pool, void* address, bbPool_Handle* handle);
+bbFlag bbBloatedPool_printHeader(bbBloatedPool* pool, void* address);
 I32 bbBloatedPool_handleIsEqual(bbBloatedPool* USUSED, bbPool_Handle A,
                               bbPool_Handle B);
 

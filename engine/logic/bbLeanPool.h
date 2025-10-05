@@ -32,6 +32,7 @@ bbFlag bbLeanPool_free(bbLeanPool* pool, void* address);
 bbFlag bbLeanPool_lookup(bbLeanPool* UNUSED, void** address, bbPool_Handle handle);
 bbFlag bbLeanPool_reverseLookup(bbLeanPool* UNUSED, void* address, bbPool_Handle*
 handle);
+bbFlag bbLeanPool_printHeader(bbLeanPool* pool, void* address);
 I32 bbLeanPool_handleIsEqual(bbLeanPool* USUSED, bbPool_Handle A, bbPool_Handle B);
 
 

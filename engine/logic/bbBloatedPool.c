@@ -333,3 +333,14 @@ bbFlag bbBloatedPool_print (bbBloatedPool* pool){
 
     return Success;
 }
+
+bbFlag bbBloatedPool_printHeader(bbBloatedPool* pool, void* address)
+{
+	bbBloatedPool_Header* header;
+	bbBloatedPool_getHeader(&header, address);
+
+
+	bbPrintf("bbBloatedPool_printHeader:\n");
+	bbPrintf("FILE: %s, LINE: %d, INDEX: %d\n", header->file, header->line, header->self.bloated.index);
+	return Success;
+}

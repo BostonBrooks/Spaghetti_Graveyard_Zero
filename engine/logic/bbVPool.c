@@ -16,6 +16,7 @@ bbFlag bbVPool_newLean(bbVPool** pool, I32 sizeOf, I32 num){
 	Pool->free = (bbFlag(*)(void* pool, void* address)) bbLeanPool_free;
 	Pool->lookup = (bbFlag (*)(void* pool, void** address, bbPool_Handle handle)) bbLeanPool_lookup;
 	Pool->reverseLookup = (bbFlag (*)(void* pool, void* address, bbPool_Handle* handle)) bbLeanPool_reverseLookup;
+	Pool->printHeader = (bbFlag (*)(void *, void *)) bbLeanPool_printHeader;
 	Pool->handleIsEqual = (I32 (*)(void* USUSED, bbPool_Handle A, bbPool_Handle B)) bbLeanPool_handleIsEqual;
 	*pool = Pool;
 	return Success;
@@ -34,6 +35,7 @@ bbFlag bbVPool_newBloated(bbVPool** pool, I32 sizeOf, I32 level1, I32 level2){
 	Pool->free = (bbFlag(*)(void* pool, void* address)) bbBloatedPool_free;
 	Pool->lookup = (bbFlag (*)(void* pool, void** address, bbPool_Handle handle)) bbBloatedPool_lookup;
 	Pool->reverseLookup = (bbFlag (*)(void* pool, void* address, bbPool_Handle* handle)) bbBloatedPool_reverseLookup;
+	Pool->printHeader = (bbFlag (*)(void *, void *)) bbBloatedPool_printHeader;
 	Pool->handleIsEqual = (I32 (*)(void* USUSED, bbPool_Handle A, bbPool_Handle B)) bbBloatedPool_handleIsEqual;
 	*pool = Pool;
 	return Success;
@@ -63,6 +65,11 @@ bbFlag bbVPool_lookup(bbVPool* pool, void** address, bbPool_Handle handle) {
 }
 bbFlag bbVPool_reverseLookup(bbVPool* pool, void* address, bbPool_Handle* handle){
 	return pool->reverseLookup(pool->pool, address, handle);
+}
+
+bbFlag bbVPool_printHeader(bbVPool* pool, void* address)
+{
+	return pool->printHeader(pool, address);
 }
 I32 bbVPool_handleIsEqual(bbVPool* pool, bbPool_Handle A, bbPool_Handle B){
 	return pool->handleIsEqual(pool, A, B);
