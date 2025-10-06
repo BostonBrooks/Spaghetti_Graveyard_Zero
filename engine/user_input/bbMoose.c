@@ -40,11 +40,14 @@ bbFlag bbMoose_isOver(bbMoose* moose, void* widgets)
 {
     bbWidgets* Widgets = (bbWidgets*)widgets;
 
+    bbMoose_isOver_cl cl;
+    cl.widgets = Widgets;
+
     bbTree* tree = Widgets->tree;
     bbVPool* pool = tree->pool;
     void* root;
     bbVPool_lookup(pool, &root, tree->root);
-    return bbTree_ascendingMapVisible(tree, root, bbMoose_isOverFunc, NULL);
+    return bbTree_ascendingMapVisible(tree, root, bbMoose_isOverFunc, &cl);
     return Success;
 }
 
@@ -57,7 +60,30 @@ bbFlag bbMoose_Update(bbMoose* moose, void* widgets, bbGraphics* graphics)
 
 bbFlag bbMoose_isOverFunc(bbTree* tree, void* node, void* cl)
 {
-    bbHere();
-//TODO print pool element header
-    return Continue;
+    bbWidget* widget = (bbWidget*)node;
+    bbMoose_isOver_cl* closure = (bbMoose_isOver_cl*)cl;
+    bbWidgets* widgets = closure->widgets;
+    bbMoose* moose = widgets->moose;
+
+    I32 funcInt = widget->mtable.isOver;
+
+    bbMoose_IsOver* func = moose->functions.IsOver[funcInt];
+
+    return func(moose, widgets, widget);
+
+}
+
+bbFlag bbMoose_Draw(bbMoose* moose, void* widgets, bbGraphics* graphics, sfRenderWindow* window)
+{
+    bbWidgets* Widgets = (bbWidgets*)widgets;
+    sfVector2f pos = bbScreenPoints_getV2f(moose->position);
+    bbPool_Handle widgetHandle = moose->isOver;
+    bbWidget* widget;
+    bbVPool_lookup(Widgets->pool, (void**)&widget, widgetHandle);
+    I32 spriteInt = widget->mtable.MouseIcon;
+    bbDebug("spriteInt=%d\n", spriteInt);
+    sfSprite* sprite = graphics->sprites->sprites[spriteInt];
+    sfSprite_setPosition(sprite, pos);
+    sfRenderWindow_drawSprite(window, sprite, NULL);
+    return Success;
 }

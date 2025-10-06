@@ -33,7 +33,6 @@ typedef struct
 
 
 
-
 typedef struct bbMoose
 {
     bbScreenPoints position;
@@ -58,8 +57,10 @@ typedef struct bbMoose
 //cl contains pointers to whatever systems are needed
 typedef struct
 {
-    int unused;
+    void* widgets;
 } bbMoose_isOver_cl;
+
+
 
 //Needs to know the pool used for widgets...
 bbFlag bbMoose_Init(bbMoose* moose, void* widgets, bbGraphics* graphics);
@@ -72,7 +73,7 @@ bbFlag bbMoose_Event(bbMoose* moose, sfEvent* event);
 bbFlag bbMoose_Update(bbMoose* moose, void* widgets, bbGraphics* graphics);
 
 //Draw mouse to screen, depending on what widget is selected and what is under the mouse
-bbFlag bbMoose_Draw(bbMoose* moose, struct bbWidgets* widgets, bbGraphics* graphics);
+bbFlag bbMoose_Draw(bbMoose* moose, void* widgets, bbGraphics* graphics, sfRenderWindow* window);
 
 //Function to be called recursively
 bbFlag bbMoose_isOverFunc(bbTree* tree, void* node, void* cl);

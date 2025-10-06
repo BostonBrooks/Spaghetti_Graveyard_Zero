@@ -106,6 +106,9 @@ bbFlag bbWidget_newLayout(bbWidget** self, bbGraphics* graphics, bbWidgets* widg
 	bbDebug("funcInt = %d\n", funcInt);
 	widget->mtable.isOver = funcInt;
 
+
+	widget->mtable.MouseIcon = 91;
+
 	for (I32 i = 1; i < FRAMES_PER_WIDGET; i++) {
 	    widget->frames[i].drawfunction = -1;
 	}
@@ -200,6 +203,8 @@ bbFlag bbWidget_newViewport(bbWidget** self, bbGraphics* graphics,
 
 	funcInt = bbMooseFunctions_getInt(&widgets->moose->functions,MooseIsOver, "HOVER");
 	widget->mtable.isOver = funcInt;
+
+	widget->mtable.MouseIcon = 85;
 
     widget->rect = rect;
 

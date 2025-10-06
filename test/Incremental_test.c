@@ -26,9 +26,10 @@ int main (void){
 	mode.height = 480;
 	mode.bitsPerPixel = 32;
 	sfRenderWindow* window = sfRenderWindow_create(mode, "early demo", sfResize | sfClose, NULL);
-    testWindow = window;
 	sfRenderWindow_setFramerateLimit(window, 60);
+	sfRenderWindow_setMouseCursorVisible(window, sfFalse);
 
+	testWindow = window;
 CLEARWINDOW(bbRed);
 
 	bbGraphics graphics;
@@ -60,8 +61,8 @@ CLEARWINDOW(bbYellowOrange);
 
 CLEARWINDOW(bbYellow);
 
-    bbMouse mouse;
-    bbMouse_new(&mouse, window, &graphics);
+//    bbMouse mouse;
+//    bbMouse_new(&mouse, window, &graphics);
 
 
 
@@ -72,7 +73,7 @@ CLEARWINDOW(bbGreen);
 //bbHere();
 
 	bbWidgetFunctions functions;
-	bbWidgetMouse_new(&functions);
+//	bbWidgetMouse_new(&functions);
 	//testFunctions = &functions;
 
 
@@ -97,7 +98,7 @@ CLEARWINDOW(bbGreen);
 
 
 	bbInput input;
-	bbInput_new(&input,window, &mouse,&moose);
+	bbInput_new(&input,window, NULL, &moose);
 
 CLEARWINDOW(bbTeal);
 
@@ -182,12 +183,12 @@ CLEARWINDOW(bbMagenta);
         viewport->viewpoint.i = 5120 * sin(mapTime / 360.0) + 7000;
         viewport->viewpoint.j = 5120 * cos(mapTime / 360.0) + 7000;
 
-        mouseActionClosure closure;
+//        mouseActionClosure closure;
 
-        closure.event = NULL;
-        closure.functions0 = widgets.functions;
-		closure.mouse = &mouse;
-        bbWidgets_onMouse(&widgets, &closure);
+//        closure.event = NULL;
+//        closure.functions0 = widgets.functions;
+//		closure.mouse = &mouse;
+//        bbWidgets_onMouse(&widgets, &closure);
 
 		bbMoose_isOver(&moose, &widgets);
 		bbMoose_Update(&moose, &widgets, &graphics);
@@ -207,8 +208,9 @@ CLEARWINDOW(bbMagenta);
 
         cl.target = window;
         bbWidgets_draw(&widgets, &cl);
-        bbMouse_draw(&mouse, window);
+//        bbMouse_draw(&mouse, window);
 
+		bbMoose_Draw(&moose, &widgets, &graphics, window);
 		sfRenderWindow_display(window);
         bbViewport_clear(viewport);
         bbFlag flag = bbInput_poll(&input, window);

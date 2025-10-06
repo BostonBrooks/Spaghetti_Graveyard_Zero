@@ -11,7 +11,7 @@ typedef enum
     MooseEnter
 } MooseFunctionType;
 
-typedef bbFlag bbMoose_IsOver (struct bbMoose* moose, struct bbWidgets* widgets, struct bbWidget* widget);
+typedef bbFlag bbMoose_IsOver (void* moose, void* widgets, void* widget);
 
 typedef struct
 {

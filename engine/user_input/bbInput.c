@@ -21,7 +21,10 @@ bbFlag bbInput_poll(bbInput* input, sfRenderWindow* window){
             case sfEvtClosed: return Break;
 
             case sfEvtMouseMoved:{
-                bbMouse_update(input->mouse, &event);
+                if (input->mouse != NULL)
+                {
+                    bbMouse_update(input->mouse, &event);
+                }
                 bbMoose_Event(input->moose, &event);
                 break;
             }

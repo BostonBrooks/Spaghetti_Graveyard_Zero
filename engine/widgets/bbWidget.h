@@ -14,9 +14,9 @@
 #include "engine/graphics/bbGraphics.h"
 #include "engine/logic/bbTree.h"
 #include "engine/geometry/bbCoordinates.h"
+#include "engine/user_input/bbMoose.h"
 #include "engine/user_input/bbMouse.h"
 
-#include "engine/user_input/bbMoose.h"
 
 
 

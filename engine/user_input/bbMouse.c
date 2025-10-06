@@ -13,7 +13,6 @@ extern bbWidgetFunctions* testFunctions;
 
 bbFlag bbMouse_new(bbMouse* mouse, sfRenderWindow* window,bbGraphics* graphics)
 {
-    sfRenderWindow_setMouseCursorVisible(window, sfFalse);
     mouse->cursor = graphics->sprites->sprites[85];
 }
 bbFlag bbMouse_update(bbMouse* mouse, sfEvent* event){
