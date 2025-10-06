@@ -81,7 +81,7 @@ bbFlag bbMoose_Draw(bbMoose* moose, void* widgets, bbGraphics* graphics, sfRende
     bbWidget* widget;
     bbVPool_lookup(Widgets->pool, (void**)&widget, widgetHandle);
     I32 spriteInt = widget->mtable.MouseIcon;
-    bbDebug("spriteInt=%d\n", spriteInt);
+    bbDebug("spriteInt = %d\n", spriteInt);
     sfSprite* sprite = graphics->sprites->sprites[spriteInt];
     sfSprite_setPosition(sprite, pos);
     sfRenderWindow_drawSprite(window, sprite, NULL);
