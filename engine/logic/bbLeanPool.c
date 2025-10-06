@@ -28,16 +28,14 @@ void* bbLeanPool_fromInt(bbLeanPool* pool, int i){
 
 I32 bbLeanPool_toInt(bbLeanPool* pool, void* element)
 {
-	/* TODO - this crashes
+//TODO - doesnt work :/
 	void* start_address = &pool->elements[0];
 	U64 offset = element - start_address;
 
-	I32 result = offset;
-	I32 index = result / pool->sizeOf;
 
-	return index;
-	*/
-	return 37;
+	return offset;
+
+
 }
 
 
