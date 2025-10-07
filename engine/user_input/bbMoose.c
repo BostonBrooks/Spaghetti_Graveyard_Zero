@@ -29,6 +29,19 @@ bbFlag bbMoose_Event(bbMoose* moose, sfEvent* event)
                                                 event->mouseMove.y);
 
         break;
+        case sfEvtMouseButtonPressed:
+        sfMouseButton button = event->mouseButton.button;
+        if (button == sfMouseButtonLeft)
+        {
+            moose->leftChanged = true;
+            moose->leftDown = true;
+        } else if (button == sfMouseButtonRight)
+        {
+            moose->rightChanged = true;
+            moose->rightDown = true;
+        }
+        moose->position = pixel_getScreenPoints(event->mouseButton.x,event->mouseButton.y);
+        break;
     default:{
             bbDebug("input not recognised\n");
     }
@@ -53,6 +66,7 @@ bbFlag bbMoose_isOver(bbMoose* moose, void* widgets)
 
 bbFlag bbMoose_Update(bbMoose* moose, void* widgets, bbGraphics* graphics)
 {
+
 
 
     return Success;
