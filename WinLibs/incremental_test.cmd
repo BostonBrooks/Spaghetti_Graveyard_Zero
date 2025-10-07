@@ -39,6 +39,9 @@ gcc   -D SFML_STATIC -I ../^
        ../engine/user_input/bbMouse.c^
        ../engine/widgets/bbWidgetFunctions.c^
        ../games/game0/maps/map0/widgets/widgets.c^
+       ../games/game0/maps/map0/widgets/moose.c^
+       ../engine/user_input/bbMoose.c^
+       ../engine/user_input/bbMooseFunctions.c^
   -lcsfml-system -lcsfml-graphics -lcsfml-window -g -lm -w^
     -o ../games/game0/game.exe
 IF %errorlevel% == 0 (    echo Compile Succeeded:
