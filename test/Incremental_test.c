@@ -171,6 +171,10 @@ CLEARWINDOW(bbMagenta);
 	bbWidget_constructor(&widget0, &widgets, &graphics, SP0, layout, "SPHERE");
     bbAssert(widget0 != NULL, "Returned NULL address\n");
 
+	SP0.x = 500*8; SP0.y = 23*8;
+	bbWidget_constructor(&widget0, &widgets, &graphics, SP0, layout, "BUTTON");
+
+
 	//TODO what if "SPHERE" not found?
 ////////////////////////////////////////////////////////
     CLEARWINDOW(bbRed);

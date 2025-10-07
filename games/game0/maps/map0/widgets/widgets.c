@@ -1,8 +1,12 @@
+#ifndef WIDGET
+#define WIDGET
+
 #include "engine/logic/bbFlag.h"
 #include "engine/widgets/bbWidgetFunctions.h"
 
 #include "games/game0/maps/map0/widgets/nullfunctions.h"
 #include "games/game0/maps/map0/widgets/sphere.h"
+#include "games/game0/maps/map0/widgets/button.h"
 
 
 bbFlag bbWidgetFunctions_populate(bbWidgetFunctions0* self)
@@ -14,10 +18,13 @@ bbFlag bbWidgetFunctions_populate(bbWidgetFunctions0* self)
                           NULL_Constructor, "NULL Constructor");
 
     bbWidgetFunctions_add(self, WidgetConstructor,
-                          Sphere_Constructor, "Sphere");
+    Sphere_Constructor, "Sphere");
 
     bbWidgetFunctions_add(self, WidgetConstructor,
-                          SPHERE_Constructor, "SPHERE");
+    SPHERE_Constructor, "SPHERE");
+
+    bbWidgetFunctions_add(self, WidgetConstructor,
+                          Button_Constructor, "BUTTON");
 
     //typedef bbFlag bbWidget_Update (bbWidget* widget, void* unused);
     bbWidgetFunctions_add(self, WidgetUpdate,
@@ -45,3 +52,5 @@ bbFlag bbWidgetFunctions_populate(bbWidgetFunctions0* self)
 
     return Success;
 }
+
+#endif

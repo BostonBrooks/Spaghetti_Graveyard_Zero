@@ -41,9 +41,13 @@ return Success;
 }
 */
 
+#ifndef MOOSE
+#define MOOSE
+
 #include "engine/logic/bbFlag.h"
 #include "engine/user_input/bbMooseFunctions.h"
 #include "games/game0/maps/map0/widgets/moose.h"
+#include "games/game0/maps/map0/widgets/button.h"
 
 bbFlag bbMooseFunctions_populate(bbMooseFunctions* self)
 {
@@ -53,8 +57,15 @@ bbFlag bbMooseFunctions_populate(bbMooseFunctions* self)
     bbMooseFunctions_add(self, MooseIsOver, IsOver_Teleport, "TELEPORT");
     bbMooseFunctions_add(self, MooseIsOver, IsOver_Hover, "HOVER");
 
+
+    bbMooseFunctions_add(self, MooseIsOver, Button_IsOver, "BUTTON");
+    bbMooseFunctions_add(self, MooseEnter, Button_Enter, "BUTTON");
+    bbMooseFunctions_add(self, MooseLeave, Button_Leave, "BUTTON");
+
     //test:
 
 
     return Success;
 }
+
+#endif // MOOSE

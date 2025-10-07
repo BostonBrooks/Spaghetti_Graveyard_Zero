@@ -49,13 +49,13 @@ bbFlag IsOver_Hover(bbMoose* moose, bbWidgets* widgets, bbWidget* widget)
     bbScreenPoints point = moose->position;
 
     if (bbScreenPoints_inScreenPointsRect(point, rect)){
-        bbHere();
         bbVPool* pool = widgets->pool;
         bbPool_Handle handle;
         bbVPool_reverseLookup(pool,widget,&handle);
 
         if (!bbVPool_handleIsEqual(pool,handle,moose->isOver))
         {
+            bbHere();
             moose->wasOver = moose->isOver;
             moose->isOver = handle;
         }

@@ -19,6 +19,18 @@ bbFlag bbMooseFunctions_init(bbMooseFunctions* functions)
     functions->IsOver_available = 0;
 
 
+    functions->Enter = calloc(magic_number, sizeof(bbMoose_Enter));
+    bbAssert(functions->Enter != NULL, "bad calloc\n");
+    bbDictionary_new(&functions->Enter_dict, magic_number);
+    functions->Enter_available = 0;
+
+
+    functions->Leave = calloc(magic_number, sizeof(bbMoose_Leave));
+    bbAssert(functions->Leave != NULL, "bad calloc\n");
+    bbDictionary_new(&functions->Leave_dict, magic_number);
+    functions->Leave_available = 0;
+
+
 
     return Success;
 }
@@ -41,7 +53,23 @@ bbFlag bbMooseFunctions_add(bbMooseFunctions* functions, MooseFunctionType fnTyp
         bbDictionary_add(functions->IsOver_dict, key, handle);
         return Success;
 
+    case MooseEnter:
 
+        available = functions->Enter_available++;
+        bbAssert(available < magic_number, "out of bounds error\n");
+        functions->Enter[available] = fnPointer;
+        handle.u64 = available;
+        bbDictionary_add(functions->Enter_dict, key, handle);
+        return Success;
+
+    case MooseLeave:
+
+        available = functions->Leave_available++;
+        bbAssert(available < magic_number, "out of bounds error\n");
+        functions->Leave[available] = fnPointer;
+        handle.u64 = available;
+        bbDictionary_add(functions->Leave_dict, key, handle);
+        return Success;
 
     default:
         bbAssert(0, "bad widget function type\n");
@@ -55,6 +83,12 @@ I32 bbMooseFunctions_getInt(bbMooseFunctions* functions,
     switch (fnType){
     case MooseIsOver:
         dict = functions->IsOver_dict;
+        break;
+    case MooseEnter:
+        dict = functions->Enter_dict;
+        break;
+    case MooseLeave:
+        dict = functions->Leave_dict;
         break;
 
     default:

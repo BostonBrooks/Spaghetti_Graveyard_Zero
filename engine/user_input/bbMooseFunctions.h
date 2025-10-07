@@ -26,7 +26,7 @@ typedef struct
     bbDictionary* Enter_dict;
     I32 Enter_available;
 
-    bbMoose_Exit** Leave;
+    bbMoose_Leave** Leave;
     bbDictionary* Leave_dict;
     I32 Leave_available;
 

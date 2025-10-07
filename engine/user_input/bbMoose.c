@@ -31,11 +31,11 @@ bbFlag bbMoose_Event(bbMoose* moose, sfEvent* event)
         break;
         case sfEvtMouseButtonPressed:
         sfMouseButton button = event->mouseButton.button;
-        if (button == sfMouseButtonLeft)
+        if (button == sfMouseLeft)
         {
             moose->leftChanged = true;
             moose->leftDown = true;
-        } else if (button == sfMouseButtonRight)
+        } else if (button == sfMouseRight)
         {
             moose->rightChanged = true;
             moose->rightDown = true;
