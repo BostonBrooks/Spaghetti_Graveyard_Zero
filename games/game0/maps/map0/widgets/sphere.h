@@ -99,6 +99,10 @@ bbFlag SPHERE_Constructor (bbWidget** self, void* graphics,
     funcInt = bbMooseFunctions_getInt(&widgets->moose->functions,MooseIsOver, "TELEPORT");
     widget->mtable.isOver = funcInt;
 
+
+    widget->mtable.Enter = -1;
+    widget->mtable.Leave = -1;
+
     widget->frames[0].offset.x = 0;
     widget->frames[0].offset.y = 0;
 

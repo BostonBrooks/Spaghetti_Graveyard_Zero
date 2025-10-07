@@ -120,6 +120,7 @@ bbFlag Button_Enter (void* moose, void* widgets, void* widget, void* graphics)
     bbDictionary_lookup(Graphics->sprites->dictionary,
         "BUTTON_HOVER", &Widget->frames[0].handle);
 
+    bbDebug("Mouse enters button\n");
     return Success;
 }
 
@@ -131,6 +132,7 @@ bbFlag Button_Leave (void* moose, void* widgets, void* widget, void* graphics)
     bbDictionary_lookup(Graphics->sprites->dictionary,
         "BUTTON_DEFAULT", &Widget->frames[0].handle);
 
+    bbDebug("Mouse leaves button\n");
     return Success;
 }
 

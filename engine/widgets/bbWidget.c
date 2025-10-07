@@ -106,6 +106,8 @@ bbFlag bbWidget_newLayout(bbWidget** self, bbGraphics* graphics, bbWidgets* widg
 	bbDebug("funcInt = %d\n", funcInt);
 	widget->mtable.isOver = funcInt;
 
+    widget->mtable.Enter = -1;
+    widget->mtable.Leave = -1;
 
 	widget->mtable.MouseIcon = 91;
 
@@ -205,6 +207,10 @@ bbFlag bbWidget_newViewport(bbWidget** self, bbGraphics* graphics,
 	widget->mtable.isOver = funcInt;
 
 	widget->mtable.MouseIcon = 85;
+
+
+    widget->mtable.Enter = -1;
+    widget->mtable.Leave = -1;
 
     widget->rect = rect;
 

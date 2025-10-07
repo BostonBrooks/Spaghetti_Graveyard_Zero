@@ -66,8 +66,20 @@ bbFlag bbMoose_isOver(bbMoose* moose, void* widgets)
 
 bbFlag bbMoose_Update(bbMoose* moose, void* widgets, bbGraphics* graphics)
 {
+    bbWidgets* Widgets = widgets;
+    bbVPool* pool = Widgets->pool;
+    if(!bbVPool_handleIsEqual(pool, moose->wasOver, pool->null)){
+        bbWidget* toLeave;
+        bbWidget* toEnter;
 
+        bbVPool_lookup(pool, (void**)&toLeave, moose->wasOver);
+        bbVPool_lookup(pool, (void**)&toEnter, moose->isOver);
+        bbMoose_LeaveWidget(moose, widgets, toLeave, graphics);
+        bbMoose_EnterWidget(moose, widgets, toEnter, graphics);
 
+        moose->wasOver = pool->null;
+
+    }
 
     return Success;
 }
@@ -80,6 +92,8 @@ bbFlag bbMoose_isOverFunc(bbTree* tree, void* node, void* cl)
     bbMoose* moose = widgets->moose;
 
     I32 funcInt = widget->mtable.isOver;
+
+    if (funcInt == -1) return Continue;
 
     bbMoose_IsOver* func = moose->functions.IsOver[funcInt];
 
@@ -99,4 +113,32 @@ bbFlag bbMoose_Draw(bbMoose* moose, void* widgets, bbGraphics* graphics, sfRende
     sfSprite_setPosition(sprite, pos);
     sfRenderWindow_drawSprite(window, sprite, NULL);
     return Success;
+}
+
+bbFlag bbMoose_EnterWidget(void* moose, void* widgets, void* widget, void*
+graphics)
+{
+    bbWidget* Widget = widget;
+    bbMoose* Moose = moose;
+    I32 funcInt = Widget->mtable.Enter;
+
+    if (funcInt == -1) return Success;
+
+    bbMoose_Leave* func = Moose->functions.Enter[funcInt];
+
+    return func(moose, widgets, widget, graphics);
+}
+
+bbFlag bbMoose_LeaveWidget(void* moose, void* widgets, void* widget, void*
+graphics)
+{
+    bbWidget* Widget = widget;
+    bbMoose* Moose = moose;
+    I32 funcInt = Widget->mtable.Leave;
+
+    if (funcInt == -1) return Success;
+
+    bbMoose_Leave* func = Moose->functions.Leave[funcInt];
+
+    return func(moose, widgets, widget, graphics);
 }
