@@ -12,7 +12,7 @@
 #include "engine/logic/bbVPool.h"
 #include "engine/user_input/bbMooseFunctions.h"
 
-//data stored in bbWidget, informs the object how to interact with the mouse
+//data stored in bbWidget, informs the object how to interact with the mouse using virtual functions found in vtables
 
 typedef struct
 {
