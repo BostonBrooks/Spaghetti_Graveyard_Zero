@@ -1,5 +1,5 @@
-#ifndef WIDGET
-#define WIDGET
+#ifndef WIDGET_FUNCTIONS
+#define WIDGET_FUNCTIONS
 
 #include "engine/logic/bbFlag.h"
 #include "engine/widgets/bbWidgetFunctions.h"
@@ -53,4 +53,4 @@ bbFlag bbWidgetFunctions_populate(bbWidgetFunctions0* self)
     return Success;
 }
 
-#endif
+#endif //WIDGET_FUNCTIONS

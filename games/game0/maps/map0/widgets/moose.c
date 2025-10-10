@@ -41,8 +41,8 @@ return Success;
 }
 */
 
-#ifndef MOOSE
-#define MOOSE
+#ifndef MOOSE_FUNCTIONS
+#define MOOSE_FUNCTIONS
 
 #include "engine/logic/bbFlag.h"
 #include "engine/user_input/bbMooseFunctions.h"
@@ -61,6 +61,8 @@ bbFlag bbMooseFunctions_populate(bbMooseFunctions* self)
     bbMooseFunctions_add(self, MooseIsOver, Button_IsOver, "BUTTON");
     bbMooseFunctions_add(self, MooseEnter, Button_Enter, "BUTTON");
     bbMooseFunctions_add(self, MooseLeave, Button_Leave, "BUTTON");
+    bbMooseFunctions_add(self, MooseLeftDown, Button_LeftDown, "BUTTON");
+    bbMooseFunctions_add(self, MooseLeftUp, Button_LeftUp, "BUTTON");
 
     //test:
 
@@ -68,4 +70,4 @@ bbFlag bbMooseFunctions_populate(bbMooseFunctions* self)
     return Success;
 }
 
-#endif // MOOSE
+#endif // MOOSE_FUNCTIONS

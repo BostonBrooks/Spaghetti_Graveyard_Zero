@@ -23,6 +23,7 @@ bbFlag bbMoose_Init(bbMoose* moose, void* widgets, bbGraphics* graphics)
 
 bbFlag bbMoose_Event(bbMoose* moose, sfEvent* event)
 {
+    sfMouseButton button;
     switch (event->type){
     case sfEvtMouseMoved:
         moose->position = pixel_getScreenPoints(event->mouseMove.x,
@@ -30,18 +31,32 @@ bbFlag bbMoose_Event(bbMoose* moose, sfEvent* event)
 
         break;
         case sfEvtMouseButtonPressed:
-        sfMouseButton button = event->mouseButton.button;
-        if (button == sfMouseLeft)
-        {
-            moose->leftChanged = true;
-            moose->leftDown = true;
-        } else if (button == sfMouseRight)
-        {
-            moose->rightChanged = true;
-            moose->rightDown = true;
-        }
-        moose->position = pixel_getScreenPoints(event->mouseButton.x,event->mouseButton.y);
-        break;
+            button = event->mouseButton.button;
+            moose->position = pixel_getScreenPoints(event->mouseButton.x,event->mouseButton.y);
+            if (button == sfMouseLeft)
+            {
+                moose->leftChanged = true;
+                moose->leftDown = true;
+            } else if (button == sfMouseRight)
+            {
+                moose->rightChanged = true;
+                moose->rightDown = true;
+            }
+            break;
+        case sfEvtMouseButtonReleased:
+
+            button = event->mouseButton.button;
+            moose->position = pixel_getScreenPoints(event->mouseButton.x,event->mouseButton.y);
+            if (button == sfMouseLeft)
+            {
+                moose->leftChanged = true;
+                moose->leftDown = false;
+            } else if (button == sfMouseRight)
+            {
+                moose->rightChanged = true;
+                moose->rightDown = false;
+            }
+            break;
     default:{
             bbDebug("input not recognised\n");
     }
@@ -80,6 +95,20 @@ bbFlag bbMoose_Update(bbMoose* moose, void* widgets, bbGraphics* graphics)
         moose->wasOver = pool->null;
 
     }
+    if (moose->leftDown && moose->leftChanged){
+
+        bbWidget* widget;
+
+
+
+        bbVPool_lookup(pool, (void**)&widget, moose->isOver);
+        bbMoose_LeftDownWidget (moose, widgets, widget, graphics);
+    } else if (!moose->leftDown && moose->leftChanged) {
+        bbWidget* widget;
+        bbVPool_lookup(pool, (void**)&widget, moose->selected);
+        bbMoose_LeftUpWidget (moose, widgets, widget, graphics);
+    }
+
 
     return Success;
 }
@@ -124,6 +153,7 @@ graphics)
 
     if (funcInt == -1) return Success;
 
+    bbDebug("funcInt = %d\n", funcInt);
     bbMoose_Leave* func = Moose->functions.Enter[funcInt];
 
     return func(moose, widgets, widget, graphics);
@@ -138,7 +168,37 @@ graphics)
 
     if (funcInt == -1) return Success;
 
+    bbDebug("funcInt = %d\n", funcInt);
     bbMoose_Leave* func = Moose->functions.Leave[funcInt];
+
+    return func(moose, widgets, widget, graphics);
+}
+
+bbFlag bbMoose_LeftDownWidget(void* moose, void* widgets, void* widget,
+                                void* graphics)
+{
+    bbWidget* Widget = widget;
+    bbMoose* Moose = moose;
+    I32 funcInt = Widget->mtable.LeftDown;
+
+    if (funcInt == -1) return Success;
+
+    bbDebug("funcInt = %d\n", funcInt);
+    bbMoose_Leave* func = Moose->functions.LeftDown[funcInt];
+
+    return func(moose, widgets, widget, graphics);
+}
+bbFlag bbMoose_LeftUpWidget(void* moose, void* widgets, void* widget,
+                                  void* graphics)
+{
+    bbWidget* Widget = widget;
+    bbMoose* Moose = moose;
+    I32 funcInt = Widget->mtable.LeftUp;
+
+    if (funcInt == -1) return Success;
+
+    bbDebug("funcInt = %d\n", funcInt);
+    bbMoose_Leave* func = Moose->functions.LeftUp[funcInt];
 
     return func(moose, widgets, widget, graphics);
 }

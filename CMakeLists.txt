@@ -76,4 +76,5 @@ add_executable(myprogram
         engine/widgets/bbWidgetFunctions.c
         games/game0/maps/map0/widgets/sphere.h
         engine/user_input/bbMoose.c
-        games/game0/maps/map0/widgets/button.h)
+        games/game0/maps/map0/widgets/button.h
+        engine/user_input/bbMooseFunctions.c)

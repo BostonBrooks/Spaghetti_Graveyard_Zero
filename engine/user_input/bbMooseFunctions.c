@@ -31,6 +31,18 @@ bbFlag bbMooseFunctions_init(bbMooseFunctions* functions)
     functions->Leave_available = 0;
 
 
+    functions->LeftDown = calloc(magic_number, sizeof(bbMoose_LeftDown ));
+    bbAssert(functions->LeftDown != NULL, "bad calloc\n");
+    bbDictionary_new(&functions->LeftDown_dict, magic_number);
+    functions->LeftDown_available = 0;
+
+
+    functions->LeftUp = calloc(magic_number, sizeof(bbMoose_LeftUp ));
+    bbAssert(functions->LeftUp != NULL, "bad calloc\n");
+    bbDictionary_new(&functions->LeftUp_dict, magic_number);
+    functions->LeftUp_available = 0;
+
+
 
     return Success;
 }
@@ -71,6 +83,24 @@ bbFlag bbMooseFunctions_add(bbMooseFunctions* functions, MooseFunctionType fnTyp
         bbDictionary_add(functions->Leave_dict, key, handle);
         return Success;
 
+        case MooseLeftDown:
+
+            available = functions->LeftDown_available++;
+            bbAssert(available < magic_number, "out of bounds error\n");
+            functions->LeftDown[available] = fnPointer;
+            handle.u64 = available;
+            bbDictionary_add(functions->LeftDown_dict, key, handle);
+            return Success;
+
+        case MooseLeftUp:
+
+            available = functions->LeftUp_available++;
+            bbAssert(available < magic_number, "out of bounds error\n");
+            functions->LeftUp[available] = fnPointer;
+            handle.u64 = available;
+            bbDictionary_add(functions->LeftUp_dict, key, handle);
+            return Success;
+
     default:
         bbAssert(0, "bad widget function type\n");
     }
@@ -87,9 +117,15 @@ I32 bbMooseFunctions_getInt(bbMooseFunctions* functions,
     case MooseEnter:
         dict = functions->Enter_dict;
         break;
-    case MooseLeave:
-        dict = functions->Leave_dict;
-        break;
+        case MooseLeave:
+            dict = functions->Leave_dict;
+            break;
+        case MooseLeftDown:
+            dict = functions->LeftDown_dict;
+            break;
+        case MooseLeftUp:
+            dict = functions->LeftUp_dict;
+            break;
 
     default:
         bbAssert(0, "bad widget function type\n");

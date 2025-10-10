@@ -10,11 +10,17 @@ typedef enum
     MooseIsOver,
     MooseEnter,
     MooseLeave,
+    MooseLeftDown,
+    MooseLeftUp
 } MooseFunctionType;
 
 typedef bbFlag bbMoose_IsOver (void* moose, void* widgets, void* widget);
 typedef bbFlag bbMoose_Enter (void* moose, void* widgets, void* widget, void* graphics);
 typedef bbFlag bbMoose_Leave (void* moose, void* widgets, void* widget, void* graphics);
+typedef bbFlag bbMoose_LeftDown (void* moose, void* widgets, void* widget,
+                                 void* graphics);
+typedef bbFlag bbMoose_LeftUp (void* moose, void* widgets, void* widget,
+                               void* graphics);
 
 typedef struct
 {
@@ -29,6 +35,14 @@ typedef struct
     bbMoose_Leave** Leave;
     bbDictionary* Leave_dict;
     I32 Leave_available;
+
+    bbMoose_LeftDown** LeftDown;
+    bbDictionary* LeftDown_dict;
+    I32 LeftDown_available;
+
+    bbMoose_LeftUp** LeftUp;
+    bbDictionary* LeftUp_dict;
+    I32 LeftUp_available;
 
 }bbMooseFunctions;
 

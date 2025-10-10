@@ -8,7 +8,7 @@
 //                                     bbWidgets* widgets, bbScreenPoints
 //                                     screen_coords, bbWidget* parent);
 
-#ifdef WIDGET
+#ifdef WIDGET_FUNCTIONS
 
 bbFlag Button_Constructor (bbWidget** self, void* graphics,
                            bbWidgets* widgets, bbScreenPoints screen_coords, bbWidget* parent)
@@ -67,6 +67,12 @@ bbFlag Button_Constructor (bbWidget** self, void* graphics,
     widget->mtable.Enter = funcInt;
     funcInt = bbMooseFunctions_getInt(&widgets->moose->functions,MooseLeave, "BUTTON");
     widget->mtable.Leave = funcInt;
+    funcInt = bbMooseFunctions_getInt(&widgets->moose->functions,
+                                      MooseLeftDown,"BUTTON");
+    widget->mtable.LeftDown = -1;
+    funcInt = bbMooseFunctions_getInt(&widgets->moose->functions,
+                                      MooseLeftUp,"BUTTON");
+    widget->mtable.LeftUp = -1;
 
     widget->mtable.MouseIcon = 87;
     widget->mtable.DragIcon = 97;
@@ -84,9 +90,9 @@ bbFlag Button_Constructor (bbWidget** self, void* graphics,
 
     return Success;
 }
-#endif //WIDGET
+#endif //WIDGET_FUNCTIONS
 
-#ifdef MOOSE
+#ifdef MOOSE_FUNCTIONS
 //typedef bbFlag bbMoose_IsOver (void* moose, void* widgets, void* widget);
 bbFlag Button_IsOver (bbMoose* moose, bbWidgets* widgets, bbWidget* widget)
 {
@@ -120,6 +126,7 @@ bbFlag Button_Enter (void* moose, void* widgets, void* widget, void* graphics)
     bbDictionary_lookup(Graphics->sprites->dictionary,
         "BUTTON_HOVER", &Widget->frames[0].handle);
 
+    Widget->mtable.hover = true;
     bbDebug("Mouse enters button\n");
     return Success;
 }
@@ -132,8 +139,56 @@ bbFlag Button_Leave (void* moose, void* widgets, void* widget, void* graphics)
     bbDictionary_lookup(Graphics->sprites->dictionary,
         "BUTTON_DEFAULT", &Widget->frames[0].handle);
 
+    Widget->mtable.hover = false;
     bbDebug("Mouse leaves button\n");
     return Success;
 }
 
-#endif //MOOSE
+//typedef bbFlag bbMoose_LeftDown (void* moose, void* widgets, void* widget,
+// void* graphics);
+bbFlag Button_LeftDown (void* moose, void* widgets, void* widget, void*
+graphics)
+{
+    bbWidget* Widget = (bbWidget*)widget;
+    bbGraphics* Graphics = graphics;
+    bbMoose* Moose = moose;
+    bbWidgets* Widgets = widgets;
+    bbVPool* pool = Widgets->pool;
+    bbPool_Handle handle;
+    bbDictionary_lookup(Graphics->sprites->dictionary,
+                        "BUTTON_CLICK", &Widget->frames[0].handle);
+
+    bbVPool_reverseLookup(pool, widget, &handle);
+    Widget->mtable.hover = true;
+    Moose->selected = handle;
+    bbDebug("Mouse enters button\n");
+    return Success;
+}
+
+//typedef bbFlag bbMoose_LeftUp (void* moose, void* widgets, void* widget, void*
+// graphics);
+bbFlag Button_LeftUp (void* moose, void* widgets, void* widget, void* graphics)
+{
+    bbWidget* Widget = (bbWidget*)widget;
+    bbGraphics* Graphics = graphics;
+    bbWidgets* Widgets = widgets;
+
+    bbMoose* Moose = moose;
+    Moose->selected = Widgets->pool->null;
+
+    if (Widget->mtable.hover) {
+
+        bbDictionary_lookup(Graphics->sprites->dictionary,
+                            "BUTTON_HOVER", &Widget->frames[0].handle);
+
+    } else {
+        bbDictionary_lookup(Graphics->sprites->dictionary,
+                            "BUTTON_DEFAULT", &Widget->frames[0].handle);
+    }
+
+    Widget->mtable.hover = false;
+    bbDebug("Mouse leaves button\n");
+    return Success;
+}
+
+#endif //MOOSE_FUNCTIONS

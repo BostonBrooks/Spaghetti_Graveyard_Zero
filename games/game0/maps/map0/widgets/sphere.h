@@ -102,6 +102,8 @@ bbFlag SPHERE_Constructor (bbWidget** self, void* graphics,
 
     widget->mtable.Enter = -1;
     widget->mtable.Leave = -1;
+    widget->mtable.LeftDown = -1;
+    widget->mtable.LeftUp = -1;
 
     widget->frames[0].offset.x = 0;
     widget->frames[0].offset.y = 0;

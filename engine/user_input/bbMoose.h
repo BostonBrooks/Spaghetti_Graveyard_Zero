@@ -16,6 +16,7 @@
 
 typedef struct
 {
+    //virtual functions
     I32 isOver;
     I32 Enter;
     I32 Leave;
@@ -27,6 +28,10 @@ typedef struct
     I32 Drop;
     I32 MouseIcon;
     I32 DragIcon;
+
+    //book keeping data
+    unsigned int hover : 1;
+    unsigned int selected : 1;
 } bbMooseTable;
 
 
@@ -80,6 +85,11 @@ graphics);
 
 bbFlag bbMoose_LeaveWidget(void* moose, void* widgets, void* widget, void*
 graphics);
+
+bbFlag bbMoose_LeftDownWidget(void* moose, void* widgets, void* widget,
+                                void* graphics);
+bbFlag bbMoose_LeftUpWidget(void* moose, void* widgets, void* widget,
+                                  void* graphics);
 
 //Function to be called recursively
 bbFlag bbMoose_isOverFunc(bbTree* tree, void* node, void* cl);
