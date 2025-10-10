@@ -44,7 +44,7 @@ static const int stringLength = 512;
             sprintf(string2, __VA_ARGS__);\
 \
             printf("%s%s", string1, string2);                    \
-            exit(1);\
+            int x = 1/0;\
         }\
     }
 

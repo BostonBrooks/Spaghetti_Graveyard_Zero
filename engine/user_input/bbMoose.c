@@ -105,8 +105,10 @@ bbFlag bbMoose_Update(bbMoose* moose, void* widgets, bbGraphics* graphics)
         bbMoose_LeftDownWidget (moose, widgets, widget, graphics);
     } else if (!moose->leftDown && moose->leftChanged) {
         bbWidget* widget;
-        bbVPool_lookup(pool, (void**)&widget, moose->selected);
-        bbMoose_LeftUpWidget (moose, widgets, widget, graphics);
+        if(!bbVPool_handleIsEqual(pool, moose->selected, pool->null)) {
+            bbVPool_lookup(pool, (void **) &widget, moose->selected);
+            bbMoose_LeftUpWidget(moose, widgets, widget, graphics);
+        }
     }
 
 

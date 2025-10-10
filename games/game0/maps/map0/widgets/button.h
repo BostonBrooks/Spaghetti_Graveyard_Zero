@@ -69,10 +69,10 @@ bbFlag Button_Constructor (bbWidget** self, void* graphics,
     widget->mtable.Leave = funcInt;
     funcInt = bbMooseFunctions_getInt(&widgets->moose->functions,
                                       MooseLeftDown,"BUTTON");
-    widget->mtable.LeftDown = -1;
+    widget->mtable.LeftDown = funcInt;
     funcInt = bbMooseFunctions_getInt(&widgets->moose->functions,
                                       MooseLeftUp,"BUTTON");
-    widget->mtable.LeftUp = -1;
+    widget->mtable.LeftUp = funcInt;
 
     widget->mtable.MouseIcon = 87;
     widget->mtable.DragIcon = 97;
