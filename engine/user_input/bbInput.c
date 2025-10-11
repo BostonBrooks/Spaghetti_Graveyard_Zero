@@ -34,6 +34,7 @@ bbFlag bbInput_poll(bbInput* input, sfRenderWindow* window){
                 continue;
             }
 
+
             default:{
                 bbDebug("input not recognised\n");
             }

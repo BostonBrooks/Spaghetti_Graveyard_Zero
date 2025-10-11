@@ -41,28 +41,30 @@ bbMapCoords V2f_overlay_getMapCoords(sfVector2f V2F, bbViewport* VP){
 bbScreenPoints bbMapCoords_getSP(bbMapCoords MC, bbViewport* VP){
     bbAssert(POINTS_PER_PIXEL == SCREEN_PPP, "Fix Coordinate System!\n");
     bbScreenPoints SP;
-    SP.x = VP->width/2.0
-            + (MC.i - VP->viewpoint.i)
-            + (MC.j - VP->viewpoint.j);
+    SP.x = VP->width*SCREEN_PPP/2.0
+            + (MC.i - VP->viewpoint.i)/2
+            + (MC.j - VP->viewpoint.j)/2;
 
-    SP.y = VP->height/2.0
-            + (MC.i - VP->viewpoint.i)
-            - (MC.j - VP->viewpoint.j)
+    SP.y = VP->height*SCREEN_PPP/2.0
+            + (MC.i - VP->viewpoint.i)/2
+            - (MC.j - VP->viewpoint.j)/2
             - (MC.k - VP->viewpoint.k);
 
     return SP;
 }
 
-//Inverse of above
-
+// SP is relative to top left of viewport see SP_to_MC_algebra.txt
 bbMapCoords bbScreenCoords_getMapCoords(bbScreenPoints SP, bbViewport* VP){
     bbAssert(POINTS_PER_PIXEL == SCREEN_PPP, "Fix Coordinate System!\n");
     bbMapCoords MC;
-    MC.i = (SP.x + SP.y - VP->width/2.0 - VP->height/2.0 + 2*VP->viewpoint.i
-            - VP->viewpoint.j)/2;
 
-    MC.j = (SP.x - SP.y - VP->width/2.0 + VP->height/2.0 + VP->viewpoint.j +
-            2*VP->viewpoint.k)/2;
+    MC.i = (SP.x - VP->width*SCREEN_PPP/2.0)/2
+           + SP.y - VP->height*SCREEN_PPP/2.0 - VP->viewpoint.k +
+           VP->viewpoint.i;
+    MC.j = (SP.x - VP->width*SCREEN_PPP/2.0)/2
+           - SP.y + VP->height*SCREEN_PPP/2.0 + VP->viewpoint.k +
+           VP->viewpoint.j;
+    MC.k = 0;
 
-    MC.j = 0;
+    return MC;
 }

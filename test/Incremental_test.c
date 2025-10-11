@@ -24,6 +24,7 @@ int main (void){
 
     testGoalPoint.i = 0;
     testGoalPoint.j = 0;
+    testGoalPoint.k = 0;
 
     bbColours_init();
 

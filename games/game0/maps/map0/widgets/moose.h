@@ -91,7 +91,9 @@ bbFlag IsOver_Viewport(bbMoose* moose, bbWidgets* widgets, bbWidget* widget)
 
             bbMapCoords MC = bbScreenCoords_getMapCoords(viewportCoords, VP);
 
-            //testGoalPoint =
+            testGoalPoint = MC;
+
+
 
             bbDebug("MC.i = %d, MC.j = %d\nVP.i = %d, VP.j = %d\nGP.i = %d, "
                     "GP.j = %d\n", MC.i, MC.j, VP->viewpoint.i,VP->viewpoint.j,
