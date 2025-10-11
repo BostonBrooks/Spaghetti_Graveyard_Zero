@@ -33,6 +33,8 @@ typedef struct {
     int height;
     int width;
 
+    void* widget;
+
 } bbViewport;
 
 bbFlag bbRenderable_new(bbRenderable* renderable, I32 height, I32 width);

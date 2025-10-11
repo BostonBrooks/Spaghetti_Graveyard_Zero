@@ -15,6 +15,7 @@
 #include "engine/logic/bbTree.h"
 #include "engine/geometry/bbCoordinates.h"
 #include "engine/widgets/bbWidgetFunctions.h"
+#include "engine/2point5D/bbViewport.h"
 
 bbFlag bbWidgets_init(bbWidgets* widgets){
 	bbVPool_newBloated(&widgets->pool, sizeof(bbWidget), 1024, 1024);
@@ -192,6 +193,10 @@ bbFlag bbWidget_newViewport(bbWidget** self, bbGraphics* graphics,
     bbWidget* widget;
     bbWidget_newEmpty(&widget, widgets, parent);
     widget->extra_data = viewport;
+
+    bbViewport* viewport1 = viewport;
+    viewport1->widget = widget;
+
 
     bbScreenPointsRect rect;
     rect.left = 12 * POINTS_PER_PIXEL;
