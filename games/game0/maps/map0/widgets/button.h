@@ -161,7 +161,7 @@ graphics)
     bbVPool_reverseLookup(pool, widget, &handle);
     Widget->mtable.hover = true;
     Moose->selected = handle;
-    bbDebug("Mouse enters button\n");
+    bbDebug("Mouse left button down on viewpoint\n");
     return Success;
 }
 
@@ -187,7 +187,7 @@ bbFlag Button_LeftUp (void* moose, void* widgets, void* widget, void* graphics)
     }
 
     Widget->mtable.hover = false;
-    bbDebug("Mouse leaves button\n");
+    bbDebug("Mouse left button up on viewport\n");
     return Success;
 }
 
