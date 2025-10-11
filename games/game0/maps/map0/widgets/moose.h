@@ -80,7 +80,7 @@ bbFlag IsOver_Viewport(bbMoose* moose, bbWidgets* widgets, bbWidget* widget)
         bbPool_Handle handle;
         bbVPool_reverseLookup(pool,widget,&handle);
 
-        if (moose->rightDown){
+        if (moose->rightDown && moose->rightChanged){
             //convert moose coords into map coords and update goal point
             bbScreenPoints viewportCoords;
             viewportCoords.x = point.x - widget->rect.left;

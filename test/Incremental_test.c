@@ -22,8 +22,8 @@ bbMapCoords testGoalPoint;
 
 int main (void){
 
-    testGoalPoint.i = 7000;
-    testGoalPoint.j = 12120;
+    testGoalPoint.i = 0;
+    testGoalPoint.j = 0;
 
     bbColours_init();
 

@@ -48,3 +48,16 @@ MC.i = (SP.x + SP.y – VP->width/2.0 – VP->height/2.0 + 2*VP->viewpoint.i –
 MC.j = (SP.x – SP.y – VP->width/2.0 + VP->height/2.0 + VP->viewpoint.j + 2*VP→viewpoint.k)/2
 
 MC.j = 0;
+
+from "Spaghetti_Graveyard" github
+
+    mc.i = (sc.x - VIEWPORT_WIDTH/2.0) * POINTS_PER_PIXEL / 2
+         + (sc.y - VIEWPORT_HEIGHT/2.0) * POINTS_PER_PIXEL * ISOMETRIC_FACTOR / 2
+         + (mc.k - viewpoint.k) * ISOMETRIC_FACTOR / 2
+         + viewpoint.i;
+
+    mc.j = (sc.x - VIEWPORT_WIDTH/2.0) * POINTS_PER_PIXEL / 2
+         - (sc.y - VIEWPORT_HEIGHT/2.0) * POINTS_PER_PIXEL * ISOMETRIC_FACTOR / 2
+         - (mc.k - viewpoint.k) * ISOMETRIC_FACTOR / 2
+         + viewpoint.j;
+    mc.k = 0
