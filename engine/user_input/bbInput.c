@@ -3,6 +3,7 @@
 #include "engine/user_input/bbInput.h"
 #include "engine/logic/bbTerminal.h"
 
+
 bbFlag bbInput_new(bbInput* input, sfRenderWindow* window, bbMouse* mouse, bbMoose* moose){
 
     input->mouse = mouse;
@@ -14,6 +15,8 @@ bbFlag bbInput_poll(bbInput* input, sfRenderWindow* window){
     sfEvent event;
     sfBool flag;
 
+    input->moose->rightChanged = false;
+    input->moose->leftChanged = false;
     while (1) {
         flag = sfRenderWindow_pollEvent(window, &event);
         if (flag == sfFalse) return Continue;

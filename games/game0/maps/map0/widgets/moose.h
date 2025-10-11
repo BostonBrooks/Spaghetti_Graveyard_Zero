@@ -89,8 +89,13 @@ bbFlag IsOver_Viewport(bbMoose* moose, bbWidgets* widgets, bbWidget* widget)
 
             bbViewport* VP = widget->extra_data;
 
-            testGoalPoint = bbScreenCoords_getMapCoords(viewportCoords, VP);
+            bbMapCoords MC = bbScreenCoords_getMapCoords(viewportCoords, VP);
 
+            //testGoalPoint =
+
+            bbDebug("MC.i = %d, MC.j = %d\nVP.i = %d, VP.j = %d\nGP.i = %d, "
+                    "GP.j = %d\n", MC.i, MC.j, VP->viewpoint.i,VP->viewpoint.j,
+                    testGoalPoint.i, testGoalPoint.j);
         }
 
         if (!bbVPool_handleIsEqual(pool,handle,moose->isOver))

@@ -194,8 +194,8 @@ CLEARWINDOW(bbMagenta);
 
 
         bbMapCoords difference;
-        difference.i = viewport->viewpoint.i - testGoalPoint.i;
-        difference.j = viewport->viewpoint.j - testGoalPoint.j;
+        difference.i = testGoalPoint.i - viewport->viewpoint.i;
+        difference.j = testGoalPoint.j - viewport->viewpoint.j;
         difference.k = 0;
 
         float speed = 8;
