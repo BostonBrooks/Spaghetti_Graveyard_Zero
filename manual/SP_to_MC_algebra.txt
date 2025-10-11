@@ -1,0 +1,50 @@
+    SP.x = VP->width/2.0
+            + (MC.i - VP->viewpoint.i)
+            + (MC.j - VP->viewpoint.j);
+
+    SP.y = VP->height/2.0
+            + (MC.i - VP->viewpoint.i)
+            - (MC.j - VP->viewpoint.j)
+            - (MC.k - VP->viewpoint.k);
+
+Let:
+
+SP.x = X
+SP.y = Y
+VP->width/2.0 = W
+VP->height/2.0 = H
+MC.i = I
+MC.j = J
+MC.k = 0
+
+VP->viewpoint.i = L
+VP->viewpoint.j = M
+VP->viewpoint.k = N
+
+Then:
+
+X = W + I – L + J – M
+Y = H + I – L – J + M – 0 + N
+
+Solve for I and J
+
+I + J = X – W + L + N
+I – J = Y – H + L – M – N
+
+2I = (I + J) + (I – J)
+2I = (X – W + L + N) + (Y – H + L – M – N)
+2I = X + Y – W – H + 2L – M
+I = (X + Y – W – H + 2L – M)/2
+
+2J = (I + J) – (I – J)
+2J = (X – W + L + N) - (Y – H + L – M – N)
+2J = X – Y – W + H + M + 2N
+J = (X – Y – W + H + M + 2N)/2
+
+And so:
+
+MC.i = (SP.x + SP.y – VP->width/2.0 – VP->height/2.0 + 2*VP->viewpoint.i – VP->viewpoint.j)/2
+
+MC.j = (SP.x – SP.y – VP->width/2.0 + VP->height/2.0 + VP->viewpoint.j + 2*VP→viewpoint.k)/2
+
+MC.j = 0;

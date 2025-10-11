@@ -79,4 +79,6 @@ bbScreenPoints pixel_getScreenPoints(I32 x, I32 y);
 
 I32 bbScreenPoints_inScreenPointsRect(bbScreenPoints SP, bbScreenPointsRect rect);
 
+//We need to convert mouse coords to map coords...
+
 #endif // BBCOORDINATES_H

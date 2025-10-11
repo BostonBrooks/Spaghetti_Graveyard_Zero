@@ -36,3 +36,33 @@ bbMapCoords V2f_overlay_getMapCoords(sfVector2f V2F, bbViewport* VP){
 	MC.k = 0;
 	return MC;
 }
+
+//Assume POINTS_PER_PIXEL == SCREEN_PPP
+bbScreenPoints bbMapCoords_getSP(bbMapCoords MC, bbViewport* VP){
+    bbAssert(POINTS_PER_PIXEL == SCREEN_PPP, "Fix Coordinate System!\n");
+    bbScreenPoints SP;
+    SP.x = VP->width/2.0
+            + (MC.i - VP->viewpoint.i)
+            + (MC.j - VP->viewpoint.j);
+
+    SP.y = VP->height/2.0
+            + (MC.i - VP->viewpoint.i)
+            - (MC.j - VP->viewpoint.j)
+            - (MC.k - VP->viewpoint.k);
+
+    return SP;
+}
+
+//Inverse of above
+
+bbMapCoords bbScreenCoords_getMapCoords(bbScreenPoints SP, bbViewport* VP){
+    bbAssert(POINTS_PER_PIXEL == SCREEN_PPP, "Fix Coordinate System!\n");
+    bbMapCoords MC;
+    MC.i = (SP.x + SP.y - VP->width/2.0 - VP->height/2.0 + 2*VP->viewpoint.i
+            - VP->viewpoint.j)/2;
+
+    MC.j = (SP.x - SP.y - VP->width/2.0 + VP->height/2.0 + VP->viewpoint.j +
+            2*VP->viewpoint.k)/2;
+
+    MC.j = 0;
+}

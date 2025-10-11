@@ -56,6 +56,7 @@ bbFlag bbMooseFunctions_populate(bbMooseFunctions* self)
     bbMooseFunctions_add(self, MooseIsOver, IsOver_Always, "ALWAYS");
     bbMooseFunctions_add(self, MooseIsOver, IsOver_Teleport, "TELEPORT");
     bbMooseFunctions_add(self, MooseIsOver, IsOver_Hover, "HOVER");
+    bbMooseFunctions_add(self, MooseIsOver, IsOver_Viewport, "VIEWPORT");
 
 
     bbMooseFunctions_add(self, MooseIsOver, Button_IsOver, "BUTTON");

@@ -11,12 +11,19 @@
 #include "engine/2point5D/bbOverlays.h"
 #include "engine/widgets/bbWidgetMouse.h"
 #include "engine/widgets/bbWidgetFunctions.h"
+#include "engine/geometry/bbCoordinates.h"
 
 sfRenderWindow* testWindow;
 bbWidgets* testWidgets;
 bbWidgetFunctions* testFunctions;
+bbMapCoords testGoalPoint;
+
+
 
 int main (void){
+
+    testGoalPoint.i = 7000;
+    testGoalPoint.j = 12120;
 
     bbColours_init();
 
@@ -185,8 +192,24 @@ CLEARWINDOW(bbMagenta);
 	for (mapTime = 0; ; mapTime++) {
 
 
-        viewport->viewpoint.i = 5120 * sin(mapTime / 360.0) + 7000;
-        viewport->viewpoint.j = 5120 * cos(mapTime / 360.0) + 7000;
+
+        bbMapCoords difference;
+        difference.i = viewport->viewpoint.i - testGoalPoint.i;
+        difference.j = viewport->viewpoint.j - testGoalPoint.j;
+        difference.k = 0;
+
+        float speed = 8;
+
+        float distance = sqrt(difference.i*difference.i
+                + difference.j*difference.j);
+
+        if (distance <= speed){
+            viewport->viewpoint = testGoalPoint;
+        } else {
+            viewport->viewpoint.i += difference.i * speed / distance;
+            viewport->viewpoint.j += difference.j * speed / distance;
+        }
+
 
 //        mouseActionClosure closure;
 

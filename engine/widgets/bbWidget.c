@@ -205,7 +205,8 @@ bbFlag bbWidget_newViewport(bbWidget** self, bbGraphics* graphics,
 	widget->ftable.MouseHandler = funcInt;
 
 
-	funcInt = bbMooseFunctions_getInt(&widgets->moose->functions,MooseIsOver, "HOVER");
+	funcInt = bbMooseFunctions_getInt(&widgets->moose->functions,MooseIsOver,
+                                      "VIEWPORT");
 	widget->mtable.isOver = funcInt;
 
 	widget->mtable.MouseIcon = 85;
