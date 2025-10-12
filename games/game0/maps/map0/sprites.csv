@@ -1,4 +1,4 @@
-Number of Sprites:,98,,,,,,,,,,,,
+Number of Sprites:,99,,,,,,,,,,,,
 Label:,Integer Address:,Texture:,Left:,Top:,Width:,Height:,Origin X:,Origin Y:,Scale X:,Scale Y:,Scale By:,Comment:,
 NULL,0,NULL,0,0,128,128,0,0,1,1,None,Exception,
 LAYOUT_480,1,LAYOUT_480,0,0,720,480,0,0,1,1,None,The root of the widget tree,
@@ -98,3 +98,4 @@ BUTTON_DEFAULT,94,BUTTON,0,0,75,23,0,0,1,1,None, A button state,
 BUTTON_HOVER,95,BUTTON,0,24,75,23,0,0,1,1,None, A button state,
 BUTTON_CLICK,96,BUTTON,0,48,75,23,0,0,1,1,None, A button state,
 BUTTON_DRAG,97,BUTTON,0,72,75,23,37,11,1,1,None, A button state,
+FOX,98,SPRITESHEET,0,0,66,99,26,98,1,1,None, Mr Fox
