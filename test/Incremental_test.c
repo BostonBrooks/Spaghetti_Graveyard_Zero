@@ -41,13 +41,15 @@ int main (void){
 CLEARWINDOW(bbRed);
 
 	bbGraphics graphics;
-	bbTextures_new(&graphics.textures, "./maps/map0/textures.csv");
+	bbTextures_new(&graphics.textures,
+                   "./maps/map0/graphics/textures.csv");
 
 
 
 	//bbDictionary_print(graphics.textures->dictionary);
 //bbHere();
-	bbSprites_new(&graphics.sprites, graphics.textures, "./maps/map0/sprites.csv",1,1,1);
+	bbSprites_new(&graphics.sprites, graphics.textures,
+                  "./maps/map0/graphics/sprites.csv",1,1,1);
 
     //bbDictionary_print(graphics.sprites->dictionary);
 
@@ -59,12 +61,15 @@ CLEARWINDOW(bbRedOrange);
 CLEARWINDOW(bbOrange);
 
 	void* memtest = malloc(sizeof(char) * 1028);
-	bbAnimations_new(&graphics.animations, graphics.sprites, graphics.drawfunctions, "./maps/map0/animations.csv");
+	bbAnimations_new(&graphics.animations, graphics.sprites, graphics
+            .drawfunctions, "./maps/map0/graphics/animations.csv");
 
 	//bbDictionary_print(graphics.animations->dictionary);
 CLEARWINDOW(bbYellowOrange);
 
-	bbCompositions_new(&graphics.compositions, graphics.sprites, graphics.animations, graphics.drawfunctions, "./maps/map0/compositions.csv");
+	bbCompositions_new(&graphics.compositions, graphics.sprites, graphics
+            .animations, graphics.drawfunctions,
+            "./maps/map0/graphics/compositions.csv");
 	//bbDictionary_print(graphics.compositions->dictionary);
 
 CLEARWINDOW(bbYellow);

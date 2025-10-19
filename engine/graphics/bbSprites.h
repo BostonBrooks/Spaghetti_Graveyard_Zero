@@ -8,7 +8,7 @@
  * the ground, where sprites are scaled by groundscale
  * NONE, sprites that are not scaled
  *
- * data is contained in games/game0/maps/map0/textures.csv
+ * data is contained in games/game0/maps/map0/graphics/textures.csv
  *
  * Lable: used to look up sprite in dictionary
  * Virtual Address: location of sprite in array

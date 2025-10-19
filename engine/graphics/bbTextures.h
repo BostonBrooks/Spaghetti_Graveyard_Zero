@@ -1,7 +1,7 @@
 /**
  * @file
  * @brief this file loads textures for use in the game
- * data is contained in games/game0/maps/map0/textures.csv
+ * data is contained in games/game0/maps/map0/graphics/textures.csv
  *
  * textures.csv has the following fields
  *
