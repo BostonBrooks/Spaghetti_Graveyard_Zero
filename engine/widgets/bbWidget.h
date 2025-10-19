@@ -14,7 +14,7 @@
 #include "engine/graphics/bbGraphics.h"
 #include "engine/logic/bbTree.h"
 #include "engine/geometry/bbCoordinates.h"
-#include "engine/user_input/bbMoose.h"
+#include "engine/user_input/bbMouse.h"
 
 
 
@@ -41,7 +41,7 @@ typedef struct bbWidget{
 	I32 text_columns;
 	I32 state;
 
-	bbMooseTable mtable;
+	bbMouseTable mtable;
     bbWidgetFunctionTable ftable;
 
     bbFrame frames[FRAMES_PER_WIDGET];
@@ -56,7 +56,7 @@ typedef struct bbWidgets {
 	bbTree* tree;
 	struct bbWidgetFunctions0* functions;
 
-	bbMoose* moose;
+	bbMouse* mouse;
 } bbWidgets;
 
 

@@ -52,17 +52,17 @@ bbFlag Button_Constructor (bbWidget** self, void* graphics,
 
     int funcInt;
 
-    funcInt = bbMooseFunctions_getInt(&widgets->moose->functions,MooseIsOver, "BUTTON");
+    funcInt = bbMouseFunctions_getInt(&widgets->mouse->functions,MouseIsOver, "BUTTON");
     widget->mtable.isOver = funcInt;
-    funcInt = bbMooseFunctions_getInt(&widgets->moose->functions,MooseEnter, "BUTTON");
+    funcInt = bbMouseFunctions_getInt(&widgets->mouse->functions,MouseEnter, "BUTTON");
     widget->mtable.Enter = funcInt;
-    funcInt = bbMooseFunctions_getInt(&widgets->moose->functions,MooseLeave, "BUTTON");
+    funcInt = bbMouseFunctions_getInt(&widgets->mouse->functions,MouseLeave, "BUTTON");
     widget->mtable.Leave = funcInt;
-    funcInt = bbMooseFunctions_getInt(&widgets->moose->functions,
-                                      MooseLeftDown,"BUTTON");
+    funcInt = bbMouseFunctions_getInt(&widgets->mouse->functions,
+                                      MouseLeftDown,"BUTTON");
     widget->mtable.LeftDown = funcInt;
-    funcInt = bbMooseFunctions_getInt(&widgets->moose->functions,
-                                      MooseLeftUp,"BUTTON");
+    funcInt = bbMouseFunctions_getInt(&widgets->mouse->functions,
+                                      MouseLeftUp,"BUTTON");
     widget->mtable.LeftUp = funcInt;
 
     widget->mtable.MouseIcon = 87;
@@ -84,23 +84,23 @@ bbFlag Button_Constructor (bbWidget** self, void* graphics,
 #endif //WIDGET_FUNCTIONS
 
 #ifdef MOOSE_FUNCTIONS
-//typedef bbFlag bbMoose_IsOver (void* moose, void* widgets, void* widget);
-bbFlag Button_IsOver (bbMoose* moose, bbWidgets* widgets, bbWidget* widget)
+//typedef bbFlag bbMouse_IsOver (void* mouse, void* widgets, void* widget);
+bbFlag Button_IsOver (bbMouse* mouse, bbWidgets* widgets, bbWidget* widget)
 {
     bbScreenPointsRect rect = widget->rect;
-    bbScreenPoints point = moose->position;
+    bbScreenPoints point = mouse->position;
 
     if (bbScreenPoints_inScreenPointsRect(point, rect)){
         bbVPool* pool = widgets->pool;
         bbPool_Handle handle;
         bbVPool_reverseLookup(pool,widget,&handle);
 
-        if (!bbVPool_handleIsEqual(pool,handle,moose->isOver))
+        if (!bbVPool_handleIsEqual(pool,handle,mouse->isOver))
         {
 
             bbHere();
-            moose->wasOver = moose->isOver;
-            moose->isOver = handle;
+            mouse->wasOver = mouse->isOver;
+            mouse->isOver = handle;
         }
         return Break;
     }
@@ -108,9 +108,9 @@ bbFlag Button_IsOver (bbMoose* moose, bbWidgets* widgets, bbWidget* widget)
 }
 
 
-//typedef bbFlag bbMoose_Enter (void* moose, void* widgets, void* widget, void* graphics);
+//typedef bbFlag bbMouse_Enter (void* mouse, void* widgets, void* widget, void* graphics);
 
-bbFlag Button_Enter (void* moose, void* widgets, void* widget, void* graphics)
+bbFlag Button_Enter (void* mouse, void* widgets, void* widget, void* graphics)
 {
     bbWidget* Widget = (bbWidget*)widget;
     bbGraphics* Graphics = graphics;
@@ -122,8 +122,8 @@ bbFlag Button_Enter (void* moose, void* widgets, void* widget, void* graphics)
     return Success;
 }
 
-//typedef bbFlag bbMoose_Leave (void* moose, void* widgets, void* widget, void* graphics);
-bbFlag Button_Leave (void* moose, void* widgets, void* widget, void* graphics)
+//typedef bbFlag bbMouse_Leave (void* mouse, void* widgets, void* widget, void* graphics);
+bbFlag Button_Leave (void* mouse, void* widgets, void* widget, void* graphics)
 {
     bbWidget* Widget = (bbWidget*)widget;
     bbGraphics* Graphics = graphics;
@@ -135,14 +135,14 @@ bbFlag Button_Leave (void* moose, void* widgets, void* widget, void* graphics)
     return Success;
 }
 
-//typedef bbFlag bbMoose_LeftDown (void* moose, void* widgets, void* widget,
+//typedef bbFlag bbMouse_LeftDown (void* mouse, void* widgets, void* widget,
 // void* graphics);
-bbFlag Button_LeftDown (void* moose, void* widgets, void* widget, void*
+bbFlag Button_LeftDown (void* mouse, void* widgets, void* widget, void*
 graphics)
 {
     bbWidget* Widget = (bbWidget*)widget;
     bbGraphics* Graphics = graphics;
-    bbMoose* Moose = moose;
+    bbMouse* Mouse = mouse;
     bbWidgets* Widgets = widgets;
     bbVPool* pool = Widgets->pool;
     bbPool_Handle handle;
@@ -151,21 +151,21 @@ graphics)
 
     bbVPool_reverseLookup(pool, widget, &handle);
     Widget->mtable.hover = true;
-    Moose->selected = handle;
+    Mouse->selected = handle;
     bbDebug("Mouse left button down on viewpoint\n");
     return Success;
 }
 
-//typedef bbFlag bbMoose_LeftUp (void* moose, void* widgets, void* widget, void*
+//typedef bbFlag bbMouse_LeftUp (void* mouse, void* widgets, void* widget, void*
 // graphics);
-bbFlag Button_LeftUp (void* moose, void* widgets, void* widget, void* graphics)
+bbFlag Button_LeftUp (void* mouse, void* widgets, void* widget, void* graphics)
 {
     bbWidget* Widget = (bbWidget*)widget;
     bbGraphics* Graphics = graphics;
     bbWidgets* Widgets = widgets;
 
-    bbMoose* Moose = moose;
-    Moose->selected = Widgets->pool->null;
+    bbMouse* Mouse = mouse;
+    Mouse->selected = Widgets->pool->null;
 
     if (Widget->mtable.hover) {
 

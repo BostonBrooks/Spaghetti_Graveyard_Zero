@@ -87,7 +87,7 @@ bbFlag SPHERE_Constructor (bbWidget** self, void* graphics,
 
     int funcInt;
 
-    funcInt = bbMooseFunctions_getInt(&widgets->moose->functions,MooseIsOver, "TELEPORT");
+    funcInt = bbMouseFunctions_getInt(&widgets->mouse->functions,MouseIsOver, "TELEPORT");
     widget->mtable.isOver = funcInt;
 
 

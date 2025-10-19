@@ -90,24 +90,24 @@ CLEARWINDOW(bbGreen);
 	bbWidgets_init(&widgets);
 	//testWidgets = &widgets;
 
-	bbMoose moose;
+	bbMouse mouse;
 
-	bbMoose_Init(&moose, &widgets, &graphics);
+	bbMouse_Init(&mouse, &widgets, &graphics);
 
-	bbMooseFunctions_init(&moose.functions);
-	bbMooseFunctions_populate(&moose.functions);
+	bbMouseFunctions_init(&mouse.functions);
+	bbMouseFunctions_populate(&mouse.functions);
 
 
-	int tst = bbMooseFunctions_getInt(&moose.functions,MooseIsOver, "ALWAYS");
+	int tst = bbMouseFunctions_getInt(&mouse.functions,MouseIsOver, "ALWAYS");
 	bbDebug("tst = %d\n", tst);
-	tst = bbMooseFunctions_getInt(&moose.functions,MooseIsOver, "TELEPORT");
+	tst = bbMouseFunctions_getInt(&mouse.functions,MouseIsOver, "TELEPORT");
 	bbDebug("tst = %d\n", tst);
-	tst = bbMooseFunctions_getInt(&moose.functions,MooseIsOver, "HOVER");
+	tst = bbMouseFunctions_getInt(&mouse.functions,MouseIsOver, "HOVER");
 	bbDebug("tst = %d\n", tst);
 
 
 	bbInput input;
-	bbInput_new(&input,window, &moose);
+	bbInput_new(&input,window, &mouse);
 
 CLEARWINDOW(bbTeal);
 
@@ -214,8 +214,8 @@ CLEARWINDOW(bbMagenta);
 
 
 
-		bbMoose_isOver(&moose, &widgets);
-		bbMoose_Update(&moose, &widgets, &graphics);
+		bbMouse_isOver(&mouse, &widgets);
+		bbMouse_Update(&mouse, &widgets, &graphics);
 
 
 
@@ -233,7 +233,7 @@ CLEARWINDOW(bbMagenta);
         cl.target = window;
         bbWidgets_draw(&widgets, &cl);
 
-		bbMoose_Draw(&moose, &widgets, &graphics, window);
+		bbMouse_Draw(&mouse, &widgets, &graphics, window);
 		sfRenderWindow_display(window);
         bbViewport_clear(viewport);
         bbFlag flag = bbInput_poll(&input, window);

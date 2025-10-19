@@ -1,4 +1,4 @@
-#include "engine/user_input/bbMooseFunctions.h"
+#include "engine/user_input/bbMouseFunctions.h"
 
 #include <stdlib.h>
 
@@ -9,35 +9,35 @@
 #include "engine/logic/bbTerminal.h"
 
 
-bbFlag bbMooseFunctions_init(bbMooseFunctions* functions)
+bbFlag bbMouseFunctions_init(bbMouseFunctions* functions)
 {
     I32 magic_number = 256;
 
-    functions->IsOver = calloc(magic_number, sizeof(bbMoose_IsOver));
+    functions->IsOver = calloc(magic_number, sizeof(bbMouse_IsOver));
     bbAssert(functions->IsOver != NULL, "bad calloc\n");
     bbDictionary_new(&functions->IsOver_dict, magic_number);
     functions->IsOver_available = 0;
 
 
-    functions->Enter = calloc(magic_number, sizeof(bbMoose_Enter));
+    functions->Enter = calloc(magic_number, sizeof(bbMouse_Enter));
     bbAssert(functions->Enter != NULL, "bad calloc\n");
     bbDictionary_new(&functions->Enter_dict, magic_number);
     functions->Enter_available = 0;
 
 
-    functions->Leave = calloc(magic_number, sizeof(bbMoose_Leave));
+    functions->Leave = calloc(magic_number, sizeof(bbMouse_Leave));
     bbAssert(functions->Leave != NULL, "bad calloc\n");
     bbDictionary_new(&functions->Leave_dict, magic_number);
     functions->Leave_available = 0;
 
 
-    functions->LeftDown = calloc(magic_number, sizeof(bbMoose_LeftDown ));
+    functions->LeftDown = calloc(magic_number, sizeof(bbMouse_LeftDown ));
     bbAssert(functions->LeftDown != NULL, "bad calloc\n");
     bbDictionary_new(&functions->LeftDown_dict, magic_number);
     functions->LeftDown_available = 0;
 
 
-    functions->LeftUp = calloc(magic_number, sizeof(bbMoose_LeftUp ));
+    functions->LeftUp = calloc(magic_number, sizeof(bbMouse_LeftUp ));
     bbAssert(functions->LeftUp != NULL, "bad calloc\n");
     bbDictionary_new(&functions->LeftUp_dict, magic_number);
     functions->LeftUp_available = 0;
@@ -47,7 +47,7 @@ bbFlag bbMooseFunctions_init(bbMooseFunctions* functions)
     return Success;
 }
 
-bbFlag bbMooseFunctions_add(bbMooseFunctions* functions, MooseFunctionType fnType, void* fnPointer, char* key )
+bbFlag bbMouseFunctions_add(bbMouseFunctions* functions, MouseFunctionType fnType, void* fnPointer, char* key )
 {
 
 
@@ -56,7 +56,7 @@ bbFlag bbMooseFunctions_add(bbMooseFunctions* functions, MooseFunctionType fnTyp
     I32 magic_number = 256;
     switch (fnType)
     {
-    case MooseIsOver:
+    case MouseIsOver:
 
         available = functions->IsOver_available++;
         bbAssert(available < magic_number, "out of bounds error\n");
@@ -65,7 +65,7 @@ bbFlag bbMooseFunctions_add(bbMooseFunctions* functions, MooseFunctionType fnTyp
         bbDictionary_add(functions->IsOver_dict, key, handle);
         return Success;
 
-    case MooseEnter:
+    case MouseEnter:
 
         available = functions->Enter_available++;
         bbAssert(available < magic_number, "out of bounds error\n");
@@ -74,7 +74,7 @@ bbFlag bbMooseFunctions_add(bbMooseFunctions* functions, MooseFunctionType fnTyp
         bbDictionary_add(functions->Enter_dict, key, handle);
         return Success;
 
-    case MooseLeave:
+    case MouseLeave:
 
         available = functions->Leave_available++;
         bbAssert(available < magic_number, "out of bounds error\n");
@@ -83,7 +83,7 @@ bbFlag bbMooseFunctions_add(bbMooseFunctions* functions, MooseFunctionType fnTyp
         bbDictionary_add(functions->Leave_dict, key, handle);
         return Success;
 
-        case MooseLeftDown:
+        case MouseLeftDown:
 
             available = functions->LeftDown_available++;
             bbAssert(available < magic_number, "out of bounds error\n");
@@ -92,7 +92,7 @@ bbFlag bbMooseFunctions_add(bbMooseFunctions* functions, MooseFunctionType fnTyp
             bbDictionary_add(functions->LeftDown_dict, key, handle);
             return Success;
 
-        case MooseLeftUp:
+        case MouseLeftUp:
 
             available = functions->LeftUp_available++;
             bbAssert(available < magic_number, "out of bounds error\n");
@@ -107,23 +107,23 @@ bbFlag bbMooseFunctions_add(bbMooseFunctions* functions, MooseFunctionType fnTyp
 
 }
 
-I32 bbMooseFunctions_getInt(bbMooseFunctions* functions,
-                                MooseFunctionType fnType, char* key){
+I32 bbMouseFunctions_getInt(bbMouseFunctions* functions,
+                                MouseFunctionType fnType, char* key){
     bbDictionary* dict;
     switch (fnType){
-    case MooseIsOver:
+    case MouseIsOver:
         dict = functions->IsOver_dict;
         break;
-    case MooseEnter:
+    case MouseEnter:
         dict = functions->Enter_dict;
         break;
-        case MooseLeave:
+        case MouseLeave:
             dict = functions->Leave_dict;
             break;
-        case MooseLeftDown:
+        case MouseLeftDown:
             dict = functions->LeftDown_dict;
             break;
-        case MooseLeftUp:
+        case MouseLeftUp:
             dict = functions->LeftUp_dict;
             break;
 
@@ -136,12 +136,12 @@ I32 bbMooseFunctions_getInt(bbMooseFunctions* functions,
     return handle.u64;
 }
 
-bbFlag bbMooseFunctions_getFunction(void** function, bbMooseFunctions* functions,
-                                     MooseFunctionType fnType, char* key){
+bbFlag bbMouseFunctions_getFunction(void** function, bbMouseFunctions* functions,
+                                     MouseFunctionType fnType, char* key){
     bbPool_Handle handle;
 
     switch (fnType){
-    case MooseIsOver:
+    case MouseIsOver:
         bbDictionary_lookup(functions->IsOver_dict,key,&handle);
         *function = functions->IsOver[handle.u64];
         return Success;

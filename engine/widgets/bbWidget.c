@@ -83,8 +83,8 @@ bbFlag bbWidget_newLayout(bbWidget** self, bbGraphics* graphics, bbWidgets* widg
 
 
 
-	int funcInt = bbMooseFunctions_getInt(&widgets->moose->functions,
-                                       MooseIsOver, "ALWAYS");
+	int funcInt = bbMouseFunctions_getInt(&widgets->mouse->functions,
+                                       MouseIsOver, "ALWAYS");
 	bbDebug("funcInt = %d\n", funcInt);
 	widget->mtable.isOver = funcInt;
 
@@ -185,8 +185,8 @@ bbFlag bbWidget_newViewport(bbWidget** self, bbGraphics* graphics,
     rect.height = 456 * POINTS_PER_PIXEL;
 
 
-	int funcInt = bbMooseFunctions_getInt(&widgets->moose->functions,
-                                          MooseIsOver,
+	int funcInt = bbMouseFunctions_getInt(&widgets->mouse->functions,
+                                          MouseIsOver,
                                       "VIEWPORT");
 	widget->mtable.isOver = funcInt;
 

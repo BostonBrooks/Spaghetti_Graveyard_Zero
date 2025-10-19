@@ -1,5 +1,5 @@
-//bbMoose is the new and improved mouse object that is a part of bbWidgets and interacts with the bbWidgets
-//bbMoose* moose is a member of bbInput and bbWidgets
+//bbMouse is the new and improved mouse object that is a part of bbWidgets and interacts with the bbWidgets
+//bbMouse* mouse is a member of bbInput and bbWidgets
 #ifndef BBMOOSE_H
 #define BBMOOSE_H
 
@@ -10,7 +10,7 @@
 #include "engine/logic/bbIntTypes.h"
 #include "engine/logic/bbDictionary.h"
 #include "engine/logic/bbVPool.h"
-#include "engine/user_input/bbMooseFunctions.h"
+#include "engine/user_input/bbMouseFunctions.h"
 
 //data stored in bbWidget, informs the object how to interact with the mouse using virtual functions found in vtables
 
@@ -32,13 +32,13 @@ typedef struct
     //book keeping data
     unsigned int hover : 1;
     unsigned int selected : 1;
-} bbMooseTable;
+} bbMouseTable;
 
 
 
 
 
-typedef struct bbMoose
+typedef struct bbMouse
 {
     bbScreenPoints position;
     bbScreenPoints previousPosition;
@@ -56,70 +56,70 @@ typedef struct bbMoose
     bbPool_Handle selected;
     I32 defaultMouseIcon;
 
-    bbMooseFunctions functions;
-} bbMoose;
+    bbMouseFunctions functions;
+} bbMouse;
 
 //cl contains pointers to whatever systems are needed
 typedef struct
 {
     void* widgets;
-} bbMoose_isOver_cl;
+} bbMouse_isOver_cl;
 
 
 
 //Needs to know the pool used for widgets...
-bbFlag bbMoose_Init(bbMoose* moose, void* widgets, bbGraphics* graphics);
+bbFlag bbMouse_Init(bbMouse* mouse, void* widgets, bbGraphics* graphics);
 
 //Figure out what widget the mouse is over
-bbFlag bbMoose_isOver(bbMoose* moose, void* widgets);
+bbFlag bbMouse_isOver(bbMouse* mouse, void* widgets);
 
-bbFlag bbMoose_Event(bbMoose* moose, sfEvent* event);
+bbFlag bbMouse_Event(bbMouse* mouse, sfEvent* event);
 //Interact with widgets, may have to look up sprite int in dictionary
-bbFlag bbMoose_Update(bbMoose* moose, void* widgets, bbGraphics* graphics);
+bbFlag bbMouse_Update(bbMouse* mouse, void* widgets, bbGraphics* graphics);
 
 //Draw mouse to screen, depending on what widget is selected and what is under the mouse
-bbFlag bbMoose_Draw(bbMoose* moose, void* widgets, bbGraphics* graphics, sfRenderWindow* window);
+bbFlag bbMouse_Draw(bbMouse* mouse, void* widgets, bbGraphics* graphics, sfRenderWindow* window);
 
-bbFlag bbMoose_EnterWidget(void* moose, void* widgets, void* widget, void*
+bbFlag bbMouse_EnterWidget(void* mouse, void* widgets, void* widget, void*
 graphics);
 
-bbFlag bbMoose_LeaveWidget(void* moose, void* widgets, void* widget, void*
+bbFlag bbMouse_LeaveWidget(void* mouse, void* widgets, void* widget, void*
 graphics);
 
-bbFlag bbMoose_LeftDownWidget(void* moose, void* widgets, void* widget,
+bbFlag bbMouse_LeftDownWidget(void* mouse, void* widgets, void* widget,
                                 void* graphics);
-bbFlag bbMoose_LeftUpWidget(void* moose, void* widgets, void* widget,
+bbFlag bbMouse_LeftUpWidget(void* mouse, void* widgets, void* widget,
                                   void* graphics);
 
 //Function to be called recursively
-bbFlag bbMoose_isOverFunc(bbTree* tree, void* node, void* cl);
+bbFlag bbMouse_isOverFunc(bbTree* tree, void* node, void* cl);
 #endif // BBMOOSE_H
 
 
 /*
- * bbFlag bbInput_poll(bbInput* input, sfRenderWindow* window, bbMouse* mouse, bbMoose* moose);
- *     updates bbMoose bbFlag bbMoose_Event(bbMoose* moose, sfEvent* event)
+ * bbFlag bbInput_poll(bbInput* input, sfRenderWindow* window, bbMouse* mouse, bbMouse* mouse);
+ *     updates bbMouse bbFlag bbMouse_Event(bbMouse* mouse, sfEvent* event)
  *
- * bbFlag bbMoose_Update(bbMoose* moose, struct bbWidgets* widgets, bbGraphics* graphics);
- *     calls bbFlag bbMoose_isOver(bbMoose* moose, struct bbWidgets* widgets);
+ * bbFlag bbMouse_Update(bbMouse* mouse, struct bbWidgets* widgets, bbGraphics* graphics);
+ *     calls bbFlag bbMouse_isOver(bbMouse* mouse, struct bbWidgets* widgets);
  *
- * bbFlag bbMoose_isOver(bbMoose* moose, struct bbWidgets* widgets);
- *     calls bbTree_ascendingMapVisible with bbMoose_isOverFunc and cl
+ * bbFlag bbMouse_isOver(bbMouse* mouse, struct bbWidgets* widgets);
+ *     calls bbTree_ascendingMapVisible with bbMouse_isOverFunc and cl
  *
- * bbFlag bbMoose_isOverFunc(bbTree* tree, void* node, void* cl)
+ * bbFlag bbMouse_isOverFunc(bbTree* tree, void* node, void* cl)
  *     looks up function given by node.functions.isOver
  *
  * cl contains pointers to whatever systems are needed
  *
  * function given by node.functions.isOver
- *     is type bbFlag bbMoose_IsOver(bbMoose* moose, bbWidgets* widgets, bbWidget* widget);
- *     updates bbMoose.isOver and bbMoose.wasOver and returns Break
+ *     is type bbFlag bbMouse_IsOver(bbMouse* mouse, bbWidgets* widgets, bbWidget* widget);
+ *     updates bbMouse.isOver and bbMouse.wasOver and returns Break
  *     OR returns Continue
  *
- * bbMoose_Update
+ * bbMouse_Update
  *     calls appropriate functions from bbWidget.mtable
- *     clears bbMoose.leftChanged and bbMoose.rightChanged
+ *     clears bbMouse.leftChanged and bbMouse.rightChanged
  *
- * bbMoose_Draw
+ * bbMouse_Draw
  *     looks up isOver.MouseIcon and selected.DragIcon and draws them to the screen
  */
