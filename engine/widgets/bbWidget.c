@@ -28,26 +28,9 @@ bbFlag bbWidgets_init(bbWidgets* widgets){
 
 
 
-//bbFlag testFunc(bbTree* tree, void* node, void* cl)
-bbFlag bbWidget_mouseFunc(bbTree* tree, void* node, void* cl){
-
-	bbWidget* widget = node;
-	mouseActionClosure* closure = cl;
-	return bbWidget_mouse(widget, closure->functions0, cl);
-}
-
-bbFlag bbWidget_mouse(bbWidget* widget, bbWidgetFunctions0* functions, void* cl)
-{
 
 
-	I32 mouseInt = widget->ftable.MouseHandler;
 
-
-	bbWidget_Mouse* func = functions->MouseHandler[mouseInt];
-    bbAssert(func != NULL, "Bad bbWidget_Mouse* func\n");
-	return func(widget,cl);
-
-}
 
 //bbFlag testFunc(bbTree* tree, void* node, void* cl)
 bbFlag bbWidget_drawFunc(bbTree* tree, void* node, void* cl){
@@ -98,12 +81,10 @@ bbFlag bbWidget_newLayout(bbWidget** self, bbGraphics* graphics, bbWidgets* widg
 	widget->frames[0].offset.x = 0;
 	widget->frames[0].offset.y = 0;
 
-	int funcInt = bbWidgetFunctions_getInt(widgets->functions,
-	WidgetMouseHandler, "NULL Mouse");
-	bbDebug("funcInt = %d\n", funcInt);
-	widget->ftable.MouseHandler = funcInt;
 
-	funcInt = bbMooseFunctions_getInt(&widgets->moose->functions,MooseIsOver, "ALWAYS");
+
+	int funcInt = bbMooseFunctions_getInt(&widgets->moose->functions,
+                                       MooseIsOver, "ALWAYS");
 	bbDebug("funcInt = %d\n", funcInt);
 	widget->mtable.isOver = funcInt;
 
@@ -132,7 +113,6 @@ bbFlag bbWidget_newEmpty(bbWidget** self, bbWidgets* widgets, bbWidget* parent){
 	widget->tree.visible = true;
 	widget->tree.childrenvisible = true;
 
-	widget->onMouse.onMouse = 0;
 
 	if (parent == NULL){
 		widgets->tree->root = widgetHandle;
@@ -204,13 +184,9 @@ bbFlag bbWidget_newViewport(bbWidget** self, bbGraphics* graphics,
     rect.width = 466 * POINTS_PER_PIXEL;
     rect.height = 456 * POINTS_PER_PIXEL;
 
-	int funcInt = bbWidgetFunctions_getInt(widgets->functions,
-	WidgetMouseHandler, "NULL Mouse");
-	bbDebug("funcInt = %d\n", funcInt);
-	widget->ftable.MouseHandler = funcInt;
 
-
-	funcInt = bbMooseFunctions_getInt(&widgets->moose->functions,MooseIsOver,
+	int funcInt = bbMooseFunctions_getInt(&widgets->moose->functions,
+                                          MooseIsOver,
                                       "VIEWPORT");
 	widget->mtable.isOver = funcInt;
 
@@ -252,15 +228,7 @@ bbFlag bbWidgets_draw(bbWidgets* widgets, void* cl) {
     return bbTree_descendingMapVisible(tree, root, bbWidget_drawFunc, cl);
 }
 
-//in the following function, cl contains fields such as mouse coordinates, mouse action
-bbFlag bbWidgets_onMouse(bbWidgets* widgets, void* cl) {
 
-	bbTree* tree = widgets->tree;
-	bbVPool* pool = tree->pool;
-	void* root;
-	bbVPool_lookup(pool, &root, tree->root);
-	return bbTree_ascendingMapVisible(tree, root, bbWidget_mouseFunc, cl);
-}
 
 bbFlag bbWidget_constructor(bbWidget** self, bbWidgets* widgets, bbGraphics* graphics,
 	bbScreenPoints location, bbWidget* parent, char* key)

@@ -36,7 +36,6 @@ gcc   -D SFML_STATIC -I ../^
        ../engine/widgets/bbWidget.c^
        ../engine/geometry/bbCoordinates.c^
        ../engine/user_input/bbInput.c^
-       ../engine/user_input/bbMouse.c^
        ../engine/widgets/bbWidgetFunctions.c^
        ../games/game0/maps/map0/widgets/widgets.c^
        ../games/game0/maps/map0/widgets/moose.c^

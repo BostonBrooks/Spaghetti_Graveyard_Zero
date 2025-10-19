@@ -6,10 +6,8 @@
 #include "engine/logic/bbTerminal.h"
 #include "engine/logic/bbTree.h"
 #include "engine/user_input/bbInput.h"
-#include "engine/user_input/bbMouse.h"
 #include "engine/2point5D/bbViewport.h"
 #include "engine/2point5D/bbOverlays.h"
-#include "engine/widgets/bbWidgetMouse.h"
 #include "engine/widgets/bbWidgetFunctions.h"
 #include "engine/geometry/bbCoordinates.h"
 
@@ -74,8 +72,6 @@ CLEARWINDOW(bbYellowOrange);
 
 CLEARWINDOW(bbYellow);
 
-//    bbMouse mouse;
-//    bbMouse_new(&mouse, window, &graphics);
 
 
 
@@ -111,7 +107,7 @@ CLEARWINDOW(bbGreen);
 
 
 	bbInput input;
-	bbInput_new(&input,window, NULL, &moose);
+	bbInput_new(&input,window, &moose);
 
 CLEARWINDOW(bbTeal);
 
@@ -217,12 +213,6 @@ CLEARWINDOW(bbMagenta);
         }
 
 
-//        mouseActionClosure closure;
-
-//        closure.event = NULL;
-//        closure.functions0 = widgets.functions;
-//		closure.mouse = &mouse;
-//        bbWidgets_onMouse(&widgets, &closure);
 
 		bbMoose_isOver(&moose, &widgets);
 		bbMoose_Update(&moose, &widgets, &graphics);
@@ -242,7 +232,6 @@ CLEARWINDOW(bbMagenta);
 
         cl.target = window;
         bbWidgets_draw(&widgets, &cl);
-//        bbMouse_draw(&mouse, window);
 
 		bbMoose_Draw(&moose, &widgets, &graphics, window);
 		sfRenderWindow_display(window);

@@ -57,10 +57,6 @@ bbFlag SPHERE_Constructor (bbWidget** self, void* graphics,
     bbVPool_reverseLookup(widgets->pool, widget, &widgetHandle);
     widget->tree.visible = true;
     widget->tree.childrenvisible = true;
-    //  widget->ftable.MouseHandler =
-    //  bbWidgetFunctions_getInt(bbWidgetFunctions0* functions,
-    //    WidgetFunctionType fnType, char * key);
-    widget->ftable.MouseHandler = 0;
 
     if (parent == NULL){
         widgets->tree->root = widgetHandle;
@@ -89,12 +85,7 @@ bbFlag SPHERE_Constructor (bbWidget** self, void* graphics,
     bbDictionary_lookup(Graphics->sprites->dictionary, "SPHERE",
                         &widget->frames[0].handle);
 
-    int funcInt = bbWidgetFunctions_getInt(widgets->functions,
-    WidgetMouseHandler, "SPHERE");
-
-    bbDebug("funcInt = %d\n", funcInt);
-
-    widget->ftable.MouseHandler = funcInt;
+    int funcInt;
 
     funcInt = bbMooseFunctions_getInt(&widgets->moose->functions,MooseIsOver, "TELEPORT");
     widget->mtable.isOver = funcInt;
@@ -119,28 +110,3 @@ bbFlag SPHERE_Constructor (bbWidget** self, void* graphics,
     return Success;
 }
 
-//If the mouse is over the widget, move the widget.
-bbFlag SPHERE_Mouse (bbWidget* widget, void* cl)
-{
-
-
-    mouseActionClosure* closure = cl;
-    bbMouse* mouse = closure->mouse;
-
-
-    bbScreenPoints point = mouse->position;
-
-    bbScreenPointsRect rect = widget->rect;
-
-    if (bbScreenPoints_inScreenPointsRect(point, rect)){
-
-        bbDebug("Mouse interacts with Sphere\n");
-        widget->rect.left = rand()%(720*8 - 52*8);
-        widget->rect.top = rand()%(480*8 - 52*8);
-
-    }
-
-
-
-    return Continue;
-}

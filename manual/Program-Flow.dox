@@ -49,9 +49,10 @@ An outline of the basic flow of the program (main.c) follows:
     -Draw viewport.
     -Draw widgets.
     -Parse input
-         - Send mouse movements/clicks to widgets
-         - If no widget clicked, send mouse clicks to viewport
-         - Send key presses to prompt
+         - Send mouse movements/clicks to bbMouse
+         - find what widget the mouse is over
+
+    -Widget reacts to mouse
     -Player object takes Parsed input and modifies player Actor
     //-May want to do some internet stuff
     -Update Actors and send a list of commands to drawables

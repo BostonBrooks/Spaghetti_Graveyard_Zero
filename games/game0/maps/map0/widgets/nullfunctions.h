@@ -26,12 +26,6 @@ bbFlag NULL_OnCommand (bbWidget* widget, void* data)
     return Success;
 }
 
-bbFlag NULL_Mouse (bbWidget* widget, void* void_mouseEvent)
-{
-    //bbDebug("NULL Mouse\n");
-    return Break;
-}
-
 bbFlag NULL_OnTimer (bbWidget* widget, void* void_timerNode)
 {
     bbDebug("NULL OnTimer\n");

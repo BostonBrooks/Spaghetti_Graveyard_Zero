@@ -30,11 +30,6 @@ bbFlag bbWidgetFunctions_new(bbWidgetFunctions0** self)
     bbDictionary_new(&functions->OnCommand_dict, magic_number);
     functions->OnCommand_available = 0;
 
-    functions->MouseHandler = calloc(magic_number, sizeof(bbWidget_Mouse));
-    bbAssert(functions->MouseHandler != NULL, "bad calloc\n");
-    bbDictionary_new(&functions->MouseHandler_dict, magic_number);
-    functions->MouseHandler_available = 0;
-
     functions->OnTimers = calloc(magic_number, sizeof(bbWidget_OnTimer));
     bbAssert(functions->OnTimers != NULL, "bad calloc\n");
     bbDictionary_new(&functions->OnTimers_dict, magic_number);
@@ -95,16 +90,6 @@ bbFlag bbWidgetFunctions_add(bbWidgetFunctions0* functions, WidgetFunctionType f
         bbDictionary_add(functions->OnCommand_dict, key, handle);
         return Success;
 
-    case WidgetMouseHandler:
-
-        available = functions->MouseHandler_available++;
-        bbAssert(available < magic_number, "out of bounds error\n");
-        functions->MouseHandler[available] = fnPointer;
-        handle.u64 = available;
-        bbDictionary_add(functions->MouseHandler_dict, key, handle);
-
-
-        return Success;
 
     case WidgetOnTimer:
 
@@ -140,8 +125,6 @@ I32 bbWidgetFunctions_getInt(bbWidgetFunctions0* functions,
         case WidgetOnCommand:
             dict = functions->OnCommand_dict;
             break;
-        case WidgetMouseHandler:
-            dict = functions->MouseHandler_dict;
             break;
         case WidgetOnTimer:
             dict = functions->OnTimers_dict;
@@ -173,10 +156,6 @@ bbFlag bbWidgetFunctions_getFunction(void** function, bbWidgetFunctions0* functi
         case WidgetOnCommand:
             bbDictionary_lookup(functions->OnCommand_dict,key,&handle);
             *function = functions->OnCommands[handle.u64];
-            return Success;
-        case WidgetMouseHandler:
-            bbDictionary_lookup(functions->MouseHandler_dict,key,&handle);
-            *function = functions->MouseHandler[handle.u64];
             return Success;
         case WidgetOnTimer:
             bbDictionary_lookup(functions->OnTimers_dict,key,&handle);

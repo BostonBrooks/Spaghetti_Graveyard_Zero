@@ -22,10 +22,6 @@ bbFlag Button_Constructor (bbWidget** self, void* graphics,
     bbVPool_reverseLookup(widgets->pool, widget, &widgetHandle);
     widget->tree.visible = true;
     widget->tree.childrenvisible = true;
-    //  widget->ftable.MouseHandler =
-    //  bbWidgetFunctions_getInt(bbWidgetFunctions0* functions,
-    //    WidgetFunctionType fnType, char * key);
-    widget->ftable.MouseHandler = 0;
 
     if (parent == NULL){
         widgets->tree->root = widgetHandle;
@@ -54,12 +50,7 @@ bbFlag Button_Constructor (bbWidget** self, void* graphics,
     bbDictionary_lookup(Graphics->sprites->dictionary, "BUTTON_DEFAULT",
                         &widget->frames[0].handle);
 
-    int funcInt = bbWidgetFunctions_getInt(widgets->functions,
-    WidgetMouseHandler, "SPHERE");
-
-    bbDebug("funcInt = %d\n", funcInt);
-
-    widget->ftable.MouseHandler = funcInt;
+    int funcInt;
 
     funcInt = bbMooseFunctions_getInt(&widgets->moose->functions,MooseIsOver, "BUTTON");
     widget->mtable.isOver = funcInt;

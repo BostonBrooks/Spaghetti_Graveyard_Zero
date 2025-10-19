@@ -4,11 +4,12 @@
 #include "engine/logic/bbTerminal.h"
 
 
-bbFlag bbInput_new(bbInput* input, sfRenderWindow* window, bbMouse* mouse, bbMoose* moose){
+bbFlag bbInput_new(bbInput* input, sfRenderWindow* window, bbMoose*
+moose){
 
-    input->mouse = mouse;
     input->moose = moose;
 
+    return Success;
 }
 
 bbFlag bbInput_poll(bbInput* input, sfRenderWindow* window){
@@ -26,10 +27,7 @@ bbFlag bbInput_poll(bbInput* input, sfRenderWindow* window){
             case sfEvtMouseMoved:
             case sfEvtMouseButtonPressed:
             case sfEvtMouseButtonReleased:{
-                if (input->mouse != NULL)
-                {
-                    bbMouse_update(input->mouse, &event);
-                }
+
                 bbMoose_Event(input->moose, &event);
                 continue;
             }
