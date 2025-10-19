@@ -5,8 +5,8 @@
 
 #include "engine/logic/bbFlag.h"
 #include "engine/user_input/bbMouseFunctions.h"
-#include "games/game0/maps/map0/widgets/mouse.h"
-#include "games/game0/maps/map0/widgets/button.h"
+#include "games/game0/maps/map0/mouse/mouse.h"
+#include "games/game0/maps/map0/mouse/button.h"
 
 bbFlag bbMouseFunctions_populate(bbMouseFunctions* self)
 {

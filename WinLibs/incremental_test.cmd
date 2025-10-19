@@ -38,7 +38,7 @@ gcc   -D SFML_STATIC -I ../^
        ../engine/user_input/bbInput.c^
        ../engine/widgets/bbWidgetFunctions.c^
        ../games/game0/maps/map0/widgets/widgets.c^
-       ../games/game0/maps/map0/widgets/mouse.c^
+       ../games/game0/maps/map0/mouse/mouse.c^
        ../engine/user_input/bbMouse.c^
        ../engine/user_input/bbMouseFunctions.c^
   -lcsfml-system -lcsfml-graphics -lcsfml-window -g -lm -w^

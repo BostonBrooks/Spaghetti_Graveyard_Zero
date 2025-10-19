@@ -18,9 +18,6 @@ bbFlag bbWidgetFunctions_populate(bbWidgetFunctions0* self)
                           NULL_Constructor, "NULL Constructor");
 
     bbWidgetFunctions_add(self, WidgetConstructor,
-    Sphere_Constructor, "Sphere");
-
-    bbWidgetFunctions_add(self, WidgetConstructor,
     SPHERE_Constructor, "SPHERE");
 
     bbWidgetFunctions_add(self, WidgetConstructor,
