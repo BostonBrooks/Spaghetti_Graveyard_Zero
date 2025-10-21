@@ -143,12 +143,37 @@ bbFlag bbMouse_isOverFunc(bbTree* tree, void* node, void* cl)
 
 bbFlag bbMouse_Draw(bbMouse* mouse, void* widgets, bbGraphics* graphics, sfRenderWindow* window)
 {
+
     bbWidgets* Widgets = (bbWidgets*)widgets;
-    sfVector2f pos = bbScreenPoints_getV2f(mouse->position);
+
+    bbPool_Handle selectedHandle = mouse->selected;
+    if (!bbVPool_handleIsEqual(Widgets->pool, selectedHandle,
+                              Widgets->pool->null)){
+        bbWidget* selected;
+        bbVPool_lookup(Widgets->pool, (void**)&selected, selectedHandle);
+
+        if (selected->mtable.DragIcon >= 0){
+            bbScreenPoints dragged_SP;
+            dragged_SP.x = mouse->position.x - mouse->dragOrigin.x;
+            dragged_SP.y = mouse->position.y - mouse->dragOrigin.y;
+            sfVector2f pos = bbScreenPoints_getV2f(dragged_SP);
+            sfSprite* sprite = graphics->sprites->sprites[selected->mtable.DragIcon];
+            sfSprite_setPosition(sprite, pos);
+            sfRenderWindow_drawSprite(window, sprite, NULL);
+
+
+        }
+
+    }
+
+    sfVector2f pos;
     bbPool_Handle widgetHandle = mouse->isOver;
     bbWidget* widget;
     bbVPool_lookup(Widgets->pool, (void**)&widget, widgetHandle);
-    I32 spriteInt = widget->mtable.MouseIcon;
+
+    pos = bbScreenPoints_getV2f(mouse->position);
+    int spriteInt = widget->mtable.MouseIcon;
+    if (spriteInt < 0) spriteInt = 0;
     sfSprite* sprite = graphics->sprites->sprites[spriteInt];
     sfSprite_setPosition(sprite, pos);
     sfRenderWindow_drawSprite(window, sprite, NULL);

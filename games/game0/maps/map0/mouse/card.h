@@ -115,6 +115,7 @@ bbFlag Card_LeftUp (void* mouse, void* widgets, void* widget, void* graphics)
 bbFlag Card_LeftDrag (void* mouse, void* widgets, void* widget, void*
 graphics) {
 
+    /*
     bbMouse* Mouse = mouse;
     bbWidget* Widget = (bbWidget*)widget;
     bbScreenPoints newPos;
@@ -123,7 +124,7 @@ graphics) {
 
     Widget->rect.left = newPos.x;
     Widget->rect.top = newPos.y;
-
+*/
 
     bbDebug("Mouse left button drag on card\n");
     return Success;
