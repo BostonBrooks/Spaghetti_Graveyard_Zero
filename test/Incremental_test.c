@@ -189,6 +189,9 @@ CLEARWINDOW(bbMagenta);
     SP0.x = 500*8; SP0.y = 125*8;
     bbWidget_constructor(&widget0, &widgets, &graphics, SP0, layout, "BOX");
 
+    SP0.x = 500*8; SP0.y = 300*8;
+    bbWidget_constructor(&widget0, &widgets, &graphics, SP0, layout, "CARD");
+
 
 ////////////////////////////////////////////////////////
     CLEARWINDOW(bbRed);

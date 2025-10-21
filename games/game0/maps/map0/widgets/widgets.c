@@ -10,6 +10,7 @@
 #include "games/game0/maps/map0/widgets/sphere.h"
 #include "games/game0/maps/map0/widgets/button.h"
 #include "games/game0/maps/map0/widgets/box.h"
+#include "games/game0/maps/map0/widgets/card.h"
 
 
 bbFlag bbWidgetFunctions_populate(bbWidgetFunctions0* self)
@@ -28,6 +29,10 @@ bbFlag bbWidgetFunctions_populate(bbWidgetFunctions0* self)
 
     bbWidgetFunctions_add(self, WidgetConstructor,
                           Box_Constructor, "BOX");
+
+
+    bbWidgetFunctions_add(self, WidgetConstructor,
+                          Card_Constructor, "CARD");
 
     //typedef bbFlag bbWidget_Update (bbWidget* widget, void* unused);
     bbWidgetFunctions_add(self, WidgetUpdate,

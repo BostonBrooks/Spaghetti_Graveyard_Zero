@@ -1,4 +1,4 @@
-Number of Textures:,14,,,,
+Number of Textures:,15,,,,
 Label:,Integer Address:,File:,Smooth:,Comment:,
 NULL,0,./graphics/NULL.png,F,Exception,
 LAYOUT_480,1,./graphics/Layout_480.png,F,The root of the widget tree,
@@ -14,3 +14,4 @@ POINTER,10,./graphics/Mouse.png,F,Coloured cursors,
 BOX,11,./graphics/Box.png,F,A simple asset,
 BUTTON,12,./graphics/Button.png,F,A UI element,
 SPRITESHEET,13,./graphics/SpriteSheet.bmp,F,Mr Fox etc
+CARDS,14,./graphics/wikicommons/cards.png,F,Playing Cards

@@ -8,6 +8,7 @@
 #include "games/game0/maps/map0/mouse/mouse.h"
 #include "games/game0/maps/map0/mouse/button.h"
 #include "games/game0/maps/map0/mouse/box.h"
+#include "games/game0/maps/map0/mouse/card.h"
 
 bbFlag bbMouseFunctions_populate(bbMouseFunctions* self)
 {
@@ -32,6 +33,13 @@ bbFlag bbMouseFunctions_populate(bbMouseFunctions* self)
     bbMouseFunctions_add(self, MouseLeftDown, Box_LeftDown, "BOX");
     bbMouseFunctions_add(self, MouseLeftUp, Box_LeftUp, "BOX");
     bbMouseFunctions_add(self, MouseLeftDrag, Box_LeftDrag, "BOX");
+
+    bbMouseFunctions_add(self, MouseIsOver, Card_IsOver, "CARD");
+    bbMouseFunctions_add(self, MouseEnter, Card_Enter, "CARD");
+    bbMouseFunctions_add(self, MouseLeave, Card_Leave, "CARD");
+    bbMouseFunctions_add(self, MouseLeftDown, Card_LeftDown, "CARD");
+    bbMouseFunctions_add(self, MouseLeftUp, Card_LeftUp, "CARD");
+    bbMouseFunctions_add(self, MouseLeftDrag, Card_LeftDrag, "CARD");
     //test:
 
 
