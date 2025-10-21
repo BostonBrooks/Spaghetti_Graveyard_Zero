@@ -13,6 +13,8 @@ bbFlag Box_IsOver (bbMouse* mouse, bbWidgets* widgets, bbWidget* widget)
         bbPool_Handle handle;
         bbVPool_reverseLookup(pool,widget,&handle);
 
+        if(bbVPool_handleIsEqual(pool,handle,mouse->selected)) return Continue;
+
         if (!bbVPool_handleIsEqual(pool,handle,mouse->isOver))
         {
 
