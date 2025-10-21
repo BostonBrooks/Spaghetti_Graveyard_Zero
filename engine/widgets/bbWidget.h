@@ -56,6 +56,8 @@ typedef struct bbWidgets {
 	bbTree* tree;
 	struct bbWidgetFunctions0* functions;
 
+    //TODO should this be here?
+    //For now it's too hard to unroll this
 	bbMouse* mouse;
 } bbWidgets;
 
