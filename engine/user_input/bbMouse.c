@@ -37,6 +37,8 @@ bbFlag bbMouse_Event(bbMouse* mouse, sfEvent* event)
             {
                 mouse->leftChanged = true;
                 mouse->leftDown = true;
+                mouse->previousPosition = mouse->position;
+
             } else if (button == sfMouseRight)
             {
                 mouse->rightChanged = true;
@@ -103,11 +105,18 @@ bbFlag bbMouse_Update(bbMouse* mouse, void* widgets, bbGraphics* graphics)
 
         bbVPool_lookup(pool, (void**)&widget, mouse->isOver);
         bbMouse_LeftDownWidget (mouse, widgets, widget, graphics);
+
     } else if (!mouse->leftDown && mouse->leftChanged) {
         bbWidget* widget;
         if(!bbVPool_handleIsEqual(pool, mouse->selected, pool->null)) {
             bbVPool_lookup(pool, (void **) &widget, mouse->selected);
             bbMouse_LeftUpWidget(mouse, widgets, widget, graphics);
+        }
+    } else if (mouse->leftDown && !mouse->leftChanged) {
+        bbWidget* widget;
+        if(!bbVPool_handleIsEqual(pool, mouse->selected, pool->null)) {
+            bbVPool_lookup(pool, (void **) &widget, mouse->selected);
+            bbMouse_LeftDragWidget(mouse, widgets, widget, graphics);
         }
     }
 
@@ -201,6 +210,21 @@ bbFlag bbMouse_LeftUpWidget(void* mouse, void* widgets, void* widget,
 
     bbDebug("funcInt = %d\n", funcInt);
     bbMouse_Leave* func = Mouse->functions.LeftUp[funcInt];
+
+    return func(mouse, widgets, widget, graphics);
+}
+
+bbFlag bbMouse_LeftDragWidget(void* mouse, void* widgets, void* widget,
+                            void* graphics)
+{
+    bbWidget* Widget = widget;
+    bbMouse* Mouse = mouse;
+    I32 funcInt = Widget->mtable.LeftDrag;
+
+    if (funcInt == -1) return Success;
+
+    bbDebug("funcInt = %d\n", funcInt);
+    bbMouse_Leave* func = Mouse->functions.LeftDrag[funcInt];
 
     return func(mouse, widgets, widget, graphics);
 }

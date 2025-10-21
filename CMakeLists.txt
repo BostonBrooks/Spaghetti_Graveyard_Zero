@@ -75,4 +75,5 @@ add_executable(myprogram
         engine/user_input/bbMouse.c
         games/game0/maps/map0/widgets/button.h
         engine/user_input/bbMouseFunctions.c
-        engine/2point5D/bbViewportCoords.c)
+        engine/2point5D/bbViewportCoords.c
+        games/game0/maps/map0/mouse/button.h)

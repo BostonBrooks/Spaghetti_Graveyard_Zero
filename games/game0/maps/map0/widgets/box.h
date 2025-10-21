@@ -1,4 +1,4 @@
-//button is a basic UI element
+//Box can be clicked and dragged
 
 #include "engine/logic/bbFlag.h"
 #include "engine/widgets/bbWidget.h"
@@ -10,7 +10,7 @@
 
 
 
-bbFlag Button_Constructor (bbWidget** self, void* graphics,
+bbFlag Box_Constructor (bbWidget** self, void* graphics,
                            bbWidgets* widgets, bbScreenPoints screen_coords, bbWidget* parent)
 {
 
@@ -36,8 +36,8 @@ bbFlag Button_Constructor (bbWidget** self, void* graphics,
 
     rect.left = screen_coords.x;
     rect.top = screen_coords.y;
-    rect.width = SCREEN_PPP * 75;
-    rect.height = SCREEN_PPP * 25;
+    rect.width = SCREEN_PPP * 52;
+    rect.height = SCREEN_PPP * 52;
 
     widget->rect = rect;
 
@@ -47,24 +47,30 @@ bbFlag Button_Constructor (bbWidget** self, void* graphics,
                         &drawfunctionHandle);
     widget->frames[0].drawfunction = drawfunctionHandle.u64;
 
-    bbDictionary_lookup(Graphics->sprites->dictionary, "BUTTON_DEFAULT",
+    bbDictionary_lookup(Graphics->sprites->dictionary, "BOX",
                         &widget->frames[0].handle);
 
     int funcInt;
 
-    funcInt = bbMouseFunctions_getInt(&widgets->mouse->functions,MouseIsOver, "BUTTON");
+    funcInt = bbMouseFunctions_getInt(&widgets->mouse->functions,MouseIsOver,
+                                      "BOX");
     widget->mtable.isOver = funcInt;
-    funcInt = bbMouseFunctions_getInt(&widgets->mouse->functions,MouseEnter, "BUTTON");
+    funcInt = bbMouseFunctions_getInt(&widgets->mouse->functions,MouseEnter,
+                                      "BOX");
     widget->mtable.Enter = funcInt;
-    funcInt = bbMouseFunctions_getInt(&widgets->mouse->functions,MouseLeave, "BUTTON");
+    funcInt = bbMouseFunctions_getInt(&widgets->mouse->functions,MouseLeave,
+                                      "BOX");
     widget->mtable.Leave = funcInt;
     funcInt = bbMouseFunctions_getInt(&widgets->mouse->functions,
-                                      MouseLeftDown,"BUTTON");
+                                      MouseLeftDown,"BOX");
     widget->mtable.LeftDown = funcInt;
     funcInt = bbMouseFunctions_getInt(&widgets->mouse->functions,
-                                      MouseLeftUp,"BUTTON");
+                                      MouseLeftUp,"BOX");
     widget->mtable.LeftUp = funcInt;
-    widget->mtable.LeftDrag = -1;
+
+    funcInt = bbMouseFunctions_getInt(&widgets->mouse->functions,
+                                      MouseLeftDrag,"BOX");
+    widget->mtable.LeftDrag = funcInt;
 
     widget->mtable.MouseIcon = 87;
     widget->mtable.DragIcon = 97;

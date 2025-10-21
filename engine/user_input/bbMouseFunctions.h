@@ -11,7 +11,8 @@ typedef enum
     MouseEnter,
     MouseLeave,
     MouseLeftDown,
-    MouseLeftUp
+    MouseLeftUp,
+    MouseLeftDrag
 } MouseFunctionType;
 
 typedef bbFlag bbMouse_IsOver (void* mouse, void* widgets, void* widget);
@@ -20,6 +21,8 @@ typedef bbFlag bbMouse_Leave (void* mouse, void* widgets, void* widget, void* gr
 typedef bbFlag bbMouse_LeftDown (void* mouse, void* widgets, void* widget,
                                  void* graphics);
 typedef bbFlag bbMouse_LeftUp (void* mouse, void* widgets, void* widget,
+                               void* graphics);
+typedef bbFlag bbMouse_LeftDrag (void* mouse, void* widgets, void* widget,
                                void* graphics);
 
 typedef struct
@@ -43,6 +46,11 @@ typedef struct
     bbMouse_LeftUp** LeftUp;
     bbDictionary* LeftUp_dict;
     I32 LeftUp_available;
+
+
+    bbMouse_LeftDrag** LeftDrag;
+    bbDictionary* LeftDrag_dict;
+    I32 LeftDrag_available;
 
 }bbMouseFunctions;
 

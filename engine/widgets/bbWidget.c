@@ -93,6 +93,8 @@ bbFlag bbWidget_newLayout(bbWidget** self, bbGraphics* graphics, bbWidgets* widg
     widget->mtable.LeftDown = -1;
     widget->mtable.LeftUp = -1;
 
+    widget->mtable.LeftDrag = -1;
+
 	widget->mtable.MouseIcon = 91;
 
 	for (I32 i = 1; i < FRAMES_PER_WIDGET; i++) {
@@ -197,6 +199,7 @@ bbFlag bbWidget_newViewport(bbWidget** self, bbGraphics* graphics,
     widget->mtable.Leave = -1;
     widget->mtable.LeftDown = -1;
     widget->mtable.LeftUp = -1;
+    widget->mtable.LeftDrag = -1;
 
     widget->rect = rect;
 

@@ -1,3 +1,5 @@
+//Widgetes used: Layout, viewport, button, box
+
 #ifndef WIDGET_FUNCTIONS
 #define WIDGET_FUNCTIONS
 
@@ -7,6 +9,7 @@
 #include "games/game0/maps/map0/widgets/nullfunctions.h"
 #include "games/game0/maps/map0/widgets/sphere.h"
 #include "games/game0/maps/map0/widgets/button.h"
+#include "games/game0/maps/map0/widgets/box.h"
 
 
 bbFlag bbWidgetFunctions_populate(bbWidgetFunctions0* self)
@@ -22,6 +25,9 @@ bbFlag bbWidgetFunctions_populate(bbWidgetFunctions0* self)
 
     bbWidgetFunctions_add(self, WidgetConstructor,
                           Button_Constructor, "BUTTON");
+
+    bbWidgetFunctions_add(self, WidgetConstructor,
+                          Box_Constructor, "BOX");
 
     //typedef bbFlag bbWidget_Update (bbWidget* widget, void* unused);
     bbWidgetFunctions_add(self, WidgetUpdate,

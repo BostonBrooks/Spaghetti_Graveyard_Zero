@@ -24,7 +24,7 @@ typedef struct
     I32 RightDown;
     I32 LeftUp;
     I32 RightUp;
-    I32 Drag;
+    I32 LeftDrag;
     I32 Drop;
     I32 MouseIcon;
     I32 DragIcon;
@@ -42,6 +42,7 @@ typedef struct bbMouse
 {
     bbScreenPoints position;
     bbScreenPoints previousPosition;
+    bbScreenPoints dragOrigin;
     unsigned int leftDown : 1;
     unsigned int rightDown : 1;
     unsigned int leftChanged : 1;
@@ -90,6 +91,10 @@ bbFlag bbMouse_LeftDownWidget(void* mouse, void* widgets, void* widget,
                                 void* graphics);
 bbFlag bbMouse_LeftUpWidget(void* mouse, void* widgets, void* widget,
                                   void* graphics);
+
+
+bbFlag bbMouse_LeftDragWidget(void* mouse, void* widgets, void* widget,
+                            void* graphics);
 
 //Function to be called recursively
 bbFlag bbMouse_isOverFunc(bbTree* tree, void* node, void* cl);
