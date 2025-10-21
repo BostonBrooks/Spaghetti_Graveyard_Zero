@@ -67,7 +67,7 @@ bbFlag Button_Constructor (bbWidget** self, void* graphics,
     widget->mtable.LeftDrag = -1;
 
     widget->mtable.MouseIcon = 87;
-    widget->mtable.DragIcon = 97;
+    widget->mtable.DragIcon = -1;
 
     widget->frames[0].offset.x = 0;
     widget->frames[0].offset.y = 0;

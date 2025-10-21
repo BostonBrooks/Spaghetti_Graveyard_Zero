@@ -95,7 +95,8 @@ bbFlag bbWidget_newLayout(bbWidget** self, bbGraphics* graphics, bbWidgets* widg
 
     widget->mtable.LeftDrag = -1;
 
-	widget->mtable.MouseIcon = 91;
+    widget->mtable.MouseIcon = 91;
+    widget->mtable.DragIcon = -1;
 
 	for (I32 i = 1; i < FRAMES_PER_WIDGET; i++) {
 	    widget->frames[i].drawfunction = -1;
@@ -131,43 +132,6 @@ bbFlag bbWidget_newEmpty(bbWidget** self, bbWidgets* widgets, bbWidget* parent){
 	return Success;
 }
 
-bbFlag bbWidget_newMockViewport(bbWidget** self, bbGraphics* graphics, bbWidgets* widgets, bbWidget* parent){
-	bbWidget* widget;
-
-	bbWidget_newEmpty(&widget, widgets, parent);
-
-	bbScreenPointsRect rect;
-	rect.left = 12 * POINTS_PER_PIXEL;
-	rect.top = 12 * POINTS_PER_PIXEL;
-	rect.width = 466 * POINTS_PER_PIXEL;
-	rect.height = 456 * POINTS_PER_PIXEL;
-
-	widget->rect = rect;
-
-	bbPool_Handle drawfunctionHandle;
-	bbDictionary_lookup(graphics->drawfunctions->dictionary, "WIDGETSPRITE", &drawfunctionHandle);
-
-	widget->frames[0].drawfunction = drawfunctionHandle.u64;
-
-	bbDictionary_lookup(graphics->sprites->dictionary,
-						"VIEWPORT_480", &widget->frames[0].handle);
-
-	widget->frames[0].offset.x = 0;
-	widget->frames[0].offset.y = 0;
-	widget->frames[0].framerate = 1.0;
-
-	widget->frames[0].type = Sprite;
-
-
-	for (I32 i = 1; i < FRAMES_PER_WIDGET; i++) {
-		widget->frames[i].drawfunction = -1;
-	}
-
-	*self = widget;
-
-    return Success;
-}
-
 bbFlag bbWidget_newViewport(bbWidget** self, bbGraphics* graphics,
                             bbWidgets* widgets, bbWidget* parent,
                             void* viewport){
@@ -193,7 +157,7 @@ bbFlag bbWidget_newViewport(bbWidget** self, bbGraphics* graphics,
 	widget->mtable.isOver = funcInt;
 
 	widget->mtable.MouseIcon = 85;
-
+    widget->mtable.DragIcon = -1;
 
     widget->mtable.Enter = -1;
     widget->mtable.Leave = -1;
