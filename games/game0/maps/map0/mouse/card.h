@@ -103,6 +103,16 @@ bbFlag Card_LeftUp (void* mouse, void* widgets, void* widget, void* graphics)
                             "ASPADES", &Widget->frames[0].handle);
     }
 
+    //experimental code:
+
+
+    bbScreenPoints dragged_SP;
+    dragged_SP.x = Mouse->position.x - Mouse->dragOrigin.x;
+    dragged_SP.y = Mouse->position.y - Mouse->dragOrigin.y;
+    Widget->rect.left = dragged_SP.x;
+    Widget->rect.top = dragged_SP.y;
+
+
     Widget->mtable.hover = false;
     bbDebug("Mouse left button up on card\n");
     return Success;
