@@ -2,6 +2,7 @@
 #include "engine/includes/CSFML.h"
 #include "engine/graphics/bbGraphics.h"
 #include "engine/graphics/bbColours.h"
+#include "engine/graphics/bbFonts.h"
 #include "engine/widgets/bbWidget.h"
 #include "engine/logic/bbTerminal.h"
 #include "engine/logic/bbTree.h"
@@ -72,8 +73,7 @@ CLEARWINDOW(bbYellowOrange);
 
 CLEARWINDOW(bbYellow);
 
-
-
+	bbFonts_new(&graphics.fonts, "./maps/map0/graphics/fonts.csv");
 
 CLEARWINDOW(bbChartreuse);
 
@@ -192,10 +192,19 @@ CLEARWINDOW(bbMagenta);
     SP0.x = 500*8; SP0.y = 300*8;
     bbWidget_constructor(&widget0, &widgets, &graphics, SP0, layout, "CARD");
 
-
+	SP0.x = 100*8; SP0.y = 125*8;
+    bbWidget_constructor(&widget0, &widgets, &graphics, SP0, layout, "TEXTBOX");
 ////////////////////////////////////////////////////////
     CLEARWINDOW(bbRed);
 
+	sfText* text = sfText_create();
+	sfText_setString(text, "You look up to me for exaltation!");
+	sfText_setFont(text, graphics.fonts->fonts[0]);
+	sfVector2f pos;
+	pos.x = 50;
+	pos.y = 50;
+	sfText_setPosition(text, pos);
+	sfText_setCharacterSize(text, 50);
 
 	int mapTime;
 	for (mapTime = 0; ; mapTime++) {
@@ -241,6 +250,9 @@ CLEARWINDOW(bbMagenta);
         bbWidgets_draw(&widgets, &cl);
 
 		bbMouse_Draw(&mouse, &widgets, &graphics, window);
+		sfRenderWindow_drawText(window, text, NULL);
+
+
 		sfRenderWindow_display(window);
         bbViewport_clear(viewport);
         bbFlag flag = bbInput_poll(&input, window);

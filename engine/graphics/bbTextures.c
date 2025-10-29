@@ -22,7 +22,7 @@ bbFlag bbTextures_new(bbTextures** self, char* filepath){
 	textures->numTextures = num;
 
     bbDictionary_new(&textures->dictionary, nextPrime(num));
-    //bbDictionary_new(&textures->dictionary, 1);
+
 
 
 	fscanf(file, "%*[^\n]\n");
@@ -38,7 +38,6 @@ bbFlag bbTextures_new(bbTextures** self, char* filepath){
 
 
 	while (fscanf(file, "%[^,],%d,%[^,],%c,%*[^\n]\n", key, &address, file_path, &smooth) == 4){
-        //What do I pass as area?
 
         texture = sfTexture_createFromFile(file_path, NULL);
         bbAssert(texture != NULL, "texture file failed to load\n");
@@ -46,13 +45,6 @@ bbFlag bbTextures_new(bbTextures** self, char* filepath){
 
         handle.u64 = address;
         bbDictionary_add(textures->dictionary, key, handle);
-
-        /* some debug code
-        bbPool_Handle debugHandle;
-        bbDictionary_lookup(textures->dictionary, key, &debugHandle);
-        bbDebug("key = %s, address = %d, handle = %llu\n",key, address,
-                debugHandle.u64);
-        */
         textures->textures[address] = texture;
 
 	}

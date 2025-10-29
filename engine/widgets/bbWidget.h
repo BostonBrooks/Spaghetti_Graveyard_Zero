@@ -44,7 +44,7 @@ typedef struct bbWidget_TextBox
 
 typedef union bbWidget_TypeData
 {
-	bbWidget_TextBox* textBox;
+	bbWidget_TextBox textBox;
 } bbWidget_TypeData;
 
 typedef struct bbWidget{

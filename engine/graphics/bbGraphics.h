@@ -1,4 +1,5 @@
 
+#include "bbFonts.h"
 #include "engine/graphics/bbTextures.h"
 #include "engine/graphics/bbSprites.h"
 #include "engine/graphics/bbAnimation.h"
@@ -14,7 +15,7 @@ typedef struct bbGraphics {
 	bbDrawfunctions* drawfunctions;
 	bbAnimations* animations;
 	bbCompositions* compositions;
-
+	bbFonts* fonts;
 } bbGraphics;
 
 

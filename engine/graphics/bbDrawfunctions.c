@@ -204,9 +204,23 @@ bbFlag bbDF_eyeCandyTest(void* drawable, void* frameDescriptor, void* cl){
 
 }
 
+bbFlag bbDF_widgetTextBox(void* drawable, void* frameDescriptor, void* cl)
+{
+	bbWidget* widget = drawable;
+	bbFrame* frame = frameDescriptor;
+	drawFuncClosure* closure = cl;
+	bbGraphics* graphics = closure->graphics;
+
+	sfRenderWindow_drawText(closure->target, widget->typeData.textBox.text, NULL);
+
+	return Success;
+
+
+}
+
 
 bbFlag bbDrawfunctions_new(bbDrawfunctions** drawfunctions){
-	I32 num = 8;
+	I32 num = 9;
 	bbDrawfunctions* functions = malloc(sizeof(bbDrawfunctions) + num * sizeof(bbDrawFunction*));
     bbAssert(functions!=NULL, "bad malloc");
 	bbDictionary_new(&functions->dictionary, nextPrime(num));
@@ -246,6 +260,11 @@ bbFlag bbDrawfunctions_new(bbDrawfunctions** drawfunctions){
     functions->functions[7] = bbDF_eyeCandyTest;
     handle.u64 = 7;
     bbDictionary_add(functions->dictionary, "EYECANDYTEST", handle);
+
+
+	functions->functions[8] = bbDF_widgetTextBox;
+	handle.u64 = 8;
+	bbDictionary_add(functions->dictionary, "TEXTBOX", handle);
 
 
     *drawfunctions = functions;

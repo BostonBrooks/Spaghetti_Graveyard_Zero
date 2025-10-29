@@ -11,6 +11,7 @@
 #include "games/game0/maps/map0/widgets/button.h"
 #include "games/game0/maps/map0/widgets/box.h"
 #include "games/game0/maps/map0/widgets/card.h"
+#include "games/game0/maps/map0/widgets/textbox.h"
 
 
 bbFlag bbWidgetFunctions_populate(bbWidgetFunctions0* self)
@@ -29,6 +30,10 @@ bbFlag bbWidgetFunctions_populate(bbWidgetFunctions0* self)
 
     bbWidgetFunctions_add(self, WidgetConstructor,
                           Box_Constructor, "BOX");
+
+
+    bbWidgetFunctions_add(self, WidgetConstructor,
+                          Textbox_Constructor, "TEXTBOX");
 
 
     bbWidgetFunctions_add(self, WidgetConstructor,
