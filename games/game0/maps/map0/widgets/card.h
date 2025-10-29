@@ -15,23 +15,10 @@ bbFlag Card_Constructor (bbWidget** self, void* graphics,
 {
 
 
-    bbWidget* widget; bbPool_Handle widgetHandle;
-    bbFlag flag = bbVPool_alloc(widgets->pool, (void**) &widget);
-
+    bbWidget* widget;
+    bbFlag flag =  bbWidget_newEmpty(&widget, widgets, parent);
     bbAssert(widget != NULL, "null address\n");
-    bbVPool_reverseLookup(widgets->pool, widget, &widgetHandle);
-    widget->tree.visible = true;
-    widget->tree.childrenvisible = true;
 
-    if (parent == NULL){
-        widgets->tree->root = widgetHandle;
-    } else {
-        bbTreeNode_setParent(widgets->tree, widget, parent);
-    }
-
-    for (I32 i = 0; i < FRAMES_PER_WIDGET; i++) {
-        widget->frames[i].drawfunction = -1;
-    }
     bbScreenPointsRect rect;
 
     rect.left = screen_coords.x;
@@ -78,13 +65,7 @@ bbFlag Card_Constructor (bbWidget** self, void* graphics,
     widget->frames[0].offset.x = 0;
     widget->frames[0].offset.y = 0;
 
-    for (I32 i = 1; i < FRAMES_PER_WIDGET; i++) {
-        widget->frames[i].drawfunction = -1;
-    }
-
     *self = widget;
-
-    bbAssert(widget != NULL, "null address\n");
 
     return Success;
 }

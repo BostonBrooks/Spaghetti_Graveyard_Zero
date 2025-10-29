@@ -25,6 +25,7 @@ typedef struct
     I32 LeftUp;
     I32 RightUp;
     I32 LeftDrag;
+    I32 RightDrag;
     I32 Drop;
     I32 MouseIcon;
     I32 DragIcon;

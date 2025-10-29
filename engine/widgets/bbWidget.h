@@ -16,7 +16,11 @@
 #include "engine/geometry/bbCoordinates.h"
 #include "engine/user_input/bbMouse.h"
 
-
+typedef enum bbWidget_Type
+{
+	bbWidgetType_None,
+	bbWidgetType_TextBox
+} bbWidget_Type;
 
 
 #define FRAMES_PER_WIDGET 8
@@ -29,22 +33,32 @@ typedef struct {
     I32 OnTimer;
 } bbWidgetFunctionTable;
 
+typedef struct bbWidget_TextBox
+{
+	I32 textRows;
+	I32 textColumns;
+	char* string;
+	sfText* text;
+	sfFont* font;
+}bbWidget_TextBox;
+
+typedef union bbWidget_TypeData
+{
+	bbWidget_TextBox* textBox;
+} bbWidget_TypeData;
+
 typedef struct bbWidget{
     //It is important that "bbTree_Node tree;" is the first element
 	bbTree_Node tree;
 	bbScreenPointsRect rect;
-	char label[KEY_LENGTH];
-	char code[KEY_LENGTH]; //enter code to select spell
-	char* display_str;
-	sfText* display_text;
-	I32 text_rows;
-	I32 text_columns;
-	I32 state;
-
 	bbMouseTable mtable;
-    bbWidgetFunctionTable ftable;
-
+	bbWidgetFunctionTable ftable;
     bbFrame frames[FRAMES_PER_WIDGET];
+	bbWidget_Type type;
+	bbWidget_TypeData typeData;
+
+
+
 
 	void* extra_data;
 

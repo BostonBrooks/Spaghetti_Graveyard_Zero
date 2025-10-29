@@ -55,6 +55,59 @@ bbFlag bbWidget_draw(bbWidget* widget, drawFuncClosure* cl){
 	}
 }
 
+bbFlag bbWidget_newEmpty(bbWidget** self, bbWidgets* widgets, bbWidget* parent){
+	bbWidget* widget; bbPool_Handle widgetHandle;
+	bbVPool_alloc(widgets->pool, (void**) &widget);
+	bbVPool_reverseLookup(widgets->pool, widget, &widgetHandle);
+
+	widget->tree.visible = true;
+	widget->tree.childrenvisible = true;
+
+	//Every widget is either the root or has a parent? may loosen this restriction later...
+	if (parent == NULL){
+		widgets->tree->root = widgetHandle;
+	} else {
+		bbTreeNode_setParent(widgets->tree, widget, parent);
+	}
+
+	widget->rect.left = 0;
+	widget->rect.top = 0;
+	widget->rect.width = 0;
+	widget->rect.height = 0;
+
+
+	widget->mtable.isOver = -1;
+	widget->mtable.Enter = -1;
+	widget->mtable.Leave = -1;
+	widget->mtable.LeftDown = -1;
+	widget->mtable.LeftUp = -1;
+	widget->mtable.LeftDrag = -1;
+	widget->mtable.RightDown = -1;
+	widget->mtable.RightUp = -1;
+	widget->mtable.RightDrag = -1;
+	widget->mtable.Drop = -1;
+	widget->mtable.MouseIcon = -1;
+	widget->mtable.DragIcon = -1;
+	widget->mtable.hover = false;
+	widget->mtable.selected = false;
+
+	widget->ftable.Constructor = -1;
+	widget->ftable.Update = -1;
+	widget->ftable.Destructor = -1;
+	widget->ftable.OnCommand = -1;
+	widget->ftable.OnTimer = -1;
+
+
+	for (I32 i = 0; i < FRAMES_PER_WIDGET; i++) {
+		widget->frames[i].drawfunction = -1;
+	}
+
+	widget->type = bbWidgetType_None;
+
+	*self = widget;
+	return Success;
+}
+
 bbFlag bbWidget_newLayout(bbWidget** self, bbGraphics* graphics, bbWidgets* widgets, bbWidget* parent){
 
 	bbWidget* widget;
@@ -108,29 +161,7 @@ bbFlag bbWidget_newLayout(bbWidget** self, bbGraphics* graphics, bbWidgets* widg
     return Success;
 }
 
-bbFlag bbWidget_newEmpty(bbWidget** self, bbWidgets* widgets, bbWidget* parent){
-	bbWidget* widget; bbPool_Handle widgetHandle;
-	bbVPool_alloc(widgets->pool, (void**) &widget);
-	bbVPool_reverseLookup(widgets->pool, widget, &widgetHandle);
 
-	widget->tree.visible = true;
-	widget->tree.childrenvisible = true;
-
-
-	if (parent == NULL){
-		widgets->tree->root = widgetHandle;
-	} else {
-        bbTreeNode_setParent(widgets->tree, widget, parent);
-	}
-
-	for (I32 i = 0; i < FRAMES_PER_WIDGET; i++) {
-		widget->frames[i].drawfunction = -1;
-	}
-
-
-	*self = widget;
-	return Success;
-}
 
 bbFlag bbWidget_newViewport(bbWidget** self, bbGraphics* graphics,
                             bbWidgets* widgets, bbWidget* parent,
