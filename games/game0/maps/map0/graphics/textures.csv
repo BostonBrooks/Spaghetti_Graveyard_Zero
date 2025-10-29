@@ -14,4 +14,4 @@ POINTER,10,./graphics/Mouse.png,F,Coloured cursors,
 BOX,11,./graphics/Box.png,F,A simple asset,
 BUTTON,12,./graphics/Button.png,F,A UI element,
 SPRITESHEET,13,./graphics/SpriteSheet.bmp,F,Mr Fox etc
-CARDS,14,./graphics/wikicommons/cards.png,F,Playing Cards
+CARDS,14,./graphics/wikicommons/Cards.png,F,Playing Cards
