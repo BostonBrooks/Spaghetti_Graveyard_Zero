@@ -14,7 +14,7 @@
 #include "games/game0/maps/map0/widgets/textbox.h"
 
 
-bbFlag bbWidgetFunctions_populate(bbWidgetFunctions0* self)
+bbFlag bbWidgetFunctions_populate(bbWidgetFunctions* self)
 {
     //typedef bbFlag bbWidget_Constructor (bbWidget** reference, void* graphics,
     //                                     bbWidgets* widgets, bbScreenPoints

@@ -32,7 +32,7 @@ typedef bbFlag bbWidget_Destructor (bbWidget* widget, void* unused);
 typedef bbFlag bbWidget_OnCommand (bbWidget* widget,WidgetCommandType type, void* data);
 typedef bbFlag bbWidget_OnTimer (bbWidget* widget, void* void_timerNode);
 
-typedef struct bbWidgetFunctions0 {
+typedef struct bbWidgetFunctions {
      bbWidget_Constructor** Constructors;
      bbDictionary* Constructor_dict;
      I32 Constructor_available;
@@ -53,14 +53,14 @@ typedef struct bbWidgetFunctions0 {
      void** OnTimers;
      bbDictionary* OnTimers_dict;
      I32 OnTimers_available;
-} bbWidgetFunctions0;
+} bbWidgetFunctions;
 
 
 
-bbFlag bbWidgetFunctions_new(bbWidgetFunctions0** self);
-bbFlag bbWidgetFunctions_populate(bbWidgetFunctions0* self);
-bbFlag bbWidgetFunctions_add(bbWidgetFunctions0* functions, WidgetFunctionType fnType, void* fnPointer, char* key );
-bbFlag bbWidgetFunctions_getFunction(void** function, bbWidgetFunctions0* functions, WidgetFunctionType fnType, char* key);
-I32 bbWidgetFunctions_getInt(bbWidgetFunctions0* functions, WidgetFunctionType fnType, char* key);
+bbFlag bbWidgetFunctions_new(bbWidgetFunctions** self);
+bbFlag bbWidgetFunctions_populate(bbWidgetFunctions* self);
+bbFlag bbWidgetFunctions_add(bbWidgetFunctions* functions, WidgetFunctionType fnType, void* fnPointer, char* key );
+bbFlag bbWidgetFunctions_getFunction(void** function, bbWidgetFunctions* functions, WidgetFunctionType fnType, char* key);
+I32 bbWidgetFunctions_getInt(bbWidgetFunctions* functions, WidgetFunctionType fnType, char* key);
 
 #endif //BBWIDGETFUNCTIONS_H

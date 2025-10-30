@@ -4,9 +4,9 @@
 #include <stdlib.h>
 
 
-bbFlag bbWidgetFunctions_new(bbWidgetFunctions0** self)
+bbFlag bbWidgetFunctions_new(bbWidgetFunctions** self)
 {
-    bbWidgetFunctions0* functions = calloc(1, sizeof(bbWidgetFunctions0));
+    bbWidgetFunctions* functions = calloc(1, sizeof(bbWidgetFunctions));
     I32 magic_number = 256;
 
 
@@ -43,7 +43,7 @@ bbFlag bbWidgetFunctions_new(bbWidgetFunctions0** self)
 }
 
 
-bbFlag bbWidgetFunctions_add(bbWidgetFunctions0* functions, WidgetFunctionType fnType, void* fnPointer, char* key )
+bbFlag bbWidgetFunctions_add(bbWidgetFunctions* functions, WidgetFunctionType fnType, void* fnPointer, char* key )
 {
 
 
@@ -109,7 +109,7 @@ bbFlag bbWidgetFunctions_add(bbWidgetFunctions0* functions, WidgetFunctionType f
 }
 
 
-I32 bbWidgetFunctions_getInt(bbWidgetFunctions0* functions,
+I32 bbWidgetFunctions_getInt(bbWidgetFunctions* functions,
                                 WidgetFunctionType fnType, char* key){
     bbDictionary* dict;
     switch (fnType){
@@ -136,7 +136,7 @@ I32 bbWidgetFunctions_getInt(bbWidgetFunctions0* functions,
     return handle.u64;
 }
 
-bbFlag bbWidgetFunctions_getFunction(void** function, bbWidgetFunctions0* functions,
+bbFlag bbWidgetFunctions_getFunction(void** function, bbWidgetFunctions* functions,
                                      WidgetFunctionType fnType, char* key){
     bbPool_Handle handle;
 

@@ -69,7 +69,7 @@ typedef struct bbWidget{
 typedef struct bbWidgets {
 	bbVPool* pool;
 	bbTree* tree;
-	struct bbWidgetFunctions0* functions;
+	struct bbWidgetFunctions* functions;
 
     //TODO should this be here?
     //For now it's too hard to unroll this
