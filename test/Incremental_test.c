@@ -104,7 +104,7 @@ CLEARWINDOW(bbGreen);
 
 
 	bbInput input;
-	bbInput_new(&input,window, &mouse);
+	bbInput_new(&input,window, &mouse, &widgets);
 
 CLEARWINDOW(bbTeal);
 
@@ -173,9 +173,27 @@ CLEARWINDOW(bbMagenta);
 
 	bbScreenPoints SP0;
 
+	SP0.x = 497*8; SP0.y = 12*8;
+	bbWidget_constructor(&widgets.dialog, &widgets, &graphics, SP0, layout, "TEXTBOX");
+
+
+	SP0.x = 497*8; SP0.y = 355*8;
+	bbWidget_constructor(&widgets.prompt, &widgets, &graphics, SP0, layout, "TEXTBOX");
+
+	I32x2 bounds;
+	bounds.x = 25;
+	bounds.y = 3;
+	bbWidget_onCommand(widgets.prompt, &widgets, bbWC_setBounds, &bounds);
+
+	SP0.x = 497*8; SP0.y = 416*8;
+	bbWidget_constructor(&widgets.command, &widgets, &graphics, SP0, layout, "TEXTBOX");
+
+	bounds.x = 64;
+	bounds.y = 1;
+	bbWidget_onCommand(widgets.command, &widgets, bbWC_setBounds, &bounds);
+
 	SP0.x = rand()%(720*8); SP0.y = rand()%(480*8);
 	bbWidget_constructor(&widget0, &widgets, &graphics, SP0, layout, "SPHERE");
-    bbAssert(widget0 != NULL, "Returned NULL address\n");
 
 
 
@@ -189,8 +207,7 @@ CLEARWINDOW(bbMagenta);
     SP0.x = 500*8; SP0.y = 300*8;
     bbWidget_constructor(&widget0, &widgets, &graphics, SP0, layout, "CARD");
 
-	SP0.x = 100*8; SP0.y = 125*8;
-    bbWidget_constructor(&widget0, &widgets, &graphics, SP0, layout, "TEXTBOX");
+
 ////////////////////////////////////////////////////////
     CLEARWINDOW(bbRed);
 
@@ -199,6 +216,12 @@ CLEARWINDOW(bbMagenta);
 	int mapTime;
 	for (mapTime = 0; ; mapTime++) {
 
+		char ch = 'a' + rand()%26;
+		bbWidget_onCommand(widgets.dialog, &widgets, bbWC_putChar, &ch);
+
+
+		ch = 'a' + rand()%26;
+		bbWidget_onCommand(widgets.prompt, &widgets, bbWC_putChar, &ch);
 
 
         bbMapCoords difference;

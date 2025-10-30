@@ -4,10 +4,81 @@
 #include "engine/logic/bbTerminal.h"
 
 
+
+
 bbFlag bbInput_new(bbInput* input, sfRenderWindow* window, bbMouse*
-mouse){
+mouse, bbWidgets* widgets){
 
     input->mouse = mouse;
+    input->widgets = widgets;
+
+    char* keymap;
+
+    keymap = input->keymap_lowercase;
+    for (int i = 0; i < sfKeyCount; i++)
+    {
+        keymap[i] = 0;
+    }
+
+    keymap[sfKeyA] = 'a';
+    keymap[sfKeyB] = 'b';
+    keymap[sfKeyC] = 'c';
+    keymap[sfKeyD] = 'd';
+    keymap[sfKeyE] = 'e';
+    keymap[sfKeyF] = 'f';
+    keymap[sfKeyG] = 'g';
+    keymap[sfKeyH] = 'h';
+    keymap[sfKeyI] = 'i';
+    keymap[sfKeyJ] = 'j';
+    keymap[sfKeyK] = 'k';
+    keymap[sfKeyL] = 'l';
+    keymap[sfKeyM] = 'm';
+    keymap[sfKeyN] = 'n';
+    keymap[sfKeyO] = 'o';
+    keymap[sfKeyP] = 'p';
+    keymap[sfKeyQ] = 'q';
+    keymap[sfKeyR] = 'r';
+    keymap[sfKeyS] = 's';
+    keymap[sfKeyT] = 't';
+    keymap[sfKeyU] = 'u';
+    keymap[sfKeyV] = 'v';
+    keymap[sfKeyW] = 'w';
+    keymap[sfKeyX] = 'x';
+    keymap[sfKeyY] = 'y';
+    keymap[sfKeyZ] = 'z';
+
+    keymap = input->keymap_uppercase;
+    for (int i = 0; i < sfKeyCount; i++)
+    {
+        keymap[i] = 0;
+    }
+
+    keymap[sfKeyA] = 'A';
+    keymap[sfKeyB] = 'B';
+    keymap[sfKeyC] = 'C';
+    keymap[sfKeyD] = 'D';
+    keymap[sfKeyE] = 'E';
+    keymap[sfKeyF] = 'F';
+    keymap[sfKeyG] = 'G';
+    keymap[sfKeyH] = 'H';
+    keymap[sfKeyI] = 'I';
+    keymap[sfKeyJ] = 'J';
+    keymap[sfKeyK] = 'K';
+    keymap[sfKeyL] = 'L';
+    keymap[sfKeyM] = 'M';
+    keymap[sfKeyN] = 'N';
+    keymap[sfKeyO] = 'O';
+    keymap[sfKeyP] = 'P';
+    keymap[sfKeyQ] = 'Q';
+    keymap[sfKeyR] = 'R';
+    keymap[sfKeyS] = 'S';
+    keymap[sfKeyT] = 'T';
+    keymap[sfKeyU] = 'U';
+    keymap[sfKeyV] = 'V';
+    keymap[sfKeyW] = 'W';
+    keymap[sfKeyX] = 'X';
+    keymap[sfKeyY] = 'Y';
+    keymap[sfKeyZ] = 'Z';
 
     return Success;
 }
@@ -21,18 +92,44 @@ bbFlag bbInput_poll(bbInput* input, sfRenderWindow* window){
     while (1) {
         flag = sfRenderWindow_pollEvent(window, &event);
         if (flag == sfFalse) return Continue;
-        switch (event.type){
-            case sfEvtClosed: return Break;
+        switch (event.type)
+        {
+        case sfEvtClosed: return Break;
 
-            case sfEvtMouseMoved:
-            case sfEvtMouseButtonPressed:
-            case sfEvtMouseButtonReleased:{
+        case sfEvtMouseMoved:
+        case sfEvtMouseButtonPressed:
+        case sfEvtMouseButtonReleased:{
 
                 bbMouse_Event(input->mouse, &event);
-                continue;
-            }
+                break;
+        }
+
+        case sfEvtKeyPressed:{
+
+            bbWidgets* widgets = input->widgets;
+            bbWidget* widget = widgets->command;
+
+            sfKeyCode keyCode = event.key.code;
+
+                if (event.key.shift == sfTrue)
+                {
+                    char key = input->keymap_uppercase[keyCode];
+                    if (key != 0)
+                    {
+                        bbWidget_onCommand(widget,widgets, bbWC_putChar, &key);
+                    }
+                } else {
+                    char key = input->keymap_lowercase[keyCode];
+                    if (key != 0)
+                    {
+                        bbWidget_onCommand(widget,widgets, bbWC_putChar, &key);
+                    }
+                }
 
 
+
+            break;
+        }
             default:{
                 bbDebug("input not recognised\n");
             }

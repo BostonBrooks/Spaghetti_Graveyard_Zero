@@ -15,5 +15,9 @@
 #define U16    uint16_t
 #define U32    uint32_t
 #define U64    uint64_t
-
+typedef struct
+{
+    I32 x;
+    I32 y;
+} I32x2;
 #endif //BBINTTYPES

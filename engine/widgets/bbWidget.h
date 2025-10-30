@@ -36,8 +36,8 @@ typedef struct {
 
 typedef struct bbWidget_TextBox
 {
-	I32 textRows;
-	I32 textColumns;
+	I32 rows;
+	I32 columns;
 	char* string;
 	sfText* text;
 	sfFont* font;
@@ -70,15 +70,17 @@ typedef struct bbWidgets {
 	bbVPool* pool;
 	bbTree* tree;
 	struct bbWidgetFunctions* functions;
-
-    //TODO should this be here?
-    //For now it's too hard to unroll this
 	bbMouse* mouse;
+
+	bbWidget* dialog;
+	bbWidget* prompt;
+	bbWidget* command;
 } bbWidgets;
 
 
 bbFlag bbWidget_newEmpty(bbWidget** self, bbWidgets* widgets, bbWidget* parent);
 bbFlag bbWidget_constructor(bbWidget** self, bbWidgets* widgets, bbGraphics* graphics, bbScreenPoints location, bbWidget* parent, char* key);
+bbFlag bbWidget_onCommand(bbWidget* widget, bbWidgets* widgets, enum WidgetCommandType type, void* data);
 bbFlag bbWidget_draw(bbWidget* widget, drawFuncClosure* cl);
 bbFlag bbWidget_newLayout(bbWidget** self, bbGraphics* graphics, bbWidgets* widgets, bbWidget* parent);
 bbFlag bbWidgets_init(bbWidgets* widgets);

@@ -20,6 +20,7 @@ typedef enum WidgetCommandType
 {
     bbWC_putChar,
     bbWC_putStr,
+    bbWC_setBounds
 } WidgetCommandType;
 
 typedef struct bbWidget bbWidget;
@@ -62,5 +63,6 @@ bbFlag bbWidgetFunctions_populate(bbWidgetFunctions* self);
 bbFlag bbWidgetFunctions_add(bbWidgetFunctions* functions, WidgetFunctionType fnType, void* fnPointer, char* key );
 bbFlag bbWidgetFunctions_getFunction(void** function, bbWidgetFunctions* functions, WidgetFunctionType fnType, char* key);
 I32 bbWidgetFunctions_getInt(bbWidgetFunctions* functions, WidgetFunctionType fnType, char* key);
+
 
 #endif //BBWIDGETFUNCTIONS_H

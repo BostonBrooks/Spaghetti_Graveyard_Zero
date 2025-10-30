@@ -56,6 +56,14 @@ bbFlag bbWidget_draw(bbWidget* widget, drawFuncClosure* cl){
 	}
 }
 
+bbFlag bbWidget_onCommand(bbWidget* widget, bbWidgets* widgets, WidgetCommandType type, void* data)
+{
+	I32 funcInt = widget->ftable.OnCommand;
+	bbFlag (*funcPtr)(bbWidget*,WidgetCommandType, void*);
+	funcPtr = widgets->functions->OnCommands[funcInt];
+	return funcPtr(widget, type, data);
+}
+
 bbFlag bbWidget_newEmpty(bbWidget** self, bbWidgets* widgets, bbWidget* parent){
 	bbWidget* widget; bbPool_Handle widgetHandle;
 	bbVPool_alloc(widgets->pool, (void**) &widget);

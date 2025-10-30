@@ -73,6 +73,7 @@ static I32 bbStr_setBounds(char* str, I32 columns, I32 rows, I32 max){
 
     if(str[0] == '\0') return f_Success;
 
+    //temp could be a global
     char temp[1028];  //heap is slower than stack? stack overflow possible?
 
     // copy from str to temp, keeping track of chars since last \n
