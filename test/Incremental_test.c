@@ -221,7 +221,7 @@ CLEARWINDOW(bbMagenta);
 
 
 		ch = 'a' + rand()%26;
-		bbWidget_onCommand(widgets.prompt, &widgets, bbWC_putChar, &ch);
+		//bbWidget_onCommand(widgets.prompt, &widgets, bbWC_putChar, &ch);
 
 
         bbMapCoords difference;

@@ -94,7 +94,7 @@ bbFlag Textbox_OnCommand(bbWidget* widget,WidgetCommandType type,  void* data){
                 widget->typeData.textBox.rows,
                 1048);
 
-
+        sfText_setString(widget->typeData.textBox.text, widget->typeData.textBox.string);
         break;
     }
     return Success;
