@@ -15,6 +15,7 @@
 #include "engine/logic/bbTree.h"
 #include "engine/geometry/bbCoordinates.h"
 #include "engine/user_input/bbMouse.h"
+#include "engine/widgets/bbWidgetFunctions.h"
 
 typedef enum bbWidget_Type
 {
@@ -76,38 +77,19 @@ typedef struct bbWidgets {
 } bbWidgets;
 
 
-//typedef bbFlag bbDrawFunction(graphics,void* drawable, void* frameDescriptor, void* target);
-//typedef bbFlag bWidget_DrawFunction(graphics,void* drawable, void* frameDescriptor, void* target);
-typedef bbFlag bbWidget_Constructor (bbWidget** reference, void* graphics,
-                                     bbWidgets* widgets, bbScreenPoints screen_coords, bbWidget* parent);
-typedef bbFlag bbWidget_Update (bbWidget* widget, void* unused);
-typedef bbFlag bbWidget_Destructor (bbWidget* widget, void* unused);
-typedef bbFlag bbWidget_OnCommand (bbWidget* widget, void* data);
-typedef bbFlag bbWidget_OnTimer (bbWidget* widget, void* void_timerNode);
-
-
-
-typedef struct bbWidgetFunctions{
-	bbWidget_Constructor** Constructors;  //functions to create a widget
-	bbDictionary* Constructor_dict;       //create widget by label
-	I32 Constructor_available;            //where to initialise new function
-
-} bbWidgetFunctions;
-
 bbFlag bbWidget_newEmpty(bbWidget** self, bbWidgets* widgets, bbWidget* parent);
 bbFlag bbWidget_constructor(bbWidget** self, bbWidgets* widgets, bbGraphics* graphics, bbScreenPoints location, bbWidget* parent, char* key);
 bbFlag bbWidget_draw(bbWidget* widget, drawFuncClosure* cl);
 bbFlag bbWidget_newLayout(bbWidget** self, bbGraphics* graphics, bbWidgets* widgets, bbWidget* parent);
 bbFlag bbWidgets_init(bbWidgets* widgets);
 
-bbFlag bbWidget_newMockViewport(bbWidget** self, bbGraphics* graphics, bbWidgets* widgets, bbWidget* parent);
+//bbFlag bbWidget_newMockViewport(bbWidget** self, bbGraphics* graphics, bbWidgets* widgets, bbWidget* parent);
 bbFlag bbWidget_newViewport(bbWidget** self, bbGraphics* graphics,
                             bbWidgets* widgets, bbWidget* parent,
                             void* viewport);
 
 //bbFlag testFunc(bbTree* tree, void* node, void* cl);
 bbFlag bbWidget_drawFunc(bbTree* tree, void* node, void* cl);
-
 bbFlag bbWidgets_draw(bbWidgets* widgets, void* cl);
 
 #endif // BBWIDGET_H

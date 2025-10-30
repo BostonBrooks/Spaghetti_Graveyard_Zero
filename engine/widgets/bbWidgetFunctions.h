@@ -16,13 +16,20 @@ typedef enum
      WidgetOnTimer
 } WidgetFunctionType;
 
-//typedef struct bbWidget bbWidget;
+typedef enum WidgetCommandType
+{
+    bbWC_putChar,
+    bbWC_putStr,
+} WidgetCommandType;
+
+typedef struct bbWidget bbWidget;
+typedef struct bbWidgets bbWidgets;
 
 typedef bbFlag bbWidget_Constructor (bbWidget** reference, void* graphics,
                                      bbWidgets* widgets, bbScreenPoints screen_coords, bbWidget* parent);
 typedef bbFlag bbWidget_Update (bbWidget* widget, void* unused);
 typedef bbFlag bbWidget_Destructor (bbWidget* widget, void* unused);
-typedef bbFlag bbWidget_OnCommand (bbWidget* widget, void* data);
+typedef bbFlag bbWidget_OnCommand (bbWidget* widget,WidgetCommandType type, void* data);
 typedef bbFlag bbWidget_OnTimer (bbWidget* widget, void* void_timerNode);
 
 typedef struct bbWidgetFunctions0 {

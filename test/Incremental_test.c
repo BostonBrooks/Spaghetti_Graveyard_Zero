@@ -14,7 +14,6 @@
 
 sfRenderWindow* testWindow;
 bbWidgets* testWidgets;
-bbWidgetFunctions* testFunctions;
 bbMapCoords testGoalPoint;
 
 
@@ -81,9 +80,7 @@ CLEARWINDOW(bbChartreuse);
 CLEARWINDOW(bbGreen);
 //bbHere();
 
-	bbWidgetFunctions functions;
-//	bbWidgetMouse_new(&functions);
-	//testFunctions = &functions;
+
 
 
 	bbWidgets widgets;
