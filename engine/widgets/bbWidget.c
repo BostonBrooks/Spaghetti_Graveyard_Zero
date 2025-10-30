@@ -43,8 +43,9 @@ bbFlag bbWidget_draw(bbWidget* widget, drawFuncClosure* cl){
 	for (I32 i = 0; i < FRAMES_PER_WIDGET; i++){
 		bbFrame* frame = &widget->frames[i];
 
+		I32 badMagicNumber = 9;
         //bbDebug("frame->drawfunction = %d\n", frame->drawfunction);
-		if (frame->drawfunction >= 0 && frame->drawfunction < 6) {
+		if (frame->drawfunction >= 0 && frame->drawfunction < badMagicNumber) {
             bbGraphics* graphics = cl->graphics;
 			bbDrawFunction *drawFunction =
                     graphics->drawfunctions->functions[frame->drawfunction];

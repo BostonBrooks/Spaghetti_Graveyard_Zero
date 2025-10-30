@@ -47,7 +47,7 @@ bbFlag bbWidgetFunctions_populate(bbWidgetFunctions0* self)
     bbWidgetFunctions_add(self, WidgetDestructor,
                           NULL_Destructor, "NULL Destructor");
 
-    //typedef bbFlag bbWidget_OnCommand (bbWidget* widget, void* data);
+    //typedef bbFlag bbWidget_OnCommand (bbWidget* widget,WidgetCommandType type, void* data);
     bbWidgetFunctions_add(self, WidgetOnCommand,
                           NULL_OnCommand, "NULL OnCommand");
 

@@ -31,8 +31,8 @@ bbFlag Textbox_Constructor (bbWidget** self, void* graphics,
     bbDictionary_lookup(Graphics->drawfunctions->dictionary, "TEXTBOX",
                         &drawfunctionHandle);
     widget->frames[0].drawfunction = drawfunctionHandle.u64;
-    widget->frames[0].offset.x = 0;
-    widget->frames[0].offset.y = 0;
+    widget->frames[0].offset.x = 5;
+    widget->frames[0].offset.y = 5;
 
     widget->type =  bbWidgetType_TextBox;
 
@@ -41,7 +41,7 @@ bbFlag Textbox_Constructor (bbWidget** self, void* graphics,
     sfText_setFont(text, Graphics->fonts->fonts[0]);
     sfVector2f pos;
     pos.x = 50;
-    pos.y = 50;
+    pos.y = 100;
     sfText_setPosition(text, pos);
     sfText_setCharacterSize(text, 50);
 
@@ -50,7 +50,7 @@ bbFlag Textbox_Constructor (bbWidget** self, void* graphics,
 
     *self = widget;
 
-
     return Success;
 }
 
+//typedef bbFlag bbWidget_OnCommand (bbWidget* widget,WidgetCommandType type,  void* data);

@@ -204,15 +204,17 @@ bbFlag bbDF_eyeCandyTest(void* drawable, void* frameDescriptor, void* cl){
 
 }
 
+extern sfRenderWindow* testWindow;
+
 bbFlag bbDF_widgetTextBox(void* drawable, void* frameDescriptor, void* cl)
 {
+
 	bbWidget* widget = drawable;
 	bbFrame* frame = frameDescriptor;
 	drawFuncClosure* closure = cl;
 	bbGraphics* graphics = closure->graphics;
 
 	sfRenderWindow_drawText(closure->target, widget->typeData.textBox.text, NULL);
-
 	return Success;
 
 

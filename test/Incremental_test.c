@@ -197,14 +197,7 @@ CLEARWINDOW(bbMagenta);
 ////////////////////////////////////////////////////////
     CLEARWINDOW(bbRed);
 
-	sfText* text = sfText_create();
-	sfText_setString(text, "You look up to me for exaltation!");
-	sfText_setFont(text, graphics.fonts->fonts[0]);
-	sfVector2f pos;
-	pos.x = 50;
-	pos.y = 50;
-	sfText_setPosition(text, pos);
-	sfText_setCharacterSize(text, 50);
+
 
 	int mapTime;
 	for (mapTime = 0; ; mapTime++) {
@@ -250,7 +243,6 @@ CLEARWINDOW(bbMagenta);
         bbWidgets_draw(&widgets, &cl);
 
 		bbMouse_Draw(&mouse, &widgets, &graphics, window);
-		sfRenderWindow_drawText(window, text, NULL);
 
 
 		sfRenderWindow_display(window);
