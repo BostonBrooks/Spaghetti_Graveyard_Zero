@@ -100,8 +100,8 @@ bbFlag bbInput_poll(bbInput* input, sfRenderWindow* window){
         case sfEvtMouseButtonPressed:
         case sfEvtMouseButtonReleased:{
 
-                bbMouse_Event(input->mouse, &event);
-                break;
+            bbMouse_Event(input->mouse, &event);
+            break;
         }
 
         case sfEvtKeyPressed:{
@@ -130,9 +130,12 @@ bbFlag bbInput_poll(bbInput* input, sfRenderWindow* window){
 
             break;
         }
-            default:{
-                bbDebug("input not recognised\n");
-            }
+        case sfEvtKeyReleased:
+        case sfEvtTextEntered:
+            break;
+        default:{
+            bbDebug("input not recognised\n");
+        }
 
         }
 
