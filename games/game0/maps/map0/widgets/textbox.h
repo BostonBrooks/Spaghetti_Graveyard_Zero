@@ -74,28 +74,43 @@ bbFlag Textbox_OnCommand(bbWidget* widget,WidgetCommandType type,  void* data){
     switch(type)
     {
          case bbWC_putChar:
-            char* ch = data;
-            char* string = widget->typeData.textBox.string;
-            bbStr_putChar(string, *ch, 1048);
-            bbStr_setBounds(string , widget->typeData.textBox.columns, widget->typeData.textBox.rows, 1048);
+             {
+                 char* ch = data;
+                 char* string = widget->typeData.textBox.string;
+                 bbStr_putChar(string, *ch, 1048);
+                 bbStr_setBounds(string , widget->typeData.textBox.columns, widget->typeData.textBox.rows, 1048);
 
-            sfText_setString(widget->typeData.textBox.text, string);
+                 sfText_setString(widget->typeData.textBox.text, string);
 
 
-        break;
+                 break;
+             }
+    case bbWC_putStr:
+             {
+                 char* ch = data;
+                 char* string = widget->typeData.textBox.string;
+                 bbStr_putStr(string, ch, 1048);
+                 bbStr_setBounds(string , widget->typeData.textBox.columns, widget->typeData.textBox.rows, 1048);
 
+                 sfText_setString(widget->typeData.textBox.text, string);
+
+
+                 break;
+             }
         case bbWC_setBounds:
-            I32x2* bounds = data;
+             {
+                 I32x2* bounds = data;
 
-            widget->typeData.textBox.columns = bounds->x;
-            widget->typeData.textBox.rows = bounds->y;
-            bbStr_setBounds(widget->typeData.textBox.string,
-                widget->typeData.textBox.columns,
-                widget->typeData.textBox.rows,
-                1048);
+                 widget->typeData.textBox.columns = bounds->x;
+                 widget->typeData.textBox.rows = bounds->y;
+                 bbStr_setBounds(widget->typeData.textBox.string,
+                     widget->typeData.textBox.columns,
+                     widget->typeData.textBox.rows,
+                     1048);
 
-        sfText_setString(widget->typeData.textBox.text, widget->typeData.textBox.string);
-        break;
+                 sfText_setString(widget->typeData.textBox.text, widget->typeData.textBox.string);
+                 break;
+             }
     }
     return Success;
 }

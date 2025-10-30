@@ -110,23 +110,30 @@ bbFlag bbInput_poll(bbInput* input, sfRenderWindow* window){
             bbWidget* widget = widgets->command;
 
             sfKeyCode keyCode = event.key.code;
-
+            char key;
                 if (event.key.shift == sfTrue)
                 {
-                    char key = input->keymap_uppercase[keyCode];
+                    key = input->keymap_uppercase[keyCode];
                     if (key != 0)
                     {
                         bbWidget_onCommand(widget,widgets, bbWC_putChar, &key);
                     }
                 } else {
-                    char key = input->keymap_lowercase[keyCode];
+                    key = input->keymap_lowercase[keyCode];
                     if (key != 0)
                     {
                         bbWidget_onCommand(widget,widgets, bbWC_putChar, &key);
                     }
                 }
 
-
+                //special character
+            if (key == 0)
+            {
+                if (keyCode == sfKeyReturn)
+                {
+                    bbWidget_onCommand(widgets->prompt,widgets, bbWC_putStr, widgets->command->typeData.textBox.string);
+                }
+            }
 
             break;
         }
