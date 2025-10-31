@@ -16,9 +16,50 @@ sfRenderWindow* testWindow;
 bbWidgets* testWidgets;
 bbMapCoords testGoalPoint;
 
-
+I32 hash(unsigned char *str, I32 n_bins);
 
 int main (void){
+
+
+    //trying to replicate a bug
+    I32 magic_number = 256;
+    bbPool_Handle testHandle;
+    testHandle.u64 = 33333;
+    bbDictionary* testDict;
+    bbDictionary_new(&testDict, magic_number);
+
+    bbDictionary_add(testDict,"SPELLSELECT1",testHandle);
+    bbDictionary_add(testDict,"SPELLSELECT2",testHandle);
+    bbDictionary_add(testDict,"SPELLSELECT3",testHandle);
+    bbDictionary_add(testDict,"SPELLSELECT4",testHandle);
+    bbDictionary_add(testDict,"SPELLSELECT5",testHandle);
+    bbDictionary_add(testDict,"SPELLSELECT6",testHandle);
+    bbDictionary_add(testDict,"SPELLSELECT7",testHandle);
+    bbDictionary_add(testDict,"SPELLSELECT8",testHandle);
+    bbDictionary_add(testDict,"SPELLSELECT9",testHandle);
+    bbDictionary_add(testDict,"SPELLSELECT10",testHandle);
+    bbDictionary_add(testDict,"SPELLSELECT11",testHandle);
+    bbDictionary_add(testDict,"SPELLSELECT12",testHandle);
+    bbDictionary_add(testDict,"SPELLSELECT13",testHandle);
+    bbDictionary_add(testDict,"SPELLSELECT14",testHandle);
+    bbDictionary_add(testDict,"SPELLSELECT15",testHandle);
+    bbDictionary_add(testDict,"SPELLSELECT16",testHandle);
+    bbDictionary_add(testDict,"SPELLSELECT17",testHandle);
+    bbDictionary_add(testDict,"SPELLSELECT18",testHandle);
+    bbDictionary_add(testDict,"SPELLSELECT19",testHandle);
+    bbDictionary_add(testDict,"SPELLSELECT20",testHandle);
+    bbDictionary_add(testDict,"SPELLSELECT21",testHandle);
+    bbDictionary_add(testDict,"SPELLSELECT22",testHandle);
+    bbDictionary_add(testDict,"SPELLSELECT23",testHandle);
+    bbDictionary_add(testDict,"SPELLSELECT24",testHandle);
+    bbDictionary_add(testDict,"SPELLSELECT25",testHandle);
+    bbDictionary_add(testDict,"SPELLSELECT26",testHandle);
+    bbDictionary_add(testDict,"SPELLSELECT27",testHandle);
+    bbDictionary_add(testDict,"SPELLSELECT28",testHandle);
+    bbDictionary_add(testDict,"SPELLSELECT29",testHandle);
+    bbDictionary_add(testDict,"SPELLSELECT30",testHandle);
+    bbDictionary_add(testDict,"SPELLSELECT31",testHandle);
+
 
     testGoalPoint.i = 0;
     testGoalPoint.j = 0;
@@ -164,21 +205,40 @@ CLEARWINDOW(bbMagenta);
 
     bbHere();
 
+//does this crash?
+    I32 hash_value = hash("SPELLSELECT", widgets.functions->Constructor_dict);
 
-////////////New Code to replace widgets /////////////////
+
 
 	//bbWidgets widgets0;
 	//bbWidgets_init(&widgets0);
-	bbWidget* widget0;
+    bbWidget* widget0;
+    bbWidget* widget1;
 
 	bbScreenPoints SP0;
 
+    SP0.x = 97*8; SP0.y = 422*8;
+    bbWidget_constructor(&widget0, &widgets, &graphics,
+                         SP0, layout,"SPELLBAR");
+
+    SP0.x = 58*8; SP0.y = 100*8;
+    bbWidget_constructor(&widget1, &widgets, &graphics,
+                         SP0, widget0,"SPELLMENU");
+
+
+
+
+
 	SP0.x = 497*8; SP0.y = 12*8;
-	bbWidget_constructor(&widgets.dialog, &widgets, &graphics, SP0, layout, "TEXTBOX");
+	bbWidget_constructor(&widgets.dialog, &widgets, &graphics,
+                         SP0, layout, "TEXTBOX");
+
+
 
 
 	SP0.x = 497*8; SP0.y = 355*8;
-	bbWidget_constructor(&widgets.prompt, &widgets, &graphics, SP0, layout, "TEXTBOX");
+	bbWidget_constructor(&widgets.prompt, &widgets, &graphics,
+                         SP0, layout, "TEXTBOX");
 
 	I32x2 bounds;
 	bounds.x = 25;
@@ -186,26 +246,31 @@ CLEARWINDOW(bbMagenta);
 	bbWidget_onCommand(widgets.prompt, &widgets, bbWC_setBounds, &bounds);
 
 	SP0.x = 497*8; SP0.y = 416*8;
-	bbWidget_constructor(&widgets.command, &widgets, &graphics, SP0, layout, "TEXTBOX");
+	bbWidget_constructor(&widgets.command, &widgets, &graphics,
+                         SP0, layout, "TEXTBOX");
 
 	bounds.x = 64;
 	bounds.y = 1;
 	bbWidget_onCommand(widgets.command, &widgets, bbWC_setBounds, &bounds);
 
 	SP0.x = rand()%(720*8); SP0.y = rand()%(480*8);
-	bbWidget_constructor(&widget0, &widgets, &graphics, SP0, layout, "SPHERE");
+	bbWidget_constructor(&widget0, &widgets, &graphics,
+                         SP0, layout, "SPHERE");
 
 
 
 	SP0.x = 500*8; SP0.y = 23*8;
-	bbWidget_constructor(&widget0, &widgets, &graphics, SP0, layout, "BUTTON");
+	bbWidget_constructor(&widget0, &widgets, &graphics,
+                         SP0, layout, "BUTTON");
 
 
     SP0.x = 500*8; SP0.y = 125*8;
-    bbWidget_constructor(&widget0, &widgets, &graphics, SP0, layout, "BOX");
+    bbWidget_constructor(&widget0, &widgets, &graphics,
+                         SP0, layout, "BOX");
 
     SP0.x = 500*8; SP0.y = 300*8;
-    bbWidget_constructor(&widget0, &widgets, &graphics, SP0, layout, "CARD");
+    bbWidget_constructor(&widget0, &widgets, &graphics,
+                         SP0, layout, "CARD");
 
 
 ////////////////////////////////////////////////////////
