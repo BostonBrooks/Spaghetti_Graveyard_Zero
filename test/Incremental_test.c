@@ -206,7 +206,7 @@ CLEARWINDOW(bbMagenta);
     bbHere();
 
 //does this crash?
-    I32 hash_value = hash("SPELLSELECT", widgets.functions->Constructor_dict);
+    I32 hash_value = hash("SPELLSELECT30", magic_number);
 
 
 

@@ -116,8 +116,8 @@ bbFlag bbWidgetFunctions_populate(bbWidgetFunctions* self)
 
     bbHere();
 
-    bbWidgetFunctions_add(self, WidgetConstructor,
-                          SpellSelect30_Constructor, "SPELLSELECT30");
+    //bbWidgetFunctions_add(self, WidgetConstructor,
+    //                      SpellSelect30_Constructor, "SPELLSELECT30");
 
     //typedef bbFlag bbWidget_Update (bbWidget* widget, void* unused);
     bbWidgetFunctions_add(self, WidgetUpdate,

@@ -26,7 +26,7 @@ bbFlag Spellbar_Constructor (bbWidget** self, void* graphics,
                         &drawfunctionHandle);
     widget->frames[0].drawfunction = drawfunctionHandle.u64;
 
-    bbDictionary_lookup(Graphics->sprites->dictionary, "SPELL1",
+    bbDictionary_lookup(Graphics->sprites->dictionary, "SPELLBAR",
                         &widget->frames[0].handle);
 
 

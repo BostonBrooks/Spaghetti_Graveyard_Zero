@@ -9,8 +9,8 @@ bbFlag SpellSelect1_Constructor (bbWidget** self, void* graphics,
     bbWidget* widget;
     bbScreenPoints SP;
 
-    SP.x = screen_coords.x + 11*8 + 35*8*0;
-    SP.y = screen_coords.y + 11*8 + 35*8*0;
+    SP.x = screen_coords.x;
+    SP.y = screen_coords.y;
     bbWidget_constructor(&widget, widgets, graphics,
                          SP, parent, "SPELLSELECT");
 
@@ -36,8 +36,8 @@ bbFlag SpellSelect2_Constructor (bbWidget** self, void* graphics,
     bbWidget* widget;
     bbScreenPoints SP;
 
-    SP.x = screen_coords.x + 11*8 + 35*8*0;
-    SP.y = screen_coords.y + 11*8 + 35*8*0;
+    SP.x = screen_coords.x;
+    SP.y = screen_coords.y;
     bbWidget_constructor(&widget, widgets, graphics,
                          SP, parent, "SPELLSELECT");
 
@@ -63,8 +63,8 @@ bbFlag SpellSelect3_Constructor (bbWidget** self, void* graphics,
     bbWidget* widget;
     bbScreenPoints SP;
 
-    SP.x = screen_coords.x + 11*8 + 35*8*0;
-    SP.y = screen_coords.y + 11*8 + 35*8*0;
+    SP.x = screen_coords.x;
+    SP.y = screen_coords.y;
     bbWidget_constructor(&widget, widgets, graphics,
                          SP, parent, "SPELLSELECT");
 
@@ -90,8 +90,8 @@ bbFlag SpellSelect4_Constructor (bbWidget** self, void* graphics,
     bbWidget* widget;
     bbScreenPoints SP;
 
-    SP.x = screen_coords.x + 11*8 + 35*8*0;
-    SP.y = screen_coords.y + 11*8 + 35*8*0;
+    SP.x = screen_coords.x;
+    SP.y = screen_coords.y;
     bbWidget_constructor(&widget, widgets, graphics,
                          SP, parent, "SPELLSELECT");
 
@@ -117,8 +117,8 @@ bbFlag SpellSelect5_Constructor (bbWidget** self, void* graphics,
     bbWidget* widget;
     bbScreenPoints SP;
 
-    SP.x = screen_coords.x + 11*8 + 35*8*0;
-    SP.y = screen_coords.y + 11*8 + 35*8*0;
+    SP.x = screen_coords.x;
+    SP.y = screen_coords.y;
     bbWidget_constructor(&widget, widgets, graphics,
                          SP, parent, "SPELLSELECT");
 
@@ -144,8 +144,8 @@ bbFlag SpellSelect6_Constructor (bbWidget** self, void* graphics,
     bbWidget* widget;
     bbScreenPoints SP;
 
-    SP.x = screen_coords.x + 11*8 + 35*8*0;
-    SP.y = screen_coords.y + 11*8 + 35*8*0;
+    SP.x = screen_coords.x;
+    SP.y = screen_coords.y;
     bbWidget_constructor(&widget, widgets, graphics,
                          SP, parent, "SPELLSELECT");
 
@@ -171,8 +171,8 @@ bbFlag SpellSelect7_Constructor (bbWidget** self, void* graphics,
     bbWidget* widget;
     bbScreenPoints SP;
 
-    SP.x = screen_coords.x + 11*8 + 35*8*0;
-    SP.y = screen_coords.y + 11*8 + 35*8*0;
+    SP.x = screen_coords.x;
+    SP.y = screen_coords.y;
     bbWidget_constructor(&widget, widgets, graphics,
                          SP, parent, "SPELLSELECT");
 
@@ -198,8 +198,8 @@ bbFlag SpellSelect8_Constructor (bbWidget** self, void* graphics,
     bbWidget* widget;
     bbScreenPoints SP;
 
-    SP.x = screen_coords.x + 11*8 + 35*8*0;
-    SP.y = screen_coords.y + 11*8 + 35*8*0;
+    SP.x = screen_coords.x;
+    SP.y = screen_coords.y;
     bbWidget_constructor(&widget, widgets, graphics,
                          SP, parent, "SPELLSELECT");
 
@@ -225,8 +225,8 @@ bbFlag SpellSelect9_Constructor (bbWidget** self, void* graphics,
     bbWidget* widget;
     bbScreenPoints SP;
 
-    SP.x = screen_coords.x + 11*8 + 35*8*0;
-    SP.y = screen_coords.y + 11*8 + 35*8*0;
+    SP.x = screen_coords.x;
+    SP.y = screen_coords.y;
     bbWidget_constructor(&widget, widgets, graphics,
                          SP, parent, "SPELLSELECT");
 
@@ -252,8 +252,8 @@ bbFlag SpellSelect10_Constructor (bbWidget** self, void* graphics,
     bbWidget* widget;
     bbScreenPoints SP;
 
-    SP.x = screen_coords.x + 11*8 + 35*8*0;
-    SP.y = screen_coords.y + 11*8 + 35*8*0;
+    SP.x = screen_coords.x;
+    SP.y = screen_coords.y;
     bbWidget_constructor(&widget, widgets, graphics,
                          SP, parent, "SPELLSELECT");
 
@@ -279,8 +279,8 @@ bbFlag SpellSelect11_Constructor (bbWidget** self, void* graphics,
     bbWidget* widget;
     bbScreenPoints SP;
 
-    SP.x = screen_coords.x + 11*8 + 35*8*0;
-    SP.y = screen_coords.y + 11*8 + 35*8*0;
+    SP.x = screen_coords.x;
+    SP.y = screen_coords.y;
     bbWidget_constructor(&widget, widgets, graphics,
                          SP, parent, "SPELLSELECT");
 
@@ -306,8 +306,8 @@ bbFlag SpellSelect12_Constructor (bbWidget** self, void* graphics,
     bbWidget* widget;
     bbScreenPoints SP;
 
-    SP.x = screen_coords.x + 11*8 + 35*8*0;
-    SP.y = screen_coords.y + 11*8 + 35*8*0;
+    SP.x = screen_coords.x;
+    SP.y = screen_coords.y;
     bbWidget_constructor(&widget, widgets, graphics,
                          SP, parent, "SPELLSELECT");
 
@@ -333,8 +333,8 @@ bbFlag SpellSelect13_Constructor (bbWidget** self, void* graphics,
     bbWidget* widget;
     bbScreenPoints SP;
 
-    SP.x = screen_coords.x + 11*8 + 35*8*0;
-    SP.y = screen_coords.y + 11*8 + 35*8*0;
+    SP.x = screen_coords.x;
+    SP.y = screen_coords.y;
     bbWidget_constructor(&widget, widgets, graphics,
                          SP, parent, "SPELLSELECT");
 
@@ -360,8 +360,8 @@ bbFlag SpellSelect14_Constructor (bbWidget** self, void* graphics,
     bbWidget* widget;
     bbScreenPoints SP;
 
-    SP.x = screen_coords.x + 11*8 + 35*8*0;
-    SP.y = screen_coords.y + 11*8 + 35*8*0;
+    SP.x = screen_coords.x;
+    SP.y = screen_coords.y;
     bbWidget_constructor(&widget, widgets, graphics,
                          SP, parent, "SPELLSELECT");
 
@@ -387,8 +387,8 @@ bbFlag SpellSelect15_Constructor (bbWidget** self, void* graphics,
     bbWidget* widget;
     bbScreenPoints SP;
 
-    SP.x = screen_coords.x + 11*8 + 35*8*0;
-    SP.y = screen_coords.y + 11*8 + 35*8*0;
+    SP.x = screen_coords.x;
+    SP.y = screen_coords.y;
     bbWidget_constructor(&widget, widgets, graphics,
                          SP, parent, "SPELLSELECT");
 
@@ -414,8 +414,8 @@ bbFlag SpellSelect16_Constructor (bbWidget** self, void* graphics,
     bbWidget* widget;
     bbScreenPoints SP;
 
-    SP.x = screen_coords.x + 11*8 + 35*8*0;
-    SP.y = screen_coords.y + 11*8 + 35*8*0;
+    SP.x = screen_coords.x;
+    SP.y = screen_coords.y;
     bbWidget_constructor(&widget, widgets, graphics,
                          SP, parent, "SPELLSELECT");
 
@@ -441,8 +441,8 @@ bbFlag SpellSelect17_Constructor (bbWidget** self, void* graphics,
     bbWidget* widget;
     bbScreenPoints SP;
 
-    SP.x = screen_coords.x + 11*8 + 35*8*0;
-    SP.y = screen_coords.y + 11*8 + 35*8*0;
+    SP.x = screen_coords.x;
+    SP.y = screen_coords.y;
     bbWidget_constructor(&widget, widgets, graphics,
                          SP, parent, "SPELLSELECT");
 
@@ -468,8 +468,8 @@ bbFlag SpellSelect18_Constructor (bbWidget** self, void* graphics,
     bbWidget* widget;
     bbScreenPoints SP;
 
-    SP.x = screen_coords.x + 11*8 + 35*8*0;
-    SP.y = screen_coords.y + 11*8 + 35*8*0;
+    SP.x = screen_coords.x;
+    SP.y = screen_coords.y;
     bbWidget_constructor(&widget, widgets, graphics,
                          SP, parent, "SPELLSELECT");
 
@@ -495,8 +495,8 @@ bbFlag SpellSelect19_Constructor (bbWidget** self, void* graphics,
     bbWidget* widget;
     bbScreenPoints SP;
 
-    SP.x = screen_coords.x + 11*8 + 35*8*0;
-    SP.y = screen_coords.y + 11*8 + 35*8*0;
+    SP.x = screen_coords.x;
+    SP.y = screen_coords.y;
     bbWidget_constructor(&widget, widgets, graphics,
                          SP, parent, "SPELLSELECT");
 
@@ -522,8 +522,8 @@ bbFlag SpellSelect20_Constructor (bbWidget** self, void* graphics,
     bbWidget* widget;
     bbScreenPoints SP;
 
-    SP.x = screen_coords.x + 11*8 + 35*8*0;
-    SP.y = screen_coords.y + 11*8 + 35*8*0;
+    SP.x = screen_coords.x;
+    SP.y = screen_coords.y;
     bbWidget_constructor(&widget, widgets, graphics,
                          SP, parent, "SPELLSELECT");
 
@@ -549,8 +549,8 @@ bbFlag SpellSelect21_Constructor (bbWidget** self, void* graphics,
     bbWidget* widget;
     bbScreenPoints SP;
 
-    SP.x = screen_coords.x + 11*8 + 35*8*0;
-    SP.y = screen_coords.y + 11*8 + 35*8*0;
+    SP.x = screen_coords.x;
+    SP.y = screen_coords.y;
     bbWidget_constructor(&widget, widgets, graphics,
                          SP, parent, "SPELLSELECT");
 
@@ -576,8 +576,8 @@ bbFlag SpellSelect22_Constructor (bbWidget** self, void* graphics,
     bbWidget* widget;
     bbScreenPoints SP;
 
-    SP.x = screen_coords.x + 11*8 + 35*8*0;
-    SP.y = screen_coords.y + 11*8 + 35*8*0;
+    SP.x = screen_coords.x;
+    SP.y = screen_coords.y;
     bbWidget_constructor(&widget, widgets, graphics,
                          SP, parent, "SPELLSELECT");
 
@@ -603,8 +603,8 @@ bbFlag SpellSelect23_Constructor (bbWidget** self, void* graphics,
     bbWidget* widget;
     bbScreenPoints SP;
 
-    SP.x = screen_coords.x + 11*8 + 35*8*0;
-    SP.y = screen_coords.y + 11*8 + 35*8*0;
+    SP.x = screen_coords.x;
+    SP.y = screen_coords.y;
     bbWidget_constructor(&widget, widgets, graphics,
                          SP, parent, "SPELLSELECT");
 
@@ -630,8 +630,8 @@ bbFlag SpellSelect24_Constructor (bbWidget** self, void* graphics,
     bbWidget* widget;
     bbScreenPoints SP;
 
-    SP.x = screen_coords.x + 11*8 + 35*8*0;
-    SP.y = screen_coords.y + 11*8 + 35*8*0;
+    SP.x = screen_coords.x;
+    SP.y = screen_coords.y;
     bbWidget_constructor(&widget, widgets, graphics,
                          SP, parent, "SPELLSELECT");
 
@@ -657,8 +657,8 @@ bbFlag SpellSelect25_Constructor (bbWidget** self, void* graphics,
     bbWidget* widget;
     bbScreenPoints SP;
 
-    SP.x = screen_coords.x + 11*8 + 35*8*0;
-    SP.y = screen_coords.y + 11*8 + 35*8*0;
+    SP.x = screen_coords.x;
+    SP.y = screen_coords.y;
     bbWidget_constructor(&widget, widgets, graphics,
                          SP, parent, "SPELLSELECT");
 
@@ -684,8 +684,8 @@ bbFlag SpellSelect26_Constructor (bbWidget** self, void* graphics,
     bbWidget* widget;
     bbScreenPoints SP;
 
-    SP.x = screen_coords.x + 11*8 + 35*8*0;
-    SP.y = screen_coords.y + 11*8 + 35*8*0;
+    SP.x = screen_coords.x;
+    SP.y = screen_coords.y;
     bbWidget_constructor(&widget, widgets, graphics,
                          SP, parent, "SPELLSELECT");
 
@@ -711,8 +711,8 @@ bbFlag SpellSelect27_Constructor (bbWidget** self, void* graphics,
     bbWidget* widget;
     bbScreenPoints SP;
 
-    SP.x = screen_coords.x + 11*8 + 35*8*0;
-    SP.y = screen_coords.y + 11*8 + 35*8*0;
+    SP.x = screen_coords.x;
+    SP.y = screen_coords.y;
     bbWidget_constructor(&widget, widgets, graphics,
                          SP, parent, "SPELLSELECT");
 
@@ -738,8 +738,8 @@ bbFlag SpellSelect28_Constructor (bbWidget** self, void* graphics,
     bbWidget* widget;
     bbScreenPoints SP;
 
-    SP.x = screen_coords.x + 11*8 + 35*8*0;
-    SP.y = screen_coords.y + 11*8 + 35*8*0;
+    SP.x = screen_coords.x;
+    SP.y = screen_coords.y;
     bbWidget_constructor(&widget, widgets, graphics,
                          SP, parent, "SPELLSELECT");
 
@@ -765,8 +765,8 @@ bbFlag SpellSelect29_Constructor (bbWidget** self, void* graphics,
     bbWidget* widget;
     bbScreenPoints SP;
 
-    SP.x = screen_coords.x + 11*8 + 35*8*0;
-    SP.y = screen_coords.y + 11*8 + 35*8*0;
+    SP.x = screen_coords.x;
+    SP.y = screen_coords.y;
     bbWidget_constructor(&widget, widgets, graphics,
                          SP, parent, "SPELLSELECT");
 
@@ -792,8 +792,8 @@ bbFlag SpellSelect30_Constructor (bbWidget** self, void* graphics,
     bbWidget* widget;
     bbScreenPoints SP;
 
-    SP.x = screen_coords.x + 11*8 + 35*8*0;
-    SP.y = screen_coords.y + 11*8 + 35*8*0;
+    SP.x = screen_coords.x;
+    SP.y = screen_coords.y;
     bbWidget_constructor(&widget, widgets, graphics,
                          SP, parent, "SPELLSELECT");
 
