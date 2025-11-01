@@ -15,8 +15,8 @@ bbFlag SpellSelect_Constructor (bbWidget** self, void* graphics,
 
     rect.left = screen_coords.x;
     rect.top = screen_coords.y;
-    rect.width = SCREEN_PPP * 52;
-    rect.height = SCREEN_PPP * 52;
+    rect.width = SCREEN_PPP * 36;
+    rect.height = SCREEN_PPP * 36;
 
     widget->rect = rect;
 
@@ -35,7 +35,7 @@ bbFlag SpellSelect_Constructor (bbWidget** self, void* graphics,
                                       "SPELLSELECT");
 
     widget->mtable.isOver = funcInt;
-    widget->mtable.MouseIcon = 86;
+    widget->mtable.MouseIcon = 132;
 
     *self = widget;
     return Success;
