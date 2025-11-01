@@ -29,7 +29,13 @@ bbFlag SpellSelect_Constructor (bbWidget** self, void* graphics,
     bbDictionary_lookup(Graphics->sprites->dictionary, "SPELL1",
                         &widget->frames[0].handle);
 
+    int funcInt;
 
+    funcInt = bbMouseFunctions_getInt(&widgets->mouse->functions,MouseIsOver,
+                                      "SPELLSELECT");
+
+    widget->mtable.isOver = funcInt;
+    widget->mtable.MouseIcon = 86;
 
     *self = widget;
     return Success;
