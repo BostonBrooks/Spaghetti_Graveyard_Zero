@@ -30,6 +30,44 @@ bbFlag Spellbar_Constructor (bbWidget** self, void* graphics,
                         &widget->frames[0].handle);
 
 
+    bbScreenPoints SP0;
+    bbWidget* widget0;
+    bbWidget* widget1;
+
+
+    SP0.x = screen_coords.x + 11*8 + 0*35*8; SP0.y = screen_coords.x + 11*8;
+    bbWidget_constructor(&widget1, &widgets, &graphics,
+                         SP0, widget,"SPELLSLOT");
+
+    SP0.x = screen_coords.x + 11*8 + 1*35*8; SP0.y = screen_coords.x + 11*8;
+    bbWidget_constructor(&widget1, &widgets, &graphics,
+                         SP0, widget,"SPELLSLOT");
+
+    SP0.x = screen_coords.x + 11*8 + 2*35*8; SP0.y = screen_coords.x + 11*8;
+    bbWidget_constructor(&widget1, &widgets, &graphics,
+                         SP0, widget,"SPELLSLOT");
+
+    SP0.x = screen_coords.x + 11*8 + 3*35*8; SP0.y = screen_coords.x + 11*8;
+    bbWidget_constructor(&widget1, &widgets, &graphics,
+                         SP0, widget,"SPELLSLOT");
+
+    SP0.x = screen_coords.x + 11*8 + 4*35*8; SP0.y = screen_coords.x + 11*8;
+    bbWidget_constructor(&widget1, &widgets, &graphics,
+                         SP0, widget,"SPELLSLOT");
+
+    SP0.x = screen_coords.x + 11*8 + 5*35*8; SP0.y = screen_coords.x + 11*8;
+    bbWidget_constructor(&widget1, &widgets, &graphics,
+                         SP0, widget,"SPELLSLOT");
+
+    SP0.x = screen_coords.x + 11*8 + 6*35*8; SP0.y = screen_coords.x + 11*8;
+    bbWidget_constructor(&widget1, &widgets, &graphics,
+                         SP0, widget,"SPELLSLOT");
+
+    SP0.x = screen_coords.x + 11*8 + 7*35*8; SP0.y = screen_coords.x + 11*8;
+    bbWidget_constructor(&widget1, &widgets, &graphics,
+                         SP0, widget,"SPELLSLOT");
+
+
     *self = widget;
 
 }
