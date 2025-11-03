@@ -43,11 +43,11 @@ bbFlag bbMouseFunctions_populate(bbMouseFunctions* self)
     bbMouseFunctions_add(self, MouseLeftDrag, Card_LeftDrag, "CARD");
 
     bbMouseFunctions_add(self, MouseIsOver, SpellSelect_IsOver, "SPELLSELECT");
-//    bbMouseFunctions_add(self, MouseEnter, SpellSelect_Enter, "SPELLSELECT");
-//    bbMouseFunctions_add(self, MouseLeave, SpellSelect_Leave, "SPELLSELECT");
-//    bbMouseFunctions_add(self, MouseLeftDown, SpellSelect_LeftDown, "SPELLSELECT");
-//    bbMouseFunctions_add(self, MouseLeftUp, SpellSelect_LeftUp, "SPELLSELECT");
-//    bbMouseFunctions_add(self, MouseLeftDrag, SpellSelect_LeftDrag, "SPELLSELECT");
+    bbMouseFunctions_add(self, MouseEnter, SpellSelect_Enter, "SPELLSELECT");
+    bbMouseFunctions_add(self, MouseLeave, SpellSelect_Leave, "SPELLSELECT");
+    bbMouseFunctions_add(self, MouseLeftDown, SpellSelect_LeftDown, "SPELLSELECT");
+    bbMouseFunctions_add(self, MouseLeftUp, SpellSelect_LeftUp, "SPELLSELECT");
+    bbMouseFunctions_add(self, MouseLeftDrag, SpellSelect_LeftDrag, "SPELLSELECT");
 
 
 

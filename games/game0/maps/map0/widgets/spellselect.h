@@ -36,6 +36,25 @@ bbFlag SpellSelect_Constructor (bbWidget** self, void* graphics,
                                       "SPELLSELECT");
 
     widget->mtable.isOver = funcInt;
+
+    funcInt = bbMouseFunctions_getInt(&widgets->mouse->functions,MouseEnter,
+                                      "SPELLSELECT");
+    widget->mtable.Enter = funcInt;
+    funcInt = bbMouseFunctions_getInt(&widgets->mouse->functions,MouseLeave,
+                                      "SPELLSELECT");
+    widget->mtable.Leave = funcInt;
+    funcInt = bbMouseFunctions_getInt(&widgets->mouse->functions,
+                                      MouseLeftDown,"SPELLSELECT");
+    widget->mtable.LeftDown = funcInt;
+    funcInt = bbMouseFunctions_getInt(&widgets->mouse->functions,
+                                      MouseLeftUp,"SPELLSELECT");
+    widget->mtable.LeftUp = funcInt;
+
+    funcInt = bbMouseFunctions_getInt(&widgets->mouse->functions,
+                                      MouseLeftDrag,"SPELLSELECT");
+    widget->mtable.LeftDrag = funcInt;
+
+
     widget->mtable.MouseIcon = 133;
 
     *self = widget;
