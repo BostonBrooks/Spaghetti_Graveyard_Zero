@@ -62,17 +62,12 @@ bbFlag bbWidgetFunctions_add(bbWidgetFunctions* functions, WidgetFunctionType fn
 
 
         available = functions->Constructor_available++;
-            bbAssert(available < magic_number, "out of bounds error\n");
+        bbAssert(available < magic_number, "out of bounds error\n");
 
-bbDebug("available = %d\n", available);
-bbDebug("nbins = %d\n", functions->Constructor_dict->m_NumBins);
-bbDebug("functions->Constructors = %p\n", functions->Constructors );
         functions->Constructors[available] = fnPointer;
-bbDebug("nbins = %d\n", functions->Constructor_dict->m_NumBins);
         handle.u64 = available;
 
         bbDictionary_add(functions->Constructor_dict, key, handle);
-
 
         return Success;
 

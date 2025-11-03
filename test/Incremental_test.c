@@ -25,40 +25,7 @@ int main (void){
     I32 magic_number = 256;
     bbPool_Handle testHandle;
     testHandle.u64 = 33333;
-    bbDictionary* testDict;
-    bbDictionary_new(&testDict, magic_number);
 
-    bbDictionary_add(testDict,"SPELLSELECT1",testHandle);
-    bbDictionary_add(testDict,"SPELLSELECT2",testHandle);
-    bbDictionary_add(testDict,"SPELLSELECT3",testHandle);
-    bbDictionary_add(testDict,"SPELLSELECT4",testHandle);
-    bbDictionary_add(testDict,"SPELLSELECT5",testHandle);
-    bbDictionary_add(testDict,"SPELLSELECT6",testHandle);
-    bbDictionary_add(testDict,"SPELLSELECT7",testHandle);
-    bbDictionary_add(testDict,"SPELLSELECT8",testHandle);
-    bbDictionary_add(testDict,"SPELLSELECT9",testHandle);
-    bbDictionary_add(testDict,"SPELLSELECT10",testHandle);
-    bbDictionary_add(testDict,"SPELLSELECT11",testHandle);
-    bbDictionary_add(testDict,"SPELLSELECT12",testHandle);
-    bbDictionary_add(testDict,"SPELLSELECT13",testHandle);
-    bbDictionary_add(testDict,"SPELLSELECT14",testHandle);
-    bbDictionary_add(testDict,"SPELLSELECT15",testHandle);
-    bbDictionary_add(testDict,"SPELLSELECT16",testHandle);
-    bbDictionary_add(testDict,"SPELLSELECT17",testHandle);
-    bbDictionary_add(testDict,"SPELLSELECT18",testHandle);
-    bbDictionary_add(testDict,"SPELLSELECT19",testHandle);
-    bbDictionary_add(testDict,"SPELLSELECT20",testHandle);
-    bbDictionary_add(testDict,"SPELLSELECT21",testHandle);
-    bbDictionary_add(testDict,"SPELLSELECT22",testHandle);
-    bbDictionary_add(testDict,"SPELLSELECT23",testHandle);
-    bbDictionary_add(testDict,"SPELLSELECT24",testHandle);
-    bbDictionary_add(testDict,"SPELLSELECT25",testHandle);
-    bbDictionary_add(testDict,"SPELLSELECT26",testHandle);
-    bbDictionary_add(testDict,"SPELLSELECT27",testHandle);
-    bbDictionary_add(testDict,"SPELLSELECT28",testHandle);
-    bbDictionary_add(testDict,"SPELLSELECT29",testHandle);
-    bbDictionary_add(testDict,"SPELLSELECT30",testHandle);
-    bbDictionary_add(testDict,"SPELLSELECT31",testHandle);
 
 
     testGoalPoint.i = 0;
@@ -136,22 +103,14 @@ CLEARWINDOW(bbGreen);
 	bbMouseFunctions_populate(&mouse.functions);
 
 
-	int tst = bbMouseFunctions_getInt(&mouse.functions,MouseIsOver, "ALWAYS");
-	bbDebug("tst = %d\n", tst);
-	tst = bbMouseFunctions_getInt(&mouse.functions,MouseIsOver, "TELEPORT");
-	bbDebug("tst = %d\n", tst);
-	tst = bbMouseFunctions_getInt(&mouse.functions,MouseIsOver, "HOVER");
-	bbDebug("tst = %d\n", tst);
-
-
 	bbInput input;
 	bbInput_new(&input,window, &mouse, &widgets);
 
 CLEARWINDOW(bbTeal);
 
-//bbHere();
+bbHere();
 	bbWidget *layout;
-//    bbWidget_Constructor* function0;
+
     bbScreenPoints SP;
     SP.x = 600*8;
     SP.y = 50*8;
@@ -168,7 +127,6 @@ CLEARWINDOW(bbBlue);
     bbViewport_new(&viewport, 456, 466);
     bbAssert(viewport != NULL, "bad bbViewport_new\n");
 
-    //bbViewport_draw(window, viewport);
     CLEARWINDOW(bbViolet);
 
 
@@ -206,9 +164,11 @@ CLEARWINDOW(bbMagenta);
     bbHere();
 
 //does this crash?
-    I32 hash_value = hash("SPELLSELECT30", magic_number);
+    I32 hash_value = hash("SPELLSLOT", magic_number);
 
-
+    void* testPtr;
+    bbWidgetFunctions_getFunction(&testPtr, widgets.functions,
+                                  WidgetConstructor, "SPELLSLOT");
 
 	//bbWidgets widgets0;
 	//bbWidgets_init(&widgets0);
