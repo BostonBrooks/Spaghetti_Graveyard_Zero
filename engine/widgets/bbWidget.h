@@ -20,7 +20,9 @@
 typedef enum bbWidget_Type
 {
 	bbWidgetType_None,
-	bbWidgetType_TextBox
+	bbWidgetType_TextBox,
+    bbWidgetType_SpellSelector,
+    bbWidgetType_SpellSlot
 } bbWidget_Type;
 
 

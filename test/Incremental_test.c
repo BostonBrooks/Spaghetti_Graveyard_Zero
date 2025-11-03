@@ -226,6 +226,37 @@ CLEARWINDOW(bbMagenta);
                          SP0, widget0,"SPELLMENU");
 
 
+    SP0.x = 108*8 + 0*35*8; SP0.y = 433*8;
+    bbWidget_constructor(&widget1, &widgets, &graphics,
+                         SP0, widget0,"SPELLSLOT");
+
+    SP0.x = 108*8 + 1*35*8; SP0.y = 433*8;
+    bbWidget_constructor(&widget1, &widgets, &graphics,
+                         SP0, widget0,"SPELLSLOT");
+
+    SP0.x = 108*8 + 2*35*8; SP0.y = 433*8;
+    bbWidget_constructor(&widget1, &widgets, &graphics,
+                         SP0, widget0,"SPELLSLOT");
+
+    SP0.x = 108*8 + 3*35*8; SP0.y = 433*8;
+    bbWidget_constructor(&widget1, &widgets, &graphics,
+                         SP0, widget0,"SPELLSLOT");
+
+    SP0.x = 108*8 + 4*35*8; SP0.y = 433*8;
+    bbWidget_constructor(&widget1, &widgets, &graphics,
+                         SP0, widget0,"SPELLSLOT");
+
+    SP0.x = 108*8 + 5*35*8; SP0.y = 433*8;
+    bbWidget_constructor(&widget1, &widgets, &graphics,
+                         SP0, widget0,"SPELLSLOT");
+
+    SP0.x = 108*8 + 6*35*8; SP0.y = 433*8;
+    bbWidget_constructor(&widget1, &widgets, &graphics,
+                         SP0, widget0,"SPELLSLOT");
+
+    SP0.x = 108*8 + 7*35*8; SP0.y = 433*8;
+    bbWidget_constructor(&widget1, &widgets, &graphics,
+                         SP0, widget0,"SPELLSLOT");
 
 
 

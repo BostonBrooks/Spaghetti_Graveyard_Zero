@@ -2,13 +2,13 @@
 #include "engine/widgets/bbWidget.h"
 #include "engine/widgets/bbWidgetFunctions.h"
 
-bbFlag SpellSelect_Constructor (bbWidget** self, void* graphics,
+bbFlag SpellSlot_Constructor (bbWidget** self, void* graphics,
                              bbWidgets* widgets, bbScreenPoints screen_coords, bbWidget* parent) {
 
 
     bbWidget *widget;
     bbFlag flag = bbWidget_newEmpty(&widget, widgets, parent);
-    widget->type = bbWidgetType_SpellSelector;
+    widget->type = bbWidgetType_SpellSlot;
 
     bbAssert(widget != NULL, "null address\n");
 
@@ -27,7 +27,7 @@ bbFlag SpellSelect_Constructor (bbWidget** self, void* graphics,
                         &drawfunctionHandle);
     widget->frames[0].drawfunction = drawfunctionHandle.u64;
 
-    bbDictionary_lookup(Graphics->sprites->dictionary, "SPELL1",
+    bbDictionary_lookup(Graphics->sprites->dictionary, "SPELLSLOT",
                         &widget->frames[0].handle);
 
     int funcInt;
