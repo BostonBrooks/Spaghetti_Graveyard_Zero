@@ -16,9 +16,17 @@ sfRenderWindow* testWindow;
 bbWidgets* testWidgets;
 bbMapCoords testGoalPoint;
 
-
+I32 hash(unsigned char *str, I32 n_bins);
 
 int main (void){
+
+
+    //trying to replicate a bug
+    I32 magic_number = 256;
+    bbPool_Handle testHandle;
+    testHandle.u64 = 33333;
+
+
 
     testGoalPoint.i = 0;
     testGoalPoint.j = 0;
@@ -95,22 +103,14 @@ CLEARWINDOW(bbGreen);
 	bbMouseFunctions_populate(&mouse.functions);
 
 
-	int tst = bbMouseFunctions_getInt(&mouse.functions,MouseIsOver, "ALWAYS");
-	bbDebug("tst = %d\n", tst);
-	tst = bbMouseFunctions_getInt(&mouse.functions,MouseIsOver, "TELEPORT");
-	bbDebug("tst = %d\n", tst);
-	tst = bbMouseFunctions_getInt(&mouse.functions,MouseIsOver, "HOVER");
-	bbDebug("tst = %d\n", tst);
-
-
 	bbInput input;
 	bbInput_new(&input,window, &mouse, &widgets);
 
 CLEARWINDOW(bbTeal);
 
-//bbHere();
+bbHere();
 	bbWidget *layout;
-//    bbWidget_Constructor* function0;
+
     bbScreenPoints SP;
     SP.x = 600*8;
     SP.y = 50*8;
@@ -127,7 +127,6 @@ CLEARWINDOW(bbBlue);
     bbViewport_new(&viewport, 456, 466);
     bbAssert(viewport != NULL, "bad bbViewport_new\n");
 
-    //bbViewport_draw(window, viewport);
     CLEARWINDOW(bbViolet);
 
 
@@ -164,21 +163,40 @@ CLEARWINDOW(bbMagenta);
 
     bbHere();
 
+//does this crash?
+    I32 hash_value = hash("SPELLSLOT", magic_number);
 
-////////////New Code to replace widgets /////////////////
+    void* testPtr;
+    bbWidgetFunctions_getFunction(&testPtr, widgets.functions,
+                                  WidgetConstructor, "SPELLSLOT");
 
 	//bbWidgets widgets0;
 	//bbWidgets_init(&widgets0);
-	bbWidget* widget0;
+    bbWidget* widget0;
+    bbWidget* widget1;
 
 	bbScreenPoints SP0;
 
+
+    SP0.x = 58*8; SP0.y = 100*8;
+    bbWidget_constructor(&widget1, &widgets, &graphics,
+                         SP0, layout,"SPELLMENU");
+
+
+    SP0.x = 97*8; SP0.y = 422*8;
+    bbWidget_constructor(&widget0, &widgets, &graphics,
+                        SP0, layout,"SPELLBAR");
+
 	SP0.x = 497*8; SP0.y = 12*8;
-	bbWidget_constructor(&widgets.dialog, &widgets, &graphics, SP0, layout, "TEXTBOX");
+	bbWidget_constructor(&widgets.dialog, &widgets, &graphics,
+                         SP0, layout, "TEXTBOX");
+
+
 
 
 	SP0.x = 497*8; SP0.y = 355*8;
-	bbWidget_constructor(&widgets.prompt, &widgets, &graphics, SP0, layout, "TEXTBOX");
+	bbWidget_constructor(&widgets.prompt, &widgets, &graphics,
+                         SP0, layout, "TEXTBOX");
 
 	I32x2 bounds;
 	bounds.x = 25;
@@ -186,26 +204,31 @@ CLEARWINDOW(bbMagenta);
 	bbWidget_onCommand(widgets.prompt, &widgets, bbWC_setBounds, &bounds);
 
 	SP0.x = 497*8; SP0.y = 416*8;
-	bbWidget_constructor(&widgets.command, &widgets, &graphics, SP0, layout, "TEXTBOX");
+	bbWidget_constructor(&widgets.command, &widgets, &graphics,
+                         SP0, layout, "TEXTBOX");
 
 	bounds.x = 64;
 	bounds.y = 1;
 	bbWidget_onCommand(widgets.command, &widgets, bbWC_setBounds, &bounds);
 
 	SP0.x = rand()%(720*8); SP0.y = rand()%(480*8);
-	bbWidget_constructor(&widget0, &widgets, &graphics, SP0, layout, "SPHERE");
+	bbWidget_constructor(&widget0, &widgets, &graphics,
+                         SP0, layout, "SPHERE");
 
 
 
 	SP0.x = 500*8; SP0.y = 23*8;
-	bbWidget_constructor(&widget0, &widgets, &graphics, SP0, layout, "BUTTON");
+	bbWidget_constructor(&widget0, &widgets, &graphics,
+                         SP0, layout, "BUTTON");
 
 
     SP0.x = 500*8; SP0.y = 125*8;
-    bbWidget_constructor(&widget0, &widgets, &graphics, SP0, layout, "BOX");
+    bbWidget_constructor(&widget0, &widgets, &graphics,
+                         SP0, layout, "BOX");
 
     SP0.x = 500*8; SP0.y = 300*8;
-    bbWidget_constructor(&widget0, &widgets, &graphics, SP0, layout, "CARD");
+    bbWidget_constructor(&widget0, &widgets, &graphics,
+                         SP0, layout, "CARD");
 
 
 ////////////////////////////////////////////////////////

@@ -9,28 +9,35 @@ bbFlag bbWidgetFunctions_new(bbWidgetFunctions** self)
     bbWidgetFunctions* functions = calloc(1, sizeof(bbWidgetFunctions));
     I32 magic_number = 256;
 
+//changes made fixed bug?
+//functions->Constructors = calloc(magic_number, sizeof(bbWidget_Constructor));
+    functions->Constructors = calloc(magic_number, sizeof(U64));
 
-    functions->Constructors = calloc(magic_number, sizeof(bbWidget_Constructor));
+bbDebug("functions->Constructors = %p\n", functions->Constructors );
     bbAssert(functions->Constructors != NULL, "bad calloc\n");
     bbDictionary_new(&functions->Constructor_dict, magic_number);
     functions->Constructor_available = 0;
 
-    functions->Update = calloc(magic_number, sizeof(bbWidget_Update));
+    //functions->Update = calloc(magic_number, sizeof(bbWidget_Update));
+    functions->Update = calloc(magic_number, sizeof(U64));
     bbAssert(functions->Update != NULL, "bad calloc\n");
     bbDictionary_new(&functions->Update_dict, magic_number);
     functions->Update_available = 0;
 
-    functions->Destructors = calloc(magic_number, sizeof(bbWidget_Destructor));
+//functions->Destructors = calloc(magic_number, sizeof(bbWidget_Destructor));
+    functions->Destructors = calloc(magic_number, sizeof(U64));
     bbAssert(functions->Destructors != NULL, "bad calloc\n");
     bbDictionary_new(&functions->Destructor_dict, magic_number);
     functions->Destructor_available = 0;
 
-    functions->OnCommands = calloc(magic_number, sizeof(bbWidget_OnCommand));
+    //functions->OnCommands = calloc(magic_number, sizeof(bbWidget_OnCommand));
+    functions->OnCommands = calloc(magic_number, sizeof(U64));
     bbAssert(functions->OnCommands != NULL, "bad calloc\n");
     bbDictionary_new(&functions->OnCommand_dict, magic_number);
     functions->OnCommand_available = 0;
 
-    functions->OnTimers = calloc(magic_number, sizeof(bbWidget_OnTimer));
+    //functions->OnTimers = calloc(magic_number, sizeof(bbWidget_OnTimer));
+    functions->OnTimers = calloc(magic_number, sizeof(U64));
     bbAssert(functions->OnTimers != NULL, "bad calloc\n");
     bbDictionary_new(&functions->OnTimers_dict, magic_number);
     functions->OnTimers_available = 0;
@@ -46,19 +53,22 @@ bbFlag bbWidgetFunctions_new(bbWidgetFunctions** self)
 bbFlag bbWidgetFunctions_add(bbWidgetFunctions* functions, WidgetFunctionType fnType, void* fnPointer, char* key )
 {
 
-
-    I32 available;
+    U32 available;
     bbPool_Handle handle;
     I32 magic_number = 256;
     switch (fnType)
     {
     case WidgetConstructor:
 
+
         available = functions->Constructor_available++;
         bbAssert(available < magic_number, "out of bounds error\n");
+
         functions->Constructors[available] = fnPointer;
         handle.u64 = available;
+
         bbDictionary_add(functions->Constructor_dict, key, handle);
+
         return Success;
 
     case WidgetUpdate:

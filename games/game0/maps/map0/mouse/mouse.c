@@ -9,6 +9,7 @@
 #include "games/game0/maps/map0/mouse/button.h"
 #include "games/game0/maps/map0/mouse/box.h"
 #include "games/game0/maps/map0/mouse/card.h"
+#include "games/game0/maps/map0/mouse/spellselect.h"
 
 bbFlag bbMouseFunctions_populate(bbMouseFunctions* self)
 {
@@ -40,7 +41,14 @@ bbFlag bbMouseFunctions_populate(bbMouseFunctions* self)
     bbMouseFunctions_add(self, MouseLeftDown, Card_LeftDown, "CARD");
     bbMouseFunctions_add(self, MouseLeftUp, Card_LeftUp, "CARD");
     bbMouseFunctions_add(self, MouseLeftDrag, Card_LeftDrag, "CARD");
-    //test:
+
+    bbMouseFunctions_add(self, MouseIsOver, SpellSelect_IsOver, "SPELLSELECT");
+    bbMouseFunctions_add(self, MouseEnter, SpellSelect_Enter, "SPELLSELECT");
+    bbMouseFunctions_add(self, MouseLeave, SpellSelect_Leave, "SPELLSELECT");
+    bbMouseFunctions_add(self, MouseLeftDown, SpellSelect_LeftDown, "SPELLSELECT");
+    bbMouseFunctions_add(self, MouseLeftUp, SpellSelect_LeftUp, "SPELLSELECT");
+    bbMouseFunctions_add(self, MouseLeftDrag, SpellSelect_LeftDrag, "SPELLSELECT");
+
 
 
     return Success;
