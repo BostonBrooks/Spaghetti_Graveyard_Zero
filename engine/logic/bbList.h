@@ -68,6 +68,10 @@ bbFlag bbList_popR(bbList* list, void** element);
 bbFlag bbList_sortL(bbList* list, void* element);
 bbFlag bbList_sortR(bbList* list, void* element);
 
+
+bbFlag bbList_peakL(bbList* list, void* element);
+bbFlag bbList_peakR(bbList* list, void* element);
+
 I32 bbList_getLength(bbList* list);
 bbFlag bbList_sort(bbList* list);
 
