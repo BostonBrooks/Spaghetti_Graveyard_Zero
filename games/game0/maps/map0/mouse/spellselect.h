@@ -94,7 +94,7 @@ bbFlag SpellSelect_LeftUp (void* mouse, void* widgets, void* widget, void* graph
     bbMouse* Mouse = mouse;
 
     bbWidget* target;
-    bbVPool_lookup(Widgets->pool, &target, Mouse->isOver);
+    bbVPool_lookup(Widgets->pool, (void**)&target, Mouse->isOver);
     if (target->type==bbWidgetType_SpellSlot)
              target->frames[0].handle = Widget->frames[0].handle;
     Mouse->selected = Widgets->pool->null;
