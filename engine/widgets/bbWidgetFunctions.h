@@ -20,7 +20,8 @@ typedef enum WidgetCommandType
 {
     bbWC_putChar,
     bbWC_putStr,
-    bbWC_setBounds
+    bbWC_setBounds,
+    bbWC_setStr
 } WidgetCommandType;
 
 typedef struct bbWidget bbWidget;

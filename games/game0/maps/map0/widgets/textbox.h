@@ -111,6 +111,19 @@ bbFlag Textbox_OnCommand(bbWidget* widget,WidgetCommandType type,  void* data){
                  sfText_setString(widget->typeData.textBox.text, widget->typeData.textBox.string);
                  break;
              }
+    case bbWC_setStr:
+             {
+                 char* ch = data;
+                 char* string = widget->typeData.textBox.string;
+                 bbStr_setStr(string, ch, 1048);
+                 bbStr_setBounds(string , widget->typeData.textBox.columns, widget->typeData.textBox.rows, 1048);
+
+                 sfText_setString(widget->typeData.textBox.text, string);
+
+
+                 break;
+             }
+
     }
     return Success;
 }

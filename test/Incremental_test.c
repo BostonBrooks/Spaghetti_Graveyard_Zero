@@ -11,10 +11,13 @@
 #include "engine/2point5D/bbOverlays.h"
 #include "engine/widgets/bbWidgetFunctions.h"
 #include "engine/geometry/bbCoordinates.h"
+#include "engine/dumbserver/bbDumbServer.h"
 
 sfRenderWindow* testWindow;
 bbWidgets* testWidgets;
 bbMapCoords testGoalPoint;
+bbDumbServer* testServer;
+U64 testMapTime;
 
 I32 hash(unsigned char *str, I32 n_bins);
 
@@ -235,9 +238,15 @@ CLEARWINDOW(bbMagenta);
     CLEARWINDOW(bbRed);
 
 
+	bbDumbServer_new(&testServer);
+
+
 
 	int mapTime;
 	for (mapTime = 0; ; mapTime++) {
+
+testMapTime=mapTime;
+
 
 		char ch = 'a' + rand()%26;
 		bbWidget_onCommand(widgets.dialog, &widgets, bbWC_putChar, &ch);
@@ -269,7 +278,7 @@ CLEARWINDOW(bbMagenta);
 		bbMouse_isOver(&mouse, &widgets);
 		bbMouse_Update(&mouse, &widgets, &graphics);
 
-
+		bbDumbServer_react(testServer, mapTime );
 
 	if (mapTime % 50 == 0) bbPrintf("mapTime = %d\n", mapTime);
 		cl.mapTime = mapTime;

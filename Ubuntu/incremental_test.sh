@@ -38,6 +38,7 @@ if gcc    -I ../\
        ../engine/user_input/bbMouse.c\
        ../engine/user_input/bbMouseFunctions.c\
        ../engine/graphics/bbFonts.c\
+       ../engine/dumbserver/bbDumbServer.c\
        \
   -lcsfml-system -lcsfml-graphics -lcsfml-window -g -lm -w\
   -o ../games/game0/game.out;

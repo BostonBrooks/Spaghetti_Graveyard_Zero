@@ -2,9 +2,11 @@
 #include "engine/includes/CSFML.h"
 #include "engine/user_input/bbInput.h"
 #include "engine/logic/bbTerminal.h"
+#include "engine/dumbserver/bbDumbServer.h"
 
 
-
+extern bbDumbServer *testServer;
+extern U64 testMapTime;
 
 bbFlag bbInput_new(bbInput* input, sfRenderWindow* window, bbMouse*
 mouse, bbWidgets* widgets){
@@ -132,6 +134,8 @@ bbFlag bbInput_poll(bbInput* input, sfRenderWindow* window){
                 if (keyCode == sfKeyReturn)
                 {
                     bbWidget_onCommand(widgets->prompt,widgets, bbWC_putStr, widgets->command->typeData.textBox.string);
+                    bbDumbServer_netSend(testServer, widgets->command->typeData.textBox.string, testMapTime);
+                    bbWidget_onCommand(widgets->command, widgets,bbWC_setStr, "");
                 }
             }
 
