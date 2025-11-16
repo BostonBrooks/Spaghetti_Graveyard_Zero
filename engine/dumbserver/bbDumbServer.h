@@ -55,7 +55,7 @@ bbFlag bbDumbServer_queueMsg(bbDumbServer* server, bbDumbServer_msg* message, U6
 
 
 //react to messages as in the (Re)Actor pattern?
-bbFlag bbDumbServer_react(/*args*/);
+bbFlag bbDumbServer_react(bbDumbServer* server, U64 gameTime );
 
-bbFlag bbDumbServer_netSend(bbDumbServer server, char* string, U64 gameTime);
+bbFlag bbDumbServer_netSend(bbDumbServer* server, char* string, U64 gameTime);
 #endif

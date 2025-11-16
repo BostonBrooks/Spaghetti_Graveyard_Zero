@@ -250,6 +250,36 @@ bbFlag bbList_popR(bbList* list, void** element){
 	return Success;
 }
 
+
+bbFlag bbList_peakL(bbList* list, void** element)
+{
+	if (isNULL(list->listPtr->head))
+	{
+		*element = NULL;
+		return None;
+	}
+	void* head;
+	bbVPool_lookup(list->pool, &head, list->listPtr->head);
+	//Handle edge cases?
+	*element = head;
+	return Success;
+}
+
+bbFlag bbList_peakR(bbList* list, void** element)
+{
+	if (isNULL(list->listPtr->tail))
+	{
+		*element = NULL;
+		return None;
+	}
+	void* head;
+	bbVPool_lookup(list->pool, &head, list->listPtr->tail);
+	//Handle edge cases?
+	*element = head;
+	return Success;
+}
+
+
 I32 bbList_getLength(bbList* list){
 	if(isNULL(list->listPtr->head)){
 		bbAssert(isNULL(list->listPtr->tail), "head / tail mismatch\n");

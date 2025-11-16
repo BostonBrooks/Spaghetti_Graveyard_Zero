@@ -11,7 +11,7 @@ bbFlag bbDumbServer_new(bbDumbServer** server)
     bbDumbServer* dumbServer = (bbDumbServer *)malloc(sizeof(bbDumbServer));
     bbAssert(dumbServer != NULL, "bad malloc\n");
     bbVPool* pool;
-    bbVPool_newBloated(&pool, sizeof(bbDumbserver_msg), 128, 128);
+    bbVPool_newBloated(&pool, sizeof(bbDumbServer_msg), 128, 128);
     bbList_init(&dumbServer->message_queue, pool,NULL, offsetof(bbDumbServer_listElement, listElement), NULL);
 
     *server = dumbServer;
@@ -26,8 +26,8 @@ bbFlag bbDumbServer_queueMsg(bbDumbServer* server, bbDumbServer_msg* message, U6
     message->header.timestamp = gameTime + lag;
     bbDumbServer_listElement* listElement;
     bbVPool* pool = server->message_queue.pool;
-    bbVPool_alloc(pool, &listElement);
-    memcpy(listElement->msg, message, sizeof(bbDumbserver_msg));
+    bbVPool_alloc(pool, (void**)&listElement);
+    memcpy(listElement->msg.string.string, message, sizeof(bbDumbServer_msg));
     bbList_pushR(&server->message_queue, listElement);
 
     return Success;
@@ -46,9 +46,10 @@ bbFlag bbDumbServer_react(bbDumbServer* server, U64 gameTime )
         if (message->header.timestamp > gameTime ) break;
 
         if (message->header.type == bbDumbServerMsgType_sendMsg){
-            bbPrintf("Message Received: %s\n", message->string.string);
+            bbPrintf("Message Received: %s", message->string.string);
         }
         bbList_popL(&server->message_queue, (void**)&listElement);
+        bbVPool_free(server->message_queue.pool, listElement);
     }
 
     return Success;
