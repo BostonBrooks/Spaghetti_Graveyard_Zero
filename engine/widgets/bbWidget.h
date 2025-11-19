@@ -22,7 +22,8 @@ typedef enum bbWidget_Type
 	bbWidgetType_None,
 	bbWidgetType_TextBox,
     bbWidgetType_SpellSelector,
-    bbWidgetType_SpellSlot
+    bbWidgetType_SpellSlot,
+    bbWidgetType_CurrentSpell
 } bbWidget_Type;
 
 
@@ -77,6 +78,8 @@ typedef struct bbWidgets {
 	bbWidget* dialog;
 	bbWidget* prompt;
 	bbWidget* command;
+    bbWidget* currentSpell;
+
 } bbWidgets;
 
 

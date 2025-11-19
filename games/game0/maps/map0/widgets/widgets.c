@@ -17,6 +17,7 @@
 #include "games/game0/maps/map0/widgets/spellselect.h"
 #include "games/game0/maps/map0/widgets/spellN.h"
 #include "games/game0/maps/map0/widgets/spellslot.h"
+#include "games/game0/maps/map0/widgets/currentspell.h"
 
 
 
@@ -119,6 +120,10 @@ bbFlag bbWidgetFunctions_populate(bbWidgetFunctions* self)
                           SpellSelect30_Constructor, "SPELLSELECT30");
     bbWidgetFunctions_add(self, WidgetConstructor,
                           SpellSlot_Constructor, "SPELLSLOT");
+
+
+    bbWidgetFunctions_add(self, WidgetConstructor,
+                          CurrentSpell_Constructor, "CURRENTSPELL");
 
     //typedef bbFlag bbWidget_Update (bbWidget* widget, void* unused);
     bbWidgetFunctions_add(self, WidgetUpdate,

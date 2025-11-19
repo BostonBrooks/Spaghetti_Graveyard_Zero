@@ -2,15 +2,16 @@
 #include "engine/widgets/bbWidget.h"
 #include "engine/widgets/bbWidgetFunctions.h"
 
-bbFlag SpellSlot_Constructor (bbWidget** self, void* graphics,
-                             bbWidgets* widgets, bbScreenPoints screen_coords, bbWidget* parent) {
+bbFlag CurrentSpell_Constructor (bbWidget** self, void* graphics,
+                              bbWidgets* widgets, bbScreenPoints screen_coords, bbWidget* parent) {
 
 
     bbWidget *widget;
     bbFlag flag = bbWidget_newEmpty(&widget, widgets, parent);
-    widget->type = bbWidgetType_SpellSlot;
+    widget->type = bbWidgetType_CurrentSpell;
 
     bbAssert(widget != NULL, "null address\n");
+
 
     bbScreenPointsRect rect;
 
@@ -34,15 +35,11 @@ bbFlag SpellSlot_Constructor (bbWidget** self, void* graphics,
 
     funcInt = bbMouseFunctions_getInt(&widgets->mouse->functions,MouseIsOver,
                                       "SPELLSELECT");
-    widget->mtable.isOver = funcInt;
 
-    funcInt = bbMouseFunctions_getInt(&widgets->mouse->functions,MouseLeftDown,
-                                      "SPELLSLOT");
-    widget->mtable.LeftDown = funcInt;
-
+    widget->mtable.isOver = -1;
     widget->mtable.MouseIcon = 133;
 
+    widgets->currentSpell = widget;
     *self = widget;
     return Success;
-
 }

@@ -10,6 +10,7 @@
 #include "games/game0/maps/map0/mouse/box.h"
 #include "games/game0/maps/map0/mouse/card.h"
 #include "games/game0/maps/map0/mouse/spellselect.h"
+#include "games/game0/maps/map0/mouse/spellslot.h"
 
 bbFlag bbMouseFunctions_populate(bbMouseFunctions* self)
 {
@@ -50,6 +51,7 @@ bbFlag bbMouseFunctions_populate(bbMouseFunctions* self)
     bbMouseFunctions_add(self, MouseLeftDrag, SpellSelect_LeftDrag, "SPELLSELECT");
 
 
+    bbMouseFunctions_add(self, MouseLeftDown,  SpellSlot_LeftDown, "SPELLSLOT");
 
     return Success;
 }

@@ -68,6 +68,10 @@ bbFlag Spellbar_Constructor (bbWidget** self, void* graphics,
                          SP0, widget,"SPELLSLOT");
 
 
+
+
+
+
     *self = widget;
 
 }

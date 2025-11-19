@@ -190,6 +190,10 @@ CLEARWINDOW(bbMagenta);
     bbWidget_constructor(&widget0, &widgets, &graphics,
                         SP0, layout,"SPELLBAR");
 
+    SP0.x = 11*8; SP0.y = 11*8;
+    bbWidget_constructor(&widget1, &widgets, &graphics,
+                         SP0, layout,"CURRENTSPELL");
+
 	SP0.x = 497*8; SP0.y = 12*8;
 	bbWidget_constructor(&widgets.dialog, &widgets, &graphics,
                          SP0, layout, "TEXTBOX");
