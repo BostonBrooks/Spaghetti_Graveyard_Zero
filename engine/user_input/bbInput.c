@@ -112,19 +112,25 @@ bbFlag bbInput_poll(bbInput* input, sfRenderWindow* window){
             bbWidget* widget = widgets->command;
 
             sfKeyCode keyCode = event.key.code;
-            char key;
+            unsigned char key;
                 if (event.key.shift == sfTrue)
                 {
                     key = input->keymap_uppercase[keyCode];
                     if (key != 0)
                     {
-                        bbWidget_onCommand(widget,widgets, bbWC_putChar, &key);
+                        bbPool_Handle handle;
+                        handle.u64 = key;
+                        bbWidget_onCommand(widget,widgets, bbWC_putChar,
+                                           handle);
                     }
                 } else {
                     key = input->keymap_lowercase[keyCode];
                     if (key != 0)
                     {
-                        bbWidget_onCommand(widget,widgets, bbWC_putChar, &key);
+                        bbPool_Handle handle;
+                        handle.u64 = key;
+                        bbWidget_onCommand(widget,widgets, bbWC_putChar,
+                                           handle);
                     }
                 }
 
@@ -133,9 +139,19 @@ bbFlag bbInput_poll(bbInput* input, sfRenderWindow* window){
             {
                 if (keyCode == sfKeyReturn)
                 {
-                    bbWidget_onCommand(widgets->prompt,widgets, bbWC_putStr, widgets->command->typeData.textBox.string);
+
+                    bbPool_Handle handle;
+                    handle.u64 = '\n';
+                    bbWidget_onCommand(widgets->prompt,widgets,
+                                       bbWC_putChar,handle);
+                    handle.ptr = widgets->command->typeData.textBox.string;
+                    bbWidget_onCommand(widgets->prompt,widgets, bbWC_putStr,
+                                       handle);
                     bbDumbServer_netSend(testServer, widgets->command->typeData.textBox.string, testMapTime);
-                    bbWidget_onCommand(widgets->command, widgets,bbWC_setStr, "");
+                    char sendstring[] = "";
+                    handle.ptr = sendstring;
+                    bbWidget_onCommand(widgets->command, widgets,bbWC_setStr,
+                                       handle);
                 }
             }
 

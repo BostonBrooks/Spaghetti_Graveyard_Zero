@@ -79,4 +79,5 @@ add_executable(myprogram
         games/game0/maps/map0/mouse/button.h
         games/game0/maps/map0/mouse/card.h
         games/game0/maps/map0/widgets/spellbar.h
-        games/game0/maps/map0/widgets/widgets.c)
+        games/game0/maps/map0/widgets/widgets.c
+        games/game0/maps/map0/mouse/spellselect.h)

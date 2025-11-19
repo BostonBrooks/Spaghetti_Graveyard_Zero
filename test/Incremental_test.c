@@ -201,18 +201,18 @@ CLEARWINDOW(bbMagenta);
 	bbWidget_constructor(&widgets.prompt, &widgets, &graphics,
                          SP0, layout, "TEXTBOX");
 
-	I32x2 bounds;
-	bounds.x = 25;
-	bounds.y = 3;
-	bbWidget_onCommand(widgets.prompt, &widgets, bbWC_setBounds, &bounds);
+	bbPool_Handle bounds;
+	bounds.i32x2.x = 25;
+	bounds.i32x2.y = 3;
+	bbWidget_onCommand(widgets.prompt, &widgets, bbWC_setBounds, bounds);
 
 	SP0.x = 497*8; SP0.y = 416*8;
 	bbWidget_constructor(&widgets.command, &widgets, &graphics,
                          SP0, layout, "TEXTBOX");
 
-	bounds.x = 64;
-	bounds.y = 1;
-	bbWidget_onCommand(widgets.command, &widgets, bbWC_setBounds, &bounds);
+	bounds.i32x2.x = 64;
+	bounds.i32x2.y = 1;
+	bbWidget_onCommand(widgets.command, &widgets, bbWC_setBounds, bounds);
 
 	SP0.x = rand()%(720*8); SP0.y = rand()%(480*8);
 	bbWidget_constructor(&widget0, &widgets, &graphics,
@@ -248,12 +248,11 @@ CLEARWINDOW(bbMagenta);
 testMapTime=mapTime;
 
 
-		char ch = 'a' + rand()%26;
-		bbWidget_onCommand(widgets.dialog, &widgets, bbWC_putChar, &ch);
+		unsigned char ch = 'a' + rand()%26;
+        bbPool_Handle handle;
+        handle.u64 = ch;
+		bbWidget_onCommand(widgets.dialog, &widgets, bbWC_putChar, handle);
 
-
-		ch = 'a' + rand()%26;
-		//bbWidget_onCommand(widgets.prompt, &widgets, bbWC_putChar, &ch);
 
 
         bbMapCoords difference;

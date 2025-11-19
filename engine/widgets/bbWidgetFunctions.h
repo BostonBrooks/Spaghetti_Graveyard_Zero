@@ -21,7 +21,8 @@ typedef enum WidgetCommandType
     bbWC_putChar,
     bbWC_putStr,
     bbWC_setBounds,
-    bbWC_setStr
+    bbWC_setStr,
+    bbWC_clrStr
 } WidgetCommandType;
 
 typedef struct bbWidget bbWidget;
@@ -31,7 +32,7 @@ typedef bbFlag bbWidget_Constructor (bbWidget** reference, void* graphics,
                                      bbWidgets* widgets, bbScreenPoints screen_coords, bbWidget* parent);
 typedef bbFlag bbWidget_Update (bbWidget* widget, void* unused);
 typedef bbFlag bbWidget_Destructor (bbWidget* widget, void* unused);
-typedef bbFlag bbWidget_OnCommand (bbWidget* widget,WidgetCommandType type, void* data);
+typedef bbFlag bbWidget_OnCommand (bbWidget* widget,WidgetCommandType type, bbPool_Handle data);
 typedef bbFlag bbWidget_OnTimer (bbWidget* widget, void* void_timerNode);
 
 typedef struct bbWidgetFunctions {

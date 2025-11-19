@@ -13,6 +13,7 @@ typedef union {
 	void* ptr;
 	bbBloatedPool_Handle bloated;
 	U64 u64;
+    I32x2 i32x2;
 } bbPool_Handle;
 
 

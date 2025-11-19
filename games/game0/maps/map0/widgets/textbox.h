@@ -70,14 +70,14 @@ bbFlag Textbox_Constructor (bbWidget** self, void* graphics,
 }
 
 //typedef bbFlag bbWidget_OnCommand (bbWidget* widget,WidgetCommandType type,  void* data);
-bbFlag Textbox_OnCommand(bbWidget* widget,WidgetCommandType type,  void* data){
+bbFlag Textbox_OnCommand(bbWidget* widget,WidgetCommandType type,  bbPool_Handle data){
     switch(type)
     {
          case bbWC_putChar:
              {
-                 char* ch = data;
+                 char ch = data.u64;
                  char* string = widget->typeData.textBox.string;
-                 bbStr_putChar(string, *ch, 1048);
+                 bbStr_putChar(string, ch, 1048);
                  bbStr_setBounds(string , widget->typeData.textBox.columns, widget->typeData.textBox.rows, 1048);
 
                  sfText_setString(widget->typeData.textBox.text, string);
@@ -87,7 +87,7 @@ bbFlag Textbox_OnCommand(bbWidget* widget,WidgetCommandType type,  void* data){
              }
     case bbWC_putStr:
              {
-                 char* ch = data;
+                 char* ch = data.ptr;
                  char* string = widget->typeData.textBox.string;
                  bbStr_putStr(string, ch, 1048);
                  bbStr_setBounds(string , widget->typeData.textBox.columns, widget->typeData.textBox.rows, 1048);
@@ -99,10 +99,10 @@ bbFlag Textbox_OnCommand(bbWidget* widget,WidgetCommandType type,  void* data){
              }
         case bbWC_setBounds:
              {
-                 I32x2* bounds = data;
+                 I32x2 bounds = data.i32x2;
 
-                 widget->typeData.textBox.columns = bounds->x;
-                 widget->typeData.textBox.rows = bounds->y;
+                 widget->typeData.textBox.columns = bounds.x;
+                 widget->typeData.textBox.rows = bounds.y;
                  bbStr_setBounds(widget->typeData.textBox.string,
                      widget->typeData.textBox.columns,
                      widget->typeData.textBox.rows,
@@ -113,7 +113,7 @@ bbFlag Textbox_OnCommand(bbWidget* widget,WidgetCommandType type,  void* data){
              }
     case bbWC_setStr:
              {
-                 char* ch = data;
+                 char* ch = data.ptr;
                  char* string = widget->typeData.textBox.string;
                  bbStr_setStr(string, ch, 1048);
                  bbStr_setBounds(string , widget->typeData.textBox.columns, widget->typeData.textBox.rows, 1048);
@@ -123,6 +123,18 @@ bbFlag Textbox_OnCommand(bbWidget* widget,WidgetCommandType type,  void* data){
 
                  break;
              }
+        case bbWC_clrStr:
+        {
+            char* ch = data.ptr;
+            char* string = widget->typeData.textBox.string;
+            bbStr_setStr(string, "", 1048);
+            bbStr_setBounds(string , widget->typeData.textBox.columns, widget->typeData.textBox.rows, 1048);
+
+            sfText_setString(widget->typeData.textBox.text, string);
+
+
+            break;
+        }
 
     }
     return Success;
