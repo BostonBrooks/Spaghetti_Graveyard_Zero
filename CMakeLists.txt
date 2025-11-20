@@ -81,4 +81,6 @@ add_executable(myprogram
         games/game0/maps/map0/widgets/spellbar.h
         games/game0/maps/map0/widgets/widgets.c
         games/game0/maps/map0/mouse/spellselect.h
-        games/game0/maps/map0/widgets/currentspell.h)
+        games/game0/maps/map0/widgets/currentspell.h
+        games/game0/maps/map0/mouse/spellmenu.h
+        games/game0/maps/map0/mouse/mouse.h)

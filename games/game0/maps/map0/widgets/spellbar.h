@@ -15,8 +15,10 @@ bbFlag Spellbar_Constructor (bbWidget** self, void* graphics,
 
     rect.left = screen_coords.x;
     rect.top = screen_coords.y;
-    rect.width = SCREEN_PPP * 52;
-    rect.height = SCREEN_PPP * 52;
+    rect.width = SCREEN_PPP * 303;
+    rect.height = SCREEN_PPP * 47;
+
+    widget->mtable.MouseIcon = 89;
 
     widget->rect = rect;
 
@@ -29,6 +31,15 @@ bbFlag Spellbar_Constructor (bbWidget** self, void* graphics,
     bbDictionary_lookup(Graphics->sprites->dictionary, "SPELLBAR",
                         &widget->frames[0].handle);
 
+
+    int funcInt;
+    funcInt = bbMouseFunctions_getInt(&widgets->mouse->functions,MouseLeftDown,
+                                      "SPELLBAR");
+    widget->mtable.LeftDown = funcInt;
+
+    funcInt = bbMouseFunctions_getInt(&widgets->mouse->functions,MouseIsOver,
+                                      "SPELLSELECT");
+    widget->mtable.isOver = funcInt;
 
     bbScreenPoints SP0;
     bbWidget* widget0;

@@ -79,6 +79,7 @@ typedef struct bbWidgets {
 	bbWidget* prompt;
 	bbWidget* command;
     bbWidget* currentSpell;
+    bbWidget* spellMenu;
 
 } bbWidgets;
 

@@ -15,8 +15,10 @@ bbFlag SpellMenu_Constructor (bbWidget** self, void* graphics,
 
     rect.left = screen_coords.x;
     rect.top = screen_coords.y;
-    rect.width = SCREEN_PPP * 52;
-    rect.height = SCREEN_PPP * 52;
+    rect.width = SCREEN_PPP * 373;
+    rect.height = SCREEN_PPP * 127;
+
+    widget->mtable.MouseIcon = 89;
 
     widget->rect = rect;
 
@@ -29,7 +31,14 @@ bbFlag SpellMenu_Constructor (bbWidget** self, void* graphics,
     bbDictionary_lookup(Graphics->sprites->dictionary, "SPELLMENU",
                         &widget->frames[0].handle);
 
+    int funcInt;
+    funcInt = bbMouseFunctions_getInt(&widgets->mouse->functions,MouseLeftDown,
+                                      "SPELLMENU");
+    widget->mtable.LeftDown = funcInt;
 
+    funcInt = bbMouseFunctions_getInt(&widgets->mouse->functions,MouseIsOver,
+                                      "SPELLSELECT");
+    widget->mtable.isOver = funcInt;
 
     bbWidget* widget0;
     bbScreenPoints SP;
@@ -186,6 +195,7 @@ bbFlag SpellMenu_Constructor (bbWidget** self, void* graphics,
     bbWidget_constructor(&widget0, widgets, graphics,
                          SP, widget, "SPELLSELECT30");
 
+    widgets->spellMenu = widget;
     *self = widget;
 
 }
