@@ -12,6 +12,7 @@
 #include "engine/logic/bbDictionary.h"
 #include "engine/widgets/bbWidget.h"
 #include "engine/geometry/bbCoordinates.h"
+#include "engine/spells/bbSpell.h"
 
 typedef enum
 {
@@ -40,7 +41,7 @@ typedef struct {
 
 } bbSpell;
 
-typedef bbFlag bbSpell_Constructor(/*args*/);
+typedef bbFlag bbSpell_Constructor(bbSpell** self, struct bbSpells* spells);
 typedef bbFlag bbSpell_Destructor(/*args*/);
 typedef bbFlag bbSpell_SetActive(/*args*/);
 typedef bbFlag bbSpell_SetInactive(/*args*/);
@@ -74,7 +75,7 @@ typedef struct {
 
 } bbSpellFunctions;
 
-typedef struct {
+typedef struct bbSpells{
     bbVPool* pool;
     bbDictionary* spellCodes;
     bbSpellFunctions functions;
@@ -82,7 +83,7 @@ typedef struct {
     bbWidget* command;
 } bbSpells;
 
-bbFlag bbSpell_new(/*args*/);
+bbFlag bbSpell_new(bbSpell** self, bbSpells* Spells, char* key);
 
 bbFlag bbSpell_setActive (bbPool_Handle spellHandle, bbSpells* spells);
 bbFlag bbSpell_setInactive (bbPool_Handle spellHandle, bbSpells* spells);
@@ -100,5 +101,9 @@ bbFlag bbSpellsFunctions_add(bbSpellFunctions* functions,
                              char* key);
 bbFlag bbSpellFunctions_populate(bbSpellFunctions* functions);
 I32 bbSpells_getInt(/*args*/);
+bbFlag bbSpellFunctions_getFunction(void** function, bbSpellFunctions*
+functions, bbSpellFunctionType fnType, char* key);
+I32 bbSpellFunctions_getInt(bbSpellFunctions* functions, bbSpellFunctionType
+fnType, char* key);
 
 #endif BBSPELL_H

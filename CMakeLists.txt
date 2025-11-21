@@ -85,4 +85,5 @@ add_executable(myprogram
         games/game0/maps/map0/mouse/spellmenu.h
         games/game0/maps/map0/mouse/mouse.h
         engine/spells/bbSpell.h
-        engine/spells/bbSpells.c)
+        engine/spells/bbSpells.c
+        engine/spells/bbSpell.c)

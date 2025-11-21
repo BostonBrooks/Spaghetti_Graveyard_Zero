@@ -44,6 +44,7 @@ gcc   -D SFML_STATIC -I ../^
        ../engine/graphics/bbFonts.c^
        ../engine/dumbserver/bbDumbServer.c^
        ../engine/spells/bbSpells.c^
+       ../engine/spells/bbSpell.c^
        ../games/game0/maps/map0/spells/spells.c^
   -lcsfml-system -lcsfml-graphics -lcsfml-window -g -lm -w^
     -o ../games/game0/game.exe

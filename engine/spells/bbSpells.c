@@ -5,12 +5,20 @@
 bbFlag bbSpells_init(bbSpells* spells){
     I32 magic_number = 256;
 
+    bbVPool_newBloated(&spells->pool, sizeof(bbSpell), 1024, 1024);
+
     bbSpellFunctions* functions = &spells->functions;
     //sizeof (bbSpell_Constructor)?
     functions->Constructors = calloc(magic_number, sizeof(U64));
     bbAssert(functions->Constructors != NULL, "bad calloc\n");
     bbDictionary_new(&functions->Constructor_dict, magic_number);
     functions->Constructor_available = 0;
+
+
+    functions->Destructors = calloc(magic_number, sizeof(U64));
+    bbAssert(functions->Destructors != NULL, "bad calloc\n");
+    bbDictionary_new(&functions->Destructor_dict, magic_number);
+    functions->Destructor_available = 0;
 
     //sizeof (bbSpell_SetActive)?
     functions->SetActive = calloc(magic_number, sizeof(U64));
@@ -54,7 +62,7 @@ type, void* fnPointer, char* key)
 {
     U32 available;
     bbPool_Handle handle;
-    I32 max_spells;
+    I32 max_spells = 256;
     switch (type)
     {
         case SpellConstructor:
@@ -108,4 +116,76 @@ type, void* fnPointer, char* key)
 
 
     }
+}
+
+
+/*
+SpellConstructor,
+SpellDestructor,
+SpellSetActive,
+SpellSetInactive,
+SpellReceiveStr,
+SpellReceiveClick
+*/
+
+I32 bbSpellFunctions_getInt(bbSpellFunctions* functions, bbSpellFunctionType
+fnType, char* key){
+    bbDictionary* dict;
+    switch (fnType){
+        case SpellConstructor:
+            dict = functions->Constructor_dict;
+            break;
+        case SpellDestructor:
+            dict = functions->Destructor_dict;
+            break;
+        case SpellSetActive:
+            dict = functions->SetActive_dict;
+            break;
+        case SpellSetInactive:
+            dict = functions->SetInactive_dict;
+            break;
+        case SpellReceiveStr:
+            dict = functions->ReceiveStr_dict;
+            break;
+        case SpellReceiveClick:
+            dict = functions->ReceiveClick_dict;
+            break;
+    }
+
+    bbPool_Handle handle;
+    bbDictionary_lookup(dict,key,&handle);
+    return handle.u64;
+}
+
+bbFlag bbSpellFunctions_getFunction(void** function, bbSpellFunctions*
+functions, bbSpellFunctionType fnType, char* key){
+    bbPool_Handle handle;
+
+    switch (fnType){
+        case SpellConstructor:
+            bbDictionary_lookup(functions->Constructor_dict,key,&handle);
+            *function = functions->Constructors[handle.u64];
+            return Success;
+        case SpellDestructor:
+            bbDictionary_lookup(functions->Destructor_dict,key,&handle);
+            *function = functions->Destructors[handle.u64];
+            return Success;
+        case SpellSetActive:
+            bbDictionary_lookup(functions->SetActive_dict,key,&handle);
+            *function = functions->SetActive[handle.u64];
+            return Success;
+        case SpellSetInactive:
+            bbDictionary_lookup(functions->SetInactive_dict,key,&handle);
+            *function = functions->SetInactive[handle.u64];
+            return Success;
+        case SpellReceiveStr:
+            bbDictionary_lookup(functions->ReceiveStr_dict,key,&handle);
+            *function = functions->ReceiveStr[handle.u64];
+            return Success;
+        case SpellReceiveClick:
+            bbDictionary_lookup(functions->ReceiveClick_dict,key,&handle);
+            *function = functions->ReceiveClick[handle.u64];
+            return Success;
+    }
+
 }

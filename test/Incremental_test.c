@@ -96,6 +96,9 @@ CLEARWINDOW(bbGreen);
     bbSpells spells;
     bbSpells_init(&spells);
 
+    bbSpell* null_spell;
+    bbSpell_new(&null_spell, &spells, "NULL");
+
 	bbWidgets widgets;
 	bbWidgets_init(&widgets);
 	//testWidgets = &widgets;
