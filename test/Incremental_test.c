@@ -15,11 +15,10 @@
 #include "engine/spells/bbSpell.h"
 #include "engine/data/bbHome.h"
 
-sfRenderWindow* testWindow;
+
 bbWidgets* testWidgets;
 bbMapCoords testGoalPoint;
-bbDumbServer* testServer;
-U64 testMapTime;
+
 
 I32 hash(unsigned char *str, I32 n_bins);
 
@@ -27,6 +26,7 @@ bbHome home;
 
 int main (void){
 
+    home.private.server;
 
     //trying to replicate a bug
     I32 magic_number = 256;
@@ -50,7 +50,7 @@ int main (void){
 	sfRenderWindow_setFramerateLimit(window, 60);
 	sfRenderWindow_setMouseCursorVisible(window, sfFalse);
 
-	testWindow = window;
+	home.private.window = window;
 CLEARWINDOW(bbRed);
 
 	//bbGraphics graphics;
@@ -260,14 +260,13 @@ CLEARWINDOW(bbMagenta);
     CLEARWINDOW(bbRed);
 
 
-	bbDumbServer_new(&testServer);
+	bbDumbServer_new(&home.private.server);
 
 
 
-	int mapTime;
-	for (mapTime = 0; ; mapTime++) {
 
-testMapTime=mapTime;
+	for (home.private.mapTime = 0; ; home.private.mapTime++) {
+
 
 
 		unsigned char ch = 'a' + rand()%26;
@@ -299,11 +298,11 @@ testMapTime=mapTime;
 		bbMouse_isOver(&home.private.mouse, &home.private.widgets);
 		bbMouse_Update(&home.private.mouse, &home.private.widgets, &home.constant.graphics);
 
-		bbDumbServer_react(testServer, mapTime );
+		bbDumbServer_react(home.private.server, home.private.mapTime );
 
-	if (mapTime % 50 == 0) bbPrintf("mapTime = %d\n", mapTime);
-		cl.mapTime = mapTime;
-        cl.GUI_time = mapTime;
+	if (home.private.mapTime % 50 == 0) bbPrintf("mapTime = %d\n", home.private.mapTime);
+		cl.mapTime = home.private.mapTime;
+        cl.GUI_time = home.private.mapTime;
         cl.graphics = &home.constant.graphics;
 
         cl.target = home.private.viewport;

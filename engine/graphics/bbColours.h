@@ -3,15 +3,18 @@
 
 #include "engine/includes/CSFML.h"
 #include "engine/logic/bbTerminal.h"
+#include "engine/data/bbHome.h"
 
 ///Clear the window to a given colour.
 /// Used to see if the graphics library is functioning, because the graphics
 /// library may crash long before the main thread realises
 
+
+
 #define CLEARWINDOW(COLOUR) \
         bbHere();                    \
-        sfRenderWindow_clear(testWindow, COLOUR);\
-        sfRenderWindow_display(testWindow);
+        sfRenderWindow_clear(home.private.window, COLOUR);\
+        sfRenderWindow_display(home.private.window);
 
 
 extern sfColor bbRed;

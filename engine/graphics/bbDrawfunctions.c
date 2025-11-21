@@ -8,8 +8,8 @@
 #include "engine/2point5D/bbViewport.h"
 #include "engine/2point5D/bbOverlays.h"
 #include "engine/2point5D/bbViewportCoords.h"
+#include "engine/data/bbHome.h"
 
-extern sfRenderWindow* testWindow;
 
 
 //typedef bbFlag bbDrawFunction(void* drawable, void* frameDescriptor, void* cl);
@@ -30,7 +30,7 @@ bbFlag bbDF_widgetSprite(void* drawable, void* frameDescriptor, void* cl){
 
 
     //bbDebug("spriteInt = %d, sprite = %p, target = %p, window = %p\n",
-    //        spriteInt, sprite, target, testWindow);
+    //        spriteInt, sprite, target, home.private.window);
 	bbScreenPoints SP;
 	SP.x = widget->rect.left + frame->offset.x;
 	SP.y = widget->rect.top + frame->offset.y;
@@ -204,7 +204,6 @@ bbFlag bbDF_eyeCandyTest(void* drawable, void* frameDescriptor, void* cl){
 
 }
 
-extern sfRenderWindow* testWindow;
 
 bbFlag bbDF_widgetTextBox(void* drawable, void* frameDescriptor, void* cl)
 {

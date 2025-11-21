@@ -1,7 +1,11 @@
+#ifndef BBHOME_H
+#define BBHOME_H
+
 #include "engine/widgets/bbWidget.h"
 #include "engine/spells/bbSpell.h"
 #include "engine/user_input/bbInput.h"
 #include "engine/2point5D/bbOverlays.h"
+#include "engine/dumbserver/bbDumbServer.h"
 
 typedef struct {
     bbSpells spells;
@@ -9,8 +13,10 @@ typedef struct {
     bbMouse mouse;
     bbInput input;
     bbViewport* viewport;
-    bbDumbServer server;
-
+    bbDumbServer* server;
+    sfRenderWindow* window;
+    U64 mapTime;
+    U64 UITime;
 } bbPrivate;
 
 typedef struct {
@@ -27,3 +33,6 @@ typedef struct {
     bbConstant constant;
     bbShared shared;
 } bbHome;
+
+extern bbHome home;
+#endif //BBHOME_H

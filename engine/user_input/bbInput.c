@@ -3,10 +3,8 @@
 #include "engine/user_input/bbInput.h"
 #include "engine/logic/bbTerminal.h"
 #include "engine/dumbserver/bbDumbServer.h"
+#include "engine/data/bbHome.h"
 
-
-extern bbDumbServer *testServer;
-extern U64 testMapTime;
 
 bbFlag bbInput_new(bbInput* input, sfRenderWindow* window, bbMouse*
 mouse, bbWidgets* widgets){
@@ -147,7 +145,8 @@ bbFlag bbInput_poll(bbInput* input, sfRenderWindow* window){
                     handle.ptr = widgets->command->typeData.textBox.string;
                     bbWidget_onCommand(widgets->prompt,widgets, bbWC_putStr,
                                        handle);
-                    bbDumbServer_netSend(testServer, widgets->command->typeData.textBox.string, testMapTime);
+                    bbDumbServer_netSend(home.private.server, widgets->command->typeData.textBox.string,
+                                         home.private.mapTime);
                     char sendstring[] = "";
                     handle.ptr = sendstring;
                     bbWidget_onCommand(widgets->command, widgets,bbWC_setStr,

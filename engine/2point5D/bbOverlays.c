@@ -3,8 +3,8 @@
 #include "engine/includes/CSFML.h"
 #include "engine/logic/bbNestedList.h"
 #include "engine/2point5D/bbViewportCoords.h"
+#include "engine/data/bbHome.h"
 
-extern sfRenderWindow* testWindow;
 
 
 bbFlag myFunc (bbList* list, void* node, void* cl){

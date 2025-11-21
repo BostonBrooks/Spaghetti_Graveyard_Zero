@@ -6,8 +6,8 @@
 #include "engine/logic/bbTerminal.h"
 #include "engine/logic/bbPrime.h"
 #include "engine/logic/bbString.h"
+#include "engine/data/bbHome.h"
 
-extern sfRenderWindow* testWindow;
 
 typedef struct {
 	I32 left;
@@ -56,10 +56,10 @@ bbFlag bbSprite_new(bbSprites* sprites, char* key, I32 address, sfTexture* textu
     sfVector2f pos;
     pos.x = 150;
     pos.y = 100;
-    sfRenderWindow_clear(testWindow, sfBlue);
+    sfRenderWindow_clear(home.private.window, sfBlue);
     sfSprite_setPosition(sprite, pos);
-    sfRenderWindow_drawSprite(testWindow, sprite,NULL);
-    sfRenderWindow_display(testWindow);
+    sfRenderWindow_drawSprite(home.private.window, sprite,NULL);
+    sfRenderWindow_display(home.private.window);
 */
 	return Success;
 }
