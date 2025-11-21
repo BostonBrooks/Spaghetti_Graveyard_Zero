@@ -99,6 +99,12 @@ CLEARWINDOW(bbGreen);
     bbSpell* null_spell;
     bbSpell_new(&null_spell, &spells, "NULL");
 
+    bbDebug("null_spell = %p\n", null_spell);
+
+    bbPool_Handle nullHandle;
+    nullHandle.ptr = NULL;
+    bbSpell_receiveStr(null_spell, &spells, nullHandle);
+
 	bbWidgets widgets;
 	bbWidgets_init(&widgets);
 	//testWidgets = &widgets;

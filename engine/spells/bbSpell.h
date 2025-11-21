@@ -89,7 +89,7 @@ bbFlag bbSpell_setActive (bbPool_Handle spellHandle, bbSpells* spells);
 bbFlag bbSpell_setInactive (bbPool_Handle spellHandle, bbSpells* spells);
 
 //receive str from text input
-bbFlag bbSpell_receiveStr(bbPool_Handle spellHandle, bbSpells* spells,
+bbFlag bbSpell_receiveStr(bbSpell* spell, bbSpells* spells,
                       bbPool_Handle str);
 
 bbFlag bbSpell_receiveClick(bbPool_Handle spellHandle, bbSpells* spells,

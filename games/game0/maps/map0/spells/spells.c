@@ -31,6 +31,7 @@ bbFlag bbSpell_NULLConstructor(bbSpell** self, bbSpells* spells){
             bbSpellFunctions_getInt(&spells->functions,
                                     SpellReceiveClick, "NULL");
 
+    *self = spell;
     return Success;
 }
 
