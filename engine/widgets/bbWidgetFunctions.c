@@ -50,7 +50,7 @@ bbDebug("functions->Constructors = %p\n", functions->Constructors );
 }
 
 
-bbFlag bbWidgetFunctions_add(bbWidgetFunctions* functions, WidgetFunctionType fnType, void* fnPointer, char* key )
+bbFlag bbWidgetFunctions_add(bbWidgetFunctions* functions, bbWidgetFunctionType fnType, void* fnPointer, char* key )
 {
 
     U32 available;
@@ -120,7 +120,7 @@ bbFlag bbWidgetFunctions_add(bbWidgetFunctions* functions, WidgetFunctionType fn
 
 
 I32 bbWidgetFunctions_getInt(bbWidgetFunctions* functions,
-                                WidgetFunctionType fnType, char* key){
+                             bbWidgetFunctionType fnType, char* key){
     bbDictionary* dict;
     switch (fnType){
         case WidgetConstructor:
@@ -147,7 +147,7 @@ I32 bbWidgetFunctions_getInt(bbWidgetFunctions* functions,
 }
 
 bbFlag bbWidgetFunctions_getFunction(void** function, bbWidgetFunctions* functions,
-                                     WidgetFunctionType fnType, char* key){
+                                     bbWidgetFunctionType fnType, char* key){
     bbPool_Handle handle;
 
     switch (fnType){

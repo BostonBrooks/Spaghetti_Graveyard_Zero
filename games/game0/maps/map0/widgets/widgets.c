@@ -133,11 +133,11 @@ bbFlag bbWidgetFunctions_populate(bbWidgetFunctions* self)
     bbWidgetFunctions_add(self, WidgetDestructor,
                           NULL_Destructor, "NULL Destructor");
 
-    //typedef bbFlag bbWidget_OnCommand (bbWidget* widget,WidgetCommandType type, void* data);
+    //typedef bbFlag bbWidget_OnCommand (bbWidget* widget,bbWidgetCommandType type, void* data);
     bbWidgetFunctions_add(self, WidgetOnCommand,
                           NULL_OnCommand, "NULL OnCommand");
 
-    //typedef bbFlag bbWidget_OnCommand (bbWidget* widget,WidgetCommandType type, void* data);
+    //typedef bbFlag bbWidget_OnCommand (bbWidget* widget,bbWidgetCommandType type, void* data);
     bbWidgetFunctions_add(self, WidgetOnCommand,
                            Textbox_OnCommand, "TEXTBOX");
 

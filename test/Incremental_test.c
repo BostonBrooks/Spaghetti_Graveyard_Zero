@@ -12,6 +12,7 @@
 #include "engine/widgets/bbWidgetFunctions.h"
 #include "engine/geometry/bbCoordinates.h"
 #include "engine/dumbserver/bbDumbServer.h"
+#include "engine/spells/bbSpell.h"
 
 sfRenderWindow* testWindow;
 bbWidgets* testWidgets;
@@ -92,7 +93,8 @@ CLEARWINDOW(bbGreen);
 //bbHere();
 
 
-
+    bbSpells spells;
+    bbSpells_init(&spells);
 
 	bbWidgets widgets;
 	bbWidgets_init(&widgets);

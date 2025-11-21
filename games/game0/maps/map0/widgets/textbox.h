@@ -69,8 +69,8 @@ bbFlag Textbox_Constructor (bbWidget** self, void* graphics,
     return Success;
 }
 
-//typedef bbFlag bbWidget_OnCommand (bbWidget* widget,WidgetCommandType type,  void* data);
-bbFlag Textbox_OnCommand(bbWidget* widget,WidgetCommandType type,  bbPool_Handle data){
+//typedef bbFlag bbWidget_OnCommand (bbWidget* widget,bbWidgetCommandType type,  void* data);
+bbFlag Textbox_OnCommand(bbWidget* widget, bbWidgetCommandType type, bbPool_Handle data){
     switch(type)
     {
          case bbWC_putChar:

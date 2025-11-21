@@ -14,16 +14,16 @@ typedef enum
      WidgetDestructor,
      WidgetOnCommand,
      WidgetOnTimer
-} WidgetFunctionType;
+} bbWidgetFunctionType;
 
-typedef enum WidgetCommandType
+typedef enum bbWidgetCommandType
 {
     bbWC_putChar,
     bbWC_putStr,
     bbWC_setBounds,
     bbWC_setStr,
     bbWC_clrStr
-} WidgetCommandType;
+} bbWidgetCommandType;
 
 typedef struct bbWidget bbWidget;
 typedef struct bbWidgets bbWidgets;
@@ -32,7 +32,7 @@ typedef bbFlag bbWidget_Constructor (bbWidget** reference, void* graphics,
                                      bbWidgets* widgets, bbScreenPoints screen_coords, bbWidget* parent);
 typedef bbFlag bbWidget_Update (bbWidget* widget, void* unused);
 typedef bbFlag bbWidget_Destructor (bbWidget* widget, void* unused);
-typedef bbFlag bbWidget_OnCommand (bbWidget* widget,WidgetCommandType type, bbPool_Handle data);
+typedef bbFlag bbWidget_OnCommand (bbWidget* widget, bbWidgetCommandType type, bbPool_Handle data);
 typedef bbFlag bbWidget_OnTimer (bbWidget* widget, void* void_timerNode);
 
 typedef struct bbWidgetFunctions {
@@ -62,9 +62,9 @@ typedef struct bbWidgetFunctions {
 
 bbFlag bbWidgetFunctions_new(bbWidgetFunctions** self);
 bbFlag bbWidgetFunctions_populate(bbWidgetFunctions* self);
-bbFlag bbWidgetFunctions_add(bbWidgetFunctions* functions, WidgetFunctionType fnType, void* fnPointer, char* key );
-bbFlag bbWidgetFunctions_getFunction(void** function, bbWidgetFunctions* functions, WidgetFunctionType fnType, char* key);
-I32 bbWidgetFunctions_getInt(bbWidgetFunctions* functions, WidgetFunctionType fnType, char* key);
+bbFlag bbWidgetFunctions_add(bbWidgetFunctions* functions, bbWidgetFunctionType fnType, void* fnPointer, char* key );
+bbFlag bbWidgetFunctions_getFunction(void** function, bbWidgetFunctions* functions, bbWidgetFunctionType fnType, char* key);
+I32 bbWidgetFunctions_getInt(bbWidgetFunctions* functions, bbWidgetFunctionType fnType, char* key);
 
 
 #endif //BBWIDGETFUNCTIONS_H

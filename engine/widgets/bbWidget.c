@@ -56,10 +56,10 @@ bbFlag bbWidget_draw(bbWidget* widget, drawFuncClosure* cl){
 	}
 }
 
-bbFlag bbWidget_onCommand(bbWidget* widget, bbWidgets* widgets, WidgetCommandType type, bbPool_Handle data)
+bbFlag bbWidget_onCommand(bbWidget* widget, bbWidgets* widgets, bbWidgetCommandType type, bbPool_Handle data)
 {
 	I32 funcInt = widget->ftable.OnCommand;
-	bbFlag (*funcPtr)(bbWidget*,WidgetCommandType, bbPool_Handle);
+	bbFlag (*funcPtr)(bbWidget*, bbWidgetCommandType, bbPool_Handle);
 	funcPtr = widgets->functions->OnCommands[funcInt];
 	return funcPtr(widget, type, data);
 }

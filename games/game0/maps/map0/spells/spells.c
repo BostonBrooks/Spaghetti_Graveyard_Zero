@@ -1,7 +1,7 @@
 #include "engine/logic/bbFlag.h"
 #include "engine/spells/bbSpell.h"
 
-bbFlag bbSpells_populate(bbSpells* self){
+bbFlag bbSpellFunctions_populate(bbSpellFunctions* functions){
 
-    return Success
+    return Success;
 }
