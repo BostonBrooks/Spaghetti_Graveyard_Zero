@@ -16,6 +16,6 @@ graphics)
     bbWidget* CurrentSpell = Widgets->currentSpell;
     CurrentSpell->frames[0].handle = Widget->frames[0].handle;
 
-    bbDebug("Mouse left button down on spell slot\n");
+    bbDebug("Mouse left button down on spells slot\n");
     return Success;
 }

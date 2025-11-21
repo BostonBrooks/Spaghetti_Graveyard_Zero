@@ -37,7 +37,7 @@ bbFlag SpellSelect_Enter (void* mouse, void* widgets, void* widget, void* graphi
     //                    "ASPADES", &Widget->frames[0].handle);
 
     Widget->mtable.hover = true;
-    bbDebug("Mouse enters spell selector\n");
+    bbDebug("Mouse enters spells selector\n");
     return Success;
 }
 
@@ -50,7 +50,7 @@ bbFlag SpellSelect_Leave (void* mouse, void* widgets, void* widget, void* graphi
     //                    "ASPADES", &Widget->frames[0].handle);
 
     Widget->mtable.hover = false;
-    bbDebug("Mouse leaves spell selector\n");
+    bbDebug("Mouse leaves spells selector\n");
     return Success;
 }
 
@@ -77,7 +77,7 @@ graphics)
     dragOrigin.y = Mouse->position.y - Widget->rect.top;
     Mouse->dragOrigin = dragOrigin;
 
-    bbDebug("Mouse left button down on spell selector\n");
+    bbDebug("Mouse left button down on spells selector\n");
     return Success;
 }
 
@@ -120,7 +120,7 @@ bbFlag SpellSelect_LeftUp (void* mouse, void* widgets, void* widget, void* graph
 
 
     Widget->mtable.hover = false;
-    bbDebug("Mouse left button up on spell selector\n");
+    bbDebug("Mouse left button up on spells selector\n");
     return Success;
 }
 
