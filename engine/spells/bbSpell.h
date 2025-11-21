@@ -24,6 +24,8 @@ typedef enum
     SpellReceiveClick
 } bbSpellFunctionType;
 
+
+
 typedef struct {
     I32 Constructor;
     I32 Destructor;
