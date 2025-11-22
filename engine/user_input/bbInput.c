@@ -47,6 +47,28 @@ mouse, bbWidgets* widgets){
     keymap[sfKeyY] = 'y';
     keymap[sfKeyZ] = 'z';
 
+    keymap[sfKeyNum0] = '0';
+    keymap[sfKeyNum1] = '1';
+    keymap[sfKeyNum2] = '2';
+    keymap[sfKeyNum3] = '3';
+    keymap[sfKeyNum4] = '4';
+    keymap[sfKeyNum5] = '5';
+    keymap[sfKeyNum6] = '6';
+    keymap[sfKeyNum7] = '7';
+    keymap[sfKeyNum8] = '8';
+    keymap[sfKeyNum9] = '9';
+
+    keymap[sfKeyNumpad0] = '0';
+    keymap[sfKeyNumpad1] = '1';
+    keymap[sfKeyNumpad2] = '2';
+    keymap[sfKeyNumpad3] = '3';
+    keymap[sfKeyNumpad4] = '4';
+    keymap[sfKeyNumpad5] = '5';
+    keymap[sfKeyNumpad6] = '6';
+    keymap[sfKeyNumpad7] = '7';
+    keymap[sfKeyNumpad8] = '8';
+    keymap[sfKeyNumpad9] = '9';
+
     keymap = input->keymap_uppercase;
     for (int i = 0; i < sfKeyCount; i++)
     {
@@ -79,6 +101,29 @@ mouse, bbWidgets* widgets){
     keymap[sfKeyX] = 'X';
     keymap[sfKeyY] = 'Y';
     keymap[sfKeyZ] = 'Z';
+
+    keymap[sfKeyNum0] = '0';
+    keymap[sfKeyNum1] = '1';
+    keymap[sfKeyNum2] = '2';
+    keymap[sfKeyNum3] = '3';
+    keymap[sfKeyNum4] = '4';
+    keymap[sfKeyNum5] = '5';
+    keymap[sfKeyNum6] = '6';
+    keymap[sfKeyNum7] = '7';
+    keymap[sfKeyNum8] = '8';
+    keymap[sfKeyNum9] = '9';
+
+    keymap[sfKeyNumpad0] = '0';
+    keymap[sfKeyNumpad1] = '1';
+    keymap[sfKeyNumpad2] = '2';
+    keymap[sfKeyNumpad3] = '3';
+    keymap[sfKeyNumpad4] = '4';
+    keymap[sfKeyNumpad5] = '5';
+    keymap[sfKeyNumpad6] = '6';
+    keymap[sfKeyNumpad7] = '7';
+    keymap[sfKeyNumpad8] = '8';
+    keymap[sfKeyNumpad9] = '9';
+
 
     return Success;
 }
@@ -147,6 +192,7 @@ bbFlag bbInput_poll(bbInput* input, sfRenderWindow* window){
                                        handle);
                     bbDumbServer_netSend(home.private.server, widgets->command->typeData.textBox.string,
                                          home.private.mapTime);
+                    bbSpell_receiveStr(home.private.spells.currentSpell, &home.private.spells, widgets->command->typeData.textBox.string);
                     char sendstring[] = "";
                     handle.ptr = sendstring;
                     bbWidget_onCommand(widgets->command, widgets,bbWC_setStr,
