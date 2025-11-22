@@ -79,7 +79,7 @@ bbFlag bbSpell_Crossbow_SetActive(bbSpell* spell, void* Spells, bbDumbServer* se
 
     //bbPool_Handle icon = spell->spellButton->frames->handle; //error undefined
     bbPool_Handle icon; icon.u64 = 108;
-    bbDumbServer_setActiveSpell(server, icon, gameTime);
+    //bbDumbServer_setActiveSpell(server, icon, gameTime);
     I32 x = rand() % 10;
     I32 y = rand() % 10;
 

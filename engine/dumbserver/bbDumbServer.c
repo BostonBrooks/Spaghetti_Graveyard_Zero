@@ -49,7 +49,7 @@ bbFlag bbDumbServer_react(bbDumbServer* server, U64 gameTime )
             bbPrintf("Message Received: %s", message->string.string);
         }
 
-        if (message->header.type = bbDumbServerMsgType_activateSpell)
+        if (message->header.type == bbDumbServerMsgType_activateSpell)
         {
             bbDebug("Spell Activated\n");
             server->widgets->currentSpell->frames[0].handle
@@ -72,6 +72,9 @@ bbFlag bbDumbServer_netSend(bbDumbServer* server, char* string, U64 gameTime)
     bbDumbServer_listElement* listElement;
     bbVPool* pool = server->message_queue.pool;
     bbVPool_alloc(pool, (void**)&listElement);
+    listElement->listElement.next = pool->null;
+    listElement->listElement.prev = pool->null;
+
     listElement->msg.header.type = bbDumbServerMsgType_sendMsg;
     listElement->msg.header.timestamp = gameTime + lag;
     bbStr_setStr(listElement->msg.string.string, string, 64);
@@ -85,8 +88,14 @@ bbFlag bbDumbServer_setActiveSpell(bbDumbServer* server, bbPool_Handle spell, U6
     const int lag = 5;
 
     bbDumbServer_listElement* listElement;
+
+    //TODO roll the following 4 lines into one function call
     bbVPool* pool = server->message_queue.pool;
     bbVPool_alloc(pool, (void**)&listElement);
+    listElement->listElement.next = pool->null;
+    listElement->listElement.prev = pool->null;
+
+
     listElement->msg.header.type = bbDumbServerMsgType_activateSpell;
     listElement->msg.header.timestamp = gameTime + lag;
     listElement->msg.handle.handle = spell;
