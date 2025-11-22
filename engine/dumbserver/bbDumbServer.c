@@ -48,8 +48,17 @@ bbFlag bbDumbServer_react(bbDumbServer* server, U64 gameTime )
         if (message->header.type == bbDumbServerMsgType_sendMsg){
             bbPrintf("Message Received: %s", message->string.string);
         }
+
+        if (message->header.type = bbDumbServerMsgType_activateSpell)
+        {
+            bbDebug("Spell Activated\n");
+            server->widgets->currentSpell->frames[0].handle
+             = message->handle.handle;
+        }
         bbList_popL(&server->message_queue, (void**)&listElement);
         bbVPool_free(server->message_queue.pool, listElement);
+
+
     }
 
     return Success;

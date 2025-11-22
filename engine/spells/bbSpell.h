@@ -55,7 +55,7 @@ typedef bbFlag bbSpell_Destructor(bbSpell** self, void* spells);
 typedef bbFlag bbSpell_SetActive(bbSpell* spell, void* Spells, bbDumbServer* server, U64 gameTime);
 typedef bbFlag bbSpell_SetInactive(bbSpell** self, void* spells);
 typedef bbFlag bbSpell_ReceiveStr(bbSpell* self, void* spells, char* answer);
-typedef bbFlag bbSpell_ReceiveClick(bbSpell** self, void* spells, bbMapCoords MC);
+typedef bbFlag bbSpell_ReceiveClick(bbSpell* spell, void* Spells, bbMapCoords MC, bbDumbServer* server, U64 gameTime);
 
 typedef struct {
     bbSpell_Constructor** Constructors;
@@ -98,11 +98,9 @@ bbFlag bbSpell_setActive (bbSpell* self, void* spells, bbDumbServer* server, U64
 bbFlag bbSpell_setInactive (bbSpell* spell, bbSpells* spells);
 
 //receive str from text input
-bbFlag bbSpell_receiveStr(bbSpell* spell, bbSpells* spells,
-                      bbPool_Handle str);
+bbFlag bbSpell_receiveStr(bbSpell* spell, void* spells, char* str);
 
-bbFlag bbSpell_receiveClick(bbPool_Handle spellHandle, bbSpells* spells,
-                            bbMapCoords coords);
+bbFlag bbSpell_receiveClick(bbSpell* spell, void* Spells, bbMapCoords MC, bbDumbServer* server, U64 gameTime);
 
 bbFlag bbSpells_init(bbSpells* self);
 bbFlag bbSpellsFunctions_add(bbSpellFunctions* functions,

@@ -25,7 +25,7 @@ typedef bbFlag bbSpell_Destructor(bbSpell** self, void* spells);
 typedef bbFlag bbSpell_SetActive(bbSpell* self, void* spells, bbDumbServer* server, U64 gameTime);
 typedef bbFlag bbSpell_SetInactive(bbSpell* self, void* spells);
 typedef bbFlag bbSpell_ReceiveStr(bbSpell* self, void* spells, char* answer);
-typedef bbFlag bbSpell_ReceiveClick(bbSpell** self, void* spells, bbMapCoords MC);
+typedef bbFlag bbSpell_ReceiveClick(bbSpell* self, void* spells, bbMapCoords MC);
 */
 
 bbFlag bbSpell_Crossbow_Constructor(bbSpell** self, void* Spells)
@@ -71,12 +71,14 @@ bbFlag bbSpell_Crossbow_Destructor(bbSpell** self, void* spells)
 
 bbFlag bbSpell_Crossbow_SetActive(bbSpell* spell, void* Spells, bbDumbServer* server, U64 gameTime)
 {
-
+    bbHere();
     bbSpells* spells = (bbSpells*)Spells;
     bbSpell_setInactive(spells->currentSpell, spells);
     spells->currentSpell = spell;
 
-    bbPool_Handle icon = spell->spellButton->frames->handle;
+
+    //bbPool_Handle icon = spell->spellButton->frames->handle; //error undefined
+    bbPool_Handle icon; icon.u64 = 108;
     bbDumbServer_setActiveSpell(server, icon, gameTime);
     I32 x = rand() % 10;
     I32 y = rand() % 10;

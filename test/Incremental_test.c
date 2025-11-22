@@ -98,18 +98,24 @@ CLEARWINDOW(bbGreen);
 //bbHere();
 
 
+	bbDumbServer_new(&home.private.server);
+
+	bbDumbServer_netSend(home.private.server, "TEST\n", 0);
+	bbDumbServer_netSend(home.private.server, "TEST\n", 0);
+	bbDumbServer_netSend(home.private.server, "TEST\n", 0);
+	bbDumbServer_netSend(home.private.server, "TEST\n", 0);
+	bbDumbServer_netSend(home.private.server, "TEST\n", 0);
+
     //bbSpells spells;
     bbSpells_init(&home.private.spells);
 
     bbSpell* null_spell;
     bbSpell_new(&null_spell, &home.private.spells, "NULL");
-    bbSpell_new(&null_spell, &home.private.spells, "CROSSBOW");
-
-
-
-    bbPool_Handle nullHandle;
-    nullHandle.ptr = NULL;
-    bbSpell_receiveStr(null_spell, &home.private.spells, nullHandle);
+	bbHere();
+	bbSpell* crossbow;
+    bbSpell_new(&crossbow, &home.private.spells, "CROSSBOW");
+	bbHere();
+	bbSpell_setActive(crossbow, &home.private.spells, home.private.server, 0);
 
 	//bbWidgets widgets;
 	bbWidgets_init(&home.private.widgets);
@@ -260,7 +266,6 @@ CLEARWINDOW(bbMagenta);
     CLEARWINDOW(bbRed);
 
 
-	bbDumbServer_new(&home.private.server);
 
 
 
