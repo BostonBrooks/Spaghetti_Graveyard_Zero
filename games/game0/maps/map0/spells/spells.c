@@ -1,7 +1,8 @@
 #include "engine/logic/bbFlag.h"
 #include "engine/spells/bbSpell.h"
+#include "games/game0/maps/map0/spells/crossbow.h"
 
-bbFlag bbSpell_NULLConstructor(bbSpell** self, bbSpells* spells){
+bbFlag bbSpell_NULL_Constructor(bbSpell** self, bbSpells* spells){
     bbDebug("Execute virtual function\n");
 
     bbSpell* spell; bbPool_Handle spellHandle;
@@ -35,27 +36,27 @@ bbFlag bbSpell_NULLConstructor(bbSpell** self, bbSpells* spells){
     return Success;
 }
 
-bbFlag bbSpell_NULLDestructor(/*args*/){
+bbFlag bbSpell_NULL_Destructor(/*args*/){
     bbDebug("Execute virtual function\n");
     return Success;
 }
 
-bbFlag bbSpell_NULLSetActive(/*args*/){
+bbFlag bbSpell_NULL_SetActive(/*args*/){
     bbDebug("Execute virtual function\n");
     return Success;
 }
 
-bbFlag bbSpell_NULLSetInactive(/*args*/){
+bbFlag bbSpell_NULL_SetInactive(/*args*/){
     bbDebug("Execute virtual function\n");
     return Success;
 }
 
-bbFlag bbSpell_NULLReceiveStr(/*args*/){
+bbFlag bbSpell_NULL_ReceiveStr(/*args*/){
     bbDebug("Execute virtual function\n");
     return Success;
 }
 
-bbFlag bbSpell_NULLReceiveClick(/*args*/){
+bbFlag bbSpell_NULL_ReceiveClick(/*args*/){
     bbDebug("Execute virtual function\n");
     return Success;
 }
@@ -72,16 +73,29 @@ bbFlag bbSpell_NULLReceiveClick(/*args*/){
 bbFlag bbSpellFunctions_populate(bbSpellFunctions* functions){
 
     bbSpellsFunctions_add(functions, SpellConstructor,
-                          bbSpell_NULLConstructor,"NULL");
+                          bbSpell_NULL_Constructor,"NULL");
     bbSpellsFunctions_add(functions, SpellDestructor,
-                          bbSpell_NULLDestructor,"NULL");
+                          bbSpell_NULL_Destructor,"NULL");
     bbSpellsFunctions_add(functions, SpellSetActive,
-                          bbSpell_NULLSetActive,"NULL");
+                          bbSpell_NULL_SetActive,"NULL");
     bbSpellsFunctions_add(functions, SpellSetInactive,
-                          bbSpell_NULLSetInactive,"NULL");
+                          bbSpell_NULL_SetInactive,"NULL");
     bbSpellsFunctions_add(functions, SpellReceiveStr,
-                          bbSpell_NULLReceiveStr,"NULL");
+                          bbSpell_NULL_ReceiveStr,"NULL");
     bbSpellsFunctions_add(functions, SpellReceiveClick,
-                          bbSpell_NULLReceiveClick,"NULL");
+                          bbSpell_NULL_ReceiveClick,"NULL");
+
+    bbSpellsFunctions_add(functions, SpellConstructor,
+                      bbSpell_Crossbow_Constructor,"CROSSBOW");
+    bbSpellsFunctions_add(functions, SpellDestructor,
+                          bbSpell_Crossbow_Destructor,"CROSSBOW");
+    bbSpellsFunctions_add(functions, SpellSetActive,
+                          bbSpell_Crossbow_SetActive,"CROSSBOW");
+    bbSpellsFunctions_add(functions, SpellSetInactive,
+                          bbSpell_Crossbow_SetInactive,"CROSSBOW");
+    bbSpellsFunctions_add(functions, SpellReceiveStr,
+                          bbSpell_Crossbow_ReceiveStr,"CROSSBOW");
+    bbSpellsFunctions_add(functions, SpellReceiveClick,
+                          bbSpell_Crossbow_ReceiveClick,"CROSSBOW");
     return Success;
 }

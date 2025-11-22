@@ -87,4 +87,5 @@ add_executable(myprogram
         engine/spells/bbSpell.h
         engine/spells/bbSpells.c
         engine/spells/bbSpell.c
-        engine/data/data.h)
+        engine/data/bbHome.h
+        games/game0/maps/map0/spells/crossbow.h)

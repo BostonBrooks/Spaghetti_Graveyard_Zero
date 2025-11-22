@@ -46,6 +46,7 @@ gcc   -D SFML_STATIC -I ../^
        ../engine/spells/bbSpells.c^
        ../engine/spells/bbSpell.c^
        ../games/game0/maps/map0/spells/spells.c^
+       ^
   -lcsfml-system -lcsfml-graphics -lcsfml-window -g -lm -w^
     -o ../games/game0/game.exe
 IF %errorlevel% == 0 (    echo Compile Succeeded:

@@ -15,7 +15,9 @@
 
 typedef enum
 {
-    bbDumbServerMsgType_sendMsg
+    bbDumbServerMsgType_sendMsg,
+    bbDumbServerMsgType_activateSpell,
+    bbDumbServerMsgType_castSpell
 } bbDumbServer_msgType;
 
 typedef struct
@@ -30,10 +32,17 @@ typedef struct
 
 } bbDumbServer_msgString;
 
+typedef struct
+{
+    bbDumbserver_msgHeader header;
+    bbPool_Handle handle;
+} bbDumbServer_poolHandle;
+
 typedef union
 {
     bbDumbserver_msgHeader header;
     bbDumbServer_msgString string;
+    bbDumbServer_poolHandle handle;
 } bbDumbServer_msg;
 
 typedef struct
@@ -58,4 +67,6 @@ bbFlag bbDumbServer_queueMsg(bbDumbServer* server, bbDumbServer_msg* message, U6
 bbFlag bbDumbServer_react(bbDumbServer* server, U64 gameTime );
 
 bbFlag bbDumbServer_netSend(bbDumbServer* server, char* string, U64 gameTime);
+bbFlag bbDumbServer_setActiveSpell(bbDumbServer* server, bbPool_Handle spell, U64 gameTime);
+bbFlag bbDumbServer_castSpell(bbDumbServer* server, bbMapCoords MC, U64 gameTime);
 #endif

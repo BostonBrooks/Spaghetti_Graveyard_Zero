@@ -26,7 +26,6 @@ bbHome home;
 
 int main (void){
 
-    home.private.server;
 
     //trying to replicate a bug
     I32 magic_number = 256;
@@ -104,8 +103,9 @@ CLEARWINDOW(bbGreen);
 
     bbSpell* null_spell;
     bbSpell_new(&null_spell, &home.private.spells, "NULL");
+    bbSpell_new(&null_spell, &home.private.spells, "CROSSBOW");
 
-    bbDebug("null_spell = %p\n", null_spell);
+
 
     bbPool_Handle nullHandle;
     nullHandle.ptr = NULL;

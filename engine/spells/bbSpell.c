@@ -7,7 +7,7 @@ bbFlag bbSpell_new(bbSpell** self, bbSpells* spells, char* key){
     bbSpell_Constructor* function;
     bbSpellFunctions_getFunction((void**)&function, &spells->functions,
                                  SpellConstructor,key);
-    return function(self, spells);
+    return function(self, (void*)spells);
 
 }
 
@@ -16,5 +16,11 @@ bbFlag bbSpell_receiveStr(bbSpell* spell, bbSpells* spells,
 
     I32 functionInt = spell->fTable.ReceiveStr;
     bbSpell_ReceiveStr* function = spells->functions.ReceiveStr[functionInt];
-    return function();
+    return function(spell, (void*)spells, str.ptr);
+}
+
+bbFlag bbSpell_setInactive (bbSpell* spell, bbSpells* spells)
+{
+    //TODO
+    return Success;
 }

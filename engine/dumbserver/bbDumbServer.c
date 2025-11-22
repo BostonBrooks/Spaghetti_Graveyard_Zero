@@ -71,3 +71,24 @@ bbFlag bbDumbServer_netSend(bbDumbServer* server, char* string, U64 gameTime)
     return Success;
 }
 
+bbFlag bbDumbServer_setActiveSpell(bbDumbServer* server, bbPool_Handle spell, U64 gameTime)
+{
+    const int lag = 5;
+
+    bbDumbServer_listElement* listElement;
+    bbVPool* pool = server->message_queue.pool;
+    bbVPool_alloc(pool, (void**)&listElement);
+    listElement->msg.header.type = bbDumbServerMsgType_activateSpell;
+    listElement->msg.header.timestamp = gameTime + lag;
+    listElement->msg.handle.handle = spell;
+
+    bbList_pushR(&server->message_queue, listElement);
+    return Success;
+}
+
+
+bbFlag bbDumbServer_castSpell(bbDumbServer* server, bbMapCoords MC, U64 gameTime)
+{
+    //TODO
+    return Success;
+}

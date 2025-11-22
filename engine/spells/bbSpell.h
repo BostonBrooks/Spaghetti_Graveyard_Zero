@@ -13,6 +13,7 @@
 #include "engine/widgets/bbWidget.h"
 #include "engine/geometry/bbCoordinates.h"
 #include "engine/spells/bbSpell.h"
+#include "engine/dumbserver/bbDumbServer.h"
 
 typedef enum
 {
@@ -24,7 +25,12 @@ typedef enum
     SpellReceiveClick
 } bbSpellFunctionType;
 
-
+typedef enum
+{
+    SpellInactive,
+    SpellWaitingForAnswer,
+    SpellWaitingForClick,
+} bbSpellState;
 
 typedef struct {
     I32 Constructor;
@@ -39,16 +45,17 @@ typedef struct {
 
     bbSpellFunctionTable fTable;
     I32 answer;
+    bbSpellState state;
     bbWidget* spellButton;
 
 } bbSpell;
 
-typedef bbFlag bbSpell_Constructor(bbSpell** self, struct bbSpells* spells);
-typedef bbFlag bbSpell_Destructor(/*args*/);
-typedef bbFlag bbSpell_SetActive(/*args*/);
-typedef bbFlag bbSpell_SetInactive(/*args*/);
-typedef bbFlag bbSpell_ReceiveStr(/*args*/);
-typedef bbFlag bbSpell_ReceiveClick(/*args*/);
+typedef bbFlag bbSpell_Constructor(bbSpell** self, void* spells);
+typedef bbFlag bbSpell_Destructor(bbSpell** self, void* spells);
+typedef bbFlag bbSpell_SetActive(bbSpell* spell, void* Spells, bbDumbServer* server, U64 gameTime);
+typedef bbFlag bbSpell_SetInactive(bbSpell** self, void* spells);
+typedef bbFlag bbSpell_ReceiveStr(bbSpell* self, void* spells, char* answer);
+typedef bbFlag bbSpell_ReceiveClick(bbSpell** self, void* spells, bbMapCoords MC);
 
 typedef struct {
     bbSpell_Constructor** Constructors;
@@ -81,14 +88,14 @@ typedef struct bbSpells{
     bbVPool* pool;
     bbDictionary* spellCodes;
     bbSpellFunctions functions;
-
+    bbSpell* currentSpell;
     bbWidget* command;
 } bbSpells;
 
 bbFlag bbSpell_new(bbSpell** self, bbSpells* Spells, char* key);
 
-bbFlag bbSpell_setActive (bbPool_Handle spellHandle, bbSpells* spells);
-bbFlag bbSpell_setInactive (bbPool_Handle spellHandle, bbSpells* spells);
+bbFlag bbSpell_setActive (bbSpell* self, void* spells, bbDumbServer* server, U64 gameTime);
+bbFlag bbSpell_setInactive (bbSpell* spell, bbSpells* spells);
 
 //receive str from text input
 bbFlag bbSpell_receiveStr(bbSpell* spell, bbSpells* spells,
