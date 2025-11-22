@@ -22,6 +22,7 @@ bbFlag bbMouseFunctions_populate(bbMouseFunctions* self)
     bbMouseFunctions_add(self, MouseIsOver, IsOver_Teleport, "TELEPORT");
     bbMouseFunctions_add(self, MouseIsOver, IsOver_Hover, "HOVER");
     bbMouseFunctions_add(self, MouseIsOver, IsOver_Viewport, "VIEWPORT");
+    bbMouseFunctions_add(self, MouseLeftDown, Viewport_LeftDown, "VIEWPORT");
 
 
     bbMouseFunctions_add(self, MouseIsOver, Button_IsOver, "BUTTON");

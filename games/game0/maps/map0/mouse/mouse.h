@@ -6,6 +6,8 @@
 #include "engine/widgets/bbWidget.h"
 #include "engine/2point5D/bbViewport.h"
 #include "engine/2point5D/bbViewportCoords.h"
+#include "engine/data/bbHome.h"
+#include "engine/spells/bbSpell.h"
 
 extern bbMapCoords testGoalPoint;
 
@@ -111,4 +113,21 @@ bbFlag IsOver_Viewport(bbMouse* mouse, bbWidgets* widgets, bbWidget* widget)
     return Continue;
 }
 
+bbFlag Viewport_LeftDown(void* mouse, void* widgets, void* widget, void*
+graphics){
+    bbSpells* spells = &home.private.spells;
+    bbSpell* spell = spells->currentSpell;
+    bbDumbServer* server = home.private.server;
+    U64 gameTime = home.private.mapTime;
+
+    //calculate map coords
+    bbMapCoords MC;
+    MC.i = 0;
+    MC.j = 0;
+    MC.k = 0;
+
+    bbSpell_receiveClick(spell, (void*) spells, MC, server, gameTime);
+
+    return Success;
+}
 #endif

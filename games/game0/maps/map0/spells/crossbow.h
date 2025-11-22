@@ -80,11 +80,11 @@ bbFlag bbSpell_Crossbow_SetActive(bbSpell* spell, void* Spells, bbDumbServer* se
     //bbPool_Handle icon = spell->spellButton->frames->handle; //error undefined
     bbPool_Handle icon; icon.u64 = 108;
     //bbDumbServer_setActiveSpell(server, icon, gameTime);
-    I32 x = rand() % 10;
-    I32 y = rand() % 10;
+    I32 x = 5; //rand() % 10;
+    I32 y = 12; //rand() % 10;
 
     //well post maths question in terminal for now
-    printf("what is %d x %d\n", x, y);
+    printf("what is %d x %d\nXXXXXXXXXXXXXXXXXXXXXXx\n", x, y);
     spell->answer = x * y;
     spell->state = SpellWaitingForAnswer;
 
@@ -109,6 +109,8 @@ bbFlag bbSpell_Crossbow_ReceiveStr(bbSpell* spell, void* Spells, char* answer)
     I32 answerInt = atoi(answer);
     if (answerInt != spell->answer) return Continue;
 
+    printf("Correct! Click to fire crossbow.\nXXXXXXXXXXXXXXXXXXXXXXx\n");
+
     spell->state = SpellWaitingForClick;
 
     return Success;
@@ -119,12 +121,12 @@ bbFlag bbSpell_Crossbow_ReceiveClick(bbSpell* spell, void* Spells, bbMapCoords M
 {
     if (spell->state != SpellWaitingForClick) return Continue;
     bbSpells* spells = (bbSpells*)Spells;
-    bbDumbServer_castSpell(server, MC, gameTime);
-    I32 x = rand() % 10;
-    I32 y = rand() % 10;
+    //bbDumbServer_castSpell(server, MC, gameTime);
+    I32 x = 3;//rand() % 10;
+    I32 y = 7; //rand() % 10;
 
     //well post maths question in terminal for now
-    printf("what is %d x %d\n", x, y);
+    printf("what is %d x %d\nXXXXXXXXXXXXXXXXXXXXXXXXXXXx\n", x, y);
     spell->answer = x * y;
     spell->state = SpellWaitingForAnswer;
 

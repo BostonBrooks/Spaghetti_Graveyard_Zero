@@ -196,12 +196,16 @@ bbFlag bbWidget_newViewport(bbWidget** self, bbGraphics* graphics,
                                       "VIEWPORT");
 	widget->mtable.isOver = funcInt;
 
+	funcInt = bbMouseFunctions_getInt(&widgets->mouse->functions,
+										  MouseLeftDown,
+									  "VIEWPORT");
+	widget->mtable.LeftDown = funcInt;
+
 	widget->mtable.MouseIcon = 85;
     widget->mtable.DragIcon = -1;
 
     widget->mtable.Enter = -1;
     widget->mtable.Leave = -1;
-    widget->mtable.LeftDown = -1;
     widget->mtable.LeftUp = -1;
     widget->mtable.LeftDrag = -1;
 
