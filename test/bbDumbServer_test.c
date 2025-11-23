@@ -1,12 +1,12 @@
-#include "engine/dumbserver/bbDumbServer.h"
+#include "engine/dummyserver/bbDummySender.h"
 
 int main (void)
 {
-    bbDumbServer* server;
-    bbDumbServer_new(&server);
+    bbDummySender* server;
+    bbDummySender_new(&server);
 
     U64 gameTime = 0;
-    bbDumbServer_msg* msg;
+    bbDummySender_msg* msg;
 
     char str[64];
     while (1)
@@ -15,8 +15,8 @@ int main (void)
         sprintf(str, "%d\n", gameTime);
 
 
-        bbDumbServer_netSend(server, str, gameTime);
-        bbDumbServer_react(server, gameTime );
+        bbDummySender_netSend(server, str, gameTime);
+        bbDummySender_react(server, gameTime );
 
         sfSleep(sfMilliseconds(16));
         gameTime++;

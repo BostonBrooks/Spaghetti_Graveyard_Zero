@@ -11,7 +11,7 @@
 #include "engine/2point5D/bbOverlays.h"
 #include "engine/widgets/bbWidgetFunctions.h"
 #include "engine/geometry/bbCoordinates.h"
-#include "engine/dumbserver/bbDumbServer.h"
+#include "engine/dummyserver/bbDummySender.h"
 #include "engine/spells/bbSpell.h"
 #include "engine/data/bbHome.h"
 
@@ -98,13 +98,13 @@ CLEARWINDOW(bbGreen);
 //bbHere();
 
 
-	bbDumbServer_new(&home.private.server);
+	bbDummySender_new(&home.private.server);
 
-	bbDumbServer_netSend(home.private.server, "TEST\n", 0);
-	bbDumbServer_netSend(home.private.server, "TEST\n", 0);
-	bbDumbServer_netSend(home.private.server, "TEST\n", 0);
-	bbDumbServer_netSend(home.private.server, "TEST\n", 0);
-	bbDumbServer_netSend(home.private.server, "TEST\n", 0);
+	bbDummySender_netSend(home.private.server, "TEST\n", 0);
+	bbDummySender_netSend(home.private.server, "TEST\n", 0);
+	bbDummySender_netSend(home.private.server, "TEST\n", 0);
+	bbDummySender_netSend(home.private.server, "TEST\n", 0);
+	bbDummySender_netSend(home.private.server, "TEST\n", 0);
 
     //bbSpells spells;
     bbSpells_init(&home.private.spells);
@@ -255,7 +255,7 @@ CLEARWINDOW(bbMagenta);
     bbWidget_constructor(&widget0, &home.private.widgets, &home.constant.graphics,
                          SP0, layout, "BOX");
 
-    SP0.x = 500*8; SP0.y = 300*8;
+    SP0.x = 200*8; SP0.y = 300*8;
     bbWidget_constructor(&widget0, &home.private.widgets, &home.constant.graphics,
                          SP0, layout, "CARD");
 
@@ -302,7 +302,7 @@ CLEARWINDOW(bbMagenta);
 		bbMouse_isOver(&home.private.mouse, &home.private.widgets);
 		bbMouse_Update(&home.private.mouse, &home.private.widgets, &home.constant.graphics);
 
-		bbDumbServer_react(home.private.server, home.private.mapTime );
+		bbDummySender_react(home.private.server, home.private.mapTime );
 
 	if (home.private.mapTime % 50 == 0) bbPrintf("mapTime = %d\n", home.private.mapTime);
 		cl.mapTime = home.private.mapTime;

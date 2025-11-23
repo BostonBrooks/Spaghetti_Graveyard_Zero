@@ -117,7 +117,7 @@ bbFlag Viewport_LeftDown(void* mouse, void* widgets, void* widget, void*
 graphics){
     bbSpells* spells = &home.private.spells;
     bbSpell* spell = spells->currentSpell;
-    bbDumbServer* server = home.private.server;
+    bbDummySender* server = home.private.server;
     U64 gameTime = home.private.mapTime;
 
     //calculate map coords

@@ -13,7 +13,7 @@
 #include "engine/widgets/bbWidget.h"
 #include "engine/geometry/bbCoordinates.h"
 #include "engine/spells/bbSpell.h"
-#include "engine/dumbserver/bbDumbServer.h"
+#include "engine/dummyserver/bbDummySender.h"
 
 typedef enum
 {
@@ -52,10 +52,10 @@ typedef struct {
 
 typedef bbFlag bbSpell_Constructor(bbSpell** self, void* spells);
 typedef bbFlag bbSpell_Destructor(bbSpell** self, void* spells);
-typedef bbFlag bbSpell_SetActive(bbSpell* spell, void* Spells, bbDumbServer* server, U64 gameTime);
+typedef bbFlag bbSpell_SetActive(bbSpell* spell, void* Spells, bbDummySender* server, U64 gameTime);
 typedef bbFlag bbSpell_SetInactive(bbSpell** self, void* spells);
 typedef bbFlag bbSpell_ReceiveStr(bbSpell* self, void* spells, char* answer);
-typedef bbFlag bbSpell_ReceiveClick(bbSpell* spell, void* Spells, bbMapCoords MC, bbDumbServer* server, U64 gameTime);
+typedef bbFlag bbSpell_ReceiveClick(bbSpell* spell, void* Spells, bbMapCoords MC, bbDummySender* server, U64 gameTime);
 
 typedef struct {
     bbSpell_Constructor** Constructors;
@@ -94,13 +94,13 @@ typedef struct bbSpells{
 
 bbFlag bbSpell_new(bbSpell** self, bbSpells* Spells, char* key);
 
-bbFlag bbSpell_setActive (bbSpell* self, void* spells, bbDumbServer* server, U64 gameTime);
+bbFlag bbSpell_setActive (bbSpell* self, void* spells, bbDummySender* server, U64 gameTime);
 bbFlag bbSpell_setInactive (bbSpell* spell, bbSpells* spells);
 
 //receive str from text input
 bbFlag bbSpell_receiveStr(bbSpell* spell, void* spells, char* str);
 
-bbFlag bbSpell_receiveClick(bbSpell* spell, void* Spells, bbMapCoords MC, bbDumbServer* server, U64 gameTime);
+bbFlag bbSpell_receiveClick(bbSpell* spell, void* Spells, bbMapCoords MC, bbDummySender* server, U64 gameTime);
 
 bbFlag bbSpells_init(bbSpells* self);
 bbFlag bbSpellsFunctions_add(bbSpellFunctions* functions,

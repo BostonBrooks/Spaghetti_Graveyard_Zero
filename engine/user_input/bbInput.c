@@ -2,7 +2,7 @@
 #include "engine/includes/CSFML.h"
 #include "engine/user_input/bbInput.h"
 #include "engine/logic/bbTerminal.h"
-#include "engine/dumbserver/bbDumbServer.h"
+#include "engine/dummyserver/bbDummySender.h"
 #include "engine/data/bbHome.h"
 
 
@@ -192,7 +192,7 @@ bbFlag bbInput_poll(bbInput* input, sfRenderWindow* window){
 
                     bbWidget_onCommand(widgets->prompt,widgets, bbWC_putStr,
                                        handle);
-                    bbDumbServer_netSend(home.private.server, widgets->command->typeData.textBox.string,
+                    bbDummySender_netSend(home.private.server, widgets->command->typeData.textBox.string,
                                          home.private.mapTime);
                                          */
                     bbSpell_receiveStr(home.private.spells.currentSpell, &home.private.spells, widgets->command->typeData.textBox.string);

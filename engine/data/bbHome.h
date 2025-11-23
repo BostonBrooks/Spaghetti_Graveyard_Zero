@@ -5,7 +5,7 @@
 #include "engine/spells/bbSpell.h"
 #include "engine/user_input/bbInput.h"
 #include "engine/2point5D/bbOverlays.h"
-#include "engine/dumbserver/bbDumbServer.h"
+#include "engine/dummyserver/bbDummySender.h"
 
 typedef struct {
     bbSpells spells;
@@ -13,7 +13,7 @@ typedef struct {
     bbMouse mouse;
     bbInput input;
     bbViewport* viewport;
-    bbDumbServer* server;
+    bbDummySender* server;
     sfRenderWindow* window;
     U64 mapTime;
     U64 UITime;

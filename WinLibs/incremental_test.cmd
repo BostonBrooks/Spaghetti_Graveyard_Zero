@@ -42,7 +42,7 @@ gcc   -D SFML_STATIC -I ../^
        ../engine/user_input/bbMouse.c^
        ../engine/user_input/bbMouseFunctions.c^
        ../engine/graphics/bbFonts.c^
-       ../engine/dumbserver/bbDumbServer.c^
+       ../engine/dummyserver/bbDummySender.c^
        ../engine/spells/bbSpells.c^
        ../engine/spells/bbSpell.c^
        ../games/game0/maps/map0/spells/spells.c^

@@ -1,18 +1,18 @@
-#include "engine/dumbserver/bbDumbServer.h"
+#include "engine/dummyserver/bbDummySender.h"
 
 #include <string.h>
 
 #include "engine/logic/bbFlag.h"
 
 
-bbFlag bbDumbServer_new(bbDumbServer** server)
+bbFlag bbDummySender_new(bbDummySender** server)
 {
 
-    bbDumbServer* dumbServer = (bbDumbServer *)malloc(sizeof(bbDumbServer));
+    bbDummySender* dumbServer = (bbDummySender *)malloc(sizeof(bbDummySender));
     bbAssert(dumbServer != NULL, "bad malloc\n");
     bbVPool* pool;
-    bbVPool_newBloated(&pool, sizeof(bbDumbServer_msg), 128, 128);
-    bbList_init(&dumbServer->message_queue, pool,NULL, offsetof(bbDumbServer_listElement, listElement), NULL);
+    bbVPool_newBloated(&pool, sizeof(bbDummySender_msg), 128, 128);
+    bbList_init(&dumbServer->message_queue, pool,NULL, offsetof(bbDummySender_listElement, listElement), NULL);
 
     *server = dumbServer;
     return Success;
@@ -20,24 +20,24 @@ bbFlag bbDumbServer_new(bbDumbServer** server)
 
 }
 
-bbFlag bbDumbServer_queueMsg(bbDumbServer* server, bbDumbServer_msg* message, U64 gameTime )
+bbFlag bbDummySender_queueMsg(bbDummySender* server, bbDummySender_msg* message, U64 gameTime )
 {
     const int lag = 5;
     message->header.timestamp = gameTime + lag;
-    bbDumbServer_listElement* listElement;
+    bbDummySender_listElement* listElement;
     bbVPool* pool = server->message_queue.pool;
     bbVPool_alloc(pool, (void**)&listElement);
-    memcpy(listElement->msg.string.string, message, sizeof(bbDumbServer_msg));
+    memcpy(listElement->msg.string.string, message, sizeof(bbDummySender_msg));
     bbList_pushR(&server->message_queue, listElement);
 
     return Success;
 }
 
 
-bbFlag bbDumbServer_react(bbDumbServer* server, U64 gameTime )
+bbFlag bbDummySender_react(bbDummySender* server, U64 gameTime )
 {
-    bbDumbServer_listElement* listElement;
-    bbDumbServer_msg* message;
+    bbDummySender_listElement* listElement;
+    bbDummySender_msg* message;
 
     while (1) {
         bbFlag flag = bbList_peakL(&server->message_queue, (void**)&listElement);
@@ -45,11 +45,11 @@ bbFlag bbDumbServer_react(bbDumbServer* server, U64 gameTime )
         message = &listElement->msg;
         if (message->header.timestamp > gameTime ) break;
 
-        if (message->header.type == bbDumbServerMsgType_sendMsg){
+        if (message->header.type == bbDummySenderMsgType_sendMsg){
             bbPrintf("Message Received: %s", message->string.string);
         }
 
-        if (message->header.type == bbDumbServerMsgType_activateSpell)
+        if (message->header.type == bbDummySenderMsgType_activateSpell)
         {
             bbDebug("Spell Activated\n");
             server->widgets->currentSpell->frames[0].handle
@@ -65,17 +65,17 @@ bbFlag bbDumbServer_react(bbDumbServer* server, U64 gameTime )
 }
 
 
-bbFlag bbDumbServer_netSend(bbDumbServer* server, char* string, U64 gameTime)
+bbFlag bbDummySender_netSend(bbDummySender* server, char* string, U64 gameTime)
 {
     const int lag = 5;
 
-    bbDumbServer_listElement* listElement;
+    bbDummySender_listElement* listElement;
     bbVPool* pool = server->message_queue.pool;
     bbVPool_alloc(pool, (void**)&listElement);
     listElement->listElement.next = pool->null;
     listElement->listElement.prev = pool->null;
 
-    listElement->msg.header.type = bbDumbServerMsgType_sendMsg;
+    listElement->msg.header.type = bbDummySenderMsgType_sendMsg;
     listElement->msg.header.timestamp = gameTime + lag;
     bbStr_setStr(listElement->msg.string.string, string, 64);
 
@@ -83,11 +83,11 @@ bbFlag bbDumbServer_netSend(bbDumbServer* server, char* string, U64 gameTime)
     return Success;
 }
 
-bbFlag bbDumbServer_setActiveSpell(bbDumbServer* server, bbPool_Handle spell, U64 gameTime)
+bbFlag bbDummySender_setActiveSpell(bbDummySender* server, bbPool_Handle spell, U64 gameTime)
 {
     const int lag = 5;
 
-    bbDumbServer_listElement* listElement;
+    bbDummySender_listElement* listElement;
 
     //TODO roll the following 4 lines into one function call
     bbVPool* pool = server->message_queue.pool;
@@ -96,7 +96,7 @@ bbFlag bbDumbServer_setActiveSpell(bbDumbServer* server, bbPool_Handle spell, U6
     listElement->listElement.prev = pool->null;
 
 
-    listElement->msg.header.type = bbDumbServerMsgType_activateSpell;
+    listElement->msg.header.type = bbDummySenderMsgType_activateSpell;
     listElement->msg.header.timestamp = gameTime + lag;
     listElement->msg.handle.handle = spell;
 
@@ -105,7 +105,7 @@ bbFlag bbDumbServer_setActiveSpell(bbDumbServer* server, bbPool_Handle spell, U6
 }
 
 
-bbFlag bbDumbServer_castSpell(bbDumbServer* server, bbMapCoords MC, U64 gameTime)
+bbFlag bbDummySender_castSpell(bbDummySender* server, bbMapCoords MC, U64 gameTime)
 {
     //TODO
     return Success;

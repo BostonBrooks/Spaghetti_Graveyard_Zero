@@ -16,14 +16,14 @@
 
 #include "engine/logic/bbFlag.h"
 #include "engine/spells/bbSpell.h"
-#include "engine/dumbserver/bbDumbServer.h"
+#include "engine/dummyserver/bbDummySender.h"
 #include "engine/data/bbHome.h"
 #include <string.h>
 
 /*
 typedef bbFlag bbSpell_Constructor(bbSpell** self, void* spells);
 typedef bbFlag bbSpell_Destructor(bbSpell** self, void* spells);
-typedef bbFlag bbSpell_SetActive(bbSpell* self, void* spells, bbDumbServer* server, U64 gameTime);
+typedef bbFlag bbSpell_SetActive(bbSpell* self, void* spells, bbDummySender* server, U64 gameTime);
 typedef bbFlag bbSpell_SetInactive(bbSpell* self, void* spells);
 typedef bbFlag bbSpell_ReceiveStr(bbSpell* self, void* spells, char* answer);
 typedef bbFlag bbSpell_ReceiveClick(bbSpell* self, void* spells, bbMapCoords MC);
@@ -70,7 +70,7 @@ bbFlag bbSpell_Crossbow_Destructor(bbSpell** self, void* spells)
     return Success;
 }
 
-bbFlag bbSpell_Crossbow_SetActive(bbSpell* spell, void* Spells, bbDumbServer* server, U64 gameTime)
+bbFlag bbSpell_Crossbow_SetActive(bbSpell* spell, void* Spells, bbDummySender* server, U64 gameTime)
 {
     bbHere();
     bbSpells* spells = (bbSpells*)Spells;
@@ -80,9 +80,9 @@ bbFlag bbSpell_Crossbow_SetActive(bbSpell* spell, void* Spells, bbDumbServer* se
 
     //bbPool_Handle icon = spell->spellButton->frames->handle; //error undefined
     bbPool_Handle icon; icon.u64 = 108;
-    //bbDumbServer_setActiveSpell(server, icon, gameTime);
-    I32 x = rand() % 12;
-    I32 y = rand() % 12;
+    //bbDummySender_setActiveSpell(server, icon, gameTime);
+    I32 x = rand() % 20;
+    I32 y = rand() % 20;
 
     char promptStr[64]; bbPool_Handle handle;
     sprintf(promptStr, "what is %d x %d?\n", x, y);
@@ -130,13 +130,13 @@ bbFlag bbSpell_Crossbow_ReceiveStr(bbSpell* spell, void* Spells, char* answer)
 }
 
 
-bbFlag bbSpell_Crossbow_ReceiveClick(bbSpell* spell, void* Spells, bbMapCoords MC, bbDumbServer* server, U64 gameTime)
+bbFlag bbSpell_Crossbow_ReceiveClick(bbSpell* spell, void* Spells, bbMapCoords MC, bbDummySender* server, U64 gameTime)
 {
     if (spell->state != SpellWaitingForClick) return Continue;
     bbSpells* spells = (bbSpells*)Spells;
-    //bbDumbServer_castSpell(server, MC, gameTime);
-    I32 x = rand() % 12;
-    I32 y = rand() % 12;
+    //bbDummySender_castSpell(server, MC, gameTime);
+    I32 x = rand() % 20;
+    I32 y = rand() % 20;
 
     char promptStr[64]; bbPool_Handle handle;
     sprintf(promptStr, "what is %d x %d\n", x, y);

@@ -18,7 +18,7 @@ bbFlag bbSpell_setInactive (bbSpell* spell, bbSpells* spells)
     return Success;
 }
 
-bbFlag bbSpell_setActive(bbSpell* spell, void* Spells, bbDumbServer* server, U64 gameTime)
+bbFlag bbSpell_setActive(bbSpell* spell, void* Spells, bbDummySender* server, U64 gameTime)
 {
     bbSpells* spells = (bbSpells*)Spells;
     I32 functionInt = spell->fTable.SetActive;
@@ -36,7 +36,7 @@ bbFlag bbSpell_receiveStr(bbSpell* spell, void* Spells, char* answer)
     return function(spell,Spells, answer);
 }
 
-bbFlag bbSpell_receiveClick(bbSpell* spell, void* Spells, bbMapCoords MC, bbDumbServer* server, U64 gameTime)
+bbFlag bbSpell_receiveClick(bbSpell* spell, void* Spells, bbMapCoords MC, bbDummySender* server, U64 gameTime)
 {
     bbSpells* spells = (bbSpells*)Spells;
     I32 functionInt = spell->fTable.ReceiveClick;
