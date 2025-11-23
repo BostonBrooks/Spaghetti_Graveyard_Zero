@@ -185,13 +185,16 @@ bbFlag bbInput_poll(bbInput* input, sfRenderWindow* window){
 
                     bbPool_Handle handle;
                     handle.u64 = '\n';
+                    /*
                     bbWidget_onCommand(widgets->prompt,widgets,
                                        bbWC_putChar,handle);
                     handle.ptr = widgets->command->typeData.textBox.string;
+
                     bbWidget_onCommand(widgets->prompt,widgets, bbWC_putStr,
                                        handle);
                     bbDumbServer_netSend(home.private.server, widgets->command->typeData.textBox.string,
                                          home.private.mapTime);
+                                         */
                     bbSpell_receiveStr(home.private.spells.currentSpell, &home.private.spells, widgets->command->typeData.textBox.string);
                     char sendstring[] = "";
                     handle.ptr = sendstring;
