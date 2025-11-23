@@ -12,6 +12,7 @@
 #include "engine/widgets/bbWidgetFunctions.h"
 #include "engine/geometry/bbCoordinates.h"
 #include "engine/dummyserver/bbDummySender.h"
+#include "engine/dummyserver/bbDummyReceiver.h"
 #include "engine/spells/bbSpell.h"
 #include "engine/data/bbHome.h"
 

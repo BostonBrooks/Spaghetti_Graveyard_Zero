@@ -89,4 +89,6 @@ add_executable(myprogram
         engine/spells/bbSpell.c
         engine/data/bbHome.h
         games/game0/maps/map0/spells/crossbow.h
-        engine/dummyserver/bbDummySender.c)
+        engine/dummyserver/bbDummySender.c
+        engine/dummyserver/bbDummyReceiver.h
+        engine/dummyserver/bbDummyReceiver.c)

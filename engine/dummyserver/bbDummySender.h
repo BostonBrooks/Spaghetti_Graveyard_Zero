@@ -5,8 +5,8 @@
  * things will get confusing when it comes time to merge input streams
  */
 
-#ifndef DUMBSERVER_H
-#define DUMBSERVER_H
+#ifndef BBDUMMYSENDER_H
+#define BBDUMMYSENDER_H
 
 #include "engine/widgets/bbWidget.h"
 #include "engine/logic/bbFlag.h"
@@ -63,10 +63,9 @@ bbFlag bbDummySender_new(/*args*/);
 bbFlag bbDummySender_queueMsg(bbDummySender* server, bbDummySender_msg* message, U64 gameTime);
 
 
-//react to messages as in the (Re)Actor pattern?
-bbFlag bbDummySender_react(bbDummySender* server, U64 gameTime );
 
 bbFlag bbDummySender_netSend(bbDummySender* server, char* string, U64 gameTime);
 bbFlag bbDummySender_setActiveSpell(bbDummySender* server, bbPool_Handle spell, U64 gameTime);
 bbFlag bbDummySender_castSpell(bbDummySender* server, bbMapCoords MC, U64 gameTime);
-#endif
+
+#endif //BBDUMMYSENDER_H
