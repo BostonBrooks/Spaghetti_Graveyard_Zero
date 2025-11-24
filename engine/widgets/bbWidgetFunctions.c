@@ -13,7 +13,6 @@ bbFlag bbWidgetFunctions_new(bbWidgetFunctions** self)
 //functions->Constructors = calloc(magic_number, sizeof(bbWidget_Constructor));
     functions->Constructors = calloc(magic_number, sizeof(U64));
 
-bbDebug("functions->Constructors = %p\n", functions->Constructors );
     bbAssert(functions->Constructors != NULL, "bad calloc\n");
     bbDictionary_new(&functions->Constructor_dict, magic_number);
     functions->Constructor_available = 0;
@@ -95,8 +94,6 @@ bbFlag bbWidgetFunctions_add(bbWidgetFunctions* functions, bbWidgetFunctionType 
         bbAssert(available < magic_number, "out of bounds error\n");
         functions->OnCommands[available] = fnPointer;
         handle.u64 = available;
-            bbDebug("dict.bins = %d, key = %s\n",
-                    functions->OnCommand_dict->m_NumBins, key);
         bbDictionary_add(functions->OnCommand_dict, key, handle);
         return Success;
 

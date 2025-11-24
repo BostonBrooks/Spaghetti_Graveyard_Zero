@@ -23,7 +23,7 @@ bbFlag bbSpell_setActive(bbSpell* spell, void* Spells, bbDummySender* server, U6
     bbSpells* spells = (bbSpells*)Spells;
     I32 functionInt = spell->fTable.SetActive;
     bbSpell_SetActive* function = spells->functions.SetActive[functionInt];
-    return function(spell, (void*)spells, Spells, gameTime);
+    return function(spell, (void*)spells, server, gameTime);
 }
 
 
