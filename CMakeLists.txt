@@ -84,11 +84,10 @@ add_executable(myprogram
         games/game0/maps/map0/widgets/currentspell.h
         games/game0/maps/map0/mouse/spellmenu.h
         games/game0/maps/map0/mouse/mouse.h
-        engine/spells/bbSpell.h
         engine/spells/bbSpells.c
         engine/spells/bbSpell.c
         engine/data/bbHome.h
-        games/game0/maps/map0/spells/crossbow.h
+        games/game0/maps/map0/spells/spell1.h
         engine/dummyserver/bbDummySender.c
         engine/dummyserver/bbDummyReceiver.h
         engine/dummyserver/bbDummyReceiver.c)

@@ -38,7 +38,6 @@ bbFlag Card_Enter (void* mouse, void* widgets, void* widget, void* graphics)
                         "ASPADES", &Widget->frames[0].handle);
 
     Widget->mtable.hover = true;
-    bbDebug("Mouse enters card\n");
     return Success;
 }
 
@@ -51,7 +50,6 @@ bbFlag Card_Leave (void* mouse, void* widgets, void* widget, void* graphics)
                         "ASPADES", &Widget->frames[0].handle);
 
     Widget->mtable.hover = false;
-    bbDebug("Mouse leaves card\n");
     return Success;
 }
 
@@ -77,8 +75,7 @@ graphics)
     dragOrigin.x = Mouse->position.x - Widget->rect.left;
     dragOrigin.y = Mouse->position.y - Widget->rect.top;
     Mouse->dragOrigin = dragOrigin;
-
-    bbDebug("Mouse left button down on carde\n");
+;
     return Success;
 }
 
@@ -114,7 +111,6 @@ bbFlag Card_LeftUp (void* mouse, void* widgets, void* widget, void* graphics)
 
 
     Widget->mtable.hover = false;
-    bbDebug("Mouse left button up on card\n");
     return Success;
 }
 
@@ -136,6 +132,5 @@ graphics) {
     Widget->rect.top = newPos.y;
 */
 
-    bbDebug("Mouse left button drag on card\n");
     return Success;
 }

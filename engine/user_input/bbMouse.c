@@ -189,7 +189,6 @@ graphics)
 
     if (funcInt == -1) return Success;
 
-    bbDebug("funcInt = %d\n", funcInt);
     bbMouse_Leave* func = Mouse->functions.Enter[funcInt];
 
     return func(mouse, widgets, widget, graphics);
@@ -204,7 +203,6 @@ graphics)
 
     if (funcInt == -1) return Success;
 
-    bbDebug("funcInt = %d\n", funcInt);
     bbMouse_Leave* func = Mouse->functions.Leave[funcInt];
 
     return func(mouse, widgets, widget, graphics);
@@ -219,7 +217,6 @@ bbFlag bbMouse_LeftDownWidget(void* mouse, void* widgets, void* widget,
 
     if (funcInt == -1) return Success;
 
-    bbDebug("funcInt = %d\n", funcInt);
     bbMouse_Leave* func = Mouse->functions.LeftDown[funcInt];
 
     return func(mouse, widgets, widget, graphics);
@@ -233,7 +230,6 @@ bbFlag bbMouse_LeftUpWidget(void* mouse, void* widgets, void* widget,
 
     if (funcInt == -1) return Success;
 
-    bbDebug("funcInt = %d\n", funcInt);
     bbMouse_Leave* func = Mouse->functions.LeftUp[funcInt];
 
     return func(mouse, widgets, widget, graphics);
@@ -248,7 +244,6 @@ bbFlag bbMouse_LeftDragWidget(void* mouse, void* widgets, void* widget,
 
     if (funcInt == -1) return Success;
 
-    bbDebug("funcInt = %d\n", funcInt);
     bbMouse_Leave* func = Mouse->functions.LeftDrag[funcInt];
 
     return func(mouse, widgets, widget, graphics);

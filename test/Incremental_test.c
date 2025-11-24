@@ -108,9 +108,12 @@ CLEARWINDOW(bbGreen);
 
     bbSpell* null_spell;
     bbSpell_new(&null_spell, &home.private.spells, "NULL");
-	bbSpell* crossbow;
-    bbSpell_new(&crossbow, &home.private.spells, "CROSSBOW");
+	bbSpell* spell1;
+    bbSpell_new(&spell1, &home.private.spells, "SPELL1");
 
+    bbSpell* spellN;
+    bbSpell_new(&spellN, &home.private.spells, "SPELL2");
+    bbSpell_new(&spellN, &home.private.spells, "SPELL3");
 
 	//bbWidgets widgets;
 	bbWidgets_init(&home.private.widgets);
@@ -261,7 +264,7 @@ CLEARWINDOW(bbMagenta);
     CLEARWINDOW(bbRed);
 
 
-    bbSpell_setActive(crossbow, &home.private.spells, home.private.server, 0);
+    bbSpell_setActive(spell1, &home.private.spells, home.private.server, 0);
 
 
 

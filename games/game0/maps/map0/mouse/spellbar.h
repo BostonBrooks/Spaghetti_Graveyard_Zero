@@ -35,7 +35,6 @@ graphics)
         SpellMenu->tree.visible = true;
         SpellMenu->tree.childrenvisible = true;
 
-        bbDebug("clicked spells bar top right\n");
     }
 
 

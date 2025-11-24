@@ -7,6 +7,7 @@ bbFlag bbSpells_init(bbSpells* spells){
 
     bbVPool_newBloated(&spells->pool, sizeof(bbSpell), 1024, 1024);
 
+    bbDictionary_new(&spells->spellCodes, magic_number);
     bbSpellFunctions* functions = &spells->functions;
     //sizeof (bbSpell_Constructor)?
     functions->Constructors = calloc(magic_number, sizeof(U64));

@@ -1,6 +1,7 @@
 #include "engine/logic/bbFlag.h"
 #include "engine/widgets/bbWidget.h"
 #include "engine/widgets/bbWidgetFunctions.h"
+#include "engine/data/bbHome.h"
 
 //typedef bbFlag bbMouse_LeftDown (void* mouse, void* widgets, void* widget,
 // void* graphics);
@@ -16,6 +17,10 @@ graphics)
     bbWidget* CurrentSpell = Widgets->currentSpell;
     CurrentSpell->frames[0].handle = Widget->frames[0].handle;
 
-    bbDebug("Mouse left button down on spells slot\n");
+    bbSpell_setActive_Key(Widget->key,
+                          &home.private.spells,
+                          home.private.server,
+                          home.private.mapTime);
+
     return Success;
 }

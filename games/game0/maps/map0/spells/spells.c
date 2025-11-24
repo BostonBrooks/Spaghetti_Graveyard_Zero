@@ -1,6 +1,8 @@
 #include "engine/logic/bbFlag.h"
 #include "engine/spells/bbSpell.h"
 #include "games/game0/maps/map0/spells/spell1.h"
+#include "games/game0/maps/map0/spells/spell2.h"
+#include "games/game0/maps/map0/spells/spell3.h"
 
 bbFlag bbSpell_NULL_Constructor(bbSpell** self, bbSpells* spells){
     bbDebug("Execute virtual function\n");
@@ -87,17 +89,44 @@ bbFlag bbSpellFunctions_populate(bbSpellFunctions* functions){
     bbSpellsFunctions_add(functions, SpellReceiveClick,
                           bbSpell_NULL_ReceiveClick,"NULL");
 
+
     bbSpellsFunctions_add(functions, SpellConstructor,
-                      bbSpell_Crossbow_Constructor,"CROSSBOW");
+                          bbSpell_Spell1_Constructor,"SPELL1");
     bbSpellsFunctions_add(functions, SpellDestructor,
-                          bbSpell_Crossbow_Destructor,"CROSSBOW");
+                          bbSpell_Spell1_Destructor,"SPELL1");
     bbSpellsFunctions_add(functions, SpellSetActive,
-                          bbSpell_Crossbow_SetActive,"CROSSBOW");
+                          bbSpell_Spell1_SetActive,"SPELL1");
     bbSpellsFunctions_add(functions, SpellSetInactive,
-                          bbSpell_Crossbow_SetInactive,"CROSSBOW");
+                          bbSpell_Spell1_SetInactive,"SPELL1");
     bbSpellsFunctions_add(functions, SpellReceiveStr,
-                          bbSpell_Crossbow_ReceiveStr,"CROSSBOW");
+                          bbSpell_Spell1_ReceiveStr,"SPELL1");
     bbSpellsFunctions_add(functions, SpellReceiveClick,
-                          bbSpell_Crossbow_ReceiveClick,"CROSSBOW");
+                          bbSpell_Spell1_ReceiveClick,"SPELL1");
+
+    bbSpellsFunctions_add(functions, SpellConstructor,
+                          bbSpell_Spell2_Constructor,"SPELL2");
+    bbSpellsFunctions_add(functions, SpellDestructor,
+                          bbSpell_Spell2_Destructor,"SPELL2");
+    bbSpellsFunctions_add(functions, SpellSetActive,
+                          bbSpell_Spell2_SetActive,"SPELL2");
+    bbSpellsFunctions_add(functions, SpellSetInactive,
+                          bbSpell_Spell2_SetInactive,"SPELL2");
+    bbSpellsFunctions_add(functions, SpellReceiveStr,
+                          bbSpell_Spell2_ReceiveStr,"SPELL2");
+    bbSpellsFunctions_add(functions, SpellReceiveClick,
+                          bbSpell_Spell2_ReceiveClick,"SPELL2");
+
+    bbSpellsFunctions_add(functions, SpellConstructor,
+                          bbSpell_Spell3_Constructor,"SPELL3");
+    bbSpellsFunctions_add(functions, SpellDestructor,
+                          bbSpell_Spell3_Destructor,"SPELL3");
+    bbSpellsFunctions_add(functions, SpellSetActive,
+                          bbSpell_Spell3_SetActive,"SPELL3");
+    bbSpellsFunctions_add(functions, SpellSetInactive,
+                          bbSpell_Spell3_SetInactive,"SPELL3");
+    bbSpellsFunctions_add(functions, SpellReceiveStr,
+                          bbSpell_Spell3_ReceiveStr,"SPELL3");
+    bbSpellsFunctions_add(functions, SpellReceiveClick,
+                          bbSpell_Spell3_ReceiveClick,"SPELL3");
     return Success;
 }

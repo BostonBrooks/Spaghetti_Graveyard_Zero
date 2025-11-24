@@ -16,7 +16,6 @@ bbFlag Button_IsOver (bbMouse* mouse, bbWidgets* widgets, bbWidget* widget)
         if (!bbVPool_handleIsEqual(pool,handle,mouse->isOver))
         {
 
-            bbHere();
             mouse->wasOver = mouse->isOver;
             mouse->isOver = handle;
         }
@@ -36,7 +35,6 @@ bbFlag Button_Enter (void* mouse, void* widgets, void* widget, void* graphics)
                         "BUTTON_HOVER", &Widget->frames[0].handle);
 
     Widget->mtable.hover = true;
-    bbDebug("Mouse enters button\n");
     return Success;
 }
 
@@ -49,7 +47,6 @@ bbFlag Button_Leave (void* mouse, void* widgets, void* widget, void* graphics)
                         "BUTTON_DEFAULT", &Widget->frames[0].handle);
 
     Widget->mtable.hover = false;
-    bbDebug("Mouse leaves button\n");
     return Success;
 }
 
@@ -70,7 +67,6 @@ graphics)
     bbVPool_reverseLookup(pool, widget, &handle);
     Widget->mtable.hover = true;
     Mouse->selected = handle;
-    bbDebug("Mouse left button down on button\n");
     return Success;
 }
 
@@ -96,6 +92,5 @@ bbFlag Button_LeftUp (void* mouse, void* widgets, void* widget, void* graphics)
     }
 
     Widget->mtable.hover = false;
-    bbDebug("Mouse left button up on button\n");
     return Success;
 }

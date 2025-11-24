@@ -20,7 +20,6 @@ bbFlag IsOver_Always(bbMouse* mouse, bbWidgets* widgets, bbWidget* widget)
     bbVPool_reverseLookup(pool,widget,&handle);
     if (!bbVPool_handleIsEqual(pool,handle,mouse->isOver))
     {
-        bbHere();
         mouse->wasOver = mouse->isOver;
         mouse->isOver = handle;
     }
@@ -37,7 +36,6 @@ bbFlag IsOver_Teleport(bbMouse* mouse, bbWidgets* widgets, bbWidget* widget)
     bbScreenPoints point = mouse->position;
 
     if (bbScreenPoints_inScreenPointsRect(point, rect)){
-        bbDebug("Mouse interacts with Sphere\n");
         widget->rect.left = rand()%(720*8 - 52*8);
         widget->rect.top = rand()%(480*8 - 52*8);
 
@@ -62,7 +60,6 @@ bbFlag IsOver_Hover(bbMouse* mouse, bbWidgets* widgets, bbWidget* widget)
 
         if (!bbVPool_handleIsEqual(pool,handle,mouse->isOver))
         {
-            bbHere();
             mouse->wasOver = mouse->isOver;
             mouse->isOver = handle;
         }
@@ -97,14 +94,10 @@ bbFlag IsOver_Viewport(bbMouse* mouse, bbWidgets* widgets, bbWidget* widget)
 
 
 
-            bbDebug("MC.i = %d, MC.j = %d\nVP.i = %d, VP.j = %d\nGP.i = %d, "
-                    "GP.j = %d\n", MC.i, MC.j, VP->viewpoint.i,VP->viewpoint.j,
-                    testGoalPoint.i, testGoalPoint.j);
         }
 
         if (!bbVPool_handleIsEqual(pool,handle,mouse->isOver))
         {
-            bbHere();
             mouse->wasOver = mouse->isOver;
             mouse->isOver = handle;
         }

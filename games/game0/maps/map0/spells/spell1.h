@@ -1,16 +1,16 @@
 /**Usual Program Flow:
  *
  *bbSpell_setActive:
- *  notify server (So the player character can show the crossbow in hand)
+ *  notify server (So the player character can show the spell1 in hand)
  *  prompt player to answer maths question
  *
  *bbSpell_ReceiveStr:
  *  player answers maths question,
- *  if correct, crossbow is armed
+ *  if correct, spell1 is armed
  *  otherwise, prompt player to enter maths question
  *
  *bbSpell_ReceivedClick:
- *  request launch of crossbow bolt from server
+ *  request launch of spell1 bolt from server
  *  prompt player to answer maths question
 */
 
@@ -29,38 +29,40 @@ typedef bbFlag bbSpell_ReceiveStr(bbSpell* self, void* spells, char* answer);
 typedef bbFlag bbSpell_ReceiveClick(bbSpell* self, void* spells, bbMapCoords MC);
 */
 
-bbFlag bbSpell_Crossbow_Constructor(bbSpell** self, void* Spells)
+bbFlag bbSpell_Spell1_Constructor(bbSpell** self, void* Spells)
 {
     bbSpells* spells = (bbSpells*)Spells;
     bbSpell* spell; bbPool_Handle spellHandle;
     bbVPool_alloc(spells->pool, (void**)&spell);
 
+    bbVPool_reverseLookup(spells->pool, spell, &spellHandle);
+    bbDictionary_add(spells->spellCodes, "SPELL1", spellHandle);
 
-    spell->spellIcon = 103;
+    spell->spellIcon = 101+1;
 
     spell->fTable.Constructor =
             bbSpellFunctions_getInt(&spells->functions,
-                                    SpellConstructor, "CROSSBOW");
+                                    SpellConstructor, "SPELL1");
 
     spell->fTable.Destructor =
             bbSpellFunctions_getInt(&spells->functions,
-                                    SpellDestructor, "CROSSBOW");
+                                    SpellDestructor, "SPELL1");
 
     spell->fTable.SetActive =
             bbSpellFunctions_getInt(&spells->functions,
-                                    SpellSetActive, "CROSSBOW");
+                                    SpellSetActive, "SPELL1");
 
     spell->fTable.SetInactive =
             bbSpellFunctions_getInt(&spells->functions,
-                                    SpellSetInactive, "CROSSBOW");
+                                    SpellSetInactive, "SPELL1");
 
     spell->fTable.ReceiveStr =
             bbSpellFunctions_getInt(&spells->functions,
-                                    SpellReceiveStr, "CROSSBOW");
+                                    SpellReceiveStr, "SPELL1");
 
     spell->fTable.ReceiveClick =
             bbSpellFunctions_getInt(&spells->functions,
-                                    SpellReceiveClick, "CROSSBOW");
+                                    SpellReceiveClick, "SPELL1");
 
     spell->state = SpellInactive;
 
@@ -68,16 +70,17 @@ bbFlag bbSpell_Crossbow_Constructor(bbSpell** self, void* Spells)
     return Success;
 }
 
-bbFlag bbSpell_Crossbow_Destructor(bbSpell** self, void* spells)
+bbFlag bbSpell_Spell1_Destructor(bbSpell** self, void* spells)
 {
     return Success;
 }
 
-bbFlag bbSpell_Crossbow_SetActive(bbSpell* spell, void* Spells, bbDummySender* server, U64 gameTime)
+bbFlag bbSpell_Spell1_SetActive(bbSpell* spell, void* Spells, bbDummySender* server, U64 gameTime)
 {
     bbHere();
     bbSpells* spells = (bbSpells*)Spells;
-    bbSpell_setInactive(spells->currentSpell, spells);
+    //TODO roll out to calling function
+    //bbSpell_setInactive(spells->currentSpell, spells);
     spells->currentSpell = spell;
 
 
@@ -101,13 +104,13 @@ bbFlag bbSpell_Crossbow_SetActive(bbSpell* spell, void* Spells, bbDummySender* s
 
     return Success;
 }
-bbFlag bbSpell_Crossbow_SetInactive(bbSpell* self, void* spells)
+bbFlag bbSpell_Spell1_SetInactive(bbSpell* self, void* spells)
 {
     self->state = SpellInactive;
     return Success;
 }
 
-bbFlag bbSpell_Crossbow_ReceiveStr(bbSpell* spell, void* Spells, char* answer)
+bbFlag bbSpell_Spell1_ReceiveStr(bbSpell* spell, void* Spells, char* answer)
 {
     if (spell->state != SpellWaitingForAnswer) return Continue;
     bbSpells* spells = (bbSpells*)Spells;
@@ -121,7 +124,7 @@ bbFlag bbSpell_Crossbow_ReceiveStr(bbSpell* spell, void* Spells, char* answer)
     if (answerInt != spell->answer) return Continue;
 
     char promptStr[64]; bbPool_Handle handle;
-    sprintf(promptStr, "Correct!\nClick to fire crossbow\n");
+    sprintf(promptStr, "Correct!\nClick to fire spell1\n");
 
     handle.ptr = promptStr;
     bbWidget_onCommand(home.private.widgets.prompt,&home.private.widgets,
@@ -134,7 +137,7 @@ bbFlag bbSpell_Crossbow_ReceiveStr(bbSpell* spell, void* Spells, char* answer)
 }
 
 
-bbFlag bbSpell_Crossbow_ReceiveClick(bbSpell* spell, void* Spells, bbMapCoords MC, bbDummySender* server, U64 gameTime)
+bbFlag bbSpell_Spell1_ReceiveClick(bbSpell* spell, void* Spells, bbMapCoords MC, bbDummySender* server, U64 gameTime)
 {
     if (spell->state != SpellWaitingForClick) return Continue;
     bbSpells* spells = (bbSpells*)Spells;

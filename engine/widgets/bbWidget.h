@@ -60,6 +60,7 @@ typedef struct bbWidget{
     bbFrame frames[FRAMES_PER_WIDGET];
 	bbWidget_Type type;
 	bbWidget_TypeData typeData;
+    char key[64];
 
 
 

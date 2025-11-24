@@ -20,12 +20,33 @@ bbFlag bbSpell_setInactive (bbSpell* spell, bbSpells* spells)
 
 bbFlag bbSpell_setActive(bbSpell* spell, void* Spells, bbDummySender* server, U64 gameTime)
 {
+    /* TODO:
+     * if current spell != NULL,
+     * bbSpell_setInactive
+     */
     bbSpells* spells = (bbSpells*)Spells;
     I32 functionInt = spell->fTable.SetActive;
     bbSpell_SetActive* function = spells->functions.SetActive[functionInt];
     return function(spell, (void*)spells, server, gameTime);
 }
 
+bbFlag bbSpell_setActive_Key(char* Key, void* Spells, bbDummySender* server,
+                             U64 gameTime){
+    bbDebug("Set active spell: %s\n", Key);
+    bbSpells* spells = (bbSpells*)Spells;
+    bbPool_Handle handle;
+    bbFlag flag = bbDictionary_lookup(spells->spellCodes, Key, &handle);
+
+    if (flag == None) {
+        bbDebug("Spell not available\n");
+        return Continue;
+    }
+    bbSpell* spell;
+    bbVPool_lookup(spells->pool, (void**)&spell, handle);
+    bbSpell_setActive(spell, Spells, server, gameTime);
+
+    return Success;
+}
 
 
 bbFlag bbSpell_receiveStr(bbSpell* spell, void* Spells, char* answer)

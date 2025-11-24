@@ -10,6 +10,8 @@ bbFlag SpellSlot_Constructor (bbWidget** self, void* graphics,
     bbFlag flag = bbWidget_newEmpty(&widget, widgets, parent);
     widget->type = bbWidgetType_SpellSlot;
 
+    bbStr_setStr(widget->key, "SPELL2", 64);
+
     bbAssert(widget != NULL, "null address\n");
 
     bbScreenPointsRect rect;

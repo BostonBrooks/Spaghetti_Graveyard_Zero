@@ -18,7 +18,6 @@ bbFlag SpellSelect_IsOver (bbMouse* mouse, bbWidgets* widgets, bbWidget* widget)
         if (!bbVPool_handleIsEqual(pool,handle,mouse->isOver))
         {
 
-            bbHere();
             mouse->wasOver = mouse->isOver;
             mouse->isOver = handle;
         }
@@ -37,7 +36,6 @@ bbFlag SpellSelect_Enter (void* mouse, void* widgets, void* widget, void* graphi
     //                    "ASPADES", &Widget->frames[0].handle);
 
     Widget->mtable.hover = true;
-    bbDebug("Mouse enters spells selector\n");
     return Success;
 }
 
@@ -50,7 +48,6 @@ bbFlag SpellSelect_Leave (void* mouse, void* widgets, void* widget, void* graphi
     //                    "ASPADES", &Widget->frames[0].handle);
 
     Widget->mtable.hover = false;
-    bbDebug("Mouse leaves spells selector\n");
     return Success;
 }
 
@@ -60,6 +57,7 @@ bbFlag SpellSelect_LeftDown (void* mouse, void* widgets, void* widget, void*
 graphics)
 {
     bbWidget* Widget = (bbWidget*)widget;
+    bbDebug("Selecting spell %s\n", Widget->key);
     bbGraphics* Graphics = graphics;
     bbMouse* Mouse = mouse;
     bbWidgets* Widgets = widgets;
@@ -77,7 +75,6 @@ graphics)
     dragOrigin.y = Mouse->position.y - Widget->rect.top;
     Mouse->dragOrigin = dragOrigin;
 
-    bbDebug("Mouse left button down on spells selector\n");
     return Success;
 }
 
@@ -95,8 +92,10 @@ bbFlag SpellSelect_LeftUp (void* mouse, void* widgets, void* widget, void* graph
 
     bbWidget* target;
     bbVPool_lookup(Widgets->pool, (void**)&target, Mouse->isOver);
-    if (target->type==bbWidgetType_SpellSlot)
-             target->frames[0].handle = Widget->frames[0].handle;
+    if (target->type==bbWidgetType_SpellSlot) {
+        target->frames[0].handle = Widget->frames[0].handle;
+        bbStr_setStr(target->key, Widget->key, 64);
+    }
     Mouse->selected = Widgets->pool->null;
 
     if (Widget->mtable.hover) {
@@ -120,7 +119,6 @@ bbFlag SpellSelect_LeftUp (void* mouse, void* widgets, void* widget, void* graph
 
 
     Widget->mtable.hover = false;
-    bbDebug("Mouse left button up on spells selector\n");
     return Success;
 }
 
@@ -141,7 +139,5 @@ graphics) {
     Widget->rect.left = newPos.x;
     Widget->rect.top = newPos.y;
 */
-
-    bbDebug("Mouse left button drag on card\n");
     return Success;
 }

@@ -33,6 +33,5 @@ graphics)
         Widget->tree.childrenvisible = false;
     }
 
-    bbDebug("Spell Select Menu Closed\n");
     return Success;
 }

@@ -97,6 +97,8 @@ bbFlag bbSpell_new(bbSpell** self, bbSpells* Spells, char* key);
 
 bbFlag bbSpell_setActive (bbSpell* self, void* spells, bbDummySender* server, U64 gameTime);
 bbFlag bbSpell_setInactive (bbSpell* spell, bbSpells* spells);
+bbFlag bbSpell_setActive_Key(char* Key, void* Spells, bbDummySender* server,
+                             U64 gameTime);
 
 //receive str from text input
 bbFlag bbSpell_receiveStr(bbSpell* spell, void* spells, char* str);
