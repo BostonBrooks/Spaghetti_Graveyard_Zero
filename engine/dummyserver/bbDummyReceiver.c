@@ -17,7 +17,7 @@ bbFlag bbDummyReceiver_receive(bbDummySender* server, U64 gameTime )
 
         if (message->header.type == bbDummySenderMsgType_activateSpell)
         {
-
+            bbDummyReceiver_setActiveSpell(message);
         }
         bbList_popL(&server->message_queue, (void**)&listElement);
         bbVPool_free(server->message_queue.pool, listElement);

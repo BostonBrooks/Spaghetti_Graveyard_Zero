@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <time.h>
 #include "engine/includes/CSFML.h"
 #include "engine/graphics/bbGraphics.h"
 #include "engine/graphics/bbColours.h"
@@ -26,7 +27,7 @@ I32 hash(unsigned char *str, I32 n_bins);
 bbHome home;
 
 int main (void){
-
+    srand(time(NULL));
 
     //trying to replicate a bug
     I32 magic_number = 256;

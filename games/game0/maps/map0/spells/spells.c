@@ -1,6 +1,6 @@
 #include "engine/logic/bbFlag.h"
 #include "engine/spells/bbSpell.h"
-#include "games/game0/maps/map0/spells/crossbow.h"
+#include "games/game0/maps/map0/spells/spell1.h"
 
 bbFlag bbSpell_NULL_Constructor(bbSpell** self, bbSpells* spells){
     bbDebug("Execute virtual function\n");
