@@ -101,11 +101,6 @@ CLEARWINDOW(bbGreen);
 
 	bbDummySender_new(&home.private.server);
 
-	bbDummySender_netSend(home.private.server, "TEST\n", 0);
-	bbDummySender_netSend(home.private.server, "TEST\n", 0);
-	bbDummySender_netSend(home.private.server, "TEST\n", 0);
-	bbDummySender_netSend(home.private.server, "TEST\n", 0);
-	bbDummySender_netSend(home.private.server, "TEST\n", 0);
 
     //bbSpells spells;
     bbSpells_init(&home.private.spells);
@@ -273,13 +268,16 @@ CLEARWINDOW(bbMagenta);
 	for (home.private.mapTime = 0; ; home.private.mapTime++) {
 
 
-
+/*
 		unsigned char ch = 'a' + rand()%26;
         bbPool_Handle handle;
         handle.u64 = ch;
 		bbWidget_onCommand(home.private.widgets.dialog, &home.private.widgets, bbWC_putChar, handle);
 
+*/
 
+        bbDummySender_textMessage(home.private.server, "TEST", home.private
+        .mapTime);
 
         bbMapCoords difference;
         difference.i = testGoalPoint.i - home.private.viewport->viewpoint.i;
@@ -303,7 +301,7 @@ CLEARWINDOW(bbMagenta);
 		bbMouse_isOver(&home.private.mouse, &home.private.widgets);
 		bbMouse_Update(&home.private.mouse, &home.private.widgets, &home.constant.graphics);
 
-		bbDummySender_react(home.private.server, home.private.mapTime );
+		bbDummyReceiver_receive(home.private.server, home.private.mapTime );
 
 	if (home.private.mapTime % 50 == 0) bbPrintf("mapTime = %d\n", home.private.mapTime);
 		cl.mapTime = home.private.mapTime;

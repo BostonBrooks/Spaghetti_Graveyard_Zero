@@ -8,6 +8,8 @@ bbFlag bbSpell_NULL_Constructor(bbSpell** self, bbSpells* spells){
     bbSpell* spell; bbPool_Handle spellHandle;
     bbVPool_alloc(spells->pool, (void**)&spell);
 
+    spell->spellIcon = 102;
+
     spell->fTable.Constructor =
             bbSpellFunctions_getInt(&spells->functions,
                                     SpellConstructor, "NULL");

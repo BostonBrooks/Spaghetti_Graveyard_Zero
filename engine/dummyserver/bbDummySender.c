@@ -37,7 +37,7 @@ bbFlag bbDummySender_queueMsg(bbDummySender* server, bbDummySender_msg* message,
 
 
 
-bbFlag bbDummySender_netSend(bbDummySender* server, char* string, U64 gameTime)
+bbFlag bbDummySender_textMessage(bbDummySender* server, char* string, U64 gameTime)
 {
     const int lag = 5;
 

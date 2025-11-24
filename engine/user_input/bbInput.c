@@ -192,7 +192,7 @@ bbFlag bbInput_poll(bbInput* input, sfRenderWindow* window){
 
                     bbWidget_onCommand(widgets->prompt,widgets, bbWC_putStr,
                                        handle);
-                    bbDummySender_netSend(home.private.server, widgets->command->typeData.textBox.string,
+                    bbDummySender_textMessage(home.private.server, widgets->command->typeData.textBox.string,
                                          home.private.mapTime);
                                          */
                     bbSpell_receiveStr(home.private.spells.currentSpell, &home.private.spells, widgets->command->typeData.textBox.string);

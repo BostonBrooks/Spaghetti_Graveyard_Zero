@@ -35,6 +35,9 @@ bbFlag bbSpell_Crossbow_Constructor(bbSpell** self, void* Spells)
     bbSpell* spell; bbPool_Handle spellHandle;
     bbVPool_alloc(spells->pool, (void**)&spell);
 
+
+    spell->spellIcon = 103;
+
     spell->fTable.Constructor =
             bbSpellFunctions_getInt(&spells->functions,
                                     SpellConstructor, "CROSSBOW");
@@ -79,8 +82,9 @@ bbFlag bbSpell_Crossbow_SetActive(bbSpell* spell, void* Spells, bbDummySender* s
 
 
     //bbPool_Handle icon = spell->spellButton->frames->handle; //error undefined
-    bbPool_Handle icon; icon.u64 = 108;
-    //bbDummySender_setActiveSpell(server, icon, gameTime);
+    bbPool_Handle icon; icon.u64 = spell->spellIcon;
+    bbDummySender_setActiveSpell(server, icon, gameTime);
+
     I32 x = rand() % 20;
     I32 y = rand() % 20;
 

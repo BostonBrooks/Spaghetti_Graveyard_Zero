@@ -47,6 +47,7 @@ typedef struct {
     I32 answer;
     bbSpellState state;
     bbWidget* spellButton;
+    I32 spellIcon;
 
 } bbSpell;
 

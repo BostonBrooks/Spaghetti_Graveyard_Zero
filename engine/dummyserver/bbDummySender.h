@@ -64,7 +64,7 @@ bbFlag bbDummySender_queueMsg(bbDummySender* server, bbDummySender_msg* message,
 
 
 
-bbFlag bbDummySender_netSend(bbDummySender* server, char* string, U64 gameTime);
+bbFlag bbDummySender_textMessage(bbDummySender* server, char* string, U64 gameTime);
 bbFlag bbDummySender_setActiveSpell(bbDummySender* server, bbPool_Handle spell, U64 gameTime);
 bbFlag bbDummySender_castSpell(bbDummySender* server, bbMapCoords MC, U64 gameTime);
 

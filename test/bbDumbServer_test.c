@@ -15,8 +15,8 @@ int main (void)
         sprintf(str, "%d\n", gameTime);
 
 
-        bbDummySender_netSend(server, str, gameTime);
-        bbDummySender_react(server, gameTime );
+        bbDummySender_textMessage(server, str, gameTime);
+        bbDummyReceiver_receive(server, gameTime );
 
         sfSleep(sfMilliseconds(16));
         gameTime++;
