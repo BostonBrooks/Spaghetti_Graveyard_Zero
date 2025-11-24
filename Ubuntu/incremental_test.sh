@@ -39,6 +39,7 @@ if gcc    -I ../\
        ../engine/user_input/bbMouseFunctions.c\
        ../engine/graphics/bbFonts.c\
        ../engine/dummyserver/bbDummySender.c\
+       ../engine/dummyserver/bbDummyReceiver.c\
        ../engine/spells/bbSpells.c\
        ../engine/spells/bbSpell.c\
        ../games/game0/maps/map0/spells/spells.c\
