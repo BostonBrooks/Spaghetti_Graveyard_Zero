@@ -46,8 +46,8 @@ typedef struct {
     size_t offsetOf;
     /*todo: offset of interesting part of element
      * size_t offsetOfInterest;
-     * useful for iterating over the local avoidance part of a larger object
-     * in the game world.
+     * useful for iterating over the local avoidance part / drawable part of a
+     * larger object in the game world.
      */
     I32 (*compare)(void* A, void* B);
 	bbPool_Handle current;
