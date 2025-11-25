@@ -23,6 +23,7 @@
  * compare had better return > or < and never ==
  * ie if A < B iff B > A
  *
+ *
  */
 
 #ifndef BBLIST_H
@@ -43,6 +44,11 @@ typedef struct {
     bbPool_List list;
     //offset of bbPool_ListElement from beginning of element
     size_t offsetOf;
+    /*todo: offset of interesting part of element
+     * size_t offsetOfInterest;
+     * useful for iterating over the local avoidance part of a larger object
+     * in the game world.
+     */
     I32 (*compare)(void* A, void* B);
 	bbPool_Handle current;
 	bbPool_Handle prev;
