@@ -44,11 +44,8 @@ typedef struct {
     bbPool_List list;
     //offset of bbPool_ListElement from beginning of element
     size_t offsetOf;
-    /*todo: offset of interesting part of element
-     * size_t offsetOfInterest;
-     * useful for iterating over the local avoidance part / drawable part of a
-     * larger object in the game world.
-     */
+    size_t offsetOfInterest;
+
     I32 (*compare)(void* A, void* B);
 	bbPool_Handle current;
 	bbPool_Handle prev;
