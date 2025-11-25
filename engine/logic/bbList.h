@@ -44,6 +44,7 @@ typedef struct {
     bbPool_List list;
     //offset of bbPool_ListElement from beginning of element
     size_t offsetOf;
+    //TODO tested with bbList_iterate, gets harder when using nested lists
     size_t offsetOfInterest;
 
     I32 (*compare)(void* A, void* B);
