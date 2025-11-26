@@ -1,5 +1,5 @@
 
-#include "engine/user_input/bbMouse.h"
+#include "engine/userinterface/bbMouse.h"
 
 #include "engine/widgets/bbWidget.h"
 

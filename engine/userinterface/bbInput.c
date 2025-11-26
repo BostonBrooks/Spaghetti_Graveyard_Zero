@@ -1,6 +1,6 @@
 #include "engine/logic/bbFlag.h"
 #include "engine/includes/CSFML.h"
-#include "engine/user_input/bbInput.h"
+#include "engine/userinterface/bbInput.h"
 #include "engine/logic/bbTerminal.h"
 #include "engine/dummyserver/bbDummySender.h"
 #include "engine/data/bbHome.h"

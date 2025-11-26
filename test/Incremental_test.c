@@ -7,14 +7,14 @@
 #include "engine/widgets/bbWidget.h"
 #include "engine/logic/bbTerminal.h"
 #include "engine/logic/bbTree.h"
-#include "engine/user_input/bbInput.h"
+#include "engine/userinterface/bbInput.h"
 #include "engine/viewport/bbViewport.h"
 #include "engine/viewport/bbOverlays.h"
 #include "engine/widgets/bbWidgetFunctions.h"
 #include "engine/geometry/bbCoordinates.h"
 #include "engine/dummyserver/bbDummySender.h"
 #include "engine/dummyserver/bbDummyReceiver.h"
-#include "engine/viewport/bbSpell.h"
+#include "engine/userinterface/bbSpell.h"
 #include "engine/data/bbHome.h"
 
 

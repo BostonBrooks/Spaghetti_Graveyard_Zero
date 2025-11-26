@@ -53,8 +53,8 @@ add_executable(myprogram
         engine/logic/bbTree.c
         engine/logic/bbList_map.c
         engine/widgets/bbWidget.c
-        engine/user_input/bbInput.h
-        engine/user_input/bbInput.c
+        engine/userinterface/bbInput.h
+        engine/userinterface/bbInput.c
         engine/viewport/bbViewport.h
         engine/viewport/bbViewport.c
         engine/viewport/bbOverlays.h
@@ -72,22 +72,22 @@ add_executable(myprogram
         games/game0/maps/map0/widgets/nullfunctions.h
         engine/widgets/bbWidgetFunctions.c
         games/game0/maps/map0/widgets/sphere.h
-        engine/user_input/bbMouse.c
+        engine/userinterface/bbMouse.c
         games/game0/maps/map0/widgets/button.h
-        engine/user_input/bbMouseFunctions.c
+        engine/userinterface/bbMouseFunctions.c
         engine/viewport/bbViewportCoords.c
         games/game0/maps/map0/mouse/button.h
         games/game0/maps/map0/mouse/card.h
         games/game0/maps/map0/widgets/spellbar.h
         games/game0/maps/map0/widgets/widgets.c
-        games/game0/maps/map0/mouse/viewportelect.h
         games/game0/maps/map0/widgets/currentspell.h
         games/game0/maps/map0/mouse/spellmenu.h
         games/game0/maps/map0/mouse/mouse.h
-        engine/viewport/bbSpells.c
-        engine/viewport/bbSpell.c
+        engine/userinterface/bbSpells.c
+        engine/userinterface/bbSpell.c
         engine/data/bbHome.h
-        games/game0/maps/map0/viewport/spell1.h
+        games/game0/maps/map0/spells/spell1.h
         engine/dummyserver/bbDummySender.c
         engine/dummyserver/bbDummyReceiver.h
-        engine/dummyserver/bbDummyReceiver.c)
+        engine/dummyserver/bbDummyReceiver.c
+        engine/viewport/bbDrawable.h)

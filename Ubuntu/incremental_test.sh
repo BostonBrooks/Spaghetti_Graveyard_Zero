@@ -31,17 +31,17 @@ if gcc    -I ../\
        ../engine/logic/bbNestedList.c\
        ../engine/widgets/bbWidget.c\
        ../engine/geometry/bbCoordinates.c\
-       ../engine/user_input/bbInput.c\
+       ../engine/userinterface/bbInput.c\
        ../engine/widgets/bbWidgetFunctions.c\
        ../games/game0/maps/map0/widgets/widgets.c\
        ../games/game0/maps/map0/mouse/mouse.c\
-       ../engine/user_input/bbMouse.c\
-       ../engine/user_input/bbMouseFunctions.c\
+       ../engine/userinterface/bbMouse.c\
+       ../engine/userinterface/bbMouseFunctions.c\
        ../engine/graphics/bbFonts.c\
        ../engine/dummyserver/bbDummySender.c\
        ../engine/dummyserver/bbDummyReceiver.c\
-       ../engine/viewport/bbSpells.c\
-       ../engine/viewport/bbSpell.c\
+       ../engine/userinterface/bbSpells.c\
+       ../engine/userinterface/bbSpell.c\
        ../games/game0/maps/map0/spells/spells.c\
        \
   -lcsfml-system -lcsfml-graphics -lcsfml-window -g -lm -w\

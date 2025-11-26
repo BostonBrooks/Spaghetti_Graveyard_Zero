@@ -7,7 +7,7 @@
 #include "engine/viewport/bbViewport.h"
 #include "engine/viewport/bbViewportCoords.h"
 #include "engine/data/bbHome.h"
-#include "engine/viewport/bbSpell.h"
+#include "engine/userinterface/bbSpell.h"
 
 extern bbMapCoords testGoalPoint;
 

@@ -4,7 +4,7 @@
 #define MOOSE_FUNCTIONS
 
 #include "engine/logic/bbFlag.h"
-#include "engine/user_input/bbMouseFunctions.h"
+#include "engine/userinterface/bbMouseFunctions.h"
 #include "games/game0/maps/map0/mouse/mouse.h"
 #include "games/game0/maps/map0/mouse/button.h"
 #include "games/game0/maps/map0/mouse/box.h"

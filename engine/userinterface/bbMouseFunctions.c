@@ -1,4 +1,4 @@
-#include "engine/user_input/bbMouseFunctions.h"
+#include "engine/userinterface/bbMouseFunctions.h"
 
 #include <stdlib.h>
 

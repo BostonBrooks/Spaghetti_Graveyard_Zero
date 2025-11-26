@@ -15,7 +15,7 @@
 */
 
 #include "engine/logic/bbFlag.h"
-#include "engine/viewport/bbSpell.h"
+#include "engine/userinterface/bbSpell.h"
 #include "engine/dummyserver/bbDummySender.h"
 #include "engine/data/bbHome.h"
 #include <string.h>

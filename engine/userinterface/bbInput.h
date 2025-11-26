@@ -6,7 +6,7 @@
 #include "engine/logic/bbFlag.h"
 #include "engine/includes/CSFML.h"
 #include "engine/graphics/bbGraphics.h"
-#include "engine/user_input/bbMouse.h"
+#include "engine/userinterface/bbMouse.h"
 #include "engine/widgets/bbWidget.h"
 
 typedef struct {
