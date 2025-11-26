@@ -7,7 +7,7 @@
 #include "engine/widgets/bbWidget.h"
 #include "engine/viewport/bbViewport.h"
 #include "engine/viewport/bbOverlays.h"
-#include "engine/viewport/bbViewportCoords.h"
+#include "engine/geometry/bbViewportCoords.h"
 #include "engine/data/bbHome.h"
 
 

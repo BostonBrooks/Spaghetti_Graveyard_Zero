@@ -16,7 +16,7 @@ gcc   -D SFML_STATIC -I ../^
        ../test/Incremental_test.c^
        ../engine/viewport/bbViewport.c^
        ../engine/viewport/bbOverlays.c^
-       ../engine/viewport/bbViewportCoords.c^
+       ../engine/geometry/bbViewportCoords.c^
        ../engine/graphics/bbTextures.c^
        ../engine/graphics/bbSprites.c^
        ../engine/graphics/bbDrawfunctions.c^

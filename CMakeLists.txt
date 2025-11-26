@@ -66,7 +66,7 @@ add_executable(myprogram
         engine/logic/bbNestedList.c
         test/bbListList_test.c
         test/bbListList_map_test.c
-        engine/viewport/bbViewportCoords.h
+        engine/geometry/bbViewportCoords.h
         test/bbOverlay_test.c
         test/automorphicNumbers.c
         games/game0/maps/map0/widgets/nullfunctions.h
@@ -75,7 +75,7 @@ add_executable(myprogram
         engine/userinterface/bbMouse.c
         games/game0/maps/map0/widgets/button.h
         engine/userinterface/bbMouseFunctions.c
-        engine/viewport/bbViewportCoords.c
+        engine/geometry/bbViewportCoords.c
         games/game0/maps/map0/mouse/button.h
         games/game0/maps/map0/mouse/card.h
         games/game0/maps/map0/widgets/spellbar.h
