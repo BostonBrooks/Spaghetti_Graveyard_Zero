@@ -21,7 +21,7 @@ bbFlag bbList_setHead(bbList* list, void** element){
     list->next = list->pool->null;
 
     if (element!=NULL) {
-        bbVPool_lookup(list->pool, *element, list->current);
+        bbVPool_lookup(list->pool, element, list->current);
     }
     return Success;
 }
@@ -35,7 +35,7 @@ bbFlag bbList_setTail(bbList* list, void** element){
     list->next = list->pool->null;
 
     if (element!=NULL) {
-        bbVPool_lookup(list->pool, *element, list->current);
+        bbVPool_lookup(list->pool, element, list->current);
     }
     return Success;
 }
@@ -60,7 +60,7 @@ bbFlag bbList_increment(bbList* list, void** element){
         list->next = list->pool->null;
 
         if (element!=NULL) {
-            bbVPool_lookup(list->pool, *element, list->current);
+            bbVPool_lookup(list->pool, element, list->current);
         }
 
         return Success;
@@ -74,7 +74,7 @@ bbFlag bbList_increment(bbList* list, void** element){
     list->next = list->pool->null;
 
     if (element!=NULL) {
-        bbVPool_lookup(list->pool, *element, list->current);
+        bbVPool_lookup(list->pool, element, list->current);
     }
 
     return Success;
@@ -101,7 +101,7 @@ bbFlag bbList_decrement(bbList* list, void** element){
         list->next = list->pool->null;
 
         if (element!=NULL) {
-            bbVPool_lookup(list->pool, *element, list->current);
+            bbVPool_lookup(list->pool, element, list->current);
         }
 
         return Success;
@@ -115,7 +115,7 @@ bbFlag bbList_decrement(bbList* list, void** element){
     list->next = list->pool->null;
 
     if (element!=NULL) {
-        bbVPool_lookup(list->pool, *element, list->current);
+        bbVPool_lookup(list->pool, element, list->current);
     }
 
     return Success;
@@ -129,7 +129,7 @@ bbFlag bbList_getCurrent(bbList* list, void** element){
     }
 
     if (element!=NULL) {
-        bbVPool_lookup(list->pool, *element, list->current);
+        bbVPool_lookup(list->pool, element, list->current);
     }
 }
 
