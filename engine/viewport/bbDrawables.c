@@ -77,21 +77,23 @@ bbFlag bbDrawable_draw(bbDrawable* drawable, drawFuncClosure* cl){
 bbFlag bbDrawables_draw(bbDrawables* drawables, drawFuncClosure* cl,
                         I32 square_i_min, I32 square_j_min,
                         I32 square_i_max, I32 square_j_max){
-    bbNestedList list;
-    bbNestedList_init(&list);
+    bbNestedList* list = &drawables->nestedList;
+
+    //todo roll init out to bbDrawables_new
+    bbNestedList_init(list);
     I32 squares_i = drawables->squares_i;
     I32 squares_j = drawables->squares_j;
 
     for (int i = square_i_min; i < square_i_max; ++i) {
         for (int j = square_j_min; j < square_j_max; ++j) {
             I32 n = bbDrawables_getIndex(i, j, drawables->squares_i);
-            bbNestedList_attach(&list, &drawables->squares[n].list);
+            bbNestedList_attach(list, &drawables->squares[n].list);
         }
 
     }
 
 
-    bbNestedList_map(&list, bbDrawable_drawFunc, cl);
+    bbNestedList_map(list, bbDrawable_drawFunc, cl);
 
     return Success;
 }

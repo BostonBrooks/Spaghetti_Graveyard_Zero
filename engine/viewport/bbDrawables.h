@@ -9,6 +9,7 @@
 #include "engine/graphics/bbComposition.h"
 #include "engine/logic/bbList.h"
 #include "engine/graphics/bbGraphics.h"
+#include "engine/logic/bbNestedList.h"
 
 #define FRAMES_PER_DRAWABLE 8
 
@@ -32,6 +33,7 @@ typedef struct
     bbVPool* pool;
     //Drawables outside the usual map grid
     bbList list;
+    bbNestedList nestedList;
 
     //We cant extend bbDrawables because it ends in a flexible array member,
     //so we use a pointer to extra data

@@ -26,9 +26,9 @@ bbFlag bbNestedList_init(bbNestedList* nestedList) {
 bbFlag bbNestedList_attach(bbNestedList* nestedList, bbList* list){
 
 
-    bbList_setHead(list, NULL);
+    bbFlag flag = bbList_setHead(list, NULL);
 
-
+    if(flag = None) return None;
     bbNestedListElement* nestedListElement;
     bbVPool_alloc(bbNestedList_pool, (void**) &nestedListElement);
     nestedListElement->list = list;
