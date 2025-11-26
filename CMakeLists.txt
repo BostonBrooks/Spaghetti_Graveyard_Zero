@@ -90,4 +90,5 @@ add_executable(myprogram
         engine/dummyserver/bbDummySender.c
         engine/dummyserver/bbDummyReceiver.h
         engine/dummyserver/bbDummyReceiver.c
-        engine/viewport/bbDrawable.h)
+        engine/viewport/bbDrawables.h
+        engine/viewport/bbDrawables.c)

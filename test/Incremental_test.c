@@ -16,11 +16,11 @@
 #include "engine/dummyserver/bbDummyReceiver.h"
 #include "engine/userinterface/bbSpell.h"
 #include "engine/data/bbHome.h"
+#include "engine/viewport/bbDrawables.h"
 
 
 bbWidgets* testWidgets;
 bbMapCoords testGoalPoint;
-
 
 I32 hash(unsigned char *str, I32 n_bins);
 
@@ -267,7 +267,15 @@ CLEARWINDOW(bbMagenta);
     bbSpell_setActive(spell1, &home.private.spells, home.private.server, 0);
 
 
+    bbDrawables* drawables;
+    bbDrawables_new((void**)&drawables, &home.constant.graphics, 12, 12);
 
+    cl.mapTime = home.private.mapTime;
+    cl.GUI_time = home.private.mapTime;
+    cl.graphics = &home.constant.graphics;
+    cl.target = home.private.viewport;
+
+    bbDrawables_draw(drawables, &cl,0, 0,3, 3);
 
 	for (home.private.mapTime = 0; ; home.private.mapTime++) {
 
