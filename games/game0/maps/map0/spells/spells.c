@@ -1,5 +1,5 @@
 #include "engine/logic/bbFlag.h"
-#include "engine/spells/bbSpell.h"
+#include "engine/viewport/bbSpell.h"
 #include "games/game0/maps/map0/spells/spell1.h"
 #include "games/game0/maps/map0/spells/spell2.h"
 #include "games/game0/maps/map0/spells/spell3.h"

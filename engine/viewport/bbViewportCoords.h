@@ -8,7 +8,7 @@
 #ifndef BBVIEWPORTCOORDS_H
 #define BBVIEWPORTCOORDS_H
 
-#include "engine/2point5D/bbViewport.h"
+#include "engine/viewport/bbViewport.h"
 #include "engine/includes/game0.h"
 
 sfVector2f bbMapCoords_getV2f(bbMapCoords MC, bbViewport* VP);

@@ -10,7 +10,7 @@ Color_Off='\033[0m'
 
 if gcc    -I ../\
        ../test/bbOverlay_test.c\
-       ../engine/2point5D/bbOverlay.c\
+       ../engine/viewport/bbOverlay.c\
        ../engine/logic/bbVPool.c\
        ../engine/logic/bbLeanPool.c\
        ../engine/logic/bbBloatedPool.c\

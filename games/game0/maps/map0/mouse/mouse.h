@@ -4,10 +4,10 @@
 
 #include "engine/logic/bbVPool.h"
 #include "engine/widgets/bbWidget.h"
-#include "engine/2point5D/bbViewport.h"
-#include "engine/2point5D/bbViewportCoords.h"
+#include "engine/viewport/bbViewport.h"
+#include "engine/viewport/bbViewportCoords.h"
 #include "engine/data/bbHome.h"
-#include "engine/spells/bbSpell.h"
+#include "engine/viewport/bbSpell.h"
 
 extern bbMapCoords testGoalPoint;
 

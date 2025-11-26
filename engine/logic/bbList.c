@@ -33,7 +33,6 @@ bbFlag bbList_init(bbList* list, bbVPool* pool, void* listPtr, size_t offsetOf,
 		list->list.tail = pool->null;
 	}
 	list->offsetOf = offsetOf;
-    list->offsetOfInterest = 0;
 	list->compare = compare;
 	list->prev = list->pool->null;
 	list->current = list->pool->null;

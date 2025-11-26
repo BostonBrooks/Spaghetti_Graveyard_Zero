@@ -2,9 +2,9 @@
 #define BBHOME_H
 
 #include "engine/widgets/bbWidget.h"
-#include "engine/spells/bbSpell.h"
+#include "engine/viewport/bbSpell.h"
 #include "engine/user_input/bbInput.h"
-#include "engine/2point5D/bbOverlays.h"
+#include "engine/viewport/bbOverlays.h"
 #include "engine/dummyserver/bbDummySender.h"
 
 typedef struct {

@@ -8,7 +8,7 @@
 
 #include "engine/logic/bbIntTypes.h"
 #include "engine/geometry/bbCoordinates.h"
-#include "engine/2point5D/bbViewport.h"
+#include "engine/viewport/bbViewport.h"
 #include "engine/graphics/bbComposition.h"
 
 

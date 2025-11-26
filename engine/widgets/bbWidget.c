@@ -15,7 +15,7 @@
 #include "engine/logic/bbTree.h"
 #include "engine/geometry/bbCoordinates.h"
 #include "engine/widgets/bbWidgetFunctions.h"
-#include "engine/2point5D/bbViewport.h"
+#include "engine/viewport/bbViewport.h"
 
 bbFlag bbWidgets_init(bbWidgets* widgets){
 	bbVPool_newBloated(&widgets->pool, sizeof(bbWidget), 1024, 1024);

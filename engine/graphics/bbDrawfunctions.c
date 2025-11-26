@@ -5,9 +5,9 @@
 #include "engine/graphics/bbDrawfunctions.h"
 #include "engine/logic/bbTerminal.h"
 #include "engine/widgets/bbWidget.h"
-#include "engine/2point5D/bbViewport.h"
-#include "engine/2point5D/bbOverlays.h"
-#include "engine/2point5D/bbViewportCoords.h"
+#include "engine/viewport/bbViewport.h"
+#include "engine/viewport/bbOverlays.h"
+#include "engine/viewport/bbViewportCoords.h"
 #include "engine/data/bbHome.h"
 
 

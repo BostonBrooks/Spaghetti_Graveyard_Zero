@@ -21,9 +21,7 @@ bbFlag bbList_setHead(bbList* list, void** element){
     list->next = list->pool->null;
 
     if (element!=NULL) {
-        void* kludge;
-        bbVPool_lookup(list->pool, &kludge, list->current);
-        *element = kludge + list->offsetOfInterest;
+        bbVPool_lookup(list->pool, *element, list->current);
     }
     return Success;
 }
@@ -37,9 +35,7 @@ bbFlag bbList_setTail(bbList* list, void** element){
     list->next = list->pool->null;
 
     if (element!=NULL) {
-        void* kludge;
-        bbVPool_lookup(list->pool, &kludge, list->current);
-        *element = kludge + list->offsetOfInterest;
+        bbVPool_lookup(list->pool, *element, list->current);
     }
     return Success;
 }
@@ -64,9 +60,7 @@ bbFlag bbList_increment(bbList* list, void** element){
         list->next = list->pool->null;
 
         if (element!=NULL) {
-            void* kludge;
-            bbVPool_lookup(list->pool, &kludge, list->current);
-            *element = kludge + list->offsetOfInterest;
+            bbVPool_lookup(list->pool, *element, list->current);
         }
 
         return Success;
@@ -80,9 +74,7 @@ bbFlag bbList_increment(bbList* list, void** element){
     list->next = list->pool->null;
 
     if (element!=NULL) {
-        void* kludge;
-        bbVPool_lookup(list->pool, &kludge, list->current);
-        *element = kludge + list->offsetOfInterest;
+        bbVPool_lookup(list->pool, *element, list->current);
     }
 
     return Success;
@@ -109,9 +101,7 @@ bbFlag bbList_decrement(bbList* list, void** element){
         list->next = list->pool->null;
 
         if (element!=NULL) {
-            void* kludge;
-            bbVPool_lookup(list->pool, &kludge, list->current);
-            *element = kludge + list->offsetOfInterest;
+            bbVPool_lookup(list->pool, *element, list->current);
         }
 
         return Success;
@@ -125,9 +115,7 @@ bbFlag bbList_decrement(bbList* list, void** element){
     list->next = list->pool->null;
 
     if (element!=NULL) {
-        void* kludge;
-        bbVPool_lookup(list->pool, &kludge, list->current);
-        *element = kludge + list->offsetOfInterest;
+        bbVPool_lookup(list->pool, *element, list->current);
     }
 
     return Success;
@@ -139,17 +127,15 @@ bbFlag bbList_getCurrent(bbList* list, void** element){
         *element = NULL;
         return None;
     }
+
     if (element!=NULL) {
-        void* kludge;
-        bbVPool_lookup(list->pool, &kludge, list->current);
-        *element = kludge + list->offsetOfInterest;
+        bbVPool_lookup(list->pool, *element, list->current);
     }
 }
 
 bbFlag bbList_setCurrent(bbList* list, void* element){
     bbPool_Handle elementHandle;
-    void* kludge = element - list->offsetOfInterest;
-    bbVPool_reverseLookup(list->pool, kludge, &elementHandle);
+    bbVPool_reverseLookup(list->pool, element, &elementHandle);
 
     list->current = elementHandle;
     list->prev = list->pool->null;

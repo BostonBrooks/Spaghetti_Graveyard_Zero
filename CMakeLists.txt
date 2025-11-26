@@ -55,10 +55,10 @@ add_executable(myprogram
         engine/widgets/bbWidget.c
         engine/user_input/bbInput.h
         engine/user_input/bbInput.c
-        engine/2point5D/bbViewport.h
-        engine/2point5D/bbViewport.c
-        engine/2point5D/bbOverlays.h
-        engine/2point5D/bbOverlays.c
+        engine/viewport/bbViewport.h
+        engine/viewport/bbViewport.c
+        engine/viewport/bbOverlays.h
+        engine/viewport/bbOverlays.c
         engine/graphics/bbColours.c
         test/bbListList.c
         test/bbList_pushpop.c
@@ -66,7 +66,7 @@ add_executable(myprogram
         engine/logic/bbNestedList.c
         test/bbListList_test.c
         test/bbListList_map_test.c
-        engine/2point5D/bbViewportCoords.h
+        engine/viewport/bbViewportCoords.h
         test/bbOverlay_test.c
         test/automorphicNumbers.c
         games/game0/maps/map0/widgets/nullfunctions.h
@@ -75,19 +75,19 @@ add_executable(myprogram
         engine/user_input/bbMouse.c
         games/game0/maps/map0/widgets/button.h
         engine/user_input/bbMouseFunctions.c
-        engine/2point5D/bbViewportCoords.c
+        engine/viewport/bbViewportCoords.c
         games/game0/maps/map0/mouse/button.h
         games/game0/maps/map0/mouse/card.h
         games/game0/maps/map0/widgets/spellbar.h
         games/game0/maps/map0/widgets/widgets.c
-        games/game0/maps/map0/mouse/spellselect.h
+        games/game0/maps/map0/mouse/viewportelect.h
         games/game0/maps/map0/widgets/currentspell.h
         games/game0/maps/map0/mouse/spellmenu.h
         games/game0/maps/map0/mouse/mouse.h
-        engine/spells/bbSpells.c
-        engine/spells/bbSpell.c
+        engine/viewport/bbSpells.c
+        engine/viewport/bbSpell.c
         engine/data/bbHome.h
-        games/game0/maps/map0/spells/spell1.h
+        games/game0/maps/map0/viewport/spell1.h
         engine/dummyserver/bbDummySender.c
         engine/dummyserver/bbDummyReceiver.h
         engine/dummyserver/bbDummyReceiver.c)

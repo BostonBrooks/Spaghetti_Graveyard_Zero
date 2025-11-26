@@ -12,7 +12,7 @@
 #include "engine/logic/bbDictionary.h"
 #include "engine/widgets/bbWidget.h"
 #include "engine/geometry/bbCoordinates.h"
-#include "engine/spells/bbSpell.h"
+#include "engine/viewport/bbSpell.h"
 #include "engine/dummyserver/bbDummySender.h"
 
 typedef enum

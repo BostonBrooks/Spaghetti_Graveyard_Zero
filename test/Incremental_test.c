@@ -8,13 +8,13 @@
 #include "engine/logic/bbTerminal.h"
 #include "engine/logic/bbTree.h"
 #include "engine/user_input/bbInput.h"
-#include "engine/2point5D/bbViewport.h"
-#include "engine/2point5D/bbOverlays.h"
+#include "engine/viewport/bbViewport.h"
+#include "engine/viewport/bbOverlays.h"
 #include "engine/widgets/bbWidgetFunctions.h"
 #include "engine/geometry/bbCoordinates.h"
 #include "engine/dummyserver/bbDummySender.h"
 #include "engine/dummyserver/bbDummyReceiver.h"
-#include "engine/spells/bbSpell.h"
+#include "engine/viewport/bbSpell.h"
 #include "engine/data/bbHome.h"
 
 

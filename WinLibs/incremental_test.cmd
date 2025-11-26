@@ -14,9 +14,9 @@ echo Attempting to compile:
 SET PATH=C:\winlibs\mingw64\bin
 gcc   -D SFML_STATIC -I ../^
        ../test/Incremental_test.c^
-       ../engine/2point5D/bbViewport.c^
-       ../engine/2point5D/bbOverlays.c^
-       ../engine/2point5D/bbViewportCoords.c^
+       ../engine/viewport/bbViewport.c^
+       ../engine/viewport/bbOverlays.c^
+       ../engine/viewport/bbViewportCoords.c^
        ../engine/graphics/bbTextures.c^
        ../engine/graphics/bbSprites.c^
        ../engine/graphics/bbDrawfunctions.c^
@@ -44,8 +44,8 @@ gcc   -D SFML_STATIC -I ../^
        ../engine/graphics/bbFonts.c^
        ../engine/dummyserver/bbDummySender.c^
        ../engine/dummyserver/bbDummyReceiver.c^
-       ../engine/spells/bbSpells.c^
-       ../engine/spells/bbSpell.c^
+       ../engine/viewport/bbSpells.c^
+       ../engine/viewport/bbSpell.c^
        ../games/game0/maps/map0/spells/spells.c^
        ^
   -lcsfml-system -lcsfml-graphics -lcsfml-window -g -lm -w^

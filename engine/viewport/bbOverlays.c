@@ -1,8 +1,8 @@
-#include "engine/2point5D/bbOverlays.h"
+#include "engine/viewport/bbOverlays.h"
 #include "engine/logic/bbString.h"
 #include "engine/includes/CSFML.h"
 #include "engine/logic/bbNestedList.h"
-#include "engine/2point5D/bbViewportCoords.h"
+#include "engine/viewport/bbViewportCoords.h"
 #include "engine/data/bbHome.h"
 
 

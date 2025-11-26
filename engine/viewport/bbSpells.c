@@ -1,4 +1,4 @@
-#include "engine/spells/bbSpell.h"
+#include "engine/viewport/bbSpell.h"
 #include "engine/logic/bbFlag.h"
 #include "engine/logic/bbTerminal.h"
 

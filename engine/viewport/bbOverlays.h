@@ -13,7 +13,7 @@
 #include "engine/logic/bbVPool.h"
 #include "engine/logic/bbFlag.h"
 #include "engine/graphics/bbComposition.h"
-#include "engine/2point5D/bbViewport.h"
+#include "engine/viewport/bbViewport.h"
 #include "engine/graphics/bbGraphics.h"
 #include "engine/graphics/bbDrawfunctions.h"
 
