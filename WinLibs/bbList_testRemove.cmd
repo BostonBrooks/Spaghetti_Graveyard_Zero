@@ -1,5 +1,5 @@
 SET PATH=C:\winlibs\mingw64\bin
-gcc    -I ../^
+gcc    -g -I ../^
       ../test/bbList_testRemove.c^
       ../engine/logic/bbList.c^
       ../engine/logic/bbBloatedPool.c^

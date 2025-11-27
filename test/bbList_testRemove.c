@@ -36,7 +36,7 @@ int main (void){
     bbHere();
     bbList_remove(&list, someStructs[2]);
     bbHere();
-    bbList_remove(&list, someStructs[10]);
+    bbList_remove(&list, someStructs[9]);
     bbHere();
     bbList_remove(&list, someStructs[5]);
     bbHere();
