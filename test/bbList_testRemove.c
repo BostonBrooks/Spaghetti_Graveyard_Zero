@@ -1,5 +1,6 @@
 #include "engine/logic/bbList.h"
 #include <stdio.h>
+#include "engine/logic/bbTerminal.h"
 
 typedef struct {
     bbPool_ListElement listElement;
@@ -22,7 +23,31 @@ int main (void){
         bbList_pushR(&list, someStructs[i]);
     }
 
+    bbHere();
     bbList_remove(&list, someStructs[3]);
+    bbHere();
+    bbList_remove(&list, someStructs[7]);
+    bbHere();
+    bbList_remove(&list, someStructs[9]);
+    bbHere();
+    bbList_remove(&list, someStructs[11]);
+    bbHere();
+    bbList_remove(&list, someStructs[0]);
+    bbHere();
+    bbList_remove(&list, someStructs[2]);
+    bbHere();
+    bbList_remove(&list, someStructs[10]);
+    bbHere();
+    bbList_remove(&list, someStructs[5]);
+    bbHere();
+    bbList_remove(&list, someStructs[8]);
+    bbHere();
+    bbList_remove(&list, someStructs[4]);
+    bbHere();
+    bbList_remove(&list, someStructs[1]);
+    bbHere();
+    bbList_remove(&list, someStructs[6]);
+    bbHere();
 
     printf("Task passed unexpectedly\n");
 
