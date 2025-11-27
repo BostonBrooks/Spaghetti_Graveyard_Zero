@@ -15,7 +15,6 @@ SET PATH=C:\winlibs\mingw64\bin
 gcc   -D SFML_STATIC -I ../^
        ../test/Incremental_test.c^
        ../engine/viewport/bbViewport.c^
-       ../engine/viewport/bbOverlays.c^
        ../engine/geometry/bbViewportCoords.c^
        ../engine/graphics/bbTextures.c^
        ../engine/graphics/bbSprites.c^
@@ -48,6 +47,7 @@ gcc   -D SFML_STATIC -I ../^
        ../engine/userinterface/bbSpell.c^
        ../games/game0/maps/map0/spells/spells.c^
        ../engine/viewport/bbDrawables.c^
+       ../engine/viewport/bbMapIcons.c^
        ^
   -lcsfml-system -lcsfml-graphics -lcsfml-window -g -lm -w^
     -o ../games/game0/game.exe

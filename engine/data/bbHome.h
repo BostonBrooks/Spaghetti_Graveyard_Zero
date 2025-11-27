@@ -4,8 +4,8 @@
 #include "engine/widgets/bbWidget.h"
 #include "engine/userinterface/bbSpell.h"
 #include "engine/userinterface/bbInput.h"
-#include "engine/viewport/bbOverlays.h"
 #include "engine/dummyserver/bbDummySender.h"
+#include "engine/viewport/bbViewport.h"
 
 typedef struct {
     bbSpells spells;
@@ -20,7 +20,7 @@ typedef struct {
 } bbPrivate;
 
 typedef struct {
-    bbOverlays* overlays;
+    //TODO add drawables and mapicons
     bbGraphics graphics;
 } bbConstant;
 

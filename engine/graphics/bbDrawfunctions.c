@@ -6,7 +6,8 @@
 #include "engine/logic/bbTerminal.h"
 #include "engine/widgets/bbWidget.h"
 #include "engine/viewport/bbViewport.h"
-#include "engine/viewport/bbOverlays.h"
+#include "engine/viewport/bbDrawables.h"
+#include "engine/viewport/bbMapIcons.h"
 #include "engine/geometry/bbViewportCoords.h"
 #include "engine/data/bbHome.h"
 
@@ -147,7 +148,7 @@ bbFlag bbDF_widgetViewport(void* drawable, void* frameDescriptor, void* cl){
 }
 
 bbFlag bbDF_overlayTest(void* drawable, void* frameDescriptor, void* cl){
-    bbOverlay* overlay = drawable;
+    bbDrawable* overlay = drawable;
     drawFuncClosure* foo = cl;
 
     //bbDebug("overlay\n", overlay->label);
@@ -173,7 +174,7 @@ bbFlag bbDF_overlayTest(void* drawable, void* frameDescriptor, void* cl){
 }
 
 bbFlag bbDF_eyeCandyTest(void* drawable, void* frameDescriptor, void* cl){
-    bbOverlay* overlay = drawable;
+    bbDrawable* overlay = drawable;
     drawFuncClosure* foo = cl;
 
     //bbDebug("eye candy\n", overlay->label);

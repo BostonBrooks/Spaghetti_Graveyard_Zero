@@ -26,7 +26,7 @@ bbFlag bbVPool_newLean(bbVPool** pool, I32 sizeOf, I32 num);
 bbFlag bbVPool_newBloated(bbVPool** pool, I32 sizeOf, I32 level1, I32 level2);
 
 #define bbVPool_alloc(pool, address)\
-bbVPool_allocImpl(pool, address, __FILE_NAME__, __LINE__);;
+bbVPool_allocImpl(pool, address, __FILE_NAME__, __LINE__);
 
 //I32 bbVPool_new(bbVPool** pool, I32 sizeOf, I32 num);
 bbFlag bbVPool_delete(bbVPool* pool);

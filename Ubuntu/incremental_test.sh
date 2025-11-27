@@ -11,7 +11,6 @@ Color_Off='\033[0m'
 if gcc    -I ../\
        ../test/Incremental_test.c\
        ../engine/viewport/bbViewport.c\
-       ../engine/viewport/bbOverlays.c\
        ../engine/geometry/bbViewportCoords.c\
        ../engine/graphics/bbTextures.c\
        ../engine/graphics/bbSprites.c\

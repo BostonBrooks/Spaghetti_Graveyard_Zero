@@ -57,8 +57,6 @@ add_executable(myprogram
         engine/userinterface/bbInput.c
         engine/viewport/bbViewport.h
         engine/viewport/bbViewport.c
-        engine/viewport/bbOverlays.h
-        engine/viewport/bbOverlays.c
         engine/graphics/bbColours.c
         test/bbListList.c
         test/bbList_pushpop.c
@@ -67,7 +65,6 @@ add_executable(myprogram
         test/bbListList_test.c
         test/bbListList_map_test.c
         engine/geometry/bbViewportCoords.h
-        test/bbOverlay_test.c
         test/automorphicNumbers.c
         games/game0/maps/map0/widgets/nullfunctions.h
         engine/widgets/bbWidgetFunctions.c
@@ -91,4 +88,5 @@ add_executable(myprogram
         engine/dummyserver/bbDummyReceiver.h
         engine/dummyserver/bbDummyReceiver.c
         engine/viewport/bbDrawables.h
-        engine/viewport/bbDrawables.c)
+        engine/viewport/bbDrawables.c
+        engine/viewport/bbMapIcons.c)

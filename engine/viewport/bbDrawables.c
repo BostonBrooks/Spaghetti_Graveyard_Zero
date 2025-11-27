@@ -15,15 +15,15 @@ I32 bbDrawable_isCloser(void* one, void* two){
     return (foo > 0);
 }
 
-bbFlag bbDrawables_new(void** self, bbGraphics* graphics, I32 squares_i, I32
-squares_j){
+bbFlag bbDrawables_newImpl(void** self, bbGraphics* graphics, I32 squares_i, I32
+squares_j, I32 sizeOf){
     bbDrawables* drawables = malloc(sizeof(bbDrawables) + sizeof
             (bbDrawableSquare)*squares_i*squares_j);
     bbAssert(drawables != NULL, "bad malloc\n");
 
     bbVPool* pool;
 
-    bbVPool_newBloated(&pool, sizeof(bbDrawable), 1000, 1000);
+    bbVPool_newBloated(&pool, sizeOf, 1000, 1000);
 
     drawables->pool = pool;
 
@@ -50,6 +50,8 @@ squares_j){
     *self = drawables;
     return Success;
 }
+
+
 
 ///typedef bbFlag bbNestedList_mapFunction(void* node, void* cl);
 bbFlag bbDrawable_drawFunc(void* node, void* cl){
@@ -92,6 +94,7 @@ bbFlag bbDrawables_draw(bbDrawables* drawables, drawFuncClosure* cl,
 
     bbNestedList_map(&list, bbDrawable_drawFunc, cl);
 
+    //TODO bbNestedList_cleanup;
     return Success;
 }
 

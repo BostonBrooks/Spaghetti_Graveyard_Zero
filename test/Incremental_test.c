@@ -9,7 +9,6 @@
 #include "engine/logic/bbTree.h"
 #include "engine/userinterface/bbInput.h"
 #include "engine/viewport/bbViewport.h"
-#include "engine/viewport/bbOverlays.h"
 #include "engine/widgets/bbWidgetFunctions.h"
 #include "engine/geometry/bbCoordinates.h"
 #include "engine/dummyserver/bbDummySender.h"
@@ -17,6 +16,7 @@
 #include "engine/userinterface/bbSpell.h"
 #include "engine/data/bbHome.h"
 #include "engine/viewport/bbDrawables.h"
+#include "engine/viewport/bbMapIcons.h"
 
 
 bbWidgets* testWidgets;
@@ -183,8 +183,6 @@ CLEARWINDOW(bbPurple);
 
 CLEARWINDOW(bbMagenta);
 
-    bbOverlays *overlays;
-    bbOverlays_new((void**)&overlays, &home.constant.graphics, 7, 9);
 
     bbHere();
 
@@ -268,7 +266,9 @@ CLEARWINDOW(bbMagenta);
 
 
     bbDrawables* drawables;
+    bbMapIcons* mapicons;
     bbDrawables_new((void**)&drawables, &home.constant.graphics, 12, 12);
+    bbMapIcons_new((void**) &mapicons, &home.constant.graphics, 12, 12);
 
     cl.mapTime = home.private.mapTime;
     cl.GUI_time = home.private.mapTime;
@@ -290,6 +290,8 @@ CLEARWINDOW(bbMagenta);
 
             bbDrawable* drawable;
             bbDrawable_new(&drawable, drawables,&home.constant.graphics, MC);
+            bbMapIcon* mapicon;
+            bbMapIcon_new(&mapicon, mapicons,&home.constant.graphics, MC);
         }
     }
 
@@ -340,7 +342,8 @@ CLEARWINDOW(bbMagenta);
 
 
         bbDrawables_draw(drawables, &cl, 0, 0, 12, 12);
-        bbOverlays_draw(overlays, &cl);
+        bbMapIcons_draw(mapicons, &cl, 0, 0, 12, 12);
+
 
 
         cl.target = window;
