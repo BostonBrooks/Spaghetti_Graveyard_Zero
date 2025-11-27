@@ -89,4 +89,5 @@ add_executable(myprogram
         engine/dummyserver/bbDummyReceiver.c
         engine/viewport/bbDrawables.h
         engine/viewport/bbDrawables.c
-        engine/viewport/bbMapIcons.c)
+        engine/viewport/bbMapIcons.c
+        test/bbList_testRemove.c)

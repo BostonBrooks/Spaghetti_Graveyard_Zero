@@ -98,6 +98,7 @@ bbFlag bbDrawables_draw(bbDrawables* drawables, drawFuncClosure* cl,
     return Success;
 }
 
+//TODO what if MC is out of bounds
 bbFlag bbDrawable_new(bbDrawable** self, bbDrawables* drawables,
                    bbGraphics* graphics, bbMapCoords MC)
 {
@@ -122,5 +123,30 @@ bbFlag bbDrawable_new(bbDrawable** self, bbDrawables* drawables,
     }
 
     bbList_sortL(&drawableSquare.list, drawable);
+    return Success;
+}
+
+//TODO what if MC or drawable is out of bounds?
+//TODO it might be faster, if the drawable stays in the same square,
+//that we move the drawable up or down in the list instead of removing it
+// then re-inserting it
+bbFlag bbDrawable_setLocation(bbDrawable* drawable, bbDrawables* drawables,
+                              bbMapCoords MC){
+    bbSquareCoords SC = bbMapCoords_getSquareCoords(MC);
+
+    I32 index = bbDrawables_getSquareIndex(drawable->coords.i,
+                                           drawable->coords.j,
+                                           drawables->squares_i);
+    bbDrawableSquare* drawableSquare = &drawables->squares[index];
+
+    bbList_remove(&drawableSquare->list, drawable);
+
+    drawable->coords = MC;
+
+    index = bbDrawables_getSquareIndex(SC.i, SC.j,drawables->squares_i);
+    drawableSquare = &drawables->squares[index];
+
+    bbList_sortL(&drawableSquare->list, drawable);
+
     return Success;
 }

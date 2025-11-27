@@ -270,6 +270,7 @@ CLEARWINDOW(bbMagenta);
     bbDrawables_new((void**)&drawables, &home.constant.graphics, 12, 12);
     bbMapIcons_new((void**) &mapicons, &home.constant.graphics, 12, 12);
 
+
     cl.mapTime = home.private.mapTime;
     cl.GUI_time = home.private.mapTime;
     cl.graphics = &home.constant.graphics;
@@ -294,6 +295,10 @@ CLEARWINDOW(bbMagenta);
             bbMapIcon_new(&mapicon, mapicons,&home.constant.graphics, MC);
         }
     }
+
+    bbDrawable* player;
+    bbDrawable_new(&player, drawables, &home.constant.graphics, home.private
+    .viewport->viewpoint);
 
 	for (home.private.mapTime = 0; ; home.private.mapTime++) {
 
@@ -326,7 +331,7 @@ CLEARWINDOW(bbMagenta);
             home.private.viewport->viewpoint.j += difference.j * speed / distance;
         }
 
-
+        bbDrawable_setLocation(player, drawables, home.private.viewport->viewpoint);
 
 		bbMouse_isOver(&home.private.mouse, &home.private.widgets);
 		bbMouse_Update(&home.private.mouse, &home.private.widgets, &home.constant.graphics);
