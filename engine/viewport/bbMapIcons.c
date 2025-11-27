@@ -14,7 +14,7 @@ bbFlag bbMapIcon_new(bbMapIcon** self, bbMapIcons* mapicons,
     bbPool_Handle drawfunctionHandle;
 
     bbDictionary_lookup(graphics->drawfunctions->dictionary,
-                        "OVERLAYTEST",
+                        "MAPICONTEST",
                         &drawfunctionHandle);
 
     drawable->frames[0].drawfunction = drawfunctionHandle.u64;

@@ -25,7 +25,7 @@ bbFlag bbViewport_new(bbViewport** viewport, I32 height, I32 width){
     bbRenderable_new(&VP->background, height, width);
     bbRenderable_new(&VP->ground, height, width);
     bbRenderable_new(&VP->main, height, width);
-    bbRenderable_new(&VP->overlay, height, width);
+    bbRenderable_new(&VP->mapicon, height, width);
 
     VP->height = height;
     VP->width = width;
@@ -55,18 +55,18 @@ bbFlag bbViewport_new(bbViewport** viewport, I32 height, I32 width){
         uniform sampler2D Background;\
         uniform sampler2D Ground;\
         uniform sampler2D Main;\
-        uniform sampler2D Overlay;\
+        uniform sampler2D MapIcon;\
         \
         void main()\
         {\
             vec4 background = texture2D(Background, gl_TexCoord[0].xy);\
             vec4 ground     = texture2D(Ground,     gl_TexCoord[0].xy);\
             vec4 main       = texture2D(Main,       gl_TexCoord[0].xy);\
-            vec4 overlay    = texture2D(Overlay,    gl_TexCoord[0].xy);\
+            vec4 mapicon    = texture2D(MapIcon,    gl_TexCoord[0].xy);\
         \
             vec4 mix1 = mix(background, ground,  ground.a);\
             vec4 mix2 = mix(mix1,       main,    main.a  );\
-            vec4 mix3 = mix(mix2,       overlay, overlay.a / 2.0  );\
+            vec4 mix3 = mix(mix2,       mapicon, mapicon.a / 2.0  );\
 \
             gl_FragColor =  mix3;\
             \
@@ -83,7 +83,7 @@ bbFlag bbViewport_new(bbViewport** viewport, I32 height, I32 width){
     sfShader_setTextureUniform(VP->shader,"Background", VP->background.texture);
     sfShader_setTextureUniform(VP->shader,"Ground", VP->ground.texture);
     sfShader_setTextureUniform(VP->shader,"Main", VP->main.texture);
-    sfShader_setTextureUniform(VP->shader,"Overlay", VP->overlay.texture);
+    sfShader_setTextureUniform(VP->shader,"MapIcon", VP->mapicon.texture);
 
     *viewport = VP;
 
@@ -95,7 +95,7 @@ bbFlag bbViewport_draw(sfRenderWindow* window, bbViewport* viewport){
     sfRenderTexture_display(viewport->background.renderTexture);
     sfRenderTexture_display(viewport->ground.renderTexture);
     sfRenderTexture_display(viewport->main.renderTexture);
-    sfRenderTexture_display(viewport->overlay.renderTexture);
+    sfRenderTexture_display(viewport->mapicon.renderTexture);
 
     sfRenderWindow_drawSprite(window, viewport->background.sprite,
                               &viewport->renderStates);
@@ -109,5 +109,5 @@ bbFlag bbViewport_clear(bbViewport* viewport){
     sfRenderTexture_clear(viewport->background.renderTexture, bbGreen);
     sfRenderTexture_clear(viewport->ground.renderTexture, sfTransparent);
     sfRenderTexture_clear(viewport->main.renderTexture, sfTransparent);
-    sfRenderTexture_clear(viewport->overlay.renderTexture, sfTransparent);
+    sfRenderTexture_clear(viewport->mapicon.renderTexture, sfTransparent);
 }

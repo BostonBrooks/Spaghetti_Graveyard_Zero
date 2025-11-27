@@ -147,11 +147,11 @@ bbFlag bbDF_widgetViewport(void* drawable, void* frameDescriptor, void* cl){
     return Success;
 }
 
-bbFlag bbDF_overlayTest(void* drawable, void* frameDescriptor, void* cl){
-    bbDrawable* overlay = drawable;
+bbFlag bbDF_mapiconTest(void* drawable, void* frameDescriptor, void* cl){
+    bbDrawable* mapicon = drawable;
     drawFuncClosure* foo = cl;
 
-    //bbDebug("overlay\n", overlay->label);
+    //bbDebug("mapicon\n", mapicon->label);
     I32 spriteInt = 86;
 
     bbGraphics* graphics = foo->graphics;
@@ -160,9 +160,9 @@ bbFlag bbDF_overlayTest(void* drawable, void* frameDescriptor, void* cl){
 
     bbViewport* VP = foo->target;
 
-    sfRenderTexture* renderTexture = VP->overlay.renderTexture;
+    sfRenderTexture* renderTexture = VP->mapicon.renderTexture;
 
-    sfVector2f V2F = bbMapCoords_getV2f_overlay(overlay->coords, VP);
+    sfVector2f V2F = bbMapCoords_getV2f_mapicon(mapicon->coords, VP);
 
 
 
@@ -174,10 +174,10 @@ bbFlag bbDF_overlayTest(void* drawable, void* frameDescriptor, void* cl){
 }
 
 bbFlag bbDF_eyeCandyTest(void* drawable, void* frameDescriptor, void* cl){
-    bbDrawable* overlay = drawable;
+    bbDrawable* mapicon = drawable;
     drawFuncClosure* foo = cl;
 
-    //bbDebug("eye candy\n", overlay->label);
+    //bbDebug("eye candy\n", mapicon->label);
 	I32 animationInt = 7;
 
     bbGraphics* graphics = foo->graphics;
@@ -194,7 +194,7 @@ bbFlag bbDF_eyeCandyTest(void* drawable, void* frameDescriptor, void* cl){
 
     sfRenderTexture* renderTexture = VP->main.renderTexture;
 
-    sfVector2f V2F = bbMapCoords_getV2f(overlay->coords, VP);
+    sfVector2f V2F = bbMapCoords_getV2f(mapicon->coords, VP);
 
 
 
@@ -254,9 +254,9 @@ bbFlag bbDrawfunctions_new(bbDrawfunctions** drawfunctions){
     handle.u64 = 5;
     bbDictionary_add(functions->dictionary, "WIDGETVIEWPORT", handle);
 
-    functions->functions[6] = bbDF_overlayTest;
+    functions->functions[6] = bbDF_mapiconTest;
     handle.u64 = 6;
-    bbDictionary_add(functions->dictionary, "OVERLAYTEST", handle);
+    bbDictionary_add(functions->dictionary, "MAPICONTEST", handle);
 
 
     functions->functions[7] = bbDF_eyeCandyTest;

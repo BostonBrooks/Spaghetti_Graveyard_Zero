@@ -16,23 +16,23 @@ sfVector2f bbMapCoords_getV2f(bbMapCoords MC, bbViewport* VP){
     return V2F;
 }
 
-sfVector2f bbMapCoords_getV2f_overlay(bbMapCoords MC, bbViewport* VP){
+sfVector2f bbMapCoords_getV2f_mapicon(bbMapCoords MC, bbViewport* VP){
     sfVector2f V2F;
     V2F.x = VP->width/2.0
-          + (MC.i - VP->viewpoint.i) / (1.0 * POINTS_PER_PIXEL * OVERLAY_SCALE)
-          + (MC.j - VP->viewpoint.j) / (1.0 * POINTS_PER_PIXEL * OVERLAY_SCALE);
+          + (MC.i - VP->viewpoint.i) / (1.0 * POINTS_PER_PIXEL * MAPICON_SCALE)
+          + (MC.j - VP->viewpoint.j) / (1.0 * POINTS_PER_PIXEL * MAPICON_SCALE);
 
     V2F.y = VP->height/2.0
-          + (MC.i - VP->viewpoint.i) / (2.0 * POINTS_PER_PIXEL * OVERLAY_SCALE)
-          - (MC.j - VP->viewpoint.j) / (2.0 * POINTS_PER_PIXEL * OVERLAY_SCALE);
+          + (MC.i - VP->viewpoint.i) / (2.0 * POINTS_PER_PIXEL * MAPICON_SCALE)
+          - (MC.j - VP->viewpoint.j) / (2.0 * POINTS_PER_PIXEL * MAPICON_SCALE);
 
     return V2F;
 }
 
-bbMapCoords V2f_overlay_getMapCoords(sfVector2f V2F, bbViewport* VP){
+bbMapCoords V2f_mapicon_getMapCoords(sfVector2f V2F, bbViewport* VP){
 	bbMapCoords MC;
-	MC.i = ((V2F.x / 2 + V2F.y - VP->height/2 - VP->width / 4) * POINTS_PER_PIXEL * OVERLAY_SCALE) + VP->viewpoint.i;
-	MC.j = ((V2F.x / 2 - V2F.y + VP->height/2 - VP->width / 4) * POINTS_PER_PIXEL * OVERLAY_SCALE) + VP->viewpoint.j;
+	MC.i = ((V2F.x / 2 + V2F.y - VP->height/2 - VP->width / 4) * POINTS_PER_PIXEL * MAPICON_SCALE) + VP->viewpoint.i;
+	MC.j = ((V2F.x / 2 - V2F.y + VP->height/2 - VP->width / 4) * POINTS_PER_PIXEL * MAPICON_SCALE) + VP->viewpoint.j;
 	MC.k = 0;
 	return MC;
 }
