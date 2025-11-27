@@ -8,7 +8,7 @@ bbVPool* bbNestedList_pool;
 
 bbFlag bbNestedList_init(bbNestedList* nestedList) {
     if (bbNestedList_pool == NULL){
-        bbVPool_newLean(&bbNestedList_pool, sizeof(bbNestedListElement), 100);
+        bbVPool_newLean(&bbNestedList_pool, sizeof(bbNestedListElement), 1000);
     }
     bbList_init(&nestedList->list,
                 bbNestedList_pool,
@@ -28,7 +28,7 @@ bbFlag bbNestedList_attach(bbNestedList* nestedList, bbList* list){
 
     bbFlag flag = bbList_setHead(list, NULL);
 
-    if(flag = None) return None;
+    if(flag == None) return None;
     bbNestedListElement* nestedListElement;
     bbVPool_alloc(bbNestedList_pool, (void**) &nestedListElement);
     nestedListElement->list = list;

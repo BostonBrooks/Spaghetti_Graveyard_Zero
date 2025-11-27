@@ -71,14 +71,14 @@ squares_j){
 
             overlayIcon->frames[0].drawfunction = drawfunctionHandle.u64;
 
-            bbDictionary_lookup(graphics->drawfunctions->dictionary,
-                                "EYECANDYTEST",
-                                &drawfunctionHandle);
+//            bbDictionary_lookup(graphics->drawfunctions->dictionary,
+//                                "EYECANDYTEST",
+//                                &drawfunctionHandle);
+//
+//
+//            overlayIcon->frames[1].drawfunction = drawfunctionHandle.u64;
 
-
-            overlayIcon->frames[1].drawfunction = drawfunctionHandle.u64;
-
-            for (I32 k = 2; k < FRAMES_PER_OVERLAY; k++){
+            for (I32 k = 1; k < FRAMES_PER_OVERLAY; k++){
                 overlayIcon->frames[k].drawfunction = -1;
             }
 
@@ -109,14 +109,14 @@ squares_j){
 
             overlayIcon->frames[0].drawfunction = drawfunctionHandle.u64;
 
-            bbDictionary_lookup(graphics->drawfunctions->dictionary,
-                                "EYECANDYTEST",
-                                &drawfunctionHandle);
+//            bbDictionary_lookup(graphics->drawfunctions->dictionary,
+//                                "EYECANDYTEST",
+//                                &drawfunctionHandle);
+//
+//
+//            overlayIcon->frames[1].drawfunction = drawfunctionHandle.u64;
 
-
-            overlayIcon->frames[1].drawfunction = drawfunctionHandle.u64;
-
-            for (I32 k = 2; k < FRAMES_PER_OVERLAY; k++){
+            for (I32 k = 1; k < FRAMES_PER_OVERLAY; k++){
                 overlayIcon->frames[k].drawfunction = -1;
             }
 

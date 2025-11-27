@@ -1,7 +1,7 @@
 #include "engine/viewport/bbDrawables.h"
 #include "engine/logic/bbNestedList.h"
 
-I32 bbDrawables_getIndex(I32 i, I32 j, I32 squares_i){
+I32 bbDrawables_getSquareIndex(I32 i, I32 j, I32 squares_i){
     return i + squares_i * j;
 }
 
@@ -37,7 +37,7 @@ squares_j){
 
     for (I32 i = 0; i < squares_i;i++){
         for (I32 j = 0; j < squares_j; j++){
-            I32 n = bbDrawables_getIndex(i, j, squares_i);
+            I32 n = bbDrawables_getSquareIndex(i, j, squares_i);
             bbDrawableSquare* drawableSquare = &drawables->squares[n];
             drawableSquare->coords.i = i;
             drawableSquare->coords.j = j;
@@ -77,23 +77,47 @@ bbFlag bbDrawable_draw(bbDrawable* drawable, drawFuncClosure* cl){
 bbFlag bbDrawables_draw(bbDrawables* drawables, drawFuncClosure* cl,
                         I32 square_i_min, I32 square_j_min,
                         I32 square_i_max, I32 square_j_max){
-    bbNestedList* list = &drawables->nestedList;
-
-    //todo roll init out to bbDrawables_new
-    bbNestedList_init(list);
+    bbNestedList list;
+    bbNestedList_init(&list);
     I32 squares_i = drawables->squares_i;
     I32 squares_j = drawables->squares_j;
 
     for (int i = square_i_min; i < square_i_max; ++i) {
         for (int j = square_j_min; j < square_j_max; ++j) {
-            I32 n = bbDrawables_getIndex(i, j, drawables->squares_i);
-            bbNestedList_attach(list, &drawables->squares[n].list);
+            I32 n = i + squares_i * j;
+            bbNestedList_attach(&list, &drawables->squares[n].list);
         }
 
     }
 
+    bbNestedList_map(&list, bbDrawable_drawFunc, cl);
 
-    bbNestedList_map(list, bbDrawable_drawFunc, cl);
+    return Success;
+}
 
+bbFlag bbDrawable_new(bbDrawable** self, bbDrawables* drawables,
+                   bbGraphics* graphics, bbMapCoords MC)
+{
+    bbVPool* pool = drawables->pool;
+    bbSquareCoords SC = bbMapCoords_getSquareCoords(MC);
+    I32 index = bbDrawables_getSquareIndex(SC.i, SC.j, drawables->squares_i);
+    bbDrawableSquare drawableSquare = drawables->squares[index];
+    bbDrawable* drawable;
+    bbVPool_alloc(pool, (void**)&drawable);
+    drawable->coords = MC;
+
+    bbPool_Handle drawfunctionHandle;
+
+    bbDictionary_lookup(graphics->drawfunctions->dictionary,
+                        "EYECANDYTEST",
+                        &drawfunctionHandle);
+
+    drawable->frames[0].drawfunction = drawfunctionHandle.u64;
+
+    for (I32 k = 1; k < FRAMES_PER_DRAWABLE; k++){
+        drawable->frames[k].drawfunction = -1;
+    }
+
+    bbList_sortL(&drawableSquare.list, drawable);
     return Success;
 }

@@ -275,7 +275,23 @@ CLEARWINDOW(bbMagenta);
     cl.graphics = &home.constant.graphics;
     cl.target = home.private.viewport;
 
-    bbDrawables_draw(drawables, &cl,0, 0,3, 3);
+    //bbDrawables_draw(drawables, &cl,0, 0,3, 3);
+
+    for (I32 i = 0; i<12;i++){
+        for (I32 j=0; j<12;j++){
+            bbSquareCoords SC;
+            SC.i = i;
+            SC.j = j;
+            SC.k = 0;
+
+            bbMapCoords MC = bbSquareCoords_getMapCoords(SC);
+            MC.i += rand()%(100 * POINTS_PER_PIXEL);
+            MC.j += rand()%(100 * POINTS_PER_PIXEL);
+
+            bbDrawable* drawable;
+            bbDrawable_new(&drawable, drawables,&home.constant.graphics, MC);
+        }
+    }
 
 	for (home.private.mapTime = 0; ; home.private.mapTime++) {
 
@@ -323,6 +339,7 @@ CLEARWINDOW(bbMagenta);
         cl.target = home.private.viewport;
 
 
+        bbDrawables_draw(drawables, &cl, 0, 0, 12, 12);
         bbOverlays_draw(overlays, &cl);
 
 

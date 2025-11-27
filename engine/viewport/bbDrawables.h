@@ -56,6 +56,10 @@ bbFlag bbDrawables_draw(bbDrawables* drawables, drawFuncClosure* cl,
 bbFlag bbDrawables_drawFunc(void* node, void* cl);
 /** bbbDrawable_draw draws a drawable to the screen*/
 bbFlag bbDrawable_draw(bbDrawable* drawable, drawFuncClosure* cl);
-I32 bbDrawables_getIndex(I32 i, I32 j, I32 squares_i);
+I32 bbDrawables_getSquareIndex(I32 i, I32 j, I32 squares_i);
+
+bbFlag bbDrawable_new(bbDrawable** self, bbDrawables* drawables,
+                   bbGraphics* graphics, bbMapCoords MC);
+
 #endif //BBDRAWABLES_H
 
