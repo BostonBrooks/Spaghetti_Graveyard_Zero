@@ -10,7 +10,8 @@
 #include "engine/viewport/bbMapIcons.h"
 #include "engine/geometry/bbViewportCoords.h"
 #include "engine/data/bbHome.h"
-
+#include "games/game0/maps/map0/drawfunctions/drawablesprite.h"
+#include "games/game0/maps/map0/drawfunctions/drawableanimation.h"
 
 
 //typedef bbFlag bbDrawFunction(void* drawable, void* frameDescriptor, void* cl);
@@ -222,7 +223,7 @@ bbFlag bbDF_widgetTextBox(void* drawable, void* frameDescriptor, void* cl)
 
 
 bbFlag bbDrawfunctions_new(bbDrawfunctions** drawfunctions){
-    I32 num = 9;
+    I32 num = 11;
     bbDrawfunctions* functions = malloc(sizeof(bbDrawfunctions) + num * sizeof(bbDrawFunction*));
     bbAssert(functions!=NULL, "bad malloc");
     bbDictionary_new(&functions->dictionary, nextPrime(num));
@@ -267,6 +268,16 @@ bbFlag bbDrawfunctions_new(bbDrawfunctions** drawfunctions){
     functions->functions[8] = bbDF_widgetTextBox;
     handle.u64 = 8;
     bbDictionary_add(functions->dictionary, "TEXTBOX", handle);
+
+    functions->functions[9] = bbDF_drawableSprite;
+    handle.u64 = 9;
+    bbDictionary_add(functions->dictionary, "DRAWABLESPRITE", handle);
+
+    functions->functions[10] = bbDF_drawableAnimation;
+    handle.u64 = 10;
+    bbDictionary_add(functions->dictionary, "DRAWABLESPRITE", handle);
+
+
 
 
     *drawfunctions = functions;
