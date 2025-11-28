@@ -6,6 +6,7 @@
 #include "engine/userinterface/bbInput.h"
 #include "engine/dummyserver/bbDummySender.h"
 #include "engine/viewport/bbViewport.h"
+#include "engine/viewport/bbDrawables.h"
 
 typedef struct {
     bbSpells spells;

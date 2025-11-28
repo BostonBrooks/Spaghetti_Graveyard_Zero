@@ -21,6 +21,7 @@
 
 bbWidgets* testWidgets;
 bbMapCoords testGoalPoint;
+bbDrawables* drawables;
 
 I32 hash(unsigned char *str, I32 n_bins);
 
@@ -253,7 +254,7 @@ CLEARWINDOW(bbMagenta);
     bbWidget_constructor(&widget0, &home.private.widgets, &home.constant.graphics,
                          SP0, layout, "BOX");
 
-    SP0.x = 200*8; SP0.y = 300*8;
+    SP0.x = 570*8; SP0.y = 125*8;
     bbWidget_constructor(&widget0, &home.private.widgets, &home.constant.graphics,
                          SP0, layout, "CARD");
 
@@ -265,7 +266,7 @@ CLEARWINDOW(bbMagenta);
     bbSpell_setActive(spell1, &home.private.spells, home.private.server, 0);
 
 
-    bbDrawables* drawables;
+
     bbMapIcons* mapicons;
     bbDrawables_new((void**)&drawables, &home.constant.graphics, 12, 12);
     bbMapIcons_new((void**) &mapicons, &home.constant.graphics, 12, 12);
@@ -278,27 +279,28 @@ CLEARWINDOW(bbMagenta);
 
     //bbDrawables_draw(drawables, &cl,0, 0,3, 3);
 
-    for (I32 i = 0; i<12;i++){
-        for (I32 j=0; j<12;j++){
-            bbSquareCoords SC;
-            SC.i = i;
-            SC.j = j;
-            SC.k = 0;
+    for (I32 i = 0; i<24;i++){
+        for (I32 j=0; j<24;j++){
 
-            bbMapCoords MC = bbSquareCoords_getMapCoords(SC);
+            bbMapCoords MC;
+            MC.i = i * (POINTS_PER_SQUARE / 2);
+            MC.j = j * (POINTS_PER_SQUARE / 2);
+            MC.k = 0;
+
             MC.i += rand()%(100 * POINTS_PER_PIXEL);
             MC.j += rand()%(100 * POINTS_PER_PIXEL);
 
             bbDrawable* drawable;
-            bbDrawable_new(&drawable, drawables,&home.constant.graphics, MC);
+            bbDrawable_newTree(&drawable, drawables, &home.constant.graphics,
+                               MC);
             bbMapIcon* mapicon;
             bbMapIcon_new(&mapicon, mapicons,&home.constant.graphics, MC);
         }
     }
 
     bbDrawable* player;
-    bbDrawable_new(&player, drawables, &home.constant.graphics, home.private
-    .viewport->viewpoint);
+    bbDrawable_newCat(&player, drawables, &home.constant.graphics, home.private
+            .viewport->viewpoint);
 
 	for (home.private.mapTime = 0; ; home.private.mapTime++) {
 

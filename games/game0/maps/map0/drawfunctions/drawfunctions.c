@@ -153,7 +153,7 @@ bbFlag bbDF_mapiconTest(void* drawable, void* frameDescriptor, void* cl){
     drawFuncClosure* foo = cl;
 
     //bbDebug("mapicon\n", mapicon->label);
-    I32 spriteInt = 86;
+    I32 spriteInt = 141;
 
     bbGraphics* graphics = foo->graphics;
     sfSprite* sprite = graphics->sprites->sprites[spriteInt];
@@ -275,7 +275,7 @@ bbFlag bbDrawfunctions_new(bbDrawfunctions** drawfunctions){
 
     functions->functions[10] = bbDF_drawableAnimation;
     handle.u64 = 10;
-    bbDictionary_add(functions->dictionary, "DRAWABLESPRITE", handle);
+    bbDictionary_add(functions->dictionary, "DRAWABLEANIMATION", handle);
 
 
 

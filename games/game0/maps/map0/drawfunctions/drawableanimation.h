@@ -28,7 +28,7 @@ bbFlag bbDF_drawableAnimation(void* Drawable, void* frameDescriptor, void* cl){
     I32 frameInt = (I64)((double)(foo->mapTime - frame->startTime)
             *(double)animation->framerate*(double)frame->framerate) % frames;
 
-    I32 spriteInt = animation->Sprites[angle*frames*frameInt].u64;
+    I32 spriteInt = animation->Sprites[angle*frames+frameInt].u64;
 
     sfSprite* sprite = animation->sprites->sprites[spriteInt];
     sfRenderTexture* renderTexture = VP->main.renderTexture;

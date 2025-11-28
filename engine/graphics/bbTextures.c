@@ -40,7 +40,7 @@ bbFlag bbTextures_new(bbTextures** self, char* filepath){
 	while (fscanf(file, "%[^,],%d,%[^,],%c,%*[^\n]\n", key, &address, file_path, &smooth) == 4){
 
         texture = sfTexture_createFromFile(file_path, NULL);
-        bbAssert(texture != NULL, "texture file failed to load\n");
+        bbAssert(texture != NULL, "texture file %s failed to load\n", file_path);
         sfTexture_setSmooth(texture, smooth == 'T' ? sfTrue : sfFalse);
 
         handle.u64 = address;

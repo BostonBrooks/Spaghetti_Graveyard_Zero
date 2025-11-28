@@ -18,6 +18,7 @@
 #include "engine/userinterface/bbSpell.h"
 #include "engine/dummyserver/bbDummySender.h"
 #include "engine/data/bbHome.h"
+#include "engine/viewport/bbDrawables.h"
 #include <string.h>
 
 /*
@@ -135,13 +136,24 @@ bbFlag bbSpell_Spell1_ReceiveStr(bbSpell* spell, void* Spells, char* answer)
 
     return Success;
 }
-
+//TODO remove extern
+extern bbDrawables* drawables;
 
 bbFlag bbSpell_Spell1_ReceiveClick(bbSpell* spell, void* Spells, bbMapCoords MC, bbDummySender* server, U64 gameTime)
 {
     if (spell->state != SpellWaitingForClick) return Continue;
     bbSpells* spells = (bbSpells*)Spells;
-    //bbDummySender_castSpell(server, MC, gameTime);
+
+
+    bbMapCoords testMC;
+    testMC.i = 10000;
+    testMC.j = 10000;
+    testMC.k = 0;
+
+    bbDrawable* none;
+    bbDrawable_newFire(&none, drawables, &home.constant.graphics, testMC);
+bbHere()
+
     I32 x = rand() % 20;
     I32 y = rand() % 20;
 

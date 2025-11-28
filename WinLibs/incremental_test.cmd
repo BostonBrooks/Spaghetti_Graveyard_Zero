@@ -48,6 +48,7 @@ gcc   -D SFML_STATIC -I ../^
        ../games/game0/maps/map0/spells/spells.c^
        ../engine/viewport/bbDrawables.c^
        ../engine/viewport/bbMapIcons.c^
+       ../games/game0/maps/map0/drawfunctions/drawfunctions.c^
        ^
   -lcsfml-system -lcsfml-graphics -lcsfml-window -g -lm -w^
     -o ../games/game0/game.exe

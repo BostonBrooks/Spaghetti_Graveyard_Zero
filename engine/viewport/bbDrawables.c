@@ -99,17 +99,14 @@ bbFlag bbDrawables_draw(bbDrawables* drawables, drawFuncClosure* cl,
 }
 
 //TODO what if MC is out of bounds
-bbFlag bbDrawable_new(bbDrawable** self, bbDrawables* drawables,
-                   bbGraphics* graphics, bbMapCoords MC)
+bbFlag bbDrawable_newTree(bbDrawable** self, bbDrawables* drawables,
+                          bbGraphics* graphics, bbMapCoords MC)
 {
     bbVPool* pool = drawables->pool;
     bbSquareCoords SC = bbMapCoords_getSquareCoords(MC);
     I32 index = bbDrawables_getSquareIndex(SC.i, SC.j, drawables->squares_i);
     bbDrawableSquare drawableSquare = drawables->squares[index];
 
-    bbDebug("map coords(%d, %d)\n", MC.i, MC.j);
-    bbDebug("index = %d, i = %d, j = %d, squares_i = %d\n",
-            index,SC.i,SC.j,drawables->squares_i);
     bbDrawable* drawable;
     bbVPool_alloc(pool, (void**)&drawable);
     drawable->coords = MC;
@@ -117,10 +114,53 @@ bbFlag bbDrawable_new(bbDrawable** self, bbDrawables* drawables,
     bbPool_Handle drawfunctionHandle;
 
     bbDictionary_lookup(graphics->drawfunctions->dictionary,
-                        "EYECANDYTEST",
+                        "DRAWABLESPRITE",
                         &drawfunctionHandle);
 
     drawable->frames[0].drawfunction = drawfunctionHandle.u64;
+    drawable->frames[0].handle.u64 = 134;
+
+    bbDictionary_lookup(graphics->drawfunctions->dictionary,
+                        "DRAWABLEANIMATION",
+                        &drawfunctionHandle);
+
+    drawable->frames[1].drawfunction = drawfunctionHandle.u64;
+    drawable->frames[1].handle.u64 = 8;
+    drawable->frames[1].startTime =  -(rand()%6);
+    drawable->frames[1].framerate = 1;
+
+    for (I32 k = 2; k < FRAMES_PER_DRAWABLE; k++){
+        drawable->frames[k].drawfunction = -1;
+    }
+
+    bbList_sortL(&drawableSquare.list, drawable);
+    *self = drawable;
+    return Success;
+}
+bbFlag bbDrawable_newCat(bbDrawable** self, bbDrawables* drawables,
+                          bbGraphics* graphics, bbMapCoords MC)
+{
+    bbVPool* pool = drawables->pool;
+    bbSquareCoords SC = bbMapCoords_getSquareCoords(MC);
+    I32 index = bbDrawables_getSquareIndex(SC.i, SC.j, drawables->squares_i);
+    bbDrawableSquare drawableSquare = drawables->squares[index];
+
+    bbDrawable* drawable;
+    bbVPool_alloc(pool, (void**)&drawable);
+    drawable->coords = MC;
+
+    bbPool_Handle drawfunctionHandle;
+
+
+
+    bbDictionary_lookup(graphics->drawfunctions->dictionary,
+                        "DRAWABLEANIMATION",
+                        &drawfunctionHandle);
+
+    drawable->frames[0].drawfunction = drawfunctionHandle.u64;
+    drawable->frames[0].handle.u64 = 7;
+    drawable->frames[0].startTime =  -(rand()%6);
+    drawable->frames[0].framerate = 1;
 
     for (I32 k = 1; k < FRAMES_PER_DRAWABLE; k++){
         drawable->frames[k].drawfunction = -1;
@@ -131,6 +171,37 @@ bbFlag bbDrawable_new(bbDrawable** self, bbDrawables* drawables,
     return Success;
 }
 
+bbFlag bbDrawable_newFire(bbDrawable** self, bbDrawables* drawables,
+                         bbGraphics* graphics, bbMapCoords MC)
+{
+    bbVPool* pool = drawables->pool;
+    bbSquareCoords SC = bbMapCoords_getSquareCoords(MC);
+    I32 index = bbDrawables_getSquareIndex(SC.i, SC.j, drawables->squares_i);
+    bbDrawableSquare drawableSquare = drawables->squares[index];
+
+    bbDrawable* drawable;
+    bbVPool_alloc(pool, (void**)&drawable);
+    drawable->coords = MC;
+
+    bbPool_Handle drawfunctionHandle;
+
+
+
+    bbDictionary_lookup(graphics->drawfunctions->dictionary,
+                        "DRAWABLESPRITE",
+                        &drawfunctionHandle);
+
+    drawable->frames[0].drawfunction = drawfunctionHandle.u64;
+    drawable->frames[0].handle.u64 = 142;
+
+    for (I32 k = 1; k < FRAMES_PER_DRAWABLE; k++){
+        drawable->frames[k].drawfunction = -1;
+    }
+
+    bbList_sortL(&drawableSquare.list, drawable);
+    *self = drawable;
+    return Success;
+}
 //TODO what if MC or drawable is out of bounds?
 //TODO it might be faster, if the drawable stays in the same square,
 //that we move the drawable up or down in the list instead of removing it

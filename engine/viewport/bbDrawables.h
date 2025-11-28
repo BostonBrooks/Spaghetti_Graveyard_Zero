@@ -62,9 +62,12 @@ bbFlag bbDrawables_drawFunc(void* node, void* cl);
 bbFlag bbDrawable_draw(bbDrawable* drawable, drawFuncClosure* cl);
 I32 bbDrawables_getSquareIndex(I32 i, I32 j, I32 squares_i);
 
-bbFlag bbDrawable_new(bbDrawable** self, bbDrawables* drawables,
-                   bbGraphics* graphics, bbMapCoords MC);
-
+bbFlag bbDrawable_newTree(bbDrawable** self, bbDrawables* drawables,
+                          bbGraphics* graphics, bbMapCoords MC);
+bbFlag bbDrawable_newCat(bbDrawable** self, bbDrawables* drawables,
+                         bbGraphics* graphics, bbMapCoords MC);
+bbFlag bbDrawable_newFire(bbDrawable** self, bbDrawables* drawables,
+                         bbGraphics* graphics, bbMapCoords MC);
 bbFlag bbDrawable_setLocation(bbDrawable* self, bbDrawables* drawables,
                               bbMapCoords MC);
 
