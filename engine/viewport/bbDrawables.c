@@ -106,6 +106,10 @@ bbFlag bbDrawable_new(bbDrawable** self, bbDrawables* drawables,
     bbSquareCoords SC = bbMapCoords_getSquareCoords(MC);
     I32 index = bbDrawables_getSquareIndex(SC.i, SC.j, drawables->squares_i);
     bbDrawableSquare drawableSquare = drawables->squares[index];
+
+    bbDebug("map coords(%d, %d)\n", MC.i, MC.j);
+    bbDebug("index = %d, i = %d, j = %d, squares_i = %d\n",
+            index,SC.i,SC.j,drawables->squares_i);
     bbDrawable* drawable;
     bbVPool_alloc(pool, (void**)&drawable);
     drawable->coords = MC;
@@ -123,6 +127,7 @@ bbFlag bbDrawable_new(bbDrawable** self, bbDrawables* drawables,
     }
 
     bbList_sortL(&drawableSquare.list, drawable);
+    *self = drawable;
     return Success;
 }
 
@@ -132,21 +137,23 @@ bbFlag bbDrawable_new(bbDrawable** self, bbDrawables* drawables,
 // then re-inserting it
 bbFlag bbDrawable_setLocation(bbDrawable* drawable, bbDrawables* drawables,
                               bbMapCoords MC){
-    bbSquareCoords SC = bbMapCoords_getSquareCoords(MC);
-
-    I32 index = bbDrawables_getSquareIndex(drawable->coords.i,
-                                           drawable->coords.j,
+    bbSquareCoords newSC = bbMapCoords_getSquareCoords(MC);
+    bbSquareCoords oldSC = bbMapCoords_getSquareCoords(drawable->coords);
+    I32 newIndex = bbDrawables_getSquareIndex(newSC.i,
+                                           newSC.j,
                                            drawables->squares_i);
-    bbDrawableSquare* drawableSquare = &drawables->squares[index];
+    I32 oldIndex = bbDrawables_getSquareIndex(oldSC.i,
+                                              oldSC.j,
+                                              drawables->squares_i);
+    bbDrawableSquare* newSquare = &drawables->squares[newIndex];
+    bbDrawableSquare* oldSquare = &drawables->squares[oldIndex];
 
-    bbList_remove(&drawableSquare->list, drawable);
+    bbList_remove(&oldSquare->list, drawable);
 
     drawable->coords = MC;
 
-    index = bbDrawables_getSquareIndex(SC.i, SC.j,drawables->squares_i);
-    drawableSquare = &drawables->squares[index];
 
-    bbList_sortL(&drawableSquare->list, drawable);
+    bbList_sortL(&newSquare->list, drawable);
 
     return Success;
 }
