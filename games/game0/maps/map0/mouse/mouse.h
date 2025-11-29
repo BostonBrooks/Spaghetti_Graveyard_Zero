@@ -79,7 +79,7 @@ bbFlag IsOver_Viewport(bbMouse* mouse, bbWidgets* widgets, bbWidget* widget)
         bbPool_Handle handle;
         bbVPool_reverseLookup(pool,widget,&handle);
 
-        if (mouse->rightDown && mouse->rightChanged){
+        if (mouse->rightDown /*&& mouse->rightChanged*/){
             //convert mouse coords into map coords and update goal point
             bbScreenPoints viewportCoords;
             viewportCoords.x = point.x - widget->rect.left;
@@ -106,18 +106,24 @@ bbFlag IsOver_Viewport(bbMouse* mouse, bbWidgets* widgets, bbWidget* widget)
     return Continue;
 }
 
-bbFlag Viewport_LeftDown(void* mouse, void* widgets, void* widget, void*
+bbFlag Viewport_LeftDown(void* Mouse, void* widgets, void* Widget, void*
 graphics){
     bbSpells* spells = &home.private.spells;
     bbSpell* spell = spells->currentSpell;
     bbDummySender* server = home.private.server;
     U64 gameTime = home.private.mapTime;
+    bbWidget* widget = Widget;
+    bbMouse* mouse = Mouse;
+    bbScreenPoints point = mouse->position;
 
+    bbScreenPoints viewportCoords;
+    viewportCoords.x = point.x - widget->rect.left;
+    viewportCoords.y = point.y - widget->rect.top;
+    bbViewport* VP = widget->extra_data;
+
+    bbMapCoords MC = bbScreenCoords_getMapCoords(viewportCoords, VP);
     //calculate map coords
-    bbMapCoords MC;
-    MC.i = 0;
-    MC.j = 0;
-    MC.k = 0;
+
 
     bbSpell_receiveClick(spell, (void*) spells, MC, server, gameTime);
 

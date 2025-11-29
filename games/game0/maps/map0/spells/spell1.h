@@ -145,13 +145,9 @@ bbFlag bbSpell_Spell1_ReceiveClick(bbSpell* spell, void* Spells, bbMapCoords MC,
     bbSpells* spells = (bbSpells*)Spells;
 
 
-    bbMapCoords testMC;
-    testMC.i = 10000;
-    testMC.j = 10000;
-    testMC.k = 0;
 
     bbDrawable* none;
-    bbDrawable_newFire(&none, drawables, &home.constant.graphics, testMC);
+    bbDrawable_newFire(&none, drawables, &home.constant.graphics, MC);
 bbHere()
 
     I32 x = rand() % 20;
