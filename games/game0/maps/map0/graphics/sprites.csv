@@ -1,4 +1,4 @@
-Number of Sprites:,143,,,,,,,,,,,,
+Number of Sprites:,144,,,,,,,,,,,,
 Label:,Integer Address:,Texture:,Left:,Top:,Width:,Height:,Origin X:,Origin Y:,Scale X:,Scale Y:,Scale By:,Comment:,
 NULL,0,NULL,0,0,128,128,0,0,1,1,None,Exception,
 LAYOUT_480,1,LAYOUT_480,0,0,720,480,0,0,1,1,None,The root of the widget tree,
@@ -143,4 +143,4 @@ LIGHTS4,139,LIGHTS4,0,0,300,450,157,441,0.6,0.6,None, Decoration for the tree,
 LIGHTS5,140,LIGHTS5,0,0,300,450,157,441,0.6,0.6,None, Decoration for the tree,
 TREE_SMALL,141,TREE,0,0,300,450,157,441,0.03,0.03,None, tree map icon,
 FIRE,142,FIRE,0,0,120,150,63,117,0.4,0.4,None, a camp fire,
-
+COW_R,143,SPRITESHEET,280,9,93,155,33,162,1,1,None,A cow;

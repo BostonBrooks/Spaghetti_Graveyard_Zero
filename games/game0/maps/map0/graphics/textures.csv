@@ -1,4 +1,4 @@
-Number of Textures:,25,,,,
+Number of Textures:,26,,,,
 Label:,Integer Address:,File:,Smooth:,Comment:,
 NULL,0,./graphics/NULL.png,F,Exception,
 LAYOUT_480,1,./graphics/Layout_480.png,F,The root of the widget tree,
@@ -25,3 +25,4 @@ LIGHTS3,21,./graphics/Lights3.png,F, decoration for the tree,
 LIGHTS4,22,./graphics/Lights4.png,F, decoration for the tree,
 LIGHTS5,23,./graphics/Lights5.png,F, decoration for the tree,
 FIRE,24,./graphics/Fire.bmp,F, a camp fire
+SPRITESHEET,25,./graphics/SpriteSheet.bmp,F,some sprites,

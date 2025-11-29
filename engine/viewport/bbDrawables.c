@@ -1,5 +1,7 @@
 #include "engine/viewport/bbDrawables.h"
 #include "engine/logic/bbNestedList.h"
+#include "engine/units/bbUnits.h"
+#include "engine/data/bbHome.h"
 
 I32 bbDrawables_getSquareIndex(I32 i, I32 j, I32 squares_i){
     return i + squares_i * j;
@@ -26,7 +28,6 @@ squares_j, I32 sizeOf){
     bbVPool_newBloated(&pool, sizeOf, 1000, 1000);
 
     drawables->pool = pool;
-
     bbList_init(&drawables->list, pool,NULL,offsetof(bbDrawable, listElement)
                 ,bbDrawable_isCloser);
 
@@ -87,7 +88,10 @@ bbFlag bbDrawables_draw(bbDrawables* drawables, drawFuncClosure* cl,
     for (int i = square_i_min; i < square_i_max; ++i) {
         for (int j = square_j_min; j < square_j_max; ++j) {
             I32 n = i + squares_i * j;
+
+            bbUnits* units = home.shared.units;
             bbNestedList_attach(&list, &drawables->squares[n].list);
+            bbNestedList_attach(&list, &units->squares[n].list);
         }
 
     }

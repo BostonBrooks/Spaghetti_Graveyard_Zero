@@ -7,6 +7,7 @@
 #include "engine/dummyserver/bbDummySender.h"
 #include "engine/viewport/bbViewport.h"
 #include "engine/viewport/bbDrawables.h"
+#include "engine/units/bbUnits.h"
 
 typedef struct {
     bbSpells spells;
@@ -26,7 +27,7 @@ typedef struct {
 } bbConstant;
 
 typedef struct {
-
+    bbUnits* units;
 } bbShared;
 
 typedef struct {

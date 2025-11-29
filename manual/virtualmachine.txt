@@ -1,0 +1,6 @@
+The game will have a virtual machine that will contain the core logic of the game and will be synchronised across multiple computers.
+"instructions" in the "instruction set architecture" will have effects on the game state and push new instructions to a stack and then exit.
+
+Messages from the user interface to the virtual machine will have to make a round-trip to the server.
+
+I don't know enough to say what happens if the VM has to rewind, act on some input, and then fast forward. The VM would have to keep a log of inputs and changes to the game state. 

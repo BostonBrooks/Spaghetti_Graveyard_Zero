@@ -1,35 +1,38 @@
+/** Units cannot pass through avoidables */
+
+#ifndef BBAVOIDABLES_H
+#define BBAVOIDABLES_H
+
 #include "engine/geometry/bbCoordinates.h"
 #include "engine/logic/bbList.h"
 #include "engine/logic/bbNestedList.h"
+#include "engine/viewport/bbDrawables.h"
 
 typedef struct
 {
-    bbSquareCoords coords;
+    bbMapCoords coords;
+    bbPool_ListElement listElement;
     I32 radius;
 } bbAvoidable;
 
-typedef struct
-{
-    bbSquareCoords coords;
-    bbList list;
-} bbAvoidableSquare;
+#define bbAvoidableSquare bbDrawableSquare
 
-typedef struct
-{
+#define bbAvoidables bbDrawables
 
-    bbVPool* pool;
-    //Drawables outside the usual map grid
-    bbList list;
-    bbNestedList nestedList;
+bbFlag bbAvoidables_new(void** self, I32 squares_i, I32 squares_j);
 
-    //We cant extend bbDrawables because it ends in a flexible array member,
-    //so we use a pointer to extra data
-    void* extra_data;
+#define bbAvoidable_isCloser bbDrawable_isCloser
+#define bbAvoidable_getSquareIndex bbDrawables_getSquareIndex
 
-    I32 squares_i;
-    I32 squares_j;
-    bbAvoidableSquare squares[];
-} bbAvoidables;
+bbFlag bbAvoidable_new(bbAvoidable** self, bbAvoidables* avoidables,
+                       bbMapCoords MC, I32 radius);
 
-bbFlag bbAvoidables_newImpl(void** self, I32 squares_i, I32
-squares_j, I32 sizeOf);
+bbFlag bbAvoidables_draw(bbDrawables* drawables, drawFuncClosure* cl,
+                        I32 square_i_min, I32 square_j_min,
+                        I32 square_i_max, I32 square_j_max);
+
+bbFlag bbAvoidable_drawFunc(void* node, void* cl);
+
+
+
+#endif //BBAVOIDABLES_H

@@ -17,6 +17,8 @@
 #include "engine/data/bbHome.h"
 #include "engine/viewport/bbDrawables.h"
 #include "engine/viewport/bbMapIcons.h"
+#include "engine/avoidance/bbAvoidables.h"
+#include "engine/units/bbUnits.h"
 
 
 bbWidgets* testWidgets;
@@ -268,9 +270,11 @@ CLEARWINDOW(bbMagenta);
 
 
     bbMapIcons* mapicons;
+    bbAvoidables* avoidables;
     bbDrawables_new((void**)&drawables,  12, 12);
     bbMapIcons_new((void**) &mapicons,  12, 12);
-
+    bbUnits_new((void**)&home.shared.units, 12, 12);
+    bbAvoidables_new((void**)&avoidables, 12, 12);
 
     cl.mapTime = home.private.mapTime;
     cl.GUI_time = home.private.mapTime;
@@ -295,12 +299,18 @@ CLEARWINDOW(bbMagenta);
                                MC);
             bbMapIcon* mapicon;
             bbMapIcon_new(&mapicon, mapicons,&home.constant.graphics, MC);
+            bbAvoidable* avoidable;
+            bbAvoidable_new(&avoidable, avoidables, MC, 160);
         }
     }
 
     bbDrawable* player;
     bbDrawable_newCat(&player, drawables, &home.constant.graphics, home.private
             .viewport->viewpoint);
+
+    bbUnit* unit;
+    bbUnit_new(&unit,home.shared.units, &home.constant.graphics,home.private
+    .viewport->viewpoint);
 
 	for (home.private.mapTime = 0; ; home.private.mapTime++) {
 
@@ -347,9 +357,11 @@ CLEARWINDOW(bbMagenta);
 
         cl.target = home.private.viewport;
 
-
+//TODO change bbDrawables_draw(drawables, &cl, 0, 0, 12, 12); signature back
         bbDrawables_draw(drawables, &cl, 0, 0, 12, 12);
         bbMapIcons_draw(mapicons, &cl, 0, 0, 12, 12);
+        bbAvoidables_draw(avoidables, &cl, 0, 0, 12, 12);
+
 
 
 

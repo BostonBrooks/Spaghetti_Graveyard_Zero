@@ -92,4 +92,8 @@ add_executable(myprogram
         engine/viewport/bbMapIcons.c
         test/old/bbList_testRemove.c
         games/game0/maps/map0/drawfunctions/drawfunctions.c
-        games/game0/maps/map0/drawfunctions/drawablesprite.h)
+        games/game0/maps/map0/drawfunctions/drawablesprite.h
+        engine/avoidance/bbAvoidables.h
+        engine/avoidance/bbAvoidables.c
+        engine/units/bbUnits.h
+        engine/units/bbUnits.c)
