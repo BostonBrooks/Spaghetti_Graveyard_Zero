@@ -44,11 +44,11 @@ typedef struct
     bbDrawableSquare squares[];
 } bbDrawables;
 
-bbFlag bbDrawables_newImpl(void** self, bbGraphics* graphics, I32 squares_i, I32
+bbFlag bbDrawables_newImpl(void** self, I32 squares_i, I32
 squares_j, I32 sizeOf);
 
-#define bbDrawables_new(self, graphics, squares_i, squares_j)\
-bbDrawables_newImpl(self, graphics, squares_i, squares_j, sizeof(bbDrawable));
+#define bbDrawables_new(self, squares_i, squares_j)\
+bbDrawables_newImpl(self, squares_i, squares_j, sizeof(bbDrawable));
 
 I32 bbDrawable_isCloser(void* one, void* two);
 

@@ -268,8 +268,8 @@ CLEARWINDOW(bbMagenta);
 
 
     bbMapIcons* mapicons;
-    bbDrawables_new((void**)&drawables, &home.constant.graphics, 12, 12);
-    bbMapIcons_new((void**) &mapicons, &home.constant.graphics, 12, 12);
+    bbDrawables_new((void**)&drawables,  12, 12);
+    bbMapIcons_new((void**) &mapicons,  12, 12);
 
 
     cl.mapTime = home.private.mapTime;

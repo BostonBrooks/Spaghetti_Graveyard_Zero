@@ -12,8 +12,8 @@ typedef struct {
 
 #define bbMapIcons bbDrawables
 
-#define bbMapIcons_new(self, graphics, squares_i, squares_j)\
-bbDrawables_newImpl(self, graphics, squares_i, squares_j, sizeof(bbMapIcon));
+#define bbMapIcons_new(self, squares_i, squares_j)\
+bbDrawables_newImpl(self, squares_i, squares_j, sizeof(bbMapIcon));
 
 #define bbMapIcons_draw bbDrawables_draw
 

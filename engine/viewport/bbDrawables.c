@@ -15,7 +15,7 @@ I32 bbDrawable_isCloser(void* one, void* two){
     return (foo > 0);
 }
 
-bbFlag bbDrawables_newImpl(void** self, bbGraphics* graphics, I32 squares_i, I32
+bbFlag bbDrawables_newImpl(void** self, I32 squares_i, I32
 squares_j, I32 sizeOf){
     bbDrawables* drawables = malloc(sizeof(bbDrawables) + sizeof
             (bbDrawableSquare)*squares_i*squares_j);

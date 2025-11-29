@@ -6,7 +6,7 @@ cmake_minimum_required(VERSION 2.6.0)
 project(myprogram C)
 include_directories( ./ )
 add_executable(myprogram
-        test/bbList_testSortElement.c
+        test/old/bbList_testSortElement.c
         engine/logic/bbArith.h
         engine/logic/bbBloatedPool.c
         engine/logic/bbBloatedPool.h
@@ -19,25 +19,25 @@ add_executable(myprogram
         engine/logic/bbTree.c
         engine/logic/bbTree.h
         engine/logic/bbVPool.c
-        test/bbConstants_test.c
-        test/bbFloorDivision_test.c
-        test/bbList_test.c
-        test/bbList_testInsert.c
-        test/bbList_testMerge.c
-        test/bbList_testSort.c
-        test/bbList_testSortedInsert.c
-        test/bbList_testSplit.c
-        test/bbRoundUp_test.c
-        test/bbTerminal_test.c
-        test/bbTree_test.c
-        test/bbVPool_test.c
-        test/dowhile_test.c
+        test/old/bbConstants_test.c
+        test/old/bbFloorDivision_test.c
+        test/old/bbList_test.c
+        test/old/bbList_testInsert.c
+        test/old/bbList_testMerge.c
+        test/old/bbList_testSort.c
+        test/old/bbList_testSortedInsert.c
+        test/old/bbList_testSplit.c
+        test/old/bbRoundUp_test.c
+        test/old/bbTerminal_test.c
+        test/old/bbTree_test.c
+        test/old/bbVPool_test.c
+        test/old/dowhile_test.c
         engine/logic/bbList_iterate.c
-        test/bbList_testIterate.c
+        test/old/bbList_testIterate.c
         engine/graphics/bbTextures.h
         engine/graphics/bbTextures.c
         engine/logic/bbPrime.h
-        test/bbPrime_test.c
+        test/old/bbPrime_test.c
         engine/graphics/bbSprites.c
         engine/graphics/bbAnimation.h
         engine/graphics/bbAnimation.c
@@ -58,14 +58,14 @@ add_executable(myprogram
         engine/viewport/bbViewport.h
         engine/viewport/bbViewport.c
         engine/graphics/bbColours.c
-        test/bbListList.c
-        test/bbList_pushpop.c
+        test/old/bbListList.c
+        test/old/bbList_pushpop.c
         engine/logic/bbNestedList.h
         engine/logic/bbNestedList.c
-        test/bbListList_test.c
-        test/bbListList_map_test.c
+        test/old/bbListList_test.c
+        test/old/bbListList_map_test.c
         engine/geometry/bbViewportCoords.h
-        test/automorphicNumbers.c
+        test/old/automorphicNumbers.c
         games/game0/maps/map0/widgets/nullfunctions.h
         engine/widgets/bbWidgetFunctions.c
         games/game0/maps/map0/widgets/sphere.h
@@ -90,6 +90,6 @@ add_executable(myprogram
         engine/viewport/bbDrawables.h
         engine/viewport/bbDrawables.c
         engine/viewport/bbMapIcons.c
-        test/bbList_testRemove.c
+        test/old/bbList_testRemove.c
         games/game0/maps/map0/drawfunctions/drawfunctions.c
         games/game0/maps/map0/drawfunctions/drawablesprite.h)
