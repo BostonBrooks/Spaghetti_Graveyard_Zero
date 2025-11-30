@@ -301,6 +301,16 @@ CLEARWINDOW(bbMagenta);
             bbMapIcon_new(&mapicon, mapicons,&home.constant.graphics, MC);
             bbAvoidable* avoidable;
             bbAvoidable_new(&avoidable, avoidables, MC, 160);
+
+            MC.i = i * (POINTS_PER_SQUARE / 2);
+            MC.j = j * (POINTS_PER_SQUARE / 2);
+            MC.k = 0;
+
+            MC.i += rand()%(100 * POINTS_PER_PIXEL);
+            MC.j += rand()%(100 * POINTS_PER_PIXEL);
+
+            bbUnit* unit;
+            bbUnit_new(&unit,home.shared.units, &home.constant.graphics,MC);
         }
     }
 
@@ -308,9 +318,7 @@ CLEARWINDOW(bbMagenta);
     bbDrawable_newCat(&player, drawables, &home.constant.graphics, home.private
             .viewport->viewpoint);
 
-    bbUnit* unit;
-    bbUnit_new(&unit,home.shared.units, &home.constant.graphics,home.private
-    .viewport->viewpoint);
+
 
 	for (home.private.mapTime = 0; ; home.private.mapTime++) {
 
