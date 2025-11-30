@@ -18,6 +18,7 @@ bbFlag bbDF_drawableSprite(void* Drawable, void* frameDescriptor, void* cl){
     bbGraphics* graphics = foo->graphics;
     bbViewport* VP = foo->target;
 
+
     I32 spriteInt = frame->handle.u64;
     sfSprite* sprite = graphics->sprites->sprites[spriteInt];
 
@@ -28,6 +29,10 @@ bbFlag bbDF_drawableSprite(void* Drawable, void* frameDescriptor, void* cl){
     sfSprite_setPosition(sprite,V2F);
 
     sfRenderTexture_drawSprite(renderTexture,sprite,NULL);
+
+
+    bbPrintf("i-j = %d, spriteInt = %d\n",
+             drawable->coords.i - drawable->coords.j, spriteInt);
 
     return Success;
 

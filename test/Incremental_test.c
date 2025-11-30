@@ -322,7 +322,7 @@ CLEARWINDOW(bbMagenta);
 
 	for (home.private.mapTime = 0; ; home.private.mapTime++) {
 
-
+bbHere();
 /*
 		unsigned char ch = 'a' + rand()%26;
         bbPool_Handle handle;
