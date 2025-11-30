@@ -18,12 +18,11 @@
 #include "engine/viewport/bbDrawables.h"
 #include "engine/viewport/bbMapIcons.h"
 #include "engine/avoidance/bbAvoidables.h"
-#include "engine/units/bbUnits.h"
+#include "engine/viewport/bbUnits.h"
 
 
 bbWidgets* testWidgets;
 bbMapCoords testGoalPoint;
-bbDrawables* drawables;
 
 I32 hash(unsigned char *str, I32 n_bins);
 
@@ -269,10 +268,10 @@ CLEARWINDOW(bbMagenta);
 
 
 
-    bbMapIcons* mapicons;
+
     bbAvoidables* avoidables;
-    bbDrawables_new((void**)&drawables,  12, 12);
-    bbMapIcons_new((void**) &mapicons,  12, 12);
+    bbDrawables_new((void**)&home.constant.drawables,  12, 12);
+    bbMapIcons_new((void**) &home.constant.mapIcons,  12, 12);
     bbUnits_new((void**)&home.shared.units, 12, 12);
     bbAvoidables_new((void**)&avoidables, 12, 12);
 
@@ -295,10 +294,10 @@ CLEARWINDOW(bbMagenta);
             MC.j += rand()%(100 * POINTS_PER_PIXEL);
 
             bbDrawable* drawable;
-            bbDrawable_newTree(&drawable, drawables, &home.constant.graphics,
+            bbDrawable_newTree(&drawable, home.constant.drawables, &home.constant.graphics,
                                MC);
             bbMapIcon* mapicon;
-            bbMapIcon_new(&mapicon, mapicons,&home.constant.graphics, MC);
+            bbMapIcon_new(&mapicon, home.constant.mapIcons,&home.constant.graphics, MC);
             bbAvoidable* avoidable;
             bbAvoidable_new(&avoidable, avoidables, MC, 160);
 
@@ -315,7 +314,7 @@ CLEARWINDOW(bbMagenta);
     }
 
     bbDrawable* player;
-    bbDrawable_newCat(&player, drawables, &home.constant.graphics, home.private
+    bbDrawable_newCat(&player, home.constant.drawables, &home.constant.graphics, home.private
             .viewport->viewpoint);
 
 
@@ -351,7 +350,7 @@ bbHere();
             home.private.viewport->viewpoint.j += difference.j * speed / distance;
         }
 
-        bbDrawable_setLocation(player, drawables, home.private.viewport->viewpoint);
+        bbDrawable_setLocation(player, home.constant.drawables, home.private.viewport->viewpoint);
 
 		bbMouse_isOver(&home.private.mouse, &home.private.widgets);
 		bbMouse_Update(&home.private.mouse, &home.private.widgets, &home.constant.graphics);
@@ -366,9 +365,8 @@ bbHere();
         cl.target = home.private.viewport;
 
 //TODO change bbDrawables_draw(drawables, &cl, 0, 0, 12, 12); signature back
-        bbDrawables_draw(drawables, &cl, 0, 0, 12, 12);
-        bbMapIcons_draw(mapicons, &cl, 0, 0, 12, 12);
-        bbAvoidables_draw(avoidables, &cl, 0, 0, 12, 12);
+        bbDrawablesPlus_draw( &cl, 0, 0, 12, 12);
+bbAvoidables_draw(avoidables, &cl, 0, 0, 12, 12);
 
 
 

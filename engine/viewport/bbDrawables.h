@@ -56,6 +56,11 @@ I32 bbDrawable_isCloser(void* one, void* two);
 bbFlag bbDrawables_draw(bbDrawables* drawables, drawFuncClosure* cl,
                         I32 square_i_min, I32 square_j_min,
                         I32 square_i_max, I32 square_j_max);
+
+bbFlag bbDrawablesPlus_draw(drawFuncClosure* cl,
+                            I32 square_i_min, I32 square_j_min,
+                            I32 square_i_max, I32 square_j_max);
+
 /** bbDrawables_drawFunc calls bbDrawable_draw */
 bbFlag bbDrawables_drawFunc(void* node, void* cl);
 /** bbbDrawable_draw draws a drawable to the screen*/

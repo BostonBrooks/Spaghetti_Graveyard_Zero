@@ -7,7 +7,8 @@
 #include "engine/dummyserver/bbDummySender.h"
 #include "engine/viewport/bbViewport.h"
 #include "engine/viewport/bbDrawables.h"
-#include "engine/units/bbUnits.h"
+#include "engine/viewport/bbMapIcons.h"
+#include "engine/viewport/bbUnits.h"
 
 typedef struct {
     bbSpells spells;
@@ -24,6 +25,8 @@ typedef struct {
 typedef struct {
     //TODO add drawables and mapicons
     bbGraphics graphics;
+    bbDrawables* drawables;
+    bbMapIcons* mapIcons;
 } bbConstant;
 
 typedef struct {

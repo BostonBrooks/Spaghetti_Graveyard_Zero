@@ -1,6 +1,6 @@
 #include "engine/viewport/bbDrawables.h"
 #include "engine/logic/bbNestedList.h"
-#include "engine/units/bbUnits.h"
+#include "bbUnits.h"
 #include "engine/data/bbHome.h"
 
 I32 bbDrawables_getSquareIndex(I32 i, I32 j, I32 squares_i){
@@ -101,6 +101,45 @@ bbFlag bbDrawables_draw(bbDrawables* drawables, drawFuncClosure* cl,
     //TODO bbNestedList_cleanup;
     return Success;
 }
+
+bbFlag bbDrawablesPlus_draw(drawFuncClosure* cl,
+                            I32 square_i_min, I32 square_j_min,
+                            I32 square_i_max, I32 square_j_max){
+    bbDrawables* drawables = home.constant.drawables;
+    bbDrawables* mapicons = home.constant.mapIcons;
+    bbDrawables* units = home.shared.units;
+
+    bbNestedList list;
+    bbNestedList_init(&list);
+
+    I32 squares_i = drawables->squares_i;
+    I32 squares_j = drawables->squares_j;
+
+    for (I32 i = square_i_min; i < square_i_max; ++i) {
+        for (I32 j = square_j_min; j < square_j_max; ++j) {
+            I32 n = i + squares_i * j;
+
+            bbNestedList_attach(&list, &drawables->squares[n].list);
+            bbNestedList_attach(&list, &units->squares[n].list);
+        }
+
+    }
+
+    for (I32 i = 0; i < squares_i; ++i) {
+        for (I32 j = 0; j < squares_j; ++j) {
+            I32 n = i + squares_i * j;
+
+            bbNestedList_attach(&list, &mapicons->squares[n].list);
+        }
+
+    }
+
+    bbNestedList_map(&list, bbDrawable_drawFunc, cl);
+
+    //TODO bbNestedList_cleanup;
+    return Success;
+}
+
 
 //TODO what if MC is out of bounds
 bbFlag bbDrawable_newTree(bbDrawable** self, bbDrawables* drawables,

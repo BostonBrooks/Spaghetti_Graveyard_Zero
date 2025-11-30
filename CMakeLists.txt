@@ -95,5 +95,5 @@ add_executable(myprogram
         games/game0/maps/map0/drawfunctions/drawablesprite.h
         engine/avoidance/bbAvoidables.h
         engine/avoidance/bbAvoidables.c
-        engine/units/bbUnits.h
-        engine/units/bbUnits.c)
+        engine/viewport/bbUnits.h
+        engine/viewport/bbUnits.c)

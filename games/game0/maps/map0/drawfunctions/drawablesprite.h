@@ -31,9 +31,6 @@ bbFlag bbDF_drawableSprite(void* Drawable, void* frameDescriptor, void* cl){
     sfRenderTexture_drawSprite(renderTexture,sprite,NULL);
 
 
-    bbPrintf("i-j = %d, spriteInt = %d\n",
-             drawable->coords.i - drawable->coords.j, spriteInt);
-
     return Success;
 
 

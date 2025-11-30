@@ -136,8 +136,6 @@ bbFlag bbSpell_Spell1_ReceiveStr(bbSpell* spell, void* Spells, char* answer)
 
     return Success;
 }
-//TODO remove extern
-extern bbDrawables* drawables;
 
 bbFlag bbSpell_Spell1_ReceiveClick(bbSpell* spell, void* Spells, bbMapCoords MC, bbDummySender* server, U64 gameTime)
 {
@@ -147,7 +145,7 @@ bbFlag bbSpell_Spell1_ReceiveClick(bbSpell* spell, void* Spells, bbMapCoords MC,
 
 
     bbDrawable* none;
-    bbDrawable_newFire(&none, drawables, &home.constant.graphics, MC);
+    bbDrawable_newFire(&none, home.constant.drawables, &home.constant.graphics, MC);
 bbHere()
 
     I32 x = rand() % 20;

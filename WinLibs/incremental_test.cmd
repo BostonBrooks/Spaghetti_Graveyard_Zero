@@ -49,7 +49,7 @@ gcc   -D SFML_STATIC -I ../^
        ../engine/viewport/bbDrawables.c^
        ../engine/viewport/bbMapIcons.c^
        ../engine/avoidance/bbAvoidables.c^
-       ../engine/units/bbUnits.c^
+       ../engine/viewport/bbUnits.c^
        ../games/game0/maps/map0/drawfunctions/drawfunctions.c^
        ^
   -lcsfml-system -lcsfml-graphics -lcsfml-window -g -lm -w^
