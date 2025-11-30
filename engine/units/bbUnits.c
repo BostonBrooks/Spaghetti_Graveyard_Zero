@@ -22,11 +22,11 @@ bbFlag bbUnit_new(bbUnit** self,bbUnits* units, bbGraphics* graphics,
                         "DRAWABLESPRITE",
                         &drawfunctionHandle);
 
-    unit->frames[0].drawfunction = drawfunctionHandle.u64;
-    unit->frames[0].handle.u64 = 143;
+    unit->drawable.frames[0].drawfunction = drawfunctionHandle.u64;
+    unit->drawable.frames[0].handle.u64 = 143;
 
     for (I32 k = 1; k < FRAMES_PER_DRAWABLE; k++){
-        unit->frames[k].drawfunction = -1;
+        unit->drawable.frames[k].drawfunction = -1;
     }
 
     bbList_sortL(&unitSquare.list, unit);
