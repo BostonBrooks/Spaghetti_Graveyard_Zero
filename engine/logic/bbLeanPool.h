@@ -14,6 +14,7 @@ typedef struct {
 	bbPool_Handle null;
 	U32 num;
 	U32 sizeOf;
+    U32 inUse;
 	bbPool_List available;
 	alignas(8) U8 elements[];
 } bbLeanPool;

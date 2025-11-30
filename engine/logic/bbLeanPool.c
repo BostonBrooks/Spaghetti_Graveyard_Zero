@@ -51,6 +51,7 @@ bbFlag bbLeanPool_new(bbLeanPool** pool, I32 sizeOf, I32 num){
 	Pool->null.ptr = NULL;
 	Pool->num = num;
 	Pool->sizeOf = size;
+    Pool->inUse = 0;
 
 /*
 	element0.prev = NULL
@@ -94,6 +95,7 @@ bbFlag bbLeanPool_delete(bbLeanPool* pool){
 bbFlag bbLeanPool_clear(bbLeanPool* pool){
 	
 	I32 num = pool->num;
+    pool->inUse = 0;
 	bbLeanPool_Header* element;
 	element = bbLeanPool_fromInt(pool, 0);
 	element->prev.ptr = NULL;
@@ -122,6 +124,7 @@ bbFlag bbLeanPool_allocImpl(bbLeanPool* pool, void** address, char* file, int li
 	bbAssert(pool->available.head.ptr != NULL, "pool full\n");
 	bbLeanPool_Header* header = pool->available.head.ptr;
 
+    pool->inUse += 1;
 	if (pool->available.head.ptr == pool->available.tail.ptr){
 		//last available element
 		bbLeanPool_Header* element = pool->available.tail.ptr;
@@ -152,6 +155,7 @@ bbFlag bbLeanPool_free(bbLeanPool* pool, void* address){
 	bbLeanPool_Header* element = address;
 	bbLeanPool_Header* available = pool->available.head.ptr;
 
+    pool->inUse -= 1;
 	// if pool is empty
 	if (available == NULL){
 		bbAssert(pool->available.head.ptr == NULL, "head/tail\n");
