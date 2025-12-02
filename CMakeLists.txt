@@ -97,4 +97,5 @@ add_executable(myprogram
         engine/avoidance/bbAvoidables.c
         engine/viewport/bbUnits.h
         engine/viewport/bbUnits.c
-        engine/core/bbCore.h)
+        engine/core/bbCore.h
+        engine/core/bbMessages.h)

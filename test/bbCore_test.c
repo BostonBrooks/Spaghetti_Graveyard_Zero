@@ -1,7 +1,7 @@
 #include "engine/logic/bbIntTypes.h"
 #include "engine/logic/bbTerminal.h"
 
-#include "engine/userinterface/bb"
+#include "engine/userinterface/bbWidget.h"
 
 bbWidgets* testWidgets;
 bbMapCoords testGoalPoint;

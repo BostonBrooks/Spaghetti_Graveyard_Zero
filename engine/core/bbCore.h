@@ -36,41 +36,8 @@
 
 #include "engine/logic/bbIntTypes.h"
 #include "engine/logic/bbList.h"
-#include "engine/core/bbCore_dummyServer.h"
 
 
-typedef enum {
-    bbSentMessage_none
-} bbSentMessage_type;
-
-typedef union {
-
-} bbSentMessage_data;
-
-typedef struct {
-
-    U64 time_sent;
-    U64 time_enacted;
-    bbPool_ListElement listElement;
-    bbSentMessage_data data;
-} bbSendMessage;
-
-typedef enum {
-    bbReceivedMessage_none
-} bbReceivedMessage_type;
-
-
-typedef union {
-
-} bbReceivedMessage_data;
-
-
-typedef struct {
-    U64 time_sent;
-    U64 time_enacted;
-    bbPool_ListElement listElement;
-    bbReceivedMessage_data data;
-} bbReceiveMessage;
 
 typedef enum {
     bbStateChange_none
