@@ -2,7 +2,7 @@
 #include "engine/userinterface/bbWidget.h"
 #include "engine/userinterface/bbWidgetFunctions.h"
 
-bbFlag SpellSelect_Constructor (bbWidget** self, void* graphics,
+bbFlag SpellSelect_Constructor (bbWidget** self, void* Graphics,
                              bbWidgets* widgets, bbScreenPoints screen_coords, bbWidget* parent) {
 
 
@@ -21,13 +21,13 @@ bbFlag SpellSelect_Constructor (bbWidget** self, void* graphics,
 
     widget->rect = rect;
 
-    bbGraphics *Graphics = graphics;
+    bbGraphics *graphics = Graphics;
     bbPool_Handle drawfunctionHandle;
-    bbDictionary_lookup(Graphics->drawfunctions->dictionary, "WIDGETSPRITE",
+    bbDictionary_lookup(graphics->drawfunctions->dictionary, "WIDGETSPRITE",
                         &drawfunctionHandle);
     widget->frames[0].drawfunction = drawfunctionHandle.u64;
 
-    bbDictionary_lookup(Graphics->sprites->dictionary, "SPELL1",
+    bbDictionary_lookup(graphics->sprites->dictionary, "SPELL1",
                         &widget->frames[0].handle);
 
     int funcInt;
