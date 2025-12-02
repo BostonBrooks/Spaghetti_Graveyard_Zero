@@ -5,19 +5,19 @@
 
 //typedef bbFlag bbMouse_LeftDown (void* mouse, void* widgets, void* widget,
 // void* graphics);
-bbFlag SpellSlot_LeftDown (void* mouse, void* widgets, void* widget, void*
-graphics)
+bbFlag SpellSlot_LeftDown (void* Mouse, void* Widgets, void* Widget, void*
+Graphics)
 {
 
-    bbWidget* Widget = (bbWidget*)widget;
-    bbGraphics* Graphics = graphics;
-    bbMouse* Mouse = mouse;
-    bbWidgets* Widgets = widgets;
+    bbWidget* widget = (bbWidget*)Widget;
+    bbGraphics* graphics = Graphics;
+    bbMouse* mouse = Mouse;
+    bbWidgets* widgets = Widgets;
 
-    bbWidget* CurrentSpell = Widgets->currentSpell;
-    CurrentSpell->frames[0].handle = Widget->frames[0].handle;
+    bbWidget* CurrentSpell = widgets->currentSpell;
+    CurrentSpell->frames[0].handle = widget->frames[0].handle;
 
-    bbSpell_setActive_Key(Widget->key,
+    bbSpell_setActive_Key(widget->key,
                           &home.private.spells,
                           home.private.server,
                           home.private.mapTime);

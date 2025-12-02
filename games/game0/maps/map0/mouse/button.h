@@ -27,70 +27,71 @@ bbFlag Button_IsOver (bbMouse* mouse, bbWidgets* widgets, bbWidget* widget)
 
 //typedef bbFlag bbMouse_Enter (void* mouse, void* widgets, void* widget, void* graphics);
 
-bbFlag Button_Enter (void* mouse, void* widgets, void* widget, void* graphics)
+bbFlag Button_Enter (void* mouse, void* widgets, void* Widget, void* Graphics)
 {
-    bbWidget* Widget = (bbWidget*)widget;
-    bbGraphics* Graphics = graphics;
-    bbDictionary_lookup(Graphics->sprites->dictionary,
-                        "BUTTON_HOVER", &Widget->frames[0].handle);
+    bbWidget* widget = (bbWidget*)Widget;
+    bbGraphics* graphics = Graphics;
+    bbDictionary_lookup(graphics->sprites->dictionary,
+                        "BUTTON_HOVER", &widget->frames[0].handle);
 
-    Widget->mtable.hover = true;
+    widget->mtable.hover = true;
     return Success;
 }
 
 //typedef bbFlag bbMouse_Leave (void* mouse, void* widgets, void* widget, void* graphics);
-bbFlag Button_Leave (void* mouse, void* widgets, void* widget, void* graphics)
+bbFlag Button_Leave (void* mouse, void* widgets, void* Widget, void* Graphics)
 {
-    bbWidget* Widget = (bbWidget*)widget;
-    bbGraphics* Graphics = graphics;
-    bbDictionary_lookup(Graphics->sprites->dictionary,
-                        "BUTTON_DEFAULT", &Widget->frames[0].handle);
+    bbWidget* widget = (bbWidget*)Widget;
+    bbGraphics* graphics = Graphics;
+    bbDictionary_lookup(graphics->sprites->dictionary,
+                        "BUTTON_DEFAULT", &widget->frames[0].handle);
 
-    Widget->mtable.hover = false;
+    widget->mtable.hover = false;
     return Success;
 }
 
 //typedef bbFlag bbMouse_LeftDown (void* mouse, void* widgets, void* widget,
 // void* graphics);
-bbFlag Button_LeftDown (void* mouse, void* widgets, void* widget, void*
-graphics)
+bbFlag Button_LeftDown (void* Mouse, void* Widgets, void* Widget, void*
+Graphics)
 {
-    bbWidget* Widget = (bbWidget*)widget;
-    bbGraphics* Graphics = graphics;
-    bbMouse* Mouse = mouse;
-    bbWidgets* Widgets = widgets;
-    bbVPool* pool = Widgets->pool;
+    bbWidget* widget = (bbWidget*)Widget;
+    bbGraphics* graphics = Graphics;
+    bbMouse* mouse = Mouse;
+    bbWidgets* widgets = Widgets;
+
+    bbVPool* pool = widgets->pool;
     bbPool_Handle handle;
-    bbDictionary_lookup(Graphics->sprites->dictionary,
-                        "BUTTON_CLICK", &Widget->frames[0].handle);
+    bbDictionary_lookup(graphics->sprites->dictionary,
+                        "BUTTON_CLICK", &widget->frames[0].handle);
 
     bbVPool_reverseLookup(pool, widget, &handle);
-    Widget->mtable.hover = true;
-    Mouse->selected = handle;
+    widget->mtable.hover = true;
+    mouse->selected = handle;
     return Success;
 }
 
 //typedef bbFlag bbMouse_LeftUp (void* mouse, void* widgets, void* widget, void*
 // graphics);
-bbFlag Button_LeftUp (void* mouse, void* widgets, void* widget, void* graphics)
+bbFlag Button_LeftUp (void* Mouse, void* Widgets, void* Widget, void* Graphics)
 {
-    bbWidget* Widget = (bbWidget*)widget;
-    bbGraphics* Graphics = graphics;
-    bbWidgets* Widgets = widgets;
+    bbWidget* widget = (bbWidget*)Widget;
+    bbGraphics* graphics = Graphics;
+    bbMouse* mouse = Mouse;
+    bbWidgets* widgets = Widgets;
 
-    bbMouse* Mouse = mouse;
-    Mouse->selected = Widgets->pool->null;
+    mouse->selected = widgets->pool->null;
 
-    if (Widget->mtable.hover) {
+    if (widget->mtable.hover) {
 
-        bbDictionary_lookup(Graphics->sprites->dictionary,
-                            "BUTTON_HOVER", &Widget->frames[0].handle);
+        bbDictionary_lookup(graphics->sprites->dictionary,
+                            "BUTTON_HOVER", &widget->frames[0].handle);
 
     } else {
-        bbDictionary_lookup(Graphics->sprites->dictionary,
-                            "BUTTON_DEFAULT", &Widget->frames[0].handle);
+        bbDictionary_lookup(graphics->sprites->dictionary,
+                            "BUTTON_DEFAULT", &widget->frames[0].handle);
     }
 
-    Widget->mtable.hover = false;
+    widget->mtable.hover = false;
     return Success;
 }

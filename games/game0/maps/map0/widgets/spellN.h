@@ -2,25 +2,25 @@
 #include "engine/userinterface/bbWidget.h"
 #include "engine/userinterface/bbWidgetFunctions.h"
 
-bbFlag SpellSelect1_Constructor (bbWidget** self, void* graphics,
+bbFlag SpellSelect1_Constructor (bbWidget** self, void* Graphics,
                              bbWidgets* widgets, bbScreenPoints screen_coords, bbWidget* parent) {
 
-    bbGraphics *Graphics = graphics;
+    bbGraphics *graphics = Graphics;
     bbWidget* widget;
     bbScreenPoints SP;
 
 
     SP.x = screen_coords.x;
     SP.y = screen_coords.y;
-    bbWidget_constructor(&widget, widgets, graphics,
+    bbWidget_constructor(&widget, widgets, Graphics,
                          SP, parent, "SPELLSELECT");
 
-    bbDictionary_lookup(Graphics->sprites->dictionary, "SPELL1",
+    bbDictionary_lookup(graphics->sprites->dictionary, "SPELL1",
                         &widget->frames[0].handle);
 
 
     bbPool_Handle dragHandle;
-    bbDictionary_lookup(Graphics->sprites->dictionary, "SPELL1",
+    bbDictionary_lookup(graphics->sprites->dictionary, "SPELL1",
                         &dragHandle);
 
     bbStr_setStr(widget->key, "SPELL1", 64);
@@ -32,24 +32,24 @@ bbFlag SpellSelect1_Constructor (bbWidget** self, void* graphics,
 
 }
 
-bbFlag SpellSelect2_Constructor (bbWidget** self, void* graphics,
+bbFlag SpellSelect2_Constructor (bbWidget** self, void* Graphics,
                            bbWidgets* widgets, bbScreenPoints screen_coords, bbWidget* parent) {
 
-    bbGraphics *Graphics = graphics;
+    bbGraphics *graphics = Graphics;
     bbWidget* widget;
     bbScreenPoints SP;
 
     SP.x = screen_coords.x;
     SP.y = screen_coords.y;
-    bbWidget_constructor(&widget, widgets, graphics,
+    bbWidget_constructor(&widget, widgets, Graphics,
                          SP, parent, "SPELLSELECT");
 
-    bbDictionary_lookup(Graphics->sprites->dictionary, "SPELL2",
+    bbDictionary_lookup(graphics->sprites->dictionary, "SPELL2",
                         &widget->frames[0].handle);
 
 
     bbPool_Handle dragHandle;
-    bbDictionary_lookup(Graphics->sprites->dictionary, "SPELL2",
+    bbDictionary_lookup(graphics->sprites->dictionary, "SPELL2",
                         &dragHandle);
     bbStr_setStr(widget->key, "SPELL2", 64);
 
@@ -60,24 +60,24 @@ bbFlag SpellSelect2_Constructor (bbWidget** self, void* graphics,
 
 }
 
-bbFlag SpellSelect3_Constructor (bbWidget** self, void* graphics,
+bbFlag SpellSelect3_Constructor (bbWidget** self, void* Graphics,
                            bbWidgets* widgets, bbScreenPoints screen_coords, bbWidget* parent) {
 
-    bbGraphics *Graphics = graphics;
+    bbGraphics *graphics = Graphics;
     bbWidget* widget;
     bbScreenPoints SP;
 
     SP.x = screen_coords.x;
     SP.y = screen_coords.y;
-    bbWidget_constructor(&widget, widgets, graphics,
+    bbWidget_constructor(&widget, widgets, Graphics,
                          SP, parent, "SPELLSELECT");
 
-    bbDictionary_lookup(Graphics->sprites->dictionary, "SPELL3",
+    bbDictionary_lookup(graphics->sprites->dictionary, "SPELL3",
                         &widget->frames[0].handle);
 
 
     bbPool_Handle dragHandle;
-    bbDictionary_lookup(Graphics->sprites->dictionary, "SPELL3",
+    bbDictionary_lookup(graphics->sprites->dictionary, "SPELL3",
                         &dragHandle);
 
     bbStr_setStr(widget->key, "SPELL3", 64);
@@ -89,24 +89,24 @@ bbFlag SpellSelect3_Constructor (bbWidget** self, void* graphics,
 
 }
 
-bbFlag SpellSelect4_Constructor (bbWidget** self, void* graphics,
+bbFlag SpellSelect4_Constructor (bbWidget** self, void* Graphics,
                            bbWidgets* widgets, bbScreenPoints screen_coords, bbWidget* parent) {
 
-    bbGraphics *Graphics = graphics;
+    bbGraphics *graphics = Graphics;
     bbWidget* widget;
     bbScreenPoints SP;
 
     SP.x = screen_coords.x;
     SP.y = screen_coords.y;
-    bbWidget_constructor(&widget, widgets, graphics,
+    bbWidget_constructor(&widget, widgets, Graphics,
                          SP, parent, "SPELLSELECT");
 
-    bbDictionary_lookup(Graphics->sprites->dictionary, "SPELL4",
+    bbDictionary_lookup(graphics->sprites->dictionary, "SPELL4",
                         &widget->frames[0].handle);
 
 
     bbPool_Handle dragHandle;
-    bbDictionary_lookup(Graphics->sprites->dictionary, "SPELL4",
+    bbDictionary_lookup(graphics->sprites->dictionary, "SPELL4",
                         &dragHandle);
 
     bbStr_setStr(widget->key, "SPELL4", 64);
@@ -118,24 +118,24 @@ bbFlag SpellSelect4_Constructor (bbWidget** self, void* graphics,
 
 }
 
-bbFlag SpellSelect5_Constructor (bbWidget** self, void* graphics,
+bbFlag SpellSelect5_Constructor (bbWidget** self, void* Graphics,
                            bbWidgets* widgets, bbScreenPoints screen_coords, bbWidget* parent) {
 
-    bbGraphics *Graphics = graphics;
+    bbGraphics *graphics = Graphics;
     bbWidget* widget;
     bbScreenPoints SP;
 
     SP.x = screen_coords.x;
     SP.y = screen_coords.y;
-    bbWidget_constructor(&widget, widgets, graphics,
+    bbWidget_constructor(&widget, widgets, Graphics,
                          SP, parent, "SPELLSELECT");
 
-    bbDictionary_lookup(Graphics->sprites->dictionary, "SPELL5",
+    bbDictionary_lookup(graphics->sprites->dictionary, "SPELL5",
                         &widget->frames[0].handle);
 
 
     bbPool_Handle dragHandle;
-    bbDictionary_lookup(Graphics->sprites->dictionary, "SPELL5",
+    bbDictionary_lookup(graphics->sprites->dictionary, "SPELL5",
                         &dragHandle);
 
     bbStr_setStr(widget->key, "SPELL5", 64);
@@ -147,24 +147,24 @@ bbFlag SpellSelect5_Constructor (bbWidget** self, void* graphics,
 
 }
 
-bbFlag SpellSelect6_Constructor (bbWidget** self, void* graphics,
+bbFlag SpellSelect6_Constructor (bbWidget** self, void* Graphics,
                            bbWidgets* widgets, bbScreenPoints screen_coords, bbWidget* parent) {
 
-    bbGraphics *Graphics = graphics;
+    bbGraphics *graphics = Graphics;
     bbWidget* widget;
     bbScreenPoints SP;
 
     SP.x = screen_coords.x;
     SP.y = screen_coords.y;
-    bbWidget_constructor(&widget, widgets, graphics,
+    bbWidget_constructor(&widget, widgets, Graphics,
                          SP, parent, "SPELLSELECT");
 
-    bbDictionary_lookup(Graphics->sprites->dictionary, "SPELL6",
+    bbDictionary_lookup(graphics->sprites->dictionary, "SPELL6",
                         &widget->frames[0].handle);
 
 
     bbPool_Handle dragHandle;
-    bbDictionary_lookup(Graphics->sprites->dictionary, "SPELL6",
+    bbDictionary_lookup(graphics->sprites->dictionary, "SPELL6",
                         &dragHandle);
 
     bbStr_setStr(widget->key, "SPELL6", 64);
@@ -176,24 +176,24 @@ bbFlag SpellSelect6_Constructor (bbWidget** self, void* graphics,
 
 }
 
-bbFlag SpellSelect7_Constructor (bbWidget** self, void* graphics,
+bbFlag SpellSelect7_Constructor (bbWidget** self, void* Graphics,
                            bbWidgets* widgets, bbScreenPoints screen_coords, bbWidget* parent) {
 
-    bbGraphics *Graphics = graphics;
+    bbGraphics *graphics = Graphics;
     bbWidget* widget;
     bbScreenPoints SP;
 
     SP.x = screen_coords.x;
     SP.y = screen_coords.y;
-    bbWidget_constructor(&widget, widgets, graphics,
+    bbWidget_constructor(&widget, widgets, Graphics,
                          SP, parent, "SPELLSELECT");
 
-    bbDictionary_lookup(Graphics->sprites->dictionary, "SPELL7",
+    bbDictionary_lookup(graphics->sprites->dictionary, "SPELL7",
                         &widget->frames[0].handle);
 
 
     bbPool_Handle dragHandle;
-    bbDictionary_lookup(Graphics->sprites->dictionary, "SPELL7",
+    bbDictionary_lookup(graphics->sprites->dictionary, "SPELL7",
                         &dragHandle);
 
     bbStr_setStr(widget->key, "SPELL7", 64);
@@ -205,24 +205,24 @@ bbFlag SpellSelect7_Constructor (bbWidget** self, void* graphics,
 
 }
 
-bbFlag SpellSelect8_Constructor (bbWidget** self, void* graphics,
+bbFlag SpellSelect8_Constructor (bbWidget** self, void* Graphics,
                            bbWidgets* widgets, bbScreenPoints screen_coords, bbWidget* parent) {
 
-    bbGraphics *Graphics = graphics;
+    bbGraphics *graphics = Graphics;
     bbWidget* widget;
     bbScreenPoints SP;
 
     SP.x = screen_coords.x;
     SP.y = screen_coords.y;
-    bbWidget_constructor(&widget, widgets, graphics,
+    bbWidget_constructor(&widget, widgets, Graphics,
                          SP, parent, "SPELLSELECT");
 
-    bbDictionary_lookup(Graphics->sprites->dictionary, "SPELL8",
+    bbDictionary_lookup(graphics->sprites->dictionary, "SPELL8",
                         &widget->frames[0].handle);
 
 
     bbPool_Handle dragHandle;
-    bbDictionary_lookup(Graphics->sprites->dictionary, "SPELL8",
+    bbDictionary_lookup(graphics->sprites->dictionary, "SPELL8",
                         &dragHandle);
 
     bbStr_setStr(widget->key, "SPELL8", 64);
@@ -234,24 +234,24 @@ bbFlag SpellSelect8_Constructor (bbWidget** self, void* graphics,
 
 }
 
-bbFlag SpellSelect9_Constructor (bbWidget** self, void* graphics,
+bbFlag SpellSelect9_Constructor (bbWidget** self, void* Graphics,
                            bbWidgets* widgets, bbScreenPoints screen_coords, bbWidget* parent) {
 
-    bbGraphics *Graphics = graphics;
+    bbGraphics *graphics = Graphics;
     bbWidget* widget;
     bbScreenPoints SP;
 
     SP.x = screen_coords.x;
     SP.y = screen_coords.y;
-    bbWidget_constructor(&widget, widgets, graphics,
+    bbWidget_constructor(&widget, widgets, Graphics,
                          SP, parent, "SPELLSELECT");
 
-    bbDictionary_lookup(Graphics->sprites->dictionary, "SPELL9",
+    bbDictionary_lookup(graphics->sprites->dictionary, "SPELL9",
                         &widget->frames[0].handle);
 
 
     bbPool_Handle dragHandle;
-    bbDictionary_lookup(Graphics->sprites->dictionary, "SPELL9",
+    bbDictionary_lookup(graphics->sprites->dictionary, "SPELL9",
                         &dragHandle);
 
     bbStr_setStr(widget->key, "SPELL9", 64);
@@ -263,24 +263,24 @@ bbFlag SpellSelect9_Constructor (bbWidget** self, void* graphics,
 
 }
 
-bbFlag SpellSelect10_Constructor (bbWidget** self, void* graphics,
+bbFlag SpellSelect10_Constructor (bbWidget** self, void* Graphics,
                            bbWidgets* widgets, bbScreenPoints screen_coords, bbWidget* parent) {
 
-    bbGraphics *Graphics = graphics;
+    bbGraphics *graphics = Graphics;
     bbWidget* widget;
     bbScreenPoints SP;
 
     SP.x = screen_coords.x;
     SP.y = screen_coords.y;
-    bbWidget_constructor(&widget, widgets, graphics,
+    bbWidget_constructor(&widget, widgets, Graphics,
                          SP, parent, "SPELLSELECT");
 
-    bbDictionary_lookup(Graphics->sprites->dictionary, "SPELL10",
+    bbDictionary_lookup(graphics->sprites->dictionary, "SPELL10",
                         &widget->frames[0].handle);
 
 
     bbPool_Handle dragHandle;
-    bbDictionary_lookup(Graphics->sprites->dictionary, "SPELL10",
+    bbDictionary_lookup(graphics->sprites->dictionary, "SPELL10",
                         &dragHandle);
 
     bbStr_setStr(widget->key, "SPELL10", 64);
@@ -292,24 +292,24 @@ bbFlag SpellSelect10_Constructor (bbWidget** self, void* graphics,
 
 }
 
-bbFlag SpellSelect11_Constructor (bbWidget** self, void* graphics,
+bbFlag SpellSelect11_Constructor (bbWidget** self, void* Graphics,
                            bbWidgets* widgets, bbScreenPoints screen_coords, bbWidget* parent) {
 
-    bbGraphics *Graphics = graphics;
+    bbGraphics *graphics = Graphics;
     bbWidget* widget;
     bbScreenPoints SP;
 
     SP.x = screen_coords.x;
     SP.y = screen_coords.y;
-    bbWidget_constructor(&widget, widgets, graphics,
+    bbWidget_constructor(&widget, widgets, Graphics,
                          SP, parent, "SPELLSELECT");
 
-    bbDictionary_lookup(Graphics->sprites->dictionary, "SPELL11",
+    bbDictionary_lookup(graphics->sprites->dictionary, "SPELL11",
                         &widget->frames[0].handle);
 
 
     bbPool_Handle dragHandle;
-    bbDictionary_lookup(Graphics->sprites->dictionary, "SPELL11",
+    bbDictionary_lookup(graphics->sprites->dictionary, "SPELL11",
                         &dragHandle);
 
     bbStr_setStr(widget->key, "SPELL11", 64);
@@ -321,24 +321,24 @@ bbFlag SpellSelect11_Constructor (bbWidget** self, void* graphics,
 
 }
 
-bbFlag SpellSelect12_Constructor (bbWidget** self, void* graphics,
+bbFlag SpellSelect12_Constructor (bbWidget** self, void* Graphics,
                            bbWidgets* widgets, bbScreenPoints screen_coords, bbWidget* parent) {
 
-    bbGraphics *Graphics = graphics;
+    bbGraphics *graphics = Graphics;
     bbWidget* widget;
     bbScreenPoints SP;
 
     SP.x = screen_coords.x;
     SP.y = screen_coords.y;
-    bbWidget_constructor(&widget, widgets, graphics,
+    bbWidget_constructor(&widget, widgets, Graphics,
                          SP, parent, "SPELLSELECT");
 
-    bbDictionary_lookup(Graphics->sprites->dictionary, "SPELL12",
+    bbDictionary_lookup(graphics->sprites->dictionary, "SPELL12",
                         &widget->frames[0].handle);
 
 
     bbPool_Handle dragHandle;
-    bbDictionary_lookup(Graphics->sprites->dictionary, "SPELL12",
+    bbDictionary_lookup(graphics->sprites->dictionary, "SPELL12",
                         &dragHandle);
 
     bbStr_setStr(widget->key, "SPELL12", 64);
@@ -350,24 +350,24 @@ bbFlag SpellSelect12_Constructor (bbWidget** self, void* graphics,
 
 }
 
-bbFlag SpellSelect13_Constructor (bbWidget** self, void* graphics,
+bbFlag SpellSelect13_Constructor (bbWidget** self, void* Graphics,
                            bbWidgets* widgets, bbScreenPoints screen_coords, bbWidget* parent) {
 
-    bbGraphics *Graphics = graphics;
+    bbGraphics *graphics = Graphics;
     bbWidget* widget;
     bbScreenPoints SP;
 
     SP.x = screen_coords.x;
     SP.y = screen_coords.y;
-    bbWidget_constructor(&widget, widgets, graphics,
+    bbWidget_constructor(&widget, widgets, Graphics,
                          SP, parent, "SPELLSELECT");
 
-    bbDictionary_lookup(Graphics->sprites->dictionary, "SPELL13",
+    bbDictionary_lookup(graphics->sprites->dictionary, "SPELL13",
                         &widget->frames[0].handle);
 
 
     bbPool_Handle dragHandle;
-    bbDictionary_lookup(Graphics->sprites->dictionary, "SPELL13",
+    bbDictionary_lookup(graphics->sprites->dictionary, "SPELL13",
                         &dragHandle);
 
     bbStr_setStr(widget->key, "SPELL13", 64);
@@ -379,24 +379,24 @@ bbFlag SpellSelect13_Constructor (bbWidget** self, void* graphics,
 
 }
 
-bbFlag SpellSelect14_Constructor (bbWidget** self, void* graphics,
+bbFlag SpellSelect14_Constructor (bbWidget** self, void* Graphics,
                            bbWidgets* widgets, bbScreenPoints screen_coords, bbWidget* parent) {
 
-    bbGraphics *Graphics = graphics;
+    bbGraphics *graphics = Graphics;
     bbWidget* widget;
     bbScreenPoints SP;
 
     SP.x = screen_coords.x;
     SP.y = screen_coords.y;
-    bbWidget_constructor(&widget, widgets, graphics,
+    bbWidget_constructor(&widget, widgets, Graphics,
                          SP, parent, "SPELLSELECT");
 
-    bbDictionary_lookup(Graphics->sprites->dictionary, "SPELL14",
+    bbDictionary_lookup(graphics->sprites->dictionary, "SPELL14",
                         &widget->frames[0].handle);
 
 
     bbPool_Handle dragHandle;
-    bbDictionary_lookup(Graphics->sprites->dictionary, "SPELL14",
+    bbDictionary_lookup(graphics->sprites->dictionary, "SPELL14",
                         &dragHandle);
 
     bbStr_setStr(widget->key, "SPELL14", 64);
@@ -408,24 +408,24 @@ bbFlag SpellSelect14_Constructor (bbWidget** self, void* graphics,
 
 }
 
-bbFlag SpellSelect15_Constructor (bbWidget** self, void* graphics,
+bbFlag SpellSelect15_Constructor (bbWidget** self, void* Graphics,
                            bbWidgets* widgets, bbScreenPoints screen_coords, bbWidget* parent) {
 
-    bbGraphics *Graphics = graphics;
+    bbGraphics *graphics = Graphics;
     bbWidget* widget;
     bbScreenPoints SP;
 
     SP.x = screen_coords.x;
     SP.y = screen_coords.y;
-    bbWidget_constructor(&widget, widgets, graphics,
+    bbWidget_constructor(&widget, widgets, Graphics,
                          SP, parent, "SPELLSELECT");
 
-    bbDictionary_lookup(Graphics->sprites->dictionary, "SPELL15",
+    bbDictionary_lookup(graphics->sprites->dictionary, "SPELL15",
                         &widget->frames[0].handle);
 
 
     bbPool_Handle dragHandle;
-    bbDictionary_lookup(Graphics->sprites->dictionary, "SPELL15",
+    bbDictionary_lookup(graphics->sprites->dictionary, "SPELL15",
                         &dragHandle);
 
     bbStr_setStr(widget->key, "SPELL15", 64);
@@ -437,24 +437,24 @@ bbFlag SpellSelect15_Constructor (bbWidget** self, void* graphics,
 
 }
 
-bbFlag SpellSelect16_Constructor (bbWidget** self, void* graphics,
+bbFlag SpellSelect16_Constructor (bbWidget** self, void* Graphics,
                            bbWidgets* widgets, bbScreenPoints screen_coords, bbWidget* parent) {
 
-    bbGraphics *Graphics = graphics;
+    bbGraphics *graphics = Graphics;
     bbWidget* widget;
     bbScreenPoints SP;
 
     SP.x = screen_coords.x;
     SP.y = screen_coords.y;
-    bbWidget_constructor(&widget, widgets, graphics,
+    bbWidget_constructor(&widget, widgets, Graphics,
                          SP, parent, "SPELLSELECT");
 
-    bbDictionary_lookup(Graphics->sprites->dictionary, "SPELL16",
+    bbDictionary_lookup(graphics->sprites->dictionary, "SPELL16",
                         &widget->frames[0].handle);
 
 
     bbPool_Handle dragHandle;
-    bbDictionary_lookup(Graphics->sprites->dictionary, "SPELL16",
+    bbDictionary_lookup(graphics->sprites->dictionary, "SPELL16",
                         &dragHandle);
 
     bbStr_setStr(widget->key, "SPELL16", 64);
@@ -466,24 +466,24 @@ bbFlag SpellSelect16_Constructor (bbWidget** self, void* graphics,
 
 }
 
-bbFlag SpellSelect17_Constructor (bbWidget** self, void* graphics,
+bbFlag SpellSelect17_Constructor (bbWidget** self, void* Graphics,
                            bbWidgets* widgets, bbScreenPoints screen_coords, bbWidget* parent) {
 
-    bbGraphics *Graphics = graphics;
+    bbGraphics *graphics = Graphics;
     bbWidget* widget;
     bbScreenPoints SP;
 
     SP.x = screen_coords.x;
     SP.y = screen_coords.y;
-    bbWidget_constructor(&widget, widgets, graphics,
+    bbWidget_constructor(&widget, widgets, Graphics,
                          SP, parent, "SPELLSELECT");
 
-    bbDictionary_lookup(Graphics->sprites->dictionary, "SPELL17",
+    bbDictionary_lookup(graphics->sprites->dictionary, "SPELL17",
                         &widget->frames[0].handle);
 
 
     bbPool_Handle dragHandle;
-    bbDictionary_lookup(Graphics->sprites->dictionary, "SPELL17",
+    bbDictionary_lookup(graphics->sprites->dictionary, "SPELL17",
                         &dragHandle);
 
     bbStr_setStr(widget->key, "SPELL17", 64);
@@ -495,24 +495,24 @@ bbFlag SpellSelect17_Constructor (bbWidget** self, void* graphics,
 
 }
 
-bbFlag SpellSelect18_Constructor (bbWidget** self, void* graphics,
+bbFlag SpellSelect18_Constructor (bbWidget** self, void* Graphics,
                            bbWidgets* widgets, bbScreenPoints screen_coords, bbWidget* parent) {
 
-    bbGraphics *Graphics = graphics;
+    bbGraphics *graphics = Graphics;
     bbWidget* widget;
     bbScreenPoints SP;
 
     SP.x = screen_coords.x;
     SP.y = screen_coords.y;
-    bbWidget_constructor(&widget, widgets, graphics,
+    bbWidget_constructor(&widget, widgets, Graphics,
                          SP, parent, "SPELLSELECT");
 
-    bbDictionary_lookup(Graphics->sprites->dictionary, "SPELL18",
+    bbDictionary_lookup(graphics->sprites->dictionary, "SPELL18",
                         &widget->frames[0].handle);
 
 
     bbPool_Handle dragHandle;
-    bbDictionary_lookup(Graphics->sprites->dictionary, "SPELL18",
+    bbDictionary_lookup(graphics->sprites->dictionary, "SPELL18",
                         &dragHandle);
 
     bbStr_setStr(widget->key, "SPELL18", 64);
@@ -524,24 +524,24 @@ bbFlag SpellSelect18_Constructor (bbWidget** self, void* graphics,
 
 }
 
-bbFlag SpellSelect19_Constructor (bbWidget** self, void* graphics,
+bbFlag SpellSelect19_Constructor (bbWidget** self, void* Graphics,
                            bbWidgets* widgets, bbScreenPoints screen_coords, bbWidget* parent) {
 
-    bbGraphics *Graphics = graphics;
+    bbGraphics *graphics = Graphics;
     bbWidget* widget;
     bbScreenPoints SP;
 
     SP.x = screen_coords.x;
     SP.y = screen_coords.y;
-    bbWidget_constructor(&widget, widgets, graphics,
+    bbWidget_constructor(&widget, widgets, Graphics,
                          SP, parent, "SPELLSELECT");
 
-    bbDictionary_lookup(Graphics->sprites->dictionary, "SPELL19",
+    bbDictionary_lookup(graphics->sprites->dictionary, "SPELL19",
                         &widget->frames[0].handle);
 
 
     bbPool_Handle dragHandle;
-    bbDictionary_lookup(Graphics->sprites->dictionary, "SPELL19",
+    bbDictionary_lookup(graphics->sprites->dictionary, "SPELL19",
                         &dragHandle);
 
     bbStr_setStr(widget->key, "SPELL19", 64);
@@ -553,24 +553,24 @@ bbFlag SpellSelect19_Constructor (bbWidget** self, void* graphics,
 
 }
 
-bbFlag SpellSelect20_Constructor (bbWidget** self, void* graphics,
+bbFlag SpellSelect20_Constructor (bbWidget** self, void* Graphics,
                            bbWidgets* widgets, bbScreenPoints screen_coords, bbWidget* parent) {
 
-    bbGraphics *Graphics = graphics;
+    bbGraphics *graphics = Graphics;
     bbWidget* widget;
     bbScreenPoints SP;
 
     SP.x = screen_coords.x;
     SP.y = screen_coords.y;
-    bbWidget_constructor(&widget, widgets, graphics,
+    bbWidget_constructor(&widget, widgets, Graphics,
                          SP, parent, "SPELLSELECT");
 
-    bbDictionary_lookup(Graphics->sprites->dictionary, "SPELL20",
+    bbDictionary_lookup(graphics->sprites->dictionary, "SPELL20",
                         &widget->frames[0].handle);
 
 
     bbPool_Handle dragHandle;
-    bbDictionary_lookup(Graphics->sprites->dictionary, "SPELL20",
+    bbDictionary_lookup(graphics->sprites->dictionary, "SPELL20",
                         &dragHandle);
 
     bbStr_setStr(widget->key, "SPELL20", 64);
@@ -582,24 +582,24 @@ bbFlag SpellSelect20_Constructor (bbWidget** self, void* graphics,
 
 }
 
-bbFlag SpellSelect21_Constructor (bbWidget** self, void* graphics,
+bbFlag SpellSelect21_Constructor (bbWidget** self, void* Graphics,
                            bbWidgets* widgets, bbScreenPoints screen_coords, bbWidget* parent) {
 
-    bbGraphics *Graphics = graphics;
+    bbGraphics *graphics = Graphics;
     bbWidget* widget;
     bbScreenPoints SP;
 
     SP.x = screen_coords.x;
     SP.y = screen_coords.y;
-    bbWidget_constructor(&widget, widgets, graphics,
+    bbWidget_constructor(&widget, widgets, Graphics,
                          SP, parent, "SPELLSELECT");
 
-    bbDictionary_lookup(Graphics->sprites->dictionary, "SPELL21",
+    bbDictionary_lookup(graphics->sprites->dictionary, "SPELL21",
                         &widget->frames[0].handle);
 
 
     bbPool_Handle dragHandle;
-    bbDictionary_lookup(Graphics->sprites->dictionary, "SPELL21",
+    bbDictionary_lookup(graphics->sprites->dictionary, "SPELL21",
                         &dragHandle);
 
     bbStr_setStr(widget->key, "SPELL21", 64);
@@ -611,24 +611,24 @@ bbFlag SpellSelect21_Constructor (bbWidget** self, void* graphics,
 
 }
 
-bbFlag SpellSelect22_Constructor (bbWidget** self, void* graphics,
+bbFlag SpellSelect22_Constructor (bbWidget** self, void* Graphics,
                            bbWidgets* widgets, bbScreenPoints screen_coords, bbWidget* parent) {
 
-    bbGraphics *Graphics = graphics;
+    bbGraphics *graphics = Graphics;
     bbWidget* widget;
     bbScreenPoints SP;
 
     SP.x = screen_coords.x;
     SP.y = screen_coords.y;
-    bbWidget_constructor(&widget, widgets, graphics,
+    bbWidget_constructor(&widget, widgets, Graphics,
                          SP, parent, "SPELLSELECT");
 
-    bbDictionary_lookup(Graphics->sprites->dictionary, "SPELL22",
+    bbDictionary_lookup(graphics->sprites->dictionary, "SPELL22",
                         &widget->frames[0].handle);
 
 
     bbPool_Handle dragHandle;
-    bbDictionary_lookup(Graphics->sprites->dictionary, "SPELL22",
+    bbDictionary_lookup(graphics->sprites->dictionary, "SPELL22",
                         &dragHandle);
 
     bbStr_setStr(widget->key, "SPELL22", 64);
@@ -640,24 +640,24 @@ bbFlag SpellSelect22_Constructor (bbWidget** self, void* graphics,
 
 }
 
-bbFlag SpellSelect23_Constructor (bbWidget** self, void* graphics,
+bbFlag SpellSelect23_Constructor (bbWidget** self, void* Graphics,
                            bbWidgets* widgets, bbScreenPoints screen_coords, bbWidget* parent) {
 
-    bbGraphics *Graphics = graphics;
+    bbGraphics *graphics = Graphics;
     bbWidget* widget;
     bbScreenPoints SP;
 
     SP.x = screen_coords.x;
     SP.y = screen_coords.y;
-    bbWidget_constructor(&widget, widgets, graphics,
+    bbWidget_constructor(&widget, widgets, Graphics,
                          SP, parent, "SPELLSELECT");
 
-    bbDictionary_lookup(Graphics->sprites->dictionary, "SPELL23",
+    bbDictionary_lookup(graphics->sprites->dictionary, "SPELL23",
                         &widget->frames[0].handle);
 
 
     bbPool_Handle dragHandle;
-    bbDictionary_lookup(Graphics->sprites->dictionary, "SPELL23",
+    bbDictionary_lookup(graphics->sprites->dictionary, "SPELL23",
                         &dragHandle);
 
     bbStr_setStr(widget->key, "SPELL23", 64);
@@ -669,24 +669,24 @@ bbFlag SpellSelect23_Constructor (bbWidget** self, void* graphics,
 
 }
 
-bbFlag SpellSelect24_Constructor (bbWidget** self, void* graphics,
+bbFlag SpellSelect24_Constructor (bbWidget** self, void* Graphics,
                            bbWidgets* widgets, bbScreenPoints screen_coords, bbWidget* parent) {
 
-    bbGraphics *Graphics = graphics;
+    bbGraphics *graphics = Graphics;
     bbWidget* widget;
     bbScreenPoints SP;
 
     SP.x = screen_coords.x;
     SP.y = screen_coords.y;
-    bbWidget_constructor(&widget, widgets, graphics,
+    bbWidget_constructor(&widget, widgets, Graphics,
                          SP, parent, "SPELLSELECT");
 
-    bbDictionary_lookup(Graphics->sprites->dictionary, "SPELL24",
+    bbDictionary_lookup(graphics->sprites->dictionary, "SPELL24",
                         &widget->frames[0].handle);
 
 
     bbPool_Handle dragHandle;
-    bbDictionary_lookup(Graphics->sprites->dictionary, "SPELL24",
+    bbDictionary_lookup(graphics->sprites->dictionary, "SPELL24",
                         &dragHandle);
 
     bbStr_setStr(widget->key, "SPELL24", 64);
@@ -698,24 +698,24 @@ bbFlag SpellSelect24_Constructor (bbWidget** self, void* graphics,
 
 }
 
-bbFlag SpellSelect25_Constructor (bbWidget** self, void* graphics,
+bbFlag SpellSelect25_Constructor (bbWidget** self, void* Graphics,
                            bbWidgets* widgets, bbScreenPoints screen_coords, bbWidget* parent) {
 
-    bbGraphics *Graphics = graphics;
+    bbGraphics *graphics = Graphics;
     bbWidget* widget;
     bbScreenPoints SP;
 
     SP.x = screen_coords.x;
     SP.y = screen_coords.y;
-    bbWidget_constructor(&widget, widgets, graphics,
+    bbWidget_constructor(&widget, widgets, Graphics,
                          SP, parent, "SPELLSELECT");
 
-    bbDictionary_lookup(Graphics->sprites->dictionary, "SPELL25",
+    bbDictionary_lookup(graphics->sprites->dictionary, "SPELL25",
                         &widget->frames[0].handle);
 
 
     bbPool_Handle dragHandle;
-    bbDictionary_lookup(Graphics->sprites->dictionary, "SPELL25",
+    bbDictionary_lookup(graphics->sprites->dictionary, "SPELL25",
                         &dragHandle);
 
     bbStr_setStr(widget->key, "SPELL25", 64);
@@ -727,24 +727,24 @@ bbFlag SpellSelect25_Constructor (bbWidget** self, void* graphics,
 
 }
 
-bbFlag SpellSelect26_Constructor (bbWidget** self, void* graphics,
+bbFlag SpellSelect26_Constructor (bbWidget** self, void* Graphics,
                            bbWidgets* widgets, bbScreenPoints screen_coords, bbWidget* parent) {
 
-    bbGraphics *Graphics = graphics;
+    bbGraphics *graphics = Graphics;
     bbWidget* widget;
     bbScreenPoints SP;
 
     SP.x = screen_coords.x;
     SP.y = screen_coords.y;
-    bbWidget_constructor(&widget, widgets, graphics,
+    bbWidget_constructor(&widget, widgets, Graphics,
                          SP, parent, "SPELLSELECT");
 
-    bbDictionary_lookup(Graphics->sprites->dictionary, "SPELL26",
+    bbDictionary_lookup(graphics->sprites->dictionary, "SPELL26",
                         &widget->frames[0].handle);
 
 
     bbPool_Handle dragHandle;
-    bbDictionary_lookup(Graphics->sprites->dictionary, "SPELL26",
+    bbDictionary_lookup(graphics->sprites->dictionary, "SPELL26",
                         &dragHandle);
 
     bbStr_setStr(widget->key, "SPELL26", 64);
@@ -756,24 +756,24 @@ bbFlag SpellSelect26_Constructor (bbWidget** self, void* graphics,
 
 }
 
-bbFlag SpellSelect27_Constructor (bbWidget** self, void* graphics,
+bbFlag SpellSelect27_Constructor (bbWidget** self, void* Graphics,
                            bbWidgets* widgets, bbScreenPoints screen_coords, bbWidget* parent) {
 
-    bbGraphics *Graphics = graphics;
+    bbGraphics *graphics = Graphics;
     bbWidget* widget;
     bbScreenPoints SP;
 
     SP.x = screen_coords.x;
     SP.y = screen_coords.y;
-    bbWidget_constructor(&widget, widgets, graphics,
+    bbWidget_constructor(&widget, widgets, Graphics,
                          SP, parent, "SPELLSELECT");
 
-    bbDictionary_lookup(Graphics->sprites->dictionary, "SPELL27",
+    bbDictionary_lookup(graphics->sprites->dictionary, "SPELL27",
                         &widget->frames[0].handle);
 
 
     bbPool_Handle dragHandle;
-    bbDictionary_lookup(Graphics->sprites->dictionary, "SPELL27",
+    bbDictionary_lookup(graphics->sprites->dictionary, "SPELL27",
                         &dragHandle);
 
     bbStr_setStr(widget->key, "SPELL27", 64);
@@ -785,24 +785,24 @@ bbFlag SpellSelect27_Constructor (bbWidget** self, void* graphics,
 
 }
 
-bbFlag SpellSelect28_Constructor (bbWidget** self, void* graphics,
+bbFlag SpellSelect28_Constructor (bbWidget** self, void* Graphics,
                            bbWidgets* widgets, bbScreenPoints screen_coords, bbWidget* parent) {
 
-    bbGraphics *Graphics = graphics;
+    bbGraphics *graphics = Graphics;
     bbWidget* widget;
     bbScreenPoints SP;
 
     SP.x = screen_coords.x;
     SP.y = screen_coords.y;
-    bbWidget_constructor(&widget, widgets, graphics,
+    bbWidget_constructor(&widget, widgets, Graphics,
                          SP, parent, "SPELLSELECT");
 
-    bbDictionary_lookup(Graphics->sprites->dictionary, "SPELL28",
+    bbDictionary_lookup(graphics->sprites->dictionary, "SPELL28",
                         &widget->frames[0].handle);
 
 
     bbPool_Handle dragHandle;
-    bbDictionary_lookup(Graphics->sprites->dictionary, "SPELL28",
+    bbDictionary_lookup(graphics->sprites->dictionary, "SPELL28",
                         &dragHandle);
 
     bbStr_setStr(widget->key, "SPELL28", 64);
@@ -814,24 +814,24 @@ bbFlag SpellSelect28_Constructor (bbWidget** self, void* graphics,
 
 }
 
-bbFlag SpellSelect29_Constructor (bbWidget** self, void* graphics,
+bbFlag SpellSelect29_Constructor (bbWidget** self, void* Graphics,
                            bbWidgets* widgets, bbScreenPoints screen_coords, bbWidget* parent) {
 
-    bbGraphics *Graphics = graphics;
+    bbGraphics *graphics = Graphics;
     bbWidget* widget;
     bbScreenPoints SP;
 
     SP.x = screen_coords.x;
     SP.y = screen_coords.y;
-    bbWidget_constructor(&widget, widgets, graphics,
+    bbWidget_constructor(&widget, widgets, Graphics,
                          SP, parent, "SPELLSELECT");
 
-    bbDictionary_lookup(Graphics->sprites->dictionary, "SPELL29",
+    bbDictionary_lookup(graphics->sprites->dictionary, "SPELL29",
                         &widget->frames[0].handle);
 
 
     bbPool_Handle dragHandle;
-    bbDictionary_lookup(Graphics->sprites->dictionary, "SPELL29",
+    bbDictionary_lookup(graphics->sprites->dictionary, "SPELL29",
                         &dragHandle);
 
     bbStr_setStr(widget->key, "SPELL29", 64);
@@ -843,24 +843,24 @@ bbFlag SpellSelect29_Constructor (bbWidget** self, void* graphics,
 
 }
 
-bbFlag SpellSelect30_Constructor (bbWidget** self, void* graphics,
+bbFlag SpellSelect30_Constructor (bbWidget** self, void* Graphics,
                            bbWidgets* widgets, bbScreenPoints screen_coords, bbWidget* parent) {
 
-    bbGraphics *Graphics = graphics;
+    bbGraphics *graphics = Graphics;
     bbWidget* widget;
     bbScreenPoints SP;
 
     SP.x = screen_coords.x;
     SP.y = screen_coords.y;
-    bbWidget_constructor(&widget, widgets, graphics,
+    bbWidget_constructor(&widget, widgets, Graphics,
                          SP, parent, "SPELLSELECT");
 
-    bbDictionary_lookup(Graphics->sprites->dictionary, "SPELL30",
+    bbDictionary_lookup(graphics->sprites->dictionary, "SPELL30",
                         &widget->frames[0].handle);
 
 
     bbPool_Handle dragHandle;
-    bbDictionary_lookup(Graphics->sprites->dictionary, "SPELL30",
+    bbDictionary_lookup(graphics->sprites->dictionary, "SPELL30",
                         &dragHandle);
 
     bbStr_setStr(widget->key, "SPELL30", 64);

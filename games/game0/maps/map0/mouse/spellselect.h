@@ -28,77 +28,77 @@ bbFlag SpellSelect_IsOver (bbMouse* mouse, bbWidgets* widgets, bbWidget* widget)
 
 //typedef bbFlag bbMouse_Enter (void* mouse, void* widgets, void* widget, void* graphics);
 
-bbFlag SpellSelect_Enter (void* mouse, void* widgets, void* widget, void* graphics)
+bbFlag SpellSelect_Enter (void* mouse, void* widgets, void* Widget, void*
+Graphics)
 {
-    bbWidget* Widget = (bbWidget*)widget;
-    bbGraphics* Graphics = graphics;
+    bbWidget* widget = (bbWidget*)Widget;
+    bbGraphics* graphics = Graphics;
     //bbDictionary_lookup(Graphics->sprites->dictionary,
     //                    "ASPADES", &Widget->frames[0].handle);
 
-    Widget->mtable.hover = true;
+    widget->mtable.hover = true;
     return Success;
 }
 
 //typedef bbFlag bbMouse_Leave (void* mouse, void* widgets, void* widget, void* graphics);
-bbFlag SpellSelect_Leave (void* mouse, void* widgets, void* widget, void* graphics)
+bbFlag SpellSelect_Leave (void* mouse, void* widgets, void* Widget, void*
+Graphics)
 {
-    bbWidget* Widget = (bbWidget*)widget;
-    bbGraphics* Graphics = graphics;
+    bbWidget* widget = (bbWidget*)Widget;
+    bbGraphics* graphics = Graphics;
     //bbDictionary_lookup(Graphics->sprites->dictionary,
     //                    "ASPADES", &Widget->frames[0].handle);
 
-    Widget->mtable.hover = false;
+    widget->mtable.hover = false;
     return Success;
 }
 
 //typedef bbFlag bbMouse_LeftDown (void* mouse, void* widgets, void* widget,
 // void* graphics);
-bbFlag SpellSelect_LeftDown (void* mouse, void* widgets, void* widget, void*
-graphics)
+bbFlag SpellSelect_LeftDown (void* Mouse, void* Widgets, void* Widget, void*
+Graphics)
 {
-    bbWidget* Widget = (bbWidget*)widget;
-    bbDebug("Selecting spell %s\n", Widget->key);
-    bbGraphics* Graphics = graphics;
-    bbMouse* Mouse = mouse;
-    bbWidgets* Widgets = widgets;
-    bbVPool* pool = Widgets->pool;
+    bbWidget* widget = (bbWidget*)Widget;
+    bbGraphics* graphics = Graphics;
+    bbMouse* mouse = Mouse;
+    bbWidgets* widgets = Widgets;
+
+    bbVPool* pool = widgets->pool;
     bbPool_Handle handle;
     //bbDictionary_lookup(Graphics->sprites->dictionary,
     //                    "ASPADES", &Widget->frames[0].handle);
 
     bbVPool_reverseLookup(pool, widget, &handle);
-    Widget->mtable.hover = true;
-    Mouse->selected = handle;
+    widget->mtable.hover = true;
+    mouse->selected = handle;
 
     bbScreenPoints dragOrigin;
-    dragOrigin.x = Mouse->position.x - Widget->rect.left;
-    dragOrigin.y = Mouse->position.y - Widget->rect.top;
-    Mouse->dragOrigin = dragOrigin;
+    dragOrigin.x = mouse->position.x - widget->rect.left;
+    dragOrigin.y = mouse->position.y - widget->rect.top;
+    mouse->dragOrigin = dragOrigin;
 
     return Success;
 }
 
 //typedef bbFlag bbMouse_LeftUp (void* mouse, void* widgets, void* widget, void*
 // graphics);
-bbFlag SpellSelect_LeftUp (void* mouse, void* widgets, void* widget, void* graphics)
+bbFlag SpellSelect_LeftUp (void* Mouse, void* Widgets, void* Widget, void*
+Graphics)
 {
-    bbWidget* Widget = (bbWidget*)widget;
-    bbGraphics* Graphics = graphics;
-    bbWidgets* Widgets = widgets;
-
-
-
-    bbMouse* Mouse = mouse;
+    bbWidget* widget = (bbWidget*)Widget;
+    bbGraphics* graphics = Graphics;
+    bbMouse* mouse = Mouse;
+    bbWidgets* widgets = Widgets;
 
     bbWidget* target;
-    bbVPool_lookup(Widgets->pool, (void**)&target, Mouse->isOver);
+    bbVPool_lookup(widgets->pool, (void**)&target, mouse->isOver);
     if (target->type==bbWidgetType_SpellSlot) {
-        target->frames[0].handle = Widget->frames[0].handle;
-        bbStr_setStr(target->key, Widget->key, 64);
+        target->frames[0].handle = widget->frames[0].handle;
+        bbStr_setStr(target->key, widget->key, 64);
     }
-    Mouse->selected = Widgets->pool->null;
+    mouse->selected = widgets->pool->null;
 
-    if (Widget->mtable.hover) {
+    if (widget->mtable.hover) {
 
         //bbDictionary_lookup(Graphics->sprites->dictionary,
         //                    "ASPADES", &Widget->frames[0].handle);
@@ -112,13 +112,13 @@ bbFlag SpellSelect_LeftUp (void* mouse, void* widgets, void* widget, void* graph
 
 
     bbScreenPoints dragged_SP;
-    dragged_SP.x = Mouse->position.x - Mouse->dragOrigin.x;
-    dragged_SP.y = Mouse->position.y - Mouse->dragOrigin.y;
+    dragged_SP.x = mouse->position.x - mouse->dragOrigin.x;
+    dragged_SP.y = mouse->position.y - mouse->dragOrigin.y;
     //Widget->rect.left = dragged_SP.x;
     //Widget->rect.top = dragged_SP.y;
 
 
-    Widget->mtable.hover = false;
+    widget->mtable.hover = false;
     return Success;
 }
 

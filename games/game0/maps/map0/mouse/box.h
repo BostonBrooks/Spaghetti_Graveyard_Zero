@@ -30,53 +30,53 @@ bbFlag Box_IsOver (bbMouse* mouse, bbWidgets* widgets, bbWidget* widget)
 
 //typedef bbFlag bbMouse_Enter (void* mouse, void* widgets, void* widget, void* graphics);
 
-bbFlag Box_Enter (void* mouse, void* widgets, void* widget, void* graphics)
+bbFlag Box_Enter (void* mouse, void* widgets, void* Widget, void* graphics)
 {
-    bbWidget* Widget = (bbWidget*)widget;
+    bbWidget* widget = (bbWidget*)Widget;
     bbGraphics* Graphics = graphics;
     bbDictionary_lookup(Graphics->sprites->dictionary,
-                        "BOX", &Widget->frames[0].handle);
+                        "BOX", &widget->frames[0].handle);
 
-    Widget->mtable.hover = true;
+    widget->mtable.hover = true;
     bbDebug("Mouse enters box\n");
     return Success;
 }
 
 //typedef bbFlag bbMouse_Leave (void* mouse, void* widgets, void* widget, void* graphics);
-bbFlag Box_Leave (void* mouse, void* widgets, void* widget, void* graphics)
+bbFlag Box_Leave (void* mouse, void* widgets, void* Widget, void* graphics)
 {
-    bbWidget* Widget = (bbWidget*)widget;
+    bbWidget* widget = (bbWidget*)Widget;
     bbGraphics* Graphics = graphics;
     bbDictionary_lookup(Graphics->sprites->dictionary,
-                        "BOX", &Widget->frames[0].handle);
+                        "BOX", &widget->frames[0].handle);
 
-    Widget->mtable.hover = false;
+    widget->mtable.hover = false;
     bbDebug("Mouse leaves box\n");
     return Success;
 }
 
 //typedef bbFlag bbMouse_LeftDown (void* mouse, void* widgets, void* widget,
 // void* graphics);
-bbFlag Box_LeftDown (void* mouse, void* widgets, void* widget, void*
-graphics)
+bbFlag Box_LeftDown (void* Mouse, void* Widgets, void* Widget, void*
+Graphics)
 {
-    bbWidget* Widget = (bbWidget*)widget;
-    bbGraphics* Graphics = graphics;
-    bbMouse* Mouse = mouse;
-    bbWidgets* Widgets = widgets;
-    bbVPool* pool = Widgets->pool;
+    bbWidget* widget = (bbWidget*)Widget;
+    bbGraphics* graphics = Graphics;
+    bbMouse* mouse = Mouse;
+    bbWidgets* widgets = Widgets;
+    bbVPool* pool = widgets->pool;
     bbPool_Handle handle;
-    bbDictionary_lookup(Graphics->sprites->dictionary,
-                        "BOX", &Widget->frames[0].handle);
+    bbDictionary_lookup(graphics->sprites->dictionary,
+                        "BOX", &widget->frames[0].handle);
 
     bbVPool_reverseLookup(pool, widget, &handle);
-    Widget->mtable.hover = true;
-    Mouse->selected = handle;
+    widget->mtable.hover = true;
+    mouse->selected = handle;
 
     bbScreenPoints dragOrigin;
-    dragOrigin.x = Mouse->position.x - Widget->rect.left;
-    dragOrigin.y = Mouse->position.y - Widget->rect.top;
-    Mouse->dragOrigin = dragOrigin;
+    dragOrigin.x = mouse->position.x - widget->rect.left;
+    dragOrigin.y = mouse->position.y - widget->rect.top;
+    mouse->dragOrigin = dragOrigin;
 
     bbDebug("Mouse left button down on box\n");
     return Success;
@@ -84,26 +84,26 @@ graphics)
 
 //typedef bbFlag bbMouse_LeftUp (void* mouse, void* widgets, void* widget, void*
 // graphics);
-bbFlag Box_LeftUp (void* mouse, void* widgets, void* widget, void* graphics)
+bbFlag Box_LeftUp (void* Mouse, void* Widgets, void* Widget, void* Graphics)
 {
-    bbWidget* Widget = (bbWidget*)widget;
-    bbGraphics* Graphics = graphics;
-    bbWidgets* Widgets = widgets;
+    bbWidget* widget = (bbWidget*)Widget;
+    bbGraphics* graphics = Graphics;
+    bbWidgets* widgets = Widgets;
+    bbMouse* mouse = Mouse;
 
-    bbMouse* Mouse = mouse;
-    Mouse->selected = Widgets->pool->null;
+    mouse->selected = widgets->pool->null;
 
-    if (Widget->mtable.hover) {
+    if (widget->mtable.hover) {
 
-        bbDictionary_lookup(Graphics->sprites->dictionary,
-                            "BOX", &Widget->frames[0].handle);
+        bbDictionary_lookup(graphics->sprites->dictionary,
+                            "BOX", &widget->frames[0].handle);
 
     } else {
-        bbDictionary_lookup(Graphics->sprites->dictionary,
-                            "BOX", &Widget->frames[0].handle);
+        bbDictionary_lookup(graphics->sprites->dictionary,
+                            "BOX", &widget->frames[0].handle);
     }
 
-    Widget->mtable.hover = false;
+    widget->mtable.hover = false;
     bbDebug("Mouse left button up on box\n");
     return Success;
 }
@@ -112,16 +112,16 @@ bbFlag Box_LeftUp (void* mouse, void* widgets, void* widget, void* graphics)
 //typedef bbFlag bbMouse_LeftDrag (void* mouse, void* widgets, void* widget,
 //                                 void* graphics);
 
-bbFlag Box_LeftDrag (void* mouse, void* widgets, void* widget, void* graphics) {
+bbFlag Box_LeftDrag (void* Mouse, void* widgets, void* Widget, void* graphics) {
 
-    bbMouse* Mouse = mouse;
-    bbWidget* Widget = (bbWidget*)widget;
+    bbMouse* mouse = Mouse;
+    bbWidget* widget = (bbWidget*)Widget;
     bbScreenPoints newPos;
-    newPos.x = Mouse->position.x - Mouse->dragOrigin.x;
-    newPos.y = Mouse->position.y - Mouse->dragOrigin.y;
+    newPos.x = mouse->position.x - mouse->dragOrigin.x;
+    newPos.y = mouse->position.y - mouse->dragOrigin.y;
 
-    Widget->rect.left = newPos.x;
-    Widget->rect.top = newPos.y;
+    widget->rect.left = newPos.x;
+    widget->rect.top = newPos.y;
 
 
     bbDebug("Mouse left button drag on box\n");
