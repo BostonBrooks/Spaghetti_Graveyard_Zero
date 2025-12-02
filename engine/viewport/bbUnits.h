@@ -37,4 +37,8 @@ bbDrawables_newImpl(self, squares_i, squares_j, sizeof(bbUnit));
 
 bbFlag bbUnit_new(bbUnit** unit,bbUnits* units, bbGraphics* graphics,bbMapCoords MC);
 
+bbFlag bbUnit_newCat(bbUnit** self,bbUnits* units, bbGraphics* graphics,
+                     bbMapCoords MC);
+
+#define bbUnit_setLocation bbDrawable_setLocation
 #endif //BBUNITS
