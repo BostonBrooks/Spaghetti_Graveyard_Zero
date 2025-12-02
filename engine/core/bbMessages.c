@@ -4,7 +4,7 @@
 #include "engine/logic/bbList.h"
 
 
-#define MESSAGE_LAG 60;
+#define MESSAGE_LAG 10;
 
 I32 bbReceiveMessage_isSooner(void* one, void* two){
     bbReceiveMessage* message1 = one;
