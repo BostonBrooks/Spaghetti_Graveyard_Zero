@@ -2,7 +2,7 @@
 #include "engine/logic/bbString.h"
 #include "engine/logic/bbTerminal.h"
 #include "engine/logic/bbList.h"
-
+#include <string.h>
 
 #define MESSAGE_LAG 10;
 
@@ -64,6 +64,16 @@ bbFlag bbMessages_send(bbMessages* messages, U64 time){
                 bbStr_setStr(receive->data.txt, send->data.txt, 64);
                 bbList_sortR(&messages->receiveMessages_list,receive);
             }
+            case bbSentMessage_bbCoreDo: {
+                bbReceiveMessage *receive;
+                bbVPool_alloc(messages->receiveMessages_pool,
+                              (void **) &receive);
+
+                receive->receiveTime = send->sendTime + rand()%MESSAGE_LAG;
+                receive->type = bbReceiveMessage_bbCoreDo;
+                memcpy(&receive->data, &send->data, sizeof(bbRedoData));
+                bbList_sortR(&messages->receiveMessages_list,receive);
+            }
 
         }
     }
@@ -85,6 +95,10 @@ bbFlag bbMessages_receive(bbMessages* messages, U64 time){
                         receive->receiveTime, receive->data.txt);
                 bbVPool_free(messages->receiveMessages_pool, receive);
 
+            }
+            case bbReceiveMessage_bbCoreDo: {
+                bbCore_receiveMessage(home.shared.core, (bbStateChange*)
+                &receive->data);
             }
 
         }

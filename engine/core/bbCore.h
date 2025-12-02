@@ -22,40 +22,63 @@
  * 2) Message is sent to the server
  * 3) Game runs from M frames
  * 4) Message is received from the server
- * 5) Game state is rolled back M frames
+ * 5) Game state is rolled back M frames, saving past inputs
  * 6) Received message is mixed in with other messages received from server
  * from M frames ago
- * 7) Game is fast-forwarded M frames
+ * 7) Game is fast-forwarded M frames, re-processing any inputs
  * 8) Play continues
- *
- *
- *
  */
+
+/*****************************************
+ * For now, we ignore messages that are received after they should be enacted
+ *
+ ****************************************/
+
 #ifndef BBCORE_H
-#define BBDORE_H
+#define BBCORE_H
 
 #include "engine/logic/bbIntTypes.h"
 #include "engine/logic/bbList.h"
+#include "engine/data/bbHome.h"
 
-//bbStateChange_receiveMessages(U64 time)
 
-typedef enum {
-    bbStateChange_none
-} bbStateChange_Type;
+
+
+
 typedef union {
 
-} bbStateChange_data;
+} bbUndoData;
+
+typedef union {
+    char txt[64];
+} bbRedoData;
+
+typedef enum {
+    bbStateChange_none,
+    bbStateChange_txt
+} bbStateChangeType;
+
+typedef struct {
+    bbStateChangeType type;
+    bbRedoData redo;
+} bbStateChangeData;
 
 typedef struct {
     bbPool_ListElement listElement;
-    bbStateChange_data data;
+    U64 sentTime;
+    U64 receiveTime;
+    U64 enactTime;
+    bbStateChangeData data;
 } bbStateChange;
 
 typedef struct {
 
+    bbVPool* pool;
+    bbList redo;
 } bbCore;
 
-
+bbFlag bbCore_new(bbCore** self);
+bbFlag bbCore_receiveMessage(bbCore* core, bbStateChange* stateChange);
 
 
 

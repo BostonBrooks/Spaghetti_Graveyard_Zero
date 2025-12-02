@@ -52,6 +52,7 @@ gcc   -D SFML_STATIC -I ../^
        ../engine/viewport/bbUnits.c^
        ../games/game0/maps/map0/drawfunctions/drawfunctions.c^
        ../engine/core/bbMessages.c^
+       ../engine/core/bbCore.c^
        ^
   -lcsfml-system -lcsfml-graphics -lcsfml-window -g -lm -w^
     -o ../games/game0/game.exe

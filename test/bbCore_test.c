@@ -3,6 +3,7 @@
 
 #include "engine/userinterface/bbWidget.h"
 #include "engine/core/bbMessages.h"
+#include "engine/core/bbCore.h"
 #include "engine/data/bbHome.h"
 
 bbWidgets* testWidgets;
@@ -16,15 +17,27 @@ int main(void){
 
     bbMessages* messages;
     bbMessages_new(&messages);
+    home.shared.messages = messages;
+
+
+
+    bbCore* core;
+    bbCore_new(&core);
+    home.shared.core = core;
+
     bbSendMessage* send;
 
     for (time = 0; time<1000; time++){
         bbPrintf("time = %d\n", time);
         bbMessage_new(&send, messages);
+
+
         sprintf(send->data.txt, "message_created t=%llu", time);
         bbMessage_send(send, messages, time);
         bbMessages_send(messages, time);
         bbMessages_receive(messages, time);
+
+
 
     }
     exit(EXIT_SUCCESS);

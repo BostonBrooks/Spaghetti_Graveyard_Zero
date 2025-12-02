@@ -1,15 +1,22 @@
 /** bbMessages simulates a web server by adding lag and then returning the
  * message */
+#ifndef BBMESSAGES_H
+#define BBMESSAGES_H
 
 #include "engine/logic/bbIntTypes.h"
 #include "engine/logic/bbList.h"
+#include "engine/core/bbCore.h"
+
+#include "engine/data/bbHome.h"
 
 typedef enum {
-    bbSentMessage_txt
+    bbSentMessage_txt,
+    bbSentMessage_bbCoreDo
 } bbSendMessage_type;
 
 typedef union {
     char txt[64];
+    //bbRedoData redo;
 } bbSendMessage_data;
 
 typedef struct {
@@ -20,7 +27,8 @@ typedef struct {
 } bbSendMessage;
 
 typedef enum {
-    bbReceiveMessage_txt
+    bbReceiveMessage_txt,
+    bbReceiveMessage_bbCoreDo
 } bbReceiveMessage_type;
 
 
@@ -54,4 +62,4 @@ bbFlag bbMessages_send(bbMessages* messages, U64 time);
 //5) React to messages received
 bbFlag bbMessages_receive(bbMessages* messages, U64 time);
 
-
+#endif //BBMESSAGES_H

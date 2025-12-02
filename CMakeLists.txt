@@ -99,4 +99,6 @@ add_executable(myprogram
         engine/viewport/bbUnits.c
         engine/core/bbCore.h
         engine/core/bbMessages.h
-        test/bbCore_test.c)
+        test/bbCore_test.c
+        engine/core/bbMessages.c
+        engine/core/bbCore.c)

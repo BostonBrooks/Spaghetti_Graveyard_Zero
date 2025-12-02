@@ -9,6 +9,8 @@
 #include "engine/viewport/bbDrawables.h"
 #include "engine/viewport/bbMapIcons.h"
 #include "engine/viewport/bbUnits.h"
+#include "engine/core/bbCore.h"
+#include "engine/core/bbMessages.h"
 
 typedef struct {
     bbSpells spells;
@@ -31,6 +33,9 @@ typedef struct {
 
 typedef struct {
     bbUnits* units;
+    bbCore* core;
+    bbMessages* messages;
+
 } bbShared;
 
 typedef struct {
