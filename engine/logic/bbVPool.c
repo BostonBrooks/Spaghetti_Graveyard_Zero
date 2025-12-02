@@ -29,7 +29,7 @@ bbFlag bbVPool_newLean(bbVPool** Pool, I32 sizeOf, I32 num){
 bbFlag bbVPool_newBloated(bbVPool** Pool, I32 sizeOf, I32 level1, I32 level2){
 	bbBloatedPool* BloatedPool;
 	bbBloatedPool_new(&BloatedPool, sizeOf, level1, level2);
-	bbVPool* pool = malloc(sizeof(*Pool));
+	bbVPool* pool = malloc(sizeof(bbVPool));
 	pool->pool = BloatedPool;
 	pool->null = BloatedPool->null;
 	pool->sizeOf = BloatedPool->sizeOf;
