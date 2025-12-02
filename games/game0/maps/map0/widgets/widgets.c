@@ -4,7 +4,7 @@
 #define WIDGET_FUNCTIONS
 
 #include "engine/logic/bbFlag.h"
-#include "engine/widgets/bbWidgetFunctions.h"
+#include "engine/userinterface/bbWidgetFunctions.h"
 
 #include "games/game0/maps/map0/widgets/nullfunctions.h"
 #include "games/game0/maps/map0/widgets/sphere.h"

@@ -32,10 +32,10 @@ gcc   -D SFML_STATIC -I ../^
        ../engine/logic/bbList_map.c^
        ../engine/logic/bbList_sort.c^
        ../engine/logic/bbNestedList.c^
-       ../engine/widgets/bbWidget.c^
+       ../engine/userinterface/bbWidget.c^
        ../engine/geometry/bbCoordinates.c^
        ../engine/userinterface/bbInput.c^
-       ../engine/widgets/bbWidgetFunctions.c^
+       ../engine/userinterface/bbWidgetFunctions.c^
        ../games/game0/maps/map0/widgets/widgets.c^
        ../games/game0/maps/map0/mouse/mouse.c^
        ../engine/userinterface/bbMouse.c^

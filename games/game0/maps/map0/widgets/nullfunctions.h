@@ -1,5 +1,5 @@
 #include "engine/logic/bbTerminal.h"
-#include "engine/widgets/bbWidget.h"
+#include "engine/userinterface/bbWidget.h"
 
 bbFlag NULL_Constructor (bbWidget** reference, void* graphics,
                          void* widgets, bbScreenPoints screen_coords, bbWidget* parent)

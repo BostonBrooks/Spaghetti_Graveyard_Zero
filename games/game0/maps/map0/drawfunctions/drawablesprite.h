@@ -4,7 +4,7 @@
 #include "engine/logic/bbPrime.h"
 #include "engine/graphics/bbDrawfunctions.h"
 #include "engine/logic/bbTerminal.h"
-#include "engine/widgets/bbWidget.h"
+#include "engine/userinterface/bbWidget.h"
 #include "engine/viewport/bbViewport.h"
 #include "engine/viewport/bbDrawables.h"
 #include "engine/viewport/bbMapIcons.h"

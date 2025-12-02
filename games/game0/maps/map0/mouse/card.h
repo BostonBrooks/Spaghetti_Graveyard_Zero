@@ -1,6 +1,6 @@
 #include "engine/logic/bbFlag.h"
-#include "engine/widgets/bbWidget.h"
-#include "engine/widgets/bbWidgetFunctions.h"
+#include "engine/userinterface/bbWidget.h"
+#include "engine/userinterface/bbWidgetFunctions.h"
 
 //typedef bbFlag bbMouse_IsOver (void* mouse, void* widgets, void* widget);
 bbFlag Card_IsOver (bbMouse* mouse, bbWidgets* widgets, bbWidget* widget)

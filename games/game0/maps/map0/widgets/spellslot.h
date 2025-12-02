@@ -1,6 +1,6 @@
 #include "engine/logic/bbFlag.h"
-#include "engine/widgets/bbWidget.h"
-#include "engine/widgets/bbWidgetFunctions.h"
+#include "engine/userinterface/bbWidget.h"
+#include "engine/userinterface/bbWidgetFunctions.h"
 
 bbFlag SpellSlot_Constructor (bbWidget** self, void* graphics,
                              bbWidgets* widgets, bbScreenPoints screen_coords, bbWidget* parent) {

@@ -15,7 +15,7 @@
 #include "engine/logic/bbTree.h"
 #include "engine/geometry/bbCoordinates.h"
 #include "engine/userinterface/bbMouse.h"
-#include "bbWidgetFunctions.h"
+#include "engine/userinterface/bbWidgetFunctions.h"
 
 typedef enum bbWidget_Type
 {

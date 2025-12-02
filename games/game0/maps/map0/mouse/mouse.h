@@ -3,7 +3,7 @@
 #define MOOSE_H
 
 #include "engine/logic/bbVPool.h"
-#include "engine/widgets/bbWidget.h"
+#include "engine/userinterface/bbWidget.h"
 #include "engine/viewport/bbViewport.h"
 #include "engine/geometry/bbViewportCoords.h"
 #include "engine/data/bbHome.h"

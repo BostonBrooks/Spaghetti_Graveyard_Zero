@@ -1,6 +1,6 @@
 #include "engine/logic/bbFlag.h"
-#include "engine/widgets/bbWidget.h"
-#include "engine/widgets/bbWidgetFunctions.h"
+#include "engine/userinterface/bbWidget.h"
+#include "engine/userinterface/bbWidgetFunctions.h"
 #include "engine/data/bbHome.h"
 
 //typedef bbFlag bbMouse_LeftDown (void* mouse, void* widgets, void* widget,

@@ -2,8 +2,8 @@
 // object teleports to a new location.
 
 #include "engine/logic/bbFlag.h"
-#include "engine/widgets/bbWidget.h"
-#include "engine/widgets/bbWidgetFunctions.h"
+#include "engine/userinterface/bbWidget.h"
+#include "engine/userinterface/bbWidgetFunctions.h"
 
 //typedef bbFlag bbWidget_Constructor (bbWidget** reference, void* graphics,
 //                                     bbWidgets* widgets, bbScreenPoints

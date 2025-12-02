@@ -1,8 +1,8 @@
 //textbox is a textbox
 
 #include "engine/logic/bbFlag.h"
-#include "engine/widgets/bbWidget.h"
-#include "engine/widgets/bbWidgetFunctions.h"
+#include "engine/userinterface/bbWidget.h"
+#include "engine/userinterface/bbWidgetFunctions.h"
 #include "engine/logic/bbString.h"
 
 //typedef bbFlag bbWidget_Constructor (bbWidget** reference, void* graphics,

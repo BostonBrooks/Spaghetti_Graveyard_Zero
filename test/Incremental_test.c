@@ -4,12 +4,12 @@
 #include "engine/graphics/bbGraphics.h"
 #include "engine/graphics/bbColours.h"
 #include "engine/graphics/bbFonts.h"
-#include "engine/widgets/bbWidget.h"
+#include "engine/userinterface/bbWidget.h"
 #include "engine/logic/bbTerminal.h"
 #include "engine/logic/bbTree.h"
 #include "engine/userinterface/bbInput.h"
 #include "engine/viewport/bbViewport.h"
-#include "engine/widgets/bbWidgetFunctions.h"
+#include "engine/userinterface/bbWidgetFunctions.h"
 #include "engine/geometry/bbCoordinates.h"
 #include "engine/dummyserver/bbDummySender.h"
 #include "engine/dummyserver/bbDummyReceiver.h"
@@ -38,8 +38,8 @@ int main (void){
 
 
 
-    testGoalPoint.i = 0;
-    testGoalPoint.j = 0;
+    testGoalPoint.i = 10000;
+    testGoalPoint.j = 10000;
     testGoalPoint.k = 0;
 
     bbColours_init();
@@ -301,6 +301,20 @@ CLEARWINDOW(bbMagenta);
             bbAvoidable* avoidable;
             bbAvoidable_new(&avoidable, avoidables, MC, 160);
 
+
+        }
+    }
+
+    for (I32 i = 0; i<6;i++) {
+        for (I32 j = 0; j < 6; j++) {
+            bbMapCoords MC;
+            MC.i = i * (POINTS_PER_SQUARE * 2);
+            MC.j = j * (POINTS_PER_SQUARE * 2);
+            MC.k = 0;
+
+            MC.i += rand()%(400 * POINTS_PER_PIXEL);
+            MC.j += rand()%(400 * POINTS_PER_PIXEL);
+
             MC.i = i * (POINTS_PER_SQUARE / 2);
             MC.j = j * (POINTS_PER_SQUARE / 2);
             MC.k = 0;
@@ -313,10 +327,11 @@ CLEARWINDOW(bbMagenta);
         }
     }
 
-    bbDrawable* player;
-    bbDrawable_newCat(&player, home.constant.drawables, &home.constant.graphics, home.private
-            .viewport->viewpoint);
+    bbUnit* player;
+    bbUnit_newCat(&player, home.shared.units, &home.constant.graphics,
+               home.private.viewport->viewpoint);
 
+    CLEARWINDOW(bbRedOrange);
 
 
 	for (home.private.mapTime = 0; ; home.private.mapTime++) {
@@ -350,7 +365,8 @@ bbHere();
             home.private.viewport->viewpoint.j += difference.j * speed / distance;
         }
 
-        bbDrawable_setLocation(player, home.constant.drawables, home.private.viewport->viewpoint);
+        bbUnit_setLocation((bbDrawable*)player, home.shared.units,
+                               home.private.viewport->viewpoint);
 
 		bbMouse_isOver(&home.private.mouse, &home.private.widgets);
 		bbMouse_Update(&home.private.mouse, &home.private.widgets, &home.constant.graphics);

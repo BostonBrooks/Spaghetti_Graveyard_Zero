@@ -1,7 +1,7 @@
 #ifndef BBWIDGETFUNCTIONS_H
 #define BBWIDGETFUNCTIONS_H
 
-#include "bbWidget.h"
+#include "engine/userinterface/bbWidget.h"
 #include "engine/geometry/bbCoordinates.h"
 #include "engine/logic/bbFlag.h"
 #include "engine/logic/bbIntTypes.h"
