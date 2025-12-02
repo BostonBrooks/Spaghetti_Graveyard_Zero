@@ -24,7 +24,6 @@
 static const int stringLength = 512;
 
 ///Same as bbDebug but with the DEBUG: tag
-#define bbPrintf printf
 
 #ifdef BBVERBOSE
     #define bbVerbose printf
@@ -70,6 +69,12 @@ static const int stringLength = 512;
         __FILE_NAME__, __func__, __LINE__);\
 	sprintf (string2, __VA_ARGS__);\
     printf("%s%s", string1, string2);\
+    }
+
+#define bbPrintf(...) {\
+    char string[stringLength];\
+	sprintf (string, __VA_ARGS__);\
+    printf("bbPrintf: %s", string);\
     }
 
 #define bbHere() printf ("In FILE: %s, FUNCTION: %s, LINE: %d\n",\
