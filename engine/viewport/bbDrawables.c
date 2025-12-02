@@ -1,6 +1,6 @@
 #include "engine/viewport/bbDrawables.h"
 #include "engine/logic/bbNestedList.h"
-#include "bbUnits.h"
+#include "engine/viewport/bbUnits.h"
 #include "engine/data/bbHome.h"
 
 I32 bbDrawables_getSquareIndex(I32 i, I32 j, I32 squares_i){
@@ -267,11 +267,12 @@ bbFlag bbDrawable_setLocation(bbDrawable* drawable, bbDrawables* drawables,
     bbDrawableSquare* newSquare = &drawables->squares[newIndex];
     bbDrawableSquare* oldSquare = &drawables->squares[oldIndex];
 
+    bbHere()
     bbList_remove(&oldSquare->list, drawable);
 
     drawable->coords = MC;
 
-
+bbHere()
     bbList_sortL(&newSquare->list, drawable);
 
     return Success;

@@ -1,7 +1,7 @@
 
 #include "engine/userinterface/bbMouse.h"
 
-#include "engine/widgets/bbWidget.h"
+#include "engine/userinterface/bbWidget.h"
 
 
 bbFlag bbMouse_Init(bbMouse* mouse, void* widgets, bbGraphics* graphics)

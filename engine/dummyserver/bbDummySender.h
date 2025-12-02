@@ -8,7 +8,7 @@
 #ifndef BBDUMMYSENDER_H
 #define BBDUMMYSENDER_H
 
-#include "engine/widgets/bbWidget.h"
+#include "engine/userinterface/bbWidget.h"
 #include "engine/logic/bbFlag.h"
 #include "engine/logic/bbIntTypes.h"
 #include "engine/logic/bbList.h"

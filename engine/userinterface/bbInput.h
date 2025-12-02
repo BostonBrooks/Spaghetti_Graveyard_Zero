@@ -7,7 +7,7 @@
 #include "engine/includes/CSFML.h"
 #include "engine/graphics/bbGraphics.h"
 #include "engine/userinterface/bbMouse.h"
-#include "engine/widgets/bbWidget.h"
+#include "engine/userinterface/bbWidget.h"
 
 typedef struct {
     bbMouse* mouse;

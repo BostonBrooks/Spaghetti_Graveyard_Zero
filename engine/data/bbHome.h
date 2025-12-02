@@ -1,7 +1,7 @@
 #ifndef BBHOME_H
 #define BBHOME_H
 
-#include "engine/widgets/bbWidget.h"
+#include "engine/userinterface/bbWidget.h"
 #include "engine/userinterface/bbSpell.h"
 #include "engine/userinterface/bbInput.h"
 #include "engine/dummyserver/bbDummySender.h"

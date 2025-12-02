@@ -10,9 +10,9 @@
 #include "engine/logic/bbLeanPool.h"
 #include "engine/logic/bbIntTypes.h"
 #include "engine/logic/bbDictionary.h"
-#include "engine/widgets/bbWidget.h"
+#include "engine/userinterface/bbWidget.h"
 #include "engine/geometry/bbCoordinates.h"
-#include "bbSpell.h"
+#include "engine/userinterface/bbSpell.h"
 #include "engine/dummyserver/bbDummySender.h"
 
 typedef enum
