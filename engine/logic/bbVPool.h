@@ -28,6 +28,9 @@ bbFlag bbVPool_newBloated(bbVPool** pool, I32 sizeOf, I32 level1, I32 level2);
 #define bbVPool_alloc(pool, address)\
 bbVPool_allocImpl(pool, address, __FILE_NAME__, __LINE__);
 
+//create new pool element with the same handle as that given
+//bbFlag bbVPool_newFromHande(bbVPool* pool, void** address, bbPool_Handle handle);
+
 //I32 bbVPool_new(bbVPool** pool, I32 sizeOf, I32 num);
 bbFlag bbVPool_delete(bbVPool* pool);
 bbFlag bbVPool_clear(bbVPool* pool);
