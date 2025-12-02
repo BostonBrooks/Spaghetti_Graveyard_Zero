@@ -1,6 +1,6 @@
 #include "bbWidgetFunctions.h"
 #include "engine/includes/CSFML.h"
-#include "engine/widgets/bbWidgetFunctions.h"
+#include "bbWidgetFunctions.h"
 #include <stdlib.h>
 
 

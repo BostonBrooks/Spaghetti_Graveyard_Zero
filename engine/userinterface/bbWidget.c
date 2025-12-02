@@ -11,10 +11,10 @@
 
 
 #include "engine/graphics/bbGraphics.h"
-#include "engine/widgets/bbWidget.h"
+#include "bbWidget.h"
 #include "engine/logic/bbTree.h"
 #include "engine/geometry/bbCoordinates.h"
-#include "engine/widgets/bbWidgetFunctions.h"
+#include "bbWidgetFunctions.h"
 #include "engine/viewport/bbViewport.h"
 
 bbFlag bbWidgets_init(bbWidgets* widgets){

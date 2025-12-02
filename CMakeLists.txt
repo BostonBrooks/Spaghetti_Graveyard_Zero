@@ -44,7 +44,7 @@ add_executable(myprogram
         engine/graphics/bbDrawfunctions.h
         engine/graphics/bbComposition.h
         engine/graphics/bbComposition.c
-        engine/widgets/bbWidget.h
+        engine/userinterface/bbWidget.h
         engine/graphics/bbGraphics.h
         engine/graphics/bbDrawfunctions.c
         engine/geometry/bbCoordinates.h
@@ -52,7 +52,7 @@ add_executable(myprogram
         test/Incremental_test.c
         engine/logic/bbTree.c
         engine/logic/bbList_map.c
-        engine/widgets/bbWidget.c
+        engine/userinterface/bbWidget.c
         engine/userinterface/bbInput.h
         engine/userinterface/bbInput.c
         engine/viewport/bbViewport.h
@@ -67,7 +67,7 @@ add_executable(myprogram
         engine/geometry/bbViewportCoords.h
         test/old/automorphicNumbers.c
         games/game0/maps/map0/widgets/nullfunctions.h
-        engine/widgets/bbWidgetFunctions.c
+        engine/userinterface/bbWidgetFunctions.c
         games/game0/maps/map0/widgets/sphere.h
         engine/userinterface/bbMouse.c
         games/game0/maps/map0/widgets/button.h
@@ -96,4 +96,5 @@ add_executable(myprogram
         engine/avoidance/bbAvoidables.h
         engine/avoidance/bbAvoidables.c
         engine/viewport/bbUnits.h
-        engine/viewport/bbUnits.c)
+        engine/viewport/bbUnits.c
+        engine/core/bbCore.h)
