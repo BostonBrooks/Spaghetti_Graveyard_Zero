@@ -40,18 +40,18 @@ I32 bbLeanPool_toInt(bbLeanPool* pool, void* element)
 
 
 
-bbFlag bbLeanPool_new(bbLeanPool** pool, I32 sizeOf, I32 num){
+bbFlag bbLeanPool_new(bbLeanPool** Pool, I32 sizeOf, I32 num){
 
 	//we might get an error if num is too small
 	if (num < 2) num = 2;
 
 	I32 size = bbArith_roundUp(sizeOf, 8);
 	size = bbArith_max(sizeof(bbLeanPool_Header), size);
-	bbLeanPool* Pool = malloc(sizeof(bbLeanPool)+ num * size);
-	Pool->null.ptr = NULL;
-	Pool->num = num;
-	Pool->sizeOf = size;
-    Pool->inUse = 0;
+	bbLeanPool* pool = malloc(sizeof(bbLeanPool)+ num * size);
+	pool->null.ptr = NULL;
+	pool->num = num;
+	pool->sizeOf = size;
+    pool->inUse = 0;
 
 /*
 	element0.prev = NULL
@@ -65,24 +65,24 @@ bbFlag bbLeanPool_new(bbLeanPool** pool, I32 sizeOf, I32 num){
 */
 
 	bbLeanPool_Header* element;
-	element = bbLeanPool_fromInt(Pool, 0);
+	element = bbLeanPool_fromInt(pool, 0);
 	element->prev.ptr = NULL;
-	element->next.ptr = bbLeanPool_fromInt(Pool, 1);
+	element->next.ptr = bbLeanPool_fromInt(pool, 1);
 
 	for (I32 i = 1; i < num-1; i++){
-		element = bbLeanPool_fromInt(Pool, i);
-		element->prev.ptr = bbLeanPool_fromInt(Pool, i-1);
-		element->next.ptr = bbLeanPool_fromInt(Pool, i+1);
+		element = bbLeanPool_fromInt(pool, i);
+		element->prev.ptr = bbLeanPool_fromInt(pool, i-1);
+		element->next.ptr = bbLeanPool_fromInt(pool, i+1);
 	}
 
-	element = bbLeanPool_fromInt(Pool, num-1);
-	element->prev.ptr = bbLeanPool_fromInt(Pool, num - 2);
+	element = bbLeanPool_fromInt(pool, num-1);
+	element->prev.ptr = bbLeanPool_fromInt(pool, num - 2);
 	element->next.ptr = NULL;
 
-	Pool->available.head.ptr = bbLeanPool_fromInt(Pool, 0);
-	Pool->available.tail.ptr = bbLeanPool_fromInt(Pool, num-1);
+	pool->available.head.ptr = bbLeanPool_fromInt(pool, 0);
+	pool->available.tail.ptr = bbLeanPool_fromInt(pool, num-1);
 
-	*pool = Pool;
+	*Pool = pool;
 
 	return Success;
  }

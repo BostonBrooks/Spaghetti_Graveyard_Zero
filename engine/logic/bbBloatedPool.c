@@ -27,25 +27,27 @@ bbFlag bbBloatedPool_getHeader(bbBloatedPool_Header** header, void* address){
 	return Success;
 }
 
-bbFlag bbBloatedPool_new(bbBloatedPool** pool, I32 sizeOf, I32 level1, I32 level2){
+bbFlag bbBloatedPool_new(bbBloatedPool** Pool, I32 sizeOf, I32 level1, I32
+level2){
 //We might get errors if leve1, level2 are too small
     if (level1 < 1) level1 = 1;
 	if (level2 < 5) level2 = 5;
 
-	bbBloatedPool* Pool = malloc(sizeof(bbBloatedPool) + level1 * sizeof(void*));
+	bbBloatedPool* pool = malloc(sizeof(bbBloatedPool) + level1 * sizeof
+            (void*));
 	I32 size = bbArith_roundUp(sizeOf, 8);
-	Pool->null.bloated.index = 0;
-	Pool->null.bloated.collision = 0;
+	pool->null.bloated.index = 0;
+	pool->null.bloated.collision = 0;
 
-	Pool->sizeOf = size;
-	Pool->level1 = level1;
-	Pool->level2 = level2;
-	Pool->available.head = Pool->null;
-	Pool->available.tail = Pool->null;
+	pool->sizeOf = size;
+	pool->level1 = level1;
+	pool->level2 = level2;
+	pool->available.head = pool->null;
+	pool->available.tail = pool->null;
 	for(I32 i = 0; i < level1; i++){
-		Pool->elements[i] = NULL;
+		pool->elements[i] = NULL;
 	}
-	*pool = Pool;
+	*Pool = pool;
 	return Success;
 }
 
@@ -66,16 +68,17 @@ bbFlag bbBloatedPool_clear(bbBloatedPool* pool){
 	pool->available.tail = pool->null;
 	return Success;
 }
-bbFlag bbBloatedPool_newHandle(bbBloatedPool* Pool, U32 lvl1index, U32 lvl2index, bbPool_Handle* handle){
+bbFlag bbBloatedPool_newHandle(bbBloatedPool* Pool, U32 lvl1index, U32
+lvl2index, bbPool_Handle* Handle){
 	U32 index = lvl1index * Pool->level2 + lvl2index;
 	U32 randint = rand();
 	if (randint == 0) randint++;
 	U32 collision = randint;
     //bbDebug("collision = %d\n", collision);
-	bbPool_Handle Handle;
-	Handle.bloated.index = index;
-	Handle.bloated.collision = collision;
-	*handle = Handle;
+	bbPool_Handle handle;
+	handle.bloated.index = index;
+	handle.bloated.collision = collision;
+	*Handle = handle;
 	return Success;
 }
 

@@ -9,13 +9,13 @@
 #define isEqual(A, B) bbVPool_handleIsEqual(tree->pool, A, B)
 #define isNULL(A) bbVPool_handleIsEqual(tree->pool, A, tree->pool->null)
 
-bbFlag bbTree_new (bbTree** tree, void* pool, size_t offset){
-    bbTree* Tree = malloc(sizeof(*Tree));
+bbFlag bbTree_new (bbTree** Tree, void* pool, size_t offset){
+    bbTree* tree = malloc(sizeof(*Tree));
     bbVPool* Pool = pool;
-    Tree->pool = Pool;
-    Tree->root = Pool->null;
-    Tree->offset = offset;
-    *tree = Tree;
+    tree->pool = Pool;
+    tree->root = Pool->null;
+    tree->offset = offset;
+    *Tree = tree;
 
     return Success;
 }

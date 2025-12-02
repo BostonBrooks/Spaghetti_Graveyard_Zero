@@ -4,20 +4,20 @@
 #include "engine/userinterface/bbWidget.h"
 
 
-bbFlag bbMouse_Init(bbMouse* mouse, void* widgets, bbGraphics* graphics)
+bbFlag bbMouse_Init(bbMouse* mouse, void* Widgets, bbGraphics* graphics)
 {
-    bbWidgets* Widgets = (bbWidgets*)widgets;
+    bbWidgets* widgets = (bbWidgets*)Widgets;
     mouse->position.x = 720*4;
     mouse->position.y = 480*4;
     mouse->leftDown = false;
     mouse->rightDown = false;
     mouse->leftChanged = false;
     mouse->rightChanged = false;
-    mouse->wasOver = Widgets->pool->null;
-    mouse->isOver = Widgets->pool->null;
-    mouse->selected = Widgets->pool->null;
+    mouse->wasOver = widgets->pool->null;
+    mouse->isOver = widgets->pool->null;
+    mouse->selected = widgets->pool->null;
 
-    Widgets->mouse = mouse;
+    widgets->mouse = mouse;
     return Success;
 }
 
@@ -66,14 +66,14 @@ bbFlag bbMouse_Event(bbMouse* mouse, sfEvent* event)
     return Success;
 }
 
-bbFlag bbMouse_isOver(bbMouse* mouse, void* widgets)
+bbFlag bbMouse_isOver(bbMouse* mouse, void* Widgets)
 {
-    bbWidgets* Widgets = (bbWidgets*)widgets;
+    bbWidgets* widgets = (bbWidgets*)Widgets;
 
     bbMouse_isOver_cl cl;
-    cl.widgets = Widgets;
+    cl.widgets = widgets;
 
-    bbTree* tree = Widgets->tree;
+    bbTree* tree = widgets->tree;
     bbVPool* pool = tree->pool;
     void* root;
     bbVPool_lookup(pool, &root, tree->root);
@@ -81,10 +81,10 @@ bbFlag bbMouse_isOver(bbMouse* mouse, void* widgets)
     return Success;
 }
 
-bbFlag bbMouse_Update(bbMouse* mouse, void* widgets, bbGraphics* graphics)
+bbFlag bbMouse_Update(bbMouse* mouse, void* Widgets, bbGraphics* graphics)
 {
-    bbWidgets* Widgets = widgets;
-    bbVPool* pool = Widgets->pool;
+    bbWidgets* widgets = Widgets;
+    bbVPool* pool = widgets->pool;
     if(!bbVPool_handleIsEqual(pool, mouse->wasOver, pool->null)){
         bbWidget* toLeave;
         bbWidget* toEnter;
@@ -141,16 +141,17 @@ bbFlag bbMouse_isOverFunc(bbTree* tree, void* node, void* cl)
 
 }
 
-bbFlag bbMouse_Draw(bbMouse* mouse, void* widgets, bbGraphics* graphics, sfRenderWindow* window)
+bbFlag bbMouse_Draw(bbMouse* mouse, void* Widgets, bbGraphics* graphics,
+                    sfRenderWindow* window)
 {
 
-    bbWidgets* Widgets = (bbWidgets*)widgets;
+    bbWidgets* widgets = (bbWidgets*)Widgets;
 
     bbPool_Handle selectedHandle = mouse->selected;
-    if (!bbVPool_handleIsEqual(Widgets->pool, selectedHandle,
-                              Widgets->pool->null)){
+    if (!bbVPool_handleIsEqual(widgets->pool, selectedHandle,
+                              widgets->pool->null)){
         bbWidget* selected;
-        bbVPool_lookup(Widgets->pool, (void**)&selected, selectedHandle);
+        bbVPool_lookup(widgets->pool, (void**)&selected, selectedHandle);
 
         if (selected->mtable.DragIcon >= 0){
             bbScreenPoints dragged_SP;
@@ -169,7 +170,7 @@ bbFlag bbMouse_Draw(bbMouse* mouse, void* widgets, bbGraphics* graphics, sfRende
     sfVector2f pos;
     bbPool_Handle widgetHandle = mouse->isOver;
     bbWidget* widget;
-    bbVPool_lookup(Widgets->pool, (void**)&widget, widgetHandle);
+    bbVPool_lookup(widgets->pool, (void**)&widget, widgetHandle);
 
     pos = bbScreenPoints_getV2f(mouse->position);
     int spriteInt = widget->mtable.MouseIcon;
@@ -180,71 +181,71 @@ bbFlag bbMouse_Draw(bbMouse* mouse, void* widgets, bbGraphics* graphics, sfRende
     return Success;
 }
 
-bbFlag bbMouse_EnterWidget(void* mouse, void* widgets, void* widget, void*
+bbFlag bbMouse_EnterWidget(void* mouse, void* widgets, void* Widget, void*
 graphics)
 {
-    bbWidget* Widget = widget;
+    bbWidget* widget = Widget;
     bbMouse* Mouse = mouse;
-    I32 funcInt = Widget->mtable.Enter;
+    I32 funcInt = widget->mtable.Enter;
 
     if (funcInt == -1) return Success;
 
     bbMouse_Leave* func = Mouse->functions.Enter[funcInt];
 
-    return func(mouse, widgets, widget, graphics);
+    return func(mouse, widgets, Widget, graphics);
 }
 
-bbFlag bbMouse_LeaveWidget(void* mouse, void* widgets, void* widget, void*
+bbFlag bbMouse_LeaveWidget(void* Mouse, void* widgets, void* Widget, void*
 graphics)
 {
-    bbWidget* Widget = widget;
-    bbMouse* Mouse = mouse;
-    I32 funcInt = Widget->mtable.Leave;
+    bbWidget* widget = Widget;
+    bbMouse* mouse = Mouse;
+    I32 funcInt = widget->mtable.Leave;
 
     if (funcInt == -1) return Success;
 
-    bbMouse_Leave* func = Mouse->functions.Leave[funcInt];
+    bbMouse_Leave* func = mouse->functions.Leave[funcInt];
 
-    return func(mouse, widgets, widget, graphics);
+    return func(Mouse, widgets, Widget, graphics);
 }
 
-bbFlag bbMouse_LeftDownWidget(void* mouse, void* widgets, void* widget,
+bbFlag bbMouse_LeftDownWidget(void* Mouse, void* widgets, void* Widget,
                                 void* graphics)
 {
-    bbWidget* Widget = widget;
-    bbMouse* Mouse = mouse;
-    I32 funcInt = Widget->mtable.LeftDown;
+    bbWidget* widget = Widget;
+    bbMouse* mouse = Mouse;
+    I32 funcInt = widget->mtable.LeftDown;
 
     if (funcInt == -1) return Success;
 
-    bbMouse_Leave* func = Mouse->functions.LeftDown[funcInt];
+    bbMouse_Leave* func = mouse->functions.LeftDown[funcInt];
 
-    return func(mouse, widgets, widget, graphics);
+    return func(Mouse, widgets, Widget, graphics);
 }
-bbFlag bbMouse_LeftUpWidget(void* mouse, void* widgets, void* widget,
+bbFlag bbMouse_LeftUpWidget(void* Mouse, void* widgets, void* Widget,
                                   void* graphics)
 {
-    bbWidget* Widget = widget;
-    bbMouse* Mouse = mouse;
-    I32 funcInt = Widget->mtable.LeftUp;
+    bbWidget* widget = Widget;
+    bbMouse* mouse = Mouse;
+    I32 funcInt = widget->mtable.LeftUp;
 
     if (funcInt == -1) return Success;
 
-    bbMouse_Leave* func = Mouse->functions.LeftUp[funcInt];
+    bbMouse_Leave* func = mouse->functions.LeftUp[funcInt];
 
-    return func(mouse, widgets, widget, graphics);
+    return func(Mouse, widgets, Widget, graphics);
 }
 
-bbFlag bbMouse_LeftDragWidget(void* mouse, void* widgets, void* widget,
+bbFlag bbMouse_LeftDragWidget(void* Mouse, void* widgets, void* Widget,
                             void* graphics)
 {
-    bbWidget* Widget = widget;
-    bbMouse* Mouse = mouse;
-    I32 funcInt = Widget->mtable.LeftDrag;
+    bbWidget* widget = Widget;
+    bbMouse* mouse = Mouse;
+    I32 funcInt = widget->mtable.LeftDrag;
 
     if (funcInt == -1) return Success;
 
-    bbMouse_Leave* func = Mouse->functions.LeftDrag[funcInt];
+    bbMouse_Leave* func = mouse->functions.LeftDrag[funcInt];
 
-    return func(mouse, widgets, widget, graphics);
+    return func(Mouse, widgets, Widget, graphics);
 }
