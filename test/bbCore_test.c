@@ -21,9 +21,8 @@ int main(void){
     for (time = 0; time<1000; time++){
         bbPrintf("time = %d\n", time);
         bbMessage_new(&send, messages);
-        send->time_sent = time;
         sprintf(send->data.txt, "message_created t=%llu", time);
-        bbMessage_send(send, messages);
+        bbMessage_send(send, messages, time);
         bbMessages_send(messages, time);
         bbMessages_receive(messages, time);
 

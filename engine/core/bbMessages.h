@@ -14,7 +14,7 @@ typedef union {
 
 typedef struct {
     bbPool_ListElement listElement;
-    U64 time_sent;
+    U64 sendTime;
     bbSendMessage_data data;
     bbSendMessage_type type;
 } bbSendMessage;
@@ -31,7 +31,7 @@ typedef union {
 
 typedef struct {
     bbPool_ListElement listElement;
-    U64 time_sent;
+    U64 receiveTime;
     bbReceiveMessage_data data;
     bbReceiveMessage_type type;
 } bbReceiveMessage;
@@ -48,7 +48,7 @@ bbFlag bbMessages_new(bbMessages** messages);
 //2) Allocate an empty message
 bbFlag bbMessage_new(bbSendMessage** self, bbMessages* messages);
 //3) Pass message to system
-bbFlag bbMessage_send(bbSendMessage* self, bbMessages* messages);
+bbFlag bbMessage_send(bbSendMessage* self, bbMessages* messages, U64 time);
 //4) Move messages from sent to received
 bbFlag bbMessages_send(bbMessages* messages, U64 time);
 //5) React to messages received
