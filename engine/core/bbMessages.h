@@ -39,6 +39,7 @@ typedef union {
 
 typedef struct {
     bbPool_ListElement listElement;
+    U64 sendTime;
     U64 receiveTime;
     bbReceiveMessage_data data;
     bbReceiveMessage_type type;

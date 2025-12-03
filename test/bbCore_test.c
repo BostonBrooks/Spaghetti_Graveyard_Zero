@@ -17,13 +17,13 @@ int main(void){
 
     bbMessages* messages;
     bbMessages_new(&messages);
-    home.shared.messages = messages;
+    //home.shared.messages = messages;
 
 
 
-    bbCore* core;
-    bbCore_new(&core);
-    home.shared.core = core;
+    //bbCore* core;
+    //bbCore_new(&core);
+    //home.shared.core = core;
 
     bbSendMessage* send;
 

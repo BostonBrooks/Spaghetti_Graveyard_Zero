@@ -25,7 +25,7 @@ bbFlag bbList_new(bbList** list, bbVPool* pool, void* listPtr, size_t offsetOf,
 bbFlag bbList_init(bbList* list, bbVPool* pool, void* listPtr, size_t offsetOf,
 				   I32 (*compare)(void* A, void* B)){
 	list->pool = pool;
-    //I dont remember what listPtr does...
+    //listPtr is used to attach a bbList to an existing list
 	if(listPtr != NULL){
 		list->listPtr = listPtr;
 	} else {

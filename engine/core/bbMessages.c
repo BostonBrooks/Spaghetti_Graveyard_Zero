@@ -10,7 +10,7 @@ I32 bbReceiveMessage_isSooner(void* one, void* two){
     bbReceiveMessage* message1 = one;
     bbReceiveMessage* message2 = two;
 
-    return message1->receiveTime < message2->receiveTime;
+    return message1->sendTime < message2->sendTime;
 }
 
 bbFlag bbMessages_new(bbMessages** Messages){
@@ -59,6 +59,7 @@ bbFlag bbMessages_send(bbMessages* messages, U64 time){
                 bbVPool_alloc(messages->receiveMessages_pool,
                               (void **) &receive);
 
+                receive->sendTime = send->sendTime;
                 receive->receiveTime = send->sendTime + rand()%MESSAGE_LAG;
                 receive->type = bbReceiveMessage_txt;
                 bbStr_setStr(receive->data.txt, send->data.txt, 64);
@@ -69,6 +70,7 @@ bbFlag bbMessages_send(bbMessages* messages, U64 time){
                 bbVPool_alloc(messages->receiveMessages_pool,
                               (void **) &receive);
 
+                receive->sendTime = send->sendTime;
                 receive->receiveTime = send->sendTime + rand()%MESSAGE_LAG;
                 receive->type = bbReceiveMessage_bbCoreDo;
                 memcpy(&receive->data, &send->data, sizeof(bbRedoData));
@@ -97,8 +99,8 @@ bbFlag bbMessages_receive(bbMessages* messages, U64 time){
 
             }
             case bbReceiveMessage_bbCoreDo: {
-                bbCore_receiveMessage(home.shared.core, (bbStateChange*)
-                &receive->data);
+                //bbCore_receiveMessage(home.shared.core, (bbStateChange*)
+                //&receive->data);
             }
 
         }

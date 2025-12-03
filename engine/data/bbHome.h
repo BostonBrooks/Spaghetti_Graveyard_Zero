@@ -34,7 +34,7 @@ typedef struct {
 typedef struct {
     bbUnits* units;
     bbCore* core;
-    bbMessages* messages;
+    //bbMessages* messages;
 
 } bbShared;
 
