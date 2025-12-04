@@ -14,8 +14,8 @@ bbFlag bbAvoidables_new(void** self, I32 squares_i, I32 squares_j) {
     sfColor darkGreen = sfColor_fromRGB(0,104,54);
     sfCircleShape_setFillColor(avoidableCircle, darkGreen);
     sfVector2f scale;
-    scale.x = 1.414;
-    scale.y = 0.707;
+    scale.x = 1.414f;
+    scale.y = 0.707f;
 
     sfCircleShape_setScale(avoidableCircle, scale);
     sfCircleShape_setRadius(avoidableCircle, 10);
@@ -84,4 +84,5 @@ bbFlag bbAvoidable_new(bbAvoidable** self, bbAvoidables* avoidables,
     bbList_sortL(&avoidableSquare.list, avoidable);
 
     *self = avoidable;
+    return Success;
 }
