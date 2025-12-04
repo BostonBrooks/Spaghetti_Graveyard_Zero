@@ -23,6 +23,6 @@
 #define POINTS_PER_MAP        (POINTS_PER_PIXEL * PIXELS_PER_MAP)
 
 #define MAPICON_SCALE         8
-#define SCREEN_PPP            8.0
+#define SCREEN_PPP            8.f
 
 #endif //CONSTANTS_H

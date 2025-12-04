@@ -27,7 +27,7 @@ I32 bbMesh_new (bbMesh** mesh, I32 tiles_i, I32 tiles_j){
     Mesh->defaultValue = 128;
     *mesh = Mesh;
     return f_Success;
-};
+}
 
 I32 bbMesh_fromFile (bbMesh** mesh, I32 tiles_i, I32 tiles_j, char* path){
     bbMesh* Mesh;

@@ -14,6 +14,7 @@
 // returned by reference. names had better not overwrite other C keywords
 typedef enum {
     Success,
+    Fail,
     None,
     Full,
     Empty,
