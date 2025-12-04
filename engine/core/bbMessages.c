@@ -4,7 +4,7 @@
 #include "engine/logic/bbList.h"
 #include <string.h>
 
-#define MESSAGE_LAG 10
+#define MESSAGE_LAG 10;
 
 I32 bbReceiveMessage_isSooner(void* one, void* two){
     bbReceiveMessage* message1 = one;
@@ -51,7 +51,7 @@ bbFlag bbMessage_send(bbSendMessage* self, bbMessages* messages, U64 time){
 
 bbFlag bbMessages_send(bbMessages* messages, U64 time){
     bbSendMessage* send;
-    while (bbList_popL(&messages->sendMessages_list, (void**)&send) == Success)
+    while (bbList_popL(&messages->sendMessages_list, &send) == Success)
     {
         switch (send->type) {
             case bbSentMessage_txt: {
@@ -90,7 +90,7 @@ bbFlag bbMessages_receive(bbMessages* messages, U64 time){
         if (receive->receiveTime > time) {
             bbList_pushL(&messages->receiveMessages_list, receive);
             break;
-        }
+        };
         switch (receive->type) {
             case bbReceiveMessage_txt: {
                 bbPrintf("receiveTime = %llu, %s\n",

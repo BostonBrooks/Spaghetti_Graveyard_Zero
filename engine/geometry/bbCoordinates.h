@@ -34,8 +34,8 @@ typedef struct {
 /// viewport coordinates may be scaled up and down, but screen points stay at
 /// the same scale
 typedef struct {
-    I32 x; // x-axis points to the right
-    I32 y; // y-axis points down
+    I32 x; // x axis points to the right
+    I32 y; // y axis points down
 } bbScreenPoints;
 
 typedef struct {

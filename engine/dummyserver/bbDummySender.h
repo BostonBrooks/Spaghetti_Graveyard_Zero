@@ -57,7 +57,7 @@ typedef struct
     bbDummySender_msg msg;
 } bbDummySender_listElement;
 
-bbFlag bbDummySender_new(bbDummySender** server);
+bbFlag bbDummySender_new(/*args*/);
 
 //the second argument in the following is a union of structs beginning with bbDummySender_msgHeader
 bbFlag bbDummySender_queueMsg(bbDummySender* server, bbDummySender_msg* message, U64 gameTime);

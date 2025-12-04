@@ -1,10 +1,7 @@
 /**
  * @file
  * @brief bbDictionary stores a number of key-value pairs for fast lookup.
- * Keys should be up to 32 characters. dictionary can contain up to 10000
- * members
- *
- * works like bbPool_Bloated with 100 * 100 entries
+ * Keys should be up to 32 characters. dictionary can contain up to 10000 members
  */
 
 #ifndef BBDICTIONARY_H

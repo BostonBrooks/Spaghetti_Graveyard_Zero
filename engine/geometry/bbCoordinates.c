@@ -42,7 +42,7 @@ bbScreenPoints bbMapCoords_getScreenPoints_relative (bbMapCoords A,
 }
 
 bbFloat3D bbFloat3D_normalise (bbFloat3D foo){
-    float abs = sqrtf (foo.i * foo.i + foo.j * foo.j + foo.k * foo.k );
+    float abs = sqrt (foo.i * foo.i + foo.j * foo.j + foo.k * foo.k );
     foo.i /= abs;
     foo.j /= abs;
     foo.k /= abs;
@@ -62,8 +62,8 @@ bbMapCoords bbSquareCoords_getMapCoords(bbSquareCoords SC){
 
 sfVector2f bbScreenPoints_getV2f(bbScreenPoints SP){
 	sfVector2f V2f;
-	V2f.x = (float) (SP.x / SCREEN_PPP);
-	V2f.y = (float) (SP.y / SCREEN_PPP);
+	V2f.x = (float) SP.x / SCREEN_PPP;
+	V2f.y = (float) SP.y / SCREEN_PPP;
 
 	return V2f;
 }

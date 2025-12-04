@@ -6,7 +6,7 @@
 #include "engine/logic/bbScatter.h"
 #include "engine/logic/bbPoolHandle.h"
 
-U32 hash(unsigned char *str, I32 n_bins)
+I32 hash(unsigned char *str, I32 n_bins)
 {
 
     U32 hash_value = 5381;
@@ -92,7 +92,6 @@ bbFlag bbDictionary_increase(bbDictionary* dict){
 	}
 
 	bbAssert(0==1, "increasing non-empty pool\n");
-    return Fail;
 }
 
 bbDictionary_entry* bbDictionary_indexLookup(bbDictionary* dict, I32 index){
@@ -104,7 +103,7 @@ bbDictionary_entry* bbDictionary_indexLookup(bbDictionary* dict, I32 index){
 }
 
 I32 bbDictionary_lookupIndex(bbDictionary* dict, char* key){
-	U32 hash_value = hash(key, dict->m_NumBins);
+	I32 hash_value = hash(key, dict->m_NumBins);
 	bbDictionary_entry* entry;
 	I32 index = dict->m_Bins[hash_value].Head;
 
@@ -180,7 +179,7 @@ bbFlag bbDictionary_add(bbDictionary* dict, char* key, bbPool_Handle value){
 	}
 
 	//create new entry
-	U32 hash_value = hash(key, dict->m_NumBins);
+	I32 hash_value = hash(key, dict->m_NumBins);
 	int* head = &dict->m_Bins[hash_value].Head;
 	int* tail = &dict->m_Bins[hash_value].Tail;
 	bbDictionary_entry* entry = grab_entry(dict);
@@ -223,14 +222,14 @@ bbFlag bbDictionary_print(bbDictionary* dict){
 		while (index != f_None){
 			bbDictionary_entry* entry = bbDictionary_indexLookup(dict, index);
 
-			printf("%d\t\t%d\t\t%d\t\t%d\t\t%d\t\t%s\t\t%llu\n",
+			printf("%d\t\t%d\t\t%d\t\t%d\t\t%d\t\t%s\t\t%d\n",
 				   i,
 				   entry->m_Self,
 				   entry->m_Prev,
 				   entry->m_Next,
 				   entry->m_InUse,
 				   entry->m_Key,
-				   entry->m_Value.u64);
+				   entry->m_Value);
 
 			index = entry->m_Next;
 		}
