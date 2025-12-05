@@ -25,17 +25,23 @@ int main(void){
     sfSocketSelector* selector = sfSocketSelector_create();
     sfSocketSelector_addTcpListener(selector, listener);
 
-    while(sfSocketSelector_wait(selector,sfTime_Zero)){
+    while(1){
+        sfSocketSelector_wait(selector,sfTime_Zero);
         if (sfSocketSelector_isTcpListenerReady(selector,listener) == sfTrue){
             sfTcpSocket* socket;
             //socket = sfTcpSocket_create();
             status = sfTcpListener_accept(listener, &socket);
+            bbHere();
             if (status == sfSocketDone){
+                bbHere();
                 int i = 0;
                 while (sockets[i] != NULL){i++;}
-                if (i<8) {sockets[i] = socket;}
-                else
+                if (i<8)
                 {
+                    sockets[i] = socket;
+                    sfSocketSelector_addTcpSocket(selector, socket);
+                } else {
+                    bbHere();
                     sfTcpSocket_destroy(socket);
                     bbDebug("socket array full\n");
                 }
@@ -44,24 +50,27 @@ int main(void){
 
             for(int i = 0; i < 8;i++){
                 if (sockets[i] == NULL) continue;
+                bbHere();
                 if(sfSocketSelector_isTcpSocketReady(selector, sockets[i]) ==
                 sfTrue){
+                    bbHere();
                     sfPacket* packet;
-                    //packet = sfPacket_create();
+                    packet = sfPacket_create();
                     status = sfTcpSocket_receivePacket(sockets[i], packet);
                     if (status != sfSocketDone){
                         sfTcpSocket_destroy(sockets[i]);
                         sockets[i] = NULL;
                         continue;
                     }
-
+bbHere();
                     char data[512];
 
                     sfPacket_readString(packet,data);
-
+                    bbDebug("message: %s\n", data);
 
                     continue;
                 }
+                bbHere();
             }
 
 

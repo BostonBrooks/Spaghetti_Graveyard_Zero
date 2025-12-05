@@ -16,5 +16,20 @@ int main(void){
     sfSocketStatus status = sfTcpSocket_connect(socket, address, port, sfSeconds(10));
     bbAssert(status == sfSocketDone, "Could not connect to server\n");
 
-    bbDebug("Connected!\n");
+
+    sfTcpSocket_setBlocking(socket, sfFalse);
+
+    bbDebug("Connected to server!\n");
+    sfSleep(sfSeconds(1));
+    bbDebug("Sending message...\n");
+
+    char username[] = "Toblerone rollo combo\n";
+
+    sfPacket* startingPacket = sfPacket_create();
+    sfPacket_writeString(startingPacket, "Celebrate good times!\n");
+
+    status = sfTcpSocket_sendPacket(socket, startingPacket);
+
+    bbAssert(status == sfSocketDone, "fail to send packet\n");
+    sfSleep(sfSeconds(1));
 }
