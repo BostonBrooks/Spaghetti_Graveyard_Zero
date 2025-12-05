@@ -101,4 +101,5 @@ add_executable(myprogram
         engine/core/bbMessages.h
         test/bbCore_test.c
         engine/core/bbMessages.c
-        engine/core/bbCore.c)
+        engine/core/bbCore.c
+        chatroom/server.c)

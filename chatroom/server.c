@@ -14,8 +14,60 @@ int main(void){
     sfSocketStatus status = sfTcpListener_listen(listener,port,sfIpAddress_Any);
     bbAssert(status == sfSocketDone, "Could not connect to client");
 
+    sfTcpSocket* sockets[8];
+    for (int i = 0; i < 8; ++i) {
+        sockets[i] = NULL;
+    }
+
+
+    bbDebug("Waiting for clients to connect...\n");
+
     sfSocketSelector* selector = sfSocketSelector_create();
     sfSocketSelector_addTcpListener(selector, listener);
+
+    while(sfSocketSelector_wait(selector,sfTime_Zero)){
+        if (sfSocketSelector_isTcpListenerReady(selector,listener) == sfTrue){
+            sfTcpSocket* socket;
+            //socket = sfTcpSocket_create();
+            status = sfTcpListener_accept(listener, &socket);
+            if (status == sfSocketDone){
+                int i = 0;
+                while (sockets[i] != NULL){i++;}
+                if (i<8) {sockets[i] = socket;}
+                else
+                {
+                    sfTcpSocket_destroy(socket);
+                    bbDebug("socket array full\n");
+                }
+
+            }
+
+            for(int i = 0; i < 8;i++){
+                if (sockets[i] == NULL) continue;
+                if(sfSocketSelector_isTcpSocketReady(selector, sockets[i]) ==
+                sfTrue){
+                    sfPacket* packet;
+                    //packet = sfPacket_create();
+                    status = sfTcpSocket_receivePacket(sockets[i], packet);
+                    if (status != sfSocketDone){
+                        sfTcpSocket_destroy(sockets[i]);
+                        sockets[i] = NULL;
+                        continue;
+                    }
+
+                    char data[512];
+
+                    sfPacket_readString(packet,data);
+
+
+                    continue;
+                }
+            }
+
+
+        }
+    }
+
 
     sfSocketSelector_wait(selector, sfSeconds(60));
     if (sfSocketSelector_isTcpListenerReady(selector,listener) == sfFalse)
