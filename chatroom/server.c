@@ -12,7 +12,7 @@ int main(void){
     I32 port = 80;
     sfTcpListener* listener = sfTcpListener_create();
     sfSocketStatus status = sfTcpListener_listen(listener,port,sfIpAddress_Any);
-    bbAssert(status == sfSocketDone, "Could not connect to client");
+    sfSocketStatus_print(status);
 
     sfTcpSocket* sockets[8];
     for (int i = 0; i < 8; ++i) {
@@ -26,19 +26,29 @@ int main(void){
     sfSocketSelector_addTcpListener(selector, listener);
 
     while(1){
-        sfSocketSelector_wait(selector,sfTime_Zero);
-        if (sfSocketSelector_isTcpListenerReady(selector,listener) == sfTrue){
-            sfTcpSocket* socket;
+        sfBool flag = sfFalse;
+        while (flag == sfFalse) {
+            flag = sfSocketSelector_wait(selector, sfSeconds(10));
+
+            bbHere();
+        }
+bbHere()
+        if (sfSocketSelector_isTcpListenerReady(selector,listener) == sfTrue) {
+            sfTcpSocket *socket = NULL;
             //socket = sfTcpSocket_create();
             status = sfTcpListener_accept(listener, &socket);
-            bbHere();
-            if (status == sfSocketDone){
+            sfSocketStatus_print(status);
+            if (status == sfSocketDone) {
                 bbHere();
                 int i = 0;
-                while (sockets[i] != NULL){i++;}
-                if (i<8)
-                {
+                while (sockets[i] != NULL) {
+                    i++;
+                    bbDebug("i = %d\n", i)
+                }
+                if (i < 8) {
+                    bbHere();
                     sockets[i] = socket;
+                    if (socket == NULL) { bbHere(); }
                     sfSocketSelector_addTcpSocket(selector, socket);
                 } else {
                     bbHere();
@@ -48,39 +58,38 @@ int main(void){
 
             }
 
-            for(int i = 0; i < 8;i++){
-                if (sockets[i] == NULL) continue;
+        }
+
+        for(int i = 0; i < 8;i++){
+            if (sockets[i] == NULL) continue;
+            bbHere();
+            if(sfSocketSelector_isTcpSocketReady(selector, sockets[i]) ==
+            sfTrue){
                 bbHere();
-                if(sfSocketSelector_isTcpSocketReady(selector, sockets[i]) ==
-                sfTrue){
-                    bbHere();
-                    sfPacket* packet;
-                    packet = sfPacket_create();
-                    status = sfTcpSocket_receivePacket(sockets[i], packet);
-                    if (status != sfSocketDone){
-                        sfTcpSocket_destroy(sockets[i]);
-                        sockets[i] = NULL;
-                        continue;
-                    }
-bbHere();
-                    char data[512];
-
-                    sfPacket_readString(packet,data);
-                    bbDebug("message: %s\n", data);
-
+                sfPacket* packet;
+                packet = sfPacket_create();
+                status = sfTcpSocket_receivePacket(sockets[i], packet);
+                if (status != sfSocketDone){
+                    sfTcpSocket_destroy(sockets[i]);
+                    sockets[i] = NULL;
                     continue;
                 }
-                bbHere();
+bbHere();
+                char data[512];
+
+                sfPacket_readString(packet,data);
+                bbDebug("message: %s\n", data);
+
+                continue;
             }
-
-
+            bbHere();
         }
+
+
+
     }
 
 
-    sfSocketSelector_wait(selector, sfSeconds(60));
-    if (sfSocketSelector_isTcpListenerReady(selector,listener) == sfFalse)
-        exit(EXIT_FAILURE);
 
     bbDebug("we made it this far!");
 

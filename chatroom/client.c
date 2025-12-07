@@ -10,11 +10,12 @@
 int main(void){
     printf("Hello, client!\n");
 
+
     I32 port = 80;
     sfIpAddress address = sfIpAddress_fromString("127.0.0.1");
     sfTcpSocket* socket = sfTcpSocket_create();
     sfSocketStatus status = sfTcpSocket_connect(socket, address, port, sfSeconds(10));
-    bbAssert(status == sfSocketDone, "Could not connect to server\n");
+    sfSocketStatus_print(status);
 
 
     sfTcpSocket_setBlocking(socket, sfFalse);
@@ -27,9 +28,9 @@ int main(void){
 
     sfPacket* startingPacket = sfPacket_create();
     sfPacket_writeString(startingPacket, "Celebrate good times!\n");
-
-    status = sfTcpSocket_sendPacket(socket, startingPacket);
-
-    bbAssert(status == sfSocketDone, "fail to send packet\n");
-    sfSleep(sfSeconds(1));
+    while(1) {
+        status = sfTcpSocket_sendPacket(socket, startingPacket);
+        sfSocketStatus_print(status);
+        sfSleep(sfSeconds(1));
+    }
 }

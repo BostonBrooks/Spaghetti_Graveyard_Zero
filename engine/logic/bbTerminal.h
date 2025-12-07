@@ -114,9 +114,35 @@ static const int stringLength = 512;
         break;\
     case Tail:\
         bbDebug ("Flag = Tail\n");\
-        break;\
+        break;            \
+    dafault:              \
+        bbDebug ("Flag = unknown\n");\
     }\
 }\
 
+#define sfSocketStatus_print(status)\
+{\
+    switch((sfSocketStatus)status)\
+    {\
+        case sfSocketDone:\
+        bbDebug("status = sfSocketDone\n");\
+        break;\
+        case sfSocketNotReady:\
+        bbDebug("status = sfSocketNotReady\n");\
+        break;\
+        case sfSocketPartial:\
+        bbDebug("status = sfSocketPartial\n");\
+        break;\
+        case sfSocketDisconnected:\
+        bbDebug("status = sfSocketDisconnected\n");\
+        break;\
+        case sfSocketError:\
+        bbDebug("status = sfSocketError\n");\
+        break;\
+        default:\
+        bbDebug("status = unknown\n");\
+        \
+    }\
+}\
 
 #endif // BBPRINTF_H
