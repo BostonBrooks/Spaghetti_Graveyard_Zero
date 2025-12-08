@@ -27,7 +27,7 @@ int main(void){
     char username[] = "Toblerone rollo combo\n";
 
     sfPacket* startingPacket = sfPacket_create();
-    sfPacket_writeString(startingPacket, "Celebrate good times!\n");
+    sfPacket_writeString(startingPacket, "Celebrate good times!");
     while(1) {
         status = sfTcpSocket_sendPacket(socket, startingPacket);
         sfSocketStatus_print(status);
