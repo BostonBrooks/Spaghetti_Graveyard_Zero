@@ -6,8 +6,44 @@
 #ifndef BBSTRING_H
 #define BBSTRING_H
 
+#include <stdlib.h>
+#include <string.h>
 #include "engine/logic/bbIntTypes.h"
 #include "engine/logic/bbFlag.h"
+
+
+/**if the string can be represented as an I32, the function
+ * should return that number, otherwise, the function should
+ * return I32_MAX = 2147483647
+ * the minimum value the function can return is: I32_MIN + 1 = -2147483646
+ **/
+
+
+static I32 bbStr_toI32(char* Str){
+    char* str = Str;
+    I64 sign = 1;
+    if (str[0] == '-'){
+        sign = -1;
+        str = &str[1];
+    }
+
+    int len = strlen(str);
+    if (len > 16) return I32_MAX;
+
+    char digits[] = "0123456789";
+    int int_len = strspn(str, digits);
+
+    if(len != int_len) return I32_MAX;
+
+    I64 number = strtol(str,NULL, 10);
+    number *= sign;
+
+    if (number >= I32_MAX) return I32_MAX;
+    if (number <= I32_MIN) return I32_MAX;
+
+    return (I32)number;
+
+}
 
 /// strcpy()
 static I32 bbStr_setStr(char* dest, char* src, I32 max){

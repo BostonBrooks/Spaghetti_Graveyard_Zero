@@ -15,6 +15,10 @@
 #define U16    uint16_t
 #define U32    uint32_t
 #define U64    uint64_t
+
+#define I32_MAX 2147483647l
+#define I32_MIN -2147483647l
+
 typedef struct
 {
     I32 x;
