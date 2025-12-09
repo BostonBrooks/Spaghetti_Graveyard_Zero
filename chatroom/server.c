@@ -5,15 +5,20 @@
 #include <SFML/Network.h>
 #include "engine/logic/bbIntTypes.h"
 #include "engine/logic/bbTerminal.h"
+#include "chatroom/io.h"
 
 int main(void){
     printf("Hello, server!\n");
 
-    I32 port = 80;
+    int port = get_integer_input("Input server port: ");
+
     sfTcpListener* listener = sfTcpListener_create();
     sfSocketStatus status = sfTcpListener_listen(listener,port,sfIpAddress_Any);
     //sfSocketStatus_print(status);
-
+    if (status != sfSocketDone) {
+        printf("Could not connect to the given port!");
+        exit(EXIT_FAILURE);
+    }
     sfTcpSocket* sockets[8];
     for (int i = 0; i < 8; ++i) {
         sockets[i] = NULL;
