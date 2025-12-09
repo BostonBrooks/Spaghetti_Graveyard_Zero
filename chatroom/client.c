@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <pthread.h>
 #include <SFML/System.h>
 #include <SFML/Graphics.h>
 #include <SFML/Window.h>
@@ -8,6 +9,9 @@
 #include "engine/logic/bbTerminal.h"
 #include "chatroom/io.h"
 
+void send_messages(sfTcpSocket* socket, char* username);
+void receive_messages(sfTcpSocket* socket);
+void* test_function(void* args);
 
 int main(void){
     printf("Hello, client!\n");
@@ -35,10 +39,37 @@ int main(void){
     sprintf(packetString, "%s connected.", username);
     sfPacket_writeString(startingPacket, packetString);
 
+    pthread_t test_thread;
+    pthread_create(&test_thread, NULL, test_function, NULL);
 
     while(1) {
-        status = sfTcpSocket_sendPacket(socket, startingPacket);
-        sfSocketStatus_print(status);
+        //status = sfTcpSocket_sendPacket(socket, startingPacket);
+        //sfSocketStatus_print(status);
+        printf("main thread\n");
+        sfSleep(sfSeconds(1));
+    }
+}
+
+void* test_function(void* args)
+{
+    while(1){
+        printf("Test messages thread\n");
+        sfSleep(sfSeconds(1));
+    }
+}
+
+void send_messages(sfTcpSocket* socket, char* username)
+{
+    while(1){
+        printf("Send messages thread\n");
+        sfSleep(sfSeconds(1));
+    }
+}
+
+void receive_messages(sfTcpSocket* socket)
+{
+    while(1){
+        printf("receive messages thread\n");
         sfSleep(sfSeconds(1));
     }
 }
