@@ -5,17 +5,32 @@
 #include <SFML/Window.h>
 #include <SFML/Network.h>
 #include <time.h>
-#include "engine/logic/bbIntTypes.h"
-#include "engine/logic/bbTerminal.h"
+#include <stdatomic.h>
+#include <string.h>
 #include "chatroom/io.h"
 
-void send_messages(sfTcpSocket* socket, char* username);
-void receive_messages(sfTcpSocket* socket);
+//used for debugging:
+#include "engine/logic/bbTerminal.h"
+
+pthread_mutex_t mutex;
+atomic_bool quit = false;
+
+typedef struct {
+    sfTcpSocket* socket;
+    char* username;
+} send_messages_args;
+
+//void send_messages(sfTcpSocket* socket, char* username);
+void* send_messages(void* args);
+//void receive_messages(sfTcpSocket* socket);
+void* receive_messages(void* args);
 void* test_function(void* args);
 
 int main(void){
     printf("Hello, client!\n");
     srand(time(NULL));
+
+    pthread_mutex_init(&mutex, NULL);
 
     I32 port = get_integer_input("Input desired server's port: ");
     sfIpAddress address = sfIpAddress_fromString("127.0.0.1");
@@ -58,18 +73,52 @@ void* test_function(void* args)
     }
 }
 
-void send_messages(sfTcpSocket* socket, char* username)
+//void send_messages(sfTcpSocket* socket, char* username)
+void* send_messages(void* Args)
 {
-    while(1){
-        printf("Send messages thread\n");
-        sfSleep(sfSeconds(1));
+    send_messages_args* args = (send_messages_args*) Args;
+    sfTcpSocket* socket = args->socket;
+    char* username = args->username;
+
+
+    while(1)
+    {
+        printf("Input your message ('exit' to exit): ");
+        fflush(stdout);
+
+        char message[512];
+        scanf("%s", message);
+        clear_line(1);
+
+        if (strcmp(message,"exit") == 0)
+        {
+            quit = true;
+            printf( "Exiting...\n");
+            return NULL;
+        }
+        char full_message[512];
+        sprintf(full_message, "%s: %s", username, message);
+
+        sfPacket* packet = sfPacket_create();
+        sfPacket_writeString(packet, full_message);
+
+        pthread_mutex_lock(&mutex);
+
+        sfSocketStatus status;
+        status = sfTcpSocket_sendPacket(socket, packet);
+
+
+        if (status != sfSocketDone){
+            printf("Could not send data!");
+            exit(1);
+        }
+        pthread_mutex_unlock(&mutex);
     }
 }
 
-void receive_messages(sfTcpSocket* socket)
+//void receive_messages(sfTcpSocket* socket)
+void* receive_messages(void* Socket)
 {
-    while(1){
-        printf("receive messages thread\n");
-        sfSleep(sfSeconds(1));
-    }
+    sfTcpSocket* socket = (sfTcpSocket*) Socket;
+
 }
