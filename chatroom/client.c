@@ -18,12 +18,12 @@ atomic_bool quit = false;
 typedef struct {
     sfTcpSocket* socket;
     char* username;
-} send_messages_args;
+} send_thread_args;
 
 //void send_messages(sfTcpSocket* socket, char* username);
 void* send_messages(void* args);
 //void receive_messages(sfTcpSocket* socket);
-void* receive_messages(void* args);
+void* receive_messages(void* Socket);
 void* test_function(void* args);
 
 int main(void){
@@ -53,16 +53,29 @@ int main(void){
     char packetString[80];
     sprintf(packetString, "%s connected.", username);
     sfPacket_writeString(startingPacket, packetString);
+    status = sfTcpSocket_sendPacket(socket, startingPacket);
 
-    pthread_t test_thread;
-    pthread_create(&test_thread, NULL, test_function, NULL);
 
-    while(1) {
-        //status = sfTcpSocket_sendPacket(socket, startingPacket);
-        //sfSocketStatus_print(status);
-        printf("main thread\n");
-        sfSleep(sfSeconds(1));
-    }
+    pthread_t send_thread, receive_thread;
+    send_thread_args args;
+    args.socket = socket;
+    args.username = username;
+
+    pthread_create(&send_thread,NULL, send_messages, &args);
+    pthread_create(&receive_thread,NULL, receive_messages, socket);
+
+    pthread_join(send_thread, NULL);
+    pthread_join(receive_thread, NULL);
+
+    sfPacket* disconnectPacket;
+    disconnectPacket = sfPacket_create(); //destroy?
+    sprintf(packetString, "%s disconnected", username);
+    sfTcpSocket_sendPacket(socket, disconnectPacket);
+    printf("Disconnected.\n");
+
+    sfTcpSocket_destroy(socket);
+
+
 }
 
 void* test_function(void* args)
@@ -76,7 +89,7 @@ void* test_function(void* args)
 //void send_messages(sfTcpSocket* socket, char* username)
 void* send_messages(void* Args)
 {
-    send_messages_args* args = (send_messages_args*) Args;
+    send_thread_args* args = (send_thread_args*) Args;
     sfTcpSocket* socket = args->socket;
     char* username = args->username;
 
@@ -94,12 +107,13 @@ void* send_messages(void* Args)
         {
             quit = true;
             printf( "Exiting...\n");
+            fflush(stdout);
             return NULL;
         }
         char full_message[512];
         sprintf(full_message, "%s: %s", username, message);
 
-        sfPacket* packet = sfPacket_create();
+        sfPacket* packet = sfPacket_create(); //destroy?
         sfPacket_writeString(packet, full_message);
 
         pthread_mutex_lock(&mutex);
@@ -110,6 +124,7 @@ void* send_messages(void* Args)
 
         if (status != sfSocketDone){
             printf("Could not send data!");
+            fflush(stdout);
             exit(1);
         }
         pthread_mutex_unlock(&mutex);
@@ -120,5 +135,30 @@ void* send_messages(void* Args)
 void* receive_messages(void* Socket)
 {
     sfTcpSocket* socket = (sfTcpSocket*) Socket;
+
+    while(1)
+    {
+        if(quit) return NULL;
+
+
+        sfPacket* received;
+        received = sfPacket_create(); //destroy?
+
+        pthread_mutex_lock(&mutex);
+
+        sfSocketStatus status;
+        status = sfTcpSocket_receivePacket(socket, received);
+
+        if(status == sfSocketDone)
+        {
+            char message[512];
+            sfPacket_readString(received, message);
+            clear_line(0);
+            printf("%s\n", message);
+            printf("Input your message ('exit' to exit): ");
+            fflush(stdout);
+
+        }
+    }
 
 }
