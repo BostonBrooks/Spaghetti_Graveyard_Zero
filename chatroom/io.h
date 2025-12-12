@@ -38,7 +38,7 @@
             number = atoi(answer);
             return (number);
         }
-        clear_line(2);
+        clear_line(1);
 
         printf("Invalid input. Please enter a valid integer.\n");
 
@@ -68,4 +68,27 @@ int get_valid_username(char* username, char* prompt)
     return 1;
 
 }
+
+//Similar but not the same as one of the answers on
+// https://stackoverflow.com/questions/314401/how-to-read-a-line-from-the-console-in-c
+int get_line(char* string, int length, FILE* fp)
+    {
+        int numchars = 0;
+        int c = '\0';
+
+        while(1){
+            c = fgetc(fp);
+
+            if(c == EOF || c == '\n') break;
+
+            string[numchars] = c;
+
+            if(numchars >= length-1) break;
+            numchars++;
+        }
+
+        string[numchars+1] = '\0';
+
+        return numchars+1;
+    }
 #endif //NETWORKING_IO_H

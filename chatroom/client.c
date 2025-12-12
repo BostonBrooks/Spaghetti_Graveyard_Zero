@@ -99,8 +99,9 @@ void* send_messages(void* Args)
         printf("Input your message ('exit' to exit): ");
         fflush(stdout);
 
-        char message[512];
-        scanf("%s", message);
+        char message[9];
+        //scanf("%s", message);
+        get_line(message, 9, stdin);
         clear_line(1);
 
         if (strcmp(message,"exit") == 0)
@@ -159,6 +160,8 @@ void* receive_messages(void* Socket)
             fflush(stdout);
 
         }
+
+        pthread_mutex_unlock(&mutex);
     }
 
 }
