@@ -8,3 +8,8 @@ gcc    -I ../\
        ../chatroom/server.c\
   -lcsfml-system -lcsfml-graphics -lcsfml-window -lcsfml-network -g -lm -w\
   -o server.out
+  
+  gcc    -I ../\
+       ../chatroom/get_IPAddress_test.c\
+  -lcsfml-system -lcsfml-graphics -lcsfml-window -lcsfml-network -g -lm -w\
+  -o test.out

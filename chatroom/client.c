@@ -20,11 +20,8 @@ typedef struct {
     char* username;
 } send_thread_args;
 
-//void send_messages(sfTcpSocket* socket, char* username);
 void* send_messages(void* args);
-//void receive_messages(sfTcpSocket* socket);
 void* receive_messages(void* Socket);
-void* test_function(void* args);
 
 int main(void){
     printf("Hello, client!\n");
@@ -32,26 +29,22 @@ int main(void){
 
     pthread_mutex_init(&mutex, NULL);
 
-    sfIpAddress address = sfIpAddress_fromString("127.0.0.1");
-
-    //TODO get_IPAddress_input
-    printf("Input desired server's IP address: ");
-    fflush(stdout);
-    {
-        char AddressStr[64];
-        get_line(AddressStr,64,stdin);
-        address = sfIpAddress_fromString(AddressStr);
-
-    }
-
-    I32 port = get_integer_input("Input desired server's port: ");
+    sfIpAddress address;
+    sfSocketStatus status;
+    I32 port;
     sfTcpSocket* socket = sfTcpSocket_create();
-    sfSocketStatus status = sfTcpSocket_connect(socket, address, port, sfSeconds(10));
-    if (status != sfSocketDone) {
-        printf("Could not connect to the given port!");
-        exit(EXIT_FAILURE);
-    }
 
+while (1){
+    address = get_IPAddress("Input desired server's IP address: ");
+    port = get_integer_input("Input desired server's port: ");
+    status = sfTcpSocket_connect(socket, address, port, sfSeconds(10));
+
+    if (status != sfSocketDone) {
+        printf("Could not connect to the given port!\n\n");
+        continue;
+    }
+    break;
+}
 
     sfTcpSocket_setBlocking(socket, sfFalse);
 
@@ -89,13 +82,6 @@ int main(void){
 
 }
 
-void* test_function(void* args)
-{
-    while(1){
-        printf("Test messages thread\n");
-        sfSleep(sfSeconds(1));
-    }
-}
 
 //void send_messages(sfTcpSocket* socket, char* username)
 void* send_messages(void* Args)

@@ -72,23 +72,43 @@ int get_valid_username(char* username, char* prompt)
 //Similar but not the same as one of the answers on
 // https://stackoverflow.com/questions/314401/how-to-read-a-line-from-the-console-in-c
 int get_line(char* string, int length, FILE* fp)
+{
+    int numchars = 0;
+    int c = '\0';
+
+    while (1)
     {
-        int numchars = 0;
-        int c = '\0';
+        c = fgetc(fp);
 
-        while(1){
-            c = fgetc(fp);
+        if (c == EOF || c == '\n') break;
 
-            if(c == EOF || c == '\n') break;
+        string[numchars] = c;
 
-            string[numchars] = c;
-
-            if(numchars >= length-1) break;
-            numchars++;
-        }
-
-        string[numchars+1] = '\0';
-
-        return numchars+1;
+        if (numchars >= length - 1) break;
+        numchars++;
     }
+
+    string[numchars + 1] = '\0';
+
+    return numchars + 1;
+}
+
+sfIpAddress get_IPAddress(char* prompt)
+{
+
+    fflush(stdout);
+     sfIpAddress address;
+
+
+    printf("%s", prompt);
+    fflush(stdout);
+    char addressStr[64];
+    get_line(addressStr, 64,stdin);
+    clear_line(2);
+    address = sfIpAddress_fromString(addressStr);
+
+
+
+    return (address);
+}
 #endif //NETWORKING_IO_H
