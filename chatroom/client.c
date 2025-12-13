@@ -126,6 +126,7 @@ void* send_messages(void* Args)
             exit(1);
         }
         pthread_mutex_unlock(&mutex);
+        sfPacket_destroy(packet);
     }
 }
 
@@ -159,6 +160,7 @@ void* receive_messages(void* Socket)
         }
 
         pthread_mutex_unlock(&mutex);
+        sfPacket_destroy(received);
     }
 
 }
