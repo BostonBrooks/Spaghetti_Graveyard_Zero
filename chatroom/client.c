@@ -32,8 +32,19 @@ int main(void){
 
     pthread_mutex_init(&mutex, NULL);
 
-    I32 port = get_integer_input("Input desired server's port: ");
     sfIpAddress address = sfIpAddress_fromString("127.0.0.1");
+
+    //TODO get_IPAddress_input
+    printf("Input desired server's IP address: ");
+    fflush(stdout);
+    {
+        char AddressStr[64];
+        get_line(AddressStr,64,stdin);
+        address = sfIpAddress_fromString(AddressStr);
+
+    }
+
+    I32 port = get_integer_input("Input desired server's port: ");
     sfTcpSocket* socket = sfTcpSocket_create();
     sfSocketStatus status = sfTcpSocket_connect(socket, address, port, sfSeconds(10));
     if (status != sfSocketDone) {
@@ -99,9 +110,9 @@ void* send_messages(void* Args)
         printf("Input your message ('exit' to exit): ");
         fflush(stdout);
 
-        char message[9];
+        char message[128];
         //scanf("%s", message);
-        get_line(message, 9, stdin);
+        get_line(message, 128, stdin);
         clear_line(1);
 
         if (strcmp(message,"exit") == 0)

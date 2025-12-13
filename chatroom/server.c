@@ -10,6 +10,21 @@
 int main(void){
     printf("Hello, server!\n");
 
+    sfIpAddress localAddress;
+    localAddress = sfIpAddress_getLocalAddress();
+    char localAddressString[64];
+    sfIpAddress_toString(localAddress, localAddressString);
+
+
+    sfIpAddress publicAddress;
+    publicAddress = sfIpAddress_getPublicAddress(sfSeconds(120));
+    char publicAddressString[64];
+    sfIpAddress_toString(publicAddress, publicAddressString);
+
+    printf("local address = %s\npublic address = %s\n",
+           localAddressString,
+           publicAddressString);
+
     int port = get_integer_input("Input server port: ");
 
     sfTcpListener* listener = sfTcpListener_create();
