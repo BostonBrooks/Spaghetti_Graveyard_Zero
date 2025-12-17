@@ -34,5 +34,5 @@ Graphics)
         widget->tree.childrenvisible = false;
     }
 
-    return Break;
+    return Success;
 }

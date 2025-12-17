@@ -37,7 +37,7 @@ bbFlag SpellMenu_Constructor (bbWidget** self, void* Graphics,
     widget->mtable.LeftDown = funcInt;
 
     funcInt = bbMouseFunctions_getInt(&widgets->mouse->functions,MouseIsOver,
-                                      "SPELLSELECT");
+                                      "ALWAYS");
     widget->mtable.isOver = funcInt;
 
     bbWidget* widget0;
