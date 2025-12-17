@@ -56,5 +56,5 @@ gcc   -D SFML_STATIC -I ../^
     -o ../games/game0/game.exe
 IF %errorlevel% == 0 (    echo Compile Succeeded:
                           cd ../games/game0/
-                          gdb -ex=r ./game.exe)^
+                          gdb ./game.exe)^
  ELSE (echo compile failed!)
