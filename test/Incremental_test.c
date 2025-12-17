@@ -221,8 +221,6 @@ CLEARWINDOW(bbMagenta);
                          SP0, layout, "TEXTBOX");
 
 
-
-
 	SP0.x = 497*8; SP0.y = 355*8;
 	bbWidget_constructor(&home.private.widgets.prompt, &home.private.widgets, &home.constant.graphics,
                          SP0, layout, "TEXTBOX");
@@ -305,18 +303,12 @@ CLEARWINDOW(bbMagenta);
         }
     }
 
-    for (I32 i = 0; i<6;i++) {
-        for (I32 j = 0; j < 6; j++) {
+    for (I32 i = 0; i<12;i++) {
+        for (I32 j = 0; j < 12; j++) {
             bbMapCoords MC;
-            MC.i = i * (POINTS_PER_SQUARE * 2);
-            MC.j = j * (POINTS_PER_SQUARE * 2);
-            MC.k = 0;
 
-            MC.i += rand()%(400 * POINTS_PER_PIXEL);
-            MC.j += rand()%(400 * POINTS_PER_PIXEL);
-
-            MC.i = i * (POINTS_PER_SQUARE / 2);
-            MC.j = j * (POINTS_PER_SQUARE / 2);
+            MC.i = i * (POINTS_PER_SQUARE);
+            MC.j = j * (POINTS_PER_SQUARE);
             MC.k = 0;
 
             MC.i += rand()%(100 * POINTS_PER_PIXEL);
