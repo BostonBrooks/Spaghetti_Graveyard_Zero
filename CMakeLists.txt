@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 2.6.0)
+cmake_minimum_required(VERSION 4.1)
 
 # here we specify that the project is C language only, so the default
 # C compiler on the system will be used
@@ -104,4 +104,7 @@ add_executable(myprogram
         engine/core/bbCore.c
         chatroom/server.c
         chatroom/client.c
-        chatroom/io.h)
+        chatroom/io.h
+        test/Incremental_test.c
+        games/game0/maps/map0/mouse/textbox.h
+        games/game0/maps/map0/mouse/textbox.h)

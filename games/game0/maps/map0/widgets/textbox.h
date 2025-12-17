@@ -1,5 +1,6 @@
 //textbox is a textbox
 
+#include "engine/includes/CSFML.h"
 #include "engine/logic/bbFlag.h"
 #include "engine/userinterface/bbWidget.h"
 #include "engine/userinterface/bbWidgetFunctions.h"
