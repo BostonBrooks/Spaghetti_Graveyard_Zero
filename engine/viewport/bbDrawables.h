@@ -16,7 +16,7 @@
 typedef struct
 {
     bbMapCoords coords;
-    //float rotation;?
+    float rotation;
     bbPool_ListElement listElement;
     bbFrame frames[FRAMES_PER_DRAWABLE];
 } bbDrawable;
