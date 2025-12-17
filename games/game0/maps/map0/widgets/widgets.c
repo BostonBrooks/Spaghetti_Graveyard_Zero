@@ -3,6 +3,7 @@
 #ifndef WIDGET_FUNCTIONS
 #define WIDGET_FUNCTIONS
 
+#include "engine/includes/CSFML.h"
 #include "engine/logic/bbFlag.h"
 #include "engine/userinterface/bbWidgetFunctions.h"
 

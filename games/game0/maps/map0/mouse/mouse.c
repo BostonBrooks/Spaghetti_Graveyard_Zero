@@ -13,6 +13,7 @@
 #include "games/game0/maps/map0/mouse/spellslot.h"
 #include "games/game0/maps/map0/mouse/spellmenu.h"
 #include "games/game0/maps/map0/mouse/spellbar.h"
+#include "games/game0/maps/map0/mouse/textbox.h"
 
 bbFlag bbMouseFunctions_populate(bbMouseFunctions* self)
 {
@@ -57,6 +58,10 @@ bbFlag bbMouseFunctions_populate(bbMouseFunctions* self)
     bbMouseFunctions_add(self, MouseLeftDown,  SpellSlot_LeftDown, "SPELLSLOT");
     bbMouseFunctions_add(self, MouseLeftDown,  SpellMenu_LeftDown, "SPELLMENU");
     bbMouseFunctions_add(self, MouseLeftDown,  SpellBar_LeftDown, "SPELLBAR");
+
+
+    bbMouseFunctions_add(self, MouseIsOver,  Textbox_IsOver, "TEXTBOX");
+    bbMouseFunctions_add(self, MouseLeftDown,  Textbox_LeftDown, "TEXTBOX");
 
     return Success;
 }
