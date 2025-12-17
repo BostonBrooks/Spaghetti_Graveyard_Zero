@@ -16,7 +16,7 @@ bbFlag SpellMenu_Constructor (bbWidget** self, void* Graphics,
     rect.left = screen_coords.x;
     rect.top = screen_coords.y;
     rect.width = SCREEN_PPP * 373;
-    rect.height = SCREEN_PPP * 127;
+    rect.height = SCREEN_PPP * 197;
 
     widget->mtable.MouseIcon = 89;
 
