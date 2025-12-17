@@ -62,7 +62,7 @@ bbFlag SpellMenu_Constructor (bbWidget** self, void* Graphics,
     SP.y = screen_coords.y + 80*8 + 35*8*0;
     bbWidget_constructor(&widget0, widgets, graphics,
                          SP, widget, "SPELLSELECT4");
-
+/*
     SP.x = screen_coords.x + 11*8 + 35*8*4;
     SP.y = screen_coords.y + 80*8 + 35*8*0;
     bbWidget_constructor(&widget0, widgets, graphics,
@@ -194,7 +194,7 @@ bbFlag SpellMenu_Constructor (bbWidget** self, void* Graphics,
     SP.y = screen_coords.y + 80*8 + 35*8*2;
     bbWidget_constructor(&widget0, widgets, graphics,
                          SP, widget, "SPELLSELECT30");
-
+*/
     widgets->spellMenu = widget;
     *self = widget;
 
