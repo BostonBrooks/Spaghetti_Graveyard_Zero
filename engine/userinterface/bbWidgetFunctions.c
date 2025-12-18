@@ -7,7 +7,7 @@
 bbFlag bbWidgetFunctions_new(bbWidgetFunctions** self)
 {
     bbWidgetFunctions* functions = calloc(1, sizeof(bbWidgetFunctions));
-    I32 magic_number = 256;
+    I32 magic_number = nextPrime(256);
 
 //changes made fixed bug?
 //functions->Constructors = calloc(magic_number, sizeof(bbWidget_Constructor));

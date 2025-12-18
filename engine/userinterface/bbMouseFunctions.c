@@ -6,12 +6,13 @@
 #include "engine/logic/bbFlag.h"
 #include "engine/logic/bbIntTypes.h"
 #include "engine/logic/bbPoolHandle.h"
+#include "engine/logic/bbPrime.h"
 #include "engine/logic/bbTerminal.h"
 
 
 bbFlag bbMouseFunctions_init(bbMouseFunctions* functions)
 {
-    I32 magic_number = 256;
+    I32 magic_number = nextPrime(256);
 
     functions->IsOver = calloc(magic_number, sizeof(bbMouse_IsOver));
     bbAssert(functions->IsOver != NULL, "bad calloc\n");

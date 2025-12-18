@@ -3,7 +3,7 @@
 #include "engine/logic/bbTerminal.h"
 
 bbFlag bbSpells_init(bbSpells* spells){
-    I32 magic_number = 256;
+    I32 magic_number = nextPrime(256);
 
     bbVPool_newBloated(&spells->pool, sizeof(bbSpell), 1024, 1024);
 
