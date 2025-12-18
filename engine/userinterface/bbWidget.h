@@ -75,7 +75,7 @@ typedef struct bbWidgets {
 	bbTree* tree;
 	struct bbWidgetFunctions* functions;
 	bbMouse* mouse;
-
+    bbDictionary* dict;
 	bbWidget* dialog;
 	bbWidget* prompt;
 	bbWidget* command;

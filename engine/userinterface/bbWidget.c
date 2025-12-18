@@ -21,6 +21,7 @@ bbFlag bbWidgets_init(bbWidgets* widgets){
 	bbVPool_newBloated(&widgets->pool, sizeof(bbWidget), 1024, 1024);
 	bbTree_new(&widgets->tree, widgets->pool, offsetof(bbWidget, tree));
 
+	bbDictionary_new(&widgets->dict, nextPrime(256));
     bbWidgetFunctions_new(&widgets->functions);
 
 	bbWidgetFunctions_populate(widgets->functions);
