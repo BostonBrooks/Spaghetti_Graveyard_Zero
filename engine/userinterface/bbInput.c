@@ -152,7 +152,7 @@ bbFlag bbInput_poll(bbInput* input, sfRenderWindow* window){
         case sfEvtKeyPressed:{
 
             bbWidgets* widgets = input->widgets;
-            bbWidget* widget = widgets->command;
+            bbWidget* widget = widgets->textbox;
 
             sfKeyCode keyCode = event.key.code;
             unsigned char key;

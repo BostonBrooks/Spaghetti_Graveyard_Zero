@@ -234,6 +234,7 @@ CLEARWINDOW(bbMagenta);
 	bbWidget_constructor(&home.private.widgets.command, &home.private.widgets, &home.constant.graphics,
                          SP0, layout, "TEXTBOX");
 
+	home.private.widgets.textbox = home.private.widgets.command;
 	bounds.i32x2.x = 64;
 	bounds.i32x2.y = 1;
 	bbWidget_onCommand(home.private.widgets.command, &home.private.widgets, bbWC_setBounds, bounds);
