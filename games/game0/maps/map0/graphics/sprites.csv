@@ -1,4 +1,4 @@
-Number of Sprites:,144,,,,,,,,,,,,
+Number of Sprites:,152,,,,,,,,,,,,
 Label:,Integer Address:,Texture:,Left:,Top:,Width:,Height:,Origin X:,Origin Y:,Scale X:,Scale Y:,Scale By:,Comment:,
 NULL,0,NULL,0,0,128,128,0,0,1,1,None,Exception,
 LAYOUT_480,1,LAYOUT_480,0,0,720,480,0,0,1,1,None,The root of the widget tree,
@@ -144,3 +144,13 @@ LIGHTS5,140,LIGHTS5,0,0,300,450,157,441,0.6,0.6,None, Decoration for the tree,
 TREE_SMALL,141,TREE,0,0,300,450,157,441,0.03,0.03,None, tree map icon,
 FIRE,142,FIRE,0,0,120,150,63,117,0.4,0.4,None, a camp fire,
 COW_R,143,SPRITESHEET,280,9,93,155,33,162,1,1,None,A cow;
+CONNECTMENU,144,CONNECT,0,0,373,197,0,0,1,1,None, Set IP and Port,
+CONNECT_DEFAULT,145,CONNECT,13,206,74,22,0,0,1,1,None, A button,
+CONNECT_HOVER,146,CONNECT,13,231,74,22,0,0,1,1,None, A button,
+CONNECT_CLICK,147,CONNECT,13,254,74,22,0,0,1,1,None, A button,
+DISCONNECT_DEFAULT,148,CONNECT,90,206,74,22,0,0,1,1,None, A button,
+DISCONNECT_HOVER,149,CONNECT,90,231,74,22,0,0,1,1,None, A button,
+DISCONNECT_CLICK,150,CONNECT,90,254,74,22,0,0,1,1,None, A button,
+CONNECT_LOGO,151,CONNECT,179,221,36,36,0,0,1,1,None, A button,
+
+
