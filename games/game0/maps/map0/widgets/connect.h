@@ -33,7 +33,7 @@ bbWidgets* widgets, bbScreenPoints screen_coords, bbWidget* parent)
     widget->mtable.MouseIcon = 86;
     int funcInt;
     funcInt = bbMouseFunctions_getInt(&widgets->mouse->functions,MouseIsOver,
-                                  "HOVER");
+                                  "ALWAYS");
     widget->mtable.isOver = funcInt;
 
 

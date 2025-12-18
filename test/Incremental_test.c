@@ -238,6 +238,10 @@ CLEARWINDOW(bbMagenta);
 	bounds.i32x2.y = 1;
 	bbWidget_onCommand(home.private.widgets.command, &home.private.widgets, bbWC_setBounds, bounds);
 
+	SP0.x = 58*8; SP0.y = 100*8;
+	bbWidget_constructor(&widget1, &home.private.widgets, &home.constant.graphics,
+						 SP0, layout,"CONNECTMENU");
+
 	SP0.x = rand()%(720*8); SP0.y = rand()%(480*8);
 	bbWidget_constructor(&widget0, &home.private.widgets, &home.constant.graphics,
                          SP0, layout, "SPHERE");
@@ -257,9 +261,7 @@ CLEARWINDOW(bbMagenta);
     bbWidget_constructor(&widget0, &home.private.widgets, &home.constant.graphics,
                          SP0, layout, "CARD");
 
-	SP0.x = 58*8; SP0.y = 100*8;
-	bbWidget_constructor(&widget1, &home.private.widgets, &home.constant.graphics,
-						 SP0, layout,"CONNECTMENU");
+
 ////////////////////////////////////////////////////////
     CLEARWINDOW(bbRed);
 
