@@ -81,6 +81,10 @@ bbFlag bbWidgetFunctions_populate(bbWidgetFunctions* self)
     bbWidgetFunctions_add(self, WidgetConstructor,
                           TopLeft_Constructor, "TOPLEFT");
 
+
+    bbWidgetFunctions_add(self, WidgetConstructor,
+                          ConnectIcon_Constructor, "CONNECTICON");
+
     //typedef bbFlag bbWidget_Update (bbWidget* widget, void* unused);
     bbWidgetFunctions_add(self, WidgetUpdate,
                           NULL_Update, "NULL Update");

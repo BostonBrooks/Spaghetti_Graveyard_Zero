@@ -12,12 +12,14 @@ Graphics)
     bbWidgets* widgets = Widgets;
 
     bbVPool* pool = widgets->pool;
-    bbPool_Handle handle = widget->tree.children.head;
+    bbPool_Handle handle;
 
+    bbDictionary_lookup(widgets->dict,"CONNECTMENU",&handle );
     bbWidget* ConnectMenu;
     bbVPool_lookup(pool, (void**)&ConnectMenu,handle);
-    ConnectMenu->tree.visible = true;
-    ConnectMenu->tree.childrenvisible = true;
+    bool visible = !ConnectMenu->tree.visible;
+    ConnectMenu->tree.visible = visible;
+    ConnectMenu->tree.childrenvisible = visible;
 
 
     return Success;

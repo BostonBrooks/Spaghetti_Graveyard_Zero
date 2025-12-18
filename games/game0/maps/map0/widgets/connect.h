@@ -18,9 +18,9 @@ bbWidgets* widgets, bbScreenPoints screen_coords, bbWidget* parent)
 {
 
     bbWidget *widget, *ConnectIcon;
-    bbFlag flag = ConnectIcon_Constructor (&ConnectIcon, graphics,widgets, screen_coords, parent);
+    bbFlag flag;// = ConnectIcon_Constructor (&ConnectIcon, graphics,widgets, screen_coords, parent);
 
-    flag=  bbWidget_newEmpty(&widget, widgets, ConnectIcon);
+    flag=  bbWidget_newEmpty(&widget, widgets, parent);
 
     bbScreenPointsRect rect;
 
@@ -79,8 +79,8 @@ bbWidgets* widgets, bbScreenPoints screen_coords, bbWidget* parent)
 
     bbScreenPointsRect rect;
 
-    rect.left = 46 * POINTS_PER_PIXEL;
-    rect.top = 11 * POINTS_PER_PIXEL;
+    rect.left = screen_coords.x;
+    rect.top = screen_coords.y;
     rect.width = 36 * POINTS_PER_PIXEL;
     rect.height = 36 * POINTS_PER_PIXEL;
     widget->rect = rect;

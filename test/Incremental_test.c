@@ -212,9 +212,7 @@ CLEARWINDOW(bbMagenta);
     bbWidget_constructor(&widget0, &home.private.widgets, &home.constant.graphics,
                         SP0, layout,"SPELLBAR");
 
-    SP0.x = 11*8; SP0.y = 11*8;
-    bbWidget_constructor(&widget1, &home.private.widgets, &home.constant.graphics,
-                         SP0, layout,"CURRENTSPELL");
+
 
 	SP0.x = 497*8; SP0.y = 12*8;
 	bbWidget_constructor(&home.private.widgets.dialog, &home.private.widgets, &home.constant.graphics,
@@ -256,11 +254,19 @@ CLEARWINDOW(bbMagenta);
 	bbWidget_constructor(&widget1, &home.private.widgets, &home.constant.graphics,
 						 SP0, layout,"TOPLEFT");
 
+	SP0.x = 11*8; SP0.y = 11*8;
+	bbWidget_constructor(&widget0, &home.private.widgets, &home.constant.graphics,
+						 SP0, widget1,"CURRENTSPELL");
 
+	SP0.x = 46*8; SP0.y = 11*8;
+	bbWidget_constructor(&widget0, &home.private.widgets, &home.constant.graphics,
+						 SP0, widget1, "CONNECTICON");
 
 	SP0.x = rand()%(720*8); SP0.y = rand()%(480*8);
 	bbWidget_constructor(&widget0, &home.private.widgets, &home.constant.graphics,
                          SP0, layout, "SPHERE");
+
+
 
 
 
