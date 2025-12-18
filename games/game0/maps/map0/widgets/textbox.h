@@ -23,12 +23,21 @@ bbFlag Textbox_Constructor (bbWidget** self, void* graphics,
 
     rect.left = screen_coords.x;
     rect.top = screen_coords.y;
-    rect.width = 1;
-    rect.height = 1;
+    rect.width = 50*POINTS_PER_PIXEL;
+    rect.height = 11*POINTS_PER_PIXEL;
 
     widget->rect = rect;
 
     widget->ftable.OnCommand = bbWidgetFunctions_getInt(widgets->functions,WidgetOnCommand ,"TEXTBOX");
+
+    int funcInt;
+    funcInt = bbMouseFunctions_getInt(&widgets->mouse->functions,MouseIsOver,
+                                  "HOVER");
+    widget->mtable.isOver = funcInt;
+
+    funcInt = bbMouseFunctions_getInt(&widgets->mouse->functions,MouseLeftDown,
+                                  "TEXTBOX");
+    widget->mtable.LeftDown = funcInt;
 
     bbGraphics* Graphics = graphics;
     bbPool_Handle drawfunctionHandle;

@@ -24,12 +24,20 @@ bbFlag SpellMenu_Constructor (bbWidget** self, void* Graphics,
 
     bbGraphics *graphics = Graphics;
     bbPool_Handle drawfunctionHandle;
-    bbDictionary_lookup(graphics->drawfunctions->dictionary, "WIDGETSPRITE",
+    bbDictionary_lookup(graphics->drawfunctions->dictionary, "LAYERBOUNDARY",
                         &drawfunctionHandle);
+
     widget->frames[0].drawfunction = drawfunctionHandle.u64;
 
-    bbDictionary_lookup(graphics->sprites->dictionary, "SPELLMENU",
+    bbDictionary_lookup(graphics->sprites->dictionary, "LAYERBOUNDARY",
                         &widget->frames[0].handle);
+
+    bbDictionary_lookup(graphics->drawfunctions->dictionary, "WIDGETSPRITE",
+                    &drawfunctionHandle);
+    widget->frames[1].drawfunction = drawfunctionHandle.u64;
+
+    bbDictionary_lookup(graphics->sprites->dictionary, "SPELLMENU",
+                        &widget->frames[1].handle);
 
     int funcInt;
     funcInt = bbMouseFunctions_getInt(&widgets->mouse->functions,MouseLeftDown,

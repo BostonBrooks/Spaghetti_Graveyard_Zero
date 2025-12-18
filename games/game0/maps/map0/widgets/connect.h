@@ -43,12 +43,21 @@ bbWidgets* widgets, bbScreenPoints screen_coords, bbWidget* parent)
 
     bbGraphics* Graphics = graphics;
     bbPool_Handle drawfunctionHandle;
-    bbDictionary_lookup(Graphics->drawfunctions->dictionary, "WIDGETSPRITE",
+
+
+    bbDictionary_lookup(Graphics->drawfunctions->dictionary, "LAYERBOUNDARY",
                         &drawfunctionHandle);
     widget->frames[0].drawfunction = drawfunctionHandle.u64;
 
-    bbDictionary_lookup(Graphics->sprites->dictionary, "CONNECTMENU",
+    bbDictionary_lookup(Graphics->sprites->dictionary, "LAYERBOUNDARY",
                         &widget->frames[0].handle);
+
+    bbDictionary_lookup(Graphics->drawfunctions->dictionary, "WIDGETSPRITE",
+                        &drawfunctionHandle);
+    widget->frames[1].drawfunction = drawfunctionHandle.u64;
+
+    bbDictionary_lookup(Graphics->sprites->dictionary, "CONNECTMENU",
+                        &widget->frames[1].handle);
 
 
 

@@ -46,6 +46,32 @@ bbFlag bbDF_widgetSprite(void* drawable, void* frameDescriptor, void* cl){
     return Success;
 }
 
+//Draw a sprite belonging to a widget
+bbFlag bbDF_layerBoundary(void* drawable, void* frameDescriptor, void* cl){
+    bbWidget* widget = drawable;
+    bbFrame* frame = frameDescriptor;
+    drawFuncClosure* closure = cl;
+    bbGraphics* graphics = closure->graphics;
+
+    I32 spriteInt = frame->handle.u64;
+    sfSprite* sprite = graphics->sprites->sprites[spriteInt];
+
+
+    //bbDebug("spriteInt = %d, sprite = %p, target = %p, window = %p\n",
+    //        spriteInt, sprite, target, home.private.window);
+    bbScreenPoints SP;
+    SP.x = 0;
+    SP.y = 0;
+
+    sfVector2f position = bbScreenPoints_getV2f(SP);
+    sfSprite_setPosition(sprite, position);
+
+
+    sfRenderWindow_drawSprite(closure->target, sprite, NULL);
+
+    return Success;
+}
+
 // Draw an animation belonging to a widget;
 bbFlag bbDF_widgetAnimation(void* drawable, void* frameDescriptor, void* cl){
 
@@ -223,7 +249,7 @@ bbFlag bbDF_widgetTextBox(void* drawable, void* frameDescriptor, void* cl)
 
 
 bbFlag bbDrawfunctions_new(bbDrawfunctions** drawfunctions){
-    I32 num = 11;
+    I32 num = 12;
     bbDrawfunctions* functions = malloc(sizeof(bbDrawfunctions) + num * sizeof(bbDrawFunction*));
     bbAssert(functions!=NULL, "bad malloc");
     bbDictionary_new(&functions->dictionary, nextPrime(num));
@@ -276,6 +302,10 @@ bbFlag bbDrawfunctions_new(bbDrawfunctions** drawfunctions){
     functions->functions[10] = bbDF_drawableAnimation;
     handle.u64 = 10;
     bbDictionary_add(functions->dictionary, "DRAWABLEANIMATION", handle);
+
+    functions->functions[11] = bbDF_layerBoundary;
+    handle.u64 = 11;
+    bbDictionary_add(functions->dictionary, "LAYERBOUNDARY", handle);
 
 
 
