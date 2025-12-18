@@ -107,6 +107,7 @@ bbFlag Textbox_OnCommand(bbWidget* widget, bbWidgetCommandType type, bbPool_Hand
 
                  break;
              }
+        //TODO set textbox size in points. Bounds will be calculated based on font, font size and area
         case bbWC_setBounds:
              {
                  I32x2 bounds = data.i32x2;
