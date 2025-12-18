@@ -76,9 +76,12 @@ bbFlag Button_Constructor (bbWidget** self, void* graphics,
         widget->frames[i].drawfunction = -1;
     }
 
+    bbPool_Handle handle;
+    bbVPool_reverseLookup(widgets->pool, widget, &handle);
+    bbDictionary_add(widgets->dict, "BUTTON", handle);
+
     *self = widget;
 
-    bbAssert(widget != NULL, "null address\n");
 
     return Success;
 }

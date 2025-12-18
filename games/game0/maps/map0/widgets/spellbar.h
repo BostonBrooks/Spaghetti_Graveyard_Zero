@@ -82,7 +82,10 @@ bbFlag Spellbar_Constructor (bbWidget** self, void* Graphics,
 
 
 
+    bbPool_Handle handle;
+    bbVPool_reverseLookup(widgets->pool, widget, &handle);
+    bbDictionary_add(widgets->dict, "SPELLBAR", handle);
 
     *self = widget;
-
+    return Success;
 }

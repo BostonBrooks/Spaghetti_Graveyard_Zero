@@ -44,6 +44,11 @@ bbFlag CurrentSpell_Constructor (bbWidget** self, void* Graphics,
     widget->mtable.LeftDown = funcInt;
 
     widgets->currentSpell = widget;
+
+    bbPool_Handle handle;
+    bbVPool_reverseLookup(widgets->pool, widget, &handle);
+    bbDictionary_add(widgets->dict, "CURRENTSPELL", handle);
+
     *self = widget;
     return Success;
 }

@@ -66,6 +66,9 @@ bbFlag Box_Constructor (bbWidget** self, void* graphics,
     widget->frames[0].offset.x = 0;
     widget->frames[0].offset.y = 0;
 
+    bbPool_Handle handle;
+    bbVPool_reverseLookup(widgets->pool, widget, &handle);
+    bbDictionary_add(widgets->dict, "BOX", handle);
 
     *self = widget;
 

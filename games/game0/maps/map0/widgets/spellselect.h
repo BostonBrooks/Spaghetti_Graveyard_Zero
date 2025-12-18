@@ -57,6 +57,9 @@ bbFlag SpellSelect_Constructor (bbWidget** self, void* Graphics,
 
     widget->mtable.MouseIcon = 133;
 
+    bbPool_Handle handle;
+    bbVPool_reverseLookup(widgets->pool, widget, &handle);
+    bbDictionary_add(widgets->dict, "SPELLSELECT?", handle);
     *self = widget;
     return Success;
 

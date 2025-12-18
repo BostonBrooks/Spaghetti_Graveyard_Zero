@@ -61,6 +61,9 @@ bbWidgets* widgets, bbScreenPoints screen_coords, bbWidget* parent)
 
 
 
+    bbPool_Handle handle;
+    bbVPool_reverseLookup(widgets->pool, widget, &handle);
+    bbDictionary_add(widgets->dict, "CONNECTMENU", handle);
 
 
     *self = widget;
@@ -101,7 +104,11 @@ bbWidgets* widgets, bbScreenPoints screen_coords, bbWidget* parent)
     bbDictionary_lookup(Graphics->sprites->dictionary, "CONNECT_ICON",
                         &widget->frames[0].handle);
 
-    *self = widget;
 
+    bbPool_Handle handle;
+    bbVPool_reverseLookup(widgets->pool, widget, &handle);
+    bbDictionary_add(widgets->dict, "CONNECTICON", handle);
+
+    *self = widget;
     return Success;
 }

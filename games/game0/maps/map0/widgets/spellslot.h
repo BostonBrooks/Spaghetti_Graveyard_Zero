@@ -44,6 +44,10 @@ bbFlag SpellSlot_Constructor (bbWidget** self, void* Graphics,
 
     widget->mtable.MouseIcon = 133;
 
+    bbPool_Handle handle;
+    bbVPool_reverseLookup(widgets->pool, widget, &handle);
+    bbDictionary_add(widgets->dict, "SPELLSLOT?", handle);
+
     *self = widget;
     return Success;
 

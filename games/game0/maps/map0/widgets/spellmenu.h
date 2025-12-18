@@ -203,6 +203,11 @@ bbFlag SpellMenu_Constructor (bbWidget** self, void* Graphics,
     bbWidget_constructor(&widget0, widgets, graphics,
                          SP, widget, "SPELLSELECT30");
 */
+
+    bbPool_Handle handle;
+    bbVPool_reverseLookup(widgets->pool, widget, &handle);
+    bbDictionary_add(widgets->dict, "SPELLMENU", handle);
+
     widgets->spellMenu = widget;
     *self = widget;
 
