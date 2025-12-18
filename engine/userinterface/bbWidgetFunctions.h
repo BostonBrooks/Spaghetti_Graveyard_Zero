@@ -21,6 +21,7 @@ typedef enum bbWidgetCommandType
     bbWC_putChar,
     bbWC_putStr,
     bbWC_setBounds,
+    bbWC_setDimensions,
     bbWC_setStr,
     bbWC_clrStr
 } bbWidgetCommandType;

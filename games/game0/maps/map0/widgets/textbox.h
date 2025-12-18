@@ -122,6 +122,36 @@ bbFlag Textbox_OnCommand(bbWidget* widget, bbWidgetCommandType type, bbPool_Hand
                  sfText_setString(widget->typeData.textBox.text, widget->typeData.textBox.string);
                  break;
              }
+
+    case bbWC_setDimensions:
+             { //TODO get letter spacing and line spacing
+                 I32x2 dimensions = data.i32x2;
+
+                 widget->rect.width = dimensions.x;
+                 widget->rect.height = dimensions.y;
+
+                 sfText* text = widget->typeData.textBox.text;
+                 float lineSpacing = 12;// = sfText_getLineSpacing(text);
+                 float letterSpacing = 8;//= sfText_getLetterSpacing(text);
+                 //int charsize = sfText_getCharacterSize(text);
+
+                 //bbDebug("lineSpacing = %f, letterSpacing = %f, charsize = %d\n", lineSpacing, letterSpacing, charsize);
+
+
+                 I32x2 bounds;
+                 bounds.x = dimensions.x / (letterSpacing * 8);
+                 bounds.y = dimensions.y / (lineSpacing * 8);
+
+                 widget->typeData.textBox.columns = bounds.x;
+                 widget->typeData.textBox.rows = bounds.y;
+                 bbStr_setBounds(widget->typeData.textBox.string,
+                     widget->typeData.textBox.columns,
+                     widget->typeData.textBox.rows,
+                     1048);
+
+                 sfText_setString(widget->typeData.textBox.text, widget->typeData.textBox.string);
+                 break;
+             }
     case bbWC_setStr:
              {
                  char* ch = data.ptr;

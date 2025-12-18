@@ -230,9 +230,9 @@ CLEARWINDOW(bbMagenta);
 	bbDictionary_add(home.private.widgets.dict, "PROMPT", handle);
 
 	bbPool_Handle bounds;
-	bounds.i32x2.x = 25;
-	bounds.i32x2.y = 3;
-	bbWidget_onCommand(home.private.widgets.prompt, &home.private.widgets, bbWC_setBounds, bounds);
+	bounds.i32x2.x = 200*8;
+	bounds.i32x2.y = 45*8;
+	bbWidget_onCommand(home.private.widgets.prompt, &home.private.widgets, bbWC_setDimensions, bounds);
 
 	SP0.x = 497*8; SP0.y = 416*8;
 	bbWidget_constructor(&home.private.widgets.command, &home.private.widgets, &home.constant.graphics,
@@ -242,9 +242,13 @@ CLEARWINDOW(bbMagenta);
 	bbDictionary_add(home.private.widgets.dict, "COMMAND", handle);
 
 	home.private.widgets.textbox = home.private.widgets.command;
+	bounds.i32x2.x = 200 * 8;
+	bounds.i32x2.y = 45*8;
+	bbWidget_onCommand(home.private.widgets.command, &home.private.widgets, bbWC_setDimensions, bounds);
 	bounds.i32x2.x = 64;
 	bounds.i32x2.y = 1;
 	bbWidget_onCommand(home.private.widgets.command, &home.private.widgets, bbWC_setBounds, bounds);
+
 
 	SP0.x = 58*8; SP0.y = 100*8;
 	bbWidget_constructor(&widget1, &home.private.widgets, &home.constant.graphics,
