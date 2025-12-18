@@ -20,6 +20,7 @@
 #include "games/game0/maps/map0/widgets/spellslot.h"
 #include "games/game0/maps/map0/widgets/currentspell.h"
 #include "games/game0/maps/map0/widgets/connect.h"
+#include "games/game0/maps/map0/widgets/topleft.h"
 
 
 
@@ -76,6 +77,9 @@ bbFlag bbWidgetFunctions_populate(bbWidgetFunctions* self)
 
     bbWidgetFunctions_add(self, WidgetConstructor,
                           CurrentSpell_Constructor, "CURRENTSPELL");
+
+    bbWidgetFunctions_add(self, WidgetConstructor,
+                          TopLeft_Constructor, "TOPLEFT");
 
     //typedef bbFlag bbWidget_Update (bbWidget* widget, void* unused);
     bbWidgetFunctions_add(self, WidgetUpdate,

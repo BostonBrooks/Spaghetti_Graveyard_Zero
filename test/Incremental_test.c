@@ -252,6 +252,12 @@ CLEARWINDOW(bbMagenta);
 	bbWidget_constructor(&widget1, &home.private.widgets, &home.constant.graphics,
 						 SP0, layout,"CONNECTMENU");
 
+	SP0.x = 11*8; SP0.y = 11*8;
+	bbWidget_constructor(&widget1, &home.private.widgets, &home.constant.graphics,
+						 SP0, layout,"TOPLEFT");
+
+
+
 	SP0.x = rand()%(720*8); SP0.y = rand()%(480*8);
 	bbWidget_constructor(&widget0, &home.private.widgets, &home.constant.graphics,
                          SP0, layout, "SPHERE");
