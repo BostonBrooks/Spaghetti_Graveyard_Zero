@@ -98,16 +98,20 @@ sfIpAddress get_IPAddress(char* prompt)
 
     fflush(stdout);
      sfIpAddress address;
+    while (1)
+    {
+        printf("%s", prompt);
+        fflush(stdout);
+        char addressStr[64];
+        get_line(addressStr, 64,stdin);
+        clear_line(2);
+        address = sfIpAddress_fromString(addressStr);
 
+        unsigned int intAddress;
+        intAddress = sfIpAddress_toInteger(address);
 
-    printf("%s", prompt);
-    fflush(stdout);
-    char addressStr[64];
-    get_line(addressStr, 64,stdin);
-    clear_line(2);
-    address = sfIpAddress_fromString(addressStr);
-
-
+        if (intAddress != 0) break;
+    }
 
     return (address);
 }
