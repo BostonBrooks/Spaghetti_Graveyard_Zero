@@ -15,6 +15,7 @@
 #include "games/game0/maps/map0/mouse/spellbar.h"
 #include "games/game0/maps/map0/mouse/textbox.h"
 #include "games/game0/maps/map0/mouse/connecticon.h"
+#include "games/game0/maps/map0/mouse/currentspell.h"
 
 bbFlag bbMouseFunctions_populate(bbMouseFunctions* self)
 {
@@ -66,6 +67,7 @@ bbFlag bbMouseFunctions_populate(bbMouseFunctions* self)
 
 
     bbMouseFunctions_add(self, MouseLeftDown,  ConnectIcon_LeftDown, "CONNECTICON");
+    bbMouseFunctions_add(self, MouseLeftDown,  CurrentSpell_LeftDown, "CURRENTSPELL");
 
     return Success;
 }

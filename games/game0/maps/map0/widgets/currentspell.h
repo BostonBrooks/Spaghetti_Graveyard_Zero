@@ -34,10 +34,14 @@ bbFlag CurrentSpell_Constructor (bbWidget** self, void* Graphics,
     int funcInt;
 
     funcInt = bbMouseFunctions_getInt(&widgets->mouse->functions,MouseIsOver,
-                                      "SPELLSELECT");
+                                      "HOVER");
 
-    widget->mtable.isOver = -1;
-    widget->mtable.MouseIcon = 133;
+    widget->mtable.isOver = funcInt;
+    widget->mtable.MouseIcon = 141;
+
+    funcInt = bbMouseFunctions_getInt(&widgets->mouse->functions,MouseLeftDown,
+                                  "CURRENTSPELL");
+    widget->mtable.LeftDown = funcInt;
 
     widgets->currentSpell = widget;
     *self = widget;
