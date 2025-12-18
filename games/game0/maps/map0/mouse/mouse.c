@@ -14,6 +14,7 @@
 #include "games/game0/maps/map0/mouse/spellmenu.h"
 #include "games/game0/maps/map0/mouse/spellbar.h"
 #include "games/game0/maps/map0/mouse/textbox.h"
+#include "games/game0/maps/map0/mouse/connecticon.h"
 
 bbFlag bbMouseFunctions_populate(bbMouseFunctions* self)
 {
@@ -62,6 +63,9 @@ bbFlag bbMouseFunctions_populate(bbMouseFunctions* self)
 
     bbMouseFunctions_add(self, MouseIsOver,  Textbox_IsOver, "TEXTBOX");
     bbMouseFunctions_add(self, MouseLeftDown,  Textbox_LeftDown, "TEXTBOX");
+
+
+    bbMouseFunctions_add(self, MouseLeftDown,  ConnectIcon_LeftDown, "CONNECTICON");
 
     return Success;
 }

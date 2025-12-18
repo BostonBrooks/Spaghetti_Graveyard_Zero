@@ -19,6 +19,7 @@
 #include "games/game0/maps/map0/widgets/spellN.h"
 #include "games/game0/maps/map0/widgets/spellslot.h"
 #include "games/game0/maps/map0/widgets/currentspell.h"
+#include "games/game0/maps/map0/widgets/connect.h"
 
 
 
@@ -48,10 +49,13 @@ bbFlag bbWidgetFunctions_populate(bbWidgetFunctions* self)
                           Card_Constructor, "CARD");
 
     bbWidgetFunctions_add(self, WidgetConstructor,
-                          Spellbar_Constructor, "SPELLBAR");
+    Spellbar_Constructor, "SPELLBAR");
 
     bbWidgetFunctions_add(self, WidgetConstructor,
                           SpellMenu_Constructor, "SPELLMENU");
+
+    bbWidgetFunctions_add(self, WidgetConstructor,
+                          ConnectMenu_Constructor, "CONNECTMENU");
 
 
     bbWidgetFunctions_add(self, WidgetConstructor,

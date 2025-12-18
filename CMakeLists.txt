@@ -106,4 +106,5 @@ add_executable(myprogram
         chatroom/client.c
         chatroom/io.h
         test/Incremental_test.c
-        games/game0/maps/map0/mouse/textbox.h)
+        games/game0/maps/map0/mouse/textbox.h
+        games/game0/maps/map0/widgets/connect.h)

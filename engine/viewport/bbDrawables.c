@@ -267,12 +267,12 @@ bbFlag bbDrawable_setLocation(bbDrawable* drawable, bbDrawables* drawables,
     bbDrawableSquare* newSquare = &drawables->squares[newIndex];
     bbDrawableSquare* oldSquare = &drawables->squares[oldIndex];
 
-    bbHere()
+
     bbList_remove(&oldSquare->list, drawable);
 
     drawable->coords = MC;
 
-bbHere()
+
     bbList_sortL(&newSquare->list, drawable);
 
     return Success;

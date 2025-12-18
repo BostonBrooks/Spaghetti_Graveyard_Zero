@@ -257,7 +257,9 @@ CLEARWINDOW(bbMagenta);
     bbWidget_constructor(&widget0, &home.private.widgets, &home.constant.graphics,
                          SP0, layout, "CARD");
 
-
+	SP0.x = 58*8; SP0.y = 100*8;
+	bbWidget_constructor(&widget1, &home.private.widgets, &home.constant.graphics,
+						 SP0, layout,"CONNECTMENU");
 ////////////////////////////////////////////////////////
     CLEARWINDOW(bbRed);
 
@@ -325,10 +327,8 @@ CLEARWINDOW(bbMagenta);
 
     CLEARWINDOW(bbRedOrange);
 
-
 	for (home.private.mapTime = 0; ; home.private.mapTime++) {
 
-bbHere();
 /*
 		unsigned char ch = 'a' + rand()%26;
         bbPool_Handle handle;
