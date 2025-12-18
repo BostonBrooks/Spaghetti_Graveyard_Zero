@@ -221,9 +221,15 @@ CLEARWINDOW(bbMagenta);
                          SP0, layout, "TEXTBOX");
 
 
+	bbPool_Handle handle;
+	bbVPool_reverseLookup(home.private.widgets.pool, home.private.widgets.dialog, &handle);
+	bbDictionary_add(home.private.widgets.dict, "DIALOG", handle);
+
 	SP0.x = 497*8; SP0.y = 355*8;
 	bbWidget_constructor(&home.private.widgets.prompt, &home.private.widgets, &home.constant.graphics,
                          SP0, layout, "TEXTBOX");
+	bbVPool_reverseLookup(home.private.widgets.pool, home.private.widgets.prompt, &handle);
+	bbDictionary_add(home.private.widgets.dict, "PROMPT", handle);
 
 	bbPool_Handle bounds;
 	bounds.i32x2.x = 25;
@@ -233,6 +239,9 @@ CLEARWINDOW(bbMagenta);
 	SP0.x = 497*8; SP0.y = 416*8;
 	bbWidget_constructor(&home.private.widgets.command, &home.private.widgets, &home.constant.graphics,
                          SP0, layout, "TEXTBOX");
+
+	bbVPool_reverseLookup(home.private.widgets.pool, home.private.widgets.command, &handle);
+	bbDictionary_add(home.private.widgets.dict, "COMMAND", handle);
 
 	home.private.widgets.textbox = home.private.widgets.command;
 	bounds.i32x2.x = 64;

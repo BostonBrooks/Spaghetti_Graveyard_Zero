@@ -166,6 +166,9 @@ bbFlag bbWidget_newLayout(bbWidget** self, bbGraphics* graphics, bbWidgets* widg
 	    widget->frames[i].drawfunction = -1;
 	}
 
+	bbPool_Handle handle;
+	bbVPool_reverseLookup(widgets->pool, widget, &handle);
+	bbDictionary_add(widgets->dict, "LAYOUT", handle);
 
 	*self = widget;
 
@@ -224,6 +227,9 @@ bbFlag bbWidget_newViewport(bbWidget** self, bbGraphics* graphics,
         widget->frames[i].drawfunction = -1;
     }
 
+	bbPool_Handle handle;
+	bbVPool_reverseLookup(widgets->pool, widget, &handle);
+	bbDictionary_add(widgets->dict, "VIEWPORT", handle);
 
 
     *self = widget;
