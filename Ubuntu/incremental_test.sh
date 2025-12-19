@@ -28,10 +28,10 @@ if gcc    -I ../\
        ../engine/logic/bbList_map.c\
        ../engine/logic/bbList_sort.c\
        ../engine/logic/bbNestedList.c\
-       ../engine/widgets/bbWidget.c\
+       ../engine/userinterface/bbWidget.c\
        ../engine/geometry/bbCoordinates.c\
        ../engine/userinterface/bbInput.c\
-       ../engine/widgets/bbWidgetFunctions.c\
+       ../engine/userinterface/bbWidgetFunctions.c\
        ../games/game0/maps/map0/widgets/widgets.c\
        ../games/game0/maps/map0/mouse/mouse.c\
        ../engine/userinterface/bbMouse.c\
@@ -44,6 +44,8 @@ if gcc    -I ../\
        ../games/game0/maps/map0/spells/spells.c\
        ../engine/viewport/bbDrawables.c\
        ../engine/viewport/bbMapIcons.c\
+       ../engine/avoidance/bbAvoidables.c\
+       ../engine/viewport/bbUnits.c\
        ../games/game0/maps/map0/drawfunctions/drawfunctions.c\
        \
   -lcsfml-system -lcsfml-graphics -lcsfml-window -g -lm -w\
