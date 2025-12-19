@@ -400,9 +400,10 @@ CLEARWINDOW(bbMagenta);
 
         cl.target = home.private.viewport;
 
-//TODO change bbDrawables_draw(drawables, &cl, 0, 0, 12, 12); signature back
-        bbDrawablesPlus_draw( &cl, 0, 0, 12, 12);
-bbAvoidables_draw(avoidables, &cl, 0, 0, 12, 12);
+//TODO bbDrawables_draw(drawables, &cl, 0, 0, 12, 12); signature back
+		//TODO either of the following two lines causes a crash
+        //bbDrawablesPlus_draw( &cl, 0, 0, 12, 12);
+        //bbAvoidables_draw(avoidables, &cl, 0, 0, 12, 12);
 
 
 
