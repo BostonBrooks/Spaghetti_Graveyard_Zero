@@ -1,7 +1,7 @@
 #include "engine/viewport/bbViewport.h"
 #include "engine/graphics/bbColours.h"
 
-bbFlag bbRenderable_new(bbRenderable* renderable, I32 height, I32 width){
+bbFlag bbRenderable_init(bbRenderable* renderable, I32 height, I32 width){
 
     renderable->renderTexture
     = sfRenderTexture_create(width, height, sfFalse);
@@ -22,10 +22,10 @@ bbFlag bbViewport_new(bbViewport** viewport, I32 height, I32 width){
     bbViewport* VP = malloc(sizeof *VP);
     bbAssert(VP != NULL, "bad malloc\n");
 
-    bbRenderable_new(&VP->background, height, width);
-    bbRenderable_new(&VP->ground, height, width);
-    bbRenderable_new(&VP->main, height, width);
-    bbRenderable_new(&VP->mapicon, height, width);
+    bbRenderable_init(&VP->background, height, width);
+    bbRenderable_init(&VP->ground, height, width);
+    bbRenderable_init(&VP->main, height, width);
+    bbRenderable_init(&VP->mapicon, height, width);
 
     VP->height = height;
     VP->width = width;

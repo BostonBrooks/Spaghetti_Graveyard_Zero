@@ -37,7 +37,7 @@ typedef struct {
 
 } bbViewport;
 
-bbFlag bbRenderable_new(bbRenderable* renderable, I32 height, I32 width);
+bbFlag bbRenderable_init(bbRenderable* renderable, I32 height, I32 width);
 bbFlag bbViewport_new(bbViewport** viewport,  I32 height, I32 width);
 bbFlag bbViewport_draw(sfRenderWindow* window, bbViewport* viewport);
 bbFlag bbViewport_clear(bbViewport* viewport);
