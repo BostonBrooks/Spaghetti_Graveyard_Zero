@@ -39,6 +39,8 @@ bbFlag Textbox_Constructor (bbWidget** self, void* graphics,
                                   "TEXTBOX");
     widget->mtable.LeftDown = funcInt;
 
+    widget->mtable.MouseIcon = 155;
+
     bbGraphics* Graphics = graphics;
     bbPool_Handle drawfunctionHandle;
     bbDictionary_lookup(Graphics->drawfunctions->dictionary, "TEXTBOX",
