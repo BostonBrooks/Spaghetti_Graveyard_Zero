@@ -405,8 +405,8 @@ CLEARWINDOW(bbMagenta);
 		bbVPool_lookup(home.private.widgets.pool, (void**)&connectWidget, connectHandle);
 
 		//test if the following functions work
-		if (home.private.mapTime % 50 == 0) bbWidget_hide(connectWidget, &home.private.widgets);
-		if (home.private.mapTime % 50 == 25) bbWidget_unhide(connectWidget, &home.private.widgets);
+		//if (home.private.mapTime % 50 == 0) bbWidget_hide(connectWidget, &home.private.widgets);
+		//if (home.private.mapTime % 50 == 25) bbWidget_unhide(connectWidget, &home.private.widgets);
 
 
 	if (home.private.mapTime % 50 == 0) bbPrintf("mapTime = %d\n", home.private.mapTime);

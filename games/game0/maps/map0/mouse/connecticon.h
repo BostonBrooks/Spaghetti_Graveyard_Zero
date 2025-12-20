@@ -1,6 +1,7 @@
 #include "engine/logic/bbPoolHandle.h"
 #include "engine/logic/bbVPool.h"
 #include "engine/userinterface/bbWidgetFunctions.h"
+#include "engine/data/bbHome.h"
 //typedef bbFlag bbMouse_LeftDown (void* mouse, void* widgets, void* widget,
 // void* graphics);
 bbFlag ConnectIcon_LeftDown (void* Mouse, void* Widgets, void* Widget, void*
@@ -15,11 +16,12 @@ Graphics)
     bbPool_Handle handle;
 
     bbDictionary_lookup(widgets->dict,"CONNECTMENU",&handle );
-    bbWidget* ConnectMenu;
-    bbVPool_lookup(pool, (void**)&ConnectMenu,handle);
-    bool visible = !ConnectMenu->tree.visible;
-    ConnectMenu->tree.visible = visible;
-    ConnectMenu->tree.childrenvisible = visible;
+    bbWidget* connectMenu;
+    bbVPool_lookup(pool, (void**)&connectMenu,handle);
+    bool visible = connectMenu->tree.visible;
+
+    if (visible) bbWidget_hide(connectMenu, &home.private.widgets);
+    else bbWidget_unhide(connectMenu, &home.private.widgets);
 
 
     return Success;
