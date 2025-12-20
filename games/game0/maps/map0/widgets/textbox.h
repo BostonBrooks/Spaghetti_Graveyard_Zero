@@ -47,6 +47,10 @@ bbFlag Textbox_Constructor (bbWidget** self, void* graphics,
     widget->frames[0].offset.x = 5;
     widget->frames[0].offset.y = 5;
 
+    bbDictionary_lookup(Graphics->drawfunctions->dictionary, "TEXTBOXINDICATOR",
+                        &drawfunctionHandle);
+    widget->frames[1].drawfunction = drawfunctionHandle.u64;
+
     widget->type =  bbWidgetType_TextBox;
 
     char* string = calloc(1048, sizeof(char));

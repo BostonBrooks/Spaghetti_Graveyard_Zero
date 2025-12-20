@@ -8,7 +8,7 @@ Color_Off='\033[0m'
 
  echo -e "Look, a Tortoise:\n${BGreen}\n       _____     ____\n     /      \  |  o |\n    |        |/ ___\| \n    |_________/     \n    |_|_| |_|_|\n//////////////////////////////////////////////////////////////${Color_Off}\n\nAttempting to compile:\n"
 
-if gcc    -I ../\
+if gcc   -fsanitize=address -fno-omit-frame-pointer -g -I ../\
        ../test/Incremental_test.c\
        ../engine/viewport/bbViewport.c\
        ../engine/geometry/bbViewportCoords.c\
@@ -48,7 +48,7 @@ if gcc    -I ../\
        ../engine/viewport/bbUnits.c\
        ../games/game0/maps/map0/drawfunctions/drawfunctions.c\
        \
-  -lcsfml-system -lcsfml-graphics -lcsfml-window -g -lm -w\
+  -lcsfml-system -lcsfml-graphics -lcsfml-window -lm -w\
   -o ../games/game0/game.out;
 then
     echo "Compile Succeeded:"

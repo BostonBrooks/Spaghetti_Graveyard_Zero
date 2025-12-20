@@ -44,7 +44,7 @@ bbFlag bbUnit_newCat(bbUnit** self,bbUnits* units, bbGraphics* graphics,
 
     bbUnit* unit;
     bbFlag flag = bbVPool_alloc(pool, (void**)&unit);
-    bbFlag_print(flag);
+
     unit->radius = 160;
     unit->drawable.coords = MC;
 

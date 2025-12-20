@@ -10,7 +10,7 @@
 #define isNULL(A) bbVPool_handleIsEqual(tree->pool, A, tree->pool->null)
 
 bbFlag bbTree_new (bbTree** Tree, void* pool, size_t offset){
-    bbTree* tree = malloc(sizeof(*Tree));
+    bbTree* tree = malloc(sizeof(bbTree));
     bbVPool* Pool = pool;
     tree->pool = Pool;
     tree->root = Pool->null;

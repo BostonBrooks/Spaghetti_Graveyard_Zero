@@ -223,13 +223,18 @@ CLEARWINDOW(bbMagenta);
 	bbVPool_reverseLookup(home.private.widgets.pool, home.private.widgets.dialog, &handle);
 	bbDictionary_add(home.private.widgets.dict, "DIALOG", handle);
 
+	bbPool_Handle bounds;
+	bounds.i32x2.x = 200*8;
+	bounds.i32x2.y = 322*8;
+	bbWidget_onCommand(home.private.widgets.dialog, &home.private.widgets, bbWC_setDimensions, bounds);
+
 	SP0.x = 497*8; SP0.y = 355*8;
 	bbWidget_constructor(&home.private.widgets.prompt, &home.private.widgets, &home.constant.graphics,
                          SP0, layout, "TEXTBOX");
 	bbVPool_reverseLookup(home.private.widgets.pool, home.private.widgets.prompt, &handle);
 	bbDictionary_add(home.private.widgets.dict, "PROMPT", handle);
 
-	bbPool_Handle bounds;
+
 	bounds.i32x2.x = 200*8;
 	bounds.i32x2.y = 45*8;
 	bbWidget_onCommand(home.private.widgets.prompt, &home.private.widgets, bbWC_setDimensions, bounds);
@@ -309,6 +314,7 @@ CLEARWINDOW(bbMagenta);
     cl.target = home.private.viewport;
 
     //bbDrawables_draw(drawables, &cl,0, 0,3, 3);
+
 
     for (I32 i = 0; i<24;i++){
         for (I32 j=0; j<24;j++){
@@ -402,8 +408,8 @@ CLEARWINDOW(bbMagenta);
 
 //TODO bbDrawables_draw(drawables, &cl, 0, 0, 12, 12); signature back
 		//TODO either of the following two lines causes a crash
-        //bbDrawablesPlus_draw( &cl, 0, 0, 12, 12);
-        //bbAvoidables_draw(avoidables, &cl, 0, 0, 12, 12);
+        bbDrawablesPlus_draw( &cl, 0, 0, 12, 12);
+        bbAvoidables_draw(avoidables, &cl, 0, 0, 12, 12);
 
 
 

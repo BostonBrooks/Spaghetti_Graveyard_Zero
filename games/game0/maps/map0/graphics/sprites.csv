@@ -1,4 +1,4 @@
-Number of Sprites:,154,,,,,,,,,,,,
+Number of Sprites:,155,,,,,,,,,,,,
 Label:,Integer Address:,Texture:,Left:,Top:,Width:,Height:,Origin X:,Origin Y:,Scale X:,Scale Y:,Scale By:,Comment:,
 NULL,0,NULL,0,0,128,128,0,0,1,1,None,Exception,
 LAYOUT_480,1,LAYOUT_480,0,0,720,480,0,0,1,1,None,The root of the widget tree,
@@ -154,5 +154,6 @@ DISCONNECT_CLICK,150,CONNECT,90,254,74,22,0,0,1,1,None, A button,
 CONNECT_ICON,151,CONNECT,179,221,36,36,0,0,1,1,None, A button,
 LAYERBOUNDARY,152,LAYERBOUNDARY,0,0,720,480,0,0,1,1,None, boundary between menus and game screen
 TOPLEFT,153,TOPLEFT,0,0,292,47,0,0,1,1,None, menu at the top left of the screen
+REDDOT,154,SPRITESHEET,156,180,20,20,10,10,1,1,None, indicates which textbox is selected
 
 

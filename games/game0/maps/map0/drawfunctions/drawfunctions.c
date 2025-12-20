@@ -10,8 +10,11 @@
 #include "engine/viewport/bbMapIcons.h"
 #include "engine/geometry/bbViewportCoords.h"
 #include "engine/data/bbHome.h"
+
+
 #include "games/game0/maps/map0/drawfunctions/drawablesprite.h"
 #include "games/game0/maps/map0/drawfunctions/drawableanimation.h"
+#include "games/game0/maps/map0/drawfunctions/textboxindicator.h"
 
 
 //typedef bbFlag bbDrawFunction(void* drawable, void* frameDescriptor, void* cl);
@@ -249,7 +252,7 @@ bbFlag bbDF_widgetTextBox(void* drawable, void* frameDescriptor, void* cl)
 
 
 bbFlag bbDrawfunctions_new(bbDrawfunctions** drawfunctions){
-    I32 num = 12;
+    I32 num = 13;
     bbDrawfunctions* functions = malloc(sizeof(bbDrawfunctions) + num * sizeof(bbDrawFunction*));
     bbAssert(functions!=NULL, "bad malloc");
     bbDictionary_new(&functions->dictionary, nextPrime(num));
@@ -306,6 +309,10 @@ bbFlag bbDrawfunctions_new(bbDrawfunctions** drawfunctions){
     functions->functions[11] = bbDF_layerBoundary;
     handle.u64 = 11;
     bbDictionary_add(functions->dictionary, "LAYERBOUNDARY", handle);
+
+    functions->functions[12] = bbDF_textboxIndicator;
+    handle.u64 = 12;
+    bbDictionary_add(functions->dictionary, "TEXTBOXINDICATOR", handle);
 
 
 

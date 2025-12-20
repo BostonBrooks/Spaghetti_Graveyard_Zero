@@ -1,12 +1,16 @@
 #include "stdlib.h"
 #include "engine/logic/bbVPool.h"
+
+#include "bbTerminal.h"
 #include "engine/logic/bbLeanPool.h"
 #include "engine/logic/bbBloatedPool.h"
 #include "engine/logic/bbFlag.h"
 bbFlag bbVPool_newLean(bbVPool** Pool, I32 sizeOf, I32 num){
 	bbLeanPool* LeanPool;
 	bbLeanPool_new(&LeanPool, sizeOf, num);
-	bbVPool* pool = malloc(sizeof(*Pool));
+	bbAssert(LeanPool != NULL,"bad bbLeanPool_new\n")
+	bbVPool* pool = malloc(sizeof(bbVPool));
+	bbAssert(pool != NULL, "bad malloc\n");
 	pool->pool = LeanPool;
 	pool->null = LeanPool->null;
 	pool->sizeOf = LeanPool->sizeOf;
