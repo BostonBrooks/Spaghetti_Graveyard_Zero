@@ -31,3 +31,14 @@ bbFlag NULL_OnTimer (bbWidget* widget, void* void_timerNode)
     bbDebug("NULL OnTimer\n");
     return Continue;
 }
+
+bbFlag NULL_Hide (bbWidget* widget, void* void_timerNode)
+{
+    bbDebug("NULL Hide\n");
+    return Continue;
+}
+bbFlag NULL_Unhide (bbWidget* widget, void* void_timerNode)
+{
+    bbDebug("NULL Unhide\n");
+    return Continue;
+}

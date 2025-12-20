@@ -13,7 +13,9 @@ typedef enum
      WidgetUpdate,
      WidgetDestructor,
      WidgetOnCommand,
-     WidgetOnTimer
+     WidgetOnTimer,
+     WidgetHide,
+     WidgetUnhide
 } bbWidgetFunctionType;
 
 typedef enum bbWidgetCommandType
@@ -35,6 +37,8 @@ typedef bbFlag bbWidget_Update (bbWidget* widget, void* unused);
 typedef bbFlag bbWidget_Destructor (bbWidget* widget, void* unused);
 typedef bbFlag bbWidget_OnCommand (bbWidget* widget, bbWidgetCommandType type, bbPool_Handle data);
 typedef bbFlag bbWidget_OnTimer (bbWidget* widget, void* void_timerNode);
+typedef bbFlag bbWidget_Hide (bbWidget* widget, bbWidgets* widgets);
+typedef bbFlag bbWidget_UnHide (bbWidget* widget, bbWidgets* widgets);
 
 typedef struct bbWidgetFunctions {
      bbWidget_Constructor** Constructors;
@@ -52,11 +56,19 @@ typedef struct bbWidgetFunctions {
      //includes on click and on prompt?
      bbWidget_OnCommand** OnCommands;
      bbDictionary* OnCommand_dict;
-     I32 OnCommand_available;
+    I32 OnCommand_available;
 
-     void** OnTimers;
-     bbDictionary* OnTimers_dict;
-     I32 OnTimers_available;
+    void** OnTimers;
+    bbDictionary* OnTimers_dict;
+    I32 OnTimers_available;
+
+    void** Hide;
+    bbDictionary* Hide_dict;
+    I32 Hide_available;
+
+    void** Unhide;
+    bbDictionary* Unhide_dict;
+    I32 Unhide_available;
 } bbWidgetFunctions;
 
 

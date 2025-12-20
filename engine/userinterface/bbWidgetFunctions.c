@@ -41,6 +41,18 @@ bbFlag bbWidgetFunctions_new(bbWidgetFunctions** self)
     bbDictionary_new(&functions->OnTimers_dict, magic_number);
     functions->OnTimers_available = 0;
 
+    //functions->OnTimers = calloc(magic_number, sizeof(bbWidget_OnTimer));
+    functions->Hide = calloc(magic_number, sizeof(U64));
+    bbAssert(functions->Hide != NULL, "bad calloc\n");
+    bbDictionary_new(&functions->Hide_dict, magic_number);
+    functions->Hide_available = 0;
+
+    //functions->OnTimers = calloc(magic_number, sizeof(bbWidget_OnTimer));
+    functions->Unhide = calloc(magic_number, sizeof(U64));
+    bbAssert(functions->Unhide != NULL, "bad calloc\n");
+    bbDictionary_new(&functions->Unhide_dict, magic_number);
+    functions->Unhide_available = 0;
+
 
 
 
@@ -107,6 +119,24 @@ bbFlag bbWidgetFunctions_add(bbWidgetFunctions* functions, bbWidgetFunctionType 
         bbDictionary_add(functions->OnTimers_dict, key, handle);
         return Success;
 
+    case WidgetHide:
+
+        available = functions->Hide_available++;
+        bbAssert(available < magic_number, "out of bounds error\n");
+        functions->Hide[available] = fnPointer;
+        handle.u64 = available;
+        bbDictionary_add(functions->Hide_dict, key, handle);
+        return Success;
+
+    case WidgetUnhide:
+
+        available = functions->Unhide_available++;
+        bbAssert(available < magic_number, "out of bounds error\n");
+        functions->Unhide[available] = fnPointer;
+        handle.u64 = available;
+        bbDictionary_add(functions->Unhide_dict, key, handle);
+        return Success;
+
 
     default:
         bbAssert(0, "bad widget function type\n");
@@ -132,10 +162,16 @@ I32 bbWidgetFunctions_getInt(bbWidgetFunctions* functions,
         case WidgetOnCommand:
             dict = functions->OnCommand_dict;
             break;
-            break;
-        case WidgetOnTimer:
-            dict = functions->OnTimers_dict;
-            break;
+        break;
+    case WidgetOnTimer:
+        dict = functions->OnTimers_dict;
+        break;
+    case WidgetHide:
+        dict = functions->Hide_dict;
+        break;
+    case WidgetUnhide:
+        dict = functions->Unhide_dict;
+        break;
     }
 
     bbPool_Handle handle;
@@ -163,11 +199,15 @@ bbFlag bbWidgetFunctions_getFunction(void** function, bbWidgetFunctions* functio
         case WidgetOnCommand:
             bbDictionary_lookup(functions->OnCommand_dict,key,&handle);
             *function = functions->OnCommands[handle.u64];
-            return Success;
-        case WidgetOnTimer:
-            bbDictionary_lookup(functions->OnTimers_dict,key,&handle);
-            *function = functions->OnTimers[handle.u64];
-            return Success;
+        return Success;
+    case WidgetHide:
+        bbDictionary_lookup(functions->Hide_dict,key,&handle);
+        *function = functions->Hide[handle.u64];
+        return Success;
+    case WidgetUnhide:
+        bbDictionary_lookup(functions->Unhide_dict,key,&handle);
+        *function = functions->Unhide[handle.u64];
+        return Success;
     }
 
 }

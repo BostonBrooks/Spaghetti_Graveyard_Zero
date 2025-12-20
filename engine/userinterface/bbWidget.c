@@ -61,9 +61,32 @@ bbFlag bbWidget_draw(bbWidget* widget, drawFuncClosure* cl){
 bbFlag bbWidget_onCommand(bbWidget* widget, bbWidgets* widgets, bbWidgetCommandType type, bbPool_Handle data)
 {
 	I32 funcInt = widget->ftable.OnCommand;
+	if (funcInt < 0) return None;
 	bbFlag (*funcPtr)(bbWidget*, bbWidgetCommandType, bbPool_Handle);
 	funcPtr = widgets->functions->OnCommands[funcInt];
 	return funcPtr(widget, type, data);
+}
+
+
+bbFlag bbWidget_hide(bbWidget* widget, bbWidgets* widgets)
+{
+
+	I32 funcInt = widget->ftable.Hide;
+	if (funcInt < 0) return None;
+	bbHere();
+	bbFlag (*funcPtr)(bbWidget* widget, bbWidgets* widgets);
+	funcPtr = widgets->functions->Hide[funcInt];
+	return funcPtr(widget, widgets);
+}
+bbFlag bbWidget_unhide(bbWidget* widget, bbWidgets* widgets)
+{
+
+	I32 funcInt = widget->ftable.Unhide;
+	if (funcInt < 0) return None;
+	bbHere();
+	bbFlag (*funcPtr)(bbWidget* widget, bbWidgets* widgets);
+	funcPtr = widgets->functions->Unhide[funcInt];
+	return funcPtr(widget, widgets);
 }
 
 bbFlag bbWidget_newEmpty(bbWidget** self, bbWidgets* widgets, bbWidget* parent){
@@ -107,6 +130,8 @@ bbFlag bbWidget_newEmpty(bbWidget** self, bbWidgets* widgets, bbWidget* parent){
 	widget->ftable.Destructor = -1;
 	widget->ftable.OnCommand = -1;
 	widget->ftable.OnTimer = -1;
+	widget->ftable.Hide = -1;
+	widget->ftable.Unhide = -1;
 
 
 	for (I32 i = 0; i < FRAMES_PER_WIDGET; i++) {

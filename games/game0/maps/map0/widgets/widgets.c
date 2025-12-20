@@ -30,7 +30,7 @@ bbFlag bbWidgetFunctions_populate(bbWidgetFunctions* self)
     //                                     bbWidgets* widgets, bbScreenPoints
     //                                     screen_coords, bbWidget* parent);
     bbWidgetFunctions_add(self, WidgetConstructor,
-                          NULL_Constructor, "NULL Constructor");
+                          NULL_Constructor, "NULLCONSTRUCTOR");
 
     bbWidgetFunctions_add(self, WidgetConstructor,
     SPHERE_Constructor, "SPHERE");
@@ -87,23 +87,43 @@ bbFlag bbWidgetFunctions_populate(bbWidgetFunctions* self)
 
     //typedef bbFlag bbWidget_Update (bbWidget* widget, void* unused);
     bbWidgetFunctions_add(self, WidgetUpdate,
-                          NULL_Update, "NULL Update");
+                          NULL_Update, "NULLUPDATE");
 
     //typedef bbFlag bbWidget_Destructor (bbWidget* widget, void* unused);
     bbWidgetFunctions_add(self, WidgetDestructor,
-                          NULL_Destructor, "NULL Destructor");
+                          NULL_Destructor, "NULLDESTRUCTOR");
 
     //typedef bbFlag bbWidget_OnCommand (bbWidget* widget,bbWidgetCommandType type, void* data);
     bbWidgetFunctions_add(self, WidgetOnCommand,
-                          NULL_OnCommand, "NULL OnCommand");
+                          NULL_OnCommand, "NULLONCOMMAND");
 
     //typedef bbFlag bbWidget_OnCommand (bbWidget* widget,bbWidgetCommandType type, void* data);
     bbWidgetFunctions_add(self, WidgetOnCommand,
-                           Textbox_OnCommand, "TEXTBOX");
+    Textbox_OnCommand, "TEXTBOX");
 
     //typedef bbFlag bbWidget_OnTimer (bbWidget* widget, void* void_timerNode)
     bbWidgetFunctions_add(self, WidgetOnTimer,
-                          NULL_OnTimer, "NULL OnTimer");
+    NULL_OnTimer, "NULLONTIMER");
+
+    //typedef bbFlag bbWidget_Hide (bbWidget* widget, bbWidgets* widgets);
+    bbWidgetFunctions_add(self, WidgetHide,
+    NULL_Hide, "NULLHIDE");
+
+
+    //typedef bbFlag bbWidget_UnHide (bbWidget* widget, bbWidgets* widgets);
+    bbWidgetFunctions_add(self, WidgetUnhide,
+                          NULL_Unhide, "NULLUNHIDE");
+
+
+
+    //typedef bbFlag bbWidget_Hide (bbWidget* widget, bbWidgets* widgets);
+    bbWidgetFunctions_add(self, WidgetHide,
+    Connect_Hide, "CONNECTHIDE");
+
+
+    //typedef bbFlag bbWidget_UnHide (bbWidget* widget, bbWidgets* widgets);
+    bbWidgetFunctions_add(self, WidgetUnhide,
+                          Connect_Unhide, "CONNECTUNHIDE");
 
     return Success;
 }

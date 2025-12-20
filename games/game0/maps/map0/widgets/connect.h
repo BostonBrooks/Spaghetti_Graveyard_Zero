@@ -60,6 +60,8 @@ bbWidgets* widgets, bbScreenPoints screen_coords, bbWidget* parent)
                         &widget->frames[1].handle);
 
 
+    widget->ftable.Hide = bbWidgetFunctions_getInt(widgets->functions,WidgetHide ,"CONNECTHIDE");
+    widget->ftable.Unhide = bbWidgetFunctions_getInt(widgets->functions,WidgetUnhide ,"CONNECTUNHIDE");
 
     bbPool_Handle handle;
     bbVPool_reverseLookup(widgets->pool, widget, &handle);
@@ -109,6 +111,35 @@ bbWidgets* widgets, bbScreenPoints screen_coords, bbWidget* parent)
     bbVPool_reverseLookup(widgets->pool, widget, &handle);
     bbDictionary_add(widgets->dict, "CONNECTICON", handle);
 
+
+
     *self = widget;
     return Success;
+}
+
+bbFlag Connect_Hide (bbWidget* widget, bbWidgets* widgets)
+{
+    bbHere()
+    bbVPool* pool = widgets->pool;
+    bbPool_Handle handle;
+
+    bbDictionary_lookup(widgets->dict,"CONNECTMENU",&handle );
+    bbWidget* ConnectMenu;
+    bbVPool_lookup(pool, (void**)&ConnectMenu,handle);
+    ConnectMenu->tree.visible = false;
+    ConnectMenu->tree.childrenvisible = false;
+    return Continue;
+}
+bbFlag Connect_Unhide (bbWidget* widget, bbWidgets* widgets)
+{
+    bbHere()
+    bbVPool* pool = widgets->pool;
+    bbPool_Handle handle;
+
+    bbDictionary_lookup(widgets->dict,"CONNECTMENU",&handle );
+    bbWidget* ConnectMenu;
+    bbVPool_lookup(pool, (void**)&ConnectMenu,handle);
+    ConnectMenu->tree.visible = true;
+    ConnectMenu->tree.childrenvisible = true;
+    return Continue;
 }

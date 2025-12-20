@@ -399,6 +399,16 @@ CLEARWINDOW(bbMagenta);
 
 		bbDummyReceiver_receive(home.private.server, home.private.mapTime );
 
+		bbPool_Handle connectHandle;
+		bbWidget* connectWidget;
+		bbDictionary_lookup(home.private.widgets.dict, "CONNECTMENU", &connectHandle);
+		bbVPool_lookup(home.private.widgets.pool, (void**)&connectWidget, connectHandle);
+
+		//test if the following functions work
+		if (home.private.mapTime % 50 == 0) bbWidget_hide(connectWidget, &home.private.widgets);
+		if (home.private.mapTime % 50 == 25) bbWidget_unhide(connectWidget, &home.private.widgets);
+
+
 	if (home.private.mapTime % 50 == 0) bbPrintf("mapTime = %d\n", home.private.mapTime);
 		cl.mapTime = home.private.mapTime;
         cl.GUI_time = home.private.mapTime;

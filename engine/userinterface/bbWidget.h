@@ -35,6 +35,8 @@ typedef struct {
     I32 Destructor;
     I32 OnCommand;
     I32 OnTimer;
+    I32 Hide;
+    I32 Unhide;
 } bbWidgetFunctionTable;
 
 typedef struct bbWidget_TextBox
@@ -92,7 +94,8 @@ bbFlag bbWidget_onCommand(bbWidget* widget, bbWidgets* widgets, enum bbWidgetCom
 bbFlag bbWidget_draw(bbWidget* widget, drawFuncClosure* cl);
 bbFlag bbWidget_newLayout(bbWidget** self, bbGraphics* graphics, bbWidgets* widgets, bbWidget* parent);
 bbFlag bbWidgets_init(bbWidgets* widgets);
-
+bbFlag bbWidget_hide(bbWidget* widget, bbWidgets* widgets);
+bbFlag bbWidget_unhide(bbWidget* widget, bbWidgets* widgets);
 //bbFlag bbWidget_newMockViewport(bbWidget** self, bbGraphics* graphics, bbWidgets* widgets, bbWidget* parent);
 bbFlag bbWidget_newViewport(bbWidget** self, bbGraphics* graphics,
                             bbWidgets* widgets, bbWidget* parent,
