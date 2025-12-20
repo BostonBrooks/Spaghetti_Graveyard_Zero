@@ -39,6 +39,8 @@
 typedef struct {
     bbVPool* pool;
     //bbList can be attached to any bbPool_List
+
+	/// listPtr allows a list to piggyback of another list
     bbPool_List* listPtr;
     //bbList can supply its own bbPool_List
     bbPool_List list;
