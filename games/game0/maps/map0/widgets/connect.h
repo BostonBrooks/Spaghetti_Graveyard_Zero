@@ -68,6 +68,25 @@ bbWidgets* widgets, bbScreenPoints screen_coords, bbWidget* parent)
     bbDictionary_add(widgets->dict, "CONNECTMENU", handle);
 
 
+    bbPool_Handle bounds;
+    bounds.i32x2.x = 196*POINTS_PER_PIXEL;
+    bounds.i32x2.y = 21*POINTS_PER_PIXEL;
+
+    bbScreenPoints SP;
+    bbWidget* IPAddress;
+    SP.x = 169*8; SP.y = 166*8;
+    bbWidget_constructor(&IPAddress, widgets, graphics,SP, widget, "TEXTBOX");
+    bbVPool_reverseLookup(widgets->pool, IPAddress, &handle);
+    bbDictionary_add(widgets->dict, "IP_ADDRESS", handle);
+	bbWidget_onCommand(IPAddress, widgets, bbWC_setDimensions, bounds);
+
+    bbWidget* IP_Port;
+    SP.x = 208*8; SP.y = 166*8;
+    bbWidget_constructor(&IP_Port, widgets, graphics,SP, widget, "TEXTBOX");
+    bbVPool_reverseLookup(widgets->pool, IP_Port, &handle);
+    bbDictionary_add(widgets->dict, "IP_PORT", handle);
+	bbWidget_onCommand(IP_Port, widgets, bbWC_setDimensions, bounds);
+
     *self = widget;
     return Success;
 }

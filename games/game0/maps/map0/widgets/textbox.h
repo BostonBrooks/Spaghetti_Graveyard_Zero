@@ -137,8 +137,8 @@ bbFlag Textbox_OnCommand(bbWidget* widget, bbWidgetCommandType type, bbPool_Hand
                  widget->rect.height = dimensions.y;
 
                  sfText* text = widget->typeData.textBox.text;
-                 float lineSpacing = 12;// = sfText_getLineSpacing(text);
-                 float letterSpacing = 8;//= sfText_getLetterSpacing(text);
+                 float lineSpacing = 12;// != sfText_getLineSpacing(text);
+                 float letterSpacing = 8;// != sfText_getLetterSpacing(text);
                  //int charsize = sfText_getCharacterSize(text);
 
                  //bbDebug("lineSpacing = %f, letterSpacing = %f, charsize = %d\n", lineSpacing, letterSpacing, charsize);
