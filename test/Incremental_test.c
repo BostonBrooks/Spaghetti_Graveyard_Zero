@@ -139,8 +139,8 @@ bbHere();
 	bbWidget *layout;
 
     bbScreenPoints SP;
-    SP.x = 600*8;
-    SP.y = 50*8;
+    SP.x = 600*SCREEN_PPP;
+    SP.y = 50*SCREEN_PPP;
 
 	//Does not need to be listed in constructor table
     bbWidget_newLayout(&layout, &home.constant.graphics, &home.private.widgets, NULL);
@@ -203,18 +203,18 @@ CLEARWINDOW(bbMagenta);
 	bbScreenPoints SP0;
 
 
-    SP0.x = 58*8; SP0.y = 100*8;
+    SP0.x = 58*SCREEN_PPP; SP0.y = 100*SCREEN_PPP;
     bbWidget_constructor(&widget1, &home.private.widgets, &home.constant.graphics,
                          SP0, layout,"SPELLMENU");
 
 
-    SP0.x = 97*8; SP0.y = 422*8;
+    SP0.x = 97*SCREEN_PPP; SP0.y = 422*SCREEN_PPP;
     bbWidget_constructor(&widget0, &home.private.widgets, &home.constant.graphics,
                         SP0, layout,"SPELLBAR");
 
 
 
-	SP0.x = 497*8; SP0.y = 12*8;
+	SP0.x = 497*SCREEN_PPP; SP0.y = 12*SCREEN_PPP;
 	bbWidget_constructor(&home.private.widgets.dialog, &home.private.widgets, &home.constant.graphics,
                          SP0, layout, "TEXTBOX");
 
@@ -224,22 +224,22 @@ CLEARWINDOW(bbMagenta);
 	bbDictionary_add(home.private.widgets.dict, "DIALOG", handle);
 
 	bbPool_Handle bounds;
-	bounds.i32x2.x = 200*8;
-	bounds.i32x2.y = 322*8;
+	bounds.i32x2.x = 200*SCREEN_PPP;
+	bounds.i32x2.y = 322*SCREEN_PPP;
 	bbWidget_onCommand(home.private.widgets.dialog, &home.private.widgets, bbWC_setDimensions, bounds);
 
-	SP0.x = 497*8; SP0.y = 355*8;
+	SP0.x = 497*SCREEN_PPP; SP0.y = 355*SCREEN_PPP;
 	bbWidget_constructor(&home.private.widgets.prompt, &home.private.widgets, &home.constant.graphics,
                          SP0, layout, "TEXTBOX");
 	bbVPool_reverseLookup(home.private.widgets.pool, home.private.widgets.prompt, &handle);
 	bbDictionary_add(home.private.widgets.dict, "PROMPT", handle);
 
 
-	bounds.i32x2.x = 200*8;
-	bounds.i32x2.y = 45*8;
+	bounds.i32x2.x = 200*SCREEN_PPP;
+	bounds.i32x2.y = 45*SCREEN_PPP;
 	bbWidget_onCommand(home.private.widgets.prompt, &home.private.widgets, bbWC_setDimensions, bounds);
 
-	SP0.x = 497*8; SP0.y = 416*8;
+	SP0.x = 497*SCREEN_PPP; SP0.y = 416*SCREEN_PPP;
 	bbWidget_constructor(&home.private.widgets.command, &home.private.widgets, &home.constant.graphics,
                          SP0, layout, "TEXTBOX");
 
@@ -247,31 +247,31 @@ CLEARWINDOW(bbMagenta);
 	bbDictionary_add(home.private.widgets.dict, "COMMAND", handle);
 
 	home.private.widgets.textbox = home.private.widgets.command;
-	bounds.i32x2.x = 200 * 8;
-	bounds.i32x2.y = 45*8;
+	bounds.i32x2.x = 200 * SCREEN_PPP;
+	bounds.i32x2.y = 45*SCREEN_PPP;
 	bbWidget_onCommand(home.private.widgets.command, &home.private.widgets, bbWC_setDimensions, bounds);
 	bounds.i32x2.x = 64;
 	bounds.i32x2.y = 1;
 	bbWidget_onCommand(home.private.widgets.command, &home.private.widgets, bbWC_setBounds, bounds);
 
 
-	SP0.x = 58*8; SP0.y = 100*8;
+	SP0.x = 58*SCREEN_PPP; SP0.y = 100*SCREEN_PPP;
 	bbWidget_constructor(&widget1, &home.private.widgets, &home.constant.graphics,
 						 SP0, layout,"CONNECTMENU");
 
-	SP0.x = 11*8; SP0.y = 11*8;
+	SP0.x = 11*SCREEN_PPP; SP0.y = 11*SCREEN_PPP;
 	bbWidget_constructor(&widget1, &home.private.widgets, &home.constant.graphics,
 						 SP0, layout,"TOPLEFT");
 
-	SP0.x = 11*8; SP0.y = 11*8;
+	SP0.x = 11*SCREEN_PPP; SP0.y = 11*SCREEN_PPP;
 	bbWidget_constructor(&widget0, &home.private.widgets, &home.constant.graphics,
 						 SP0, widget1,"CURRENTSPELL");
 
-	SP0.x = 46*8; SP0.y = 11*8;
+	SP0.x = 46*SCREEN_PPP; SP0.y = 11*SCREEN_PPP;
 	bbWidget_constructor(&widget0, &home.private.widgets, &home.constant.graphics,
 						 SP0, widget1, "CONNECTICON");
 
-	SP0.x = rand()%(720*8); SP0.y = rand()%(480*8);
+	SP0.x = rand()%(720*SCREEN_PPP); SP0.y = rand()%(480*SCREEN_PPP);
 	bbWidget_constructor(&widget0, &home.private.widgets, &home.constant.graphics,
                          SP0, layout, "SPHERE");
 
@@ -279,16 +279,16 @@ CLEARWINDOW(bbMagenta);
 
 
 
-	SP0.x = 500*8; SP0.y = 23*8;
+	SP0.x = 500*SCREEN_PPP; SP0.y = 23*SCREEN_PPP;
 	bbWidget_constructor(&widget0, &home.private.widgets, &home.constant.graphics,
                          SP0, layout, "BUTTON");
 
 
-    SP0.x = 500*8; SP0.y = 125*8;
+    SP0.x = 500*SCREEN_PPP; SP0.y = 125*SCREEN_PPP;
     bbWidget_constructor(&widget0, &home.private.widgets, &home.constant.graphics,
                          SP0, layout, "BOX");
 
-    SP0.x = 570*8; SP0.y = 125*8;
+    SP0.x = 570*SCREEN_PPP; SP0.y = 125*SCREEN_PPP;
     bbWidget_constructor(&widget0, &home.private.widgets, &home.constant.graphics,
                          SP0, layout, "CARD");
 
