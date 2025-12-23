@@ -69,6 +69,8 @@ mouse, bbWidgets* widgets){
     keymap[sfKeyNumpad8] = '8';
     keymap[sfKeyNumpad9] = '9';
 
+    keymap[sfKeyPeriod] = '.';
+
     keymap = input->keymap_uppercase;
     for (int i = 0; i < sfKeyCount; i++)
     {
@@ -124,6 +126,7 @@ mouse, bbWidgets* widgets){
     keymap[sfKeyNumpad8] = '8';
     keymap[sfKeyNumpad9] = '9';
 
+    keymap[sfKeyPeriod] = '.';
 
     return Success;
 }
