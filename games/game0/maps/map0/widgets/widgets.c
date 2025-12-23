@@ -1,4 +1,4 @@
-//Widgetes used: Layout, viewport, button, box
+
 
 #ifndef WIDGET_FUNCTIONS
 #define WIDGET_FUNCTIONS

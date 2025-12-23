@@ -69,23 +69,24 @@ bbWidgets* widgets, bbScreenPoints screen_coords, bbWidget* parent)
 
 
     bbPool_Handle bounds;
-    bounds.i32x2.x = 196*POINTS_PER_PIXEL;
+    bounds.i32x2.x = 187*POINTS_PER_PIXEL;
     bounds.i32x2.y = 21*POINTS_PER_PIXEL;
 
     bbScreenPoints SP;
-    bbWidget* IPAddress;
+    bbWidget* IP_widget;
     SP.x = 169*8; SP.y = 166*8;
-    bbWidget_constructor(&IPAddress, widgets, graphics,SP, widget, "TEXTBOX");
-    bbVPool_reverseLookup(widgets->pool, IPAddress, &handle);
+    bbWidget_constructor(&IP_widget, widgets, graphics,SP, widget, "TEXTBOX");
+    bbVPool_reverseLookup(widgets->pool, IP_widget, &handle);
     bbDictionary_add(widgets->dict, "IP_ADDRESS", handle);
-	bbWidget_onCommand(IPAddress, widgets, bbWC_setDimensions, bounds);
+	bbWidget_onCommand(IP_widget, widgets, bbWC_setDimensions, bounds);
 
-    bbWidget* IP_Port;
-    SP.x = 208*8; SP.y = 166*8;
-    bbWidget_constructor(&IP_Port, widgets, graphics,SP, widget, "TEXTBOX");
-    bbVPool_reverseLookup(widgets->pool, IP_Port, &handle);
+
+    bbWidget* Port_widget;
+    SP.x = 169*8; SP.y = 208*8;
+    bbWidget_constructor(&Port_widget, widgets, graphics,SP, widget, "TEXTBOX");
+    bbVPool_reverseLookup(widgets->pool, Port_widget, &handle);
     bbDictionary_add(widgets->dict, "IP_PORT", handle);
-	bbWidget_onCommand(IP_Port, widgets, bbWC_setDimensions, bounds);
+	bbWidget_onCommand(Port_widget, widgets, bbWC_setDimensions, bounds);
 
     *self = widget;
     return Success;
@@ -141,7 +142,6 @@ bbFlag Connect_Hide (bbWidget* widget, bbWidgets* widgets)
     bbHere()
     bbVPool* pool = widgets->pool;
     bbPool_Handle handle;
-
     bbDictionary_lookup(widgets->dict,"CONNECTMENU",&handle );
     bbWidget* ConnectMenu;
     bbVPool_lookup(pool, (void**)&ConnectMenu,handle);

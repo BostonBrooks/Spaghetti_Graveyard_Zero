@@ -1,11 +1,9 @@
-#ifndef BBWIDGETFUNCTIONS_H
-#define BBWIDGETFUNCTIONS_H
+//BBWIDGETFUNCTIONENUMS_H are needed for
+//bbFlag bbWidget_onCommand(bbWidget* widget, bbWidgets* widgets, bbWidgetCommandType type, bbPool_Handle data);
 
-#include "engine/userinterface/bbWidget.h"
-#include "engine/geometry/bbCoordinates.h"
-#include "engine/logic/bbFlag.h"
-#include "engine/logic/bbIntTypes.h"
-#include "engine/logic/bbDictionary.h"
+#ifndef BBWIDGETFUNCTIONENUMS_H
+#define BBWIDGETFUNCTIONENUMS_H
+
 
 typedef enum
 {
@@ -27,6 +25,18 @@ typedef enum bbWidgetCommandType
     bbWC_setStr,
     bbWC_clrStr
 } bbWidgetCommandType;
+
+#endif //BBWIDGETFUNCTIONENUMS_H
+
+
+#ifndef BBWIDGETFUNCTIONS_H
+#define BBWIDGETFUNCTIONS_H
+
+#include "engine/userinterface/bbWidget.h"
+#include "engine/geometry/bbCoordinates.h"
+#include "engine/logic/bbFlag.h"
+#include "engine/logic/bbIntTypes.h"
+#include "engine/logic/bbDictionary.h"
 
 typedef struct bbWidget bbWidget;
 typedef struct bbWidgets bbWidgets;
