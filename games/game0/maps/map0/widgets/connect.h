@@ -88,6 +88,12 @@ bbWidgets* widgets, bbScreenPoints screen_coords, bbWidget* parent)
     bbDictionary_add(widgets->dict, "IP_PORT", handle);
 	bbWidget_onCommand(Port_widget, widgets, bbWC_setDimensions, bounds);
 
+    bbWidget* connect_button;
+    SP.x = 150*8; SP.y = 250*8;
+    bbWidget_constructor(&connect_button, widgets, graphics,SP, widget, "CONNECTBUTTON");
+    bbVPool_reverseLookup(widgets->pool, Port_widget, &handle);
+    bbDictionary_add(widgets->dict, "CONNECT_BUTTON", handle);
+
     *self = widget;
     return Success;
 }
