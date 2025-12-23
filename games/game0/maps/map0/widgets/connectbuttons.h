@@ -29,6 +29,11 @@ bbFlag ConnectButton_Constructor (bbWidget** self, void* Graphics,
     bbPool_Handle handle;
     bbVPool_reverseLookup(widgets->pool, widget, &handle);
     bbDictionary_add(widgets->dict, "CONNECT_DEFAULT", handle);
+    I32 funcInt;
+    funcInt = bbMouseFunctions_getInt(&widgets->mouse->functions,MouseIsOver, "BUTTON");
+    widget->mtable.isOver = funcInt;
+
+    widget->mtable.MouseIcon = 91;
 
     *self = widget;
 
