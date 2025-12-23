@@ -1,0 +1,4 @@
+this file contains threadsafe primitives:
+for example a thread might receive packets from the internet and put them in a queue for the main thread to react to
+
+if a pool needs to be synchronised with one on another computer it should be reversible.
