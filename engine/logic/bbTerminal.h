@@ -120,6 +120,33 @@ static const int stringLength = 512;
     }\
 }\
 
+#define bbWidgetCommandType_print(flag)\
+{\
+switch ((bbWidgetCommandType)flag)\
+{\
+case bbWC_putChar:\
+bbDebug ("bbWidgetCommandType = bbWC_putChar\n");\
+break;\
+case bbWC_putStr:\
+bbDebug ("bbWidgetCommandType = bbWC_putStr\n");\
+break;\
+case bbWC_setBounds:\
+bbDebug ("bbWidgetCommandType = bbWC_setBounds\n");\
+break;\
+case bbWC_setDimensions:\
+bbDebug ("bbWidgetCommandType = bbWC_setDimensions\n");\
+break;\
+case bbWC_setStr:\
+bbDebug ("bbWidgetCommandType = bbWC_setStr\n");\
+break;\
+case bbWC_clrStr:\
+bbDebug ("bbWidgetCommandType = bbWC_clrStr\n");\
+break;\
+dafault:              \
+bbDebug ("bbWidgetCommandType = unknown\n");\
+}\
+}\
+
 #define sfSocketStatus_print(status)\
 {\
     switch((sfSocketStatus)status)\
