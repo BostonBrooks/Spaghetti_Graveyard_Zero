@@ -17,11 +17,9 @@
  * the screen interleaved with the drawables
  * avoidance should be order agnostic
  */
-#define MAPICON_FRAMES_PER_UNIT 2
 
 typedef struct {
     bbDrawable drawable;
-    bbFrame frames[MAPICON_FRAMES_PER_UNIT];
     I32 radius;
 } bbUnit;
 
