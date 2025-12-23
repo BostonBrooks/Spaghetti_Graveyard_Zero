@@ -153,8 +153,8 @@ bbFlag bbWidget_newLayout(bbWidget** self, bbGraphics* graphics, bbWidgets* widg
 	bbScreenPointsRect rect;
 	rect.left = 0;
 	rect.top = 0;
-	rect.width = 720 * 8;
-	rect.height = 480 * 8;
+	rect.width = 720 * SCREEN_PPP;
+	rect.height = 480 * SCREEN_PPP;
 
 	widget->rect = rect;
 

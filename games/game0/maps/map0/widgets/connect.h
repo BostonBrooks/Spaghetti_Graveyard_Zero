@@ -26,8 +26,8 @@ bbWidgets* widgets, bbScreenPoints screen_coords, bbWidget* parent)
 
     rect.left = screen_coords.x;
     rect.top = screen_coords.y;
-    rect.width = 373 * POINTS_PER_PIXEL;
-    rect.height = 197 * POINTS_PER_PIXEL;
+    rect.width = 373 * SCREEN_PPP;
+    rect.height = 197 * SCREEN_PPP;
     widget->rect = rect;
 
     widget->mtable.MouseIcon = 86;
@@ -69,12 +69,12 @@ bbWidgets* widgets, bbScreenPoints screen_coords, bbWidget* parent)
 
 
     bbPool_Handle bounds;
-    bounds.i32x2.x = 187*POINTS_PER_PIXEL;
-    bounds.i32x2.y = 21*POINTS_PER_PIXEL;
+    bounds.i32x2.x = 187*SCREEN_PPP;
+    bounds.i32x2.y = 21*SCREEN_PPP;
 
     bbScreenPoints SP;
     bbWidget* IP_widget;
-    SP.x = 169*8; SP.y = 166*8;
+    SP.x = 169*SCREEN_PPP; SP.y = 166*SCREEN_PPP;
     bbWidget_constructor(&IP_widget, widgets, graphics,SP, widget, "TEXTBOX");
     bbVPool_reverseLookup(widgets->pool, IP_widget, &handle);
     bbDictionary_add(widgets->dict, "IP_ADDRESS", handle);
@@ -82,14 +82,14 @@ bbWidgets* widgets, bbScreenPoints screen_coords, bbWidget* parent)
 
 
     bbWidget* Port_widget;
-    SP.x = 169*8; SP.y = 208*8;
+    SP.x = 169*SCREEN_PPP; SP.y = 208*SCREEN_PPP;
     bbWidget_constructor(&Port_widget, widgets, graphics,SP, widget, "TEXTBOX");
     bbVPool_reverseLookup(widgets->pool, Port_widget, &handle);
     bbDictionary_add(widgets->dict, "IP_PORT", handle);
 	bbWidget_onCommand(Port_widget, widgets, bbWC_setDimensions, bounds);
 
     bbWidget* connect_button;
-    SP.x = 150*8; SP.y = 250*8;
+    SP.x = 150*SCREEN_PPP; SP.y = 250*SCREEN_PPP;
     bbWidget_constructor(&connect_button, widgets, graphics,SP, widget, "CONNECTBUTTON");
     bbVPool_reverseLookup(widgets->pool, Port_widget, &handle);
     bbDictionary_add(widgets->dict, "CONNECT_BUTTON", handle);
@@ -109,8 +109,8 @@ bbWidgets* widgets, bbScreenPoints screen_coords, bbWidget* parent)
 
     rect.left = screen_coords.x;
     rect.top = screen_coords.y;
-    rect.width = 36 * POINTS_PER_PIXEL;
-    rect.height = 36 * POINTS_PER_PIXEL;
+    rect.width = 36 * SCREEN_PPP;
+    rect.height = 36 * SCREEN_PPP;
     widget->rect = rect;
 
 

@@ -145,8 +145,8 @@ bbFlag Textbox_OnCommand(bbWidget* widget, bbWidgetCommandType type, bbPool_Hand
 
 
                  I32x2 bounds;
-                 bounds.x = dimensions.x / (letterSpacing * 8);
-                 bounds.y = dimensions.y / (lineSpacing * 8);
+                 bounds.x = dimensions.x / (letterSpacing * SCREEN_PPP);
+                 bounds.y = dimensions.y / (lineSpacing * SCREEN_PPP);
 
                  widget->typeData.textBox.columns = bounds.x;
                  widget->typeData.textBox.rows = bounds.y;
