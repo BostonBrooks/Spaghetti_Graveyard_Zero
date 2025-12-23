@@ -36,8 +36,8 @@ bbFlag IsOver_Teleport(bbMouse* mouse, bbWidgets* widgets, bbWidget* widget)
     bbScreenPoints point = mouse->position;
 
     if (bbScreenPoints_inScreenPointsRect(point, rect)){
-        widget->rect.left = rand()%(720*8 - 52*8);
-        widget->rect.top = rand()%(480*8 - 52*8);
+        widget->rect.left = rand()%(720*SCREEN_PPP - 52*SCREEN_PPP);
+        widget->rect.top = rand()%(480*SCREEN_PPP - 52*SCREEN_PPP);
 
 
     }

@@ -12,9 +12,11 @@
 #include "engine/data/bbHome.h"
 
 
+
 #include "games/game0/maps/map0/drawfunctions/drawablesprite.h"
 #include "games/game0/maps/map0/drawfunctions/drawableanimation.h"
 #include "games/game0/maps/map0/drawfunctions/textboxindicator.h"
+#include "games/game0/maps/map0/drawfunctions/widgettext.h"
 
 
 //typedef bbFlag bbDrawFunction(void* drawable, void* frameDescriptor, void* cl);
@@ -180,9 +182,10 @@ bbFlag bbDF_widgetViewport(void* drawable, void* frameDescriptor, void* cl){
 bbFlag bbDF_mapiconTest(void* drawable, void* frameDescriptor, void* cl){
     bbDrawable* mapicon = drawable;
     drawFuncClosure* foo = cl;
+    bbFrame* frame_descriptor = frameDescriptor;
 
-    //bbDebug("mapicon\n", mapicon->label);
-    I32 spriteInt = 141;
+
+    I32 spriteInt = frame_descriptor->handle.u64;
 
     bbGraphics* graphics = foo->graphics;
     sfSprite* sprite = graphics->sprites->sprites[spriteInt];
@@ -252,7 +255,7 @@ bbFlag bbDF_widgetTextBox(void* drawable, void* frameDescriptor, void* cl)
 
 
 bbFlag bbDrawfunctions_new(bbDrawfunctions** drawfunctions){
-    I32 num = 13;
+    I32 num = 14;
     bbDrawfunctions* functions = malloc(sizeof(bbDrawfunctions) + num * sizeof(bbDrawFunction*));
     bbAssert(functions!=NULL, "bad malloc");
     bbDictionary_new(&functions->dictionary, nextPrime(num));
@@ -313,6 +316,10 @@ bbFlag bbDrawfunctions_new(bbDrawfunctions** drawfunctions){
     functions->functions[12] = bbDF_textboxIndicator;
     handle.u64 = 12;
     bbDictionary_add(functions->dictionary, "TEXTBOXINDICATOR", handle);
+
+    functions->functions[13] = bbDF_widgetText;
+    handle.u64 = 13;
+    bbDictionary_add(functions->dictionary, "WIDGETTEXT", handle);
 
 
 

@@ -26,8 +26,8 @@ bbWidgets* widgets, bbScreenPoints screen_coords, bbWidget* parent)
 
     rect.left = screen_coords.x;
     rect.top = screen_coords.y;
-    rect.width = 373 * POINTS_PER_PIXEL;
-    rect.height = 197 * POINTS_PER_PIXEL;
+    rect.width = 373 * SCREEN_PPP;
+    rect.height = 197 * SCREEN_PPP;
     widget->rect = rect;
 
     widget->mtable.MouseIcon = 86;
@@ -69,23 +69,43 @@ bbWidgets* widgets, bbScreenPoints screen_coords, bbWidget* parent)
 
 
     bbPool_Handle bounds;
-    bounds.i32x2.x = 196*POINTS_PER_PIXEL;
-    bounds.i32x2.y = 21*POINTS_PER_PIXEL;
+    bounds.i32x2.x = 187*SCREEN_PPP;
+    bounds.i32x2.y = 21*SCREEN_PPP;
 
     bbScreenPoints SP;
-    bbWidget* IPAddress;
-    SP.x = 169*8; SP.y = 166*8;
-    bbWidget_constructor(&IPAddress, widgets, graphics,SP, widget, "TEXTBOX");
-    bbVPool_reverseLookup(widgets->pool, IPAddress, &handle);
+    bbWidget* IP_widget;
+    SP.x = 169*SCREEN_PPP; SP.y = 166*SCREEN_PPP;
+    bbWidget_constructor(&IP_widget, widgets, graphics,SP, widget, "TEXTBOX");
+    bbVPool_reverseLookup(widgets->pool, IP_widget, &handle);
     bbDictionary_add(widgets->dict, "IP_ADDRESS", handle);
-	bbWidget_onCommand(IPAddress, widgets, bbWC_setDimensions, bounds);
+	bbWidget_onCommand(IP_widget, widgets, bbWC_setDimensions, bounds);
 
-    bbWidget* IP_Port;
-    SP.x = 208*8; SP.y = 166*8;
-    bbWidget_constructor(&IP_Port, widgets, graphics,SP, widget, "TEXTBOX");
-    bbVPool_reverseLookup(widgets->pool, IP_Port, &handle);
+
+    bbWidget* Port_widget;
+    SP.x = 169*SCREEN_PPP; SP.y = 208*SCREEN_PPP;
+    bbWidget_constructor(&Port_widget, widgets, graphics,SP, widget, "TEXTBOX");
+    bbVPool_reverseLookup(widgets->pool, Port_widget, &handle);
     bbDictionary_add(widgets->dict, "IP_PORT", handle);
-	bbWidget_onCommand(IP_Port, widgets, bbWC_setDimensions, bounds);
+	bbWidget_onCommand(Port_widget, widgets, bbWC_setDimensions, bounds);
+
+    bbWidget* connect_button;
+    SP.x = 120*SCREEN_PPP; SP.y = 243*SCREEN_PPP;
+    bbWidget_constructor(&connect_button, widgets, graphics,SP, widget, "CONNECTBUTTON");
+    bbVPool_reverseLookup(widgets->pool, Port_widget, &handle);
+    bbDictionary_add(widgets->dict, "CONNECT_BUTTON", handle);
+
+    bbWidget* dsconnect_button;
+    SP.x = 207*SCREEN_PPP; SP.y = 243*SCREEN_PPP;
+    bbWidget_constructor(&connect_button, widgets, graphics,SP, widget, "DISCONNECTBUTTON");
+    bbVPool_reverseLookup(widgets->pool, Port_widget, &handle);
+    bbDictionary_add(widgets->dict, "CONNECT_BUTTON", handle);
+
+    bbWidget* gooffline_button;
+    SP.x = 294*SCREEN_PPP; SP.y = 243*SCREEN_PPP;
+    bbWidget_constructor(&connect_button, widgets, graphics,SP, widget, "OFFLINECONNECTBUTTON");
+    bbVPool_reverseLookup(widgets->pool, Port_widget, &handle);
+    bbDictionary_add(widgets->dict, "CONNECT_BUTTON", handle);
+
 
     *self = widget;
     return Success;
@@ -102,8 +122,8 @@ bbWidgets* widgets, bbScreenPoints screen_coords, bbWidget* parent)
 
     rect.left = screen_coords.x;
     rect.top = screen_coords.y;
-    rect.width = 36 * POINTS_PER_PIXEL;
-    rect.height = 36 * POINTS_PER_PIXEL;
+    rect.width = 36 * SCREEN_PPP;
+    rect.height = 36 * SCREEN_PPP;
     widget->rect = rect;
 
 
@@ -141,7 +161,6 @@ bbFlag Connect_Hide (bbWidget* widget, bbWidgets* widgets)
     bbHere()
     bbVPool* pool = widgets->pool;
     bbPool_Handle handle;
-
     bbDictionary_lookup(widgets->dict,"CONNECTMENU",&handle );
     bbWidget* ConnectMenu;
     bbVPool_lookup(pool, (void**)&ConnectMenu,handle);

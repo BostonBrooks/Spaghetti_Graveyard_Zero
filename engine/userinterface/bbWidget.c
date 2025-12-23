@@ -44,11 +44,9 @@ bbFlag bbWidget_draw(bbWidget* widget, drawFuncClosure* cl){
 	for (I32 i = 0; i < FRAMES_PER_WIDGET; i++){
 		bbFrame* frame = &widget->frames[i];
 
-		I32 badMagicNumber = 13;
-		if (frame->drawfunction >= badMagicNumber){bbDebug("bad magic number :P\n");}
-        //bbDebug("frame->drawfunction = %d\n", frame->drawfunction);
-		if (frame->drawfunction >= 0 && frame->drawfunction < badMagicNumber) {
-            bbGraphics* graphics = cl->graphics;
+		bbGraphics* graphics = cl->graphics;
+		if (frame->drawfunction >= 0 && frame->drawfunction < graphics->drawfunctions->num) {
+
 			bbDrawFunction *drawFunction =
                     graphics->drawfunctions->functions[frame->drawfunction];
 
@@ -153,8 +151,8 @@ bbFlag bbWidget_newLayout(bbWidget** self, bbGraphics* graphics, bbWidgets* widg
 	bbScreenPointsRect rect;
 	rect.left = 0;
 	rect.top = 0;
-	rect.width = 720 * 8;
-	rect.height = 480 * 8;
+	rect.width = 720 * SCREEN_PPP;
+	rect.height = 480 * SCREEN_PPP;
 
 	widget->rect = rect;
 

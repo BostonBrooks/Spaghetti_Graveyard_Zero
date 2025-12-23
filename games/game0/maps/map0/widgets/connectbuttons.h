@@ -1,0 +1,104 @@
+#include "engine/geometry/bbCoordinates.h"
+#include "engine/userinterface/bbWidget.h"
+
+bbFlag ConnectButton_Constructor (bbWidget** self, void* Graphics,
+                         bbWidgets* widgets, bbScreenPoints screen_coords, bbWidget* parent)
+{
+    bbHere()
+    bbWidget* widget;
+    bbGraphics* graphics = Graphics;
+    bbFlag flag =  bbWidget_newEmpty(&widget, widgets, parent);
+    bbAssert(widget != NULL, "null address\n");
+
+    bbStr_setStr(widget->key, "Connect", 64);
+    bbScreenPointsRect rect;
+
+    rect.left = screen_coords.x;
+    rect.top = screen_coords.y;
+    rect.width = 74 * SCREEN_PPP;
+    rect.height = 22 * SCREEN_PPP;
+
+    widget->rect = rect;
+
+    bbPool_Handle drawfunctionHandle;
+    bbDictionary_lookup(graphics->drawfunctions->dictionary, "WIDGETSPRITE",
+                        &drawfunctionHandle);
+    widget->frames[0].drawfunction = drawfunctionHandle.u64;
+
+    bbDictionary_lookup(graphics->sprites->dictionary, "CONNECT_DEFAULT",
+                        &widget->frames[0].handle);
+
+
+    widget->frames[0].offset.x = 0;
+    widget->frames[0].offset.y = 0;
+
+    bbDictionary_lookup(graphics->drawfunctions->dictionary, "WIDGETTEXT",
+                    &drawfunctionHandle);
+    widget->frames[1].drawfunction = drawfunctionHandle.u64;
+    widget->frames[1].offset.x = 10*SCREEN_PPP;
+    widget->frames[1].offset.y = 3*SCREEN_PPP;
+
+
+    int funcInt;
+
+    funcInt = bbMouseFunctions_getInt(&widgets->mouse->functions,MouseIsOver, "CONNECT");
+    widget->mtable.isOver = funcInt;
+    funcInt = bbMouseFunctions_getInt(&widgets->mouse->functions,MouseEnter, "CONNECT");
+    widget->mtable.Enter = funcInt;
+    funcInt = bbMouseFunctions_getInt(&widgets->mouse->functions,MouseLeave, "CONNECT");
+    widget->mtable.Leave = funcInt;
+    funcInt = bbMouseFunctions_getInt(&widgets->mouse->functions,
+                                      MouseLeftDown,"CONNECT");
+    widget->mtable.LeftDown = funcInt;
+    funcInt = bbMouseFunctions_getInt(&widgets->mouse->functions,
+                                      MouseLeftUp,"CONNECT");
+    widget->mtable.LeftUp = funcInt;
+    widget->mtable.LeftDrag = -1;
+
+    widget->mtable.MouseIcon = 87;
+    widget->mtable.DragIcon = -1;
+
+
+    for (I32 i = 2; i < FRAMES_PER_WIDGET; i++) {
+        widget->frames[i].drawfunction = -1;
+    }
+
+    bbPool_Handle handle;
+    bbVPool_reverseLookup(widgets->pool, widget, &handle);
+    bbDictionary_add(widgets->dict, "CONNECT", handle);
+
+    *self = widget;
+
+
+    return Success;
+}
+
+bbFlag DisConnectButton_Constructor (bbWidget** self, void* Graphics,
+                         bbWidgets* widgets, bbScreenPoints screen_coords, bbWidget* parent)
+{
+    bbWidget* widget;
+    ConnectButton_Constructor(&widget, Graphics, widgets, screen_coords, parent);
+
+
+    bbStr_setStr(widget->key, "Disconnect", 64);
+
+    *self = widget;
+
+    return Success;
+
+}
+
+bbFlag GoOfflineButton_Constructor (bbWidget** self, void* Graphics,
+                         bbWidgets* widgets, bbScreenPoints screen_coords, bbWidget* parent)
+{
+    bbWidget* widget;
+    ConnectButton_Constructor(&widget, Graphics, widgets, screen_coords, parent);
+
+
+    bbStr_setStr(widget->key, "Offline", 64);
+
+    *self = widget;
+
+    return Success;
+
+}

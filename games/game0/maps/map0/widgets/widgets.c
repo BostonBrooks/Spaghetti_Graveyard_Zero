@@ -1,4 +1,4 @@
-//Widgetes used: Layout, viewport, button, box
+
 
 #ifndef WIDGET_FUNCTIONS
 #define WIDGET_FUNCTIONS
@@ -21,6 +21,7 @@
 #include "games/game0/maps/map0/widgets/currentspell.h"
 #include "games/game0/maps/map0/widgets/connect.h"
 #include "games/game0/maps/map0/widgets/topleft.h"
+#include "games/game0/maps/map0/widgets/connectbuttons.h"
 
 
 
@@ -84,6 +85,18 @@ bbFlag bbWidgetFunctions_populate(bbWidgetFunctions* self)
 
     bbWidgetFunctions_add(self, WidgetConstructor,
                           ConnectIcon_Constructor, "CONNECTICON");
+
+    bbWidgetFunctions_add(self, WidgetConstructor,
+    ConnectButton_Constructor, "CONNECTBUTTON");
+
+    bbWidgetFunctions_add(self, WidgetConstructor,
+    DisConnectButton_Constructor, "DISCONNECTBUTTON");
+
+    bbWidgetFunctions_add(self, WidgetConstructor,
+                      GoOfflineButton_Constructor, "OFFLINECONNECTBUTTON");
+
+
+
 
     //typedef bbFlag bbWidget_Update (bbWidget* widget, void* unused);
     bbWidgetFunctions_add(self, WidgetUpdate,
