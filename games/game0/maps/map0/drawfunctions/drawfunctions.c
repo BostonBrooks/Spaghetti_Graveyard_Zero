@@ -180,9 +180,10 @@ bbFlag bbDF_widgetViewport(void* drawable, void* frameDescriptor, void* cl){
 bbFlag bbDF_mapiconTest(void* drawable, void* frameDescriptor, void* cl){
     bbDrawable* mapicon = drawable;
     drawFuncClosure* foo = cl;
+    bbFrame* frame_descriptor = frameDescriptor;
 
-    //bbDebug("mapicon\n", mapicon->label);
-    I32 spriteInt = 141;
+
+    I32 spriteInt = frame_descriptor->handle.u64;
 
     bbGraphics* graphics = foo->graphics;
     sfSprite* sprite = graphics->sprites->sprites[spriteInt];
