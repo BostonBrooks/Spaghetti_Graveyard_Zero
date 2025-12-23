@@ -16,6 +16,7 @@
 #include "games/game0/maps/map0/mouse/textbox.h"
 #include "games/game0/maps/map0/mouse/connecticon.h"
 #include "games/game0/maps/map0/mouse/currentspell.h"
+#include "games/game0/maps/map0/mouse/connectbutton.h"
 
 bbFlag bbMouseFunctions_populate(bbMouseFunctions* self)
 {
@@ -33,6 +34,12 @@ bbFlag bbMouseFunctions_populate(bbMouseFunctions* self)
     bbMouseFunctions_add(self, MouseLeave, Button_Leave, "BUTTON");
     bbMouseFunctions_add(self, MouseLeftDown, Button_LeftDown, "BUTTON");
     bbMouseFunctions_add(self, MouseLeftUp, Button_LeftUp, "BUTTON");
+
+    bbMouseFunctions_add(self, MouseIsOver, ConnectButton_IsOver, "CONNECT");
+    bbMouseFunctions_add(self, MouseEnter, ConnectButton_Enter, "CONNECT");
+    bbMouseFunctions_add(self, MouseLeave, ConnectButton_Leave, "CONNECT");
+    bbMouseFunctions_add(self, MouseLeftDown, ConnectButton_LeftDown, "CONNECT");
+    bbMouseFunctions_add(self, MouseLeftUp, ConnectButton_LeftUp, "CONNECT");
 
 
     bbMouseFunctions_add(self, MouseIsOver, Box_IsOver, "BOX");

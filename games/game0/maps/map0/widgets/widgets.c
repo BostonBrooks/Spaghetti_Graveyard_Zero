@@ -87,7 +87,13 @@ bbFlag bbWidgetFunctions_populate(bbWidgetFunctions* self)
                           ConnectIcon_Constructor, "CONNECTICON");
 
     bbWidgetFunctions_add(self, WidgetConstructor,
-                      ConnectButton_Constructor, "CONNECTBUTTON");
+    ConnectButton_Constructor, "CONNECTBUTTON");
+
+    bbWidgetFunctions_add(self, WidgetConstructor,
+    DisConnectButton_Constructor, "DISCONNECTBUTTON");
+
+    bbWidgetFunctions_add(self, WidgetConstructor,
+                      GoOfflineButton_Constructor, "OFFLINECONNECTBUTTON");
 
 
 

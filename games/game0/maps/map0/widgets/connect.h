@@ -96,13 +96,13 @@ bbWidgets* widgets, bbScreenPoints screen_coords, bbWidget* parent)
 
     bbWidget* dsconnect_button;
     SP.x = 207*SCREEN_PPP; SP.y = 243*SCREEN_PPP;
-    bbWidget_constructor(&connect_button, widgets, graphics,SP, widget, "CONNECTBUTTON");
+    bbWidget_constructor(&connect_button, widgets, graphics,SP, widget, "DISCONNECTBUTTON");
     bbVPool_reverseLookup(widgets->pool, Port_widget, &handle);
     bbDictionary_add(widgets->dict, "CONNECT_BUTTON", handle);
 
     bbWidget* gooffline_button;
     SP.x = 294*SCREEN_PPP; SP.y = 243*SCREEN_PPP;
-    bbWidget_constructor(&connect_button, widgets, graphics,SP, widget, "CONNECTBUTTON");
+    bbWidget_constructor(&connect_button, widgets, graphics,SP, widget, "OFFLINECONNECTBUTTON");
     bbVPool_reverseLookup(widgets->pool, Port_widget, &handle);
     bbDictionary_add(widgets->dict, "CONNECT_BUTTON", handle);
 
