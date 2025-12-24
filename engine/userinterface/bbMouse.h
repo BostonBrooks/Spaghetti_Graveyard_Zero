@@ -29,6 +29,7 @@ typedef struct
     I32 Drop;
     I32 MouseIcon;
     I32 DragIcon;
+    //todo OnClick EG connect to a network
 
     //book keeping data
     unsigned int hover : 1;
