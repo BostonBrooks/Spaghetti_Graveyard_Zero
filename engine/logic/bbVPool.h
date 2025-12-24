@@ -24,6 +24,8 @@ typedef struct {
 
 bbFlag bbVPool_newLean(bbVPool** pool, I32 sizeOf, I32 num);
 bbFlag bbVPool_newBloated(bbVPool** pool, I32 sizeOf, I32 level1, I32 level2);
+bbFlag bbVPool_newThreaded(bbVPool** pool, I32 sizeOf, I32 num);
+
 
 #define bbVPool_alloc(pool, address)\
 bbVPool_allocImpl(pool, address, __FILE_NAME__, __LINE__);

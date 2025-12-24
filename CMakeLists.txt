@@ -83,6 +83,7 @@ add_executable(myprogram
         ./engine/avoidance/bbAvoidables.c
         engine/threadsafe/bbThreadedPool.c
         engine/network/bbNetwork.h
+        test/bbThreadedPool_test.c
 
 )
 

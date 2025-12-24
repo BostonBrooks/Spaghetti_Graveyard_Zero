@@ -5,6 +5,8 @@
 #include "engine/logic/bbLeanPool.h"
 #include "engine/logic/bbBloatedPool.h"
 #include "engine/logic/bbFlag.h"
+#include "engine/threadsafe/bbThreadedPool.h"
+
 bbFlag bbVPool_newLean(bbVPool** Pool, I32 sizeOf, I32 num){
 	bbLeanPool* LeanPool;
 	bbLeanPool_new(&LeanPool, sizeOf, num);
@@ -51,6 +53,30 @@ bbFlag bbVPool_newBloated(bbVPool** Pool, I32 sizeOf, I32 level1, I32 level2){
             bbPool_Handle B)) bbBloatedPool_handleIsEqual;
 	*Pool = pool;
 	return Success;
+}
+
+bbFlag bbVPool_newThreaded(bbVPool** self, I32 sizeOf, I32 num)
+{
+	bbThreadedPool* ThreadedPool;
+	bbThreadedPool_new(&ThreadedPool, sizeOf, num);
+	bbVPool* pool = malloc(sizeof(bbVPool));
+	bbAssert(pool != NULL, "bad malloc\n");
+	pool->pool = ThreadedPool;
+	pool->null = ThreadedPool->null;
+	pool->sizeOf = ThreadedPool->sizeOf;
+	pool->delete = (bbFlag (*)(void* pool)) bbThreadedPool_delete;
+	pool->clear = NULL;
+	pool->allocImpl = (bbFlag(*)(void* pool, void** address, char* file, int
+	line)) bbThreadedPool_allocImpl;
+	pool->free = (bbFlag(*)(void* pool, void* address)) bbThreadedPool_free;
+	pool->lookup = (bbFlag (*)(void* pool, void** address, bbPool_Handle
+	handle)) bbThreadedPool_lookup;
+	pool->reverseLookup = NULL;
+	pool->printHeader = NULL;
+	pool->handleIsEqual = NULL;
+	*self = pool;
+	return Success;
+
 }
 
 //TODO small functions, consider using static functions in the header
