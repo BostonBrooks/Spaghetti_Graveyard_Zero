@@ -184,8 +184,9 @@ I32 bbThreadedPool_handleIsEqual(void* USUSED, bbPool_Handle A, bbPool_Handle B)
     return (A.u64 == B.u64);
 }
 
-bbFlag bbThreadedPool_clear(bbThreadedPool* pool)
+bbFlag bbThreadedPool_clear(void* Pool)
 {
+    bbThreadedPool* pool = Pool;
     pthread_mutex_lock(&pool->mutex);
     bbThreadedPool_unused* element;
     pool->inUse = 0;
@@ -205,5 +206,16 @@ bbFlag bbThreadedPool_clear(bbThreadedPool* pool)
 
 
     pthread_mutex_unlock(&pool->mutex);
+    return Success;
+}
+
+
+bbFlag bbThreadedPool_printHeader(void* Pool, void* address)
+{
+    bbThreadedPool* pool = Pool;
+    bbPool_Handle handle;
+    bbThreadedPool_reverseLookup(Pool, address, &handle);
+    bbPrintf("Element id at index %d\n", handle.u64);
+
     return Success;
 }

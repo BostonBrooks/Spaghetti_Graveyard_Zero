@@ -35,14 +35,14 @@ bbThreadedPool_allocImpl(pool, address, NULL, 0);
 
 bbFlag bbThreadedPool_new(bbThreadedPool** pool, I32 sizeOf, I32 num);
 bbFlag bbThreadedPool_delete(bbThreadedPool* pool);
-bbFlag bbThreadedPool_clear(bbThreadedPool* pool);
+bbFlag bbThreadedPool_clear(void* pool);
 bbFlag bbThreadedPool_allocImpl(bbThreadedPool* pool, void** address, char* file, int
 line);
 bbFlag bbThreadedPool_free(bbThreadedPool* pool, void* address);
 bbFlag bbThreadedPool_lookup(bbThreadedPool* pool, void** address, bbPool_Handle handle);
 bbFlag bbThreadedPool_reverseLookup(void* Pool, void* address, bbPool_Handle*
 handle);
-bbFlag bbThreadedPool_printHeader(bbThreadedPool* pool, void* address);
+bbFlag bbThreadedPool_printHeader(void* Pool, void* address);
 I32 bbThreadedPool_handleIsEqual(void* USUSED, bbPool_Handle A, bbPool_Handle B);
 
 #endif //BB_THREADED_POOL_H
