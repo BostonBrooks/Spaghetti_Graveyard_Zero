@@ -116,4 +116,4 @@ functions, bbSpellFunctionType fnType, char* key);
 I32 bbSpellFunctions_getInt(bbSpellFunctions* functions, bbSpellFunctionType
 fnType, char* key);
 
-#endif BBSPELL_H
+#endif //BBSPELL_H

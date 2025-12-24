@@ -19,6 +19,7 @@
 #include "engine/viewport/bbMapIcons.h"
 #include "engine/avoidance/bbAvoidables.h"
 #include "engine/viewport/bbUnits.h"
+#include "engine/network/bbNetwork.h"
 
 
 bbWidgets* testWidgets;

@@ -172,4 +172,17 @@ bbDebug ("bbWidgetCommandType = unknown\n");\
     }\
 }\
 
+static void bbClr_line(int lines)
+{
+    //    \r     #go to the start of the current line
+    //    \033[F #back to previous line
+    //    \033[K #delete everything from the cursor to the end of the line
+
+    for(int i = 0; i <= lines;i++)
+    {
+        printf("\r\033[K");
+        if (i<lines) printf("\033[F");
+    }
+    fflush(stdout);
+}
 #endif // BBPRINTF_H
