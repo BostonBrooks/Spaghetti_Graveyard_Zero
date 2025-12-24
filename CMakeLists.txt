@@ -84,6 +84,7 @@ add_executable(myprogram
         engine/threadsafe/bbThreadedPool.c
         engine/network/bbNetwork.h
         test/bbThreadedPool_test.c
+        engine/threadsafe/bbThreadedQueue.c
 
 )
 
