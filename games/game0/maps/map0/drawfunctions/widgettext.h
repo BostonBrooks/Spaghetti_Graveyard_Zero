@@ -43,7 +43,5 @@ bbFlag bbDF_widgetText(void* Drawable, void* frameDescriptor, void* cl){
 
         sfRenderWindow_drawText(closure->target, text, NULL);
 
-    bbHere()
-
         return Success;
     }

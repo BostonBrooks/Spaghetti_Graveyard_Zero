@@ -17,6 +17,7 @@
 #include "games/game0/maps/map0/drawfunctions/drawableanimation.h"
 #include "games/game0/maps/map0/drawfunctions/textboxindicator.h"
 #include "games/game0/maps/map0/drawfunctions/widgettext.h"
+#include "games/game0/maps/map0/drawfunctions/widgetstate.h"
 
 
 //typedef bbFlag bbDrawFunction(void* drawable, void* frameDescriptor, void* cl);
@@ -161,6 +162,7 @@ bbFlag bbDF_composition(void* drawable, void* frameDescriptor, void* cl){
 }
 
 
+
 ///draw the viewport to the screen
 bbFlag bbDF_widgetViewport(void* drawable, void* frameDescriptor, void* cl){
     bbWidget* widget = drawable;
@@ -255,7 +257,7 @@ bbFlag bbDF_widgetTextBox(void* drawable, void* frameDescriptor, void* cl)
 
 
 bbFlag bbDrawfunctions_new(bbDrawfunctions** drawfunctions){
-    I32 num = 14;
+    I32 num = 15;
     bbDrawfunctions* functions = malloc(sizeof(bbDrawfunctions) + num * sizeof(bbDrawFunction*));
     bbAssert(functions!=NULL, "bad malloc");
     bbDictionary_new(&functions->dictionary, nextPrime(num));
@@ -320,6 +322,10 @@ bbFlag bbDrawfunctions_new(bbDrawfunctions** drawfunctions){
     functions->functions[13] = bbDF_widgetText;
     handle.u64 = 13;
     bbDictionary_add(functions->dictionary, "WIDGETTEXT", handle);
+
+    functions->functions[14] = bbDF_widgetState;
+    handle.u64 = 14;
+    bbDictionary_add(functions->dictionary, "WIDGETSTATE", handle);
 
 
 

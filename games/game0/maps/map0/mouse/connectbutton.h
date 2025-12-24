@@ -31,10 +31,9 @@ bbFlag ConnectButton_Enter (void* mouse, void* widgets, void* Widget, void* Grap
 {
     bbWidget* widget = (bbWidget*)Widget;
     bbGraphics* graphics = Graphics;
-    bbDictionary_lookup(graphics->sprites->dictionary,
-                        "CONNECT_HOVER", &widget->frames[0].handle);
 
     widget->mtable.hover = true;
+    widget->state = bbWidgetState_Hover;
     return Success;
 }
 
@@ -43,10 +42,9 @@ bbFlag ConnectButton_Leave (void* mouse, void* widgets, void* Widget, void* Grap
 {
     bbWidget* widget = (bbWidget*)Widget;
     bbGraphics* graphics = Graphics;
-    bbDictionary_lookup(graphics->sprites->dictionary,
-                        "CONNECT_DEFAULT", &widget->frames[0].handle);
 
     widget->mtable.hover = false;
+    widget->state = bbWidgetState_Default;
     return Success;
 }
 
@@ -62,12 +60,11 @@ Graphics)
 
     bbVPool* pool = widgets->pool;
     bbPool_Handle handle;
-    bbDictionary_lookup(graphics->sprites->dictionary,
-                        "CONNECT_CLICK", &widget->frames[0].handle);
 
     bbVPool_reverseLookup(pool, widget, &handle);
     widget->mtable.hover = true;
     mouse->selected = handle;
+    widget->state = bbWidgetState_Click;
     return Success;
 }
 
@@ -84,12 +81,11 @@ bbFlag ConnectButton_LeftUp (void* Mouse, void* Widgets, void* Widget, void* Gra
 
     if (widget->mtable.hover) {
 
-        bbDictionary_lookup(graphics->sprites->dictionary,
-                            "CONNECT_HOVER", &widget->frames[0].handle);
+        widget->state = bbWidgetState_Hover;
 
     } else {
-        bbDictionary_lookup(graphics->sprites->dictionary,
-                            "CONNECT_DEFAULT", &widget->frames[0].handle);
+
+        widget->state = bbWidgetState_Default;
     }
 
     widget->mtable.hover = false;

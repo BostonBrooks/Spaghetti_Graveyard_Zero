@@ -21,11 +21,12 @@ bbFlag ConnectButton_Constructor (bbWidget** self, void* Graphics,
     widget->rect = rect;
 
     bbPool_Handle drawfunctionHandle;
-    bbDictionary_lookup(graphics->drawfunctions->dictionary, "WIDGETSPRITE",
-                        &drawfunctionHandle);
+
+    bbDictionary_lookup(graphics->drawfunctions->dictionary, "WIDGETSTATE",
+                    &drawfunctionHandle);
     widget->frames[0].drawfunction = drawfunctionHandle.u64;
 
-    bbDictionary_lookup(graphics->sprites->dictionary, "CONNECT_DEFAULT",
+    bbDictionary_lookup(graphics->compositions->dictionary, "BUTTON",
                         &widget->frames[0].handle);
 
 
@@ -38,6 +39,10 @@ bbFlag ConnectButton_Constructor (bbWidget** self, void* Graphics,
     widget->frames[1].offset.x = 10*SCREEN_PPP;
     widget->frames[1].offset.y = 3*SCREEN_PPP;
 
+
+
+
+    widget->state = bbWidgetState_Default;
 
     int funcInt;
 
@@ -59,7 +64,7 @@ bbFlag ConnectButton_Constructor (bbWidget** self, void* Graphics,
     widget->mtable.DragIcon = -1;
 
 
-    for (I32 i = 2; i < FRAMES_PER_WIDGET; i++) {
+    for (I32 i = 3; i < FRAMES_PER_WIDGET; i++) {
         widget->frames[i].drawfunction = -1;
     }
 
@@ -91,14 +96,17 @@ bbFlag DisConnectButton_Constructor (bbWidget** self, void* Graphics,
 bbFlag GoOfflineButton_Constructor (bbWidget** self, void* Graphics,
                          bbWidgets* widgets, bbScreenPoints screen_coords, bbWidget* parent)
 {
-    bbWidget* widget;
+    bbWidget* widget; bbGraphics* graphics = Graphics;
     ConnectButton_Constructor(&widget, Graphics, widgets, screen_coords, parent);
 
 
     bbStr_setStr(widget->key, "Offline", 64);
 
-    *self = widget;
 
+
+
+
+    *self = widget;
     return Success;
 
 }

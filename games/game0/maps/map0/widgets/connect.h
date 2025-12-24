@@ -82,7 +82,7 @@ bbWidgets* widgets, bbScreenPoints screen_coords, bbWidget* parent)
 
 
     bbWidget* Port_widget;
-    SP.x = 169*SCREEN_PPP; SP.y = 208*SCREEN_PPP;
+    SP.x = 169*SCREEN_PPP; SP.y = 204*SCREEN_PPP;
     bbWidget_constructor(&Port_widget, widgets, graphics,SP, widget, "TEXTBOX");
     bbVPool_reverseLookup(widgets->pool, Port_widget, &handle);
     bbDictionary_add(widgets->dict, "IP_PORT", handle);

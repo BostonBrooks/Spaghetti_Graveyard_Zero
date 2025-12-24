@@ -26,6 +26,13 @@ typedef enum bbWidget_Type
     bbWidgetType_CurrentSpell
 } bbWidget_Type;
 
+typedef enum bbWidget_state
+{
+	bbWidgetState_Default,
+	bbWidgetState_Hover,
+	bbWidgetState_Click,
+} bbWidget_state;
+
 
 #define FRAMES_PER_WIDGET 8
 
@@ -61,6 +68,7 @@ typedef struct bbWidget{
 	bbWidgetFunctionTable ftable;
     bbFrame frames[FRAMES_PER_WIDGET];
 	bbWidget_Type type;
+	bbWidget_state state;
 	bbWidget_TypeData typeData;
     char key[64];
 

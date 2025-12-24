@@ -1,4 +1,4 @@
-Number of Compositions:,3,,,,,,
+Number of Compositions:,4,,,,,,
 ,,,,,,,
 Label:,NULL,Integer Address:,0,num:,1,Comment,Void Composition
 Type:,Key:,Drawfunction:,startTime,Offest X:,Offset Y:,Frame Rate:,
@@ -15,3 +15,9 @@ Type:,Key:,Drawfunction:,startTime,Offest X:,Offset Y:,Frame Rate:,
 COMPOSITION,KITTIES,COMPOSITION,0,0,0,0.98,
 COMPOSITION,KITTIES,COMPOSITION,0,0,1000,1,
 COMPOSITION,KITTIES,COMPOSITION,0,0,2000,1.02,
+,,,,,,,,
+Label:,BUTTON,Integer Address:,3,num:,3,Comment:,Displays the button differently depending on state
+Type:,Key:,Drawfunction:,startTime,Offest X:,Offset Y:,Frame Rate:,
+SPRITE,CONNECT_DEFAULT,WIDGETSPRITE,0,0,0,0,
+SPRITE,CONNECT_HOVER,WIDGETSPRITE,0,0,0,0,
+SPRITE,CONNECT_CLICK,WIDGETSPRITE,0,0,0,0,
