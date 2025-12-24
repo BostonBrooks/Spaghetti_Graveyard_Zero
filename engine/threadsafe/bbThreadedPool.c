@@ -168,12 +168,42 @@ bbFlag bbThreadedPool_lookup(bbThreadedPool* pool, void** address, bbPool_Handle
     return Success;
 }
 
-bbFlag bbThreadedPool_reverseLookup(bbThreadedPool* pool, void* address, bbPool_Handle* Handle)
+bbFlag bbThreadedPool_reverseLookup(void* Pool, void* address, bbPool_Handle* Handle)
 {
+    bbThreadedPool* pool = Pool;
     pthread_mutex_lock(&pool->mutex);
     bbPool_Handle handle;
     bbThreadedPool_reverseLookup_unsafe(pool, (void*)address, &handle);
     *Handle = handle;
+    pthread_mutex_unlock(&pool->mutex);
+    return Success;
+}
+
+I32 bbThreadedPool_handleIsEqual(void* USUSED, bbPool_Handle A, bbPool_Handle B)
+{
+    return (A.u64 == B.u64);
+}
+
+bbFlag bbThreadedPool_clear(bbThreadedPool* pool)
+{
+    pthread_mutex_lock(&pool->mutex);
+    bbThreadedPool_unused* element;
+    pool->inUse = 0;
+    for (I32 i = 0; i < pool->num; i++)
+    {
+        element = (bbThreadedPool_unused*)&pool->elements[i];
+        element->prev = i-1;
+        element->next = i+1;
+    }
+    element = (bbThreadedPool_unused*)&pool->elements[0];
+    element->prev = -1;
+    element = (bbThreadedPool_unused*)&pool->elements[pool->num-1];
+    element->next = -1;
+
+    pool->availableHead = 0;
+    pool->availableTail = pool->num - 1;
+
+
     pthread_mutex_unlock(&pool->mutex);
     return Success;
 }

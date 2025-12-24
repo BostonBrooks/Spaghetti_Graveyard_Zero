@@ -71,9 +71,9 @@ bbFlag bbVPool_newThreaded(bbVPool** self, I32 sizeOf, I32 num)
 	pool->free = (bbFlag(*)(void* pool, void* address)) bbThreadedPool_free;
 	pool->lookup = (bbFlag (*)(void* pool, void** address, bbPool_Handle
 	handle)) bbThreadedPool_lookup;
-	pool->reverseLookup = NULL;
+	pool->reverseLookup = bbThreadedPool_reverseLookup;
 	pool->printHeader = NULL;
-	pool->handleIsEqual = NULL;
+	pool->handleIsEqual = bbThreadedPool_handleIsEqual;
 	*self = pool;
 	return Success;
 

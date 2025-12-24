@@ -40,9 +40,9 @@ bbFlag bbThreadedPool_allocImpl(bbThreadedPool* pool, void** address, char* file
 line);
 bbFlag bbThreadedPool_free(bbThreadedPool* pool, void* address);
 bbFlag bbThreadedPool_lookup(bbThreadedPool* pool, void** address, bbPool_Handle handle);
-bbFlag bbThreadedPool_reverseLookup(bbThreadedPool* pool, void* address, bbPool_Handle*
+bbFlag bbThreadedPool_reverseLookup(void* Pool, void* address, bbPool_Handle*
 handle);
 bbFlag bbThreadedPool_printHeader(bbThreadedPool* pool, void* address);
-I32 bbThreadedPool_handleIsEqual(bbThreadedPool* USUSED, bbPool_Handle A, bbPool_Handle B);
+I32 bbThreadedPool_handleIsEqual(void* USUSED, bbPool_Handle A, bbPool_Handle B);
 
 #endif //BB_THREADED_POOL_H
