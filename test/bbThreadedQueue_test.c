@@ -16,6 +16,30 @@ typedef struct
     bbPool_ListElement list_element;
 } teststring;
 
+void* send_messages(void* queue)
+{
+
+    thread = "Send";
+    I32 i = 0;
+    while (1)
+    {
+        //bbThreadedQueue* Queue = (bbThreadedQueue*)queue;
+        //bbThreadedPool* pool = Queue->pool->pool;
+        //bbDebug("inUse = %d\n", pool->inUse);
+        teststring* test;
+        bbThreadedQueue_alloc(queue, (void**)&test);
+        sprintf(test->str, "receive %d", i);
+        printf("send %d\n", i);
+        bbThreadedQueue_pushL(queue, test);
+
+        //do other things
+        sfSleep(sfSeconds(0.1));
+
+        i++;
+    }
+    return 0;
+}
+
 
 
 void* receive_messages(void* queue)
@@ -40,30 +64,6 @@ void* receive_messages(void* queue)
         }
         //do other things
         sfSleep(sfSeconds(0.1));
-    }
-    return 0;
-}
-
-void* send_messages(void* queue)
-{
-
-    thread = "Send";
-    I32 i = 0;
-    while (1)
-    {
-        //bbThreadedQueue* Queue = (bbThreadedQueue*)queue;
-        //bbThreadedPool* pool = Queue->pool->pool;
-        //bbDebug("inUse = %d\n", pool->inUse);
-        teststring* test;
-        bbThreadedQueue_alloc(queue, (void**)&test);
-        sprintf(test->str, "receive %d", i);
-        printf("send %d\n", i);
-        bbThreadedQueue_pushL(queue, test);
-
-        //do other things
-        sfSleep(sfSeconds(0.1));
-
-        i++;
     }
     return 0;
 }
