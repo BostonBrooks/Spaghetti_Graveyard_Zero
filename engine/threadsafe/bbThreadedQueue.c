@@ -212,7 +212,7 @@ __attribute__((no_sanitize("address")))
 bbFlag bbThreadedQueue_popR(bbThreadedQueue* queue, void** Element)
 {
     bbVPool* pool = queue->pool;
-    bbDebug("queue = %p, vPool = %p, Pool = %p\n", queue, pool, pool->pool);
+ //   bbDebug("queue = %p, vPool = %p, Pool = %p\n", queue, pool, pool->pool);
     bbMutexLock(&queue->mutex);
 
     //Case 1: Empty
@@ -245,7 +245,7 @@ bbFlag bbThreadedQueue_popR(bbThreadedQueue* queue, void** Element)
     }
 
     //Case 3: More than one element
-bbHere()
+//bbHere()
     bbPool_Handle tail_handle;
     tail_handle.u64 = queue->tail;
     void* tail_element;
