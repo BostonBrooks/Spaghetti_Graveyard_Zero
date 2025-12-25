@@ -65,6 +65,7 @@ bbFlag bbThreadedPool_new(bbThreadedPool** self, I32 sizeOf, I32 num)
 
     pthread_mutex_init(&pool->mutex, NULL);
     pthread_mutex_init(&pool->poolFull, NULL);
+    pthread_cond_init(&pool->poolFull2, NULL);
 
     *self = pool;
     return Success;
@@ -86,8 +87,9 @@ bbFlag bbThreadedPool_allocImpl(bbThreadedPool* pool, void** address, char* file
     if (pool->inUse > pool->num)
     {
         bbMutexUnlock(&pool->mutex);
-        bbMutexLock(&pool->poolFull);
-        bbMutexLock(&pool->poolFull);
+
+        //there is a bug when mutex is unlocked in between the following lines
+        pthread_cond_wait(&pool->poolFull2, &pool->poolFull);
         bbMutexLock(&pool->mutex);
     }
     bbPool_Handle handle;
@@ -167,6 +169,7 @@ bbFlag bbThreadedPool_free(bbThreadedPool* pool, void* address)
     element->prev = -1;
 
     //the following line may not be necessary because the pool is not full
+    pthread_cond_signal(&pool->poolFull2);
     bbMutexUnlock(&pool->poolFull);
     bbMutexUnlock(&pool->mutex);
     return Success;

@@ -29,7 +29,7 @@ typedef struct
     pthread_mutex_t mutex;
     //If pool full, thread waits until pool is not full
     pthread_mutex_t poolFull;
-    pthread_mutex_t poolEmpty;
+    pthread_cond_t poolFull2;
     alignas(8) U8 elements[];
 } bbThreadedPool;
 
