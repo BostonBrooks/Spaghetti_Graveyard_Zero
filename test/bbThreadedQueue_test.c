@@ -24,22 +24,19 @@ void* receive_messages(void* queue)
     bbFlag flag = Success;
     while (1)
     {
+        flag = Success;
         //check queue
         while (flag == Success)
         {
             //bbThreadedQueue* Queue = (bbThreadedQueue*)queue;
             //bbThreadedPool* pool = Queue->pool->pool;
             //bbDebug("inUse = %d\n", pool->inUse);
-
-
             teststring* test;
-            bbHere()
             flag = bbThreadedQueue_popR(queue, (void**)&test);
-            bbHere()
             if (flag != Success) break;
             printf("%s\n", test->str);
             bbThreadedQueue_free(queue, (void**)&test);
-            bbHere()
+
         }
         //do other things
         sfSleep(sfSeconds(0.1));

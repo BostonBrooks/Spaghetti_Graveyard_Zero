@@ -49,10 +49,8 @@ bbFlag bbThreadedQueue_alloc(bbThreadedQueue* queue, void** element)
 bbFlag bbThreadedQueue_free(bbThreadedQueue* queue, void** element)
 {
     //bbMutexLock(&queue->mutex);
-    bbHere()
     bbVPool_free(queue->pool, (void*)*element);
     *element = NULL;
-    bbHere()
     //bbMutexUnlock(&queue->mutex);
 
     return Success;

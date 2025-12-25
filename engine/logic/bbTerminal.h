@@ -188,7 +188,7 @@ static void bbClr_line(int lines)
 
 extern _Thread_local char* thread;
 
-#define THREAD_DEBUG
+//#define THREAD_DEBUG
 #ifdef THREAD_DEBUG
 
 #define bbMutexLock(mutex){\
