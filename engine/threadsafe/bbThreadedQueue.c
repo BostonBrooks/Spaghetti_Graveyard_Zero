@@ -217,9 +217,9 @@ bbFlag bbThreadedQueue_popR(bbThreadedQueue* queue, void** Element)
 
     //Case 1: Empty
 
-    if (queue->head == -1)
+    if (queue->head == -1 || queue->tail == -1)
     {
-        bbAssert(queue->tail == -1, "head/tail mismatch");
+        bbAssert(queue->head == -1 && queue->tail == -1, "head/tail mismatch");
         *Element = NULL;
         bbMutexUnlock(&queue->mutex);
         return None;
