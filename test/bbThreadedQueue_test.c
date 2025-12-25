@@ -63,7 +63,7 @@ void* receive_messages(void* queue)
 
         }
         //do other things
-        sfSleep(sfSeconds(0.1));
+        sfSleep(sfSeconds(2));
     }
     return 0;
 }
