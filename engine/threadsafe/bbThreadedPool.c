@@ -81,11 +81,11 @@ bbFlag bbThreadedPool_allocImpl(bbThreadedPool* pool, void** address, char* file
 {
     bbMutexLock(&pool->mutex);
     //TODO If pool empty, *element = NULL; return None;
-    bbAssert(pool->inUse < pool->num, "pool full inUse = %d\n", pool->inUse);
+    bbAssert(pool->inUse <= pool->num, "pool full inUse = %d\n", pool->inUse);
 
     pool->inUse++;
 
-    if (pool->inUse == pool->num)
+    if (pool->inUse > pool->num)
     {
         bbMutexUnlock(&pool->mutex);
         bbMutexLock(&pool->poolFull);
