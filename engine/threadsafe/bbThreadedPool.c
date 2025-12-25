@@ -127,6 +127,7 @@ bbFlag bbThreadedPool_free(bbThreadedPool* pool, void* address)
 {
     bbMutexLock(&pool->mutex);
     pool->inUse--;
+    pthread_cond_signal(&pool->poolFull2);
 
     //pool full, reserve empty
     if (pool->availableHead == -1)
@@ -169,7 +170,7 @@ bbFlag bbThreadedPool_free(bbThreadedPool* pool, void* address)
     element->prev = -1;
 
     //the following line may not be necessary because the pool is not full
-    pthread_cond_signal(&pool->poolFull2);
+
     bbMutexUnlock(&pool->poolFull);
     bbMutexUnlock(&pool->mutex);
     return Success;
