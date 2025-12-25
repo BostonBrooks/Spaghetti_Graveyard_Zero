@@ -6,6 +6,8 @@
 #include "engine/logic/bbTerminal.h"
 #include "engine/logic/bbVPool.h"
 
+
+
 bbFlag bbThreadedPool_lookup_unsafe(bbThreadedPool* pool, void** address, bbPool_Handle handle)
 {
     I32 offset = handle.u64 * pool->sizeOf;
@@ -62,6 +64,7 @@ bbFlag bbThreadedPool_new(bbThreadedPool** self, I32 sizeOf, I32 num)
     element->next = -1;
 
     pthread_mutex_init(&pool->mutex, NULL);
+    pthread_mutex_init(&pool->poolFull, NULL);
 
     *self = pool;
     return Success;
@@ -76,10 +79,19 @@ bbFlag bbThreadedPool_delete(bbThreadedPool* pool){
 //Takes element from Head
 bbFlag bbThreadedPool_allocImpl(bbThreadedPool* pool, void** address, char* file, int line)
 {
-    pthread_mutex_lock(&pool->mutex);
-    bbAssert(pool->inUse < pool->num, "pool full\n");
+    bbMutexLock(&pool->mutex);
+    //TODO If pool empty, *element = NULL; return None;
+    bbAssert(pool->inUse < pool->num, "pool full inUse = %d\n", pool->inUse);
 
     pool->inUse++;
+
+    if (pool->inUse == pool->num)
+    {
+        bbMutexUnlock(&pool->mutex);
+        bbMutexLock(&pool->poolFull);
+        bbMutexLock(&pool->poolFull);
+        bbMutexLock(&pool->mutex);
+    }
     bbPool_Handle handle;
     bbThreadedPool_unused* element;
     handle.u64 = pool->availableHead;
@@ -92,7 +104,7 @@ bbFlag bbThreadedPool_allocImpl(bbThreadedPool* pool, void** address, char* file
         pool->availableTail = -1;
 
         *address = element;
-        pthread_mutex_unlock(&pool->mutex);
+        bbMutexUnlock(&pool->mutex);
         return Success;
     }
 
@@ -106,15 +118,16 @@ bbFlag bbThreadedPool_allocImpl(bbThreadedPool* pool, void** address, char* file
 
     *address = element;
 
-    pthread_mutex_unlock(&pool->mutex);
+    bbMutexUnlock(&pool->mutex);
     return Success;
 }
 
 //Adds element to Head
 bbFlag bbThreadedPool_free(bbThreadedPool* pool, void* address)
 {
-    pthread_mutex_lock(&pool->mutex);
+    bbMutexLock(&pool->mutex);
     pool->inUse--;
+
 
     //Add to empty pool
     if (pool->availableHead == -1)
@@ -129,8 +142,10 @@ bbFlag bbThreadedPool_free(bbThreadedPool* pool, void* address)
         bbThreadedPool_unused* element = address;
         element->prev = -1;
         element->next = -1;
-\
-        pthread_mutex_unlock(&pool->mutex);
+
+
+        bbMutexUnlock(&pool->poolFull);
+        bbMutexUnlock(&pool->mutex);
         return Success;
 
 
@@ -154,28 +169,28 @@ bbFlag bbThreadedPool_free(bbThreadedPool* pool, void* address)
     element->next = next_handle.u64;
     element->prev = -1;
 
-    pthread_mutex_unlock(&pool->mutex);
+    bbMutexUnlock(&pool->mutex);
     return Success;
 }
 
 bbFlag bbThreadedPool_lookup(bbThreadedPool* pool, void** address, bbPool_Handle handle)
 {
-    pthread_mutex_lock(&pool->mutex);
+    bbMutexLock(&pool->mutex);
     void** element;
     bbThreadedPool_lookup_unsafe(pool, (void**)&element, handle);
     *address = element;
-    pthread_mutex_unlock(&pool->mutex);
+    bbMutexUnlock(&pool->mutex);
     return Success;
 }
 
 bbFlag bbThreadedPool_reverseLookup(void* Pool, void* address, bbPool_Handle* Handle)
 {
     bbThreadedPool* pool = Pool;
-    pthread_mutex_lock(&pool->mutex);
+    bbMutexLock(&pool->mutex);
     bbPool_Handle handle;
     bbThreadedPool_reverseLookup_unsafe(pool, (void*)address, &handle);
     *Handle = handle;
-    pthread_mutex_unlock(&pool->mutex);
+    bbMutexUnlock(&pool->mutex);
     return Success;
 }
 
@@ -187,7 +202,7 @@ I32 bbThreadedPool_handleIsEqual(void* USUSED, bbPool_Handle A, bbPool_Handle B)
 bbFlag bbThreadedPool_clear(void* Pool)
 {
     bbThreadedPool* pool = Pool;
-    pthread_mutex_lock(&pool->mutex);
+    bbMutexLock(&pool->mutex);
     bbThreadedPool_unused* element;
     pool->inUse = 0;
     for (I32 i = 0; i < pool->num; i++)
@@ -205,7 +220,7 @@ bbFlag bbThreadedPool_clear(void* Pool)
     pool->availableTail = pool->num - 1;
 
 
-    pthread_mutex_unlock(&pool->mutex);
+    bbMutexUnlock(&pool->mutex);
     return Success;
 }
 

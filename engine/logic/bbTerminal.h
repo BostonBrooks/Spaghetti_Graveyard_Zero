@@ -185,4 +185,31 @@ static void bbClr_line(int lines)
     }
     fflush(stdout);
 }
+
+extern _Thread_local char* thread;
+
+//#define THREAD_DEBUG
+#ifdef THREAD_DEBUG
+
+#define bbMutexLock(mutex){\
+bbDebug("Mutex Lock in thread %s!\n", thread);\
+pthread_mutex_lock(mutex);}\
+
+
+#define bbMutexUnlock(mutex){\
+bbDebug("Mutex Unlock in thread %s!\n", thread);\
+pthread_mutex_unlock(mutex);}\
+
+#else //#ifdef THREAD_DEBUG
+
+
+#define bbMutexLock(mutex){\
+pthread_mutex_lock(mutex);}\
+
+
+#define bbMutexUnlock(mutex){\
+pthread_mutex_unlock(mutex);}\
+
+#endif //#ifdef THREAD_DEBUG
+
 #endif // BBPRINTF_H

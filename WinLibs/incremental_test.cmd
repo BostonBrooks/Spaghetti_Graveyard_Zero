@@ -51,7 +51,7 @@ gcc   -D SFML_STATIC -I ../^
        ../engine/avoidance/bbAvoidables.c^
        ../engine/viewport/bbUnits.c^
        ../engine/threadsafe/bbThreadedPool.c^
-       ../engine/network/bbNetwork.c^
+       ../engine/threadsafe/bbThreadedQueue.c^
        ../games/game0/maps/map0/drawfunctions/drawfunctions.c^
        ^
   -lcsfml-system -lcsfml-graphics -lcsfml-window -g -lm -w^

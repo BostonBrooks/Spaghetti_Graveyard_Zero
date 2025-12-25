@@ -3,9 +3,12 @@
 #include "engine/threadsafe/bbThreadedPool.h"
 
 #include <stdio.h>
+#include <SFML/System/Sleep.h>
 
 #include "engine/logic/bbTerminal.h"
 #include "engine/logic/bbVPool.h"
+
+_Thread_local char* thread;
 
 typedef struct
 {
@@ -13,20 +16,72 @@ typedef struct
     bbPool_ListElement list_element;
 } teststring;
 
+
+
+void* receive_messages(void* queue)
+{
+    thread = "Receive";
+    bbFlag flag = Success;
+    while (1)
+    {
+        //check queue
+        while (flag == Success)
+        {
+            //bbThreadedQueue* Queue = (bbThreadedQueue*)queue;
+            //bbThreadedPool* pool = Queue->pool->pool;
+            //bbDebug("inUse = %d\n", pool->inUse);
+
+
+            teststring* test;
+            flag = bbThreadedQueue_popR(queue, (void**)&test);
+            if (flag != Success) break;
+            printf("%s\n", test->str);
+            bbThreadedQueue_free(queue, (void**)&test);
+        }
+        //do other things
+        sfSleep(sfSeconds(0.1));
+    }
+    return 0;
+}
+
+void* send_messages(void* queue)
+{
+
+    thread = "Send";
+    I32 i = 0;
+    while (1)
+    {
+        //bbThreadedQueue* Queue = (bbThreadedQueue*)queue;
+        //bbThreadedPool* pool = Queue->pool->pool;
+        //bbDebug("inUse = %d\n", pool->inUse);
+        teststring* test;
+        bbThreadedQueue_alloc(queue, (void**)&test);
+        sprintf(test->str, "receive %d", i);
+        printf("send %d\n", i);
+        bbThreadedQueue_pushL(queue, test);
+
+        //do other things
+        sfSleep(sfSeconds(0.1));
+
+        i++;
+    }
+    return 0;
+}
+
+
 int main(void)
 {
+
+    thread = "Main";
     bbFlag flag;
     bbThreadedQueue queue;
-    flag = bbThreadedQueue_init(&queue, NULL, sizeof(teststring), 100, offsetof(teststring, list_element));
+    flag = bbThreadedQueue_init(&queue, NULL, sizeof(teststring), 10, offsetof(teststring, list_element));
 
-    teststring* test;
-    flag = bbThreadedQueue_alloc(&queue, (void**)&test);
+    pthread_t send_thread, receive_thread;
+    pthread_create(&send_thread,NULL, send_messages, &queue);
+    pthread_create(&receive_thread,NULL, receive_messages, &queue);
 
-    bbStr_setStr(test->str, "rowreowrow", 64);
+    sfSleep(sfSeconds(60));
 
-    flag = bbThreadedQueue_free(&queue, (void**)&test);
-
-
-    bbPrintf("We made it to the end!\n");
-    return 0;
+    exit(0);
 }

@@ -34,7 +34,7 @@ bbFlag bbThreadedQueue_alloc(bbThreadedQueue* queue, void** element);
 bbFlag bbThreadedQueue_free(bbThreadedQueue* queue, void** element);
 bbFlag bbThreadedQueue_pushL(bbThreadedQueue* queue, void* element);
 bbFlag bbThreadedQueue_pushR(bbThreadedQueue* queue, void* element);
-bbFlag bbThreadedQueue_popL(bbThreadedQueue* queue, void** element);
+bbFlag bbThreadedQueue_popL(bbThreadedQueue* queue, void** Element);
 bbFlag bbThreadedQueue_popR(bbThreadedQueue* queue, void** element);
 
 
