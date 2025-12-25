@@ -188,7 +188,7 @@ static void bbClr_line(int lines)
 
 extern _Thread_local char* thread;
 
-//#define THREAD_DEBUG
+#define THREAD_DEBUG
 #ifdef THREAD_DEBUG
 
 #define bbMutexLock(mutex){\
@@ -199,6 +199,11 @@ pthread_mutex_lock(mutex);}\
 #define bbMutexUnlock(mutex){\
 bbDebug("Mutex Unlock in thread %s!\n", thread);\
 pthread_mutex_unlock(mutex);}\
+
+#undef bbHere()
+#define bbHere() printf ("In FILE: %s, FUNCTION: %s, LINE: %d, THREAD: %s\n",\
+__FILE_NAME__, __func__, __LINE__, thread);
+
 
 #else //#ifdef THREAD_DEBUG
 

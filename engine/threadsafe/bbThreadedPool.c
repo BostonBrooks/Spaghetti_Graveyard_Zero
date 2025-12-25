@@ -80,8 +80,6 @@ bbFlag bbThreadedPool_delete(bbThreadedPool* pool){
 bbFlag bbThreadedPool_allocImpl(bbThreadedPool* pool, void** address, char* file, int line)
 {
     bbMutexLock(&pool->mutex);
-    //TODO If pool empty, *element = NULL; return None;
-    bbAssert(pool->inUse <= pool->num, "pool full inUse = %d\n", pool->inUse);
 
     pool->inUse++;
 
@@ -128,8 +126,7 @@ bbFlag bbThreadedPool_free(bbThreadedPool* pool, void* address)
     bbMutexLock(&pool->mutex);
     pool->inUse--;
 
-
-    //Add to empty pool
+    //pool full, reserve empty
     if (pool->availableHead == -1)
     {
         bbAssert(pool->availableTail == -1, "head/tail mismatch\n");
@@ -169,28 +166,30 @@ bbFlag bbThreadedPool_free(bbThreadedPool* pool, void* address)
     element->next = next_handle.u64;
     element->prev = -1;
 
+    //the following line may not be necessary because the pool is not full
+    bbMutexUnlock(&pool->poolFull);
     bbMutexUnlock(&pool->mutex);
     return Success;
 }
 
 bbFlag bbThreadedPool_lookup(bbThreadedPool* pool, void** address, bbPool_Handle handle)
 {
-    bbMutexLock(&pool->mutex);
+    //bbMutexLock(&pool->mutex);
     void** element;
     bbThreadedPool_lookup_unsafe(pool, (void**)&element, handle);
     *address = element;
-    bbMutexUnlock(&pool->mutex);
+    //bbMutexUnlock(&pool->mutex);
     return Success;
 }
 
 bbFlag bbThreadedPool_reverseLookup(void* Pool, void* address, bbPool_Handle* Handle)
 {
     bbThreadedPool* pool = Pool;
-    bbMutexLock(&pool->mutex);
+    //bbMutexLock(&pool->mutex);
     bbPool_Handle handle;
     bbThreadedPool_reverseLookup_unsafe(pool, (void*)address, &handle);
     *Handle = handle;
-    bbMutexUnlock(&pool->mutex);
+    //bbMutexUnlock(&pool->mutex);
     return Success;
 }
 
