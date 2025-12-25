@@ -32,9 +32,10 @@ bbFlag bbThreadedQueue_init(bbThreadedQueue* queue, bbVPool* pool, I32 sizeOf, I
 bbFlag bbThreadedQueue_alloc(bbThreadedQueue* queue, void** element)
 {
     //TODO If pool empty, *element = NULL; return None;
-    bbMutexLock(&queue->mutex);
+
     bbVPool_alloc(queue->pool, (void**)element);
 
+    bbMutexLock(&queue->mutex);
     bbPool_ListElement* list_element = (*element + queue->offsetOf);
     list_element->prev = queue->pool->null;
     list_element->next = queue->pool->null;

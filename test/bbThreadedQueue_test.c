@@ -33,10 +33,13 @@ void* receive_messages(void* queue)
 
 
             teststring* test;
+            bbHere()
             flag = bbThreadedQueue_popR(queue, (void**)&test);
+            bbHere()
             if (flag != Success) break;
             printf("%s\n", test->str);
             bbThreadedQueue_free(queue, (void**)&test);
+            bbHere()
         }
         //do other things
         sfSleep(sfSeconds(0.1));
