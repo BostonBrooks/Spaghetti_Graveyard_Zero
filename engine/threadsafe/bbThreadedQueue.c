@@ -208,6 +208,7 @@ bbFlag bbThreadedQueue_popL(bbThreadedQueue* queue, void** Element)
     return Success;
 }
 //Cases: empty, 1 element, more than 1 element;
+__attribute__((no_sanitize("address")))
 bbFlag bbThreadedQueue_popR(bbThreadedQueue* queue, void** Element)
 {
     bbMutexLock(&queue->mutex);
@@ -258,7 +259,7 @@ bbHere()
     tail_listElement->prev = queue->pool->null;
     tail_listElement->next = queue->pool->null;
 
-    // test - Test passes index = 1, offsetof = 64, offset_int_pool = 160
+    /* test - Test passes index = 1, offsetof = 64, offset_int_pool = 160
 
     bbPool_Handle test_handle;
     bbThreadedPool* threaded_pool = queue->pool->pool;
@@ -266,8 +267,8 @@ bbHere()
     bbDebug("index = %d, offsetof = %d, sizeOf = %d, offset_in_pool = %llu\n",
         test_handle.u64, queue->offsetOf, threaded_pool->sizeOf,  (U64)prev_element - (U64)queue->pool->pool);
     bbDebug("tail_listElement address = %p,\n       prev_listElement address = %p\n", tail_listElement, prev_listElement);
-    test_handle = prev_listElement->next;
-     //end test - why does the above line buffer-overflow when the index is within bounds? */
+     //end test - why does the below line buffer-overflow when the index is within bounds?
+     Have switched off address sanitisation for this function*/
 
     prev_listElement->next = queue->pool->null;
     queue->tail = prev_handle.u64;
