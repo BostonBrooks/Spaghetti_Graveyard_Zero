@@ -266,7 +266,7 @@ static sfIpAddress bbGetIPAddress(char* prompt)
 //thread tells some of the debugging functions what to name each thread
 extern _Thread_local char* thread;
 
-//#define THREAD_DEBUG
+#define THREAD_DEBUG
 #ifdef THREAD_DEBUG
 
 #define bbMutexLock(mutex){\

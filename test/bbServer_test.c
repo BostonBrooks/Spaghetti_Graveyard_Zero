@@ -100,6 +100,7 @@ int main(void)
 
 void* send_messages(void* Args)
 {
+    thread = "send";
     send_thread_args* args = Args;
     sfTcpSocket* socket = args->socket;
     sfPacket* packet = sfPacket_create();
@@ -120,8 +121,10 @@ while (1)
 
 void* receive_messages(void* Args)
 {
+    thread = "receive";
     receive_thread_args* args = Args;
     sfTcpSocket* socket = args->socket;
+    bbThreadedQueue* queue = args->queue;
     sfPacket* packet = sfPacket_create();
     sfSocketStatus status;
 
@@ -136,6 +139,11 @@ void* receive_messages(void* Args)
 
         printf("Received: %s\n", message);
 
+        listPacket* list_packet;
+        bbThreadedQueue_alloc(queue, (void**)&list_packet);
+        bbStr_setStr(list_packet->data, message,64);
+        bbThreadedQueue_pushL(queue, (void**)&list_packet);
+
         sfPacket_clear(packet);
 
     }
@@ -146,5 +154,12 @@ void* receive_messages(void* Args)
 
 bbFlag check_inbox(bbThreadedQueue* queue)
 {
+    listPacket* list_packet;
+
+    bbThreadedQueue_popR(queue, (void**)&list_packet);
+
+    printf("Processed: %s", list_packet->data);
+
+    bbThreadedQueue_free(queue, (void**)&list_packet);
     return None;
 }
