@@ -251,7 +251,7 @@ static sfIpAddress bbGetIPAddress(char* prompt)
         fflush(stdout);
         char addressStr[64];
         bbGetLine(addressStr, 64,stdin);
-        bbClearLine(2);
+        bbClearLine(1);
         address = sfIpAddress_fromString(addressStr);
 
         U32 intAddress;

@@ -87,23 +87,59 @@ int main(void)
 
     while (1)
     {
-        printf("Send data to server\n");
+        //printf("Send data to server\n");
 
+        //Do somesthing else
+        sfSleep(sfSeconds(1));
 
-        printf("Receive data from server\n");
+        //printf("Receive data from server\n");
         check_inbox(&inbox);
 
     }
 }
 
-void* send_messages(void*)
+void* send_messages(void* Args)
 {
+    send_thread_args* args = Args;
+    sfTcpSocket* socket = args->socket;
+    sfPacket* packet = sfPacket_create();
+    sfSocketStatus status;
+
+    sfPacket_writeString(packet, "send message");
+
+while (1)
+{
+    status = sfTcpSocket_sendPacket(socket, packet);
+
+    sfSocketStatus_print(status);
+
     sfSleep(sfSeconds(1));
+}
     return NULL;
 }
 
-void* receive_messages(void*)
+void* receive_messages(void* Args)
 {
+    receive_thread_args* args = Args;
+    sfTcpSocket* socket = args->socket;
+    sfPacket* packet = sfPacket_create();
+    sfSocketStatus status;
+
+    while (1)
+    {
+        status = sfTcpSocket_receivePacket(socket, packet);
+
+        if (status != sfSocketDone) continue;
+
+        char message[512];
+        sfPacket_readString(packet, message);
+
+        printf("Received: %s\n", message);
+
+        sfPacket_clear(packet);
+
+    }
+
     sfSleep(sfSeconds(1));
     return NULL;
 }

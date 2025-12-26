@@ -8,7 +8,6 @@ include_directories( ./ )
 
 
 add_executable(myprogram
-        engine/echo_server/bbServer.c
         ./games/game0/maps/map0/spells/spells.c
         ./games/game0/maps/map0/widgets/widgets.c
         ./games/game0/maps/map0/drawfunctions/drawfunctions.c
@@ -86,6 +85,7 @@ add_executable(myprogram
         test/bbThreadedPool_test.c
         engine/threadsafe/bbThreadedQueue.c
         test/bbThreadedQueue_test.c
+        test/bbServer_test.c
 
 )
 

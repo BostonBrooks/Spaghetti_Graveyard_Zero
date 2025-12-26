@@ -100,10 +100,7 @@ int main(void){
                     continue;
                 }
 
-                char data[512];
-
-                sfPacket_readString(packet,data);
-                printf("message: %s\n", data);
+                printf("Received packet\n");
 
                 //Send out incoming packet
                 //sfPacket* echoPacket;
@@ -118,6 +115,9 @@ int main(void){
 
                     if (status != sfSocketDone){
                         printf("Failed to echo user %d's message!\n", j);
+                    } else
+                    {
+                        printf("Sent packet\n");
                     }
                 }
                 sfPacket_clear(packet);
