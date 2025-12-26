@@ -8,8 +8,8 @@
 
 //TODO all of these are macros, all contain only one printf statement
 
-#ifndef BBPRINTF_H
-#define BBPRINTF_H
+#ifndef BBTERMINAL_H
+#define BBTERMINAL_H
 
 #include <stdio.h>
 #include <stdarg.h>
@@ -17,6 +17,8 @@
 #include <stdlib.h>
 #include <stddef.h>
 #include <signal.h>
+#include <SFML/Network/IpAddress.h>
+
 #include "engine/logic/bbIntTypes.h"
 #include "engine/logic/bbString.h"
 
@@ -172,13 +174,14 @@ bbDebug ("bbWidgetCommandType = unknown\n");\
     }\
 }\
 
-static void bbClr_line(int lines)
+//Similar function found in https://github.com/orichalcink/chatroom
+static void bbClearLine(I32 lines)
 {
     //    \r     #go to the start of the current line
     //    \033[F #back to previous line
     //    \033[K #delete everything from the cursor to the end of the line
 
-    for(int i = 0; i <= lines;i++)
+    for(I32 i = 0; i <= lines;i++)
     {
         printf("\r\033[K");
         if (i<lines) printf("\033[F");
@@ -186,6 +189,81 @@ static void bbClr_line(int lines)
     fflush(stdout);
 }
 
+//Similar function found in https://github.com/orichalcink/chatroom
+static I32 bbGetInt(char* prompt)
+{
+    I32 number;
+    char answer[64];
+    while(1){
+        printf("%s", prompt);
+
+        scanf("%s", answer);
+
+        I32 len = strlen(answer);
+        char digits[] = "0123456789";
+        I32 int_len = strspn(answer, digits);
+
+        if(len == int_len) {
+
+            number = atoi(answer);
+            return (number);
+        }
+        bbClearLine(1);
+
+        printf("Invalid input. Please enter a valid integer.\n");
+
+
+    }
+}
+
+//Similar function found in https://github.com/orichalcink/chatroom
+static I32 bbGetLine(char* string, I32 bufferlength, FILE* fp)
+{
+    I32 numchars = 0;
+    I32 c = '\0';
+
+    while (1)
+    {
+        c = fgetc(fp);
+
+        if (c == EOF || c == '\n') break;
+
+        string[numchars] = c;
+
+        if (numchars >= bufferlength - 1) break;
+        numchars++;
+    }
+
+    string[numchars + 1] = '\0';
+
+    return numchars + 1;
+}
+
+//Similar function found in https://github.com/orichalcink/chatroom
+static sfIpAddress bbGetIPAddress(char* prompt)
+{
+
+    fflush(stdout);
+    sfIpAddress address;
+    while (1)
+    {
+        printf("%s", prompt);
+        fflush(stdout);
+        char addressStr[64];
+        bbGetLine(addressStr, 64,stdin);
+        bbClearLine(2);
+        address = sfIpAddress_fromString(addressStr);
+
+        U32 intAddress;
+        intAddress = sfIpAddress_toInteger(address);
+
+        if (intAddress != 0) break;
+    }
+
+    return (address);
+}
+
+//thread tells some of the debugging functions what to name each thread
 extern _Thread_local char* thread;
 
 //#define THREAD_DEBUG
@@ -217,4 +295,4 @@ pthread_mutex_unlock(mutex);}\
 
 #endif //#ifdef THREAD_DEBUG
 
-#endif // BBPRINTF_H
+#endif // BBTERMINAL_H
