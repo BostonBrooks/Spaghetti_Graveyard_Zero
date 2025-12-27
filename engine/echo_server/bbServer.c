@@ -94,7 +94,7 @@ int main(void){
 
 
                 status = sfTcpSocket_receivePacket(sockets[i], packet);
-                bbHere()
+
                 if (status != sfSocketDone){
 
                     sfTcpSocket_destroy(sockets[i]);

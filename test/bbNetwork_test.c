@@ -112,14 +112,17 @@ char message[512];
 while (1)
 {
 
-    sprintf(message, "Message %d\n",i++);
+    sprintf(message, "Message %d",i);
     sfPacket_writeString(packet, message);
     printf("Sent: %s\n", message);
     status = sfTcpSocket_sendPacket(socket, packet);
 
-    sfSocketStatus_print(status);
+    sfPacket_clear(packet);
+    //sfSocketStatus_print(status);
 
-    sfSleep(sfSeconds(1));
+    sfSleep(sfSeconds(0.1));
+
+    i++;
 }
     return NULL;
 }
@@ -142,7 +145,6 @@ I32 i = 0;
         sfPacket_readString(packet, message);
 
         printf("Received: %s\n", message);
-        bbHere()
         listPacket* test;
         bbThreadedQueue_alloc(queue, (void**)&test);
         sprintf(test->data, "%s", message);
@@ -172,7 +174,6 @@ bbFlag check_inbox(bbThreadedQueue* queue)
             listPacket* test;
             flag = bbThreadedQueue_popR(queue, (void**)&test);
             if (flag != Success) break;
-            bbHere()
             printf("Processed: %s\n", test->data);
             bbThreadedQueue_free(queue, (void**)&test);
 
