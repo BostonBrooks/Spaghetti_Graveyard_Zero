@@ -27,11 +27,11 @@ typedef struct
 
     //receive packets over network and add to inbox
     pthread_t receive_thread;
-    bbThreadedQueue* inbox;
+    bbThreadedQueue inbox;
 
     //take packets from outbox and send over network
     pthread_t send_thread;
-    bbThreadedQueue* outbox;
+    bbThreadedQueue outbox;
 
     // behavior is defined outside this module
     bbNetwork_ProcessPacket* process_packet;

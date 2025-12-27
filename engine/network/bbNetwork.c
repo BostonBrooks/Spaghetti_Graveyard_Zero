@@ -26,8 +26,8 @@ bbFlag bbNetwork_init(bbNetwork* network, sfIpAddress address, I32 port,
     sfTcpSocket_setBlocking(socket, sfFalse);
     network->socket = socket;
 
-    bbThreadedQueue_init(network->inbox,NULL,sizeof(bbNetwork_packet),queue_length,offsetof(bbNetwork_packet, listElement));
-    bbThreadedQueue_init(network->outbox,NULL,sizeof(bbNetwork_packet),queue_length,offsetof(bbNetwork_packet, listElement));
+    bbThreadedQueue_init(&network->inbox,NULL,sizeof(bbNetwork_packet),queue_length,offsetof(bbNetwork_packet, listElement));
+    bbThreadedQueue_init(&network->outbox,NULL,sizeof(bbNetwork_packet),queue_length,offsetof(bbNetwork_packet, listElement));
 
     pthread_create(&network->send_thread,NULL, bbNetwork_sendThread, network);
     pthread_create(&network->receive_thread,NULL, bbNetwork_receiveThread, network);
@@ -48,7 +48,7 @@ bbFlag bbNetwork_destroy(bbNetwork* network)
 
 void* bbNetwork_receiveThread(void* args){
     bbNetwork* network = args;
-    bbThreadedQueue* queue = network->inbox;
+    bbThreadedQueue* queue = &network->inbox;
     sfTcpSocket* socket = network->socket;
     sfPacket* packet = sfPacket_create();
     sfSocketStatus status;
@@ -97,7 +97,7 @@ void* bbNetwork_sendThread(void* args)
         status = sfTcpSocket_sendPacket(socket, packet);
 
         sfPacket_clear(packet);
-        //sfSocketStatus_print(status);
+        sfSocketStatus_print(status);
 
         sfSleep(sfSeconds(0.1));
 
@@ -109,7 +109,7 @@ void* bbNetwork_sendThread(void* args)
 
 bbFlag bbNetwork_checkInbox(bbNetwork* network)
 {
-    bbThreadedQueue* queue = network->inbox;
+    bbThreadedQueue* queue = &network->inbox;
     bbFlag flag = Success;
 
         //check queue
