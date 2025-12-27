@@ -1,7 +1,6 @@
 cmake_minimum_required(VERSION 4.1)
 
-# here we specify that the project is C language only, so the default
-# C compiler on the system will be used
+# This file is not used to compile the source, only used for reference in CLion
 
 project(myprogram C)
 include_directories( ./ )
@@ -86,6 +85,8 @@ add_executable(myprogram
         engine/threadsafe/bbThreadedQueue.c
         test/bbThreadedQueue_test.c
         test/bbServer_test.c
+        engine/echo_server/bbServer.c
+        test/pool_speed_test.c
 
 )
 

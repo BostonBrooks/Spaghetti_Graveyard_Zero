@@ -1,3 +1,5 @@
+///bbNetwork_test.c incorporates bbServer_test and bbThreadedQueue_test.c
+
 #include <SFML/Network.h>
 #include <pthread.h>
 #include <stdio.h>
@@ -100,15 +102,19 @@ int main(void)
 
 void* send_messages(void* Args)
 {
+    I32 i = 0;
     send_thread_args* args = Args;
     sfTcpSocket* socket = args->socket;
     sfPacket* packet = sfPacket_create();
     sfSocketStatus status;
 
-    sfPacket_writeString(packet, "send message");
-
+char message[512];
 while (1)
 {
+
+    sprintf(message, "Message %d\n",i++);
+    sfPacket_writeString(packet, message);
+    printf("Sent: %s\n", message);
     status = sfTcpSocket_sendPacket(socket, packet);
 
     sfSocketStatus_print(status);
@@ -121,10 +127,11 @@ while (1)
 void* receive_messages(void* Args)
 {
     receive_thread_args* args = Args;
+    bbThreadedQueue* queue = args->queue;
     sfTcpSocket* socket = args->socket;
     sfPacket* packet = sfPacket_create();
     sfSocketStatus status;
-
+I32 i = 0;
     while (1)
     {
         status = sfTcpSocket_receivePacket(socket, packet);
@@ -135,9 +142,14 @@ void* receive_messages(void* Args)
         sfPacket_readString(packet, message);
 
         printf("Received: %s\n", message);
+        bbHere()
+        listPacket* test;
+        bbThreadedQueue_alloc(queue, (void**)&test);
+        sprintf(test->data, "%s", message);
+        bbThreadedQueue_pushL(queue, test);
 
         sfPacket_clear(packet);
-
+i++;
     }
 
     sfSleep(sfSeconds(1));
@@ -146,5 +158,25 @@ void* receive_messages(void* Args)
 
 bbFlag check_inbox(bbThreadedQueue* queue)
 {
-    return None;
+
+    bbFlag flag = Success;
+    while (1)
+    {
+        flag = Success;
+        //check queue
+        while (flag == Success)
+        {
+            //bbThreadedQueue* Queue = (bbThreadedQueue*)queue;
+            //bbThreadedPool* pool = Queue->pool->pool;
+            //bbDebug("inUse = %d\n", pool->inUse);
+            listPacket* test;
+            flag = bbThreadedQueue_popR(queue, (void**)&test);
+            if (flag != Success) break;
+            bbHere()
+            printf("Processed: %s\n", test->data);
+            bbThreadedQueue_free(queue, (void**)&test);
+
+        }
+    }
+    return 0;
 }

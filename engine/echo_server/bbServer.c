@@ -8,6 +8,7 @@
 #include <SFML/Network.h>
 
 #include "io.h"
+#include "engine/data/bbHome.h"
 
 int main(void){
     printf("Hello, server!\n");
@@ -91,21 +92,19 @@ int main(void){
             if(sfSocketSelector_isTcpSocketReady(selector, sockets[i]) ==
             sfTrue){
 
-                sfPacket* packet;
-                packet = sfPacket_create();
+
                 status = sfTcpSocket_receivePacket(sockets[i], packet);
+                bbHere()
                 if (status != sfSocketDone){
+
                     sfTcpSocket_destroy(sockets[i]);
                     sockets[i] = NULL;
                     continue;
                 }
 
-                printf("Received packet\n");
-
-                //Send out incoming packet
-                //sfPacket* echoPacket;
-                //echoPacket = sfPacket_create();
-                //sfPacket_writeString(echoPacket,data);
+                char str[64];
+                sfPacket_readString(packet, str);
+                printf("Received: %s\n", str);
 
                 for (int j = 0; j < 8; j++){
                     //send to self

@@ -66,6 +66,7 @@ bbFlag bbThreadedQueue_pushL(bbThreadedQueue* queue, void* element)
     bbFlag flag;
     bbPool_ListElement* list_element = element + queue->offsetOf;
 
+    //bbDebug("prev = %llu, next = %llu\n", list_element->prev.u64, list_element->next.u64);
     bbAssert(
         bbVPool_handleIsEqual(queue->pool, queue->pool->null, list_element->prev)
         && bbVPool_handleIsEqual(queue->pool, queue->pool->null, list_element->next),
