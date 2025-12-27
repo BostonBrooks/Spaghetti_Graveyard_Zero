@@ -21,9 +21,9 @@ bbFlag bbNetwork_packet_toStruct (sfPacket* packet, bbNetwork_packet* Struct)
             U64 send_time_lower = sfPacket_readUint32(packet);
             U64 send_time_upper = sfPacket_readUint32(packet);
 
-            Struct->data.timestamp.packetN = packetN_upper * 2^32 + packetN_lower;
-            Struct->data.timestamp.receive_time = receive_time_upper * 2^32 + receive_time_lower;
-            Struct->data.timestamp.send_time = send_time_upper * 2^32 + send_time_lower;
+            Struct->data.timestamp.packetN = packetN_upper * 0x100000000 + packetN_lower;
+            Struct->data.timestamp.receive_time = receive_time_upper * 0x100000000  + receive_time_lower;
+            Struct->data.timestamp.send_time = send_time_upper * 0x100000000 + send_time_lower;
 
     case PACKETTYPE_REQUESTTIMESTAMP:
         break;
@@ -41,12 +41,12 @@ bbFlag bbNetwork_struct_toPacket (sfPacket* packet, bbNetwork_packet* Struct)
     case PACKETTYPE_TIMESTAMP:
         sfPacket_writeInt32(packet, Struct->type);
 
-        U64 packetN_lower = Struct->data.timestamp.packetN % (2 ^ 32);
-        U64 packetN_upper = Struct->data.timestamp.packetN / (2 ^ 32);
-        U64 receive_time_lower = Struct->data.timestamp.receive_time % (2 ^ 32);
-        U64 receive_time_upper = Struct->data.timestamp.receive_time / (2 ^ 32);
-        U64 send_time_lower = Struct->data.timestamp.send_time % (2 ^ 32);
-        U64 send_time_upper = Struct->data.timestamp.send_time / (2 ^ 32);
+        U64 packetN_lower = Struct->data.timestamp.packetN & 0xFFFFFFFF;
+        U64 packetN_upper = Struct->data.timestamp.packetN / 0x100000000;
+        U64 receive_time_lower = Struct->data.timestamp.receive_time & 0xFFFFFFFF;
+        U64 receive_time_upper = Struct->data.timestamp.receive_time / 0x100000000;
+        U64 send_time_lower = Struct->data.timestamp.send_time & 0xFFFFFFFF;
+        U64 send_time_upper = Struct->data.timestamp.send_time / 0x100000000;
 
         sfPacket_writeUint32(packet, (U32)packetN_lower);
         sfPacket_writeUint32(packet, (U32)packetN_upper);
