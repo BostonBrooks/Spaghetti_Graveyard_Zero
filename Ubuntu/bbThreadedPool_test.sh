@@ -16,11 +16,10 @@ if gcc   -fsanitize=address -fno-omit-frame-pointer -g -I ../\
        ../engine/threadsafe/bbThreadedPool.c\
        \
   -lcsfml-system -lcsfml-graphics -lcsfml-window  -lcsfml-network -lm -w\
-  -o ../games/game0/game.out;
+  -o ./test.out;
 then
     echo "Compile Succeeded:"
-    cd ../games/game0/
-    ./game.out
+    ./test.out
 else
     echo "Compile Failed!"
     #exit
