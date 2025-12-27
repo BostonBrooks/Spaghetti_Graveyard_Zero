@@ -66,6 +66,7 @@ void* bbNetwork_receiveThread(void* args){
         printf("Received: %s\n", message);
         bbNetwork_packet* test;
         bbThreadedQueue_alloc(queue, (void**)&test);
+        bbStr_setStr(test->data, message, 63);
 
         bbThreadedQueue_pushL(queue, test);
 
@@ -77,6 +78,7 @@ void* bbNetwork_receiveThread(void* args){
     return NULL;
 }
 
+/// TODO Take struct from queue, Convert struct to packet, send
 void* bbNetwork_sendThread(void* args)
 {
     I32 i = 0;
@@ -90,14 +92,14 @@ void* bbNetwork_sendThread(void* args)
     {
         if (network->quit) return 0;
 
-        // TODO Convert struct to packet
+
         sprintf(message, "Message %d", i);
         sfPacket_writeString(packet, message);
         printf("Sent: %s\n", message);
         status = sfTcpSocket_sendPacket(socket, packet);
 
         sfPacket_clear(packet);
-        sfSocketStatus_print(status);
+        //sfSocketStatus_print(status);
 
         sfSleep(sfSeconds(0.1));
 
