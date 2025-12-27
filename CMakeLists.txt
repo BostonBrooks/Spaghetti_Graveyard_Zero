@@ -90,6 +90,10 @@ add_executable(myprogram
         engine/network/bbNetwork_packet.h
         test/bbNetwork_test.c
         test/bbNetwork_test2.c
+        engine/network/bbNetworkTime.h
+        engine/network/bbNetwork_packet.c
+        test/bbNetwork_packet_test.c
+        engine/network/bbNetworkTime.c
 
 )
 

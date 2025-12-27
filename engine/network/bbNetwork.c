@@ -66,7 +66,7 @@ void* bbNetwork_receiveThread(void* args){
         printf("Received: %s\n", message);
         bbNetwork_packet* test;
         bbThreadedQueue_alloc(queue, (void**)&test);
-        bbStr_setStr(test->data, message, 63);
+        bbStr_setStr(test->data.str, message, 63);
 
         bbThreadedQueue_pushL(queue, test);
 
@@ -121,7 +121,7 @@ bbFlag bbNetwork_checkInbox(bbNetwork* network)
             flag = bbThreadedQueue_popR(queue, (void**)&test);
             if (flag != Success) break;
             // call network->processPacket
-            printf("Processed: %s\n", test->data);
+            printf("Processed: %s\n", test->data.str);
             bbThreadedQueue_free(queue, (void**)&test);
 
         }
