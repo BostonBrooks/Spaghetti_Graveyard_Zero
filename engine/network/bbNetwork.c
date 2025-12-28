@@ -62,11 +62,9 @@ void* bbNetwork_receiveThread(void* args){
 
         char message[512];
         //TODO Convert network packet to struct
-        sfPacket_readString(packet, message);
-        printf("Received: %s\n", message);
         bbNetwork_packet* test;
         bbThreadedQueue_alloc(queue, (void**)&test);
-        bbStr_setStr(test->data.str, message, 63);
+        bbNetwork_packet_toStruct(packet, test);
 
         bbThreadedQueue_pushL(queue, test);
 
@@ -92,10 +90,11 @@ void* bbNetwork_sendThread(void* args)
     {
         if (network->quit) return 0;
 
-
-        sprintf(message, "Message %d", i);
-        sfPacket_writeString(packet, message);
-        printf("Sent: %s\n", message);
+        //TODO Convert network struct to packet
+        bbNetwork_packet test;
+        test.type = PACKETTYPE_STRING;
+        sprintf(test.data.str, "i= %d", i);
+        bbNetwork_struct_toPacket(packet, &test);
         status = sfTcpSocket_sendPacket(socket, packet);
 
         sfPacket_clear(packet);
