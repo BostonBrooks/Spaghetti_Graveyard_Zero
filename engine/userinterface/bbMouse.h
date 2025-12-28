@@ -29,6 +29,8 @@ typedef struct
     I32 Drop;
     I32 MouseIcon;
     I32 DragIcon;
+    bbMouse_onClick* OnClick;
+    bbMouse_onClick* OnUnClick;
     //todo OnClick EG connect to a network
 
     //book keeping data

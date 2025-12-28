@@ -15,6 +15,7 @@ typedef enum
     MouseLeftDrag
 } MouseFunctionType;
 
+typedef bbFlag bbMouse_onClick (void* widget);
 typedef bbFlag bbMouse_IsOver (void* mouse, void* widgets, void* widget);
 typedef bbFlag bbMouse_Enter (void* mouse, void* widgets, void* widget, void* graphics);
 typedef bbFlag bbMouse_Leave (void* mouse, void* widgets, void* widget, void* graphics);
