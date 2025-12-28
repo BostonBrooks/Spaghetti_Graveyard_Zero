@@ -44,23 +44,30 @@ void* bbNetwork_spawn(void* Network)
     sfSocketStatus status;
     sfTcpSocket* socket = sfTcpSocket_create();
     bbAssert(socket!=NULL, "bad socket constructor\n");
+
+    sfTcpSocket_setBlocking(socket, sfFalse);
     status = sfTcpSocket_connect(socket, network->address, network->port, sfSeconds(connect_timeout));
-    sfSocketStatus_print(status);
-    if (status != sfSocketDone)
+
+    //workaround because status is always sfSocketDone
+    sfIpAddress address = sfTcpSocket_getRemoteAddress(socket);
+    U32 addressInt = sfIpAddress_toInteger(address);
+    U32 noneInt = sfIpAddress_toInteger(sfIpAddress_None);
+
+    if (addressInt == noneInt)
     {
         sfTcpSocket_destroy(socket);
         network->on_disconnect(NULL);
         return NULL;
     }
-    sfTcpSocket_setBlocking(socket, sfFalse);
     network->socket = socket;
+
+
+    network->on_connect(NULL);
 
     pthread_create(&network->send_thread,NULL, bbNetwork_sendThread, network);
 
 
     bbNetwork_receiveThread(network);
-
-    network->on_connect(NULL);
 
     //handle cleanup?
     return NULL;
@@ -69,7 +76,7 @@ void* bbNetwork_spawn(void* Network)
 
 void* bbNetwork_receiveThread(void* args){
 
-    printf("Hello Receive\n");
+    printf("Hello/ Receive\n");
     bbNetwork* network = args;
     bbThreadedQueue* queue = &network->inbox;
     sfTcpSocket* socket = network->socket;
@@ -103,7 +110,7 @@ void* bbNetwork_receiveThread(void* args){
 void* bbNetwork_sendThread(void* args)
 {
 
-    printf("Hello Send\n");
+    printf("Hello/Send\n");
     I32 i = 0;
     bbNetwork* network = args;
     sfTcpSocket* socket = network->socket;
