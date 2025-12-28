@@ -18,5 +18,5 @@ gcc   -D SFML_STATIC -I ../^
   -lcsfml-system -lcsfml-graphics -lcsfml-window -g -lm -w^
     -o ./a.exe
 IF %errorlevel% == 0 (    echo Compile Succeeded:
-                          gdb ./a.exe)^
+                          a.exe)^
  ELSE (echo compile failed!)
