@@ -54,7 +54,7 @@ gcc   -D SFML_STATIC -I ../^
        ../engine/threadsafe/bbThreadedQueue.c^
        ../games/game0/maps/map0/drawfunctions/drawfunctions.c^
        ^
-  -lcsfml-system -lcsfml-graphics -lcsfml-window -g -lm -w^
+  -lcsfml-system -lcsfml-graphics -lcsfml-window -lcsfml-network -g -lm -w^
     -o ../games/game0/game.exe
 IF %errorlevel% == 0 (    echo Compile Succeeded:
                           cd ../games/game0/
