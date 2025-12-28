@@ -47,7 +47,6 @@ if gcc   -fsanitize=address -fno-omit-frame-pointer -g -I ../\
        ../engine/avoidance/bbAvoidables.c\
        ../engine/viewport/bbUnits.c\
        ../engine/threadsafe/bbThreadedPool.c\
-       ../engine/network/bbNetwork.c\
        ../games/game0/maps/map0/drawfunctions/drawfunctions.c\
        \
   -lcsfml-system -lcsfml-graphics -lcsfml-window  -lcsfml-network -lm -w\

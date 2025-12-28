@@ -36,7 +36,7 @@ bbFlag ConnectButton_Constructor (bbWidget** self, void* Graphics,
     bbDictionary_lookup(graphics->drawfunctions->dictionary, "WIDGETTEXT",
                     &drawfunctionHandle);
     widget->frames[1].drawfunction = drawfunctionHandle.u64;
-    widget->frames[1].offset.x = 10*SCREEN_PPP;
+    widget->frames[1].offset.x = 3*SCREEN_PPP;
     widget->frames[1].offset.y = 3*SCREEN_PPP;
 
 
@@ -100,7 +100,7 @@ bbFlag GoOfflineButton_Constructor (bbWidget** self, void* Graphics,
     ConnectButton_Constructor(&widget, Graphics, widgets, screen_coords, parent);
 
 
-    bbStr_setStr(widget->key, "Offline", 64);
+    bbStr_setStr(widget->key, "New Server", 64);
 
 
 

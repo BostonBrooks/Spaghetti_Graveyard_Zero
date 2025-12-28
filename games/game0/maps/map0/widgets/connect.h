@@ -102,7 +102,7 @@ bbWidgets* widgets, bbScreenPoints screen_coords, bbWidget* parent)
 
     bbWidget* gooffline_button;
     SP.x = 294*SCREEN_PPP; SP.y = 243*SCREEN_PPP;
-    bbWidget_constructor(&connect_button, widgets, graphics,SP, widget, "OFFLINECONNECTBUTTON");
+    bbWidget_constructor(&connect_button, widgets, graphics,SP, widget, "NEWSERVER");
     bbVPool_reverseLookup(widgets->pool, Port_widget, &handle);
     bbDictionary_add(widgets->dict, "CONNECT_BUTTON", handle);
 

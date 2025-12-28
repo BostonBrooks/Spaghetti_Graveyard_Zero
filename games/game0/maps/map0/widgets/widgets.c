@@ -93,7 +93,7 @@ bbFlag bbWidgetFunctions_populate(bbWidgetFunctions* self)
     DisConnectButton_Constructor, "DISCONNECTBUTTON");
 
     bbWidgetFunctions_add(self, WidgetConstructor,
-                      GoOfflineButton_Constructor, "OFFLINECONNECTBUTTON");
+                      GoOfflineButton_Constructor, "NEWSERVER");
 
 
 
