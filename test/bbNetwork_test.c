@@ -35,13 +35,13 @@ typedef struct
 ///check messages in receive queue;
 bbFlag check_inbox(bbThreadedQueue* queue);
 
-pthread_mutex_t mutex;
+//pthread_mutex_t mutex;
 _Thread_local char* thread;
 
 int main(void)
 {
     thread = "main";
-    pthread_mutex_init(&mutex, NULL);
+    //pthread_mutex_init(&mutex, NULL);
 
     printf("Connect to server\n");
 
@@ -91,7 +91,7 @@ int main(void)
     {
         //printf("Send data to server\n");
 
-        //Do somesthing else
+        //Do something else
         sfSleep(sfSeconds(1));
 
         //printf("Receive data from server\n");
@@ -109,21 +109,21 @@ void* send_messages(void* Args)
     sfSocketStatus status;
 
 char message[512];
-while (1)
-{
+    while (1)
+    {
 
-    sprintf(message, "Message %d",i);
-    sfPacket_writeString(packet, message);
-    printf("Sent: %s\n", message);
-    status = sfTcpSocket_sendPacket(socket, packet);
+        sprintf(message, "Message %d",i);
+        sfPacket_writeString(packet, message);
+        printf("Sent: %s\n", message);
+        status = sfTcpSocket_sendPacket(socket, packet);
 
-    sfPacket_clear(packet);
-    //sfSocketStatus_print(status);
+        sfPacket_clear(packet);
+        //sfSocketStatus_print(status);
 
-    sfSleep(sfSeconds(0.1));
+        sfSleep(sfSeconds(0.1));
 
-    i++;
-}
+        i++;
+    }
     return NULL;
 }
 

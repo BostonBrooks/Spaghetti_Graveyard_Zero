@@ -15,10 +15,9 @@ if gcc   -fsanitize=address -fno-omit-frame-pointer -g -I ../\
        ../engine/echo_server/bbServer.c\
        \
   -lcsfml-system -lcsfml-graphics -lcsfml-window -lcsfml-network -lm -w\
-  -o ../games/game0/server.out;
+  -o ./server.out;
 then
     echo "Compile Succeeded:"
-    cd ../games/game0/
     ./server.out
 else
     echo "Compile Failed!"

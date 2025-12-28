@@ -80,13 +80,20 @@ add_executable(myprogram
         ./engine/userinterface/bbMouse.c
         ./engine/avoidance/bbAvoidables.c
         engine/threadsafe/bbThreadedPool.c
-        engine/network/bbNetwork.h
         test/bbThreadedPool_test.c
         engine/threadsafe/bbThreadedQueue.c
         test/bbThreadedQueue_test.c
         test/bbServer_test.c
         engine/echo_server/bbServer.c
         test/pool_speed_test.c
+        engine/network/bbNetwork.c
+        engine/network/bbNetwork_packet.h
+        test/bbNetwork_test.c
+        test/bbNetwork_test2.c
+        engine/network/bbNetworkTime.h
+        engine/network/bbNetwork_packet.c
+        test/bbNetwork_packet_test.c
+        engine/network/bbNetworkTime.c
 
 )
 
