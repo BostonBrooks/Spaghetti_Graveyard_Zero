@@ -18,7 +18,7 @@ bbFlag launchServer(void* self)
 #ifdef __linux__
     bbHere()
 #else
-    system("start ../../WinLibs/test.cmd");
+    system("start server.cmd");
 #endif
     return Success;
 }
