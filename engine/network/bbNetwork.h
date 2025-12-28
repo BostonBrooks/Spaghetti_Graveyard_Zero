@@ -1,14 +1,16 @@
 ///I'm starting things over, network connection must not block spawning thread
+///bbTime will need immediate access to the network, not using bbThreadedQueue
 
 #include <stdatomic.h>
 #include <SFML/Network.h>
 
+#include "bbNetwork_packet.h"
 #include "engine/threadsafe/bbThreadedQueue.h"
 
 
 typedef bbFlag bbNetwork_ProcessPacket (void* network, void* args);
-typedef bbFlag bbNetwork_PacketToStruct (sfPacket* packet, void* Struct);
-typedef bbFlag bbNetwork_StructToPacket (void* Struct, sfPacket* packet);
+typedef bbFlag bbNetwork_PacketToStruct (sfPacket* packet, bbNetwork_packet* Struct);
+typedef bbFlag bbNetwork_StructToPacket (sfPacket* packet, bbNetwork_packet* Struct);
 typedef bbFlag bbNetwork_onConnect (void* network);
 typedef bbFlag bbNetwork_onDisconnect (void* network);
 
@@ -38,14 +40,11 @@ typedef struct bbNetwork
 //if true,
     atomic_bool quit;
 
-    //Does the server belong to this computer?
-    bool isLocal;
 } bbNetwork;
 
 
-///create a new network object
-bbFlag bbNetwork_new(bbNetwork** network,
-    bbNetwork_ProcessPacket* process_packet,
+///set values in existing object
+bbFlag bbNetwork_init(bbNetwork* network,
     bbNetwork_PacketToStruct* packet_to_struct,
     bbNetwork_StructToPacket* struct_to_packet,
     bbNetwork_onConnect* on_connect,
@@ -57,8 +56,8 @@ bbFlag bbNetwork_new(bbNetwork** network,
 bbFlag bbNetwork_connect(bbNetwork* network, sfIpAddress address, I32 port);
 
 ///called by bbNetwork_connect to asynchronously connect
-void* bbNetwork_spawn(void* args);
-///call bbNetwork_onDisconnect and end connection
+void* bbNetwork_spawn(void* Network);
+///signal threads to exit
 bbFlag bbNetwork_disconnect(bbNetwork* network);
 
 //one of the following is spawned as a new thread, and the other is called like a normal function

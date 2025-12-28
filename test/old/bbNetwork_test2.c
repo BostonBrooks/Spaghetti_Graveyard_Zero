@@ -3,8 +3,11 @@
 
 #include "engine/logic/bbTerminal.h"
 #include "engine/network/bbNetwork.h"
-
+#include "engine/network/bbNetwork_packet.h"
 _Thread_local char* thread;
+
+
+
 
 int main(void)
 {
@@ -18,7 +21,7 @@ int main(void)
     while (1){
         sfIpAddress address = bbGetIPAddress("Input desired server's IP address: ");
         I32 port = bbGetInt("Input desired server's port: ");
-        flag = bbNetwork_init(&network, address, port,NULL, NULL,NULL);
+        flag = bbNetwork_init(&network,  bbNetwork_packet_toStruct, bbNetwork_struct_toPacket, NULL, NULL)
 
         if (flag != Success) {
             printf("Could not connect to the given port!\n\n");

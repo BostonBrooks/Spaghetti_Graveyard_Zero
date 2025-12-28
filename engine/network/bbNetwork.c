@@ -1,0 +1,134 @@
+#include "engine/network/bbNetwork.h"
+
+#include "engine/logic/bbTerminal.h"
+#include "engine/network/bbNetwork_packet.h"
+
+bbFlag bbNetwork_init(bbNetwork* network,
+    bbNetwork_PacketToStruct* packet_to_struct,
+    bbNetwork_StructToPacket* struct_to_packet,
+    bbNetwork_onConnect* on_connect,
+    bbNetwork_onDisconnect* on_disconnect)
+{
+    const I32 queue_length = 100;
+
+    network->packet_to_struct = packet_to_struct;
+    network->struct_to_packet = struct_to_packet;
+    network->on_connect = on_connect;
+    network->on_disconnect = on_disconnect;
+
+    bbThreadedQueue_init(&network->inbox,NULL,sizeof(bbNetwork_packet),queue_length,offsetof(bbNetwork_packet, listElement));
+    bbThreadedQueue_init(&network->outbox,NULL,sizeof(bbNetwork_packet),queue_length,offsetof(bbNetwork_packet, listElement));
+
+    network->quit = false;
+    return Success;
+}
+
+bbFlag bbNetwork_connect(bbNetwork* network, sfIpAddress address, I32 port)
+{
+    printf("Hello Connect\n");
+    network->address = address;
+    network->port = port;
+
+    pthread_create(&network->receive_thread,NULL, bbNetwork_spawn, network);
+
+    return Success;
+}
+
+void* bbNetwork_spawn(void* Network)
+{
+    printf("Hello Spawn\n");
+
+    const I32 connect_timeout = 60;
+    bbNetwork* network = (bbNetwork*)Network;
+
+    sfSocketStatus status;
+    sfTcpSocket* socket = sfTcpSocket_create();
+    bbAssert(socket!=NULL, "bad socket constructor\n");
+    status = sfTcpSocket_connect(socket, network->address, network->port, sfSeconds(connect_timeout));
+    sfSocketStatus_print(status);
+    if (status != sfSocketDone)
+    {
+        sfTcpSocket_destroy(socket);
+        network->on_disconnect(NULL);
+        return NULL;
+    }
+    sfTcpSocket_setBlocking(socket, sfFalse);
+    network->socket = socket;
+
+    pthread_create(&network->send_thread,NULL, bbNetwork_sendThread, network);
+
+
+    bbNetwork_receiveThread(network);
+
+    network->on_connect(NULL);
+
+    //handle cleanup?
+    return NULL;
+}
+
+
+void* bbNetwork_receiveThread(void* args){
+
+    printf("Hello Receive\n");
+    bbNetwork* network = args;
+    bbThreadedQueue* queue = &network->inbox;
+    sfTcpSocket* socket = network->socket;
+    sfPacket* packet = sfPacket_create();
+    sfSocketStatus status;
+    I32 i = 0;
+    while (1)
+    {
+        if (network->quit) return 0;
+        status = sfTcpSocket_receivePacket(socket, packet);
+
+        if (status != sfSocketDone) continue;
+
+        char message[512];
+        //TODO Convert network packet to struct
+        bbNetwork_packet* test;
+        bbThreadedQueue_alloc(queue, (void**)&test);
+        bbNetwork_packet_toStruct(packet, test);
+
+        bbThreadedQueue_pushL(queue, test);
+
+        sfPacket_clear(packet);
+        i++;
+    }
+
+    sfSleep(sfSeconds(1));
+    return NULL;
+}
+
+/// TODO Take struct from queue, Convert struct to packet, send
+void* bbNetwork_sendThread(void* args)
+{
+
+    printf("Hello Send\n");
+    I32 i = 0;
+    bbNetwork* network = args;
+    sfTcpSocket* socket = network->socket;
+    sfPacket* packet = sfPacket_create();
+    sfSocketStatus status;
+
+    char message[512];
+    while (1)
+    {
+        if (network->quit) return 0;
+
+        //TODO Convert network struct to packet
+        bbNetwork_packet test;
+        test.type = PACKETTYPE_STRING;
+        sprintf(test.data.str, "i= %d", i);
+        bbNetwork_struct_toPacket(packet, &test);
+        status = sfTcpSocket_sendPacket(socket, packet);
+
+        sfPacket_clear(packet);
+        //sfSocketStatus_print(status);
+
+        sfSleep(sfSeconds(0.1));
+
+        i++;
+    }
+    return NULL;
+
+}
