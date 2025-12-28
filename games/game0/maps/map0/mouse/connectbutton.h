@@ -65,6 +65,8 @@ Graphics)
     widget->mtable.hover = true;
     mouse->selected = handle;
     widget->state = bbWidgetState_Click;
+
+    widget->mtable.OnClick(widget);
     return Success;
 }
 
@@ -82,6 +84,8 @@ bbFlag ConnectButton_LeftUp (void* Mouse, void* Widgets, void* Widget, void* Gra
     if (widget->mtable.hover) {
 
         widget->state = bbWidgetState_Hover;
+
+        widget->mtable.OnUnClick(widget);
 
     } else {
 

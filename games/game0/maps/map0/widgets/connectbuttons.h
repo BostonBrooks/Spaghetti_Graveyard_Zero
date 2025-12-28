@@ -1,6 +1,28 @@
 #include "engine/geometry/bbCoordinates.h"
 #include "engine/userinterface/bbWidget.h"
 
+bbFlag testOnClick(void* self)
+{
+    bbHere()
+    return Success;
+}
+
+bbFlag testOnUnClick(void* self)
+{
+    bbHere()
+    return Success;
+}
+
+bbFlag launchServer(void* self)
+{
+#ifdef __linux__
+    bbHere()
+#else
+    system("start ../../WinLibs/test.cmd");
+#endif
+    return Success;
+}
+
 bbFlag ConnectButton_Constructor (bbWidget** self, void* Graphics,
                          bbWidgets* widgets, bbScreenPoints screen_coords, bbWidget* parent)
 {
@@ -63,6 +85,9 @@ bbFlag ConnectButton_Constructor (bbWidget** self, void* Graphics,
     widget->mtable.MouseIcon = 87;
     widget->mtable.DragIcon = -1;
 
+    widget->mtable.OnClick = testOnClick;
+    widget->mtable.OnUnClick = testOnUnClick;
+
 
     for (I32 i = 3; i < FRAMES_PER_WIDGET; i++) {
         widget->frames[i].drawfunction = -1;
@@ -103,6 +128,7 @@ bbFlag GoOfflineButton_Constructor (bbWidget** self, void* Graphics,
     bbStr_setStr(widget->key, "New Server", 64);
 
 
+    widget->mtable.OnUnClick = launchServer;
 
 
 
