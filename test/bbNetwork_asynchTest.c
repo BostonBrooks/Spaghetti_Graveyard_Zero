@@ -13,13 +13,13 @@ _Thread_local char* thread;
 //typedef bbFlag bbNetwork_onConnect (void* network);
 bbFlag connect(void* network)
 {
-    printf("Connect to server\n");
+    bbDebug("Connect to server\n");
     return Success;
 }
 //typedef bbFlag bbNetwork_onDisconnect (void* network);
 bbFlag disconnect(void* network)
 {
-    printf("Disconnect from server\n");
+    bbDebug("Disconnect from server\n");
     return Success;
 }
 
