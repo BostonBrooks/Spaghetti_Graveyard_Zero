@@ -32,6 +32,7 @@ typedef struct
 bbFlag bbNetwork_packet_toStruct (sfPacket* packet, bbNetwork_packet* Struct);
 bbFlag bbNetwork_struct_toPacket (sfPacket* packet, bbNetwork_packet* Struct);
 
-
+//depends on above functions, so not included in bbNetwork.c, which is meant to be more generic
+bbFlag bbNetwork_sendStr(void* Network, char* str);
 
 #endif //BB_NETWORK_PACKET_H

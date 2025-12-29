@@ -14,7 +14,8 @@ typedef struct
     I32 tail;
     I32 offsetOf;
 
-
+    pthread_mutex_t empty;
+    pthread_cond_t emptyCond;
 
 } bbThreadedQueue;
 
@@ -32,10 +33,18 @@ bbFlag bbThreadedQueue_deletePool(bbThreadedQueue* queue);
 
 bbFlag bbThreadedQueue_alloc(bbThreadedQueue* queue, void** element);
 bbFlag bbThreadedQueue_free(bbThreadedQueue* queue, void** element);
+
+///signal emtpyCond, unlock empty. Does order between empty and mutex matter?
 bbFlag bbThreadedQueue_pushL(bbThreadedQueue* queue, void* element);
 bbFlag bbThreadedQueue_pushR(bbThreadedQueue* queue, void* element);
-bbFlag bbThreadedQueue_popL(bbThreadedQueue* queue, void** Element);
+
+///if emtpy return None
+bbFlag bbThreadedQueue_popL(bbThreadedQueue* queue, void** element);
 bbFlag bbThreadedQueue_popR(bbThreadedQueue* queue, void** element);
+
+///if empty pthread_cond_wait(...);
+bbFlag bbThreadedQueue_popLblock(bbThreadedQueue* queue, void** element);
+bbFlag bbThreadedQueue_popRblock(bbThreadedQueue* queue, void** element);
 
 
 #endif //BB_THREADED_QUEUE_H

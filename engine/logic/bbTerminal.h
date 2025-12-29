@@ -257,7 +257,12 @@ static sfIpAddress bbGetIPAddress(char* prompt)
         U32 intAddress;
         intAddress = sfIpAddress_toInteger(address);
 
-        if (intAddress != 0) break;
+        if (intAddress != 0)
+        {
+            sfIpAddress_toString(address, addressStr);
+            printf("the IP Address is %s\n", addressStr);
+            break;
+        }
     }
 
     return (address);

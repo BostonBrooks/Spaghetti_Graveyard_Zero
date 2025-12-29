@@ -23,7 +23,7 @@ if gcc   -fsanitize=address -fno-omit-frame-pointer -g -I ../\
   -o ./test.out;
 then
     echo "Compile Succeeded:"
-    ./test.out
+    gdb ./test.out
 else
     echo "Compile Failed!"
     #exit

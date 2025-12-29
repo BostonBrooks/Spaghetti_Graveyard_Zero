@@ -65,13 +65,8 @@ void* bbNetwork_spawn(void* Network)
         return NULL;
     }
     network->socket = socket;
-
-
     network->on_connect(NULL);
-
     pthread_create(&network->send_thread,NULL, bbNetwork_sendThread, network);
-
-
     bbNetwork_receiveThread(network);
 
     //handle cleanup?
@@ -83,7 +78,7 @@ void* bbNetwork_receiveThread(void* args)
 {
 
     thread = "receive";
-    printf("Hello/ Receive\n");
+    printf("Hello Receive\n");
     bbNetwork* network = args;
     bbThreadedQueue* queue = &network->inbox;
     sfTcpSocket* socket = network->socket;
@@ -118,8 +113,7 @@ void* bbNetwork_sendThread(void* args)
 {
     thread = "send";
 
-    printf("Hello/Send\n");
-    I32 i = 0;
+    printf("Hello Send\n");
     bbNetwork* network = args;
     sfTcpSocket* socket = network->socket;
     sfPacket* packet = sfPacket_create();
@@ -130,19 +124,24 @@ void* bbNetwork_sendThread(void* args)
     {
         if (network->quit) return 0;
 
-        //TODO Convert network struct to packet
-        bbNetwork_packet test;
-        test.type = PACKETTYPE_STRING;
-        sprintf(test.data.str, "i= %d", i);
-        bbNetwork_struct_toPacket(packet, &test);
+        //TODO Use bbThreadedQueue_popRblock(...)
+        bbNetwork_packet* test;
+        bbFlag flag = bbThreadedQueue_popRblock(&network->outbox, (void**)&test);
+bbHere()
+        if (flag == None) continue;
+        bbFlag_print(flag);
+        bbDebug("bbPacket = %p\n", test);
+        bbDebug("bbPacket->type = %d\n", test->type);
+
+        bbNetwork_struct_toPacket(packet, test);
         status = sfTcpSocket_sendPacket(socket, packet);
 
+
         sfPacket_clear(packet);
+        bbThreadedQueue_free(&network->outbox, (void**)&test);
         //sfSocketStatus_print(status);
 
-        sfSleep(sfSeconds(0.1));
 
-        i++;
     }
     return NULL;
 

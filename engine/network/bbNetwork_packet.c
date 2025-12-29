@@ -1,6 +1,8 @@
 #include "engine/network/bbNetwork_packet.h"
 
+#include "bbNetwork.h"
 #include "engine/logic/bbString.h"
+#include "engine/logic/bbTerminal.h"
 
 
 extern _Thread_local char* thread;
@@ -62,5 +64,20 @@ bbFlag bbNetwork_struct_toPacket (sfPacket* packet, bbNetwork_packet* Struct)
         sfPacket_writeInt32(packet, Struct->type);
         break;
     }
+    return Success;
+}
+
+
+bbFlag bbNetwork_sendStr(void* Network, char* str)
+{
+    bbNetwork* network = (bbNetwork*)Network;
+    bbNetwork_packet* packet;
+    bbThreadedQueue_alloc(&network->outbox, (void**)&packet);
+    packet->type = PACKETTYPE_STRING;
+    bbStr_setStr(packet->data.str, str, 64);
+
+    //TODO should this not block on pool full?
+    bbThreadedQueue_pushL(&network->outbox, (void*)packet);
+
     return Success;
 }
