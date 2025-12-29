@@ -277,11 +277,13 @@ extern _Thread_local char* thread;
 #define bbMutexLock(mutex){\
 bbDebug("Mutex Lock in thread %s!\n", thread);\
 pthread_mutex_lock(mutex);}\
+bbPrintf("Lock aquired in thread %s!\n", thread);\
 
 
 #define bbMutexUnlock(mutex){\
 bbDebug("Mutex Unlock in thread %s!\n", thread);\
 pthread_mutex_unlock(mutex);}\
+bbPrintf("Lock released in thread %s!\n", thread);\
 
 #undef bbHere()
 #define bbHere() printf ("In FILE: %s, FUNCTION: %s, LINE: %d, THREAD: %s\n",\

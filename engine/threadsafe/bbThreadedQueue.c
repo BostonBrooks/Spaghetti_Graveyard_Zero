@@ -302,8 +302,8 @@ bbFlag bbThreadedQueue_popRblock(bbThreadedQueue* queue, void** Element)
     if (queue->head == -1 || queue->tail == -1)
     {
         bbAssert(queue->head == -1 && queue->tail == -1, "head/tail mismatch");
-        pthread_cond_wait(&queue->emptyCond, &queue->empty);
         bbMutexUnlock(&queue->mutex);
+        pthread_cond_wait(&queue->emptyCond, &queue->empty);
     }
 
     //Case 2: One Element
@@ -372,8 +372,8 @@ bbFlag bbThreadedQueue_popLblock(bbThreadedQueue* queue, void** Element)
     if (queue->head == -1 || queue->tail == -1)
     {
         bbAssert(queue->head == -1 && queue->tail == -1, "head/tail mismatch");
-        pthread_cond_wait(&queue->emptyCond, &queue->empty);
         bbMutexUnlock(&queue->mutex);
+        pthread_cond_wait(&queue->emptyCond, &queue->empty);
     }
 
     //Case 2: One Element
