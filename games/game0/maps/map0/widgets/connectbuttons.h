@@ -16,7 +16,8 @@ bbFlag testOnUnClick(void* self)
 bbFlag launchServer(void* self)
 {
 #ifdef __linux__
-    bbHere()
+
+    system("gnome-terminal -- bash -c \"./server.sh\"");
 #else
     system("start server.cmd");
 #endif
