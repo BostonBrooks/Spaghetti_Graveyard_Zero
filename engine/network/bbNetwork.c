@@ -3,12 +3,15 @@
 #include "engine/logic/bbTerminal.h"
 #include "engine/network/bbNetwork_packet.h"
 
+extern _Thread_local char* thread;
+
 bbFlag bbNetwork_init(bbNetwork* network,
     bbNetwork_PacketToStruct* packet_to_struct,
     bbNetwork_StructToPacket* struct_to_packet,
     bbNetwork_onConnect* on_connect,
     bbNetwork_onDisconnect* on_disconnect)
 {
+    thread = "init";
     const I32 queue_length = 100;
 
     network->packet_to_struct = packet_to_struct;
@@ -25,6 +28,7 @@ bbFlag bbNetwork_init(bbNetwork* network,
 
 bbFlag bbNetwork_connect(bbNetwork* network, sfIpAddress address, I32 port)
 {
+    thread = "connect";
     printf("Hello Connect\n");
     network->address = address;
     network->port = port;
@@ -36,9 +40,10 @@ bbFlag bbNetwork_connect(bbNetwork* network, sfIpAddress address, I32 port)
 
 void* bbNetwork_spawn(void* Network)
 {
+    thread = "spawn";
     printf("Hello Spawn\n");
 
-    const I32 connect_timeout = 60;
+    const I32 connect_timeout = 10;
     bbNetwork* network = (bbNetwork*)Network;
 
     sfSocketStatus status;
@@ -74,8 +79,10 @@ void* bbNetwork_spawn(void* Network)
 }
 
 
-void* bbNetwork_receiveThread(void* args){
+void* bbNetwork_receiveThread(void* args)
+{
 
+    thread = "receive";
     printf("Hello/ Receive\n");
     bbNetwork* network = args;
     bbThreadedQueue* queue = &network->inbox;
@@ -109,6 +116,7 @@ void* bbNetwork_receiveThread(void* args){
 /// TODO Take struct from queue, Convert struct to packet, send
 void* bbNetwork_sendThread(void* args)
 {
+    thread = "send";
 
     printf("Hello/Send\n");
     I32 i = 0;

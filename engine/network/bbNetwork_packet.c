@@ -2,6 +2,9 @@
 
 #include "engine/logic/bbString.h"
 
+
+extern _Thread_local char* thread;
+
 bbFlag bbNetwork_packet_toStruct (sfPacket* packet, bbNetwork_packet* Struct)
 {
 
