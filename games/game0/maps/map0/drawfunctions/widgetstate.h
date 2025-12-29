@@ -24,7 +24,7 @@ bbFlag bbDF_widgetState(void* drawable, void* frameDescriptor, void* cl){
         output_frame.drawfunction = input_frame->drawfunction;
 
 
-        if (output_frame.drawfunction <0 || output_frame.drawfunction> 4){
+        if (output_frame.drawfunction <0 || output_frame.drawfunction > graphics->drawfunctions->num){
             //bbDebug ("drawfunction == %d, type = %d\n",
             //		 output_frame.drawfunction, output_frame.type);
         } else {

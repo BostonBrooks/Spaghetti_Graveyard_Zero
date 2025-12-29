@@ -110,6 +110,7 @@ bbFlag DisConnectButton_Constructor (bbWidget** self, void* Graphics,
     bbWidget* widget;
     ConnectButton_Constructor(&widget, Graphics, widgets, screen_coords, parent);
 
+    widget->state = bbWidgetState_Frozen;
 
     bbStr_setStr(widget->key, "Disconnect", 64);
 
