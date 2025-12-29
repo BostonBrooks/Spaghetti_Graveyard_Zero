@@ -127,11 +127,11 @@ void* bbNetwork_sendThread(void* args)
         //TODO Use bbThreadedQueue_popRblock(...)
         bbNetwork_packet* test;
         bbFlag flag = bbThreadedQueue_popRblock(&network->outbox, (void**)&test);
-bbHere()
+//bbHere()
         if (flag == None) continue;
-        bbFlag_print(flag);
-        bbDebug("bbPacket = %p\n", test);
-        bbDebug("bbPacket->type = %d\n", test->type);
+        //bbFlag_print(flag);
+        //bbDebug("bbPacket = %p\n", test);
+        //bbDebug("bbPacket->type = %d\n", test->type);
 
         bbNetwork_struct_toPacket(packet, test);
         status = sfTcpSocket_sendPacket(socket, packet);

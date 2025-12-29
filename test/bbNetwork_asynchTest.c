@@ -45,13 +45,23 @@ int main(void)
     flag = bbNetwork_connect(&network, address, port);
 
     sfSleep(sfSeconds(2));
+    bbNetwork_packet* packet;
     char str[64];
     for (int i = 0; true; i++)
     {
-        bbHere()
+        //bbHere()
         sprintf(str, "i = %d", i);
         bbNetwork_sendStr(&network, str);
-        sfSleep(sfSeconds(1));
+
+        while (1)
+        {
+            flag = bbThreadedQueue_popR(&network.inbox, (void**)&packet);
+            if (flag != Success) break;
+            printf("packet received: %s\n", packet->data.str);
+            bbThreadedQueue_free(&network.inbox, (void**)&packet);
+
+        }
+
     }
 
     exit(EXIT_SUCCESS);
