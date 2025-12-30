@@ -57,19 +57,23 @@ bbFlag bbNetworkTime_waitInt(bbNetworkTime* network_time, U64 tick);
 //create timestamp immediately before sending packet
 bbFlag bbNetworkTimeStamp_request(bbNetwork* network, bbNetworkTime* network_time, bbNetwork_timestamp* timestamp);
 
-//consume timestamp immediately after receiving packet
-bbFlag bbNetworkTimeStamp_consume(bbNetwork* network, bbNetworkTime* network_time, bbNetwork_timestamp* timestamp);
+///react immediately to incoming message
+bbFlag bbNetworkTime_filterInbox (void* network, bbNetwork_packet* Struct);
+///react to outgoing message immediately before sending
+bbFlag bbNetworkTime_filterOutbox (void* network, bbNetwork_packet* Struct);
 
 /* What am I doing?
- * client sends packet N and notes local send time
- *                                                  Server receives packet N. notes server receiveTime
- *                                                  Server  notes server sendTime, responds to packet N,
- * client receives packet N and notes local receive time
+ * bbNetwork.extra_data points to bbNetworkTime
  *
- * RTT = local receive time - local send time - (server receive time - server send time)
+ * main thread puts a timestamp request in outbox
  *
- * server time at the time the message is received = sendTime - RTT/2
- * calculate difference in clocks to give client/server time difference.
+ * filter_outbox creates a bbNetwork_record and records time,
+ * then sends on the request to the server, filling out bbNetwork_timestamp.packetN
+ *
+ *                                                                         server adds receive time and send time
+ *                                                                         sends the packet back to the client
+ * filter_inbox adds server receive and send times, and current time to bbNetwork_record
+ * bbdebug round trip time (RTT)
  *
  */
 
