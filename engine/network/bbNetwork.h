@@ -14,6 +14,11 @@ typedef bbFlag bbNetwork_StructToPacket (sfPacket* packet, bbNetwork_packet* Str
 typedef bbFlag bbNetwork_onConnect (void* network);
 typedef bbFlag bbNetwork_onDisconnect (void* network);
 
+///react immediately to incoming message
+typedef bbFlag bbNetwork_filterInbox (void* network, bbNetwork_packet* Struct);
+///react to outgoing message immediately before sending
+typedef bbFlag bbNetwork_filterOutbox (void* network, bbNetwork_packet* Struct);
+
 typedef struct bbNetwork
 {
     sfIpAddress address;
@@ -37,6 +42,10 @@ typedef struct bbNetwork
     //notify front end
     bbNetwork_onDisconnect* on_disconnect;
 
+
+    bbNetwork_filterInbox* filter_inbox;
+    bbNetwork_filterOutbox* filter_outbox;
+    void* extra_data; //Used by bbTime
 //if true,
     atomic_bool quit;
 
@@ -48,7 +57,10 @@ bbFlag bbNetwork_init(bbNetwork* network,
     bbNetwork_PacketToStruct* packet_to_struct,
     bbNetwork_StructToPacket* struct_to_packet,
     bbNetwork_onConnect* on_connect,
-    bbNetwork_onDisconnect* on_disconnect);
+    bbNetwork_onDisconnect* on_disconnect,
+    bbNetwork_filterInbox* filter_inbox,
+    bbNetwork_filterOutbox* filter_outbox,
+    void* extra_data);
 
 ///Asynchronously try to connect to a server, if successful, call bbNetwork_onConnect, otherwise call bbNetwork_onDisconnect
 ///Launch bbNetwork_receiveThread

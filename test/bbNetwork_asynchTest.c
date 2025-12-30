@@ -25,6 +25,13 @@ bbFlag bbDisconnect(void* network)
     return Success;
 }
 
+
+///react immediately to incoming message
+bbFlag filterInbox (void* network, bbNetwork_packet* Struct);
+///react to outgoing message immediately before sending
+bbFlag filterOutbox (void* network, bbNetwork_packet* Struct);
+
+
 int main(void)
 {
 
@@ -37,7 +44,8 @@ int main(void)
     flag = bbNetwork_init(&network,
             bbNetwork_packet_toStruct,
             bbNetwork_struct_toPacket,
-            bbConnect,bbDisconnect);
+            bbConnect,bbDisconnect,
+            filterInbox,filterOutbox,NULL);
 
     sfIpAddress address = bbGetIPAddress("Input desired server's IP address: ");
     I32 port = bbGetInt("Input desired server's port: ", 1701);
@@ -71,4 +79,16 @@ int main(void)
 
     exit(EXIT_SUCCESS);
 
+}
+
+
+///react immediately to incoming message
+bbFlag filterInbox (void* network, bbNetwork_packet* Struct)
+{
+    bbHere()
+}
+///react to outgoing message immediately before sending
+bbFlag filterOutbox (void* network, bbNetwork_packet* Struct)
+{
+    bbHere()
 }

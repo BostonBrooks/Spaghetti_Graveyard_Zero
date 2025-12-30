@@ -9,7 +9,10 @@ bbFlag bbNetwork_init(bbNetwork* network,
     bbNetwork_PacketToStruct* packet_to_struct,
     bbNetwork_StructToPacket* struct_to_packet,
     bbNetwork_onConnect* on_connect,
-    bbNetwork_onDisconnect* on_disconnect)
+    bbNetwork_onDisconnect* on_disconnect,
+    bbNetwork_filterInbox* filter_inbox,
+    bbNetwork_filterOutbox* filter_outbox,
+    void* extra_data)
 {
     thread = "init";
     const I32 queue_length = 100;
@@ -18,6 +21,9 @@ bbFlag bbNetwork_init(bbNetwork* network,
     network->struct_to_packet = struct_to_packet;
     network->on_connect = on_connect;
     network->on_disconnect = on_disconnect;
+    network->filter_inbox = filter_inbox;
+    network->filter_outbox = filter_outbox;
+    network->extra_data = extra_data;
 
     bbThreadedQueue_init(&network->inbox,NULL,sizeof(bbNetwork_packet),queue_length,offsetof(bbNetwork_packet, listElement));
     bbThreadedQueue_init(&network->outbox,NULL,sizeof(bbNetwork_packet),queue_length,offsetof(bbNetwork_packet, listElement));
@@ -98,6 +104,11 @@ void* bbNetwork_receiveThread(void* args)
         bbThreadedQueue_alloc(queue, (void**)&test);
         bbNetwork_packet_toStruct(packet, test);
 
+        if (network->filter_inbox != NULL)
+        {
+            network->filter_inbox(network,test);
+        }
+
         bbThreadedQueue_pushL(queue, test);
 
         sfPacket_clear(packet);
@@ -128,6 +139,11 @@ void* bbNetwork_sendThread(void* args)
         bbFlag flag = bbThreadedQueue_popRblock(&network->outbox, (void**)&test);
 //bbHere()
         if (flag == None) continue;
+
+        if (network->filter_outbox != NULL)
+        {
+            network->filter_outbox(network,test);
+        }
         //bbFlag_print(flag);
         //bbDebug("bbPacket = %p\n", test);
         //bbDebug("bbPacket->type = %d\n", test->type);
