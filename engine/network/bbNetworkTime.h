@@ -37,6 +37,8 @@ typedef struct
 
 } bbNetworkTime;
 
+
+
 // get in synch with server
 bbFlag bbNetworkTime_init(bbNetworkTime* network_time);
 

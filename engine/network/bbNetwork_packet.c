@@ -76,7 +76,19 @@ bbFlag bbNetwork_sendStr(void* Network, char* str)
     packet->type = PACKETTYPE_STRING;
     bbStr_setStr(packet->data.str, str, 64);
 
-    //TODO should this not block on pool full?
+    bbThreadedQueue_pushL(&network->outbox, (void*)packet);
+
+    return Success;
+}
+
+
+bbFlag bbNetwork_requestTimestamp(void* Network)
+{
+    bbNetwork* network = (bbNetwork*)Network;
+    bbNetwork_packet* packet;
+    bbThreadedQueue_alloc(&network->outbox, (void**)&packet);
+    packet->type = PACKETTYPE_REQUESTTIMESTAMP;
+
     bbThreadedQueue_pushL(&network->outbox, (void*)packet);
 
     return Success;

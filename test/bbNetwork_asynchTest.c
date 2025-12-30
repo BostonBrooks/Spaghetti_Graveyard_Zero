@@ -61,14 +61,25 @@ int main(void)
     {
         //bbHere()
         sprintf(str, "i = %d", i);
+
         bbNetwork_sendStr(&network, str);
+        bbNetwork_requestTimestamp(&network);
         printf("packet sent: %s\n", str);
 
         while (1)
         {
             flag = bbThreadedQueue_popR(&network.inbox, (void**)&packet);
             if (flag != Success) break;
-            printf("packet received: %s\n", packet->data.str);
+            if (packet->type == PACKETTYPE_STRING)
+            {
+                printf("packet received: %s\n", packet->data.str);
+            } else if (packet->type == PACKETTYPE_TIMESTAMP)
+            {
+                printf("packet received timestamp: %lu\n", packet->data.timestamp.receive_time);
+            }else if (packet->type == PACKETTYPE_REQUESTTIMESTAMP)
+            {
+                bbHere()
+            }
             bbThreadedQueue_free(&network.inbox, (void**)&packet);
 
         }
