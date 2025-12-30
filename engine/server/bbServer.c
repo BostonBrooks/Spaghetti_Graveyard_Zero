@@ -28,11 +28,12 @@ int main(void){
     sfClock* clock = sfClock_create();
 
 
-
     printf("Loopback address = 127.0.0.1\nLocal address = %s\nPublic address = %s\n",
         localAddressString, publicAddressString);
 
-    int port = bbGetInt("Input server port: ", 1701);
+    I32 port = bbGetInt("Input server port: ", 1701);
+    bbClearLine(1);
+    printf("The port is %d\n", port);
 
     sfTcpListener* listener = sfTcpListener_create();
     sfSocketStatus status = sfTcpListener_listen(listener,port,sfIpAddress_Any);

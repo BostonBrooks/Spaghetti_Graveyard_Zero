@@ -220,7 +220,10 @@ static I32 bbGetInt(char* prompt, int defaultValue)
     while(1){
         printf("%s", prompt);
 
-
+        for (I32 j = 0; j < 64; j++)
+        {
+            answer[j] = 0;
+        }
 
         bbGetLine(answer,64,stdin);
 

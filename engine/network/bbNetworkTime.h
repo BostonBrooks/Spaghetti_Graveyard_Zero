@@ -1,6 +1,9 @@
+#ifndef BBNETWORKTIME_H
+#define BBNETWORKTIME_H
 
 #include <SFML/System.h>
 
+#include "bbNetwork.h"
 #include "engine/logic/bbFlag.h"
 #include "engine/logic/bbIntTypes.h"
 #include "engine/logic/bbVPool.h"
@@ -29,7 +32,7 @@ typedef struct
 {
     sfClock* localClock;
     U64 packets_sent;
-    //remember last 16 sent timestamps
+
     bbVPool* pool;
     bbList pending;
     bbList recorded;
@@ -52,10 +55,10 @@ bbFlag bbNetworkTime_getInt(bbNetworkTime* network_time, U64 tick);
 bbFlag bbNetworkTime_waitInt(bbNetworkTime* network_time, U64 tick);
 
 //create timestamp immediately before sending packet
-bbFlag bbNetworkTimeStamp_request(bbNetworkTime* network_time, bbNetwork_timestamp* timestamp);
+bbFlag bbNetworkTimeStamp_request(bbNetwork* network, bbNetworkTime* network_time, bbNetwork_timestamp* timestamp);
 
 //consume timestamp immediately after receiving packet
-bbFlag bbNetworkTimeStamp_consume(bbNetworkTime* network_time, bbNetwork_timestamp* timestamp);
+bbFlag bbNetworkTimeStamp_consume(bbNetwork* network, bbNetworkTime* network_time, bbNetwork_timestamp* timestamp);
 
 /* What am I doing?
  * client sends packet N and notes local send time
@@ -69,3 +72,5 @@ bbFlag bbNetworkTimeStamp_consume(bbNetworkTime* network_time, bbNetwork_timesta
  * calculate difference in clocks to give client/server time difference.
  *
  */
+
+#endif //BBNETWORKTIME_H

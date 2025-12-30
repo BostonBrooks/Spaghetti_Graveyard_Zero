@@ -82,14 +82,3 @@ bbFlag bbNetwork_sendStr(void* Network, char* str)
 }
 
 
-bbFlag bbNetwork_requestTimestamp(void* Network)
-{
-    bbNetwork* network = (bbNetwork*)Network;
-    bbNetwork_packet* packet;
-    bbThreadedQueue_alloc(&network->outbox, (void**)&packet);
-    packet->type = PACKETTYPE_REQUESTTIMESTAMP;
-
-    bbThreadedQueue_pushL(&network->outbox, (void*)packet);
-
-    return Success;
-}
