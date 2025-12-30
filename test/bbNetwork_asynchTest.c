@@ -40,8 +40,10 @@ int main(void)
             bbConnect,bbDisconnect);
 
     sfIpAddress address = bbGetIPAddress("Input desired server's IP address: ");
-    I32 port = bbGetInt("Input desired server's port: ");
+    I32 port = bbGetInt("Input desired server's port: ", 1701);
 
+    bbClearLine(1);
+    printf("The port is %d\n", port);
     flag = bbNetwork_connect(&network, address, port);
 
     sfSleep(sfSeconds(2));
@@ -52,6 +54,7 @@ int main(void)
         //bbHere()
         sprintf(str, "i = %d", i);
         bbNetwork_sendStr(&network, str);
+        printf("packet sent: %s\n", str);
 
         while (1)
         {
@@ -62,6 +65,8 @@ int main(void)
 
         }
 
+        //Do other things
+        sfSleep(sfSeconds(0.2));
     }
 
     exit(EXIT_SUCCESS);

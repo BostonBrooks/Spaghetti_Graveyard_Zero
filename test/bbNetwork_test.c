@@ -58,7 +58,7 @@ int main(void)
 
     while (1){
         address = bbGetIPAddress("Input desired server's IP address: ");
-        port = bbGetInt("Input desired server's port: ");
+        port = bbGetInt("Input desired server's port: ", 1701);
         status = sfTcpSocket_connect(socket, address, port, sfSeconds(20));
 
         if (status != sfSocketDone) {

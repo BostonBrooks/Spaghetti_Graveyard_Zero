@@ -190,33 +190,6 @@ static void bbClearLine(I32 lines)
 }
 
 //Similar function found in https://github.com/orichalcink/chatroom
-static I32 bbGetInt(char* prompt)
-{
-    I32 number;
-    char answer[64];
-    while(1){
-        printf("%s", prompt);
-
-        scanf("%s", answer);
-
-        I32 len = strlen(answer);
-        char digits[] = "0123456789";
-        I32 int_len = strspn(answer, digits);
-
-        if(len == int_len) {
-
-            number = atoi(answer);
-            return (number);
-        }
-        bbClearLine(1);
-
-        printf("Invalid input. Please enter a valid integer.\n");
-
-
-    }
-}
-
-//Similar function found in https://github.com/orichalcink/chatroom
 static I32 bbGetLine(char* string, I32 bufferlength, FILE* fp)
 {
     I32 numchars = 0;
@@ -240,6 +213,40 @@ static I32 bbGetLine(char* string, I32 bufferlength, FILE* fp)
 }
 
 //Similar function found in https://github.com/orichalcink/chatroom
+static I32 bbGetInt(char* prompt, int defaultValue)
+{
+    I32 number;
+    char answer[64];
+    while(1){
+        printf("%s", prompt);
+
+
+
+        bbGetLine(answer,64,stdin);
+
+        I32 len = strlen(answer);
+
+        if (len == 0) return defaultValue;
+
+        char digits[] = "0123456789";
+        I32 int_len = strspn(answer, digits);
+
+        if(len == int_len) {
+
+            number = atoi(answer);
+            return (number);
+        }
+        bbClearLine(1);
+
+        printf("Invalid input. Please enter a valid integer.\n");
+
+
+    }
+}
+
+
+
+//Similar function found in https://github.com/orichalcink/chatroom
 static sfIpAddress bbGetIPAddress(char* prompt)
 {
 
@@ -252,6 +259,12 @@ static sfIpAddress bbGetIPAddress(char* prompt)
         char addressStr[64];
         bbGetLine(addressStr, 64,stdin);
         bbClearLine(1);
+        if (strlen(addressStr) == 0)
+        {
+            address = sfIpAddress_fromString("127.0.0.1");
+            printf("the IP Address is 127.0.0.1\n", addressStr);
+            return address;
+        }
         address = sfIpAddress_fromString(addressStr);
 
         U32 intAddress;

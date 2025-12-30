@@ -108,7 +108,7 @@ void* bbNetwork_receiveThread(void* args)
     return NULL;
 }
 
-/// TODO Take struct from queue, Convert struct to packet, send
+/// Take struct from queue, Convert struct to packet, send
 void* bbNetwork_sendThread(void* args)
 {
     thread = "send";
@@ -124,7 +124,6 @@ void* bbNetwork_sendThread(void* args)
     {
         if (network->quit) return 0;
 
-        //TODO Use bbThreadedQueue_popRblock(...)
         bbNetwork_packet* test;
         bbFlag flag = bbThreadedQueue_popRblock(&network->outbox, (void**)&test);
 //bbHere()

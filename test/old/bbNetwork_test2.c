@@ -20,7 +20,7 @@ int main(void)
 
     while (1){
         sfIpAddress address = bbGetIPAddress("Input desired server's IP address: ");
-        I32 port = bbGetInt("Input desired server's port: ");
+        I32 port = bbGetInt("Input desired server's port: ", 1701);
         flag = bbNetwork_init(&network,  bbNetwork_packet_toStruct, bbNetwork_struct_toPacket, NULL, NULL)
 
         if (flag != Success) {
