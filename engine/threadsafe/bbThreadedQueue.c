@@ -107,6 +107,8 @@ bbFlag bbThreadedQueue_pushL(bbThreadedQueue* queue, void* element)
     head_listElement->prev = handle_element;
     queue->head = handle_element.u64;
 
+    bbAssert( queue->head != -1 && queue->tail != -1, "head/tail error\n");
+
     bbMutexUnlock(&queue->mutex);
     return Success;
 }
@@ -157,6 +159,7 @@ bbFlag bbThreadedQueue_pushR(bbThreadedQueue* queue, void* element)
     tail_listElement->next = handle_element;
     queue->tail = handle_element.u64;
 
+    bbAssert( queue->head != -1 && queue->tail != -1, "head/tail error\n");
     bbMutexUnlock(&queue->mutex);
     return Success;
 }

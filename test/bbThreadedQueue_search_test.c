@@ -34,7 +34,7 @@ int main (void) {
         test_struct1->integer = i;
         sprintf(test_struct1->string, "i = %d", i);
         bbDebug("i = %d\n", i);
-        bbThreadedQueue_pushL(&queue, test_struct1);
+        bbThreadedQueue_pushR(&queue, test_struct1);
     }
     bbCallback test_callback;
     test_callback.function = TestFunction;
