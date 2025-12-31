@@ -38,15 +38,22 @@ bbFlag bbThreadedQueue_alloc(bbThreadedQueue* queue, void** element)
     //bbMutexLock(&queue->mutex);
 
     void* element1;
-
-
-    bbThreadedPool_debug(queue->pool->pool);
     bbVPool_alloc(queue->pool, (void**)&element1);
-
     bbThreadedPool_debug(queue->pool->pool);
 
+    //TODO pull hair out
+    //the following code is overwriting the second element of the pool instead of the first element!
     bbPool_ListElement* list_element = (element1 + queue->offsetOf);
+    bbDebug("queue->offsetOf = %d\n", queue->offsetOf);
+    bbPool_Handle handle;
+    bbThreadedPool_reverseLookup(queue->pool->pool, element1, &handle);
+    bbDebug("handle.u64 = %llu\n", handle.u64);
+    //the following code is overwriting the second element of the pool instead of the first element!
+    //at the same time the code needs to be there to modify the returned element which is the first element
+
     list_element->prev = queue->pool->null;
+    //bbPool_Handle test_handle;
+    //test_handle.u64 = 3;
     list_element->next = queue->pool->null;
 
     bbThreadedPool_debug(queue->pool->pool);

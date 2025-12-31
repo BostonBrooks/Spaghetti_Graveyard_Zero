@@ -13,6 +13,7 @@ bbFlag bbThreadedPool_lookup_unsafe(bbThreadedPool* pool, void** address, bbPool
 
     bbAssert(handle.u64 >= 0 && handle.u64 < pool->num, "index %d out of bounds\n", handle.u64);
     I32 offset = handle.u64 * pool->sizeOf;
+
     *address = &pool->elements[offset];
     return Success;
 }
@@ -68,6 +69,11 @@ bbFlag bbThreadedPool_new(bbThreadedPool** self, I32 sizeOf, I32 num)
     bbThreadedPool_lookup_unsafe(pool, (void*)&element, handle);
     element->next = -1;
 
+
+
+    bbThreadedPool_debug(pool);
+
+
     pthread_mutex_init(&pool->mutex, NULL);
     pthread_mutex_init(&pool->poolFull, NULL);
     pthread_cond_init(&pool->poolFull2, NULL);
@@ -89,9 +95,7 @@ bbFlag bbThreadedPool_allocImpl(bbThreadedPool* pool, void** address, char* file
 {
     bbMutexLock(&pool->mutex);
 
-    bbDebug("available head = %d\n", pool->availableHead);
 
-    bbDebug("pool in use = %d\n", pool->inUse);
     if (pool->inUse >= pool->num)
     {
         //assert available list empty
@@ -113,8 +117,7 @@ bbFlag bbThreadedPool_allocImpl(bbThreadedPool* pool, void** address, char* file
 
     if (element->next == -1) //last element
     {
-        bbAssert(pool->inUse == pool->num, "We should not get here until pool is almost empty");
-        bbHere();
+        bbAssert(pool->inUse == pool->num, "We should not get here until pool is almost empty");;
         pool->availableHead = -1;
         pool->availableTail = -1;
 
@@ -131,8 +134,8 @@ bbFlag bbThreadedPool_allocImpl(bbThreadedPool* pool, void** address, char* file
     next_element->prev = -1;
     pool->availableHead = element->next;
 
-    bbDebug("available head = %d\n", pool->availableHead);
 
+    memset(element, 0, pool->sizeOf);
 
     *address = element;
 
