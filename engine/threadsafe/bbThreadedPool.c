@@ -257,17 +257,3 @@ bbFlag bbThreadedPool_printHeader(void* Pool, void* address)
 }
 
 
-bbFlag bbThreadedPool_debug(bbThreadedPool* pool) {
-
-    bbPrintf("head = %d, tail = %d\n", pool->availableHead, pool->availableTail);
-    for (I32 i = 0; i < pool->num; i++) {
-        bbThreadedPool_unused* element;
-
-        I32 offset = i * pool->sizeOf;
-        element = (bbThreadedPool_unused*)&pool->elements[offset];
-
-        bbPrintf("prev = %d, i = %d, next = %d\n", element->prev, i, element->next);
-    }
-        return Success;
-
-}

@@ -48,5 +48,21 @@ handle);
 bbFlag bbThreadedPool_printHeader(void* Pool, void* address);
 I32 bbThreadedPool_handleIsEqual(void* USUSED, bbPool_Handle A, bbPool_Handle B);
 
-bbFlag bbThreadedPool_debug(bbThreadedPool* pool);
+#define bbThreadedPool_debug(pool) \
+{\
+bbThreadedPool* pool1 = (bbThreadedPool*)pool;\
+bbDebug("head = %d, tail = %d\n", pool1->availableHead, pool1->availableTail);\
+for (I32 i = 0; i < 5; i++) {\
+bbThreadedPool_unused* element;\
+\
+I32 offset = i * pool1->sizeOf;\
+element = (bbThreadedPool_unused*)&pool1->elements[offset];\
+\
+bbPrintf("prev = %d, i = %d, next = %d\n", element->prev, i, element->next);\
+}\
+bbPrintf("...\n\n");\
+\
+}\
+
+
 #endif //BB_THREADED_POOL_H

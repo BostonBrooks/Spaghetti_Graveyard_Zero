@@ -36,14 +36,21 @@ bbFlag bbThreadedQueue_alloc(bbThreadedQueue* queue, void** element)
 {
 
     //bbMutexLock(&queue->mutex);
-    bbVPool_alloc(queue->pool, (void**)element);
+
+    void* element1;
 
 
-    bbPool_ListElement* list_element = (*element + queue->offsetOf);
+    bbThreadedPool_debug(queue->pool->pool);
+    bbVPool_alloc(queue->pool, (void**)&element1);
+
+    bbThreadedPool_debug(queue->pool->pool);
+
+    bbPool_ListElement* list_element = (element1 + queue->offsetOf);
     list_element->prev = queue->pool->null;
     list_element->next = queue->pool->null;
 
-   // bbMutexUnlock(&queue->mutex);
+    bbThreadedPool_debug(queue->pool->pool);
+   *element = element1;
 
     return Success;
 }

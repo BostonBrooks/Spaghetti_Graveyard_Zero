@@ -10,8 +10,8 @@
 
 typedef struct {
     I32 integer;
-    char string[64];
     bbPool_ListElement* list_element;
+    char string[64];
 } test_struct;
 
 //typedef bbFlag bbCallbackFunction(void* callback, bbPool_Handle handle);
@@ -34,6 +34,7 @@ int main (void) {
 
         bbThreadedPool_debug(queue.pool->pool);
         bbThreadedQueue_alloc(&queue, (void**)&test_struct1);
+        bbThreadedPool_debug(queue.pool->pool);
         test_struct1->integer = i;
         sprintf(test_struct1->string, "i = %d", i);
         bbDebug("i = %d\n", i);
