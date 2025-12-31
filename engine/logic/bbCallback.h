@@ -3,7 +3,7 @@
 #include "bbFlag.h"
 #include "bbPoolHandle.h"
 
-typedef bbFlag bbCallbackFunction(void* callback);
+typedef bbFlag bbCallbackFunction(void* callback, bbPool_Handle handle);
 
 
 typedef struct
@@ -12,9 +12,9 @@ typedef struct
     bbPool_Handle args;
 }  bbCallback;
 
-static bbFlag bbCallback_execute(bbCallback* callback)
+static bbFlag bbCallback_execute(bbCallback* callback, bbPool_Handle handle)
 {
-    return callback->function(callback);
+    return callback->function(callback, handle);
 }
 
 static bbFlag bbCallback_init(bbCallback* self, bbCallbackFunction* function, bbPool_Handle args)
