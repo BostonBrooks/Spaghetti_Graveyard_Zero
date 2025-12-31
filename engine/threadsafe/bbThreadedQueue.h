@@ -8,8 +8,11 @@
 
 typedef struct
 {
+    // bbVPool can be any type of pool, with the same interface.
+    // We may want different variations on bbThreadedPool.
     bbVPool* pool;
     pthread_mutex_t mutex;
+    // head and tail should be bbPool_handle
     I32 head;
     I32 tail;
     I32 offsetOf;
