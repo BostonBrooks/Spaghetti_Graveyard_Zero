@@ -52,7 +52,9 @@ bbFlag bbThreadedPool_new(bbThreadedPool** self, I32 sizeOf, I32 num)
     {
         handle.u64 = i;
         
-        bbThreadedPool_lookup_unsafe(pool, (void*)&element, handle);
+
+        I32 offset = i * pool->sizeOf;
+        element = (bbThreadedPool_unused*)&pool->elements[offset];
 
         element->prev = i-1;
         element->next = i+1;
@@ -71,6 +73,8 @@ bbFlag bbThreadedPool_new(bbThreadedPool** self, I32 sizeOf, I32 num)
     pthread_cond_init(&pool->poolFull2, NULL);
 
     *self = pool;
+
+
     return Success;
 }
 
@@ -250,4 +254,20 @@ bbFlag bbThreadedPool_printHeader(void* Pool, void* address)
     bbPrintf("Element id at index %d\n", handle.u64);
 
     return Success;
+}
+
+
+bbFlag bbThreadedPool_debug(bbThreadedPool* pool) {
+
+    bbPrintf("head = %d, tail = %d\n", pool->availableHead, pool->availableTail);
+    for (I32 i = 0; i < pool->num; i++) {
+        bbThreadedPool_unused* element;
+
+        I32 offset = i * pool->sizeOf;
+        element = (bbThreadedPool_unused*)&pool->elements[offset];
+
+        bbPrintf("prev = %d, i = %d, next = %d\n", element->prev, i, element->next);
+    }
+        return Success;
+
 }

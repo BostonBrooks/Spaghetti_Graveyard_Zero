@@ -48,4 +48,5 @@ handle);
 bbFlag bbThreadedPool_printHeader(void* Pool, void* address);
 I32 bbThreadedPool_handleIsEqual(void* USUSED, bbPool_Handle A, bbPool_Handle B);
 
+bbFlag bbThreadedPool_debug(bbThreadedPool* pool);
 #endif //BB_THREADED_POOL_H
