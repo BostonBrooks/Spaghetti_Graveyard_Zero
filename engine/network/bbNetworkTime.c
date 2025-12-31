@@ -16,7 +16,7 @@ bbFlag bbNetworkTime_init(bbNetworkTime* network_time)
     return Success;
 }
 
-
+/* work in progress...
 bbFlag bbNetworkTime_filterInbox (void* Network, bbNetwork_packet* Struct)
 {
     bbNetwork* network = Network;
@@ -36,3 +36,4 @@ bbFlag bbNetworkTime_filterOutbox (void* Network, bbNetwork_packet* Struct)
     bbNetworkTime* network_time = (bbNetworkTime*)network->extra_data;
     bbNetworkTime_record* record;
 }
+*/

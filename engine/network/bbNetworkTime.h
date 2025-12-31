@@ -9,7 +9,9 @@
 #include "engine/logic/bbIntTypes.h"
 #include "engine/logic/bbVPool.h"
 #include "engine/logic/bbList.h"
-// send data used to calculate difference between clocks
+#include "engine/threadsafe/bbThreadedQueue.h"
+#include "engine/network/bbNetwork_packet.h"
+#include "engine/network/bbNetwork.h"
 typedef struct
 {
     U64 packetN;
@@ -56,12 +58,12 @@ bbFlag bbNetworkTime_getInt(bbNetworkTime* network_time, U64 tick);
 bbFlag bbNetworkTime_waitInt(bbNetworkTime* network_time, U64 tick);
 
 //create timestamp immediately before sending packet
-bbFlag bbNetworkTimeStamp_request(bbNetwork* network, bbNetworkTime* network_time, bbNetwork_timestamp* timestamp);
+bbFlag bbNetworkTimeStamp_request(void* network, bbNetworkTime* network_time, bbNetwork_timestamp* timestamp);
 
 ///react immediately to incoming message
-bbFlag bbNetworkTime_filterInbox (void* network, bbNetwork_packet* Struct);
+bbFlag bbNetworkTime_filterInbox (void* network, void* Struct);
 ///react to outgoing message immediately before sending
-bbFlag bbNetworkTime_filterOutbox (void* network, bbNetwork_packet* Struct);
+bbFlag bbNetworkTime_filterOutbox (void* network, void* Struct);
 
 /* What am I doing?
  * bbNetwork.extra_data points to bbNetworkTime
