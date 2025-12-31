@@ -4,6 +4,7 @@
 #include <SFML/System.h>
 
 #include "bbNetwork.h"
+#include "bbNetwork_packet.h"
 #include "engine/logic/bbFlag.h"
 #include "engine/logic/bbIntTypes.h"
 #include "engine/logic/bbVPool.h"
@@ -24,8 +25,9 @@ typedef struct
     U64 server_send_time;
     U64 local_receive_time;
     U64 time_difference;
+    U64 round_trip_time;
     bbPool_List list_element;
-} bbNetwork_record;
+} bbNetworkTime_record;
 
 // keep data to track difference between clocks
 typedef struct
@@ -33,9 +35,8 @@ typedef struct
     sfClock* localClock;
     U64 packets_sent;
 
-    bbVPool* pool;
-    bbList pending;
-    bbList recorded;
+    bbThreadedQueue pending;
+    bbThreadedQueue recorded;
 
 
 } bbNetworkTime;

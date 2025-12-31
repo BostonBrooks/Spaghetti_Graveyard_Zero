@@ -1,5 +1,7 @@
 ///I'm starting things over, network connection must not block spawning thread
 ///bbTime will need immediate access to the network, not using bbThreadedQueue
+#ifndef BB_NETWORK_H
+#define BB_NETWORK_H
 
 #include <stdatomic.h>
 #include <SFML/Network.h>
@@ -9,10 +11,12 @@
 
 
 typedef bbFlag bbNetwork_ProcessPacket (void* network, void* args);
-typedef bbFlag bbNetwork_PacketToStruct (sfPacket* packet, bbNetwork_packet* Struct);
-typedef bbFlag bbNetwork_StructToPacket (sfPacket* packet, bbNetwork_packet* Struct);
 typedef bbFlag bbNetwork_onConnect (void* network);
 typedef bbFlag bbNetwork_onDisconnect (void* network);
+
+
+typedef bbFlag bbNetwork_PacketToStruct (sfPacket* packet, bbNetwork_packet* Struct);
+typedef bbFlag bbNetwork_StructToPacket (sfPacket* packet, bbNetwork_packet* Struct);
 
 ///react immediately to incoming message
 typedef bbFlag bbNetwork_filterInbox (void* network, bbNetwork_packet* Struct);
@@ -81,3 +85,4 @@ void* bbNetwork_receiveThread(void* args);
 
 //Functions to send to outbox or receive to inbox are called by main
 
+#endif //BB_NETWORK_H
