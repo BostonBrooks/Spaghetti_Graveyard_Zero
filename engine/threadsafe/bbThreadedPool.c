@@ -10,6 +10,8 @@
 
 bbFlag bbThreadedPool_lookup_unsafe(bbThreadedPool* pool, void** address, bbPool_Handle handle)
 {
+
+    bbAssert(handle.u64 >= 0 && handle.u64 < pool->num, "index %d out of bounds\n", handle.u64);
     I32 offset = handle.u64 * pool->sizeOf;
     *address = &pool->elements[offset];
     return Success;
@@ -19,6 +21,7 @@ bbFlag bbThreadedPool_reverseLookup_unsafe(bbThreadedPool* pool, void* address, 
 {
     I32 offset = (U8*)address - (U8*)&pool->elements[0];
     I32 index = offset / pool->sizeOf;
+    bbAssert(index >= 0 && index < pool->num, "index %d out of bounds\n", index);
     handle->u64 = index;
 
     return Success;
@@ -82,24 +85,32 @@ bbFlag bbThreadedPool_allocImpl(bbThreadedPool* pool, void** address, char* file
 {
     bbMutexLock(&pool->mutex);
 
-    pool->inUse++;
+    bbDebug("available head = %d\n", pool->availableHead);
 
-    if (pool->inUse > pool->num)
+    bbDebug("pool in use = %d\n", pool->inUse);
+    if (pool->inUse >= pool->num)
     {
+        //assert available list empty
         bbMutexUnlock(&pool->mutex);
 
         //there is a bug when mutex is unlocked in between the following lines
         pthread_cond_wait(&pool->poolFull2, &pool->poolFull);
         bbMutexLock(&pool->mutex);
     }
+
+    pool->inUse++;
+
     bbPool_Handle handle;
     bbThreadedPool_unused* element;
     handle.u64 = pool->availableHead;
-    
+
     bbThreadedPool_lookup_unsafe(pool, (void*)&element, handle);
+
 
     if (element->next == -1) //last element
     {
+        bbAssert(pool->inUse == pool->num, "We should not get here until pool is almost empty");
+        bbHere();
         pool->availableHead = -1;
         pool->availableTail = -1;
 
@@ -115,6 +126,9 @@ bbFlag bbThreadedPool_allocImpl(bbThreadedPool* pool, void** address, char* file
 
     next_element->prev = -1;
     pool->availableHead = element->next;
+
+    bbDebug("available head = %d\n", pool->availableHead);
+
 
     *address = element;
 

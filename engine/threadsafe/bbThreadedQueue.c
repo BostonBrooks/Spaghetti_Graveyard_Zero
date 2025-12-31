@@ -129,6 +129,8 @@ bbFlag bbThreadedQueue_pushR(bbThreadedQueue* queue, void* element)
     bbPool_Handle handle_element;
     flag = bbVPool_reverseLookup(queue->pool, element, &handle_element);
 
+    bbDebug("handle_element.u64 = %llu\n", handle_element.u64);
+    bbFlag_print(flag);
     if (queue->head == -1 || queue->tail == -1)
     {
         bbAssert(queue->head == -1 && queue->tail == -1, "head/tail mismatch");
@@ -136,6 +138,7 @@ bbFlag bbThreadedQueue_pushR(bbThreadedQueue* queue, void* element)
         queue->head = handle_element.u64;
         queue->tail = handle_element.u64;
 
+        bbDebug("head = %d, tail = %d\n", queue->head, queue->tail);
         //I guess we're using null for endpoints of lists, IE not a circular list
         list_element->prev = queue->pool->null;
         list_element->next = queue->pool->null;
@@ -148,6 +151,7 @@ bbFlag bbThreadedQueue_pushR(bbThreadedQueue* queue, void* element)
         return Success;
     }
 
+    bbDebug("head = %d, tail = %d\n", queue->head, queue->tail);
     void* tail; bbPool_Handle tailhandle;
     tailhandle.u64 = queue->tail;
     bbVPool_lookup(queue->pool, &tail, tailhandle);
@@ -159,7 +163,8 @@ bbFlag bbThreadedQueue_pushR(bbThreadedQueue* queue, void* element)
     tail_listElement->next = handle_element;
     queue->tail = handle_element.u64;
 
-    bbAssert( queue->head != -1 && queue->tail != -1, "head/tail error\n");
+    bbDebug("head = %d, tail = %d\n", queue->head, queue->tail);
+
     bbMutexUnlock(&queue->mutex);
     return Success;
 }
