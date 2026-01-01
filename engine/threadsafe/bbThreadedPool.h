@@ -16,7 +16,7 @@ typedef struct
 {
     I32 prev;
     I32 next;
-} bbThreadedPool_unused;
+} bbThreadedPool_available;
 
 typedef struct
 {
@@ -53,12 +53,12 @@ I32 bbThreadedPool_handleIsEqual(void* USUSED, bbPool_Handle A, bbPool_Handle B)
 bbThreadedPool* pool1 = (bbThreadedPool*)pool;\
 bbDebug("head = %d, tail = %d\n", pool1->availableHead, pool1->availableTail);\
 for (I32 i = 0; i < 5; i++) {\
-bbThreadedPool_unused* element;\
+bbThreadedPool_available* element;\
 \
 I32 offset = i * pool1->sizeOf;\
-element = (bbThreadedPool_unused*)&pool1->elements[offset];\
+element = (bbThreadedPool_available*)&pool1->elements[offset];\
 \
-bbPrintf("prev = %d, i = %d, next = %d\n", element->prev, i, element->next);\
+bbPrintf("prev = %d, index = %d, next = %d\n",element->prev, i, element->next);\
 }\
 bbPrintf("...\n\n");\
 \

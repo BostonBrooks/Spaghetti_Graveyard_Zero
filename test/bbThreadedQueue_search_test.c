@@ -10,45 +10,46 @@
 
 typedef struct {
     I32 integer;
-    char string[64];
-    bbPool_ListElement* list_element;
-} test_struct;
+    char string[128];
+    bbPool_ListElement list_element;
+} struct1;
 
 //typedef bbFlag bbCallbackFunction(void* callback, bbPool_Handle handle);
 
+//callback.function = this function
+//callback.args.u64 = 5
+//handle.ptr points to a struct1
 bbFlag TestFunction(void* Callback, bbPool_Handle handle) {
-    bbCallback* callback = (bbCallback*)Callback;
 
-    if (callback->args.u64 == handle.u64) return Success;
+    bbCallback* callback = (bbCallback*)Callback;
+    struct1* struct_1 = handle.ptr;
+    if (callback->args.u64 == struct_1->integer) return Success;
     return None;
 }
 
 int main (void) {
 
     bbThreadedQueue queue;
-    bbThreadedQueue_init(&queue, NULL, sizeof(test_struct), 100, offsetof(test_struct, list_element));
+    bbThreadedQueue_init(&queue, NULL, sizeof(struct1), 100, offsetof(struct1, list_element));
 
     bbThreadedPool* pool1 = queue.pool->pool;
-    bbDebug("sizeof = %d, offset = %d, num = %d\n\n", pool1->sizeOf, queue.offsetOf, pool1->num);
 
-    test_struct* test_struct1;
+    struct1* struct11;
 
-    bbThreadedPool_debug(queue.pool->pool);
     for (I32 i = 0; i < 100; i++) {
 
-        bbThreadedQueue_alloc(&queue, (void**)&test_struct1);
-        test_struct1->integer = i;
-        sprintf(test_struct1->string, "i = %d", i);
-        bbDebug("i = %d\n", i);
-        bbThreadedQueue_pushR(&queue, test_struct1);
+        bbThreadedQueue_alloc(&queue, (void**)&struct11);
+        struct11->integer = i;
+        sprintf(struct11->string, "i = %d", i);
+        bbThreadedQueue_pushR(&queue, struct11);
     }
     bbCallback test_callback;
     test_callback.function = TestFunction;
     test_callback.args.u64 = 5;
 
-    bbThreadedQueue_search(&queue, (void**)&test_struct1, &test_callback);
+    bbThreadedQueue_search(&queue, (void**)&struct11, &test_callback);
 
-    printf("test_struct.string = %s\n", test_struct1->string);
+    printf("struct1.string: %s\n", struct11->string);
 
     return 0;
 }
