@@ -29,17 +29,14 @@ int main (void) {
     bbThreadedQueue_init(&queue, NULL, sizeof(test_struct), 100, offsetof(test_struct, list_element));
 
     bbThreadedPool* pool1 = queue.pool->pool;
-    bbDebug("sizeof = %d, offset = %d, num = %d\n\n", pool1->sizeOf, queue.offsetOf, pool1->num);
 
     test_struct* test_struct1;
 
-    bbThreadedPool_debug(queue.pool->pool);
     for (I32 i = 0; i < 100; i++) {
 
         bbThreadedQueue_alloc(&queue, (void**)&test_struct1);
         test_struct1->integer = i;
         sprintf(test_struct1->string, "i = %d", i);
-        bbDebug("i = %d\n", i);
         bbThreadedQueue_pushR(&queue, test_struct1);
     }
     bbCallback test_callback;

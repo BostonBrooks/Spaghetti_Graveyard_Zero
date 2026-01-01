@@ -10,6 +10,7 @@
 #include "engine/logic/bbIntTypes.h"
 #include "engine/logic/bbFlag.h"
 #include "engine/logic/bbPoolHandle.h"
+#include "engine/logic/bbVPool.h"
 
 
 typedef struct
@@ -36,6 +37,8 @@ typedef struct
 #define bbThreadedPool_alloc(pool, address)\
 bbThreadedPool_allocImpl(pool, address, NULL, 0);
 
+
+bbFlag bbVPool_newThreaded(bbVPool** pool, I32 sizeOf, I32 num);
 bbFlag bbThreadedPool_new(bbThreadedPool** pool, I32 sizeOf, I32 num);
 bbFlag bbThreadedPool_delete(bbThreadedPool* pool);
 bbFlag bbThreadedPool_clear(void* pool);

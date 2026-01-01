@@ -9,6 +9,7 @@
 #include "engine/logic/bbIntTypes.h"
 #include "engine/logic/bbPoolHandle.h"
 #include "engine/logic/bbFlag.h"
+#include "engine/logic/bbVPool.h"
 
 typedef struct {
 	bbPool_Handle null;
@@ -24,6 +25,8 @@ typedef bbPool_ListElement bbLeanPool_Header;
 #define bbLeanPool_alloc(pool, address)\
 bbLeanPool_allocImpl(pool, address, NULL, 0);
 
+
+bbFlag bbVPool_newLean(bbVPool** pool, I32 sizeOf, I32 num);
 bbFlag bbLeanPool_new(bbLeanPool** pool, I32 sizeOf, I32 num);
 bbFlag bbLeanPool_delete(bbLeanPool* pool);
 bbFlag bbLeanPool_clear(bbLeanPool* pool);

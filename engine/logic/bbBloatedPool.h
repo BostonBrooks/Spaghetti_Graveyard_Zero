@@ -7,9 +7,11 @@
 #include "engine/logic/bbIntTypes.h"
 #include "engine/logic/bbPoolHandle.h"
 #include "engine/logic/bbFlag.h"
+#include "engine/logic/bbVPool.h"
 
 #include <stdalign.h>
 #include <stdbool.h>
+
 
 typedef struct {
 	bbPool_Handle null;
@@ -33,6 +35,8 @@ typedef struct {
 #define bbBloatedPool_alloc(pool, address)\
 bbBloatedPool_allocImpl(pool, address, __FILE_NAME__, __LINE__);
 
+
+bbFlag bbVPool_newBloated(bbVPool** pool, I32 sizeOf, I32 level1, I32 level2);
 bbFlag bbBloatedPool_new(
         bbBloatedPool** pool, I32 sizeOf, I32 level1, I32 level2);
 bbFlag bbBloatedPool_delete(bbBloatedPool* pool);

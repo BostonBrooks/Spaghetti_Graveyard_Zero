@@ -28,6 +28,31 @@ bbFlag bbThreadedPool_reverseLookup_unsafe(bbThreadedPool* pool, void* address, 
     return Success;
 }
 
+
+bbFlag bbVPool_newThreaded(bbVPool** self, I32 sizeOf, I32 num)
+{
+    bbThreadedPool* ThreadedPool;
+    bbThreadedPool_new(&ThreadedPool, sizeOf, num);
+    bbVPool* pool = malloc(sizeof(bbVPool));
+    bbAssert(pool != NULL, "bad malloc\n");
+    pool->pool = ThreadedPool;
+    pool->null = ThreadedPool->null;
+    pool->sizeOf = ThreadedPool->sizeOf;
+    pool->delete = (bbFlag (*)(void* pool)) bbThreadedPool_delete;
+    pool->clear = bbThreadedPool_clear;
+    pool->allocImpl = (bbFlag(*)(void* pool, void** address, char* file, int
+    line)) bbThreadedPool_allocImpl;
+    pool->free = (bbFlag(*)(void* pool, void* address)) bbThreadedPool_free;
+    pool->lookup = (bbFlag (*)(void* pool, void** address, bbPool_Handle
+    handle)) bbThreadedPool_lookup;
+    pool->reverseLookup = bbThreadedPool_reverseLookup;
+    pool->printHeader = bbThreadedPool_printHeader;
+    pool->handleIsEqual = bbThreadedPool_handleIsEqual;
+    *self = pool;
+    return Success;
+
+}
+
 bbFlag bbThreadedPool_new(bbThreadedPool** self, I32 sizeOf, I32 num)
 {
     bbAssert(num>2, "num to small\n");
@@ -68,11 +93,6 @@ bbFlag bbThreadedPool_new(bbThreadedPool** self, I32 sizeOf, I32 num)
     
     bbThreadedPool_lookup_unsafe(pool, (void*)&element, handle);
     element->next = -1;
-
-
-
-    bbThreadedPool_debug(pool);
-
 
     pthread_mutex_init(&pool->mutex, NULL);
     pthread_mutex_init(&pool->poolFull, NULL);

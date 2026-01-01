@@ -2,6 +2,7 @@
 #include "engine/logic/bbFlag.h"
 #include "engine/logic/bbArith.h"
 #include "engine/logic/bbString.h"
+#include "engine/logic/bbVPool.h"
 #include <stddef.h>
 #include <stdlib.h>
 
@@ -26,6 +27,30 @@ bbFlag bbBloatedPool_getHeader(bbBloatedPool_Header** header, void* address){
 	hdr->file[1] = 'z';
 	return Success;
 }
+
+bbFlag bbVPool_newBloated(bbVPool** Pool, I32 sizeOf, I32 level1, I32 level2){
+	bbBloatedPool* BloatedPool;
+	bbBloatedPool_new(&BloatedPool, sizeOf, level1, level2);
+	bbVPool* pool = malloc(sizeof(bbVPool));
+	pool->pool = BloatedPool;
+	pool->null = BloatedPool->null;
+	pool->sizeOf = BloatedPool->sizeOf;
+	pool->delete = (bbFlag (*)(void* pool)) bbBloatedPool_delete;
+	pool->clear = (bbFlag (*)(void* pool)) bbBloatedPool_clear;
+	pool->allocImpl = (bbFlag(*)(void* pool, void** address, char* file, int
+	line)) bbBloatedPool_allocImpl;
+	pool->free = (bbFlag(*)(void* pool, void* address)) bbBloatedPool_free;
+	pool->lookup = (bbFlag (*)(void* pool, void** address, bbPool_Handle
+	handle)) bbBloatedPool_lookup;
+	pool->reverseLookup = (bbFlag (*)(void* pool, void* address,
+			bbPool_Handle* handle)) bbBloatedPool_reverseLookup;
+	pool->printHeader = (bbFlag (*)(void *, void *)) bbBloatedPool_printHeader;
+	pool->handleIsEqual = (I32 (*)(void* USUSED, bbPool_Handle A,
+			bbPool_Handle B)) bbBloatedPool_handleIsEqual;
+	*Pool = pool;
+	return Success;
+}
+
 
 bbFlag bbBloatedPool_new(bbBloatedPool** Pool, I32 sizeOf, I32 level1, I32
 level2){
