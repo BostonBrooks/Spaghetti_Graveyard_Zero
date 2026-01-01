@@ -73,14 +73,14 @@ bbFlag bbThreadedPool_new(bbThreadedPool** self, I32 sizeOf, I32 num)
     pool->availableHead = 0;
     pool->availableTail = num-1;
 
-    bbPool_Handle handle; bbThreadedPool_unused* element;
+    bbPool_Handle handle; bbThreadedPool_available* element;
     for (I32 i = 0; i < num; i++)
     {
         handle.u64 = i;
         
 
         I32 offset = i * pool->sizeOf;
-        element = (bbThreadedPool_unused*)&pool->elements[offset];
+        element = (bbThreadedPool_available*)&pool->elements[offset];
 
         element->prev = i-1;
         element->next = i+1;
@@ -129,7 +129,7 @@ bbFlag bbThreadedPool_allocImpl(bbThreadedPool* pool, void** address, char* file
     pool->inUse++;
 
     bbPool_Handle handle;
-    bbThreadedPool_unused* element;
+    bbThreadedPool_available* element;
     handle.u64 = pool->availableHead;
 
     bbThreadedPool_lookup_unsafe(pool, (void*)&element, handle);
@@ -146,7 +146,7 @@ bbFlag bbThreadedPool_allocImpl(bbThreadedPool* pool, void** address, char* file
         return Success;
     }
 
-    bbThreadedPool_unused* next_element;
+    bbThreadedPool_available* next_element;
     handle.u64 = element->next;
     
     bbThreadedPool_lookup_unsafe(pool, (void*)&next_element, handle);
@@ -180,7 +180,7 @@ bbFlag bbThreadedPool_free(bbThreadedPool* pool, void* address)
         pool->availableHead = handle.u64;
         pool->availableTail = handle.u64;
 
-        bbThreadedPool_unused* element = address;
+        bbThreadedPool_available* element = address;
         element->prev = -1;
         element->next = -1;
 
@@ -194,7 +194,7 @@ bbFlag bbThreadedPool_free(bbThreadedPool* pool, void* address)
 
 
 
-    bbThreadedPool_unused* next_element;
+    bbThreadedPool_available* next_element;
     bbPool_Handle next_handle;
     next_handle.u64 = pool->availableHead;
     
@@ -203,7 +203,7 @@ bbFlag bbThreadedPool_free(bbThreadedPool* pool, void* address)
     bbPool_Handle handle;
     
     bbThreadedPool_reverseLookup_unsafe(pool, address, &handle);
-    bbThreadedPool_unused* element = address;
+    bbThreadedPool_available* element = address;
 
     next_element->prev = handle.u64;
     pool->availableHead = handle.u64;
@@ -247,17 +247,17 @@ bbFlag bbThreadedPool_clear(void* Pool)
 {
     bbThreadedPool* pool = Pool;
     bbMutexLock(&pool->mutex);
-    bbThreadedPool_unused* element;
+    bbThreadedPool_available* element;
     pool->inUse = 0;
     for (I32 i = 0; i < pool->num; i++)
     {
-        element = (bbThreadedPool_unused*)&pool->elements[i];
+        element = (bbThreadedPool_available*)&pool->elements[i];
         element->prev = i-1;
         element->next = i+1;
     }
-    element = (bbThreadedPool_unused*)&pool->elements[0];
+    element = (bbThreadedPool_available*)&pool->elements[0];
     element->prev = -1;
-    element = (bbThreadedPool_unused*)&pool->elements[pool->num-1];
+    element = (bbThreadedPool_available*)&pool->elements[pool->num-1];
     element->next = -1;
 
     pool->availableHead = 0;

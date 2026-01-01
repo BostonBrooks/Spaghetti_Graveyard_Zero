@@ -38,7 +38,7 @@ typedef struct
     U64 packets_sent;
 
     bbThreadedQueue pending;
-    bbThreadedQueue recorded;
+    bbThreadedQueue completed;
 
 
 } bbNetworkTime;
@@ -76,6 +76,10 @@ bbFlag bbNetworkTime_filterOutbox (void* network, void* Struct);
  *                                                                         server adds receive time and send time
  *                                                                         sends the packet back to the client
  * filter_inbox adds server receive and send times, and current time to bbNetwork_record
+ * filter_inbox must search bbNetworkTime.pending to get the record with matching packetN
+ * and push that to bbNetworkTime.completed
+ *
+ *
  * bbdebug round trip time (RTT)
  *
  */

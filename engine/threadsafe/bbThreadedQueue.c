@@ -39,20 +39,24 @@ bbFlag bbThreadedQueue_alloc(bbThreadedQueue* queue, void** element)
 
     void* element1;
     bbVPool_alloc(queue->pool, (void**)&element1);
+    bbThreadedPool_debug(queue->pool->pool);
 
     //TODO pull hair out
     //the following code is overwriting the second element of the pool instead of the first element!
     bbPool_ListElement* list_element = (element1 + queue->offsetOf);
-
-
+    bbDebug("queue->offsetOf = %d\n", queue->offsetOf);
+    bbPool_Handle handle;
+    bbThreadedPool_reverseLookup(queue->pool->pool, element1, &handle);
+    bbDebug("handle.u64 = %llu\n", handle.u64);
     //the following code is overwriting the second element of the pool instead of the first element!
     //at the same time the code needs to be there to modify the returned element which is the first element
 
     list_element->prev = queue->pool->null;
-    bbThreadedPool_debug(queue->pool->pool);
+    //bbPool_Handle test_handle;
+    //test_handle.u64 = 3;
     list_element->next = queue->pool->null;
-    bbThreadedPool_debug(queue->pool->pool);
 
+    bbThreadedPool_debug(queue->pool->pool);
    *element = element1;
 
     return Success;
@@ -139,6 +143,7 @@ bbFlag bbThreadedQueue_pushR(bbThreadedQueue* queue, void* element)
     bbPool_Handle handle_element;
     flag = bbVPool_reverseLookup(queue->pool, element, &handle_element);
 
+    bbDebug("handle_element.u64 = %llu\n", handle_element.u64);
     bbFlag_print(flag);
     if (queue->head == -1 || queue->tail == -1)
     {
@@ -160,6 +165,7 @@ bbFlag bbThreadedQueue_pushR(bbThreadedQueue* queue, void* element)
         return Success;
     }
 
+    bbDebug("head = %d, tail = %d\n", queue->head, queue->tail);
     void* tail; bbPool_Handle tailhandle;
     tailhandle.u64 = queue->tail;
     bbVPool_lookup(queue->pool, &tail, tailhandle);
@@ -171,6 +177,7 @@ bbFlag bbThreadedQueue_pushR(bbThreadedQueue* queue, void* element)
     tail_listElement->next = handle_element;
     queue->tail = handle_element.u64;
 
+    bbDebug("head = %d, tail = %d\n", queue->head, queue->tail);
 
     bbMutexUnlock(&queue->mutex);
     return Success;
