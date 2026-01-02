@@ -106,7 +106,12 @@ void* bbNetwork_receiveThread(void* args)
 
         if (network->filter_inbox != NULL)
         {
-            network->filter_inbox(network,test);
+            bbFlag flag = network->filter_inbox(network,test);
+            if (flag != Success)
+            {
+                bbThreadedQueue_free(queue, (void**)&test);
+                continue;
+            }
         }
 
         bbThreadedQueue_pushL(queue, test);
@@ -140,9 +145,11 @@ void* bbNetwork_sendThread(void* args)
 //bbHere()
         if (flag == None) continue;
 
-        if (network->filter_outbox != NULL)
+        bbFlag flag2 = network->filter_inbox(network,test);
+        if (flag2 != Success)
         {
-            network->filter_outbox(network,test);
+            bbThreadedQueue_free(&network->outbox, (void**)&test);
+            continue;
         }
         //bbFlag_print(flag);
         //bbDebug("bbPacket = %p\n", test);
