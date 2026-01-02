@@ -1,6 +1,7 @@
 #include "engine/logic/bbLeanPool.h"
 #include "engine/logic/bbFlag.h"
 #include "engine/logic/bbArith.h"
+#include "engine/logic/bbVPool.h"
 #include <stdlib.h>
 
 #define address_in_bounds(pool, address)\
@@ -38,7 +39,30 @@ I32 bbLeanPool_toInt(bbLeanPool* pool, void* element)
 
 }
 
-
+bbFlag bbVPool_newLean(bbVPool** Pool, I32 sizeOf, I32 num){
+	bbLeanPool* LeanPool;
+	bbLeanPool_new(&LeanPool, sizeOf, num);
+	bbAssert(LeanPool != NULL,"bad bbLeanPool_new\n")
+	bbVPool* pool = malloc(sizeof(bbVPool));
+	bbAssert(pool != NULL, "bad malloc\n");
+	pool->pool = LeanPool;
+	pool->null = LeanPool->null;
+	pool->sizeOf = LeanPool->sizeOf;
+	pool->delete = (bbFlag (*)(void* pool)) bbLeanPool_delete;
+	pool->clear = (bbFlag (*)(void* pool)) bbLeanPool_clear;
+	pool->allocImpl = (bbFlag(*)(void* pool, void** address, char* file, int
+	line)) bbLeanPool_allocImpl;
+	pool->free = (bbFlag(*)(void* pool, void* address)) bbLeanPool_free;
+	pool->lookup = (bbFlag (*)(void* pool, void** address, bbPool_Handle
+	handle)) bbLeanPool_lookup;
+	pool->reverseLookup = (bbFlag (*)(void* pool, void* address,
+			bbPool_Handle* handle)) bbLeanPool_reverseLookup;
+	pool->printHeader = (bbFlag (*)(void *, void *)) bbLeanPool_printHeader;
+	pool->handleIsEqual = (I32 (*)(void* USUSED, bbPool_Handle A,
+			bbPool_Handle B)) bbLeanPool_handleIsEqual;
+	*Pool = pool;
+	return Success;
+}
 
 bbFlag bbLeanPool_new(bbLeanPool** Pool, I32 sizeOf, I32 num){
 
