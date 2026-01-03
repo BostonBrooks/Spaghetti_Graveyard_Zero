@@ -75,6 +75,8 @@ bbFlag bbNetworkTime_filterInbox (void* network, void* Struct);
 ///react to outgoing message immediately before sending
 bbFlag bbNetworkTime_filterOutbox (void* network, void* Struct);
 
+
+bbFlag bbNetworkTime_ping(void* network);
 /* What am I doing?
  * bbNetwork.extra_data points to bbNetworkTime
  *

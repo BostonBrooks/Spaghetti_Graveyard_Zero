@@ -6,6 +6,7 @@
 #include "engine/logic/bbTerminal.h"
 #include "engine/network/bbNetwork.h"
 #include "engine/network/bbNetwork_packet.h"
+#include "engine/network/bbNetworkTime.h"
 
 _Thread_local char* thread;
 
@@ -27,9 +28,9 @@ bbFlag bbDisconnect(void* network)
 
 
 ///react immediately to incoming message
-bbFlag filterInbox (void* network, void* packet);
+bbFlag filterInbox (void* network, bbNetwork_packet* Struct);
 ///react to outgoing message immediately before sending
-bbFlag filterOutbox (void* network, void* packet);
+bbFlag filterOutbox (void* network, bbNetwork_packet* Struct);
 
 
 int main(void)
@@ -38,14 +39,19 @@ int main(void)
     printf("Hello Main\n");
     thread = "main";
     bbNetwork network;
+    bbNetworkTime network_time;
     bbFlag flag;
+
+
+    flag = bbNetworkTime_init(&network_time);
+
 
 
     flag = bbNetwork_init(&network,
             bbNetwork_packet_toStruct,
             bbNetwork_struct_toPacket,
             bbConnect,bbDisconnect,
-            filterInbox,filterOutbox,NULL);
+            bbNetworkTime_filterInbox,bbNetworkTime_filterOutbox,&network_time);
 
     sfIpAddress address = bbGetIPAddress("Input desired server's IP address: ");
     I32 port = bbGetInt("Input desired server's port: ", 1701);
@@ -63,7 +69,7 @@ int main(void)
         sprintf(str, "i = %d", i);
 
         bbNetwork_sendStr(&network, str);
-        bbNetwork_requestTimestamp(&network);
+        bbNetworkTime_ping(&network);
         printf("packet sent: %s\n", str);
 
         while (1)
@@ -84,8 +90,14 @@ int main(void)
 
         }
 
+        //process bbNetworkTime_record(s)
+
+        bbNetworkTime_ping(&network);
         //Do other things
         sfSleep(sfSeconds(0.2));
+
+
+
     }
 
     exit(EXIT_SUCCESS);
@@ -94,14 +106,12 @@ int main(void)
 
 
 ///react immediately to incoming message
-bbFlag filterInbox (void* network, void* packet)
+bbFlag filterInbox (void* network, bbNetwork_packet* Struct)
 {
     bbHere()
-    return Success;
 }
 ///react to outgoing message immediately before sending
-bbFlag filterOutbox (void* network, void* packet)
+bbFlag filterOutbox (void* network, bbNetwork_packet* Struct)
 {
     bbHere()
-    return Success;
 }

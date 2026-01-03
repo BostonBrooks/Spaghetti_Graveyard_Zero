@@ -1,6 +1,7 @@
 #include "engine/network/bbNetworkTime.h"
 
-#include "bbNetwork.h"
+#include "engine/network/bbNetwork.h"
+#include "engine/logic/bbTerminal.h"
 #include "engine/threadsafe/bbThreadedPool.h"
 #include "engine/threadsafe/bbThreadedQueue.h"
 #include "engine/threadsafe/bbTheadedQueue_search.h"
@@ -23,6 +24,7 @@ bbFlag bbNetworkTime_filterOutbox (void* Network, void* Struct)
         bbNetwork_packet* packet = Struct;
     if (packet->type == PACKETTYPE_REQUESTTIMESTAMP)
     {
+        bbHere()
         bbNetwork* network = Network;
         bbNetworkTime* network_time = (bbNetworkTime*)network->extra_data;
         bbNetworkTime_record* record;
@@ -37,11 +39,13 @@ bbFlag bbNetworkTime_filterOutbox (void* Network, void* Struct)
         bbThreadedQueue_pushL(&network_time->pending,record);
         return Success;
     }
+    bbHere()
     return Success;
 }
 
 bbFlag packetN_equals(void* Callback, bbPool_Handle handle)
 {
+    bbHere()
     bbCallback* callback = (bbCallback*)Callback;
     I32 packet_n = callback->args.u64;
     bbNetworkTime_record* record = handle.ptr;
@@ -57,7 +61,8 @@ bbFlag bbNetworkTime_filterInbox (void* Network, void* Struct)
     bbNetworkTime* network_time = (bbNetworkTime*)network->extra_data;
     bbNetwork_packet* packet = Struct;
     if (packet->type == PACKETTYPE_REQUESTTIMESTAMP)
-    {
+
+        {bbHere()
         bbCallback callback;
         callback.function = packetN_equals;
         callback.args.u64 = packet->data.timestamp.packetN;
@@ -75,5 +80,20 @@ bbFlag bbNetworkTime_filterInbox (void* Network, void* Struct)
         // "None" implies that the packet does not have to be placed in the network inbox
         return None;
     }
+    bbHere()
 return Success;
+}
+
+///place a PACKETTYPE_REQUESTTIMESTAMP in outbox
+bbFlag bbNetworkTime_ping(void* Network)
+{
+    bbNetwork* network = Network;
+    bbNetwork_packet* packet;
+    bbThreadedQueue_alloc(&network->outbox, (void**)&packet);
+
+    packet->type = PACKETTYPE_REQUESTTIMESTAMP;
+
+    bbThreadedQueue_pushL(&network->outbox,packet);
+
+    return Success;
 }

@@ -39,7 +39,6 @@ add_executable(myprogram
         ./test/old/bbTerminal_test.c
         ./test/old/bbList_testMerge.c
         ./test/old/bbListList.c
-        ./test/bbCore_test.c
         ./test/Incremental_test.c
         ./test/get_line_test.c
         ./engine/graphics/bbFonts.c
