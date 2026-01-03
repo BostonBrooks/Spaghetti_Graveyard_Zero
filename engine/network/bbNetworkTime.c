@@ -3,6 +3,7 @@
 #include "bbNetwork.h"
 #include "engine/threadsafe/bbThreadedPool.h"
 #include "engine/threadsafe/bbThreadedQueue.h"
+#include "engine/threadsafe/bbTheadedQueue_search.h"
 
 bbFlag bbNetworkTime_init(bbNetworkTime* network_time)
 {
@@ -16,43 +17,63 @@ bbFlag bbNetworkTime_init(bbNetworkTime* network_time)
     return Success;
 }
 
-/* //
-bbFlag bbNetworkTime_filterOutbox (void* Network, bbNetwork_packet* Struct)
+
+bbFlag bbNetworkTime_filterOutbox (void* Network, void* Struct)
 {
-    bbNetwork* network = Network;
-    bbNetworkTime* network_time = (bbNetworkTime*)network->extra_data;
-    bbNetworkTime_record* record;
-    bbThreadedQueue_alloc(network_time->pending,...)
+        bbNetwork_packet* packet = Struct;
+    if (packet->type == PACKETTYPE_REQUESTTIMESTAMP)
+    {
+        bbNetwork* network = Network;
+        bbNetworkTime* network_time = (bbNetworkTime*)network->extra_data;
+        bbNetworkTime_record* record;
 
-    bbNetwork_packet* packet = Struct;
+        bbThreadedQueue_alloc(&network_time->pending, (void**)&record);
+        packet->data.timestamp.packetN = network_time->packets_sent;
+        record->packetN = network_time->packets_sent;
 
-    if packet.type == PACKETTYPE_REQUESTTIMESTAMP{
-    packet...packetN = network_time->packets_sent
+        network_time->packets_sent++;
+        record->local_send_time = sfTime_asMicroseconds(sfClock_getElapsedTime(network_time->localClock));
 
-    record->packetN = network_time->packets_sent;
-    network_time->packets_sent++;
-    record->local_send_time = sfTime_asMilliseconds(sfClock_getElapsedTime(network_time->localClock));
-
-    //bbThreadedQueue_pushL record, network_time.pending
+        bbThreadedQueue_pushL(&network_time->pending,record);
+        return Success;
     }
     return Success;
 }
 
-//
-bbFlag bbNetworkTime_filterInbox (void* Network, bbNetwork_packet* Struct)
+bbFlag packetN_equals(void* Callback, bbPool_Handle handle)
 {
-    bbNetwork_packet* packet = Struct;
+    bbCallback* callback = (bbCallback*)Callback;
+    I32 packet_n = callback->args.u64;
+    bbNetworkTime_record* record = handle.ptr;
+
+    if (record->packetN == packet_n) return Success;
+    return None;
+}
+
+bbFlag bbNetworkTime_filterInbox (void* Network, void* Struct)
+{
+
     bbNetwork* network = Network;
     bbNetworkTime* network_time = (bbNetworkTime*)network->extra_data;
-    bbNetworkTime_record* record;
+    bbNetwork_packet* packet = Struct;
+    if (packet->type == PACKETTYPE_REQUESTTIMESTAMP)
+    {
+        bbCallback callback;
+        callback.function = packetN_equals;
+        callback.args.u64 = packet->data.timestamp.packetN;
 
-    search network_time->pending for record.packetN = packet...packetN
+        bbNetworkTime_record* record;
 
-    fill out:
-        packet.server_receive_time;
-        packet.server_send_time;
-        packet.local_receive_time;
+        bbFlag flag = bbThreadedQueue_search(&network_time->pending,  (void**)&record, &callback);
 
-    bbThreadedQueue_pushL record, network_time.completed
+        record->local_receive_time = sfTime_asMicroseconds(sfClock_getElapsedTime(network_time->localClock));
+        record->server_receive_time = packet->data.timestamp.receive_time;
+        record->server_send_time = packet->data.timestamp.send_time;
+
+        bbThreadedQueue_pushL(&network_time->completed,record);
+
+        // "None" implies that the packet does not have to be placed in the network inbox
+        return None;
+    }
+return Success;
 }
-*/

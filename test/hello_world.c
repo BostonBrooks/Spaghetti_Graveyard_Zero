@@ -9,7 +9,7 @@ int main(void)
 
     sfTime time;
     time = sfSeconds(60);
-    int milliseconds = sfTime_asMilliseconds(time);
+    int milliseconds = sfTime_asMicroseconds(time);
 
     printf("60 seconds is %d milliseconds\n", milliseconds);
     return 0;

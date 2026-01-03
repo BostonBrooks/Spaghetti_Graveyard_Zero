@@ -3,6 +3,7 @@
 
 #include <SFML/Network.h>
 
+#include "bbNetworkTime.h"
 #include "engine/logic/bbFlag.h"
 #include "engine/logic/bbPoolHandle.h"
 #include "engine/network/bbNetworkTime.h"

@@ -1,3 +1,19 @@
+
+#include "engine/logic/bbIntTypes.h"
+
+//This prevents a circular dependency
+#ifndef BBNETWORKTIMESTAMP
+#define BBNETWORKTIMESTAMP
+
+typedef struct
+{
+    U64 packetN;
+    U64 receive_time;
+    U64 send_time;
+} bbNetwork_timestamp;
+
+#endif // BBNETWORKTIMESTAMP
+
 #ifndef BBNETWORKTIME_H
 #define BBNETWORKTIME_H
 
@@ -6,18 +22,12 @@
 #include "bbNetwork.h"
 #include "bbNetwork_packet.h"
 #include "engine/logic/bbFlag.h"
-#include "engine/logic/bbIntTypes.h"
 #include "engine/logic/bbVPool.h"
 #include "engine/logic/bbList.h"
 #include "engine/threadsafe/bbThreadedQueue.h"
 #include "engine/network/bbNetwork_packet.h"
 #include "engine/network/bbNetwork.h"
-typedef struct
-{
-    U64 packetN;
-    U64 receive_time;
-    U64 send_time;
-} bbNetwork_timestamp;
+
 
 typedef struct
 {
