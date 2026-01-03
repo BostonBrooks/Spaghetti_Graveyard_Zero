@@ -35,28 +35,14 @@ bbFlag bbThreadedQueue_init(bbThreadedQueue* queue, bbVPool* pool, I32 sizeOf, I
 bbFlag bbThreadedQueue_alloc(bbThreadedQueue* queue, void** element)
 {
 
-    //bbMutexLock(&queue->mutex);
-
     void* element1;
     bbVPool_alloc(queue->pool, (void**)&element1);
-    bbThreadedPool_debug(queue->pool->pool);
 
-    //TODO pull hair out
-    //the following code is overwriting the second element of the pool instead of the first element!
     bbPool_ListElement* list_element = (element1 + queue->offsetOf);
-    bbDebug("queue->offsetOf = %d\n", queue->offsetOf);
-    bbPool_Handle handle;
-    bbThreadedPool_reverseLookup(queue->pool->pool, element1, &handle);
-    bbDebug("handle.u64 = %llu\n", handle.u64);
-    //the following code is overwriting the second element of the pool instead of the first element!
-    //at the same time the code needs to be there to modify the returned element which is the first element
 
     list_element->prev = queue->pool->null;
-    //bbPool_Handle test_handle;
-    //test_handle.u64 = 3;
     list_element->next = queue->pool->null;
 
-    bbThreadedPool_debug(queue->pool->pool);
    *element = element1;
 
     return Success;
@@ -82,7 +68,6 @@ bbFlag bbThreadedQueue_pushL(bbThreadedQueue* queue, void* element)
     bbFlag flag;
     bbPool_ListElement* list_element = element + queue->offsetOf;
 
-    //bbDebug("prev = %llu, next = %llu\n", list_element->prev.u64, list_element->next.u64);
     bbAssert(
         bbVPool_handleIsEqual(queue->pool, queue->pool->null, list_element->prev)
         && bbVPool_handleIsEqual(queue->pool, queue->pool->null, list_element->next),
@@ -143,8 +128,6 @@ bbFlag bbThreadedQueue_pushR(bbThreadedQueue* queue, void* element)
     bbPool_Handle handle_element;
     flag = bbVPool_reverseLookup(queue->pool, element, &handle_element);
 
-    bbDebug("handle_element.u64 = %llu\n", handle_element.u64);
-    bbFlag_print(flag);
     if (queue->head == -1 || queue->tail == -1)
     {
         bbAssert(queue->head == -1 && queue->tail == -1, "head/tail mismatch");
@@ -152,7 +135,6 @@ bbFlag bbThreadedQueue_pushR(bbThreadedQueue* queue, void* element)
         queue->head = handle_element.u64;
         queue->tail = handle_element.u64;
 
-        bbDebug("head = %d, tail = %d\n", queue->head, queue->tail);
         //I guess we're using null for endpoints of lists, IE not a circular list
         list_element->prev = queue->pool->null;
         list_element->next = queue->pool->null;
@@ -165,7 +147,6 @@ bbFlag bbThreadedQueue_pushR(bbThreadedQueue* queue, void* element)
         return Success;
     }
 
-    bbDebug("head = %d, tail = %d\n", queue->head, queue->tail);
     void* tail; bbPool_Handle tailhandle;
     tailhandle.u64 = queue->tail;
     bbVPool_lookup(queue->pool, &tail, tailhandle);
@@ -177,7 +158,6 @@ bbFlag bbThreadedQueue_pushR(bbThreadedQueue* queue, void* element)
     tail_listElement->next = handle_element;
     queue->tail = handle_element.u64;
 
-    bbDebug("head = %d, tail = %d\n", queue->head, queue->tail);
 
     bbMutexUnlock(&queue->mutex);
     return Success;
@@ -294,16 +274,6 @@ bbFlag bbThreadedQueue_popR(bbThreadedQueue* queue, void** Element)
     tail_listElement->prev = queue->pool->null;
     tail_listElement->next = queue->pool->null;
 
-    /* test - Test passes index = 1, offsetof = 64, offset_int_pool = 160
-
-    bbPool_Handle test_handle;
-    bbThreadedPool* threaded_pool = queue->pool->pool;
-    bbVPool_reverseLookup(queue->pool, prev_listElement - queue->offsetOf, &test_handle);
-    bbDebug("index = %d, offsetof = %d, sizeOf = %d, offset_in_pool = %llu\n",
-        test_handle.u64, queue->offsetOf, threaded_pool->sizeOf,  (U64)prev_element - (U64)queue->pool->pool);
-    bbDebug("tail_listElement address = %p,\n       prev_listElement address = %p\n", tail_listElement, prev_listElement);
-     //end test - why does the below line buffer-overflow when the index is within bounds?
-     Have switched off address sanitisation for this function*/
 
     prev_listElement->next = queue->pool->null;
     queue->tail = prev_handle.u64;
@@ -363,17 +333,6 @@ bbFlag bbThreadedQueue_popRblock(bbThreadedQueue* queue, void** Element)
 
     tail_listElement->prev = queue->pool->null;
     tail_listElement->next = queue->pool->null;
-
-    /* test - Test passes index = 1, offsetof = 64, offset_int_pool = 160
-
-    bbPool_Handle test_handle;
-    bbThreadedPool* threaded_pool = queue->pool->pool;
-    bbVPool_reverseLookup(queue->pool, prev_listElement - queue->offsetOf, &test_handle);
-    bbDebug("index = %d, offsetof = %d, sizeOf = %d, offset_in_pool = %llu\n",
-        test_handle.u64, queue->offsetOf, threaded_pool->sizeOf,  (U64)prev_element - (U64)queue->pool->pool);
-    bbDebug("tail_listElement address = %p,\n       prev_listElement address = %p\n", tail_listElement, prev_listElement);
-     //end test - why does the below line buffer-overflow when the index is within bounds?
-     Have switched off address sanitisation for this function*/
 
     prev_listElement->next = queue->pool->null;
     queue->tail = prev_handle.u64;
