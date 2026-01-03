@@ -30,8 +30,8 @@ typedef struct
 } bbNetwork_packet;
 
 
-bbFlag bbNetwork_packet_toStruct (sfPacket* packet, bbNetwork_packet* Struct);
-bbFlag bbNetwork_struct_toPacket (sfPacket* packet, bbNetwork_packet* Struct);
+bbFlag bbNetwork_packet_toStruct (sfPacket* packet, void* Struct);
+bbFlag bbNetwork_struct_toPacket (sfPacket* packet, void* Struct);
 
 //depends on above functions, so not included in bbNetwork.c, which is meant to be more generic
 bbFlag bbNetwork_sendStr(void* Network, char* str);

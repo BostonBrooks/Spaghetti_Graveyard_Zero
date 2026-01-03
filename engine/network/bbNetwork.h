@@ -15,13 +15,13 @@ typedef bbFlag bbNetwork_onConnect (void* network);
 typedef bbFlag bbNetwork_onDisconnect (void* network);
 
 
-typedef bbFlag bbNetwork_PacketToStruct (sfPacket* packet, bbNetwork_packet* Struct);
-typedef bbFlag bbNetwork_StructToPacket (sfPacket* packet, bbNetwork_packet* Struct);
+typedef bbFlag bbNetwork_PacketToStruct (sfPacket* packet, void* Struct);
+typedef bbFlag bbNetwork_StructToPacket (sfPacket* packet, void* Struct);
 
 ///react immediately to incoming message
-typedef bbFlag bbNetwork_filterInbox (void* network, bbNetwork_packet* Struct);
+typedef bbFlag bbNetwork_filterInbox (void* network, void* Struct);
 ///react to outgoing message immediately before sending
-typedef bbFlag bbNetwork_filterOutbox (void* network, bbNetwork_packet* Struct);
+typedef bbFlag bbNetwork_filterOutbox (void* network, void* Struct);
 
 typedef struct bbNetwork
 {
