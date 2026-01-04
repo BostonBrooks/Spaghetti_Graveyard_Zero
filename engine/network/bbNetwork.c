@@ -145,15 +145,17 @@ void* bbNetwork_sendThread(void* args)
         if (network->quit) return 0;
 
         bbNetwork_packet* test;
-        bbHere()
+
         bbFlag flag = bbThreadedQueue_popRblock(&network->outbox, (void**)&test);
-        bbHere()
+
         if (flag == None) continue;
 
         bbFlag flag2 = network->filter_outbox(network,test);
+
         if (flag2 != Success)
         {
             bbThreadedQueue_free(&network->outbox, (void**)&test);
+
             continue;
         }
         bbDebug("type = %d, packetN = %llu, string  = %s\n",
@@ -164,7 +166,9 @@ void* bbNetwork_sendThread(void* args)
 
 
         sfPacket_clear(packet);
+
         bbThreadedQueue_free(&network->outbox, (void**)&test);
+
         //sfSocketStatus_print(status);
 
 

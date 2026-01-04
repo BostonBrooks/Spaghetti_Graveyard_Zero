@@ -29,16 +29,19 @@ bbFlag bbNetworkTime_filterOutbox (void* Network, void* Struct)
         bbNetwork* network = Network;
         bbNetworkTime* network_time = (bbNetworkTime*)network->extra_data;
         bbNetworkTime_record* record;
-
+        bbThreadedPool* pool = network_time->pending.pool->pool;
+        bbDebug("pool in use = %d (max = %d)\n", pool->inUse, pool->num);
         bbThreadedQueue_alloc(&network_time->pending, (void**)&record);
+        bbHere()
         packet->data.timestamp.packetN = network_time->packets_sent;
         record->packetN = network_time->packets_sent;
-
+        bbHere()
 
         network_time->packets_sent++;
         record->local_send_time = sfTime_asMicroseconds(sfClock_getElapsedTime(network_time->localClock));
-
+        bbHere()
         bbThreadedQueue_pushL(&network_time->pending,record);
+        bbHere()
         return Success;
     }
 

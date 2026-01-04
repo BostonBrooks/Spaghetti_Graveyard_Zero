@@ -62,9 +62,10 @@ bbFlag bbThreadedQueue_free(bbThreadedQueue* queue, void** element)
 
 bbFlag bbThreadedQueue_pushL(bbThreadedQueue* queue, void* element)
 {
+    bbHere()
     //what if, as a protection, bbThreadedQueue_pushL sets element to NULL
     bbMutexLock(&queue->mutex);
-
+    bbHere()
     bbFlag flag;
     bbPool_ListElement* list_element = element + queue->offsetOf;
 
