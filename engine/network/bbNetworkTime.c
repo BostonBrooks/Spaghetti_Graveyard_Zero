@@ -67,6 +67,7 @@ bbFlag bbNetworkTime_filterInbox (void* Network, void* Struct)
         callback.function = packetN_equals;
         callback.args.u64 = packet->data.timestamp.packetN;
 
+        bbDebug("packetN = %llu\n", packet->data.timestamp.packetN);
         bbNetworkTime_record* record;
 
         bbFlag flag = bbThreadedQueue_search(&network_time->pending,  (void**)&record, &callback);
