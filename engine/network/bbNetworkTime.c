@@ -60,7 +60,7 @@ bbFlag bbNetworkTime_filterInbox (void* Network, void* Struct)
     bbNetwork* network = Network;
     bbNetworkTime* network_time = (bbNetworkTime*)network->extra_data;
     bbNetwork_packet* packet = Struct;
-    if (packet->type == PACKETTYPE_REQUESTTIMESTAMP)
+    if (packet->type == PACKETTYPE_TIMESTAMP)
 
         {bbHere()
         bbCallback callback;
@@ -71,12 +71,14 @@ bbFlag bbNetworkTime_filterInbox (void* Network, void* Struct)
 
         bbFlag flag = bbThreadedQueue_search(&network_time->pending,  (void**)&record, &callback);
 
-        record->local_receive_time = sfTime_asMicroseconds(sfClock_getElapsedTime(network_time->localClock));
-        record->server_receive_time = packet->data.timestamp.receive_time;
-        record->server_send_time = packet->data.timestamp.send_time;
+        if (flag == Success)
+        {
+            record->local_receive_time = sfTime_asMicroseconds(sfClock_getElapsedTime(network_time->localClock));
+            record->server_receive_time = packet->data.timestamp.receive_time;
+            record->server_send_time = packet->data.timestamp.send_time;
 
-        bbThreadedQueue_pushL(&network_time->completed,record);
-
+            bbThreadedQueue_pushL(&network_time->completed,record);
+        }
         // "None" implies that the packet does not have to be placed in the network inbox
         return None;
     }
