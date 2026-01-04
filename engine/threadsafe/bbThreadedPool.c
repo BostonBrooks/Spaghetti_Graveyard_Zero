@@ -160,6 +160,9 @@ bbFlag bbThreadedPool_allocImpl(bbThreadedPool* pool, void** address, char* file
     *address = element;
 
     bbMutexUnlock(&pool->mutex);
+
+
+    bbThreadedPool_debug(pool);
     return Success;
 }
 

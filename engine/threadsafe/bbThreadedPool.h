@@ -55,7 +55,7 @@ I32 bbThreadedPool_handleIsEqual(void* USUSED, bbPool_Handle A, bbPool_Handle B)
 {\
 bbThreadedPool* pool1 = (bbThreadedPool*)pool;\
 bbDebug("head = %d, tail = %d\n", pool1->availableHead, pool1->availableTail);\
-for (I32 i = 0; i < 5; i++) {\
+for (I32 i = 0; i < 20; i++) {\
 bbThreadedPool_available* element;\
 \
 I32 offset = i * pool1->sizeOf;\
