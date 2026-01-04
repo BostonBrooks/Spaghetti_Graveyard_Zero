@@ -142,10 +142,10 @@ void* bbNetwork_sendThread(void* args)
 
         bbNetwork_packet* test;
         bbFlag flag = bbThreadedQueue_popRblock(&network->outbox, (void**)&test);
-//bbHere()
-        if (flag == None) continue;
 
-        bbFlag flag2 = network->filter_inbox(network,test);
+        if (flag == None) continue;
+bbHere()
+        bbFlag flag2 = network->filter_outbox(network,test);
         if (flag2 != Success)
         {
             bbThreadedQueue_free(&network->outbox, (void**)&test);

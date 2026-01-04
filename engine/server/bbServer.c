@@ -121,6 +121,8 @@ bbHere()
                     structPacket.data.timestamp.receive_time = time;
                     structPacket.data.timestamp.send_time = time;
 
+                    bbDebug("packetN = %llu\n", structPacket.data.timestamp.packetN);
+
                     sfPacket_clear(packet);
                     bbNetwork_struct_toPacket(packet, &structPacket);
 

@@ -21,6 +21,7 @@ bbFlag bbNetworkTime_init(bbNetworkTime* network_time)
 
 bbFlag bbNetworkTime_filterOutbox (void* Network, void* Struct)
 {
+    bbHere()
         bbNetwork_packet* packet = Struct;
     if (packet->type == PACKETTYPE_REQUESTTIMESTAMP)
     {
@@ -33,6 +34,7 @@ bbFlag bbNetworkTime_filterOutbox (void* Network, void* Struct)
         packet->data.timestamp.packetN = network_time->packets_sent;
         record->packetN = network_time->packets_sent;
 
+        bbDebug("packetN = %llu\n", packet->data.timestamp.packetN);
         network_time->packets_sent++;
         record->local_send_time = sfTime_asMicroseconds(sfClock_getElapsedTime(network_time->localClock));
 
@@ -62,12 +64,11 @@ bbFlag bbNetworkTime_filterInbox (void* Network, void* Struct)
     bbNetwork_packet* packet = Struct;
     if (packet->type == PACKETTYPE_TIMESTAMP)
 
-        {bbHere()
+        {
         bbCallback callback;
         callback.function = packetN_equals;
         callback.args.u64 = packet->data.timestamp.packetN;
 
-        bbDebug("packetN = %llu\n", packet->data.timestamp.packetN);
         bbNetworkTime_record* record;
 
         bbFlag flag = bbThreadedQueue_search(&network_time->pending,  (void**)&record, &callback);
@@ -83,7 +84,7 @@ bbFlag bbNetworkTime_filterInbox (void* Network, void* Struct)
         // "None" implies that the packet does not have to be placed in the network inbox
         return None;
     }
-    bbHere()
+
 return Success;
 }
 
