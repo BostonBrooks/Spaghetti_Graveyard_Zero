@@ -69,10 +69,6 @@ int main(void)
     char str[64];
     for (int i = 0; true; i++)
     {
-        bbThreadedPool* pool;
-        pool = network_time.completed.pool->pool;
-
-        bbDebug("networkTime pool inUse = %d\n", pool->inUse);
 
 
         sprintf(str, "i = %d", i);
@@ -105,17 +101,20 @@ int main(void)
 
 
 
-        //react to ping
-        /*
+
+        bbThreadedPool* pool;
+        pool = network_time.completed.pool->pool;
+
+        bbDebug("networkTime pool inUse = %d\n", pool->inUse);
+
         while (1)
         {
             bbNetworkTime_record* time_record;
             flag = bbThreadedQueue_popR(&network_time.completed, (void**)&time_record);
             if (flag != Success) break;
-            //...
 
             bbThreadedQueue_free(&network_time.completed, (void**)&time_record);
-        }*/
+        }
     }
 
     exit(EXIT_SUCCESS);
