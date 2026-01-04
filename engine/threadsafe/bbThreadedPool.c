@@ -2,11 +2,15 @@
 #include <limits.h>
 
 #include "engine/threadsafe/bbThreadedPool.h"
+
+#include <SFML/System/Sleep.h>
+
 #include "engine/logic/bbArith.h"
 #include "engine/logic/bbTerminal.h"
 #include "engine/logic/bbVPool.h"
 
 
+extern _Thread_local char* thread;
 
 bbFlag bbThreadedPool_lookup_unsafe(bbThreadedPool* pool, void** address, bbPool_Handle handle)
 {
@@ -113,8 +117,8 @@ bbFlag bbThreadedPool_delete(bbThreadedPool* pool){
 //Takes element from Head
 bbFlag bbThreadedPool_allocImpl(bbThreadedPool* pool, void** address, char* file, int line)
 {
+    bbDebug("pool->inUse = %d, in thread %s\n", pool->inUse, thread);
     bbMutexLock(&pool->mutex);
-
 
     if (pool->inUse >= pool->num)
     {
@@ -162,13 +166,14 @@ bbFlag bbThreadedPool_allocImpl(bbThreadedPool* pool, void** address, char* file
     bbMutexUnlock(&pool->mutex);
 
 
-    bbThreadedPool_debug(pool);
+    sfSleep(sfSeconds(0.1));
     return Success;
 }
 
 //Adds element to Head
 bbFlag bbThreadedPool_free(bbThreadedPool* pool, void* address)
 {
+    bbDebug("pool->inUse = %d, in thread %s\n", pool->inUse, thread);
     bbMutexLock(&pool->mutex);
     pool->inUse--;
     pthread_cond_signal(&pool->poolFull2);

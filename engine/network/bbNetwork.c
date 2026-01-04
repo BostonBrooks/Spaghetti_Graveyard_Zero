@@ -14,8 +14,9 @@ bbFlag bbNetwork_init(bbNetwork* network,
     bbNetwork_filterOutbox* filter_outbox,
     void* extra_data)
 {
-    thread = "init";
-    const I32 queue_length = 100;
+    //not a thread
+    //thread = "init";
+    const I32 queue_length = 10;
 
     network->packet_to_struct = packet_to_struct;
     network->struct_to_packet = struct_to_packet;
@@ -34,7 +35,8 @@ bbFlag bbNetwork_init(bbNetwork* network,
 
 bbFlag bbNetwork_connect(bbNetwork* network, sfIpAddress address, I32 port)
 {
-    thread = "connect";
+    //Not a thread
+    //thread = "connect";
     printf("Hello Connect\n");
     network->address = address;
     network->port = port;
@@ -104,6 +106,8 @@ void* bbNetwork_receiveThread(void* args)
         bbThreadedQueue_alloc(queue, (void**)&test);
         bbNetwork_packet_toStruct(packet, test);
 
+        bbDebug("type = %d, packetN = %llu, string  = %s\n",
+            test->type, test->data.timestamp.packetN, test->data.str);
         if (network->filter_inbox != NULL)
         {
             bbFlag flag = network->filter_inbox(network,test);
@@ -141,19 +145,19 @@ void* bbNetwork_sendThread(void* args)
         if (network->quit) return 0;
 
         bbNetwork_packet* test;
+        bbHere()
         bbFlag flag = bbThreadedQueue_popRblock(&network->outbox, (void**)&test);
-
+        bbHere()
         if (flag == None) continue;
-bbHere()
+
         bbFlag flag2 = network->filter_outbox(network,test);
         if (flag2 != Success)
         {
             bbThreadedQueue_free(&network->outbox, (void**)&test);
             continue;
         }
-        //bbFlag_print(flag);
-        //bbDebug("bbPacket = %p\n", test);
-        //bbDebug("bbPacket->type = %d\n", test->type);
+        bbDebug("type = %d, packetN = %llu, string  = %s\n",
+            test->type, test->data.timestamp.packetN, test->data.str);
 
         bbNetwork_struct_toPacket(packet, test);
         status = sfTcpSocket_sendPacket(socket, packet);

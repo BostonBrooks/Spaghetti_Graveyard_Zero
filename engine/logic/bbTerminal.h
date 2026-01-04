@@ -317,4 +317,8 @@ pthread_mutex_unlock(mutex);}\
 
 #endif //#ifdef THREAD_DEBUG
 
+#undef bbHere()
+#define bbHere() printf ("In FILE: %s, FUNCTION: %s, LINE: %d, THREAD: %s\n",\
+__FILE_NAME__, __func__, __LINE__, thread);
+
 #endif // BBTERMINAL_H

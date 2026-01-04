@@ -11,6 +11,8 @@
 #include "engine/data/bbHome.h"
 #include "engine/network/bbNetwork_packet.h"
 
+_Thread_local char* thread;
+
 int main(void){
     printf("Hello, server!\n");
 
@@ -109,22 +111,25 @@ int main(void){
                     continue;
                 }
 
-                bbNetwork_packet structPacket;
+                bbNetwork_packet packetStruct;
 
-                bbNetwork_packet_toStruct(packet, &structPacket);
+                bbNetwork_packet_toStruct(packet, &packetStruct);
 
-                if (structPacket.type == PACKETTYPE_REQUESTTIMESTAMP)
+                bbDebug("type = %d, packetN = %llu, string  = %s\n",
+                    packetStruct.type, packetStruct.data.timestamp.packetN, packetStruct.data.str);
+
+                if (packetStruct.type == PACKETTYPE_REQUESTTIMESTAMP)
                 {
-                    structPacket.type = PACKETTYPE_TIMESTAMP;
-bbHere()
-                    U64 time = sfTime_asMicroseconds(sfClock_getElapsedTime(clock));
-                    structPacket.data.timestamp.receive_time = time;
-                    structPacket.data.timestamp.send_time = time;
+                    packetStruct.type = PACKETTYPE_TIMESTAMP;
 
-                    bbDebug("packetN = %llu\n", structPacket.data.timestamp.packetN);
+                    U64 time = sfTime_asMicroseconds(sfClock_getElapsedTime(clock));
+                    packetStruct.data.timestamp.receive_time = time;
+                    packetStruct.data.timestamp.send_time = time;
+
+
 
                     sfPacket_clear(packet);
-                    bbNetwork_struct_toPacket(packet, &structPacket);
+                    bbNetwork_struct_toPacket(packet, &packetStruct);
 
                 }
 

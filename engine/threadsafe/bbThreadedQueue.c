@@ -295,7 +295,9 @@ bbFlag bbThreadedQueue_popRblock(bbThreadedQueue* queue, void** Element)
     {
         bbAssert(queue->head == -1 && queue->tail == -1, "head/tail mismatch");
         bbMutexUnlock(&queue->mutex);
+        bbHere()
         pthread_cond_wait(&queue->emptyCond, &queue->empty);
+        bbHere()
     }
 
     //Case 2: One Element
