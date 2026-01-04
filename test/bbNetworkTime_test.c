@@ -47,7 +47,9 @@ int main(void)
 
     flag = bbNetworkTime_init(&network_time);
 
+    bbThreadedPool* pool1 = network_time.completed.pool->pool;
 
+    bbDebug("networkTime pool inUse = %d\n", pool1->inUse);
 
     flag = bbNetwork_init(&network,
             bbNetwork_packet_toStruct,
@@ -67,6 +69,12 @@ int main(void)
     char str[64];
     for (int i = 0; true; i++)
     {
+        bbThreadedPool* pool;
+        pool = network_time.completed.pool->pool;
+
+        bbDebug("networkTime pool inUse = %d\n", pool->inUse);
+
+
         sprintf(str, "i = %d", i);
 
         bbNetwork_sendStr(&network, str);
@@ -91,14 +99,23 @@ int main(void)
 
         }
 
-        //process bbNetworkTime_record(s)
 
-        bbNetworkTime_ping(&network);
         //Do other things
         sfSleep(sfSeconds(0.2));
 
 
 
+        //react to ping
+        /*
+        while (1)
+        {
+            bbNetworkTime_record* time_record;
+            flag = bbThreadedQueue_popR(&network_time.completed, (void**)&time_record);
+            if (flag != Success) break;
+            //...
+
+            bbThreadedQueue_free(&network_time.completed, (void**)&time_record);
+        }*/
     }
 
     exit(EXIT_SUCCESS);
