@@ -16,7 +16,7 @@ int main(void)
     bbNetwork_packet bb_packet2;
     bbNetwork_packet_toStruct(sf_packet, &bb_packet2);
 
-    printf("type = %d\npacketN = %lu\nreceive_time = %lu\nsend_time = %lu\n",
+    printf("type = %d\npacketN = %llu\nreceive_time = %llu\nsend_time = %llu\n",
         bb_packet2.type, bb_packet2.data.timestamp.packetN, bb_packet2.data.timestamp.receive_time, bb_packet2.data.timestamp.send_time);
 
     return 0;

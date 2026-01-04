@@ -26,6 +26,8 @@ bbFlag bbNetwork_packet_toStruct (sfPacket* packet, void* Struct)
             U64 send_time_lower = sfPacket_readUint32(packet);
             U64 send_time_upper = sfPacket_readUint32(packet);
 
+
+
             struct1->data.timestamp.packetN = packetN_upper * 0x100000000 + packetN_lower;
             struct1->data.timestamp.receive_time = receive_time_upper * 0x100000000  + receive_time_lower;
             struct1->data.timestamp.send_time = send_time_upper * 0x100000000 + send_time_lower;
@@ -53,6 +55,8 @@ bbFlag bbNetwork_struct_toPacket (sfPacket* packet, void* Struct)
         U64 receive_time_upper = struct1->data.timestamp.receive_time / 0x100000000;
         U64 send_time_lower = struct1->data.timestamp.send_time & 0xFFFFFFFF;
         U64 send_time_upper = struct1->data.timestamp.send_time / 0x100000000;
+
+
 
         sfPacket_writeUint32(packet, (U32)packetN_lower);
         sfPacket_writeUint32(packet, (U32)packetN_upper);
