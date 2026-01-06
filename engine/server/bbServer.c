@@ -111,7 +111,7 @@ int main(void){
 
                     //This line causes the server to lock up
                     //sfTcpSocket_destroy(sockets[i]);
-
+                    sfSocketSelector_removeTcpSocket(sockets[i]);
                     sockets[i] = NULL;
                     continue;
                 }
