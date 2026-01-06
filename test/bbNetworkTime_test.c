@@ -74,7 +74,7 @@ int main(void)
 
         bbNetwork_sendStr(&network, str);
         bbNetworkTime_ping(&network);
-        printf("packet sent: %s\n", str);
+        //printf("packet sent: %s\n", str);
 
         while (1)
         {
@@ -82,11 +82,11 @@ int main(void)
             if (flag != Success) break;
             if (packet->type == PACKETTYPE_STRING)
             {
-                printf("packet received: %s\n", packet->data.str);
+                //printf("packet received: %s\n", packet->data.str);
             } else if (packet->type == PACKETTYPE_TIMESTAMP)
             {
-                printf("packetN = %llu, receive_time = %llu, send_time = %llu\n",
-                    packet->data.timestamp.packetN, packet->data.timestamp.receive_time, packet->data.timestamp.send_time);
+                //printf("packetN = %llu, receive_time = %llu, send_time = %llu\n",
+                //    packet->data.timestamp.packetN, packet->data.timestamp.receive_time, packet->data.timestamp.send_time);
             }else if (packet->type == PACKETTYPE_REQUESTTIMESTAMP)
             {
                 bbHere()

@@ -78,8 +78,8 @@ bbFlag bbNetworkTime_filterInbox (void* Network, void* Struct)
             record->server_receive_time = packet->data.timestamp.receive_time;
             record->server_send_time = packet->data.timestamp.send_time;
 
-            printf("packetN = %llu, local_send_time = %llu, server_receive_time = %llu, server_send_time = %llu, local_receive_time = %llu\n",
-                record->packetN, record->local_send_time, record->server_receive_time, record->server_send_time, record->local_receive_time);
+            //printf("packetN = %llu, local_send_time = %llu, server_receive_time = %llu, server_send_time = %llu, local_receive_time = %llu\n",
+            //    record->packetN, record->local_send_time, record->server_receive_time, record->server_send_time, record->local_receive_time);
 
             U64 RTT = (record->local_receive_time - record->local_send_time) - (record->server_receive_time - record->server_send_time);
             U64 difference = (record->server_receive_time - record->local_send_time + record->server_send_time - record->local_receive_time) / 2;
