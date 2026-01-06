@@ -24,5 +24,5 @@ gcc   -D SFML_STATIC -I ../^
   -lcsfml-system -lcsfml-graphics -lcsfml-window -lcsfml-network -g -lm -w^
     -o ./server.exe
 IF %errorlevel% == 0 (    echo Compile Succeeded:
-                          server.exe)^
+                          gdb ./server.exe)^
  ELSE (echo compile failed!)

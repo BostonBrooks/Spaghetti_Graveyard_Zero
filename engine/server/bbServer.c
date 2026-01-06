@@ -68,6 +68,8 @@ int main(void){
         }
 
         if (sfSocketSelector_isTcpListenerReady(selector,listener) == sfTrue) {
+
+            bbHere()
             sfTcpSocket *socket = NULL;
             //socket = sfTcpSocket_create();
             status = sfTcpListener_accept(listener, &socket);
@@ -101,15 +103,19 @@ int main(void){
             if(sfSocketSelector_isTcpSocketReady(selector, sockets[i]) ==
             sfTrue){
 
+                bbHere()
 
                 status = sfTcpSocket_receivePacket(sockets[i], packet);
-
+                sfSocketStatus_print(status)
                 if (status != sfSocketDone){
 
-                    sfTcpSocket_destroy(sockets[i]);
+                    //This line causes the server to lock up
+                    //sfTcpSocket_destroy(sockets[i]);
+
                     sockets[i] = NULL;
                     continue;
                 }
+                bbHere()
 
                 bbNetwork_packet packetStruct;
 
@@ -130,7 +136,10 @@ int main(void){
 
                     sfPacket_clear(packet);
                     bbNetwork_struct_toPacket(packet, &packetStruct);
-
+                    status = sfTcpSocket_sendPacket(sockets[i], packet);
+                    sfPacket_clear(packet);
+                    printf("Sent time\n");
+                    continue;
                 }
 
 
@@ -138,6 +147,7 @@ int main(void){
                     //send to self
                     //if (j == i) continue;
                     if(sockets[j] == NULL) continue;
+
                     status = sfTcpSocket_sendPacket(sockets[j], packet);
 
                     if (status != sfSocketDone){
