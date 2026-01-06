@@ -108,11 +108,15 @@ int main(void)
 
         while (1)
         {
-            bbNetworkTime_record* time_record;
-            flag = bbThreadedQueue_popR(&network_time.completed, (void**)&time_record);
+            bbNetworkTime_record* record;
+            flag = bbThreadedQueue_popR(&network_time.completed, (void**)&record);
             if (flag != Success) break;
 
-            bbThreadedQueue_free(&network_time.completed, (void**)&time_record);
+            U64 RTT = (record->local_receive_time - record->local_send_time) - (record->server_receive_time - record->server_send_time);
+            U64 difference = (record->server_receive_time - record->local_send_time + record->server_send_time - record->local_receive_time) / 2;
+            printf("round trip time = %llu, time difference = %llu\n", RTT, difference);
+
+            bbThreadedQueue_free(&network_time.completed, (void**)&record);
         }
     }
 

@@ -81,9 +81,7 @@ bbFlag bbNetworkTime_filterInbox (void* Network, void* Struct)
             //printf("packetN = %llu, local_send_time = %llu, server_receive_time = %llu, server_send_time = %llu, local_receive_time = %llu\n",
             //    record->packetN, record->local_send_time, record->server_receive_time, record->server_send_time, record->local_receive_time);
 
-            U64 RTT = (record->local_receive_time - record->local_send_time) - (record->server_receive_time - record->server_send_time);
-            U64 difference = (record->server_receive_time - record->local_send_time + record->server_send_time - record->local_receive_time) / 2;
-            printf("round trip time = %llu, time difference = %llu\n", RTT, difference);
+
             bbThreadedQueue_pushL(&network_time->completed,record);
         }
         // "None" implies that the packet does not have to be placed in the network inbox
