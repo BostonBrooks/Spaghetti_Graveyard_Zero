@@ -8,12 +8,13 @@
 
 bbFlag bbNetworkTime_init(bbNetworkTime* network_time)
 {
+    I32 queue_size = 5;
     network_time->localClock = sfClock_create();
     network_time->packets_sent = 0;
     bbThreadedQueue_init(&network_time->pending, NULL, sizeof(bbNetworkTime_record),
-    500, offsetof(bbNetworkTime_record, list_element));
+    queue_size, offsetof(bbNetworkTime_record, list_element));
     bbThreadedQueue_init(&network_time->completed,network_time->pending.pool, sizeof(bbNetworkTime_record),
-        500, offsetof(bbNetworkTime_record, list_element));
+        queue_size, offsetof(bbNetworkTime_record, list_element));
 
     return Success;
 }
@@ -30,18 +31,13 @@ bbFlag bbNetworkTime_filterOutbox (void* Network, void* Struct)
         bbNetworkTime* network_time = (bbNetworkTime*)network->extra_data;
         bbNetworkTime_record* record;
         bbThreadedPool* pool = network_time->pending.pool->pool;
-        bbDebug("pool in use = %d (max = %d)\n", pool->inUse, pool->num);
         bbThreadedQueue_alloc(&network_time->pending, (void**)&record);
-        bbHere()
         packet->data.timestamp.packetN = network_time->packets_sent;
         record->packetN = network_time->packets_sent;
-        bbHere()
 
         network_time->packets_sent++;
         record->local_send_time = sfTime_asMicroseconds(sfClock_getElapsedTime(network_time->localClock));
-        bbHere()
         bbThreadedQueue_pushL(&network_time->pending,record);
-        bbHere()
         return Success;
     }
 
@@ -81,6 +77,9 @@ bbFlag bbNetworkTime_filterInbox (void* Network, void* Struct)
             record->local_receive_time = sfTime_asMicroseconds(sfClock_getElapsedTime(network_time->localClock));
             record->server_receive_time = packet->data.timestamp.receive_time;
             record->server_send_time = packet->data.timestamp.send_time;
+
+            printf("packetN = %llu, local_send_time = %llu, server_receive_time = %llu, server_send_time = %llu, local_receive_time = %llu\n",
+                record->packetN, record->local_send_time, record->server_receive_time, record->server_send_time, record->local_receive_time);
 
             bbThreadedQueue_pushL(&network_time->completed,record);
         }

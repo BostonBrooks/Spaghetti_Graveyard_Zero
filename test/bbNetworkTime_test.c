@@ -49,7 +49,6 @@ int main(void)
 
     bbThreadedPool* pool1 = network_time.completed.pool->pool;
 
-    bbDebug("networkTime pool inUse = %d\n", pool1->inUse);
 
     flag = bbNetwork_init(&network,
             bbNetwork_packet_toStruct,
@@ -57,7 +56,7 @@ int main(void)
             bbConnect,bbDisconnect,
             bbNetworkTime_filterInbox,bbNetworkTime_filterOutbox,&network_time);
 
-    sfIpAddress address = bbGetIPAddress("Input desired server's IP address: ");
+    sfIpAddress address = bbGetIPAddress("Input server's IP address: ");
     I32 port = bbGetInt("Input desired server's port: ", 1701);
 
     bbClearLine(1);
@@ -86,7 +85,8 @@ int main(void)
                 printf("packet received: %s\n", packet->data.str);
             } else if (packet->type == PACKETTYPE_TIMESTAMP)
             {
-                printf("packet received timestamp: %llu\n", packet->data.timestamp.receive_time);
+                printf("packetN = %llu, receive_time = %llu, send_time = %llu\n",
+                    packet->data.timestamp.packetN, packet->data.timestamp.receive_time, packet->data.timestamp.send_time);
             }else if (packet->type == PACKETTYPE_REQUESTTIMESTAMP)
             {
                 bbHere()
@@ -105,7 +105,6 @@ int main(void)
         bbThreadedPool* pool;
         pool = network_time.completed.pool->pool;
 
-        bbDebug("networkTime pool inUse = %d\n", pool->inUse);
 
         while (1)
         {

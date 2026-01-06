@@ -117,7 +117,6 @@ bbFlag bbThreadedPool_delete(bbThreadedPool* pool){
 //Takes element from Head
 bbFlag bbThreadedPool_allocImpl(bbThreadedPool* pool, void** address, char* file, int line)
 {
-    bbDebug("pool->inUse = %d, in thread %s\n", pool->inUse, thread);
     bbMutexLock(&pool->mutex);
 
     if (pool->inUse >= pool->num)
@@ -173,7 +172,6 @@ bbFlag bbThreadedPool_allocImpl(bbThreadedPool* pool, void** address, char* file
 //Adds element to Head
 bbFlag bbThreadedPool_free(bbThreadedPool* pool, void* address)
 {
-    bbDebug("pool->inUse = %d, in thread %s\n", pool->inUse, thread);
     bbMutexLock(&pool->mutex);
     pool->inUse--;
     pthread_cond_signal(&pool->poolFull2);

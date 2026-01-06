@@ -106,8 +106,6 @@ void* bbNetwork_receiveThread(void* args)
         bbThreadedQueue_alloc(queue, (void**)&test);
         bbNetwork_packet_toStruct(packet, test);
 
-        bbDebug("type = %d, packetN = %llu, string  = %s\n",
-            test->type, test->data.timestamp.packetN, test->data.str);
         if (network->filter_inbox != NULL)
         {
             bbFlag flag = network->filter_inbox(network,test);
@@ -158,8 +156,6 @@ void* bbNetwork_sendThread(void* args)
 
             continue;
         }
-        bbDebug("type = %d, packetN = %llu, string  = %s\n",
-            test->type, test->data.timestamp.packetN, test->data.str);
 
         bbNetwork_struct_toPacket(packet, test);
         status = sfTcpSocket_sendPacket(socket, packet);

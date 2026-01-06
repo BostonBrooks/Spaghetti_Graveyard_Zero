@@ -62,10 +62,10 @@ bbFlag bbThreadedQueue_free(bbThreadedQueue* queue, void** element)
 
 bbFlag bbThreadedQueue_pushL(bbThreadedQueue* queue, void* element)
 {
-    bbHere()
+
     //what if, as a protection, bbThreadedQueue_pushL sets element to NULL
     bbMutexLock(&queue->mutex);
-    bbHere()
+
     bbFlag flag;
     bbPool_ListElement* list_element = element + queue->offsetOf;
 
@@ -296,9 +296,9 @@ bbFlag bbThreadedQueue_popRblock(bbThreadedQueue* queue, void** Element)
     {
         bbAssert(queue->head == -1 && queue->tail == -1, "head/tail mismatch");
         bbMutexUnlock(&queue->mutex);
-        bbHere()
+
         pthread_cond_wait(&queue->emptyCond, &queue->empty);
-        bbHere()
+
     }
 
     //Case 2: One Element
