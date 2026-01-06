@@ -11,9 +11,9 @@ bbFlag bbNetworkTime_init(bbNetworkTime* network_time)
     network_time->localClock = sfClock_create();
     network_time->packets_sent = 0;
     bbThreadedQueue_init(&network_time->pending, NULL, sizeof(bbNetworkTime_record),
-    10, offsetof(bbNetworkTime_record, list_element));
+    500, offsetof(bbNetworkTime_record, list_element));
     bbThreadedQueue_init(&network_time->completed,network_time->pending.pool, sizeof(bbNetworkTime_record),
-        10, offsetof(bbNetworkTime_record, list_element));
+        500, offsetof(bbNetworkTime_record, list_element));
 
     return Success;
 }

@@ -18,6 +18,7 @@ bbFlag bbNetwork_packet_toStruct (sfPacket* packet, void* Struct)
             sfPacket_readString(packet, struct1->data.str);
         break;
         case PACKETTYPE_TIMESTAMP:
+        case PACKETTYPE_REQUESTTIMESTAMP:
 
             U64 packetN_lower = sfPacket_readUint32(packet);
             U64 packetN_upper = sfPacket_readUint32(packet);
@@ -32,7 +33,6 @@ bbFlag bbNetwork_packet_toStruct (sfPacket* packet, void* Struct)
             struct1->data.timestamp.receive_time = receive_time_upper * 0x100000000  + receive_time_lower;
             struct1->data.timestamp.send_time = send_time_upper * 0x100000000 + send_time_lower;
 
-    case PACKETTYPE_REQUESTTIMESTAMP:
         break;
     }
     return Success;
@@ -47,6 +47,7 @@ bbFlag bbNetwork_struct_toPacket (sfPacket* packet, void* Struct)
         sfPacket_writeString(packet, struct1->data.str);
         break;
     case PACKETTYPE_TIMESTAMP:
+    case PACKETTYPE_REQUESTTIMESTAMP:
         sfPacket_writeInt32(packet, struct1->type);
 
         U64 packetN_lower = struct1->data.timestamp.packetN & 0xFFFFFFFF;
@@ -64,9 +65,6 @@ bbFlag bbNetwork_struct_toPacket (sfPacket* packet, void* Struct)
         sfPacket_writeUint32(packet, (U32)receive_time_upper);
         sfPacket_writeUint32(packet, (U32)send_time_lower);
         sfPacket_writeUint32(packet, (U32)send_time_upper);
-        break;
-    case PACKETTYPE_REQUESTTIMESTAMP:
-        sfPacket_writeInt32(packet, struct1->type);
         break;
     }
     return Success;
