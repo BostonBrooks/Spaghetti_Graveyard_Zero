@@ -21,18 +21,16 @@ int main(void){
     char localAddressString[64];
     sfIpAddress_toString(localAddress, localAddressString);
 
-
     sfIpAddress publicAddress;
     publicAddress = sfIpAddress_getPublicAddress(sfSeconds(120));
     char publicAddressString[64];
     sfIpAddress_toString(publicAddress, publicAddressString);
 
-    sfClock* clock = sfClock_create();
-
-
     printf("Loopback address = 127.0.0.1\nLocal address = %s\nPublic address = %s\n",
         localAddressString, publicAddressString);
 
+
+    sfClock* clock = sfClock_create();
     I32 port = bbGetInt("Input server port: ", 1701);
     bbClearLine(1);
     printf("The port is %d\n", port);
@@ -111,7 +109,7 @@ int main(void){
 
                     //This line causes the server to lock up
                     //sfTcpSocket_destroy(sockets[i]);
-                    sfSocketSelector_removeTcpSocket(sockets[i]);
+                    sfSocketSelector_removeTcpSocket(selector, sockets[i]);
                     sockets[i] = NULL;
                     continue;
                 }
@@ -135,7 +133,7 @@ int main(void){
 
 
                     sfPacket_clear(packet);
-                    bbNetwork_struct_toPacket(packet, &packetStruct);
+                    bbNetworkPacket_fromStruct(packet, &packetStruct);
                     status = sfTcpSocket_sendPacket(sockets[i], packet);
                     sfPacket_clear(packet);
                     printf("Sent time\n");
