@@ -9,7 +9,7 @@
 
 #include "engine/logic/bbTerminal.h"
 #include "engine/data/bbHome.h"
-#include "engine/network/bbNetwork_packet.h"
+#include "engine/network/bbNetworkPacket.h"
 
 _Thread_local char* thread;
 
@@ -117,9 +117,9 @@ int main(void){
                 }
                 bbHere()
 
-                bbNetwork_packet packetStruct;
+                bbNetworkPacket packetStruct;
 
-                bbNetwork_packet_toStruct(packet, &packetStruct);
+                bbNetworkPacket_toStruct(packet, &packetStruct);
 
                 bbDebug("type = %d, packetN = %llu, string  = %s\n",
                     packetStruct.type, packetStruct.data.timestamp.packetN, packetStruct.data.str);

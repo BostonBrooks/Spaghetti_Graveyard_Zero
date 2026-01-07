@@ -10,8 +10,8 @@ Color_Off='\033[0m'
 
 
 if gcc   -fsanitize=address -fno-omit-frame-pointer -g -I ../\
-       ../test/bbNetwork_packet_test.c\
-       ../engine/network/bbNetwork_packet.c\
+       ../test/bbNetworkPacket_test.c\
+       ../engine/network/bbNetworkPacket.c\
        ../engine/logic/bbLeanPool.c\
        ../engine/logic/bbBloatedPool.c\
        ../engine/logic/bbVPool.c\

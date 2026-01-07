@@ -3,7 +3,7 @@
 #include "engine/logic/bbTerminal.h"
 
 bbFlag bbNetwork_init(bbNetwork* network, sfIpAddress address, I32 port,
-    bbNetwork_ProcessPacket* process_packet, bbNetwork_PacketToStruct* packet_to_struct,bbNetwork_StructToPacket* struct_to_packet)
+    bbNetwork_ProcessPacket* process_packet, bbNetworkPacketToStruct* packet_to_struct,bbNetwork_StructToPacket* struct_to_packet)
 {
     const I32 connect_timeout = 60;
     const I32 queue_length = 100;
@@ -26,8 +26,8 @@ bbFlag bbNetwork_init(bbNetwork* network, sfIpAddress address, I32 port,
     sfTcpSocket_setBlocking(socket, sfFalse);
     network->socket = socket;
 
-    bbThreadedQueue_init(&network->inbox,NULL,sizeof(bbNetwork_packet),queue_length,offsetof(bbNetwork_packet, listElement));
-    bbThreadedQueue_init(&network->outbox,NULL,sizeof(bbNetwork_packet),queue_length,offsetof(bbNetwork_packet, listElement));
+    bbThreadedQueue_init(&network->inbox,NULL,sizeof(bbNetworkPacket),queue_length,offsetof(bbNetworkPacket, listElement));
+    bbThreadedQueue_init(&network->outbox,NULL,sizeof(bbNetworkPacket),queue_length,offsetof(bbNetworkPacket, listElement));
 
     pthread_create(&network->send_thread,NULL, bbNetwork_sendThread, network);
     pthread_create(&network->receive_thread,NULL, bbNetwork_receiveThread, network);
@@ -62,9 +62,9 @@ void* bbNetwork_receiveThread(void* args){
 
         char message[512];
         //TODO Convert network packet to struct
-        bbNetwork_packet* test;
+        bbNetworkPacket* test;
         bbThreadedQueue_alloc(queue, (void**)&test);
-        bbNetwork_packet_toStruct(packet, test);
+        bbNetworkPacket_toStruct(packet, test);
 
         bbThreadedQueue_pushL(queue, test);
 
@@ -91,7 +91,7 @@ void* bbNetwork_sendThread(void* args)
         if (network->quit) return 0;
 
         //TODO Convert network struct to packet
-        bbNetwork_packet test;
+        bbNetworkPacket test;
         test.type = PACKETTYPE_STRING;
         sprintf(test.data.str, "i= %d", i);
         bbNetwork_struct_toPacket(packet, &test);
@@ -116,7 +116,7 @@ bbFlag bbNetwork_checkInbox(bbNetwork* network)
         //check queue
         while (flag == Success)
         {
-            bbNetwork_packet* test;
+            bbNetworkPacket* test;
             flag = bbThreadedQueue_popR(queue, (void**)&test);
             if (flag != Success) break;
             // call network->processPacket

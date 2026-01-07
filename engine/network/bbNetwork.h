@@ -15,7 +15,7 @@ typedef bbFlag bbNetwork_onConnect (void* network);
 typedef bbFlag bbNetwork_onDisconnect (void* network);
 
 
-typedef bbFlag bbNetwork_PacketToStruct (sfPacket* packet, void* Struct);
+typedef bbFlag bbNetworkPacketToStruct (sfPacket* packet, void* Struct);
 typedef bbFlag bbNetwork_StructToPacket (sfPacket* packet, void* Struct);
 
 ///react immediately to incoming message
@@ -39,7 +39,7 @@ typedef struct bbNetwork
 
     // behaviors are defined outside this module:
 
-    bbNetwork_PacketToStruct* packet_to_struct;
+    bbNetworkPacketToStruct* packet_to_struct;
     bbNetwork_StructToPacket* struct_to_packet;
     //notify front end
     bbNetwork_onConnect* on_connect;
@@ -58,7 +58,7 @@ typedef struct bbNetwork
 
 ///set values in existing object
 bbFlag bbNetwork_init(bbNetwork* network,
-    bbNetwork_PacketToStruct* packet_to_struct,
+    bbNetworkPacketToStruct* packet_to_struct,
     bbNetwork_StructToPacket* struct_to_packet,
     bbNetwork_onConnect* on_connect,
     bbNetwork_onDisconnect* on_disconnect,

@@ -5,7 +5,7 @@
 
 #include "engine/logic/bbTerminal.h"
 #include "engine/network/bbNetwork.h"
-#include "engine/network/bbNetwork_packet.h"
+#include "engine/network/bbNetworkPacket.h"
 
 _Thread_local char* thread;
 
@@ -42,7 +42,7 @@ int main(void)
 
 
     flag = bbNetwork_init(&network,
-            bbNetwork_packet_toStruct,
+            bbNetworkPacket_toStruct,
             bbNetwork_struct_toPacket,
             bbConnect,bbDisconnect,
             filterInbox,filterOutbox,NULL);
@@ -55,7 +55,7 @@ int main(void)
     flag = bbNetwork_connect(&network, address, port);
 
     sfSleep(sfSeconds(2));
-    bbNetwork_packet* packet;
+    bbNetworkPacket* packet;
     char str[64];
     for (int i = 0; true; i++)
     {

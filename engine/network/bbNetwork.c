@@ -6,7 +6,7 @@
 extern _Thread_local char* thread;
 
 bbFlag bbNetwork_init(bbNetwork* network,
-    bbNetwork_PacketToStruct* packet_to_struct,
+    bbNetworkPacketToStruct* packet_to_struct,
     bbNetwork_StructToPacket* struct_to_packet,
     bbNetwork_onConnect* on_connect,
     bbNetwork_onDisconnect* on_disconnect,

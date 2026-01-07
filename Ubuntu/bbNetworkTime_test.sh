@@ -12,7 +12,7 @@ Color_Off='\033[0m'
 if gcc   -fsanitize=address -fno-omit-frame-pointer -g -I ../\
        ../test/bbNetworkTime_test.c\
        ../engine/network/bbNetwork.c\
-       ../engine/network/bbNetwork_packet.c\
+       ../engine/network/bbNetworkPacket.c\
        ../engine/network/bbNetworkTime.c\
        ../engine/logic/bbLeanPool.c\
        ../engine/logic/bbBloatedPool.c\

@@ -91,7 +91,7 @@ add_executable(myprogram
         test/old/bbNetwork_test2.c
         engine/network/bbNetworkTime.h
         engine/network/bbNetworkPacket.c
-        test/bbNetwork_packet_test.c
+        test/bbNetworkPacket_test.c
         engine/network/bbNetworkTime.c
         engine/network/bbNetwork.h
         test/bbThreadedQueue_test2.c

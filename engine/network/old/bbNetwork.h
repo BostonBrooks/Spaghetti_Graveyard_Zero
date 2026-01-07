@@ -7,7 +7,7 @@
 
 #include "engine/includes/CSFML.h"
 
-#include "engine/network/bbNetwork_packet.h"
+#include "engine/network/bbNetworkPacket.h"
 #include "engine/threadsafe/bbThreadedQueue.h"
 
 
@@ -15,7 +15,7 @@
 
 //Defined outside
 typedef bbFlag bbNetwork_ProcessPacket (void* network, void* args);
-typedef bbFlag bbNetwork_PacketToStruct (sfPacket* packet, void* Struct);
+typedef bbFlag bbNetworkPacketToStruct (sfPacket* packet, void* Struct);
 typedef bbFlag bbNetwork_StructToPacket (void* Struct, sfPacket* packet);
 
 
@@ -35,19 +35,19 @@ typedef struct
 
     // behavior is defined outside this module
     bbNetwork_ProcessPacket* process_packet;
-    bbNetwork_PacketToStruct* packet_to_struct;
+    bbNetworkPacketToStruct* packet_to_struct;
     bbNetwork_StructToPacket* struct_to_packet;
 
     atomic_bool quit;
 } bbNetwork;
 
 bbFlag bbNetwork_init(bbNetwork* network, sfIpAddress address, I32 port,
-    bbNetwork_ProcessPacket* process_packet, bbNetwork_PacketToStruct* packet_to_struct,bbNetwork_StructToPacket* struct_to_packet);
+    bbNetwork_ProcessPacket* process_packet, bbNetworkPacketToStruct* packet_to_struct,bbNetwork_StructToPacket* struct_to_packet);
 bbFlag bbNetwork_destroy(bbNetwork* network);
 void* bbNetwork_receiveThread(void* args);
 void* bbNetwork_sendThread(void* args);
 bbFlag bbNetwork_checkInbox(bbNetwork* network);
-bbFlag bbNetwork_packetToStruct(bbNetwork network, sfPacket* packet, void* Struct);
+bbFlag bbNetworkPacketToStruct(bbNetwork network, sfPacket* packet, void* Struct);
 bbFlag bbNetwork_structToPacket(bbNetwork network, sfPacket* packet, void* Struct);
 
 #endif //BB_NETWORK_H
