@@ -4,6 +4,7 @@
 #include <string.h>
 
 #include "engine/logic/bbString.h"
+#include "engine/logic/bbTerminal.h"
 
 //typedef bbFlag bbNetwork_onConnect (void* network);
 //Notify user interface of network connection
@@ -11,12 +12,6 @@ bbFlag bbConnect(void* network);
 //typedef bbFlag bbNetwork_onDisconnect (void* network);
 //Notify user interface of network connection
 bbFlag bbDisconnect(void* network);
-
-
-///react immediately to incoming message
-bbFlag filterInbox (void* network, bbNetworkPacket* Struct);
-///react to outgoing message immediately before sending
-bbFlag filterOutbox (void* network, bbNetworkPacket* Struct);
 
 //initialize the system
 bbFlag bbNetworkApp_init(bbNetwork* network)
@@ -39,6 +34,7 @@ bbFlag bbNetworkApp_connect(bbNetwork* network, char* address, char* port)
 {
     sfIpAddress ip_address;
     I32 port_number;
+    bbFlag flag;
     if (strlen(address) == 0) return None;
     ip_address = sfIpAddress_fromString(address);
 
@@ -70,7 +66,7 @@ bbFlag bbNetworkApp_connect(bbNetwork* network, char* address, char* port)
     }
     port_number = atoi(port);
 
-    flag = bbNetwork_connect(&network, ip_address, port_number);
+    flag = bbNetwork_connect(network, ip_address, port_number);
 
     return flag;
 
@@ -81,7 +77,7 @@ bbFlag bbNetworkApp_sendString(bbNetwork* network, char* string)
     bbNetworkPacket* packet;
     bbThreadedQueue_alloc(&network->outbox, (void**)&packet);
     packet->type = PACKETTYPE_STRING;
-    bbStr_setStr(packet->data.str, str, 64);
+    bbStr_setStr(packet->data.str, string, 64);
     bbThreadedQueue_pushL(&network->outbox, (void*)packet);
 
     return Success;
@@ -113,6 +109,7 @@ bbFlag bbNetworkApp_checkInbox(bbNetwork* network)
 }
 bbFlag bbNetworkApp_checkTime(bbNetwork* network)
 {
+    bbFlag flag;
     while (1)
     {
         bbNetworkTime* network_time = network->extra_data;
