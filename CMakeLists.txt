@@ -86,11 +86,11 @@ add_executable(myprogram
         engine/echo_server/bbServer.c
         test/pool_speed_test.c
         engine/network/bbNetwork.c
-        engine/network/bbNetwork_packet.h
+        engine/network/bbNetworkPacket.h
         test/bbNetwork_test.c
         test/old/bbNetwork_test2.c
         engine/network/bbNetworkTime.h
-        engine/network/bbNetwork_packet.c
+        engine/network/bbNetworkPacket.c
         test/bbNetwork_packet_test.c
         engine/network/bbNetworkTime.c
         engine/network/bbNetwork.h

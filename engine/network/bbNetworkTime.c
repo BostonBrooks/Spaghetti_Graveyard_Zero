@@ -23,7 +23,7 @@ bbFlag bbNetworkTime_init(bbNetworkTime* network_time)
 bbFlag bbNetworkTime_filterOutbox (void* Network, void* Struct)
 {
 
-        bbNetwork_packet* packet = Struct;
+        bbNetworkPacket* packet = Struct;
     if (packet->type == PACKETTYPE_REQUESTTIMESTAMP)
     {
 
@@ -60,7 +60,7 @@ bbFlag bbNetworkTime_filterInbox (void* Network, void* Struct)
 
     bbNetwork* network = Network;
     bbNetworkTime* network_time = (bbNetworkTime*)network->extra_data;
-    bbNetwork_packet* packet = Struct;
+    bbNetworkPacket* packet = Struct;
     if (packet->type == PACKETTYPE_TIMESTAMP)
 
         {
@@ -95,7 +95,7 @@ return Success;
 bbFlag bbNetworkTime_ping(void* Network)
 {
     bbNetwork* network = Network;
-    bbNetwork_packet* packet;
+    bbNetworkPacket* packet;
     bbThreadedQueue_alloc(&network->outbox, (void**)&packet);
 
     packet->type = PACKETTYPE_REQUESTTIMESTAMP;

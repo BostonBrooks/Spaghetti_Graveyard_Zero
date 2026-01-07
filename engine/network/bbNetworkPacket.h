@@ -17,21 +17,21 @@ typedef union
 {
     bbNetwork_timestamp timestamp;
     char str[64];
-} bbNetwork_packet_data;
+} bbNetworkPacket_data;
 
 
 
 typedef struct
 {
     I32 type;
-    bbNetwork_packet_data data;
+    bbNetworkPacket_data data;
     bbPool_ListElement listElement;
 
-} bbNetwork_packet;
+} bbNetworkPacket;
 
 
-bbFlag bbNetwork_packet_toStruct (sfPacket* packet, void* Struct);
-bbFlag bbNetwork_struct_toPacket (sfPacket* packet, void* Struct);
+bbFlag bbNetworkPacket_toStruct (sfPacket* packet, void* Struct);
+bbFlag bbNetworkPacket_fromStruct (sfPacket* packet, void* Struct);
 
 //depends on above functions, so not included in bbNetwork.c, which is meant to be more generic
 bbFlag bbNetwork_sendStr(void* Network, char* str);

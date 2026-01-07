@@ -14,7 +14,7 @@ echo Attempting to compile:
 SET PATH=C:\winlibs\mingw64\bin
 gcc   -D SFML_STATIC -I ../^
        ../engine/server/bbServer.c^
-       ../engine/network/bbNetwork_packet.c^
+       ../engine/network/bbNetworkPacket.c^
        ../engine/threadsafe/bbThreadedPool.c^
        ../engine/threadsafe/bbThreadedQueue.c^
        ../engine/logic/bbVPool.c^

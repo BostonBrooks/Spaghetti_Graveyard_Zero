@@ -1,7 +1,7 @@
 #include "engine/network/bbNetwork.h"
 
 #include "engine/logic/bbTerminal.h"
-#include "engine/network/bbNetwork_packet.h"
+#include "engine/network/bbNetworkPacket.h"
 
 extern _Thread_local char* thread;
 
@@ -26,8 +26,8 @@ bbFlag bbNetwork_init(bbNetwork* network,
     network->filter_outbox = filter_outbox;
     network->extra_data = extra_data;
 
-    bbThreadedQueue_init(&network->inbox,NULL,sizeof(bbNetwork_packet),queue_length,offsetof(bbNetwork_packet, listElement));
-    bbThreadedQueue_init(&network->outbox,NULL,sizeof(bbNetwork_packet),queue_length,offsetof(bbNetwork_packet, listElement));
+    bbThreadedQueue_init(&network->inbox,NULL,sizeof(bbNetworkPacket),queue_length,offsetof(bbNetworkPacket, listElement));
+    bbThreadedQueue_init(&network->outbox,NULL,sizeof(bbNetworkPacket),queue_length,offsetof(bbNetworkPacket, listElement));
 
     network->quit = false;
     return Success;
@@ -102,9 +102,9 @@ void* bbNetwork_receiveThread(void* args)
 
         char message[512];
         //TODO Convert network packet to struct
-        bbNetwork_packet* test;
+        bbNetworkPacket* test;
         bbThreadedQueue_alloc(queue, (void**)&test);
-        bbNetwork_packet_toStruct(packet, test);
+        bbNetworkPacket_toStruct(packet, test);
 
         if (network->filter_inbox != NULL)
         {
@@ -142,7 +142,7 @@ void* bbNetwork_sendThread(void* args)
     {
         if (network->quit) return 0;
 
-        bbNetwork_packet* test;
+        bbNetworkPacket* test;
 
         bbFlag flag = bbThreadedQueue_popRblock(&network->outbox, (void**)&test);
 
@@ -157,7 +157,7 @@ void* bbNetwork_sendThread(void* args)
             continue;
         }
 
-        bbNetwork_struct_toPacket(packet, test);
+        bbNetworkPacket_fromStruct(packet, test);
         status = sfTcpSocket_sendPacket(socket, packet);
 
 

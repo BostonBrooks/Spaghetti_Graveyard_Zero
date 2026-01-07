@@ -1,4 +1,4 @@
-#include "engine/network/bbNetwork_packet.h"
+#include "engine/network/bbNetworkPacket.h"
 
 #include "bbNetwork.h"
 #include "engine/logic/bbString.h"
@@ -7,9 +7,9 @@
 
 extern _Thread_local char* thread;
 
-bbFlag bbNetwork_packet_toStruct (sfPacket* packet, void* Struct)
+bbFlag bbNetworkPacket_toStruct (sfPacket* packet, void* Struct)
 {
-    bbNetwork_packet* struct1 = Struct;
+    bbNetworkPacket* struct1 = Struct;
     struct1->type = sfPacket_readInt32(packet);
 
     switch (struct1->type)
@@ -37,9 +37,9 @@ bbFlag bbNetwork_packet_toStruct (sfPacket* packet, void* Struct)
     }
     return Success;
 }
-bbFlag bbNetwork_struct_toPacket (sfPacket* packet, void* Struct)
+bbFlag bbNetworkPacket_fromStruct (sfPacket* packet, void* Struct)
 {
-    bbNetwork_packet* struct1 = Struct;
+    bbNetworkPacket* struct1 = Struct;
     switch (struct1->type)
     {
     case PACKETTYPE_STRING:
@@ -74,7 +74,7 @@ bbFlag bbNetwork_struct_toPacket (sfPacket* packet, void* Struct)
 bbFlag bbNetwork_sendStr(void* Network, char* str)
 {
     bbNetwork* network = (bbNetwork*)Network;
-    bbNetwork_packet* packet;
+    bbNetworkPacket* packet;
     bbThreadedQueue_alloc(&network->outbox, (void**)&packet);
     packet->type = PACKETTYPE_STRING;
     bbStr_setStr(packet->data.str, str, 64);

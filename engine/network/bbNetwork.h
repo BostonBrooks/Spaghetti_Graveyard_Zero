@@ -6,7 +6,7 @@
 #include <stdatomic.h>
 #include <SFML/Network.h>
 
-#include "bbNetwork_packet.h"
+#include "bbNetworkPacket.h"
 #include "engine/threadsafe/bbThreadedQueue.h"
 
 

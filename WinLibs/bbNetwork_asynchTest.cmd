@@ -15,7 +15,7 @@ SET PATH=C:\winlibs\mingw64\bin
 gcc   -D SFML_STATIC -I ../^
        ../test/bbNetwork_asynchTest.c^
        ../engine/network/bbNetwork.c^
-       ../engine/network/bbNetwork_packet.c^
+       ../engine/network/bbNetworkPacket.c^
        ../engine/logic/bbLeanPool.c^
        ../engine/logic/bbBloatedPool.c^
        ../engine/logic/bbVPool.c^

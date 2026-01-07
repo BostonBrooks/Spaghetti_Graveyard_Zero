@@ -20,12 +20,12 @@ typedef struct
 #include <SFML/System.h>
 
 #include "bbNetwork.h"
-#include "bbNetwork_packet.h"
+#include "bbNetworkPacket.h"
 #include "engine/logic/bbFlag.h"
 #include "engine/logic/bbVPool.h"
 #include "engine/logic/bbList.h"
 #include "engine/threadsafe/bbThreadedQueue.h"
-#include "engine/network/bbNetwork_packet.h"
+#include "engine/network/bbNetworkPacket.h"
 #include "engine/network/bbNetwork.h"
 
 

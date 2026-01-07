@@ -5,7 +5,7 @@
 
 #include "engine/logic/bbTerminal.h"
 #include "engine/network/bbNetwork.h"
-#include "engine/network/bbNetwork_packet.h"
+#include "engine/network/bbNetworkPacket.h"
 #include "engine/network/bbNetworkTime.h"
 
 #include "engine/threadsafe/bbThreadedPool.h"
@@ -30,9 +30,9 @@ bbFlag bbDisconnect(void* network)
 
 
 ///react immediately to incoming message
-bbFlag filterInbox (void* network, bbNetwork_packet* Struct);
+bbFlag filterInbox (void* network, bbNetworkPacket* Struct);
 ///react to outgoing message immediately before sending
-bbFlag filterOutbox (void* network, bbNetwork_packet* Struct);
+bbFlag filterOutbox (void* network, bbNetworkPacket* Struct);
 
 
 int main(void)
@@ -51,8 +51,8 @@ int main(void)
 
 
     flag = bbNetwork_init(&network,
-            bbNetwork_packet_toStruct,
-            bbNetwork_struct_toPacket,
+            bbNetworkPacket_toStruct,
+            bbNetworkPacket_fromStruct,
             bbConnect,bbDisconnect,
             bbNetworkTime_filterInbox,bbNetworkTime_filterOutbox,&network_time);
 
@@ -64,7 +64,7 @@ int main(void)
     flag = bbNetwork_connect(&network, address, port);
 
     sfSleep(sfSeconds(2));
-    bbNetwork_packet* packet;
+    bbNetworkPacket* packet;
     char str[64];
     for (int i = 0; true; i++)
     {
@@ -126,12 +126,12 @@ int main(void)
 
 
 ///react immediately to incoming message
-bbFlag filterInbox (void* network, bbNetwork_packet* Struct)
+bbFlag filterInbox (void* network, bbNetworkPacket* Struct)
 {
     bbHere()
 }
 ///react to outgoing message immediately before sending
-bbFlag filterOutbox (void* network, bbNetwork_packet* Struct)
+bbFlag filterOutbox (void* network, bbNetworkPacket* Struct)
 {
     bbHere()
 }
