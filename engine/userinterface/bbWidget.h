@@ -31,6 +31,8 @@ typedef enum bbWidget_state
 	bbWidgetState_Default,
 	bbWidgetState_Hover,
 	bbWidgetState_Click,
+
+	//TODO should this be a state or a separate bool?
 	bbWidgetState_Frozen,
 } bbWidget_state;
 

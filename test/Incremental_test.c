@@ -20,6 +20,7 @@
 #include "engine/avoidance/bbAvoidables.h"
 #include "engine/viewport/bbUnits.h"
 #include "engine/network/bbNetwork.h"
+#include "engine/network/bbNetworkApp.h"
 
 
 bbWidgets* testWidgets;
@@ -100,6 +101,8 @@ CLEARWINDOW(bbYellow);
 
 CLEARWINDOW(bbChartreuse);
 
+
+	bbNetworkApp_init(&home.private.network);
 
 CLEARWINDOW(bbGreen);
 //bbHere();
@@ -373,6 +376,18 @@ CLEARWINDOW(bbMagenta);
 		bbWidget_onCommand(home.private.widgets.dialog, &home.private.widgets, bbWC_putChar, handle);
 
 */
+		if (home.private.network.connected)
+		{
+			char str[64];
+			sprintf(str, "maptime = %llu", home.private.mapTime );
+
+			bbNetwork_sendStr(&home.private.network, str);
+			bbNetworkTime_ping(&home.private.network);
+
+			bbNetworkApp_checkInbox(&home.private.network);
+			bbNetworkApp_checkTime(&home.private.network);
+		}
+
 
         bbDummySender_textMessage(home.private.server, "TEST", home.private
         .mapTime);
@@ -411,7 +426,11 @@ CLEARWINDOW(bbMagenta);
 		//if (home.private.mapTime % 50 == 0) bbWidget_hide(connectWidget, &home.private.widgets);
 		//if (home.private.mapTime % 50 == 25) bbWidget_unhide(connectWidget, &home.private.widgets);
 
-
+		if (home.private.network.connected)
+		{
+			bbNetworkApp_checkInbox(&home.private.network);
+			bbNetworkApp_checkTime(&home.private.network);
+		}
 	if (home.private.mapTime % 50 == 0) bbPrintf("mapTime = %d\n", home.private.mapTime);
 		cl.mapTime = home.private.mapTime;
         cl.GUI_time = home.private.mapTime;

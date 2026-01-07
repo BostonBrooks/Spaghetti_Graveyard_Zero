@@ -52,6 +52,7 @@ typedef struct bbNetwork
     void* extra_data; //Used by bbTime
 //if true,
     atomic_bool quit;
+    atomic_bool connected;
 
 } bbNetwork;
 

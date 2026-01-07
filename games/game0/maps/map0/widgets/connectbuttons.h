@@ -1,4 +1,6 @@
+#include "engine/data/bbHome.h"
 #include "engine/geometry/bbCoordinates.h"
+#include "engine/network/bbNetworkApp.h"
 #include "engine/userinterface/bbWidget.h"
 
 bbFlag testOnClick(void* self)
@@ -12,6 +14,15 @@ bbFlag testOnUnClick(void* self)
     bbHere()
     return Success;
 }
+//look up textboxes and use their addresses, then you will have to update their sfText
+bbFlag connextOnClick(void* self)
+{
+    char address[64] = "127.0.0.1";
+    char port[64] = "1701";
+    bbNetworkApp_connect(&home.private.network, address, port);
+    return Success;
+}
+
 
 bbFlag launchServer(void* self)
 {
@@ -86,7 +97,7 @@ bbFlag ConnectButton_Constructor (bbWidget** self, void* Graphics,
     widget->mtable.MouseIcon = 87;
     widget->mtable.DragIcon = -1;
 
-    widget->mtable.OnClick = testOnClick;
+    widget->mtable.OnClick = connextOnClick;
     widget->mtable.OnUnClick = testOnUnClick;
 
 

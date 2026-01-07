@@ -40,6 +40,7 @@ bbFlag bbNetwork_connect(bbNetwork* network, sfIpAddress address, I32 port)
     printf("Hello Connect\n");
     network->address = address;
     network->port = port;
+    network->connected = false;
 
     pthread_create(&network->receive_thread,NULL, bbNetwork_spawn, network);
 
@@ -144,6 +145,7 @@ void* bbNetwork_sendThread(void* args)
     sfTcpSocket* socket = network->socket;
     sfPacket* packet = sfPacket_create();
     sfSocketStatus status;
+    network->connected = true;
 
     char message[512];
     while (1)

@@ -80,6 +80,11 @@ bbWidgets* widgets, bbScreenPoints screen_coords, bbWidget* parent)
     bbDictionary_add(widgets->dict, "IP_ADDRESS", handle);
 	bbWidget_onCommand(IP_widget, widgets, bbWC_setDimensions, bounds);
 
+    char addressStr[] = "127.0.0.1";
+    bbPool_Handle addresshandle;
+    addresshandle.ptr = addressStr;
+	bbWidget_onCommand(IP_widget, widgets, bbWC_setStr, addresshandle);
+
 
     bbWidget* Port_widget;
     SP.x = 169*SCREEN_PPP; SP.y = 204*SCREEN_PPP;
@@ -87,6 +92,11 @@ bbWidgets* widgets, bbScreenPoints screen_coords, bbWidget* parent)
     bbVPool_reverseLookup(widgets->pool, Port_widget, &handle);
     bbDictionary_add(widgets->dict, "IP_PORT", handle);
 	bbWidget_onCommand(Port_widget, widgets, bbWC_setDimensions, bounds);
+
+    char portStr[] = "1701";
+    bbPool_Handle porthandle;
+    porthandle.ptr = portStr;
+    bbWidget_onCommand(Port_widget, widgets, bbWC_setStr, porthandle);
 
     bbWidget* connect_button;
     SP.x = 120*SCREEN_PPP; SP.y = 243*SCREEN_PPP;

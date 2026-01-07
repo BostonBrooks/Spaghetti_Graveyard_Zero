@@ -11,6 +11,7 @@
 #include "engine/viewport/bbUnits.h"
 #include "engine/core/bbCore.h"
 #include "engine/core/bbMessages.h"
+#include "engine/network/bbNetwork.h"
 
 typedef struct {
     bbSpells spells;
@@ -20,6 +21,7 @@ typedef struct {
     bbViewport* viewport;
     bbDummySender* server;
     sfRenderWindow* window;
+    bbNetwork network;
     U64 mapTime;
     U64 UITime;
 } bbPrivate;

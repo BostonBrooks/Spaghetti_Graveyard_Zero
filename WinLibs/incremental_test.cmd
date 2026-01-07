@@ -39,6 +39,7 @@ gcc   -D SFML_STATIC -I ../^
        ../engine/network/bbNetworkPacket.c^
        ../engine/network/bbNetwork.c^
        ../engine/network/bbNetworkTime.c^
+       ../engine/network/bbNetworkApp.c^
        ../engine/threadsafe/bbThreadedPool.c^
        ../engine/threadsafe/bbThreadedQueue_search.c^
        ../engine/threadsafe/bbThreadedQueue.c^
