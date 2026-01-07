@@ -24,7 +24,7 @@ bbFlag bbNetworkApp_init(bbNetwork* network)
         bbNetworkPacket_toStruct,
         bbNetworkPacket_fromStruct,
         bbConnect,bbDisconnect,
-        bbNetworkTime_filterInbox,bbNetworkTime_filterOutbox,&network_time);
+        bbNetworkTime_filterInbox,bbNetworkTime_filterOutbox,network_time);
 
     return Success;
 }
@@ -109,6 +109,7 @@ bbFlag bbNetworkApp_checkInbox(bbNetwork* network)
 }
 bbFlag bbNetworkApp_checkTime(bbNetwork* network)
 {
+    return Success;
     bbFlag flag;
     while (1)
     {

@@ -58,6 +58,8 @@ void* bbNetwork_spawn(void* Network)
     sfTcpSocket* socket = sfTcpSocket_create();
     bbAssert(socket!=NULL, "bad socket constructor\n");
 
+    bbHere()
+
     sfTcpSocket_setBlocking(socket, sfFalse);
     status = sfTcpSocket_connect(socket, network->address, network->port, sfSeconds(connect_timeout));
 
@@ -72,9 +74,15 @@ void* bbNetwork_spawn(void* Network)
         network->on_disconnect(NULL);
         return NULL;
     }
+
+    bbHere()
     network->socket = socket;
-    network->on_connect(NULL);
+
+    if (network->on_connect != NULL) network->on_connect(NULL);
+    bbHere()
     pthread_create(&network->send_thread,NULL, bbNetwork_sendThread, network);
+
+    bbHere()
     bbNetwork_receiveThread(network);
 
     //handle cleanup?

@@ -24,10 +24,13 @@ int main(void)
     bbNetwork network;
     bbFlag flag;
 
+    bbNetworkApp_init(&network);
+
     char address[64];
     bbStr_setStr(address, "127.0.0.1", 64);
     char port[64];
     bbStr_setStr(port, "1701", 64);
+
 
     //usually we would wait for the user to click before repeating
     while (1)
