@@ -14,6 +14,7 @@
 #include "engine/userinterface/bbWidget.h"
 #include "engine/logic/bbTree.h"
 #include "engine/geometry/bbCoordinates.h"
+#include "engine/logic/bbBloatedPool.h"
 #include "engine/userinterface/bbWidgetFunctions.h"
 #include "engine/viewport/bbViewport.h"
 

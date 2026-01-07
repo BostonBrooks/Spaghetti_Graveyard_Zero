@@ -2,6 +2,8 @@
 
 #include "engine/logic/bbNestedList.h"
 
+#include "bbLeanPool.h"
+
 bbVPool* bbNestedList_pool;
 
 

@@ -1,3 +1,4 @@
+#include "engine/logic/bbBloatedPool.h"
 #include "engine/userinterface/bbSpell.h"
 #include "engine/logic/bbFlag.h"
 #include "engine/logic/bbTerminal.h"

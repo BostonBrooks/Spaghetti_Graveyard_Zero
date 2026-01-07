@@ -2,6 +2,7 @@
 
 #include <string.h>
 
+#include "engine/logic/bbBloatedPool.h"
 #include "engine/logic/bbFlag.h"
 
 

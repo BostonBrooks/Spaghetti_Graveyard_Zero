@@ -2,6 +2,7 @@
 #include "engine/logic/bbNestedList.h"
 #include "engine/viewport/bbUnits.h"
 #include "engine/data/bbHome.h"
+#include "engine/logic/bbBloatedPool.h"
 
 I32 bbDrawables_getSquareIndex(I32 i, I32 j, I32 squares_i){
     return i + squares_i * j;

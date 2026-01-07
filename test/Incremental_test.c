@@ -27,6 +27,8 @@ bbMapCoords testGoalPoint;
 
 I32 hash(unsigned char *str, I32 n_bins);
 
+_Thread_local char* thread;
+
 bbHome home;
 
 int main (void){
