@@ -109,7 +109,6 @@ bbFlag bbNetworkApp_checkInbox(bbNetwork* network)
 }
 bbFlag bbNetworkApp_checkTime(bbNetwork* network)
 {
-    return Success;
     bbFlag flag;
     while (1)
     {
@@ -132,8 +131,6 @@ bbFlag bbNetworkApp_checkTime(bbNetwork* network)
 bbFlag bbConnect(void* network)
 {
     bbDebug("Connect to server in thread %s\n", thread);
-
-    bbNetworkApp_checkTime(network);
     return Success;
 }
 //typedef bbFlag bbNetwork_onDisconnect (void* network);

@@ -41,7 +41,8 @@ int main(void)
     printf("IP Address: %s, Port: %s\n", address, port);
 
 
-    sfSleep(sfSeconds(2));
+    //use mutex
+    sfSleep(sfSeconds(5));
 
     char str[64];
     for (int i = 0; true; i++)
