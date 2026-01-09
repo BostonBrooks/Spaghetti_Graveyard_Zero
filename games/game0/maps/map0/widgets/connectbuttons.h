@@ -15,11 +15,27 @@ bbFlag testOnUnClick(void* self)
     return Success;
 }
 //look up textboxes and use their addresses, then you will have to update their sfText
-bbFlag connextOnClick(void* self)
+bbFlag connectOnClick(void* self)
 {
-    char address[64] = "127.0.0.1";
-    char port[64] = "1701";
+    bbHere()
+    bbPool_Handle handle;
+    bbWidgets* widgets = &home.private.widgets;
+    bbWidget *addressWidget, *portWidget;
+    bbDictionary_lookup(widgets->dict, "IP_ADDRESS",&handle);
+    bbVPool_lookup(widgets->pool, (void**)&addressWidget, handle);
+
+    bbDictionary_lookup(widgets->dict, "IP_PORT",&handle);
+    bbVPool_lookup(widgets->pool, (void**)&portWidget, handle);
+
+    //bbDictionary_add(widgets->dict, "IP_ADDRESS", handle);
+    //bbDictionary_add(widgets->dict, "IP_PORT", handle);
+    char* address = addressWidget->typeData.textBox.string;
+    char* port = portWidget->typeData.textBox.string;
     bbNetworkApp_connect(&home.private.network, address, port);
+
+    sfText_setString(addressWidget->typeData.textBox.text, address);
+    sfText_setString(portWidget->typeData.textBox.text, port);
+
     return Success;
 }
 
@@ -97,7 +113,7 @@ bbFlag ConnectButton_Constructor (bbWidget** self, void* Graphics,
     widget->mtable.MouseIcon = 87;
     widget->mtable.DragIcon = -1;
 
-    widget->mtable.OnClick = connextOnClick;
+    widget->mtable.OnClick = connectOnClick;
     widget->mtable.OnUnClick = testOnUnClick;
 
 

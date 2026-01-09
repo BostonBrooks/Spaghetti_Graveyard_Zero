@@ -35,8 +35,14 @@ bbFlag bbNetworkApp_connect(bbNetwork* network, char* address, char* port)
     sfIpAddress ip_address;
     I32 port_number;
     bbFlag flag;
-    if (strlen(address) == 0) return None;
+    if (strlen(address) == 0)
+    {
+        bbStr_setStr(address ,"127.0.0.1", 64);
+        bbStr_setStr(port ,"1701", 64);
+        return None;
+    }
     ip_address = sfIpAddress_fromString(address);
+
 
     U32 addressInt = sfIpAddress_toInteger(ip_address);
 
@@ -68,6 +74,7 @@ bbFlag bbNetworkApp_connect(bbNetwork* network, char* address, char* port)
 
     flag = bbNetwork_connect(network, ip_address, port_number);
 
+    bbFlag_print(flag);
     return flag;
 
 }
