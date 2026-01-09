@@ -1,5 +1,5 @@
 #include "engine/logic/bbTerminal.h"
-#include "engine/core/bbCore.h"
+#include "engine/core(old)/bbCore.h"
 #include <string.h>
 
 //wait time is introduced to make sure all messages are received before any

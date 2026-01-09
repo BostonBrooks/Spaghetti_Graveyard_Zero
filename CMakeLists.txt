@@ -48,8 +48,8 @@ add_executable(myprogram
         ./engine/graphics/bbTextures.c
         ./engine/graphics/bbColours.c
         ./engine/graphics/bbDrawfunctions.c
-        ./engine/core/bbCore.c
-        ./engine/core/bbMessages.c
+        "engine/core(old)/bbCore.c"
+        "engine/core(old)/bbMessages.c"
         ./engine/geometry/bbCoordinates.c
         ./engine/geometry/bbViewportCoords.c
         ./engine/geometry/bbMesh.c

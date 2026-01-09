@@ -9,8 +9,8 @@
 #include "engine/viewport/bbDrawables.h"
 #include "engine/viewport/bbMapIcons.h"
 #include "engine/viewport/bbUnits.h"
-#include "engine/core/bbCore.h"
-#include "engine/core/bbMessages.h"
+#include "engine/core(old)/bbCore.h"
+#include "engine/core(old)/bbMessages.h"
 #include "engine/network/bbNetwork.h"
 
 typedef struct {

@@ -5,7 +5,7 @@
 
 #include "engine/logic/bbIntTypes.h"
 #include "engine/logic/bbList.h"
-#include "engine/core/bbCore.h"
+#include "engine/core(old)/bbCore.h"
 
 #include "engine/data/bbHome.h"
 
