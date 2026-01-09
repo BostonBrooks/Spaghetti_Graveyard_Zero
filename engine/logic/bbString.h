@@ -83,6 +83,28 @@ static I32 bbStr_putStr(char* dest, char* src, I32 max){
 /// add char to end of string
 static I32 bbStr_putChar(char* dest, char src, I32 max){
     I32 i = 0;
+
+    if (src == '\b')
+    {
+        if (dest[0] == '\0') return f_Success;
+
+        while (1)
+        {
+            i++;
+            if (i >= max)
+            {
+                dest[max - 1] = '\0';
+                return f_Success;
+            }
+            if (dest[i] == '\0')
+            {
+                dest[i-1] = '\0';
+                return f_Success;
+            }
+        }
+    }
+
+
     while(1){
         if(dest[i] == '\0') break;
         i++;
@@ -91,13 +113,6 @@ static I32 bbStr_putChar(char* dest, char src, I32 max){
             dest[max - 1] = '\0';
             return f_None;
         }
-    }
-
-    if (src == '\b')
-    {
-        if (i > 0) dest[i - 1] = '\0';
-
-        return f_Success;
     }
 
 
