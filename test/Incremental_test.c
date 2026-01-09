@@ -376,7 +376,7 @@ CLEARWINDOW(bbMagenta);
 		bbWidget_onCommand(home.private.widgets.dialog, &home.private.widgets, bbWC_putChar, handle);
 
 */
-		if (home.private.network.connected)
+		if (home.private.network.send_ready && home.private.network.receive_ready)
 		{
 			char str[64];
 			sprintf(str, "maptime = %llu", home.private.mapTime );
@@ -426,7 +426,7 @@ CLEARWINDOW(bbMagenta);
 		//if (home.private.mapTime % 50 == 0) bbWidget_hide(connectWidget, &home.private.widgets);
 		//if (home.private.mapTime % 50 == 25) bbWidget_unhide(connectWidget, &home.private.widgets);
 
-		if (home.private.network.connected)
+		if (home.private.network.send_ready && home.private.network.receive_ready)
 		{
 			bbNetworkApp_checkInbox(&home.private.network);
 			bbNetworkApp_checkTime(&home.private.network);

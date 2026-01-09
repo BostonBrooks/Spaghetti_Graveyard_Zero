@@ -36,7 +36,7 @@ typedef struct
     U64 server_receive_time;
     U64 server_send_time;
     U64 local_receive_time;
-    U64 time_difference;
+    I64 time_difference;
     U64 round_trip_time;
     bbPool_List list_element;
 } bbNetworkTime_record;

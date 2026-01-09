@@ -119,9 +119,9 @@ bbFlag bbNetworkApp_checkTime(bbNetwork* network)
 
         U64 RTT = (record->local_receive_time - record->local_send_time) - (record->server_receive_time - record->
             server_send_time);
-        U64 difference = (record->server_receive_time - record->local_send_time + record->server_send_time - record->
-            local_receive_time) / 2;
-        printf("round trip time = %llu, time difference = %llu\n", RTT, difference);
+        I64 difference = ((I64)record->server_receive_time - (I64)record->local_send_time
+            + (I64)record->server_send_time - (I64)record->local_receive_time) / 2;
+        printf("round trip time = %llu, time difference = %lld\n", RTT, difference);
 
         bbThreadedQueue_free(&network_time->completed, (void**)&record);
     }
