@@ -138,6 +138,8 @@ bbFlag bbWidget_newEmpty(bbWidget** self, bbWidgets* widgets, bbWidget* parent){
 	}
 
 	widget->type = bbWidgetType_None;
+	widget->state = bbWidgetState_Default;
+	widget->isFrozen = false;
 
 	*self = widget;
 	return Success;

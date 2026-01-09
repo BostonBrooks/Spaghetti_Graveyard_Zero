@@ -53,7 +53,7 @@ void* bbNetwork_spawn(void* Network)
     thread = "spawn";
     printf("Hello Spawn\n");
 
-    const I32 connect_timeout = 10;
+    const I32 connect_timeout = 20;
     bbNetwork* network = (bbNetwork*)Network;
 
     sfSocketStatus status;
@@ -62,13 +62,13 @@ void* bbNetwork_spawn(void* Network)
 
     bbHere()
 
-    sfTcpSocket_setBlocking(socket, sfFalse);
     status = sfTcpSocket_connect(socket, network->address, network->port, sfSeconds(connect_timeout));
     if (status == sfSocketNotReady)
     {
         network->on_disconnect(NULL);
         return NULL;
     }
+    sfTcpSocket_setBlocking(socket, sfFalse);
     //workaround because status is always sfSocketDone
     sfIpAddress address = sfTcpSocket_getRemoteAddress(socket);
     U32 addressInt = sfIpAddress_toInteger(address);

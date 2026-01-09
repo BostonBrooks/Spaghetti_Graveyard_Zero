@@ -33,7 +33,6 @@ bbFlag ConnectButton_Enter (void* mouse, void* widgets, void* Widget, void* Grap
     bbWidget* widget = (bbWidget*)Widget;
     bbGraphics* graphics = Graphics;
 
-    if (widget->state == bbWidgetState_Frozen) return Success;
 
     widget->mtable.hover = true;
     widget->state = bbWidgetState_Hover;
@@ -46,7 +45,6 @@ bbFlag ConnectButton_Leave (void* mouse, void* widgets, void* Widget, void* Grap
     bbWidget* widget = (bbWidget*)Widget;
     bbGraphics* graphics = Graphics;
 
-    if (widget->state == bbWidgetState_Frozen) return Success;
 
     widget->mtable.hover = false;
     widget->state = bbWidgetState_Default;
@@ -64,7 +62,6 @@ Graphics)
     bbWidgets* widgets = Widgets;
 
 
-    if (widget->state == bbWidgetState_Frozen) return Success;
 
     bbVPool* pool = widgets->pool;
     bbPool_Handle handle;
@@ -90,7 +87,6 @@ bbFlag ConnectButton_LeftUp (void* Mouse, void* Widgets, void* Widget, void* Gra
     bbMouse* mouse = Mouse;
     bbWidgets* widgets = Widgets;
 
-    if (widget->state == bbWidgetState_Frozen) return Success;
 
     mouse->selected = widgets->pool->null;
 

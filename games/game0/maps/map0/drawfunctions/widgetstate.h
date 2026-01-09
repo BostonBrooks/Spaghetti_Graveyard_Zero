@@ -11,6 +11,7 @@ bbFlag bbDF_widgetState(void* drawable, void* frameDescriptor, void* cl){
     //void* output_object;
     bbWidget* widget = drawable;
     I32 i = (I32)widget->state;
+    if (widget->isFrozen){ i = bbWidgetState_Frozen; }
     //bbDebug("composition->num_frames = %d\n", composition->num_frames);
     {
         input_frame = &composition->frame[i];

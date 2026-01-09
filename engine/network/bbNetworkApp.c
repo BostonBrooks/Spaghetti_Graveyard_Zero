@@ -3,8 +3,11 @@
 #include <stdio.h>
 #include <string.h>
 
+#include "engine/data/bbHome.h"
+#include "engine/logic/bbDictionary.h"
 #include "engine/logic/bbString.h"
 #include "engine/logic/bbTerminal.h"
+#include "engine/userinterface/bbWidget.h"
 
 //typedef bbFlag bbNetwork_onConnect (void* network);
 //Notify user interface of network connection
@@ -39,6 +42,8 @@ bbFlag bbNetworkApp_connect(bbNetwork* network, char* address, char* port)
     {
         bbStr_setStr(address ,"127.0.0.1", 64);
         bbStr_setStr(port ,"1701", 64);
+
+        network->on_disconnect(NULL);
         return None;
     }
     ip_address = sfIpAddress_fromString(address);
@@ -50,6 +55,8 @@ bbFlag bbNetworkApp_connect(bbNetwork* network, char* address, char* port)
     {
         bbStr_setStr(address ,"127.0.0.1", 64);
         bbStr_setStr(port ,"1701", 64);
+
+        network->on_disconnect(NULL);
         return None;
     }
     sfIpAddress_toString(ip_address, address);
@@ -59,6 +66,8 @@ bbFlag bbNetworkApp_connect(bbNetwork* network, char* address, char* port)
     {
         bbStr_setStr(address ,"127.0.0.1", 64);
         bbStr_setStr(port ,"1701", 64);
+
+        network->on_disconnect(NULL);
         return None;
     }
 
@@ -68,6 +77,8 @@ bbFlag bbNetworkApp_connect(bbNetwork* network, char* address, char* port)
     {
         bbStr_setStr(address ,"127.0.0.1", 64);
         bbStr_setStr(port ,"1701", 64);
+
+        network->on_disconnect(NULL);
         return None;
     }
     port_number = atoi(port);
@@ -145,5 +156,15 @@ bbFlag bbConnect(void* network)
 bbFlag bbDisconnect(void* network)
 {
     bbDebug("Disconnect from server in thread %s\n", thread);
+
+    bbPool_Handle handle;
+    bbWidgets* widgets = &home.private.widgets;
+    bbWidget *widget;
+    bbDictionary_lookup(widgets->dict, "CONNECT",&handle);
+    bbVPool_lookup(widgets->pool, (void**)&widget, handle);
+
+    bbAssert(0==1, "where is this getting called?");
+    widget->isFrozen = false;
+
     return Success;
 }
