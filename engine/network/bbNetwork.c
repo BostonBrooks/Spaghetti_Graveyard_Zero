@@ -64,7 +64,11 @@ void* bbNetwork_spawn(void* Network)
 
     sfTcpSocket_setBlocking(socket, sfFalse);
     status = sfTcpSocket_connect(socket, network->address, network->port, sfSeconds(connect_timeout));
-
+    if (status == sfSocketNotReady)
+    {
+        network->on_disconnect(NULL);
+        return NULL;
+    }
     //workaround because status is always sfSocketDone
     sfIpAddress address = sfTcpSocket_getRemoteAddress(socket);
     U32 addressInt = sfIpAddress_toInteger(address);
@@ -77,14 +81,10 @@ void* bbNetwork_spawn(void* Network)
         return NULL;
     }
 
-    bbHere()
     network->socket = socket;
 
     if (network->on_connect != NULL) network->on_connect(NULL);
-    bbHere()
     pthread_create(&network->send_thread,NULL, bbNetwork_sendThread, network);
-
-    bbHere()
     bbNetwork_receiveThread(network);
 
     //handle cleanup?
