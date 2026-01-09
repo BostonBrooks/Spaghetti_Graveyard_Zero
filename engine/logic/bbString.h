@@ -92,6 +92,15 @@ static I32 bbStr_putChar(char* dest, char src, I32 max){
             return f_None;
         }
     }
+
+    if (src == '\b')
+    {
+        if (i > 0) dest[i - 1] = '\0';
+
+        return f_Success;
+    }
+
+
     //could be modified to include:
     if(i+1 >= max){
         dest[i] = '\0';

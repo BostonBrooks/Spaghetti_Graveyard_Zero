@@ -19,6 +19,7 @@ mouse, bbWidgets* widgets){
     {
         keymap[i] = 0;
     }
+    keymap[sfKeyBackspace ] = '\b';
 
     keymap[sfKeyA] = 'a';
     keymap[sfKeyB] = 'b';
@@ -76,6 +77,8 @@ mouse, bbWidgets* widgets){
     {
         keymap[i] = 0;
     }
+
+    keymap[sfKeyBackspace ] = '\b';
 
     keymap[sfKeyA] = 'A';
     keymap[sfKeyB] = 'B';
