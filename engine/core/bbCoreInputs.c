@@ -44,3 +44,16 @@ bbFlag bbCore_setGoalPoint(bbCore* core, bbMapCoords MC, bool isInput)
 
         return Success;
 }
+
+
+bbFlag bbCore_updateViewpoint(bbCore* core, bool isInput)
+{
+    bbInstruction* instruction;
+
+    //TODO roll the following three lines into one function
+    bbFlag flag = bbList_alloc(&core->doStack, (void**)&instruction);
+    instruction->type = bbInstruction_updateViewpoint;
+    bbList_pushL(&core->doStack, instruction);
+
+    return Success;
+}

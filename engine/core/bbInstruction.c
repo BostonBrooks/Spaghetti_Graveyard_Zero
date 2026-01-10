@@ -129,7 +129,7 @@ bbFlag bbInstruction_unsetGoalPoint_fn(bbCore* core, bbInstruction* instruction)
 
 
 
-bbFlag bbInstruction_moveViewpoint_fn(bbCore* core, bbInstruction* instruction)
+bbFlag bbInstruction_updateViewpoint_fn(bbCore* core, bbInstruction* instruction)
 {
     bbMapCoords oldViewpoint;
     oldViewpoint.i = home.private.viewport->viewpoint.i;
@@ -137,9 +137,9 @@ bbFlag bbInstruction_moveViewpoint_fn(bbCore* core, bbInstruction* instruction)
     oldViewpoint.k = home.private.viewport->viewpoint.k;
 
     bbMapCoords GoalPoint;
-    GoalPoint.i = instruction->data.mapCoords.i;
-    GoalPoint.j = instruction->data.mapCoords.j;
-    GoalPoint.k = instruction->data.mapCoords.k;
+    GoalPoint.i = testGoalPoint.i;
+    GoalPoint.j = testGoalPoint.j;
+    GoalPoint.k = testGoalPoint.k;
 
     bbMapCoords difference;
     difference.i = GoalPoint.i - oldViewpoint.i;
@@ -156,6 +156,9 @@ bbFlag bbInstruction_moveViewpoint_fn(bbCore* core, bbInstruction* instruction)
         home.private.viewport->viewpoint.j += difference.j * speed / distance;
     }
 
-    bbUnit_setLocation((bbDrawable)home.shared.player, home.shared.units,
+    bbUnit_setLocation((bbDrawable*)home.shared.player, home.shared.units,
                        home.private.viewport->viewpoint);
+
+    //TODO post     undoInstruction
+    return Success;
 }

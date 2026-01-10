@@ -24,6 +24,10 @@ bbFlag bbCore_react(bbCore* core)
         {
             bbInstruction_printIndex_fn(core, instruction);
         }
+        if (instruction->type == bbInstruction_updateViewpoint)
+        {
+            bbInstruction_updateViewpoint_fn(core, instruction);
+        }
     }
 
     return Success;

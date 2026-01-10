@@ -373,6 +373,7 @@ CLEARWINDOW(bbMagenta);
     bbUnit* player;
     bbUnit_newCat(&player, home.shared.units, &home.constant.graphics,
                home.private.viewport->viewpoint);
+	home.shared.player = player;
 
     CLEARWINDOW(bbRedOrange);
 
@@ -401,25 +402,8 @@ CLEARWINDOW(bbMagenta);
         bbDummySender_textMessage(home.private.server, "TEST", home.private
         .mapTime);
 
-        bbMapCoords difference;
-        difference.i = testGoalPoint.i - home.private.viewport->viewpoint.i;
-        difference.j = testGoalPoint.j - home.private.viewport->viewpoint.j;
-        difference.k = 0;
-
-        float speed = 8;
-
-        float distance = sqrt(difference.i*difference.i
-                + difference.j*difference.j);
-
-        if (distance <= speed){
-            home.private.viewport->viewpoint = testGoalPoint;
-        } else {
-            home.private.viewport->viewpoint.i += difference.i * speed / distance;
-            home.private.viewport->viewpoint.j += difference.j * speed / distance;
-        }
-
-        bbUnit_setLocation((bbDrawable*)player, home.shared.units,
-                               home.private.viewport->viewpoint);
+		bbCore_updateViewpoint(&core, true);
+		bbCore_react(&core);
 
 		bbMouse_isOver(&home.private.mouse, &home.private.widgets);
 		bbMouse_Update(&home.private.mouse, &home.private.widgets, &home.constant.graphics);

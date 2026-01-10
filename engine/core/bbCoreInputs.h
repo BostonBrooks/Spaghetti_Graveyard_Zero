@@ -6,5 +6,6 @@
 ///isInput should be true unless being called from within a bbInstruction
 bbFlag bbCore_printIndex(bbCore* core, bbScreenPoints SP, I32 index, bool isInput);
 bbFlag bbCore_setGoalPoint(bbCore* core, bbMapCoords MC, bool isInput);
+bbFlag bbCore_updateViewpoint(bbCore* core, bool isInput);
 
 #endif //BBCOREINPUTS_H
