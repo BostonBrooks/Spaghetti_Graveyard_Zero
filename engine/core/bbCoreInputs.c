@@ -8,9 +8,7 @@ bbFlag bbCore_printIndex(bbCore* core, bbScreenPoints SP, I32 index, bool isInpu
     bbInstruction* instruction;
 
     //TODO roll the following three lines into one function
-    bbFlag flag = bbVPool_alloc(core->pool, (void**)&instruction);
-    instruction->listElement.prev = core->pool->null;
-    instruction->listElement.next = core->pool->null;
+    bbFlag flag = bbList_alloc(&core->doStack, (void**)&instruction);
 
 
 

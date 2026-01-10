@@ -434,3 +434,18 @@ bbFlag bbList_isEmpty(bbList* list){
     if (isNULL(list->listPtr->head)) return 1;
     return 0;
 }
+
+
+bbFlag bbList_alloc(bbList* list, void** element)
+{
+	void* lelement;
+	bbFlag flag = bbVPool_alloc(list->pool, &lelement);
+	if (flag == Success)
+	{
+		bbPool_ListElement* elementList = lelement + list->offsetOf;
+		elementList->next = list->pool->null;
+		elementList->prev = list->pool->null;
+		*element = lelement;
+	}
+	return flag;
+}

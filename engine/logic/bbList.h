@@ -121,5 +121,6 @@ bbFlag bbList_mapR(bbList* list, bbListFunction* myFunc, void* cl);
 
 bbFlag bbList_isEmpty(bbList* list);
 
+bbFlag bbList_alloc(bbList* list, void** element);
 
 #endif //BBLIST_H
