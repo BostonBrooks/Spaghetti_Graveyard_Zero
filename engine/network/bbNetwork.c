@@ -58,6 +58,8 @@ void* bbNetwork_spawn(void* Network)
 
     sfSocketStatus status;
     sfTcpSocket* socket = sfTcpSocket_create();
+
+    sfTcpSocket_setBlocking(socket, sfTrue);
     bbAssert(socket!=NULL, "bad socket constructor\n");
 
     bbHere()
@@ -68,7 +70,6 @@ void* bbNetwork_spawn(void* Network)
         network->on_disconnect(NULL);
         return NULL;
     }
-    sfTcpSocket_setBlocking(socket, sfFalse);
     //workaround because status is always sfSocketDone
     sfIpAddress address = sfTcpSocket_getRemoteAddress(socket);
     U32 addressInt = sfIpAddress_toInteger(address);

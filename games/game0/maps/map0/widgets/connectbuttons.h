@@ -195,7 +195,7 @@ bbFlag DisConnectButton_Constructor (bbWidget** self, void* Graphics,
     widget->mtable.MouseIcon = 87;
     widget->mtable.DragIcon = -1;
 
-    widget->mtable.OnClick = connectOnClick;
+    widget->mtable.OnClick = NULL;
     widget->mtable.OnUnClick = testOnUnClick;
 
 
@@ -279,7 +279,7 @@ bbFlag GoOfflineButton_Constructor (bbWidget** self, void* Graphics,
     widget->mtable.MouseIcon = 87;
     widget->mtable.DragIcon = -1;
 
-    widget->mtable.OnClick = connectOnClick;
+    widget->mtable.OnClick = NULL;
     widget->mtable.OnUnClick = testOnUnClick;
 
 

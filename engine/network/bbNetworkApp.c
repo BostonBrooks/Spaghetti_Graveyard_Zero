@@ -165,6 +165,8 @@ bbFlag bbDisconnect(void* network)
 
     widget->isFrozen = false;
 
+    widget->rect.top += 32;
+
 
 
     return Success;

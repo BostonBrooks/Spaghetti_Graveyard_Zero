@@ -71,7 +71,7 @@ Graphics)
     mouse->selected = handle;
     widget->state = bbWidgetState_Click;
 
-    if (widget->mtable.OnClick!=NULL)
+    if (widget->mtable.OnClick!=NULL && widget->isFrozen == false)
     {
         widget->mtable.OnClick(widget);
     }
@@ -94,7 +94,7 @@ bbFlag ConnectButton_LeftUp (void* Mouse, void* Widgets, void* Widget, void* Gra
 
         widget->state = bbWidgetState_Hover;
 
-        if (widget->mtable.OnUnClick!=NULL)
+        if (widget->mtable.OnUnClick!=NULL && widget->isFrozen == false)
         {
             widget->mtable.OnUnClick(widget);
         }
