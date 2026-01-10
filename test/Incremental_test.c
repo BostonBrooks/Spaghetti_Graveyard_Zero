@@ -46,7 +46,7 @@ int main (void){
 	home.shared.core = &core;
 	bbScreenPoints SP;
 	SP.x = 100; SP.y = 100;
-	bbCore_printIndex(&core, SP, 10,true);
+	bbCore_printIndex(&core, SP, 3,true);
 	bbCore_react(&core);
 	bbCore_rewind(&core);
 	bbCore_react(&core);

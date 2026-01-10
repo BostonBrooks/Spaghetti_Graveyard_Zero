@@ -67,6 +67,7 @@ extern bbMapCoords testGoalPoint;
 
 bbFlag bbInstruction_setGoalPoint_fn(bbCore* core, bbInstruction* instruction)
 {
+    bbHere()
     bbMapCoords oldGoalPoint;
     oldGoalPoint.i = testGoalPoint.i;
     oldGoalPoint.j = testGoalPoint.j;
@@ -103,4 +104,23 @@ bbFlag bbInstruction_setGoalPoint_fn(bbCore* core, bbInstruction* instruction)
 
     return Success;
 
+}
+
+
+bbFlag bbInstruction_unsetGoalPoint_fn(bbCore* core, bbInstruction* instruction)
+{
+    bbHere()
+    testGoalPoint.i = instruction->data.mapCoords.i;
+    testGoalPoint.j = instruction->data.mapCoords.j;
+    testGoalPoint.k = instruction->data.mapCoords.k;
+
+    if (instruction->isInput)
+    {
+        bbInstruction* redoInstruction;
+        bbVPool_lookup(core->pool, (void**)&redoInstruction, instruction->redo);
+        bbList_pushL(&core->doStack, redoInstruction);
+    }
+
+    bbVPool_free(core->pool, instruction);
+    return Success;
 }

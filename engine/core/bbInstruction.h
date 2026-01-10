@@ -39,11 +39,11 @@ typedef struct
 } bbInstruction;
 
 bbFlag bbInstruction_printIndex_fn(bbCore* core, bbInstruction* instruction);
-
 bbFlag bbInstruction_unprintIndex_fn(bbCore* core, bbInstruction* instruction);
 
 
 bbFlag bbInstruction_setGoalPoint_fn(bbCore* core, bbInstruction* instruction);
+bbFlag bbInstruction_unsetGoalPoint_fn(bbCore* core, bbInstruction* instruction);
 
 
 #endif // BBINSTRUCTION_H
