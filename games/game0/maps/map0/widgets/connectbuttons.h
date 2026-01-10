@@ -17,6 +17,9 @@ bbFlag testOnUnClick(void* self)
 //look up textboxes and use their addresses, then you will have to update their sfText
 bbFlag connectOnClick(void* self)
 {
+
+    bbWidget* widget = self;
+    widget->isFrozen = true;
     bbHere()
     bbPool_Handle handle;
     bbWidgets* widgets = &home.private.widgets;
@@ -27,8 +30,6 @@ bbFlag connectOnClick(void* self)
     bbDictionary_lookup(widgets->dict, "IP_PORT",&handle);
     bbVPool_lookup(widgets->pool, (void**)&portWidget, handle);
 
-    //bbDictionary_add(widgets->dict, "IP_ADDRESS", handle);
-    //bbDictionary_add(widgets->dict, "IP_PORT", handle);
     char* address = addressWidget->typeData.textBox.string;
     char* port = portWidget->typeData.textBox.string;
     bbNetworkApp_connect(&home.private.network, address, port);
@@ -36,8 +37,16 @@ bbFlag connectOnClick(void* self)
     sfText_setString(addressWidget->typeData.textBox.text, address);
     sfText_setString(portWidget->typeData.textBox.text, port);
 
+    return Success;
+}
+
+bbFlag disconnectOnClick(void* self)
+{
+
     bbWidget* widget = self;
     widget->isFrozen = true;
+    home.private.network.quit = true;
+
     return Success;
 }
 
@@ -116,7 +125,7 @@ bbFlag ConnectButton_Constructor (bbWidget** self, void* Graphics,
     widget->mtable.DragIcon = -1;
 
     widget->mtable.OnClick = connectOnClick;
-    widget->mtable.OnUnClick = testOnUnClick;
+    widget->mtable.OnUnClick = NULL;
 
 
     for (I32 i = 3; i < FRAMES_PER_WIDGET; i++) {
@@ -195,8 +204,8 @@ bbFlag DisConnectButton_Constructor (bbWidget** self, void* Graphics,
     widget->mtable.MouseIcon = 87;
     widget->mtable.DragIcon = -1;
 
-    widget->mtable.OnClick = NULL;
-    widget->mtable.OnUnClick = testOnUnClick;
+    widget->mtable.OnClick = disconnectOnClick;
+    widget->mtable.OnUnClick = NULL;
 
 
     for (I32 i = 3; i < FRAMES_PER_WIDGET; i++) {
@@ -280,7 +289,7 @@ bbFlag GoOfflineButton_Constructor (bbWidget** self, void* Graphics,
     widget->mtable.DragIcon = -1;
 
     widget->mtable.OnClick = NULL;
-    widget->mtable.OnUnClick = testOnUnClick;
+    widget->mtable.OnUnClick = launchServer;
 
 
     for (I32 i = 3; i < FRAMES_PER_WIDGET; i++) {
@@ -295,7 +304,6 @@ bbFlag GoOfflineButton_Constructor (bbWidget** self, void* Graphics,
     bbStr_setStr(widget->key, "New Server", 64);
 
 
-    widget->mtable.OnUnClick = launchServer;
 
 
 

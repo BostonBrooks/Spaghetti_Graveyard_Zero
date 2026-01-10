@@ -149,6 +149,21 @@ bbFlag bbNetworkApp_checkTime(bbNetwork* network)
 bbFlag bbConnect(void* network)
 {
     bbDebug("Connect to server in thread %s\n", thread);
+
+    bbPool_Handle handle;
+    bbWidgets* widgets = &home.private.widgets;
+    bbWidget *widget;
+    bbDictionary_lookup(widgets->dict, "DISCONNECT",&handle);
+    bbVPool_lookup(widgets->pool, (void**)&widget, handle);
+
+    widget->isFrozen = false;
+
+
+    bbDictionary_lookup(widgets->dict, "CONNECT",&handle);
+    bbVPool_lookup(widgets->pool, (void**)&widget, handle);
+
+    widget->isFrozen = true;
+
     return Success;
 }
 //typedef bbFlag bbNetwork_onDisconnect (void* network);
@@ -165,9 +180,9 @@ bbFlag bbDisconnect(void* network)
 
     widget->isFrozen = false;
 
-    widget->rect.top += 32;
+    bbDictionary_lookup(widgets->dict, "DISCONNECT",&handle);
+    bbVPool_lookup(widgets->pool, (void**)&widget, handle);
 
-
-
+    widget->isFrozen = true;
     return Success;
 }

@@ -112,6 +112,10 @@ void* bbNetwork_receiveThread(void* args)
         if (network->quit)
         {
             network->receive_ready = false;
+            if (network->send_ready == false)
+            {
+                network->on_disconnect(network);
+            }
             return NULL;
         }
         status = sfTcpSocket_receivePacket(socket, packet);
@@ -162,6 +166,10 @@ void* bbNetwork_sendThread(void* args)
         if (network->quit)
         {
             network->send_ready = false;
+            if (network->receive_ready == false)
+            {
+                network->on_disconnect(network);
+            }
             return NULL;
         }
 
