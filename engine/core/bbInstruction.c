@@ -17,7 +17,7 @@ bbFlag bbInstruction_printIndex_fn(bbCore* core, bbInstruction* instruction)
     SP.x = 0; SP.y = 0;
     if (instruction->data.printIndex.i > 0)
         bbCore_printIndex(core, SP, instruction->data.printIndex.i - 1, false);
-    bbDebug("i = %d\n", instruction->data.printIndex.i);
+    bbDebug("index = %d\n", instruction->data.printIndex.i);
 
     bbInstruction* undoInstruction;
     bbVPool_alloc(core->pool, (void**)&undoInstruction);
