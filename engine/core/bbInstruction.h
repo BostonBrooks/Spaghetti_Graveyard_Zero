@@ -45,5 +45,5 @@ bbFlag bbInstruction_unprintIndex_fn(bbCore* core, bbInstruction* instruction);
 bbFlag bbInstruction_setGoalPoint_fn(bbCore* core, bbInstruction* instruction);
 bbFlag bbInstruction_unsetGoalPoint_fn(bbCore* core, bbInstruction* instruction);
 
-
+bbFlag bbInstruction_moveViewpoint_fn(bbCore* core, bbInstruction* instruction);
 #endif // BBINSTRUCTION_H

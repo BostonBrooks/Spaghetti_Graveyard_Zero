@@ -6,6 +6,8 @@
 #include "engine/core/bbCoreInputs.h"
 #include "engine/core/bbInstruction.h"
 
+#include "engine/data/bbHome.h"
+
 bbFlag bbInstruction_printIndex_fn(bbCore* core, bbInstruction* instruction)
 {
     //create dot
@@ -123,4 +125,37 @@ bbFlag bbInstruction_unsetGoalPoint_fn(bbCore* core, bbInstruction* instruction)
 
     bbVPool_free(core->pool, instruction);
     return Success;
+}
+
+
+
+bbFlag bbInstruction_moveViewpoint_fn(bbCore* core, bbInstruction* instruction)
+{
+    bbMapCoords oldViewpoint;
+    oldViewpoint.i = home.private.viewport->viewpoint.i;
+    oldViewpoint.j = home.private.viewport->viewpoint.j;
+    oldViewpoint.k = home.private.viewport->viewpoint.k;
+
+    bbMapCoords GoalPoint;
+    GoalPoint.i = instruction->data.mapCoords.i;
+    GoalPoint.j = instruction->data.mapCoords.j;
+    GoalPoint.k = instruction->data.mapCoords.k;
+
+    bbMapCoords difference;
+    difference.i = GoalPoint.i - oldViewpoint.i;
+    difference.j = GoalPoint.j - oldViewpoint.j;
+
+    float speed = 8;
+    float distance = sqrt(difference.i*difference.i
+            + difference.j*difference.j);
+
+    if (distance <= speed){
+        home.private.viewport->viewpoint = testGoalPoint;
+    } else {
+        home.private.viewport->viewpoint.i += difference.i * speed / distance;
+        home.private.viewport->viewpoint.j += difference.j * speed / distance;
+    }
+
+    bbUnit_setLocation((bbDrawable)home.shared.player, home.shared.units,
+                       home.private.viewport->viewpoint);
 }
