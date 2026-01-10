@@ -14,6 +14,9 @@ echo Attempting to compile:
 SET PATH=C:\winlibs\mingw64\bin
 gcc   -D SFML_STATIC -I ../^
        ../test/Incremental_test.c^
+       ../engine/core/bbCore.c^
+       ../engine/core/bbCoreInputs.c^
+       ../engine/core/bbInstruction.c^
        ../engine/avoidance/bbAvoidables.c^
        ../engine/dummyserver/bbDummyReceiver.c^
        ../engine/dummyserver/bbDummySender.c^

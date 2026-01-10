@@ -18,6 +18,7 @@
 #include "engine/viewport/bbDrawables.h"
 #include "engine/viewport/bbMapIcons.h"
 #include "engine/avoidance/bbAvoidables.h"
+#include "engine/core/bbCoreInputs.h"
 #include "engine/viewport/bbUnits.h"
 #include "engine/network/bbNetwork.h"
 #include "engine/network/bbNetworkApp.h"
@@ -40,6 +41,15 @@ int main (void){
     bbPool_Handle testHandle;
     testHandle.u64 = 33333;
 
+	bbCore core;
+	bbCore_init(&core);
+	home.shared.core = &core;
+	bbScreenPoints SP;
+	SP.x = 100; SP.y = 100;
+	bbCore_printIndex(&core, SP, 10,true);
+	bbCore_react(&core);
+	bbCore_rewind(&core);
+	bbCore_react(&core);
 
 
     testGoalPoint.i = 10000;
@@ -144,7 +154,6 @@ CLEARWINDOW(bbTeal);
 bbHere();
 	bbWidget *layout;
 
-    bbScreenPoints SP;
     SP.x = 600*SCREEN_PPP;
     SP.y = 50*SCREEN_PPP;
 

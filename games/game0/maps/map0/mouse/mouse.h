@@ -2,6 +2,7 @@
 #ifndef MOOSE_H
 #define MOOSE_H
 
+#include "engine/core/bbCoreInputs.h"
 #include "engine/logic/bbVPool.h"
 #include "engine/userinterface/bbWidget.h"
 #include "engine/viewport/bbViewport.h"
@@ -91,7 +92,10 @@ bbFlag IsOver_Viewport(bbMouse* mouse, bbWidgets* widgets, bbWidget* widget)
             bbMapCoords MC = bbScreenCoords_getMapCoords(viewportCoords, VP);
 
             testGoalPoint = MC;
+            //TODO set false to true
+            bbCore_setGoalPoint(home.shared.core, MC, false);
 
+            bbCore_react(home.shared.core);
 
 
         }

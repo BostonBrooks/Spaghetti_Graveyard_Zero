@@ -10,7 +10,9 @@
 typedef enum
 {
     bbInstruction_printIndex,
-    bbInstruction_unprintIndex
+    bbInstruction_unprintIndex,
+    bbInstruction_setGoalPoint,
+    bbInstruction_unsetGoalPoint
 } bbInstruction_type;
 
 typedef struct
@@ -22,7 +24,8 @@ typedef struct
 
 typedef union
 {
-    bbInstruction_printIndex_data printIndex;
+    bbInstruction_printIndex_data screenPoints;
+    bbMapCoords mapCoords;
     bbPool_Handle handle;
 } bbInstruction_data;
 
@@ -38,6 +41,9 @@ typedef struct
 bbFlag bbInstruction_printIndex_fn(bbCore* core, bbInstruction* instruction);
 
 bbFlag bbInstruction_unprintIndex_fn(bbCore* core, bbInstruction* instruction);
+
+
+bbFlag bbInstruction_setGoalPoint_fn(bbCore* core, bbInstruction* instruction);
 
 
 #endif // BBINSTRUCTION_H
