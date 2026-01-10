@@ -163,8 +163,9 @@ bbFlag bbDisconnect(void* network)
     bbDictionary_lookup(widgets->dict, "CONNECT",&handle);
     bbVPool_lookup(widgets->pool, (void**)&widget, handle);
 
-    bbAssert(0==1, "where is this getting called?");
     widget->isFrozen = false;
+
+
 
     return Success;
 }
