@@ -35,7 +35,7 @@ typedef struct
 bbFlag bbCore_init(bbCore* core);
 
 ///isInput should be true unless this is being called from an instruction
-bbFlag bbCore_createDot(bbCore* core, bbScreenPoints SP, bool isInput);
+bbFlag bbCore_createDot(bbCore* core, bbScreenPoints SP, I32 numDots, bool isInput);
 bbFlag bbCore_react(bbCore* core);
 
 #endif //BBCORE_H

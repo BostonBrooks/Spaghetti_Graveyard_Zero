@@ -14,8 +14,9 @@ bbFlag bbInstruction_createDot_fn(bbCore* core, bbInstruction* instruction)
     //else free instruction
     bbScreenPoints SP;
     SP.x = 0; SP.y = 0;
-    bbCore_createDot(core, SP, false);
+    if (instruction->data.createDot.i > 0)
+        bbCore_createDot(core, SP, instruction->data.createDot.i - 1, false);
     bbVPool_free(core->pool, instruction);
-    bbHere();
+    bbDebug("i = %d\n", instruction->data.createDot.i);
     return Success;
 }

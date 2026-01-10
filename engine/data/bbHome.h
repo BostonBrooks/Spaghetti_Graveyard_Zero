@@ -1,6 +1,7 @@
 #ifndef BBHOME_H
 #define BBHOME_H
 
+#include "engine/core/bbCore.h"
 #include "engine/userinterface/bbWidget.h"
 #include "engine/userinterface/bbSpell.h"
 #include "engine/userinterface/bbInput.h"
@@ -9,8 +10,6 @@
 #include "engine/viewport/bbDrawables.h"
 #include "engine/viewport/bbMapIcons.h"
 #include "engine/viewport/bbUnits.h"
-#include "engine/core(old)/bbCore.h"
-#include "engine/core(old)/bbMessages.h"
 #include "engine/network/bbNetwork.h"
 
 typedef struct {

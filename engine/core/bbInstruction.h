@@ -13,10 +13,16 @@ typedef enum
     bbInstruction_deleteDot
 } bbInstruction_type;
 
+typedef struct
+{
+
+    bbScreenPoints screenPoints;
+    I32 i;
+} bbInstruction_createDot_data;
 
 typedef union
 {
-    bbScreenPoints screenPoints;
+    bbInstruction_createDot_data createDot;
     bbPool_Handle handle;
 } bbInstruction_data;
 

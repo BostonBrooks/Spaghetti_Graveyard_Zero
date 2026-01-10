@@ -13,7 +13,7 @@ int main (void)
     bbCore_init(&core);
     bbScreenPoints SP;
     SP.x = 100; SP.y = 100;
-    bbCore_createDot(&core, SP, true);
+    bbCore_createDot(&core, SP, 10,true);
     bbCore_react(&core);
     return 0;
 }

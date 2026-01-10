@@ -16,6 +16,7 @@ gcc   -D SFML_STATIC -I ../^
        ../test/bbCore_test.c^
        ../engine/core/bbInstruction.c^
        ../engine/core/bbCore.c^
+       ../engine/core/bbCoreInputs.c^
        ../engine/avoidance/bbAvoidables.c^
        ../engine/dummyserver/bbDummyReceiver.c^
        ../engine/dummyserver/bbDummySender.c^

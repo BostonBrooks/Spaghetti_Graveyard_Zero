@@ -9,21 +9,6 @@ bbFlag bbCore_init(bbCore* core)
     bbList_init(&core->undoStack, core->pool, NULL, offsetof(bbInstruction, listElement),NULL);
 }
 
-
-bbFlag bbCore_createDot(bbCore* core, bbScreenPoints SP,bool isInput);
-{
-    bbInstruction* instruction;
-    bbVPool_alloc(core->pool, (void**)&instruction);
-    instruction->type = bbInstruction_createDot;
-    instruction->data.screenPoints.x = SP.x;
-    instruction->data.screenPoints.y = SP.y;
-    instruction->isInput = isInput;
-
-    bbList_pushL(&core->doStack, instruction);
-
-    return Success;
-}
-
 bbFlag bbCore_react(bbCore* core)
 {
     bbFlag flag;
