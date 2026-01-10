@@ -1,4 +1,5 @@
 #include "engine/core/bbCore.h"
+#include "engine/core/bbCoreInputs.h"
 #include "engine/core/bbInstruction.h"
 #include "engine/data/bbHome.h"
 //TODO this should not depend on all the other c files
@@ -13,7 +14,9 @@ int main (void)
     bbCore_init(&core);
     bbScreenPoints SP;
     SP.x = 100; SP.y = 100;
-    bbCore_createDot(&core, SP, 10,true);
+    bbCore_printIndex(&core, SP, 10,true);
+    bbCore_react(&core);
+    bbCore_rewind(&core);
     bbCore_react(&core);
     return 0;
 }

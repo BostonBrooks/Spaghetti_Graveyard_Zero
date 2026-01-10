@@ -4,6 +4,6 @@
 #include "engine/logic/bbFlag.h"
 
 ///isInput should be true unless being called from within a bbInstruction
-bbFlag bbCore_createDot(bbCore* core, bbScreenPoints SP, I32 numDots, bool isInput);
+bbFlag bbCore_printIndex(bbCore* core, bbScreenPoints SP, I32 index, bool isInput);
 
 #endif //BBCOREINPUTS_H
