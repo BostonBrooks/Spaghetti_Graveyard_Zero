@@ -94,7 +94,6 @@ bbFlag IsOver_Viewport(bbMouse* mouse, bbWidgets* widgets, bbWidget* widget)
             testGoalPoint = MC;
             //TODO set false to true
             bbCore_setGoalPoint(home.shared.core, MC, false);
-
             bbCore_react(home.shared.core);
 
 

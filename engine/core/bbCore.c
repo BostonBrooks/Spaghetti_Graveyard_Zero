@@ -28,6 +28,11 @@ bbFlag bbCore_react(bbCore* core)
         {
             bbInstruction_updateViewpoint_fn(core, instruction);
         }
+
+        if (instruction->type == bbInstruction_setGoalPoint)
+        {
+            bbInstruction_setGoalPoint_fn(core, instruction);
+        }
     }
 
     return Success;
@@ -47,6 +52,14 @@ bbFlag bbCore_rewind(bbCore* core)
         if (instruction->type == bbInstruction_unprintIndex)
         {
             bbInstruction_unprintIndex_fn(core, instruction);
+        }
+        if (instruction->type == bbInstruction_unupdateViewpoint)
+        {
+            bbInstruction_unupdateViewpoint_fn(core, instruction);
+        }
+        if (instruction->type == bbInstruction_unsetGoalPoint)
+        {
+            bbInstruction_unsetGoalPoint_fn(core, instruction);
         }
     }
 

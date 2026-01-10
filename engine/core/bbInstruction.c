@@ -10,6 +10,7 @@
 
 bbFlag bbInstruction_printIndex_fn(bbCore* core, bbInstruction* instruction)
 {
+    bbHere()
     //create dot
     //create undo instruction
     //if input
@@ -53,6 +54,7 @@ bbFlag bbInstruction_printIndex_fn(bbCore* core, bbInstruction* instruction)
 
 bbFlag bbInstruction_unprintIndex_fn(bbCore* core, bbInstruction* instruction)
 {
+    bbHere()
     bbDebug("unprint index = %d\n", instruction->data.screenPoints.i);
 
     if (instruction->isInput)
@@ -131,6 +133,7 @@ bbFlag bbInstruction_unsetGoalPoint_fn(bbCore* core, bbInstruction* instruction)
 
 bbFlag bbInstruction_updateViewpoint_fn(bbCore* core, bbInstruction* instruction)
 {
+
     bbMapCoords oldViewpoint;
     oldViewpoint.i = home.private.viewport->viewpoint.i;
     oldViewpoint.j = home.private.viewport->viewpoint.j;
@@ -159,6 +162,52 @@ bbFlag bbInstruction_updateViewpoint_fn(bbCore* core, bbInstruction* instruction
     bbUnit_setLocation((bbDrawable*)home.shared.player, home.shared.units,
                        home.private.viewport->viewpoint);
 
-    //TODO post     undoInstruction
+    //TODO post undoInstruction
+    bbInstruction* undoInstruction;
+    bbVPool_alloc(core->pool, (void**)&undoInstruction);
+    undoInstruction->type = bbInstruction_unupdateViewpoint;
+    undoInstruction->data.mapCoords.i = oldViewpoint.i;
+    undoInstruction->data.mapCoords.j = oldViewpoint.j;
+    undoInstruction->data.mapCoords.k = oldViewpoint.k;
+    undoInstruction->isInput = instruction->isInput;
+
+    if (!instruction->isInput)
+    {
+        bbVPool_free(core->pool, instruction);
+        undoInstruction->redo = core->pool->null;
+    } else
+    {
+        bbPool_Handle handle;
+        bbVPool_reverseLookup(core->pool, instruction, &handle);
+        undoInstruction->redo = handle;
+
+        instruction->listElement.prev = core->pool->null;
+        instruction->listElement.next = core->pool->null;
+    }
+
+
+    bbList_pushL(&core->undoStack, undoInstruction);
+
+    return Success;
+}
+
+bbFlag bbInstruction_unupdateViewpoint_fn(bbCore* core, bbInstruction* instruction)
+{
+    bbHere()
+
+    home.private.viewport->viewpoint.i = instruction->data.mapCoords.i;
+    home.private.viewport->viewpoint.j = instruction->data.mapCoords.j;
+    home.private.viewport->viewpoint.k = instruction->data.mapCoords.k;
+
+    bbUnit_setLocation((bbDrawable*)home.shared.player, home.shared.units,
+                       home.private.viewport->viewpoint);
+    if (instruction->isInput)
+    {
+        bbInstruction* redoInstruction;
+        bbVPool_lookup(core->pool, (void**)&redoInstruction, instruction->redo);
+        bbList_pushL(&core->doStack, redoInstruction);
+    }
+
+    bbVPool_free(core->pool, instruction);
     return Success;
 }
