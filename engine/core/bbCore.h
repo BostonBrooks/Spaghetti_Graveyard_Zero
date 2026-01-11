@@ -1,6 +1,7 @@
 #ifndef BBCORE_H
 #define BBCORE_H
 #include "engine/geometry/bbCoordinates.h"
+#include "engine/logic/bbCallback.h"
 #include "engine/logic/bbList.h"
 #include "engine/logic/bbVPool.h"
 
@@ -36,6 +37,8 @@ bbFlag bbCore_init(bbCore* core);
 
 bbFlag bbCore_react(bbCore* core);
 bbFlag bbCore_rewind(bbCore* core);
-bbFlag bbCore_clear(bbCore* core);
+bbFlag bbCore_clearFuture(bbCore* core);
+bbFlag bbCore_rewindUntil(bbCore* core, bbCallback* callback);
+bbFlag bbCore_rewindUntilTime(bbCore* core, U64 time);
 
 #endif //BBCORE_H

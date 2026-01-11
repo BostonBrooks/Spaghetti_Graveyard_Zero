@@ -27,6 +27,8 @@
 bbWidgets* testWidgets;
 bbMapCoords testGoalPoint;
 
+bool doRewind;
+
 I32 hash(unsigned char *str, I32 n_bins);
 
 _Thread_local char* thread;
@@ -36,6 +38,7 @@ bbHome home;
 int main (void){
     srand(time(NULL));
 
+	doRewind = false;
     //trying to replicate a bug
     I32 magic_number = 256;
     bbPool_Handle testHandle;
@@ -441,6 +444,14 @@ CLEARWINDOW(bbMagenta);
 
 		bbCore_incrementClock(&core, true);
 		bbCore_react(&core);
+
+
+		if (doRewind)
+		{
+			bbCore_rewindUntilTime(&core,  home.private.mapTime - 2);
+			bbCore_clearFuture(&core);
+			testGoalPoint = home.private.viewport->viewpoint;
+		}
 	}
 
     sfRenderWindow_destroy(window);

@@ -6,6 +6,8 @@
 #include "engine/data/bbHome.h"
 
 
+extern bool doRewind;
+
 bbFlag bbInput_new(bbInput* input, sfRenderWindow* window, bbMouse*
 mouse, bbWidgets* widgets){
 
@@ -210,13 +212,22 @@ bbFlag bbInput_poll(bbInput* input, sfRenderWindow* window){
                 if (keyCode == sfKeyTilde)
                 {
                     bbCore_rewind(home.shared.core);
-                    bbCore_clear(home.shared.core);
+                    bbCore_clearFuture(home.shared.core);
+                }
+                if (keyCode == sfKeyEscape)
+                {
+                    doRewind = true;
                 }
             }
 
             break;
         }
         case sfEvtKeyReleased:
+            sfKeyCode keyCode = event.key.code;
+            if (keyCode == sfKeyEscape)
+            {
+                doRewind = false;
+            }
         case sfEvtTextEntered:
             break;
         default:{

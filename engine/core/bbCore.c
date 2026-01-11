@@ -1,5 +1,6 @@
 #include "engine/core/bbCore.h"
 #include "engine/core/bbInstruction.h"
+#include "engine/data/bbHome.h"
 #include "engine/logic/bbBloatedPool.h"
 
 bbFlag bbCore_init(bbCore* core)
@@ -55,7 +56,7 @@ bbFlag bbCore_rewind(bbCore* core)
         if (flag != Success) return Success;
         //TODO use switch()
 
-//bbInstructionType_print(instruction->type);
+        //bbInstructionType_print(instruction->type);
 
         if (instruction->type == bbInstruction_unprintIndex)
         {
@@ -79,18 +80,11 @@ bbFlag bbCore_rewind(bbCore* core)
     return Success;
 }
 
-bbFlag bbCore_clear(bbCore* core)
+bbFlag bbCore_clearFuture(bbCore* core)
 {
-
     bbFlag flag;
     bbInstruction* instruction;
 
-    while (1)
-    {
-        flag = bbList_popL(&core->undoStack, (void**)&instruction);
-        if (flag != Success) break;
-        bbVPool_free(core->pool, instruction);
-    }
 
     while (1)
     {
@@ -98,4 +92,65 @@ bbFlag bbCore_clear(bbCore* core)
         if (flag != Success) break;
         bbVPool_free(core->pool, instruction);
     }
+}
+
+
+
+bbFlag bbCore_rewindUntil(bbCore* core, bbCallback* callback)
+{
+    bbFlag flag;
+    bbInstruction* instruction;
+
+    while (1)
+    {
+        bbPool_Handle coreHandle;
+        coreHandle.ptr = (void*)core;
+        flag = bbCallback_execute(callback, coreHandle);
+        if (flag == Break) return Success;
+
+        flag = bbList_popL(&core->undoStack, (void**)&instruction);
+        if (flag != Success) return Success;
+        //TODO use switch()
+
+        //bbInstructionType_print(instruction->type);
+
+        if (instruction->type == bbInstruction_unprintIndex)
+        {
+            bbInstruction_unprintIndex_fn(core, instruction);
+        }
+        if (instruction->type == bbInstruction_unupdateViewpoint)
+        {
+            bbInstruction_unupdateViewpoint_fn(core, instruction);
+        }
+        if (instruction->type == bbInstruction_unsetGoalPoint)
+        {
+            bbInstruction_unsetGoalPoint_fn(core, instruction);
+        }
+
+        if (instruction->type == bbInstruction_unincrementClock)
+        {
+            bbInstruction_unincrementClock_fn(core, instruction);
+        }
+    }
+
+    return Success;
+}
+
+//typedef bbFlag bbCallbackFunction(void* callback, bbPool_Handle handle);
+bbFlag isTimeEqual(void* callback, bbPool_Handle handle){
+    bbCore* core = handle.ptr;
+    bbCallback* Callback = callback;
+    U64 targetTime = Callback->args.u64;
+
+    if (targetTime == home.private.mapTime) return Break;
+    return Continue;
+}
+
+bbFlag bbCore_rewindUntilTime(bbCore* core, U64 time)
+{
+    bbCallback callback;
+    callback.args.u64 = time;
+    callback.function = isTimeEqual;
+
+    return  bbCore_rewindUntil(core, &callback);
 }
