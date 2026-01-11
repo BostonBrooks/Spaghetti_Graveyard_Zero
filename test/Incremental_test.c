@@ -376,16 +376,10 @@ CLEARWINDOW(bbMagenta);
 	home.shared.player = player;
 
     CLEARWINDOW(bbRedOrange);
+	home.private.mapTime = 0;
+	while (1) {
+        bbPrintf("mapTime = %llu",home.private.mapTime );
 
-	for (home.private.mapTime = 0; ; home.private.mapTime++) {
-
-/*
-		unsigned char ch = 'a' + rand()%26;
-        bbPool_Handle handle;
-        handle.u64 = ch;
-		bbWidget_onCommand(home.private.widgets.dialog, &home.private.widgets, bbWC_putChar, handle);
-
-*/
 		if (home.private.network.send_ready && home.private.network.receive_ready)
 		{
 			char str[64];
@@ -449,6 +443,8 @@ CLEARWINDOW(bbMagenta);
         bbViewport_clear(home.private.viewport);
         bbFlag flag = bbInput_poll(&input, window);
         if (flag == Break) break;
+
+		bbCore_incrementClock(&core, true);
 	}
 
     sfRenderWindow_destroy(window);

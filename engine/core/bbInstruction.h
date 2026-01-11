@@ -14,7 +14,9 @@ typedef enum
     bbInstruction_setGoalPoint,
     bbInstruction_unsetGoalPoint,
     bbInstruction_updateViewpoint,
-    bbInstruction_unupdateViewpoint
+    bbInstruction_unupdateViewpoint,
+    bbInstruction_incrementClock,
+    bbInstruction_unincrementClock
 
 } bbInstruction_type;
 
@@ -50,4 +52,8 @@ bbFlag bbInstruction_unsetGoalPoint_fn(bbCore* core, bbInstruction* instruction)
 
 bbFlag bbInstruction_updateViewpoint_fn(bbCore* core, bbInstruction* instruction);
 bbFlag bbInstruction_unupdateViewpoint_fn(bbCore* core, bbInstruction* instruction);
+
+
+
+bbFlag bbInstruction_incrementClock_fn(bbCore* core, bbInstruction* instruction);
 #endif // BBINSTRUCTION_H

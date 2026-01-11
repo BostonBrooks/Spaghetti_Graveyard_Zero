@@ -33,6 +33,11 @@ bbFlag bbCore_react(bbCore* core)
         {
             bbInstruction_setGoalPoint_fn(core, instruction);
         }
+
+        if (instruction->type == bbInstruction_incrementClock)
+        {
+            bbInstruction_incrementClock_fn(core, instruction);
+        }
     }
 
     return Success;

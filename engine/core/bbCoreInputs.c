@@ -57,3 +57,16 @@ bbFlag bbCore_updateViewpoint(bbCore* core, bool isInput)
 
     return Success;
 }
+
+
+bbFlag bbCore_incrementClock(bbCore* core, bool isInput)
+{
+    bbInstruction* instruction;
+
+    //TODO roll the following three lines into one function
+    bbFlag flag = bbList_alloc(&core->doStack, (void**)&instruction);
+    instruction->type = bbInstruction_incrementClock;
+    bbList_pushL(&core->doStack, instruction);
+
+    return Success;
+}

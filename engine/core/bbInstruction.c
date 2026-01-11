@@ -211,3 +211,13 @@ bbFlag bbInstruction_unupdateViewpoint_fn(bbCore* core, bbInstruction* instructi
     bbVPool_free(core->pool, instruction);
     return Success;
 }
+
+///eventually this will include a wait time to achieve 60hz,
+///except for the case when we want to fast-forward?
+bbFlag bbInstruction_incrementClock_fn(bbCore* core, bbInstruction* instruction)
+{
+    U64 oldTime = home.private.mapTime;
+    home.private.mapTime++;
+
+    //TODO undo increment
+}
