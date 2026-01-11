@@ -376,12 +376,6 @@ CLEARWINDOW(bbMagenta);
     CLEARWINDOW(bbRedOrange);
 	home.private.mapTime = 0;
 	while (1) {
-		bbNetworkPacket* packet;
-		printElapsedTime()
-		bbThreadedQueue_alloc(&home.private.network.outbox, (void**)&packet);
-		printElapsedTime()
-		bbThreadedQueue_free(&home.private.network.outbox, (void**)&packet);
-		printElapsedTime()
         //bbPrintf("mapTime = %llu\n",home.private.mapTime );
 
 		if (home.private.network.send_ready && home.private.network.receive_ready)

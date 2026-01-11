@@ -3,8 +3,6 @@
 
 #include "engine/threadsafe/bbThreadedPool.h"
 
-#include <SFML/System/Sleep.h>
-
 #include "engine/logic/bbArith.h"
 #include "engine/logic/bbTerminal.h"
 #include "engine/logic/bbVPool.h"
