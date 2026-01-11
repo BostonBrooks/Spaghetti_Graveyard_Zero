@@ -164,8 +164,6 @@ bbFlag bbThreadedPool_allocImpl(bbThreadedPool* pool, void** address, char* file
 
     bbMutexUnlock(&pool->mutex);
 
-
-    sfSleep(sfSeconds(0.1));
     return Success;
 }
 
