@@ -32,7 +32,7 @@ bool doRewind;
 I32 hash(unsigned char *str, I32 n_bins);
 
 _Thread_local char* thread;
-
+sfClock* testClock = NULL;
 bbHome home;
 
 int main (void){
@@ -376,6 +376,12 @@ CLEARWINDOW(bbMagenta);
     CLEARWINDOW(bbRedOrange);
 	home.private.mapTime = 0;
 	while (1) {
+		bbNetworkPacket* packet;
+		printElapsedTime()
+		bbThreadedQueue_alloc(&home.private.network.outbox, (void**)&packet);
+		printElapsedTime()
+		bbThreadedQueue_free(&home.private.network.outbox, (void**)&packet);
+		printElapsedTime()
         //bbPrintf("mapTime = %llu\n",home.private.mapTime );
 
 		if (home.private.network.send_ready && home.private.network.receive_ready)
@@ -383,11 +389,15 @@ CLEARWINDOW(bbMagenta);
 			char str[64];
 			sprintf(str, "maptime = %llu", home.private.mapTime );
 
+
 			bbNetwork_sendStr(&home.private.network, str);
+
 			bbNetworkTime_ping(&home.private.network);
 
 			bbNetworkApp_checkInbox(&home.private.network);
+
 			bbNetworkApp_checkTime(&home.private.network);
+
 		}
 
 
@@ -411,11 +421,7 @@ CLEARWINDOW(bbMagenta);
 		//if (home.private.mapTime % 50 == 0) bbWidget_hide(connectWidget, &home.private.widgets);
 		//if (home.private.mapTime % 50 == 25) bbWidget_unhide(connectWidget, &home.private.widgets);
 
-		if (home.private.network.send_ready && home.private.network.receive_ready)
-		{
-			bbNetworkApp_checkInbox(&home.private.network);
-			bbNetworkApp_checkTime(&home.private.network);
-		}
+
 	if (home.private.mapTime % 50 == 0) bbPrintf("mapTime = %d\n", home.private.mapTime);
 		cl.mapTime = home.private.mapTime;
         cl.GUI_time = home.private.mapTime;

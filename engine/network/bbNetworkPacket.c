@@ -78,7 +78,6 @@ bbFlag bbNetwork_sendStr(void* Network, char* str)
     bbThreadedQueue_alloc(&network->outbox, (void**)&packet);
     packet->type = PACKETTYPE_STRING;
     bbStr_setStr(packet->data.str, str, 64);
-
     bbThreadedQueue_pushL(&network->outbox, (void*)packet);
 
     return Success;

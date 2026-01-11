@@ -59,7 +59,7 @@ typedef struct
 bbFlag bbNetworkTime_init(bbNetworkTime* network_time);
 
 // get the time since the server started
-bbFlag bbNetworkTime_get(bbNetworkTime* network_time, sfTime time);
+bbFlag bbNetworkTime_get(bbNetworkTime* network_time, sfTime* time);
 
 // get the number of ticks/frames since the server started
 bbFlag bbNetworkTime_getInt(bbNetworkTime* network_time, U64 tick);
