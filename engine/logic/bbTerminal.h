@@ -17,10 +17,28 @@
 #include <stdlib.h>
 #include <stddef.h>
 #include <signal.h>
-#include <SFML/Network/IpAddress.h>
+#include <SFML/System.h>
+#include <SFML/Graphics.h>
+#include <SFML/Window.h>
+#include <SFML/Network.h>
 
 #include "engine/logic/bbIntTypes.h"
 #include "engine/logic/bbString.h"
+
+extern sfClock* testClock;
+
+static bbFlag testClock_init(void){
+
+    return Success;
+}
+
+#define printElapsedTime()\
+    {\
+        if (testClock == NULL) testClock = sfClock_create();\
+        sfTime time;\
+        time = sfClock_restart(testClock);\
+        bbDebug("Elapsed Time = %llu us\n", sfTime_asMicroseconds(time) )\
+}
 
 
 static const int stringLength = 512;
@@ -184,6 +202,14 @@ bbDebug ("bbWidgetCommandType = unknown\n");\
         \
     }\
 }\
+
+#define bbTime_print()\
+    {\
+    bbNetworkTime* network_time = home.private.network.extra_data;\
+    sfTime time;\
+    bbNetworkTime_get(network_time, &time);\
+    bbDebug("time = %llu us\n", sfTime_asMicroseconds(time));\
+    }
 
 #define bbInstructionType_print(instruction)\
 {\
