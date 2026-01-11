@@ -207,6 +207,11 @@ bbFlag bbInput_poll(bbInput* input, sfRenderWindow* window){
                     bbWidget_onCommand(widgets->command, widgets,bbWC_setStr,
                                        handle);
                 }
+                if (keyCode == sfKeyTilde)
+                {
+                    bbCore_rewind(home.shared.core);
+                    bbCore_clear(home.shared.core);
+                }
             }
 
             break;

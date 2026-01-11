@@ -10,7 +10,6 @@
 
 bbFlag bbInstruction_printIndex_fn(bbCore* core, bbInstruction* instruction)
 {
-    bbHere()
     //create dot
     //create undo instruction
     //if input
@@ -54,7 +53,6 @@ bbFlag bbInstruction_printIndex_fn(bbCore* core, bbInstruction* instruction)
 
 bbFlag bbInstruction_unprintIndex_fn(bbCore* core, bbInstruction* instruction)
 {
-    bbHere()
     bbDebug("unprint index = %d\n", instruction->data.screenPoints.i);
 
     if (instruction->isInput)
@@ -71,7 +69,10 @@ extern bbMapCoords testGoalPoint;
 
 bbFlag bbInstruction_setGoalPoint_fn(bbCore* core, bbInstruction* instruction)
 {
-    bbHere()
+
+    bbDebug("Old Goal Point: i = %d, j = %d, k = %d\n",
+        testGoalPoint.i, testGoalPoint.j, testGoalPoint.k);
+
     bbMapCoords oldGoalPoint;
     oldGoalPoint.i = testGoalPoint.i;
     oldGoalPoint.j = testGoalPoint.j;
@@ -80,6 +81,9 @@ bbFlag bbInstruction_setGoalPoint_fn(bbCore* core, bbInstruction* instruction)
     testGoalPoint.i = instruction->data.mapCoords.i;
     testGoalPoint.j = instruction->data.mapCoords.j;
     testGoalPoint.k = instruction->data.mapCoords.k;
+
+    bbDebug("New Goal Point: i = %d, j = %d, k = %d\n",
+        testGoalPoint.i, testGoalPoint.j, testGoalPoint.k);
 
     bbInstruction* undoInstruction;
     bbVPool_alloc(core->pool, (void**)&undoInstruction);
@@ -113,11 +117,13 @@ bbFlag bbInstruction_setGoalPoint_fn(bbCore* core, bbInstruction* instruction)
 
 bbFlag bbInstruction_unsetGoalPoint_fn(bbCore* core, bbInstruction* instruction)
 {
-    bbHere()
+
     testGoalPoint.i = instruction->data.mapCoords.i;
     testGoalPoint.j = instruction->data.mapCoords.j;
     testGoalPoint.k = instruction->data.mapCoords.k;
 
+    bbDebug("Goal Point: i = %d, j = %d, k = %d\n",
+        testGoalPoint.i, testGoalPoint.j, testGoalPoint.k);
     if (instruction->isInput)
     {
         bbInstruction* redoInstruction;
@@ -193,7 +199,6 @@ bbFlag bbInstruction_updateViewpoint_fn(bbCore* core, bbInstruction* instruction
 
 bbFlag bbInstruction_unupdateViewpoint_fn(bbCore* core, bbInstruction* instruction)
 {
-    bbHere()
 
     home.private.viewport->viewpoint.i = instruction->data.mapCoords.i;
     home.private.viewport->viewpoint.j = instruction->data.mapCoords.j;
@@ -220,4 +225,43 @@ bbFlag bbInstruction_incrementClock_fn(bbCore* core, bbInstruction* instruction)
     home.private.mapTime++;
 
     //TODO undo increment
+    bbInstruction* undoInstruction;
+    bbVPool_alloc(core->pool, (void**)&undoInstruction);
+    undoInstruction->type = bbInstruction_unincrementClock;
+    undoInstruction->data.handle.u64 = oldTime;
+    undoInstruction->isInput = instruction->isInput;
+
+    //redo instruction
+    if (!instruction->isInput)
+    {
+        bbVPool_free(core->pool, instruction);
+        undoInstruction->redo = core->pool->null;
+    } else
+    {
+        bbPool_Handle handle;
+        bbVPool_reverseLookup(core->pool, instruction, &handle);
+        undoInstruction->redo = handle;
+
+        instruction->listElement.prev = core->pool->null;
+        instruction->listElement.next = core->pool->null;
+    }
+
+
+    bbList_pushL(&core->undoStack, undoInstruction);
+
+}
+
+
+bbFlag bbInstruction_unincrementClock_fn(bbCore* core, bbInstruction* instruction)
+{
+    home.private.mapTime = instruction->data.handle.u64;
+    if (instruction->isInput)
+    {
+        bbInstruction* redoInstruction;
+        bbVPool_lookup(core->pool, (void**)&redoInstruction, instruction->redo);
+        bbList_pushL(&core->doStack, redoInstruction);
+    }
+
+    bbVPool_free(core->pool, instruction);
+    return Success;
 }

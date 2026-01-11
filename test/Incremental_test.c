@@ -45,11 +45,6 @@ int main (void){
 	bbCore_init(&core);
 	home.shared.core = &core;
 	bbScreenPoints SP;
-	SP.x = 100; SP.y = 100;
-	bbCore_printIndex(&core, SP, 3,true);
-	bbCore_react(&core);
-	bbCore_rewind(&core);
-	bbCore_react(&core);
 
 
     testGoalPoint.i = 10000;
@@ -378,7 +373,7 @@ CLEARWINDOW(bbMagenta);
     CLEARWINDOW(bbRedOrange);
 	home.private.mapTime = 0;
 	while (1) {
-        bbPrintf("mapTime = %llu",home.private.mapTime );
+        //bbPrintf("mapTime = %llu\n",home.private.mapTime );
 
 		if (home.private.network.send_ready && home.private.network.receive_ready)
 		{
@@ -445,6 +440,7 @@ CLEARWINDOW(bbMagenta);
         if (flag == Break) break;
 
 		bbCore_incrementClock(&core, true);
+		bbCore_react(&core);
 	}
 
     sfRenderWindow_destroy(window);

@@ -185,6 +185,40 @@ bbDebug ("bbWidgetCommandType = unknown\n");\
     }\
 }\
 
+#define bbInstructionType_print(instruction)\
+{\
+switch((bbInstruction_type)instruction)\
+{\
+case bbInstruction_printIndex:\
+bbDebug("bbInstruction = printIndex\n");\
+break;\
+case bbInstruction_unprintIndex:\
+bbDebug("bbInstruction = unprintIndex\n");\
+break;\
+case bbInstruction_setGoalPoint:\
+bbDebug("bbInstruction = setGoalPoint\n");\
+break;\
+case bbInstruction_unsetGoalPoint:\
+bbDebug("bbInstruction = unsetGoalPoint\n");\
+break;\
+case bbInstruction_updateViewpoint:\
+bbDebug("bbInstruction = updateViewpoint\n");\
+break;\
+case bbInstruction_unupdateViewpoint:\
+bbDebug("bbInstruction = unupdateViewpoint\n");\
+break;\
+case bbInstruction_incrementClock:\
+bbDebug("bbInstruction = incrementClock\n");\
+break;\
+case bbInstruction_unincrementClock:\
+bbDebug("bbInstruction = unincrementClock\n");\
+break;\
+default:\
+bbDebug("bbInstruction = unknown\n");\
+\
+}\
+}\
+
 //Similar function found in https://github.com/orichalcink/chatroom
 static void bbClearLine(I32 lines)
 {

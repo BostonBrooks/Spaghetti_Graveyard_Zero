@@ -37,7 +37,7 @@ bbFlag bbCore_setGoalPoint(bbCore* core, bbMapCoords MC, bool isInput)
         instruction->type = bbInstruction_setGoalPoint;
         instruction->data.mapCoords.i = MC.i;
         instruction->data.mapCoords.j = MC.j;
-        instruction->data.mapCoords.j = MC.j;
+        instruction->data.mapCoords.k = MC.k;
         instruction->isInput = isInput;
 
         bbList_pushL(&core->doStack, instruction);

@@ -20,6 +20,8 @@ typedef enum
 
 } bbInstruction_type;
 
+
+
 typedef struct
 {
 
@@ -56,4 +58,5 @@ bbFlag bbInstruction_unupdateViewpoint_fn(bbCore* core, bbInstruction* instructi
 
 
 bbFlag bbInstruction_incrementClock_fn(bbCore* core, bbInstruction* instruction);
+bbFlag bbInstruction_unincrementClock_fn(bbCore* core, bbInstruction* instruction);
 #endif // BBINSTRUCTION_H

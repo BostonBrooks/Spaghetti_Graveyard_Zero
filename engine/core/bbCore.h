@@ -36,5 +36,6 @@ bbFlag bbCore_init(bbCore* core);
 
 bbFlag bbCore_react(bbCore* core);
 bbFlag bbCore_rewind(bbCore* core);
+bbFlag bbCore_clear(bbCore* core);
 
 #endif //BBCORE_H

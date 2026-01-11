@@ -54,6 +54,9 @@ bbFlag bbCore_rewind(bbCore* core)
         flag = bbList_popL(&core->undoStack, (void**)&instruction);
         if (flag != Success) return Success;
         //TODO use switch()
+
+//bbInstructionType_print(instruction->type);
+
         if (instruction->type == bbInstruction_unprintIndex)
         {
             bbInstruction_unprintIndex_fn(core, instruction);
@@ -66,7 +69,33 @@ bbFlag bbCore_rewind(bbCore* core)
         {
             bbInstruction_unsetGoalPoint_fn(core, instruction);
         }
+
+        if (instruction->type == bbInstruction_unincrementClock)
+        {
+            bbInstruction_unincrementClock_fn(core, instruction);
+        }
     }
 
     return Success;
+}
+
+bbFlag bbCore_clear(bbCore* core)
+{
+
+    bbFlag flag;
+    bbInstruction* instruction;
+
+    while (1)
+    {
+        flag = bbList_popL(&core->undoStack, (void**)&instruction);
+        if (flag != Success) break;
+        bbVPool_free(core->pool, instruction);
+    }
+
+    while (1)
+    {
+        flag = bbList_popL(&core->doStack, (void**)&instruction);
+        if (flag != Success) break;
+        bbVPool_free(core->pool, instruction);
+    }
 }
