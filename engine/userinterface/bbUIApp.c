@@ -1,6 +1,9 @@
 
 
 #include "engine/userinterface/bbUIApp.h"
+
+#include "engine/data/bbHome.h"
+
 bbFlag bbUIApp_newWindow(bbUIApp* app)
 {
     app->SplashTexture = sfTexture_createFromFile("./graphics/Splash.png", NULL);
@@ -40,7 +43,122 @@ bbFlag bbUIAPP_initSpells(bbUIApp* app)
     return Success;
 }
 
+bbFlag bbUIApp_spawnWidgets(bbUIApp* app)
+{
+    bbWidget *layout;
+    bbScreenPoints SP;
+    SP.x = 600*SCREEN_PPP;
+    SP.y = 50*SCREEN_PPP;
+
+    bbWidget_newLayout(&layout, &home.constant.graphics, &app->widgets, NULL);
+    bbWidget* viewportWidget;
+    //Does not need to be listed in constructor table
+    bbWidget_newViewport(&viewportWidget, &home.constant.graphics, &app->widgets, layout,
+                         app->viewport);
+
+
+    bbWidget* widget0;
+    bbWidget* widget1;
+
+    bbScreenPoints SP0;
+
+
+    SP0.x = 58*SCREEN_PPP; SP0.y = 100*SCREEN_PPP;
+    bbWidget_constructor(&widget1, &app->widgets, &home.constant.graphics,
+                         SP0, layout,"SPELLMENU");
+
+
+    SP0.x = 97*SCREEN_PPP; SP0.y = 422*SCREEN_PPP;
+    bbWidget_constructor(&widget0, &app->widgets, &home.constant.graphics,
+                        SP0, layout,"SPELLBAR");
+
+
+
+    SP0.x = 497*SCREEN_PPP; SP0.y = 12*SCREEN_PPP;
+    bbWidget_constructor(&app->widgets.dialog, &app->widgets, &home.constant.graphics,
+                         SP0, layout, "TEXTBOX");
+
+    bbPool_Handle handle;
+    bbVPool_reverseLookup(app->widgets.pool, app->widgets.dialog, &handle);
+    bbDictionary_add(app->widgets.dict, "DIALOG", handle);
+
+    bbPool_Handle bounds;
+    bounds.i32x2.x = 200*SCREEN_PPP;
+    bounds.i32x2.y = 322*SCREEN_PPP;
+    bbWidget_onCommand(app->widgets.dialog, &app->widgets, bbWC_setDimensions, bounds);
+
+    SP0.x = 497*SCREEN_PPP; SP0.y = 355*SCREEN_PPP;
+    bbWidget_constructor(&app->widgets.prompt, &app->widgets, &home.constant.graphics,
+                         SP0, layout, "TEXTBOX");
+    bbVPool_reverseLookup(app->widgets.pool, app->widgets.prompt, &handle);
+    bbDictionary_add(app->widgets.dict, "PROMPT", handle);
+
+
+	bounds.i32x2.x = 200*SCREEN_PPP;
+	bounds.i32x2.y = 45*SCREEN_PPP;
+	bbWidget_onCommand(app->widgets.prompt, &app->widgets, bbWC_setDimensions, bounds);
+
+	SP0.x = 497*SCREEN_PPP; SP0.y = 416*SCREEN_PPP;
+	bbWidget_constructor(&app->widgets.command, &app->widgets, &home.constant.graphics,
+                         SP0, layout, "TEXTBOX");
+
+	bbVPool_reverseLookup(app->widgets.pool, app->widgets.command, &handle);
+	bbDictionary_add(app->widgets.dict, "COMMAND", handle);
+
+	app->widgets.textbox = app->widgets.command;
+	bounds.i32x2.x = 200 * SCREEN_PPP;
+	bounds.i32x2.y = 45*SCREEN_PPP;
+	bbWidget_onCommand(app->widgets.command, &app->widgets, bbWC_setDimensions, bounds);
+	bounds.i32x2.x = 64;
+	bounds.i32x2.y = 1;
+	bbWidget_onCommand(app->widgets.command, &app->widgets, bbWC_setBounds, bounds);
+
+
+	SP0.x = 58*SCREEN_PPP; SP0.y = 100*SCREEN_PPP;
+	bbWidget_constructor(&widget1, &app->widgets, &home.constant.graphics,
+						 SP0, layout,"CONNECTMENU");
+
+	SP0.x = 11*SCREEN_PPP; SP0.y = 11*SCREEN_PPP;
+	bbWidget_constructor(&widget1, &app->widgets, &home.constant.graphics,
+						 SP0, layout,"TOPLEFT");
+
+	SP0.x = 11*SCREEN_PPP; SP0.y = 11*SCREEN_PPP;
+	bbWidget_constructor(&widget0, &app->widgets, &home.constant.graphics,
+						 SP0, widget1,"CURRENTSPELL");
+
+	SP0.x = 46*SCREEN_PPP; SP0.y = 11*SCREEN_PPP;
+	bbWidget_constructor(&widget0, &app->widgets, &home.constant.graphics,
+						 SP0, widget1, "CONNECTICON");
+
+	SP0.x = rand()%(720*SCREEN_PPP); SP0.y = rand()%(480*SCREEN_PPP);
+	bbWidget_constructor(&widget0, &app->widgets, &home.constant.graphics,
+                         SP0, layout, "SPHERE");
+
+	SP0.x = 500*SCREEN_PPP; SP0.y = 23*SCREEN_PPP;
+	bbWidget_constructor(&widget0, &app->widgets, &home.constant.graphics,
+                         SP0, layout, "BUTTON");
+
+    SP0.x = 500*SCREEN_PPP; SP0.y = 125*SCREEN_PPP;
+    bbWidget_constructor(&widget0, &app->widgets, &home.constant.graphics,
+                         SP0, layout, "BOX");
+
+    SP0.x = 570*SCREEN_PPP; SP0.y = 125*SCREEN_PPP;
+    bbWidget_constructor(&widget0, &app->widgets, &home.constant.graphics,
+                         SP0, layout, "CARD");
+}
+
 bbFlag bbUIApp_init(bbUIApp* app)
 {
     bbUIAPP_initSpells(app);
+
+    bbWidgets_init(&app->widgets);
+    bbMouse_Init(&app->mouse, &app->widgets, &home.constant.graphics);
+    bbMouseFunctions_init(&app->mouse.functions);
+    bbMouseFunctions_populate(&app->mouse.functions);
+    bbInput_new(&app->input,app->window, &app->mouse, &app->widgets);
+    bbViewport_new(&app->viewport, 456, 466);
+	bbUIApp_spawnWidgets(app);
+
+	//TODO set active spell
+	//bbSpell_setActive(spell1, &app->spells, home.private.server, 0);
 }

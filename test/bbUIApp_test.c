@@ -14,6 +14,7 @@ int main(void)
 {
     bbUIApp_newWindow(&home.private.UI);
     bbGraphicsApp_init(&home.constant.graphics);
+
     bbUIApp_init(&home.private.UI);
 
     sfSleep(sfSeconds(5));

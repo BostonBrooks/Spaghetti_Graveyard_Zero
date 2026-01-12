@@ -32,7 +32,7 @@ typedef struct
     bbWidgets widgets;
     bbMouse mouse;
     bbInput input;
-    bbViewport viewport;
+    bbViewport* viewport;
     bbSpells spells;
 
     bbNetState netState;
