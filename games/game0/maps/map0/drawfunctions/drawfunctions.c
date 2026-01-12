@@ -31,7 +31,7 @@ bbFlag bbDF_widgetSprite(void* drawable, void* frameDescriptor, void* cl){
     bbWidget* widget = drawable;
     bbFrame* frame = frameDescriptor;
     drawFuncClosure* closure = cl;
-    bbGraphics* graphics = closure->graphics;
+    bbGraphicsApp* graphics = closure->graphics;
 
     I32 spriteInt = frame->handle.u64;
     sfSprite* sprite = graphics->sprites->sprites[spriteInt];
@@ -57,7 +57,7 @@ bbFlag bbDF_layerBoundary(void* drawable, void* frameDescriptor, void* cl){
     bbWidget* widget = drawable;
     bbFrame* frame = frameDescriptor;
     drawFuncClosure* closure = cl;
-    bbGraphics* graphics = closure->graphics;
+    bbGraphicsApp* graphics = closure->graphics;
 
     I32 spriteInt = frame->handle.u64;
     sfSprite* sprite = graphics->sprites->sprites[spriteInt];
@@ -84,7 +84,7 @@ bbFlag bbDF_widgetAnimation(void* drawable, void* frameDescriptor, void* cl){
     bbWidget* widget = drawable;
     bbFrame* frame_descriptor = frameDescriptor;
     drawFuncClosure* closure = cl;
-    bbGraphics* graphics = closure->graphics;
+    bbGraphicsApp* graphics = closure->graphics;
 
     bbAnimation* animation = graphics->animations->animations[frame_descriptor->handle.u64];
 
@@ -117,7 +117,7 @@ bbFlag bbDF_widgetAnimationDefault(void* drawable, void* frameDescriptor, void* 
     bbWidget* widget = drawable;
     bbFrame* frame_descriptor = frameDescriptor;
     drawFuncClosure* closure = cl;
-    bbGraphics* graphics = closure->graphics;
+    bbGraphicsApp* graphics = closure->graphics;
     bbAnimation* animation = graphics->animations->animations[frame_descriptor->handle.u64];
     I32 drawFunctionInt = animation->drawFunction;
     bbDrawFunction *drawFunction = graphics->drawfunctions->functions[drawFunctionInt];
@@ -130,7 +130,7 @@ bbFlag bbDF_composition(void* drawable, void* frameDescriptor, void* cl){
 
     bbFrame* self_frame = frameDescriptor;
     drawFuncClosure* closure = cl;
-    bbGraphics* graphics = closure->graphics;
+    bbGraphicsApp* graphics = closure->graphics;
     bbComposition* composition = graphics->compositions->compositions[self_frame->handle.u64];
     bbFrame* input_frame;
     bbFrame output_frame;
@@ -189,7 +189,7 @@ bbFlag bbDF_mapiconTest(void* drawable, void* frameDescriptor, void* cl){
 
     I32 spriteInt = frame_descriptor->handle.u64;
 
-    bbGraphics* graphics = foo->graphics;
+    bbGraphicsApp* graphics = foo->graphics;
     sfSprite* sprite = graphics->sprites->sprites[spriteInt];
 
 
@@ -215,7 +215,7 @@ bbFlag bbDF_eyeCandyTest(void* drawable, void* frameDescriptor, void* cl){
     //bbDebug("eye candy\n", mapicon->label);
     I32 animationInt = 7;
 
-    bbGraphics* graphics = foo->graphics;
+    bbGraphicsApp* graphics = foo->graphics;
     I32 time = foo->mapTime;
     bbAnimation* animation = graphics->animations->animations[animationInt];
     I32 frames = animation->frames;
@@ -247,7 +247,7 @@ bbFlag bbDF_widgetTextBox(void* drawable, void* frameDescriptor, void* cl)
     bbWidget* widget = drawable;
     bbFrame* frame = frameDescriptor;
     drawFuncClosure* closure = cl;
-    bbGraphics* graphics = closure->graphics;
+    bbGraphicsApp* graphics = closure->graphics;
 
     sfRenderWindow_drawText(closure->target, widget->typeData.textBox.text, NULL);
     return Success;

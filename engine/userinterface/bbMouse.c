@@ -4,7 +4,7 @@
 #include "engine/userinterface/bbWidget.h"
 
 
-bbFlag bbMouse_Init(bbMouse* mouse, void* Widgets, bbGraphics* graphics)
+bbFlag bbMouse_Init(bbMouse* mouse, void* Widgets, bbGraphicsApp* graphics)
 {
     bbWidgets* widgets = (bbWidgets*)Widgets;
     mouse->position.x = 720*4;
@@ -81,7 +81,7 @@ bbFlag bbMouse_isOver(bbMouse* mouse, void* Widgets)
     return Success;
 }
 
-bbFlag bbMouse_Update(bbMouse* mouse, void* Widgets, bbGraphics* graphics)
+bbFlag bbMouse_Update(bbMouse* mouse, void* Widgets, bbGraphicsApp* graphics)
 {
     bbWidgets* widgets = Widgets;
     bbVPool* pool = widgets->pool;
@@ -141,7 +141,7 @@ bbFlag bbMouse_isOverFunc(bbTree* tree, void* node, void* cl)
 
 }
 
-bbFlag bbMouse_Draw(bbMouse* mouse, void* Widgets, bbGraphics* graphics,
+bbFlag bbMouse_Draw(bbMouse* mouse, void* Widgets, bbGraphicsApp* graphics,
                     sfRenderWindow* window)
 {
 

@@ -33,7 +33,7 @@ bbFlag Card_IsOver (bbMouse* mouse, bbWidgets* widgets, bbWidget* widget)
 bbFlag Card_Enter (void* mouse, void* widgets, void* Widget, void* Graphics)
 {
     bbWidget* widget = (bbWidget*)Widget;
-    bbGraphics* graphics = Graphics;
+    bbGraphicsApp* graphics = Graphics;
     bbDictionary_lookup(graphics->sprites->dictionary,
                         "ASPADES", &widget->frames[0].handle);
 
@@ -45,7 +45,7 @@ bbFlag Card_Enter (void* mouse, void* widgets, void* Widget, void* Graphics)
 bbFlag Card_Leave (void* mouse, void* widgets, void* Widget, void* Graphics)
 {
     bbWidget* widget = (bbWidget*)Widget;
-    bbGraphics* graphics = Graphics;
+    bbGraphicsApp* graphics = Graphics;
     bbDictionary_lookup(graphics->sprites->dictionary,
                         "ASPADES", &widget->frames[0].handle);
 
@@ -59,7 +59,7 @@ bbFlag Card_LeftDown (void* Mouse, void* Widgets, void* Widget, void*
 Graphics)
 {
     bbWidget* widget = (bbWidget*)Widget;
-    bbGraphics* graphics = Graphics;
+    bbGraphicsApp* graphics = Graphics;
     bbMouse* mouse = Mouse;
     bbWidgets* widgets = Widgets;
 
@@ -85,7 +85,7 @@ Graphics)
 bbFlag Card_LeftUp (void* Mouse, void* Widgets, void* Widget, void* Graphics)
 {
     bbWidget* widget = (bbWidget*)Widget;
-    bbGraphics* graphics = Graphics;
+    bbGraphicsApp* graphics = Graphics;
     bbMouse* mouse = Mouse;
     bbWidgets* widgets = Widgets;
 

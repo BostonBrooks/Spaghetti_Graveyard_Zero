@@ -11,23 +11,27 @@
 #include "engine/viewport/bbMapIcons.h"
 #include "engine/viewport/bbUnits.h"
 #include "engine/network/bbNetwork.h"
+#include "engine/userinterface/bbUIApp.h"
 
 typedef struct {
+    bbUIApp UI;
+    bbDummySender* server;
+    bbNetwork network;
+    U64 mapTime;
+
+    //Old stuff being migrated to bbUIApp
+    sfRenderWindow* window;
     bbSpells spells;
     bbWidgets widgets;
     bbMouse mouse;
     bbInput input;
     bbViewport* viewport;
-    bbDummySender* server;
-    sfRenderWindow* window;
-    bbNetwork network;
-    U64 mapTime;
     U64 UITime;
 } bbPrivate;
 
 typedef struct {
     //TODO add drawables and mapicons
-    bbGraphics graphics;
+    bbGraphicsApp graphics;
     bbDrawables* drawables;
     bbMapIcons* mapIcons;
 } bbConstant;

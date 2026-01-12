@@ -32,7 +32,7 @@ bbFlag SpellSelect_Enter (void* mouse, void* widgets, void* Widget, void*
 Graphics)
 {
     bbWidget* widget = (bbWidget*)Widget;
-    bbGraphics* graphics = Graphics;
+    bbGraphicsApp* graphics = Graphics;
     //bbDictionary_lookup(Graphics->sprites->dictionary,
     //                    "ASPADES", &Widget->frames[0].handle);
 
@@ -45,7 +45,7 @@ bbFlag SpellSelect_Leave (void* mouse, void* widgets, void* Widget, void*
 Graphics)
 {
     bbWidget* widget = (bbWidget*)Widget;
-    bbGraphics* graphics = Graphics;
+    bbGraphicsApp* graphics = Graphics;
     //bbDictionary_lookup(Graphics->sprites->dictionary,
     //                    "ASPADES", &Widget->frames[0].handle);
 
@@ -59,7 +59,7 @@ bbFlag SpellSelect_LeftDown (void* Mouse, void* Widgets, void* Widget, void*
 Graphics)
 {
     bbWidget* widget = (bbWidget*)Widget;
-    bbGraphics* graphics = Graphics;
+    bbGraphicsApp* graphics = Graphics;
     bbMouse* mouse = Mouse;
     bbWidgets* widgets = Widgets;
 
@@ -86,7 +86,7 @@ bbFlag SpellSelect_LeftUp (void* Mouse, void* Widgets, void* Widget, void*
 Graphics)
 {
     bbWidget* widget = (bbWidget*)Widget;
-    bbGraphics* graphics = Graphics;
+    bbGraphicsApp* graphics = Graphics;
     bbMouse* mouse = Mouse;
     bbWidgets* widgets = Widgets;
 

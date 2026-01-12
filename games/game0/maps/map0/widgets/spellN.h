@@ -5,7 +5,7 @@
 bbFlag SpellSelect1_Constructor (bbWidget** self, void* Graphics,
                              bbWidgets* widgets, bbScreenPoints screen_coords, bbWidget* parent) {
 
-    bbGraphics *graphics = Graphics;
+    bbGraphicsApp *graphics = Graphics;
     bbWidget* widget;
     bbScreenPoints SP;
 
@@ -40,7 +40,7 @@ bbFlag SpellSelect1_Constructor (bbWidget** self, void* Graphics,
 bbFlag SpellSelect2_Constructor (bbWidget** self, void* Graphics,
                            bbWidgets* widgets, bbScreenPoints screen_coords, bbWidget* parent) {
 
-    bbGraphics *graphics = Graphics;
+    bbGraphicsApp *graphics = Graphics;
     bbWidget* widget;
     bbScreenPoints SP;
 
@@ -71,7 +71,7 @@ bbFlag SpellSelect2_Constructor (bbWidget** self, void* Graphics,
 bbFlag SpellSelect3_Constructor (bbWidget** self, void* Graphics,
                            bbWidgets* widgets, bbScreenPoints screen_coords, bbWidget* parent) {
 
-    bbGraphics *graphics = Graphics;
+    bbGraphicsApp *graphics = Graphics;
     bbWidget* widget;
     bbScreenPoints SP;
 
@@ -105,7 +105,7 @@ bbFlag SpellSelect3_Constructor (bbWidget** self, void* Graphics,
 bbFlag SpellSelect4_Constructor (bbWidget** self, void* Graphics,
                            bbWidgets* widgets, bbScreenPoints screen_coords, bbWidget* parent) {
 
-    bbGraphics *graphics = Graphics;
+    bbGraphicsApp *graphics = Graphics;
     bbWidget* widget;
     bbScreenPoints SP;
 

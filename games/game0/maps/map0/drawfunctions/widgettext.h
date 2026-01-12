@@ -6,7 +6,7 @@
 #include "engine/geometry/bbViewportCoords.h"
 #include "engine/graphics/bbComposition.h"
 #include "engine/graphics/bbDrawfunctions.h"
-#include "engine/graphics/bbGraphics.h"
+#include "engine/graphics/bbGraphicsApp.h"
 #include "engine/graphics/bbSprites.h"
 #include "engine/graphics/bbTextures.h"
 #include "engine/logic/bbFlag.h"
@@ -20,7 +20,7 @@ bbFlag bbDF_widgetText(void* Drawable, void* frameDescriptor, void* cl){
         bbWidget* widget = Drawable;
         bbFrame* frame = frameDescriptor;
         drawFuncClosure* closure = cl;
-        bbGraphics* graphics = closure->graphics;
+        bbGraphicsApp* graphics = closure->graphics;
 
         if (text == NULL)
         {

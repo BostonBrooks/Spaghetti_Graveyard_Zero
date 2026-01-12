@@ -64,7 +64,7 @@ bbFlag bbDrawable_draw(bbDrawable* drawable, drawFuncClosure* cl){
     for (I32 i = 0; i < FRAMES_PER_DRAWABLE; i++){
         bbFrame* frame = &drawable->frames[i];
 
-        bbGraphics* graphics = cl->graphics;
+        bbGraphicsApp* graphics = cl->graphics;
 /// the 8 in the next line refers to the number of draw functions in bbDrawfunctions
         if (frame->drawfunction >= 0 && frame->drawfunction <
         graphics->drawfunctions->num) {
@@ -149,7 +149,7 @@ bbFlag bbDrawablesPlus_draw(drawFuncClosure* cl,
 
 //TODO what if MC is out of bounds
 bbFlag bbDrawable_newTree(bbDrawable** self, bbDrawables* drawables,
-                          bbGraphics* graphics, bbMapCoords MC)
+                          bbGraphicsApp* graphics, bbMapCoords MC)
 {
     bbVPool* pool = drawables->pool;
     bbSquareCoords SC = bbMapCoords_getSquareCoords(MC);
@@ -187,7 +187,7 @@ bbFlag bbDrawable_newTree(bbDrawable** self, bbDrawables* drawables,
     return Success;
 }
 bbFlag bbDrawable_newCat(bbDrawable** self, bbDrawables* drawables,
-                          bbGraphics* graphics, bbMapCoords MC)
+                          bbGraphicsApp* graphics, bbMapCoords MC)
 {
     bbVPool* pool = drawables->pool;
     bbSquareCoords SC = bbMapCoords_getSquareCoords(MC);
@@ -221,7 +221,7 @@ bbFlag bbDrawable_newCat(bbDrawable** self, bbDrawables* drawables,
 }
 
 bbFlag bbDrawable_newFire(bbDrawable** self, bbDrawables* drawables,
-                         bbGraphics* graphics, bbMapCoords MC)
+                         bbGraphicsApp* graphics, bbMapCoords MC)
 {
     bbVPool* pool = drawables->pool;
     bbSquareCoords SC = bbMapCoords_getSquareCoords(MC);

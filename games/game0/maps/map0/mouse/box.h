@@ -33,7 +33,7 @@ bbFlag Box_IsOver (bbMouse* mouse, bbWidgets* widgets, bbWidget* widget)
 bbFlag Box_Enter (void* mouse, void* widgets, void* Widget, void* graphics)
 {
     bbWidget* widget = (bbWidget*)Widget;
-    bbGraphics* Graphics = graphics;
+    bbGraphicsApp* Graphics = graphics;
     bbDictionary_lookup(Graphics->sprites->dictionary,
                         "BOX", &widget->frames[0].handle);
 
@@ -46,7 +46,7 @@ bbFlag Box_Enter (void* mouse, void* widgets, void* Widget, void* graphics)
 bbFlag Box_Leave (void* mouse, void* widgets, void* Widget, void* graphics)
 {
     bbWidget* widget = (bbWidget*)Widget;
-    bbGraphics* Graphics = graphics;
+    bbGraphicsApp* Graphics = graphics;
     bbDictionary_lookup(Graphics->sprites->dictionary,
                         "BOX", &widget->frames[0].handle);
 
@@ -61,7 +61,7 @@ bbFlag Box_LeftDown (void* Mouse, void* Widgets, void* Widget, void*
 Graphics)
 {
     bbWidget* widget = (bbWidget*)Widget;
-    bbGraphics* graphics = Graphics;
+    bbGraphicsApp* graphics = Graphics;
     bbMouse* mouse = Mouse;
     bbWidgets* widgets = Widgets;
     bbVPool* pool = widgets->pool;
@@ -87,7 +87,7 @@ Graphics)
 bbFlag Box_LeftUp (void* Mouse, void* Widgets, void* Widget, void* Graphics)
 {
     bbWidget* widget = (bbWidget*)Widget;
-    bbGraphics* graphics = Graphics;
+    bbGraphicsApp* graphics = Graphics;
     bbWidgets* widgets = Widgets;
     bbMouse* mouse = Mouse;
 

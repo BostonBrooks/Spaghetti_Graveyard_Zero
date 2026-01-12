@@ -1,6 +1,6 @@
 #include "engine/viewport/bbUnits.h"
 
-bbFlag bbUnit_new(bbUnit** self,bbUnits* units, bbGraphics* graphics,
+bbFlag bbUnit_new(bbUnit** self,bbUnits* units, bbGraphicsApp* graphics,
                   bbMapCoords MC){
 
     bbVPool* pool = units->pool;
@@ -34,7 +34,7 @@ bbFlag bbUnit_new(bbUnit** self,bbUnits* units, bbGraphics* graphics,
     return Success;
 }
 
-bbFlag bbUnit_newCat(bbUnit** self,bbUnits* units, bbGraphics* graphics,
+bbFlag bbUnit_newCat(bbUnit** self,bbUnits* units, bbGraphicsApp* graphics,
                   bbMapCoords MC){
 
     bbVPool* pool = units->pool;

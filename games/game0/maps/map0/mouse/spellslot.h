@@ -10,7 +10,7 @@ Graphics)
 {
 
     bbWidget* widget = (bbWidget*)Widget;
-    bbGraphics* graphics = Graphics;
+    bbGraphicsApp* graphics = Graphics;
     bbMouse* mouse = Mouse;
     bbWidgets* widgets = Widgets;
 

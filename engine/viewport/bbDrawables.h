@@ -8,7 +8,7 @@
 #include "engine/logic/bbFlag.h"
 #include "engine/graphics/bbComposition.h"
 #include "engine/logic/bbList.h"
-#include "engine/graphics/bbGraphics.h"
+#include "engine/graphics/bbGraphicsApp.h"
 #include "engine/logic/bbNestedList.h"
 
 #define FRAMES_PER_DRAWABLE 8
@@ -68,11 +68,11 @@ bbFlag bbDrawable_draw(bbDrawable* drawable, drawFuncClosure* cl);
 I32 bbDrawables_getSquareIndex(I32 i, I32 j, I32 squares_i);
 
 bbFlag bbDrawable_newTree(bbDrawable** self, bbDrawables* drawables,
-                          bbGraphics* graphics, bbMapCoords MC);
+                          bbGraphicsApp* graphics, bbMapCoords MC);
 bbFlag bbDrawable_newCat(bbDrawable** self, bbDrawables* drawables,
-                         bbGraphics* graphics, bbMapCoords MC);
+                         bbGraphicsApp* graphics, bbMapCoords MC);
 bbFlag bbDrawable_newFire(bbDrawable** self, bbDrawables* drawables,
-                         bbGraphics* graphics, bbMapCoords MC);
+                         bbGraphicsApp* graphics, bbMapCoords MC);
 bbFlag bbDrawable_setLocation(bbDrawable* self, bbDrawables* drawables,
                               bbMapCoords MC);
 

@@ -31,7 +31,7 @@ bbFlag ConnectButton_Enter (void* mouse, void* widgets, void* Widget, void* Grap
 {
 
     bbWidget* widget = (bbWidget*)Widget;
-    bbGraphics* graphics = Graphics;
+    bbGraphicsApp* graphics = Graphics;
 
 
     widget->mtable.hover = true;
@@ -43,7 +43,7 @@ bbFlag ConnectButton_Enter (void* mouse, void* widgets, void* Widget, void* Grap
 bbFlag ConnectButton_Leave (void* mouse, void* widgets, void* Widget, void* Graphics)
 {
     bbWidget* widget = (bbWidget*)Widget;
-    bbGraphics* graphics = Graphics;
+    bbGraphicsApp* graphics = Graphics;
 
 
     widget->mtable.hover = false;
@@ -57,7 +57,7 @@ bbFlag ConnectButton_LeftDown (void* Mouse, void* Widgets, void* Widget, void*
 Graphics)
 {
     bbWidget* widget = (bbWidget*)Widget;
-    bbGraphics* graphics = Graphics;
+    bbGraphicsApp* graphics = Graphics;
     bbMouse* mouse = Mouse;
     bbWidgets* widgets = Widgets;
 
@@ -83,7 +83,7 @@ Graphics)
 bbFlag ConnectButton_LeftUp (void* Mouse, void* Widgets, void* Widget, void* Graphics)
 {
     bbWidget* widget = (bbWidget*)Widget;
-    bbGraphics* graphics = Graphics;
+    bbGraphicsApp* graphics = Graphics;
     bbMouse* mouse = Mouse;
     bbWidgets* widgets = Widgets;
 

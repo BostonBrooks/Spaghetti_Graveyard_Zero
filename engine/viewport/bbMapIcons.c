@@ -1,7 +1,7 @@
 #include "engine/viewport/bbMapIcons.h"
 
 bbFlag bbMapIcon_new(bbMapIcon** self, bbMapIcons* mapicons,
-                      bbGraphics* graphics, bbMapCoords MC)
+                      bbGraphicsApp* graphics, bbMapCoords MC)
 {
     bbVPool* pool = mapicons->pool;
     bbSquareCoords SC = bbMapCoords_getSquareCoords(MC);

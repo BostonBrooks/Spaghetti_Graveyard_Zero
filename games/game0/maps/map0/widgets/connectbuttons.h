@@ -67,7 +67,7 @@ bbFlag ConnectButton_Constructor (bbWidget** self, void* Graphics,
 {
     bbHere()
     bbWidget* widget;
-    bbGraphics* graphics = Graphics;
+    bbGraphicsApp* graphics = Graphics;
     bbFlag flag =  bbWidget_newEmpty(&widget, widgets, parent);
     bbAssert(widget != NULL, "null address\n");
 
@@ -147,7 +147,7 @@ bbFlag DisConnectButton_Constructor (bbWidget** self, void* Graphics,
 {
     bbHere()
     bbWidget* widget;
-    bbGraphics* graphics = Graphics;
+    bbGraphicsApp* graphics = Graphics;
     bbFlag flag =  bbWidget_newEmpty(&widget, widgets, parent);
     bbAssert(widget != NULL, "null address\n");
 
@@ -231,7 +231,7 @@ bbFlag GoOfflineButton_Constructor (bbWidget** self, void* Graphics,
 {
     bbHere()
     bbWidget* widget;
-    bbGraphics* graphics = Graphics;
+    bbGraphicsApp* graphics = Graphics;
     bbFlag flag =  bbWidget_newEmpty(&widget, widgets, parent);
     bbAssert(widget != NULL, "null address\n");
 

@@ -9,14 +9,14 @@
 #ifndef BBGRAPHICS_H
 #define BBGRAPHICS_H
 
-typedef struct bbGraphics {
+typedef struct bbGraphicsApp {
 	bbTextures* textures;
 	bbSprites* sprites;
 	bbDrawfunctions* drawfunctions;
 	bbAnimations* animations;
 	bbCompositions* compositions;
 	bbFonts* fonts;
-} bbGraphics;
+} bbGraphicsApp;
 
-
+bbFlag flag bbGraphicsApp_init(void);
 #endif // BBGRAPHICS_H

@@ -33,9 +33,9 @@ bbDrawables_newImpl(self, squares_i, squares_j, sizeof(bbUnit));
 #define bbUnit_isCloser bbDrawable_isCloser
 #define bbUnit_getSquareIndex bbDrawables_getSquareIndex
 
-bbFlag bbUnit_new(bbUnit** unit,bbUnits* units, bbGraphics* graphics,bbMapCoords MC);
+bbFlag bbUnit_new(bbUnit** unit,bbUnits* units, bbGraphicsApp* graphics,bbMapCoords MC);
 
-bbFlag bbUnit_newCat(bbUnit** self,bbUnits* units, bbGraphics* graphics,
+bbFlag bbUnit_newCat(bbUnit** self,bbUnits* units, bbGraphicsApp* graphics,
                      bbMapCoords MC);
 
 #define bbUnit_setLocation bbDrawable_setLocation

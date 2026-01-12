@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <time.h>
 #include "engine/includes/CSFML.h"
-#include "engine/graphics/bbGraphics.h"
+#include "engine/graphics/bbGraphicsApp.h"
 #include "engine/graphics/bbColours.h"
 #include "engine/graphics/bbFonts.h"
 #include "engine/userinterface/bbWidget.h"
@@ -68,7 +68,7 @@ int main (void){
 	home.private.window = window;
 CLEARWINDOW(bbRed);
 
-	//bbGraphics graphics;
+	//bbGraphicsApp graphics;
 	bbTextures_new(&home.constant.graphics.textures,
                    "./maps/map0/graphics/textures.csv");
 

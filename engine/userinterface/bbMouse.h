@@ -3,7 +3,7 @@
 #ifndef BBMOOSE_H
 #define BBMOOSE_H
 
-#include "engine/graphics/bbGraphics.h"
+#include "engine/graphics/bbGraphicsApp.h"
 #include "engine/logic/bbTree.h"
 #include "engine/geometry/bbCoordinates.h"
 //#include "engine/widgets/bbWidget.h"
@@ -73,17 +73,17 @@ typedef struct
 
 
 //Needs to know the pool used for widgets...
-bbFlag bbMouse_Init(bbMouse* mouse, void* widgets, bbGraphics* graphics);
+bbFlag bbMouse_Init(bbMouse* mouse, void* widgets, bbGraphicsApp* graphics);
 
 //Figure out what widget the mouse is over
 bbFlag bbMouse_isOver(bbMouse* mouse, void* widgets);
 
 bbFlag bbMouse_Event(bbMouse* mouse, sfEvent* event);
 //Interact with widgets, may have to look up sprite int in dictionary
-bbFlag bbMouse_Update(bbMouse* mouse, void* widgets, bbGraphics* graphics);
+bbFlag bbMouse_Update(bbMouse* mouse, void* widgets, bbGraphicsApp* graphics);
 
 //Draw mouse to screen, depending on what widget is selected and what is under the mouse
-bbFlag bbMouse_Draw(bbMouse* mouse, void* widgets, bbGraphics* graphics, sfRenderWindow* window);
+bbFlag bbMouse_Draw(bbMouse* mouse, void* widgets, bbGraphicsApp* graphics, sfRenderWindow* window);
 
 bbFlag bbMouse_EnterWidget(void* mouse, void* widgets, void* widget, void*
 graphics);
@@ -109,7 +109,7 @@ bbFlag bbMouse_isOverFunc(bbTree* tree, void* node, void* cl);
  * bbFlag bbInput_poll(bbInput* input, sfRenderWindow* window, bbMouse* mouse, bbMouse* mouse);
  *     updates bbMouse bbFlag bbMouse_Event(bbMouse* mouse, sfEvent* event)
  *
- * bbFlag bbMouse_Update(bbMouse* mouse, struct bbWidgets* widgets, bbGraphics* graphics);
+ * bbFlag bbMouse_Update(bbMouse* mouse, struct bbWidgets* widgets, bbGraphicsApp* graphics);
  *     calls bbFlag bbMouse_isOver(bbMouse* mouse, struct bbWidgets* widgets);
  *
  * bbFlag bbMouse_isOver(bbMouse* mouse, struct bbWidgets* widgets);

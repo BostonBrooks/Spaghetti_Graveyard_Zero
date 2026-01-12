@@ -4,7 +4,7 @@ bbFlag bbDF_widgetState(void* drawable, void* frameDescriptor, void* cl){
 
     bbFrame* self_frame = frameDescriptor;
     drawFuncClosure* closure = cl;
-    bbGraphics* graphics = closure->graphics;
+    bbGraphicsApp* graphics = closure->graphics;
     bbComposition* composition = graphics->compositions->compositions[self_frame->handle.u64];
     bbFrame* input_frame;
     bbFrame output_frame;

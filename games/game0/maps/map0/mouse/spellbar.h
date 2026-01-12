@@ -7,7 +7,7 @@ bbFlag SpellBar_LeftDown (void* Mouse, void* Widgets, void* Widget, void*
 Graphics)
 {
     bbWidget* widget = (bbWidget*)Widget;
-    bbGraphics* graphics = Graphics;
+    bbGraphicsApp* graphics = Graphics;
     bbMouse* mouse = Mouse;
     bbWidgets* widgets = Widgets;
     bbVPool* pool = widgets->pool;

@@ -5,7 +5,7 @@
 
 #include "engine/logic/bbFlag.h"
 #include "engine/includes/CSFML.h"
-#include "engine/graphics/bbGraphics.h"
+#include "engine/graphics/bbGraphicsApp.h"
 #include "engine/userinterface/bbMouse.h"
 #include "engine/userinterface/bbWidget.h"
 

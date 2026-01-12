@@ -17,7 +17,7 @@ bbFlag bbDF_textboxIndicator(void* drawable, void* frameDescriptor, void* cl){
     bbWidget* widget = drawable;
     bbFrame* frame = frameDescriptor;
     drawFuncClosure* closure = cl;
-    bbGraphics* graphics = closure->graphics;
+    bbGraphicsApp* graphics = closure->graphics;
 
 
 

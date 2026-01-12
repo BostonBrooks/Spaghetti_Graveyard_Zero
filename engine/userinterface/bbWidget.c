@@ -10,7 +10,7 @@
  **/
 
 
-#include "engine/graphics/bbGraphics.h"
+#include "engine/graphics/bbGraphicsApp.h"
 #include "engine/userinterface/bbWidget.h"
 #include "engine/logic/bbTree.h"
 #include "engine/geometry/bbCoordinates.h"
@@ -45,7 +45,7 @@ bbFlag bbWidget_draw(bbWidget* widget, drawFuncClosure* cl){
 	for (I32 i = 0; i < FRAMES_PER_WIDGET; i++){
 		bbFrame* frame = &widget->frames[i];
 
-		bbGraphics* graphics = cl->graphics;
+		bbGraphicsApp* graphics = cl->graphics;
 		if (frame->drawfunction >= 0 && frame->drawfunction < graphics->drawfunctions->num) {
 
 			bbDrawFunction *drawFunction =
@@ -145,7 +145,7 @@ bbFlag bbWidget_newEmpty(bbWidget** self, bbWidgets* widgets, bbWidget* parent){
 	return Success;
 }
 
-bbFlag bbWidget_newLayout(bbWidget** self, bbGraphics* graphics, bbWidgets* widgets, bbWidget* parent){
+bbFlag bbWidget_newLayout(bbWidget** self, bbGraphicsApp* graphics, bbWidgets* widgets, bbWidget* parent){
 
 	bbWidget* widget;
 
@@ -203,7 +203,7 @@ bbFlag bbWidget_newLayout(bbWidget** self, bbGraphics* graphics, bbWidgets* widg
 
 
 
-bbFlag bbWidget_newViewport(bbWidget** self, bbGraphics* graphics,
+bbFlag bbWidget_newViewport(bbWidget** self, bbGraphicsApp* graphics,
                             bbWidgets* widgets, bbWidget* parent,
                             void* viewport){
 
@@ -275,7 +275,7 @@ bbFlag bbWidgets_draw(bbWidgets* widgets, void* cl) {
 
 
 
-bbFlag bbWidget_constructor(bbWidget** self, bbWidgets* widgets, bbGraphics* graphics,
+bbFlag bbWidget_constructor(bbWidget** self, bbWidgets* widgets, bbGraphicsApp* graphics,
 	bbScreenPoints location, bbWidget* parent, char* key)
 {
 	bbWidget_Constructor* function;

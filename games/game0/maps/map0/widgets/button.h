@@ -41,7 +41,7 @@ bbFlag Button_Constructor (bbWidget** self, void* graphics,
 
     widget->rect = rect;
 
-    bbGraphics* Graphics = graphics;
+    bbGraphicsApp* Graphics = graphics;
     bbPool_Handle drawfunctionHandle;
     bbDictionary_lookup(Graphics->drawfunctions->dictionary, "WIDGETSPRITE",
                         &drawfunctionHandle);

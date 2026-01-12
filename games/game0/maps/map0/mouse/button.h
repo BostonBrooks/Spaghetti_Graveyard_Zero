@@ -30,7 +30,7 @@ bbFlag Button_IsOver (bbMouse* mouse, bbWidgets* widgets, bbWidget* widget)
 bbFlag Button_Enter (void* mouse, void* widgets, void* Widget, void* Graphics)
 {
     bbWidget* widget = (bbWidget*)Widget;
-    bbGraphics* graphics = Graphics;
+    bbGraphicsApp* graphics = Graphics;
     bbDictionary_lookup(graphics->sprites->dictionary,
                         "BUTTON_HOVER", &widget->frames[0].handle);
 
@@ -42,7 +42,7 @@ bbFlag Button_Enter (void* mouse, void* widgets, void* Widget, void* Graphics)
 bbFlag Button_Leave (void* mouse, void* widgets, void* Widget, void* Graphics)
 {
     bbWidget* widget = (bbWidget*)Widget;
-    bbGraphics* graphics = Graphics;
+    bbGraphicsApp* graphics = Graphics;
     bbDictionary_lookup(graphics->sprites->dictionary,
                         "BUTTON_DEFAULT", &widget->frames[0].handle);
 
@@ -56,7 +56,7 @@ bbFlag Button_LeftDown (void* Mouse, void* Widgets, void* Widget, void*
 Graphics)
 {
     bbWidget* widget = (bbWidget*)Widget;
-    bbGraphics* graphics = Graphics;
+    bbGraphicsApp* graphics = Graphics;
     bbMouse* mouse = Mouse;
     bbWidgets* widgets = Widgets;
 
@@ -76,7 +76,7 @@ Graphics)
 bbFlag Button_LeftUp (void* Mouse, void* Widgets, void* Widget, void* Graphics)
 {
     bbWidget* widget = (bbWidget*)Widget;
-    bbGraphics* graphics = Graphics;
+    bbGraphicsApp* graphics = Graphics;
     bbMouse* mouse = Mouse;
     bbWidgets* widgets = Widgets;
 

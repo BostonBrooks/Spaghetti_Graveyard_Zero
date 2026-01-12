@@ -41,7 +41,7 @@ bbWidgets* widgets, bbScreenPoints screen_coords, bbWidget* parent)
                                       "SPELLMENU");
     widget->mtable.LeftDown = funcInt;
 
-    bbGraphics* Graphics = graphics;
+    bbGraphicsApp* Graphics = graphics;
     bbPool_Handle drawfunctionHandle;
 
 
@@ -136,7 +136,7 @@ bbWidgets* widgets, bbScreenPoints screen_coords, bbWidget* parent)
                                   "CONNECTICON");
     widget->mtable.LeftDown = funcInt;
 
-    bbGraphics* Graphics = graphics;
+    bbGraphicsApp* Graphics = graphics;
     bbPool_Handle drawfunctionHandle;
     bbDictionary_lookup(Graphics->drawfunctions->dictionary, "WIDGETSPRITE",
                         &drawfunctionHandle);

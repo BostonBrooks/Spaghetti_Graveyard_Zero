@@ -22,7 +22,7 @@ bbFlag SpellMenu_Constructor (bbWidget** self, void* Graphics,
 
     widget->rect = rect;
 
-    bbGraphics *graphics = Graphics;
+    bbGraphicsApp *graphics = Graphics;
     bbPool_Handle drawfunctionHandle;
     bbDictionary_lookup(graphics->drawfunctions->dictionary, "LAYERBOUNDARY",
                         &drawfunctionHandle);

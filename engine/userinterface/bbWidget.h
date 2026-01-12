@@ -11,7 +11,7 @@
 #ifndef BBWIDGET_H
 #define BBWIDGET_H
 
-#include "engine/graphics/bbGraphics.h"
+#include "engine/graphics/bbGraphicsApp.h"
 #include "engine/logic/bbTree.h"
 #include "engine/geometry/bbCoordinates.h"
 #include "engine/userinterface/bbMouse.h"
@@ -101,15 +101,15 @@ typedef struct bbWidgets {
 
 
 bbFlag bbWidget_newEmpty(bbWidget** self, bbWidgets* widgets, bbWidget* parent);
-bbFlag bbWidget_constructor(bbWidget** self, bbWidgets* widgets, bbGraphics* graphics, bbScreenPoints location, bbWidget* parent, char* key);
+bbFlag bbWidget_constructor(bbWidget** self, bbWidgets* widgets, bbGraphicsApp* graphics, bbScreenPoints location, bbWidget* parent, char* key);
 bbFlag bbWidget_onCommand(bbWidget* widget, bbWidgets* widgets, bbWidgetCommandType type, bbPool_Handle data);
 bbFlag bbWidget_draw(bbWidget* widget, drawFuncClosure* cl);
-bbFlag bbWidget_newLayout(bbWidget** self, bbGraphics* graphics, bbWidgets* widgets, bbWidget* parent);
+bbFlag bbWidget_newLayout(bbWidget** self, bbGraphicsApp* graphics, bbWidgets* widgets, bbWidget* parent);
 bbFlag bbWidgets_init(bbWidgets* widgets);
 bbFlag bbWidget_hide(bbWidget* widget, bbWidgets* widgets);
 bbFlag bbWidget_unhide(bbWidget* widget, bbWidgets* widgets);
-//bbFlag bbWidget_newMockViewport(bbWidget** self, bbGraphics* graphics, bbWidgets* widgets, bbWidget* parent);
-bbFlag bbWidget_newViewport(bbWidget** self, bbGraphics* graphics,
+//bbFlag bbWidget_newMockViewport(bbWidget** self, bbGraphicsApp* graphics, bbWidgets* widgets, bbWidget* parent);
+bbFlag bbWidget_newViewport(bbWidget** self, bbGraphicsApp* graphics,
                             bbWidgets* widgets, bbWidget* parent,
                             void* viewport);
 

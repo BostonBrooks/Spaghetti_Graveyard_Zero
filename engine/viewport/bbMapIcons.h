@@ -18,6 +18,6 @@ bbDrawables_newImpl(self, squares_i, squares_j, sizeof(bbMapIcon));
 #define bbMapIcons_draw bbDrawables_draw
 
 bbFlag bbMapIcon_new(bbMapIcon** self, bbMapIcons* mapicons,
-                      bbGraphics* graphics, bbMapCoords MC);
+                      bbGraphicsApp* graphics, bbMapCoords MC);
 
 #endif //BBMAPICONS_H

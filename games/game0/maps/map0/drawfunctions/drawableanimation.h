@@ -15,7 +15,7 @@ bbFlag bbDF_drawableAnimation(void* Drawable, void* frameDescriptor, void* cl){
     bbDrawable* drawable = Drawable;
     bbFrame* frame = frameDescriptor;
     drawFuncClosure* foo = cl;
-    bbGraphics* graphics = foo->graphics;
+    bbGraphicsApp* graphics = foo->graphics;
     bbViewport* VP = foo->target;
 
     I32 animationInt = frame->handle.u64;
