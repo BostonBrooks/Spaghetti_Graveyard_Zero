@@ -30,6 +30,7 @@ gcc   -D SFML_STATIC -I ../^
        ../engine/graphics/bbFonts.c^
        ../engine/graphics/bbSprites.c^
        ../engine/graphics/bbTextures.c^
+       ../engine/graphics/bbGraphicsApp.c^
        ../engine/logic/bbBloatedPool.c^
        ../engine/logic/bbDictionary.c^
        ../engine/logic/bbLeanPool.c^

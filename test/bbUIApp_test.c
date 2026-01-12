@@ -13,8 +13,8 @@ bbHome home;
 int main(void)
 {
     bbUIApp_newWindow(&home.private.UI);
-    //bbGraphicsAppApp_init(home.constant.graphics);
-    //bbUIApp_init(home.private.UI);
+    bbGraphicsApp_init(&home.constant.graphics);
+    bbUIApp_init(&home.private.UI);
 
     sfSleep(sfSeconds(5));
     printf("We made it to the end!\n");

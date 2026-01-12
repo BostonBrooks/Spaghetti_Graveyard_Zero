@@ -22,3 +22,25 @@ bbFlag bbUIApp_newWindow(bbUIApp* app)
 
     return Success;
 }
+
+bbFlag bbUIAPP_initSpells(bbUIApp* app)
+{
+    //bbSpells spells;
+    bbSpells_init(&app->spells);
+
+    bbSpell* null_spell;
+    bbSpell_new(&null_spell, &app->spells, "NULL");
+    bbSpell* spell1;
+    bbSpell_new(&spell1, &app->spells, "SPELL1");
+
+    bbSpell* spellN;
+    bbSpell_new(&spellN, &app->spells, "SPELL2");
+    bbSpell_new(&spellN, &app->spells, "SPELL3");
+
+    return Success;
+}
+
+bbFlag bbUIApp_init(bbUIApp* app)
+{
+    bbUIAPP_initSpells(app);
+}

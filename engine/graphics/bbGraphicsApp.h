@@ -9,6 +9,7 @@
 #ifndef BBGRAPHICS_H
 #define BBGRAPHICS_H
 
+//All of the elements in bbGraphicsApp have variable size, so must be dynaically allocated
 typedef struct bbGraphicsApp {
 	bbTextures* textures;
 	bbSprites* sprites;
@@ -18,5 +19,5 @@ typedef struct bbGraphicsApp {
 	bbFonts* fonts;
 } bbGraphicsApp;
 
-bbFlag flag bbGraphicsApp_init(void);
+bbFlag bbGraphicsApp_init(bbGraphicsApp* app);
 #endif // BBGRAPHICS_H

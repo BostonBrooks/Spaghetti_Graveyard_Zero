@@ -47,6 +47,7 @@ typedef struct {
 	float framerate;
 } bbFrame;
 
+//A bbAnimation should be able to have variable number of frames, so must be dynaically allocated
 typedef struct {
 	I32 num_frames;
 	bbFrame frame[];
