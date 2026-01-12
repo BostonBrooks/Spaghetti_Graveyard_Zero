@@ -15,6 +15,8 @@ int main(void)
     bbUIApp_newWindow(&home.private.UI);
     bbGraphicsApp_init(&home.constant.graphics);
 
+    //TODO: viewport is initialised here and not in bbViewportApp.
+    //fix this after migrating from Incremental_test.c to bbUIApp_test.c
     bbUIApp_init(&home.private.UI);
 
     sfSleep(sfSeconds(5));
