@@ -1,4 +1,6 @@
-# Spaghetti-Graveyard-UI
+# Spaghetti Graveyard Zero
+
+Welcome to a new year of game development in 2026!
 
 Note: I am using this distro as a usb drive to switch between my laptop and 
 my workstation, as such this work in progress will likely not compile and 
