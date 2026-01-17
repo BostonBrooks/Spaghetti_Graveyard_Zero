@@ -1,0 +1,16 @@
+/** \page animations.csv
+
+This file contains data used to populate a bbAnimations container,  that contains objects of type bbAnimation.
+
+The file makes use of the following fields:
+ - Label: A short (max 32 characters) identifier unique to this bbAnimaiton.
+ - Virtual Address: Store pointer to bbAnimaiton at this address in lookup table.
+ - DrawFunction: The virtual address of the default draw function for this animation.
+ - Angles: The number of angles/facets the animation can face.
+ - Frames: How many sprites to cycle through before the animation repeats.
+ - Sprites[]: A list of length Angles*Frames of references to sprites. This can be an integer address or a string identifier.
+ - Comment: Any extra text will be ignored.
+
+
+
+*/

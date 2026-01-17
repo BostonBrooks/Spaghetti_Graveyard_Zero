@@ -1,0 +1,30 @@
+/** \page Directory Structure
+
+/engine - code used in the game engine, folders represent different systems in
+the Entity-Component-System model, or shared code. In future, new systems will
+come online
+    / data - structures containing mostly game settings
+    / logic - reusable data structures and algorithms
+    / userinterface - code to support things like buttons and text boxes
+    / groundsurface - things like grass and mud, and hills and valleys
+    / graphics - eye candy that doesn't interact with other entities
+
+/games - games created to run on the engine
+    /game - one such game
+        /graphics - data shared between maps in one game
+        /maps - maps belonging to one game
+            /demo2 - one such map
+                /actors - code for controlling things like player character and
+                          monsters
+                /widgets - code for controlling things like buttons and text
+                          boxes
+
+/html - doxygen output
+/manual - doxygen input
+/test - .c files containing int main()
+/Ubuntu - compile scripts for Ubuntu
+/WinLibs - compile scripts for WinLibs
+
+/headers - deprecated
+/source - deprecated
+*/

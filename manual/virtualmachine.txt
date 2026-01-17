@@ -1,0 +1,23 @@
+The game will have a virtual machine that will contain the core logic of the game and will be synchronised across multiple computers.
+"instructions" in the "instruction set architecture" will have effects on the game state and push new instructions to a stack and then exit.
+
+Messages from the user interface to the virtual machine will have to make a round-trip to the server.
+
+I don't know enough to say what happens if the VM has to rewind, act on some input, and then fast forward. The VM would have to keep a log of inputs and changes to the game state. 
+
+
+
+
+bbMessages: messages come in, the game engine waits a few frames in case a
+sooner message comes in after an earlier message, so messages usually come in,
+in order. bbMessages then calls a function to input the message into the bbCore.
+
+bbCore: receives a message and then enacts side effects. The core keeps a copy
+of the data being overwritten so the state can be rolled back. If an earlier
+ message comes in after a sooner message, the state is rolled back until the
+ time the message should have been received. The core keeps track of its inputs
+ so that it can react to earlier inputs and then fast-forward to the current
+ time.
+
+ We may want to make the player's character react immediately to input and then
+ on another player's computer it will react retrospectively

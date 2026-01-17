@@ -1,0 +1,14 @@
+/** \page sprites.csv
+
+This file contains data used to populate a bbSprites container, that contains objects of type sfSprite.
+
+The file makes use of the following fields:
+ - Label: A short (max 32 characters) identifier unique to this sfSprite.
+ - Virtual Address: Store pointer to sfSprite at this address in lookup table.
+ - sfTexture: What sfTexture contains the pixel data for this sprite? This can be an integer address or a string identifier
+ - Left, Top, Width, Height: Location of sprite in the pixel data
+ - Origin_X, Origin_Y: The sprite is drawn to window or viewport relative to this point on sprite?
+ - Scale_X, Scale_Y: Adjust the size of the sprite displayed on screen
+ - Scale_By: How is the sprite effected by changes in the map's graphics settings. [VIEWPORT/WIDGET/NONE]
+ - Comment: Any extra text will be ignored.
+*/

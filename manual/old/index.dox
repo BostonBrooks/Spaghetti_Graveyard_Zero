@@ -1,0 +1,31 @@
+/** \mainpage Welcome to Spaghetti Graveyard UI
+
+
+Spaghetti Graveyard Zero will be the Nth iteration of a project I started around
+ the year 2018. <br>
+The project is an action RPG game that quizzes you on mathematics skills (numeracy).<br>
+<br>
+Spaghetti - Because I did not know much about how write well structured code at the start of this project. <br>
+Graveyard - Because since learning how to write better code, I have discarded much of the code that I had written.<br>
+Zero - Because this is intended to the first iteration that is intended for public viewing.<br>
+<br>
+Since this code is intended for public viewing, I will strive for the code to be of production quality.<br>
+As a starting point I will develop the documentation using Doxygen before implementing any functioning code.<br>
+Code will be written in the C language and attempt achieve some object oriented functionality through "clever hacks".<br>
+<br>
+This is the absolute starting point for Spaghetti Graveyard Zero.<br>
+<br>
+The basic flow of the game will be as such:<br>
+<br>
+-Right click the screen to walk around.<br>
+-Type in a code to select a spell.<br>
+-Left click to target the spell if necessary.<br>
+-Answer maths question to cast spell.<br>
+<br>
+-Depending on the spell you may be asked to answer the maths question before left clicking to target the spell.<br>
+-A default spell will be selected if you left click without selecting a spell.<br>
+-There will be icons you can click to select a spell without typing in the code.<br>
+<br>
+
+That shouldn't be too hard?
+*/

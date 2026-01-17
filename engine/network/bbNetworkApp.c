@@ -1,0 +1,188 @@
+#include "engine/network/bbNetworkApp.h"
+
+#include <stdio.h>
+#include <string.h>
+
+#include "engine/data/bbHome.h"
+#include "engine/logic/bbDictionary.h"
+#include "engine/logic/bbString.h"
+#include "engine/logic/bbTerminal.h"
+#include "engine/userinterface/bbWidget.h"
+
+//typedef bbFlag bbNetwork_onConnect (void* network);
+//Notify user interface of network connection
+bbFlag bbConnect(void* network);
+//typedef bbFlag bbNetwork_onDisconnect (void* network);
+//Notify user interface of network connection
+bbFlag bbDisconnect(void* network);
+
+//initialize the system
+bbFlag bbNetworkApp_init(bbNetwork* network)
+{
+    bbFlag flag;
+    bbNetworkTime* network_time = (bbNetworkTime*)malloc(sizeof(bbNetworkTime));
+    bbNetworkTime_init(network_time);
+
+    flag = bbNetwork_init(network,
+        bbNetworkPacket_toStruct,
+        bbNetworkPacket_fromStruct,
+        bbConnect,bbDisconnect,
+        bbNetworkTime_filterInbox,bbNetworkTime_filterOutbox,network_time);
+
+    return Success;
+}
+
+//connect to the network and change address and port to actual
+bbFlag bbNetworkApp_connect(bbNetwork* network, char* address, char* port)
+{
+    sfIpAddress ip_address;
+    I32 port_number;
+    bbFlag flag;
+    if (strlen(address) == 0)
+    {
+        bbStr_setStr(address ,"127.0.0.1", 64);
+        bbStr_setStr(port ,"1701", 64);
+
+        network->on_disconnect(NULL);
+        return None;
+    }
+    ip_address = sfIpAddress_fromString(address);
+
+
+    U32 addressInt = sfIpAddress_toInteger(ip_address);
+
+    if (addressInt == 0)
+    {
+        bbStr_setStr(address ,"127.0.0.1", 64);
+        bbStr_setStr(port ,"1701", 64);
+
+        network->on_disconnect(NULL);
+        return None;
+    }
+    sfIpAddress_toString(ip_address, address);
+
+    I32 len = strlen(port);
+    if (len == 0)
+    {
+        bbStr_setStr(address ,"127.0.0.1", 64);
+        bbStr_setStr(port ,"1701", 64);
+
+        network->on_disconnect(NULL);
+        return None;
+    }
+
+    char digits[] = "0123456789";
+    I32 int_len = strspn(port, digits);
+    if (len != int_len)
+    {
+        bbStr_setStr(address ,"127.0.0.1", 64);
+        bbStr_setStr(port ,"1701", 64);
+
+        network->on_disconnect(NULL);
+        return None;
+    }
+    port_number = atoi(port);
+
+    flag = bbNetwork_connect(network, ip_address, port_number);
+
+    bbFlag_print(flag);
+    return flag;
+
+}
+
+bbFlag bbNetworkApp_sendString(bbNetwork* network, char* string)
+{
+    bbNetworkPacket* packet;
+    bbThreadedQueue_alloc(&network->outbox, (void**)&packet);
+    packet->type = PACKETTYPE_STRING;
+    bbStr_setStr(packet->data.str, string, 64);
+    bbThreadedQueue_pushL(&network->outbox, (void*)packet);
+
+    return Success;
+}
+bbFlag bbNetworkApp_sendTime(bbNetwork* network){
+    bbNetworkPacket* packet;
+    bbThreadedQueue_alloc(&network->outbox, (void**)&packet);
+    packet->type = PACKETTYPE_REQUESTTIMESTAMP;
+    bbThreadedQueue_pushL(&network->outbox,packet);
+
+    return Success;
+}
+bbFlag bbNetworkApp_sendNetworkPacket(bbNetwork* network, void* packet);
+
+bbFlag bbNetworkApp_checkInbox(bbNetwork* network)
+{
+    while (1)
+    {
+        bbFlag flag;
+        bbNetworkPacket* packet;
+        flag = bbThreadedQueue_popR(&network->inbox, (void**)&packet);
+        if (flag != Success) return Success;
+        if (packet->type == PACKETTYPE_STRING)
+        {
+            printf("packet received: %s\n", packet->data.str);
+        }
+        bbThreadedQueue_free(&network->inbox, (void**)&packet);
+    }
+}
+bbFlag bbNetworkApp_checkTime(bbNetwork* network)
+{
+    bbFlag flag;
+    while (1)
+    {
+        bbNetworkTime* network_time = network->extra_data;
+        bbNetworkTime_record* record;
+        flag = bbThreadedQueue_popR(&network_time->completed, (void**)&record);
+        if (flag != Success) return Success;
+
+        U64 RTT = (record->local_receive_time - record->local_send_time) - (record->server_receive_time - record->
+            server_send_time);
+        I64 difference = ((I64)record->server_receive_time - (I64)record->local_send_time
+            + (I64)record->server_send_time - (I64)record->local_receive_time) / 2;
+        printf("round trip time = %llu, time difference = %lld\n", RTT, difference);
+
+        bbThreadedQueue_free(&network_time->completed, (void**)&record);
+    }
+}
+
+
+bbFlag bbConnect(void* network)
+{
+    bbDebug("Connect to server in thread %s\n", thread);
+
+    bbPool_Handle handle;
+    bbWidgets* widgets = &home.private.widgets;
+    bbWidget *widget;
+    bbDictionary_lookup(widgets->dict, "DISCONNECT",&handle);
+    bbVPool_lookup(widgets->pool, (void**)&widget, handle);
+
+    widget->isFrozen = false;
+
+
+    bbDictionary_lookup(widgets->dict, "CONNECT",&handle);
+    bbVPool_lookup(widgets->pool, (void**)&widget, handle);
+
+    widget->isFrozen = true;
+
+    return Success;
+}
+//typedef bbFlag bbNetwork_onDisconnect (void* network);
+//Notify user interface of network connection
+bbFlag bbDisconnect(void* network)
+{
+    bbDebug("Disconnect from server in thread %s\n", thread);
+
+    bbPool_Handle handle;
+    bbWidgets* widgets = &home.private.widgets;
+    bbWidget *widget;
+    bbDictionary_lookup(widgets->dict, "CONNECT",&handle);
+    bbVPool_lookup(widgets->pool, (void**)&widget, handle);
+
+    widget->isFrozen = false;
+
+    bbDictionary_lookup(widgets->dict, "DISCONNECT",&handle);
+    bbVPool_lookup(widgets->pool, (void**)&widget, handle);
+
+    widget->isFrozen = true;
+    return Success;
+}

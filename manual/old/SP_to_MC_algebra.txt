@@ -1,0 +1,56 @@
+    SP.x = VP->width*SCREEN_PPP/2.0
+            + (MC.i - VP->viewpoint.i)
+            + (MC.j - VP->viewpoint.j);
+
+    SP.y = VP->height*SCREEN_PPP/2.0
+            + (MC.i - VP->viewpoint.i)/2
+            - (MC.j - VP->viewpoint.j)/2
+            - (MC.k - VP->viewpoint.k);
+
+Let:
+
+SP.x = X
+SP.y = Y
+VP->width*SCREEN_PPP/2.0 = W
+VP->height*SCREEN_PPP/2.0 = H
+MC.i = I
+MC.j = J
+MC.k = 0
+
+VP->viewpoint.i = VI
+VP->viewpoint.j = VJ
+VP->viewpoint.k = VK
+
+Then:
+
+X = W + (I – VI) + (J – VJ)
+Y = H + (I – VI)/2 – (J - VJ)/2 – (0 - VK)
+
+Solve for I and J:
+
+(X - W) = (I – VI) + (J – VJ)
+(Y - H) = (I – VI)/2 – (J - VJ)/2 – (0 - VK)
+
+(X - W) = (I – VI) + (J – VJ)
+(Y - H - VK) = (I – VI)/2 – (J - VJ)/2
+
+(X - W) = (I – VI) + (J – VJ)
+2(Y - H - VK) = (I – VI) – (J - VJ)
+
+2(I-VI) = (X - W) + 2(Y - H - VK)
+(I-VI) = (X - W)/2 + (Y - H - VK)
+I = (X - W)/2 + (Y - H - VK) + VI
+
+2(J - VJ) = (X - W) - 2(Y - H - VK)
+(J - VJ) = (X - W)/2 - (Y - H - VK)
+J = (X - W)/2 - (Y - H - VK) + VJ
+
+
+
+
+And so:
+
+MC.i = (SP.x - VP->width*SCREEN_PPP/2.0)/2
+      + SP.y - VP->height*SCREEN_PPP/2.0 - VP->viewpoint.k + VP->viewpoint.i
+MC.j = (SP.x - VP->width*SCREEN_PPP/2.0)/2
+      - SP.y + VP->height*SCREEN_PPP/2.0 + VP->viewpoint.k + VP->viewpoint.j

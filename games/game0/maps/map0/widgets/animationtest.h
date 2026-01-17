@@ -1,0 +1,32 @@
+#include "engine/logic/bbFlag.h"
+#include "engine/userinterface/bbWidget.h"
+#include "engine/userinterface/bbWidgetFunctions.h"
+
+bbFlag AnimationTest_Constructor (bbWidget** self, void* graphics,bbWidgets* widgets, bbScreenPoints screen_coords, bbWidget* parent)
+{
+    bbWidget* widget;
+    bbFlag flag =  bbWidget_newEmpty(&widget, widgets, parent);
+
+
+    bbScreenPointsRect rect;
+
+    rect.left = 100*POINTS_PER_PIXEL;
+    rect.top =  100*POINTS_PER_PIXEL;
+    rect.width = 0;
+    rect.height = 0;
+
+    widget->rect = rect;
+
+    bbGraphicsApp* Graphics = graphics;
+    bbPool_Handle drawfunctionHandle;
+    bbDictionary_lookup(Graphics->drawfunctions->dictionary, "WIDGETANIMATION",
+                        &drawfunctionHandle);
+    widget->frames[0].drawfunction = drawfunctionHandle.u64;
+    widget->frames[0].framerate = 1;
+    bbDictionary_lookup(Graphics->animations->dictionary, "SKELETON",
+                        &widget->frames[0].handle);
+
+
+    *self = widget;
+    return Success;
+}

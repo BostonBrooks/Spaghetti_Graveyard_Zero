@@ -1,0 +1,65 @@
+/** \page Program-Flow
+
+An outline of the basic flow of the program (main.c) follows:
+
+-Make new game instance and load graphics settings, names of maps
+   -Open window and display loading screen
+
+-Open map header file and read map settings inc filenames 
+-Load textures from filename
+-Load sprites from filename
+-Load animations from filename
+
+-Load Skin data
+
+-Initialise VTables and their elements (preferably on a per-map basis, load from dynamicly linked libraries)
+    - Avoidance shape functions
+    - AI constructors
+    - AI OnUpdate
+    - AI OnCommand
+    - Drawable constructors
+    - Renderers, Shaders
+    - Draw functions for drawables/animations
+    - Messages (to drawables)
+
+-Load Terrain data, lighting or whatever else
+
+-If the settings indicate a curved ground surface,
+    - load ground surface from file.
+    - calculate ground shading.
+    This can be slow, so the first map loaded should have 
+    a flat ground surface to facilitate fast loading.
+   
+-Initialise bbDrawableSquares
+
+-Initialise Pools
+
+-Load Widgets
+    -one widget should be selected to handle text input (the prompt)
+    -one widget should be selected as root (the "layout")
+    -one widget should be selected as the current spell.
+    (as spell is a type of widget, that is represented by it's "click to activate" icon)
+-Load static Drawables
+-Load Actors with their own Drawables
+- Spawn player (go between input parser and player Actor), player Actor, player drawable
+-Initialise viewport
+
+-Begin main loop:
+
+    -Draw viewport.
+    -Draw widgets.
+    -Parse input
+         - Send mouse movements/clicks to bbMouse
+         - find what widget the mouse is over
+
+    -Widget reacts to mouse
+    -Player object takes Parsed input and modifies player Actor
+    //-May want to do some internet stuff
+    -Update Actors and send a list of commands to drawables
+    -Go though list and modify drawables
+    -Increment map time, global time
+
+-If player indicates to load a different map, clear graphics data including ground surface, and load new map as seen at the top of the page.
+(I do not know what I will do about data shared between maps such as player stats)
+
+*/

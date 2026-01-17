@@ -1,0 +1,11 @@
+/** \page textures.csv
+
+This file contains data used to populate a bbTextures container, that contains objects of type sfTexture.
+
+The file makes use of the following fields:
+ - Label: A short (max 32 characters) identifier unique to this sfTexture.
+ - Virtual Address: Store pointer to sfTexture at this address in lookup table.
+ - File: Load the texture from this address, relative to the executable.
+ - Smooth: Should the GPU interpolate between pixels? (T/F)
+ - Comment: Any extra text will be ignored.
+*/

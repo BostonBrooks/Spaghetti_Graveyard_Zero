@@ -1,0 +1,70 @@
+/** \page Coding-Conventions
+
+1. Classes and Methods
+========================
+
+Structures in C will represent \em objects of a given \em class. There will be multiple \em types of a given \em class, and type specific behavior will be determined by functions stored in <em>virtual method tables</em> (vtables).
+Wrapper functions will be used to call methods in vtables.
+vtables will be stored in dynamically linked libraries.
+
+Structures will be given names like "bbStructName", and will be found in files with names like "bbStructName.h" and "bbStructName.c". Objects' \em methods will have names like bbStructName_methodName()
+
+It may make sense to define a \em namespace containing zero or more than one object.
+These will be defined in files with names like "bbNameSpace.h" and "bbNameSpace.c"
+
+
+
+3. Flags
+========================
+
+Most functions return type bbFlag, an enum describing the status of the funciton call, a successful function execution will return 'Success'
+
+4. Virtual Method Tables
+========================
+
+We use a lot of v-tables to store the behaviour of an object using an integer value
+
+5. Fixed Point Mathematics:
+========================
+
+Floating point mathematics will be avoided where possible.
+Instead fixed point mathematics will be achieved using "conversion factors" with names like:
+Points per pixel, pixels per tile, and tiles per square, for assets being drawn to the viewport and points per pixel for widgets being drawn to the screen.
+
+One exception to this would be setting the scale of a sprite to be drawn to the viewport or screen. Information flows one way from CPU to graphics card, so using floating point values here will not lead to non-determinism in the main program.
+
+
+
+6. Member Functions:
+========================
+
+Member functions are defined in this way
+
+bbObject_method(bbObject* self, args);
+
+If it proves convenient, a wrapper method will be made in this way:
+
+  bbObject_methodI(int32_t map, int32_t address, args);
+  
+  where int32_t address is the index of the objct in the given pool
+  objects in a pool are aware of what map they are included in, so this will not be necessary.
+
+Arguments should have as narrow scope as possible,
+eg pass dont pass bbMap when bbMapConstants will suffice.
+
+The first argument to a constructor should be a reference to a pointer that will point to the new object.
+
+Containers have knowledge of what map they are in.
+
+constructors will look like:
+
+int32_t bbObject_new(bbObject** self, bbObjects* container, ... );
+
+arguments of functions will be in lowerCamelCase
+
+7. Integer Types:
+========================
+
+bbIntTypes.h is a wrapper for inttypes.h, using I32 for 32 bit int and U32 for unsigned 32 bit int
+
+*/
