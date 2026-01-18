@@ -1,9 +1,9 @@
 #include <math.h>
 #include "engine/core/bbMoveable.h"
-
 #include "engine/core/bbCoreInputs.h"
 #include "engine/data/bbHome.h"
 #include "engine/logic/bbBloatedPool.h"
+#include "engine/geometry/bbCoordinates.h"
 
 
 bbMilliCoords getForce(bbMoveables* moveables, bbMoveable* moveableA, bbMoveable* moveableB)
@@ -11,11 +11,35 @@ bbMilliCoords getForce(bbMoveables* moveables, bbMoveable* moveableA, bbMoveable
 
     //SpriteUnits[subject].Forces.i += (10000*idist)/dist/(dist - footprint)/(dist - footprint);
     //from Spaghetti_Graveyard_Demos/OldNoTerrainDemo/06_Units.h
-    bbMilliCoords mC;
-    mC.i = 1;
-    mC.j = 1;
-    mC.k = 1;
 
+    bbMilliCoords coordsA, coordsB, output;
+
+    if (moveables->useCoordsA)
+    {
+        coordsA = moveableA->coordsA;
+        coordsB = moveableB->coordsA;
+    } else
+    {
+        coordsA = moveableA->coordsB;
+        coordsB = moveableB->coordsB;
+    }
+
+
+    double delta_i = (coordsA.i - coordsB.i);
+    double delta_j = (coordsA.j - coordsB.j);
+    double distance = sqrt(delta_i * delta_i + delta_j * delta_j);
+    double distanceReduced = (distance - 0.2l*MILLS_PER_TILE)/10000.l;
+    double distanceReduced2 = distance/100000.l;
+
+    bbMilliCoords mC;
+    mC.i = ((delta_i)/(distanceReduced2*distanceReduced*distanceReduced));
+    mC.j = ((delta_j)/(distanceReduced2*distanceReduced*distanceReduced));
+    mC.k = 0;
+
+    if (distance < 4*MILLS_PER_TILE)
+    {
+        bbDebug("force.i = %lld, force.j = %lld, distance = %f\n", mC.i, mC.j, distance);
+    }
     return mC;
 }
 
@@ -42,8 +66,7 @@ bbMilliCoords sumForces(bbMoveables* moveables, bbMoveable* moveableA)
 
 bbFlag bbMoveables_init(bbMoveables* moveables)
 {
-    bbHere()
-    moveables->updatesPerFrame = 4;
+    moveables->updatesPerFrame = 8;
     for (I32 i = 0; i < numSegments; i++)
     {
         //I haven't decided yet...
@@ -146,7 +169,6 @@ bbFlag bbMoveables_updateOnce(bbMoveables* moveables)
 
             bbMilliCoords forces = sumForces(moveables, moveable);
 
-            bbDebug("forces.i = %lld, forces.j = %lld\n", forces.i, forces.j);
             moveable->coordsB.i = currentLocation.i + delta_i + forces.i;
             moveable->coordsB.j = currentLocation.j + delta_j + forces.j;
 
@@ -179,7 +201,6 @@ bbFlag bbMoveables_updateOnce(bbMoveables* moveables)
             double delta_j = distance_j / distance * 2048;
 
             bbMilliCoords forces = sumForces(moveables, moveable);
-            bbDebug("forces.i = %lld, forces.j = %lld\n", forces.i, forces.j);
 
             moveable->coordsA.i = currentLocation.i + delta_i + forces.i;
             moveable->coordsA.j = currentLocation.j + delta_j + forces.j;

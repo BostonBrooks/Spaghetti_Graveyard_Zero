@@ -7,13 +7,24 @@ include_directories( ./ )
 
 
 add_executable(myprogram
+        ./WinLibs/System_test.c
         ./games/game0/maps/map0/spells/spells.c
         ./games/game0/maps/map0/widgets/widgets.c
         ./games/game0/maps/map0/drawfunctions/drawfunctions.c
         ./games/game0/maps/map0/mouse/mouse.c
+        ./games/game0/maps/map0/spawner.c
+        ./test/pool_speed_test.c
+        ./test/bbNetworkApp_test.c
+        ./test/bbNetwork_packet_test.c
+        ./test/bbCallback_test.c
+        ./test/bbNetworkTime_test.c
         ./test/sizes_test.c
+        ./test/bbThreadedQueue_search_test.c
+        ./test/bbNetwork_asynchTest.c
+        ./test/bbThreadedQueue_test2.c
         ./test/hello_world.c
         ./test/bbStr_toI32_test.c
+        ./test/old/bbNetwork_test2.c
         ./test/old/bbList_testIterate.c
         ./test/old/bbList_test.c
         ./test/old/bbList_testInsert.c
@@ -39,8 +50,13 @@ add_executable(myprogram
         ./test/old/bbTerminal_test.c
         ./test/old/bbList_testMerge.c
         ./test/old/bbListList.c
-        ./test/Incremental_test.c
+        ./test/bbNetwork_test.c
+        ./test/bbCore_test.c
+        ./test/bbThreadedPool_test.c
+        ./test/incremental_test.c
+        ./test/bbThreadedQueue_test.c
         ./test/get_line_test.c
+        ./test/bbServer_test.c
         ./engine/graphics/bbFonts.c
         ./engine/graphics/bbAnimation.c
         ./engine/graphics/bbComposition.c
@@ -48,17 +64,25 @@ add_executable(myprogram
         ./engine/graphics/bbTextures.c
         ./engine/graphics/bbColours.c
         ./engine/graphics/bbDrawfunctions.c
-        "engine/core(old)/bbCore.c"
-        "engine/core(old)/bbMessages.c"
+        ./engine/graphics/bbGraphicsApp.c
+        ./engine/core/bbInstruction.c
+        ./engine/core/bbCoreInputs.c
+        ./engine/core/bbMoveable.c
+        ./engine/core/bbCore.c
         ./engine/geometry/bbCoordinates.c
         ./engine/geometry/bbViewportCoords.c
         ./engine/geometry/bbMesh.c
+        ./engine/viewport/bbViewportApp.c
         ./engine/viewport/bbDrawables.c
         ./engine/viewport/bbMapIcons.c
         ./engine/viewport/bbUnits.c
         ./engine/viewport/bbViewport.c
-        ./engine/dummyserver/bbDummyReceiver.c
-        ./engine/dummyserver/bbDummySender.c
+        ./engine/server/bbServer.c
+        ./engine/network/bbNetworkTime.c
+        ./engine/network/bbNetworkPacket.c
+        ./engine/network/bbNetworkApp.c
+        ./engine/network/bbNetwork.c
+        ./engine/network/old/bbNetwork.c
         ./engine/logic/bbDictionary.c
         ./engine/logic/bbTree.c
         ./engine/logic/bbLeanPool.c
@@ -72,29 +96,16 @@ add_executable(myprogram
         ./engine/logic/bbList_iterate.c
         ./engine/userinterface/bbInput.c
         ./engine/userinterface/bbSpells.c
+        ./engine/userinterface/bbUIApp.c
         ./engine/userinterface/bbMouseFunctions.c
         ./engine/userinterface/bbSpell.c
         ./engine/userinterface/bbWidgetFunctions.c
         ./engine/userinterface/bbWidget.c
         ./engine/userinterface/bbMouse.c
         ./engine/avoidance/bbAvoidables.c
-        engine/threadsafe/bbThreadedPool.c
-        test/bbThreadedPool_test.c
-        engine/threadsafe/bbThreadedQueue.c
-        test/bbThreadedQueue_test.c
-        test/bbServer_test.c
-        engine/echo_server/bbServer.c
-        test/pool_speed_test.c
-        engine/network/bbNetwork.c
-        engine/network/bbNetworkPacket.h
-        test/bbNetwork_test.c
-        test/old/bbNetwork_test2.c
-        engine/network/bbNetworkTime.h
-        engine/network/bbNetworkPacket.c
-        test/bbNetworkPacket_test.c
-        engine/network/bbNetworkTime.c
-        engine/network/bbNetwork.h
-        test/bbThreadedQueue_test2.c
+        ./engine/threadsafe/bbThreadedQueue.c
+        ./engine/threadsafe/bbThreadedPool.c
+        ./engine/threadsafe/bbThreadedQueue_search.c
 
 )
 

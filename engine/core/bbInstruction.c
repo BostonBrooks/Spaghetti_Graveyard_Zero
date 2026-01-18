@@ -148,7 +148,7 @@ bbFlag bbInstruction_updateViewpoint_fn(bbCore* core, bbInstruction* instruction
     difference.i = GoalPoint.i - oldViewpoint.i;
     difference.j = GoalPoint.j - oldViewpoint.j;
 
-    float speed = 8;
+    float speed = 16;
     float distance = sqrt(difference.i*difference.i
             + difference.j*difference.j);
 
