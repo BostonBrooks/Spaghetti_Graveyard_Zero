@@ -29,6 +29,9 @@
 bbFlag bbWidgetFunctions_populate(bbWidgetFunctions* self)
 {
     bbWidgetFunctions_add(self, WidgetConstructor2,
+    NULL_Constructor2, "NULL");
+
+    bbWidgetFunctions_add(self, WidgetConstructor2,
     SPHERE_Constructor2, "SPHERE");
 
     bbWidgetFunctions_add(self, WidgetConstructor2,
@@ -47,7 +50,13 @@ bbFlag bbWidgetFunctions_populate(bbWidgetFunctions* self)
     CURRENTSPELL_Constructor2, "CURRENTSPELL");
 
     bbWidgetFunctions_add(self, WidgetConstructor2,
-                          CONNECTICON_Constructor2, "CONNECTICON");
+    CONNECTICON_Constructor2, "CONNECTICON");
+
+    bbWidgetFunctions_add(self, WidgetConstructor2,
+    TEXTBOX_Constructor2, "TEXTBOX");
+
+    bbWidgetFunctions_add(self, WidgetConstructor2,
+                          CONNECTMENU_Constructor2, "CONNECTMENU");
 
     //typedef bbFlag bbWidget_Constructor (bbWidget** reference, void* graphics,
     //                                     bbWidgets* widgets, bbScreenPoints

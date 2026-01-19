@@ -115,33 +115,23 @@ bbFlag bbUIApp_spawnWidgets(bbUIApp* app)
 	bbWidget_onCommand(app->widgets.command, &app->widgets, bbWC_setBounds, bounds);
 
 
+	/*
 	SP0.x = 58*SCREEN_PPP; SP0.y = 100*SCREEN_PPP;
 	bbWidget_constructor(&widget1, &app->widgets, &home.constant.graphics,
-						 SP0, layout,"CONNECTMENU");
-/*
-	SP0.x = 11*SCREEN_PPP; SP0.y = 11*SCREEN_PPP;
-	bbWidget_constructor(&widget1, &app->widgets, &home.constant.graphics,
-						 SP0, layout,"TOPLEFT");
-
-	SP0.x = 11*SCREEN_PPP; SP0.y = 11*SCREEN_PPP;
-	bbWidget_constructor(&widget0, &app->widgets, &home.constant.graphics,
-						 SP0, widget1,"CURRENTSPELL");
-
-	SP0.x = 46*SCREEN_PPP; SP0.y = 11*SCREEN_PPP;
-	bbWidget_constructor(&widget0, &app->widgets, &home.constant.graphics,
-						 SP0, widget1, "CONNECTICON");
-
-*/
-
-
-
-
-
+						 SP0, layout,"CONNECTMENU");*/
 
 
 
 	bbVPool_reverseLookup(app->widgets.pool, layout, &handle);
 	bbDictionary_add(app->widgets.dict, "LAYOUT", handle);
+
+	bbWidget_constructor2(&widget0,
+				 &app->widgets,
+				 "CONNECTMENU",
+				 "LAYOUT",
+				 "CONNECTMENU2",
+				 58*SCREEN_PPP,
+				 100*SCREEN_PPP);
 
 	bbWidget_constructor2(&widget0,
 					 &app->widgets,

@@ -208,7 +208,8 @@ bbFlag bbWidgetFunctions_getFunction(void** function, bbWidgetFunctions* functio
         *function = functions->Constructors[handle.u64];
         return Success;
     case WidgetConstructor2:
-        bbDictionary_lookup(functions->Constructor2_dict,key,&handle);
+        bbFlag flag = bbDictionary_lookup(functions->Constructor2_dict,key,&handle);
+        if (flag == None) return None;
         *function = functions->Constructors2[handle.u64];
         return Success;
         case WidgetUpdate:

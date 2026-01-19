@@ -1,6 +1,18 @@
 #include "engine/logic/bbTerminal.h"
 #include "engine/userinterface/bbWidget.h"
 
+bbFlag NULL_Constructor2 (bbWidget** self,
+                            bbWidgets* widgets,
+                            bbWidget* parent,
+                            char* name,
+                            bbScreenPoints screen_coords,
+                            bbGraphicsApp* graphics
+                            )
+{
+    bbDebug("NULL Constructor2\n");
+    return Success;
+}
+
 bbFlag NULL_Constructor (bbWidget** reference, void* graphics,
                          void* widgets, bbScreenPoints screen_coords, bbWidget* parent)
 {

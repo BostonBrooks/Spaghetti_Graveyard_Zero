@@ -111,6 +111,106 @@ bbWidgets* widgets, bbScreenPoints screen_coords, bbWidget* parent)
     return Success;
 }
 
+bbFlag CONNECTMENU_Constructor2 (bbWidget** self,
+                            bbWidgets* widgets,
+                            bbWidget* parent,
+                            char* name,
+                            bbScreenPoints screen_coords,
+                            bbGraphicsApp* graphics
+                            )
+{
+    bbWidget* widget;
+    bbWidget_newEmpty2(&widget, widgets, parent, name);
+    bbScreenPointsRect rect;
+
+    rect.left = screen_coords.x;
+    rect.top = screen_coords.y;
+    rect.width = 373 * SCREEN_PPP;
+    rect.height = 197 * SCREEN_PPP;
+    widget->rect = rect;
+
+    widget->mtable.MouseIcon = 86;
+    int funcInt;
+    funcInt = bbMouseFunctions_getInt(&widgets->mouse->functions,MouseIsOver,
+                                  "ALWAYS");
+    widget->mtable.isOver = funcInt;
+    funcInt = bbMouseFunctions_getInt(&widgets->mouse->functions,MouseLeftDown,
+                                      "SPELLMENU");
+    widget->mtable.LeftDown = funcInt;
+
+    bbPool_Handle drawfunctionHandle;
+
+
+    bbDictionary_lookup(graphics->drawfunctions->dictionary, "LAYERBOUNDARY",
+                        &drawfunctionHandle);
+    widget->frames[0].drawfunction = drawfunctionHandle.u64;
+
+    bbDictionary_lookup(graphics->sprites->dictionary, "LAYERBOUNDARY",
+                        &widget->frames[0].handle);
+
+    bbDictionary_lookup(graphics->drawfunctions->dictionary, "WIDGETSPRITE",
+                        &drawfunctionHandle);
+    widget->frames[1].drawfunction = drawfunctionHandle.u64;
+
+    bbDictionary_lookup(graphics->sprites->dictionary, "CONNECTMENU",
+                        &widget->frames[1].handle);
+    widget->ftable.Hide = bbWidgetFunctions_getInt(widgets->functions,WidgetHide ,"CONNECTHIDE");
+    widget->ftable.Unhide = bbWidgetFunctions_getInt(widgets->functions,WidgetUnhide ,"CONNECTUNHIDE");
+
+    bbPool_Handle dimensions;
+    dimensions.i32x2.x = 187*SCREEN_PPP;
+    dimensions.i32x2.y = 21*SCREEN_PPP;
+
+    bbFlag flag;
+    bbWidget* IP_widget;
+    flag = bbWidget_constructor2(&IP_widget,
+                 widgets,
+                 "TEXTBOX",
+                 name,
+                 "IP_ADDRESS",
+                 169*SCREEN_PPP,
+                 166*SCREEN_PPP);
+    if (flag == Success) bbWidget_onCommand(IP_widget, widgets, bbWC_setDimensions, dimensions);
+
+    bbWidget* PORT_widget;
+    flag = bbWidget_constructor2(&PORT_widget,
+                 widgets,
+                 "TEXTBOX",
+                 name,
+                 "IP_PORT",
+                 169*SCREEN_PPP,
+                 204*SCREEN_PPP);
+    if (flag == Success) bbWidget_onCommand(PORT_widget, widgets, bbWC_setDimensions, dimensions);
+
+    bbWidget* a_widget;
+    bbWidget_constructor2(&a_widget,
+                 widgets,
+                 "CONNECTBUTTON",
+                 name,
+                 "CONNECTBUTTON",
+                 120*SCREEN_PPP,
+                 243*SCREEN_PPP);
+
+    bbWidget_constructor2(&a_widget,
+                 widgets,
+                 "DISCONNECTBUTTON",
+                 name,
+                 "DISCONNECTBUTTON",
+                 207*SCREEN_PPP,
+                 243*SCREEN_PPP);
+
+    bbWidget_constructor2(&a_widget,
+                 widgets,
+                 "NEWSERVER",
+                 name,
+                 "NEWSERVER",
+                 294*SCREEN_PPP,
+                 243*SCREEN_PPP);
+
+    *self = widget;
+    return Success;
+}
+
 bbFlag ConnectIcon_Constructor (bbWidget** self, void* graphics,
 bbWidgets* widgets, bbScreenPoints screen_coords, bbWidget* parent)
 {
@@ -155,6 +255,8 @@ bbWidgets* widgets, bbScreenPoints screen_coords, bbWidget* parent)
     *self = widget;
     return Success;
 }
+
+
 
 bbFlag Connect_Hide (bbWidget* widget, bbWidgets* widgets)
 {

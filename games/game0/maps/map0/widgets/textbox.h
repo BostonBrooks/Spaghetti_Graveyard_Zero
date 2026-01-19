@@ -186,3 +186,76 @@ bbFlag Textbox_OnCommand(bbWidget* widget, bbWidgetCommandType type, bbPool_Hand
     }
     return Success;
 }
+
+bbFlag TEXTBOX_Constructor2 (bbWidget** self,
+                            bbWidgets* widgets,
+                            bbWidget* parent,
+                            char* name,
+                            bbScreenPoints screen_coords,
+                            bbGraphicsApp* graphics
+                            )
+{
+    bbWidget* widget;
+    bbWidget_newEmpty2(&widget, widgets, parent, name);
+    bbScreenPointsRect rect;
+
+    rect.left = screen_coords.x;
+    rect.top = screen_coords.y;
+    rect.width = 50*POINTS_PER_PIXEL;
+    rect.height = 11*POINTS_PER_PIXEL;
+
+    widget->rect = rect;
+
+    widget->ftable.OnCommand = bbWidgetFunctions_getInt(widgets->functions,WidgetOnCommand ,"TEXTBOX");
+
+    int funcInt;
+    funcInt = bbMouseFunctions_getInt(&widgets->mouse->functions,MouseIsOver,
+                                  "HOVER");
+    widget->mtable.isOver = funcInt;
+
+    funcInt = bbMouseFunctions_getInt(&widgets->mouse->functions,MouseLeftDown,
+                                  "TEXTBOX");
+    widget->mtable.LeftDown = funcInt;
+
+    widget->mtable.MouseIcon = 155;
+    bbPool_Handle drawfunctionHandle;
+    bbDictionary_lookup(graphics->drawfunctions->dictionary, "TEXTBOX",
+                        &drawfunctionHandle);
+    widget->frames[0].drawfunction = drawfunctionHandle.u64;
+    widget->frames[0].offset.x = 5;
+    widget->frames[0].offset.y = 5;
+
+    bbDictionary_lookup(graphics->drawfunctions->dictionary, "TEXTBOXINDICATOR",
+                        &drawfunctionHandle);
+    widget->frames[1].drawfunction = drawfunctionHandle.u64;
+
+    widget->type =  bbWidgetType_TextBox;
+
+    char* string = calloc(1048, sizeof(char));
+
+    widget->typeData.textBox.rows = 25;
+    widget->typeData.textBox.columns = 25;
+
+    bbStr_setStr(string , "", 1048);
+    bbStr_setBounds(string , widget->typeData.textBox.columns, widget->typeData.textBox.rows, 1048);
+    widget->typeData.textBox.string = string;
+
+    sfText* text = sfText_create();
+    sfText_setString(text, widget->typeData.textBox.string);
+    sfText_setFont(text, graphics->fonts->fonts[0]);
+    bbScreenPoints pts;
+    pts.x = screen_coords.x + widget->frames[0].offset.x;
+    pts.y = screen_coords.y + widget->frames[0].offset.y;
+    sfVector2f pos;
+    pos = bbScreenPoints_getV2f(pts);
+    sfText_setPosition(text, pos);
+    sfText_setCharacterSize(text, 15);
+    sfText_setColor(text, sfBlack);
+
+    widget->typeData.textBox.text = text;
+
+
+    *self = widget;
+
+    return Success;
+}
