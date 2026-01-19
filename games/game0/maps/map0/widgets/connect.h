@@ -92,19 +92,19 @@ bbWidgets* widgets, bbScreenPoints screen_coords, bbWidget* parent)
     SP.x = 120*SCREEN_PPP; SP.y = 243*SCREEN_PPP;
     bbWidget_constructor(&connect_button, widgets, graphics,SP, widget, "CONNECTBUTTON");
     bbVPool_reverseLookup(widgets->pool, Port_widget, &handle);
-    bbDictionary_add(widgets->dict, "CONNECT_BUTTON", handle);
+    bbDictionary_add(widgets->dict, "CONNECTBUTTON", handle);
 
     bbWidget* dsconnect_button;
     SP.x = 207*SCREEN_PPP; SP.y = 243*SCREEN_PPP;
     bbWidget_constructor(&connect_button, widgets, graphics,SP, widget, "DISCONNECTBUTTON");
     bbVPool_reverseLookup(widgets->pool, Port_widget, &handle);
-    bbDictionary_add(widgets->dict, "CONNECT_BUTTON", handle);
+    bbDictionary_add(widgets->dict, "DISCONNECTBUTTON", handle);
 
     bbWidget* gooffline_button;
     SP.x = 294*SCREEN_PPP; SP.y = 243*SCREEN_PPP;
     bbWidget_constructor(&connect_button, widgets, graphics,SP, widget, "NEWSERVER");
     bbVPool_reverseLookup(widgets->pool, Port_widget, &handle);
-    bbDictionary_add(widgets->dict, "CONNECT_BUTTON", handle);
+    bbDictionary_add(widgets->dict, "NEWSERVER", handle);
 
 
     *self = widget;
