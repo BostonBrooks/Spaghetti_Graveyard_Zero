@@ -1,0 +1,75 @@
+Old Layout
+
+ LAYOUT
+     VIEWPORT
+     SPELLMENU
+         SPELLSELECT1
+         SPELLSELECT2
+         SPELLSELECT3
+         SPELLSELECT4
+     SPELLBAR
+         SPELLSLOT
+         SPELLSLOT
+         SPELLSLOT
+         SPELLSLOT
+         SPELLSLOT
+         SPELLSLOT
+         SPELLSLOT
+         SPELLSLOT
+     DIALOG
+     PROMPT
+     COMMAND
+     CONNECTMENU
+         IP_ADDRESS
+         IP_PORT
+         CONNECTBUTTON
+         DISCONNECTBUTTON
+         NEWSERVER
+     TOPLEFT
+         CURRENTSPELL
+         CONNECTICON
+     SPHERE
+     BUTTON
+     BOX
+     CARD
+
+
+New Layout:
+
+LAYOUT
+    GAME
+        VIEWPORT
+        DIALOG
+        PROMPT
+        COMMAND
+    SPELLMENU
+        SPELLSELECT1
+        SPELLSELECT2
+        SPELLSELECT3
+        SPELLSELECT4
+    SPELLBAR
+        SPELLSLOT
+        SPELLSLOT
+        SPELLSLOT
+        SPELLSLOT
+        SPELLSLOT
+        SPELLSLOT
+        SPELLSLOT
+        SPELLSLOT
+    CONNECTMENU
+        IP_ADDRESS
+        IP_PORT
+        CONNECTBUTTON
+        DISCONNECTBUTTON
+        NEWSERVER
+    TOPLEFT
+        CURRENTSPELL
+        CONNECTICON
+        HIDEMISC (Jester icon)
+    MISC
+         SPHERE
+         BUTTON
+         BOX
+         CARD
+         ANIMATIONTEST
+

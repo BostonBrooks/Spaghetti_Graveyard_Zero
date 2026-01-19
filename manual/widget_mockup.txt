@@ -1,0 +1,239 @@
+Let me think:
+
+if activeLayer = LayerGame
+
+GAME visible
+TOPLEFT visible
+SPELLBAR visible
+SPELLMENU not visible
+CONNECTMENU not visible
+MISC visible
+SPELLMENU not visible
+
+:. no conclusions
+
+if activeLayer = LayerSpellMenu
+
+
+
+GAME is faded
+SPELLBAR is faded
+TOPLEFT is visible
+CONNECTMENU not visible
+SPELLMENU is visible
+MISC visible
+
+:. GAME is before SPELLMENU
+:. TOPLEFT after SPELLMENU
+
+if activeLayer = LayerNetworkMenu
+
+
+GAME is faded
+SPELLBAR is faded
+TOPLEFT is visible
+CONNECTMENU is visible
+SPELLMENU not visible
+MISC visible
+
+:. GAME is before CONNECTMENU
+SPELLBAR is before CONNECTMENU
+TOPLEFT is after CONNECTMENU
+
+MISC is last
+
+so the order of layers is:
+
+GAME
+SPELLMENU
+
+
+
+The following shows the program flow for bbUIApp_spawnWidgets under the new arrangement
+Child constructors are called by their parent's constructor
+bbFlag bbUIApp_spawnWidgets(bbUIApp* app){
+
+
+bbWidget_constructor(bbWidget** self,
+                     char* type,
+                     char* parent,
+                     char* name,
+                     I32 position_x,
+                     I32 position_y);
+
+
+bbFlag bbUIApp_spawnWidgets(bbUIApp* app){
+    bbWidget* widget;
+    bbPoolHANDLE handle;
+
+//The head of the widget tree
+    bbWidget_newLayout(args)
+
+
+    bbWidget_constructor(&widget,
+                         GAME,
+                         LAYOUT,
+                         GAME,
+                         0,
+                         0);
+//Layout and viewport are special, and have their specific constructor?
+    bbWidget_newViewport(args)
+
+    bbWidget_constructor(&widget,
+                         TEXTBOX,
+                         GAME,
+                         DIALOG,
+                         497*SCREEN_PPP,
+                         12*SCREEN_PPP);
+
+
+    handle.i32x2.x = 200*SCREEN_PPP;
+    handle.i32x2.y = 322*SCREEN_PPP;
+    bbWidget_onCommand(widget, &app->widgets, bbWC_setDimensions, handle);
+
+
+    bbWidget_constructor(&widget,
+                         TEXTBOX,
+                         GAME,
+                         PROMPT,
+                         497*SCREEN_PPP,
+                         355*SCREEN_PPP);
+
+    handle.i32x2.x = 200*SCREEN_PPP;
+    handle.i32x2.y = 45*SCREEN_PPP;
+    bbWidget_onCommand(widget, &app->widgets, bbWC_setDimensions, handle);
+
+    bbWidget_constructor(&widget,
+                         TEXTBOX,
+                         GAME,
+                         COMMAND,
+                         497*SCREEN_PPP,
+                         416*SCREEN_PPP);
+
+    handle.i32x2.x = 200*SCREEN_PPP;
+    handle.i32x2.y = 45*SCREEN_PPP;
+    bbWidget_onCommand(widget, &app->widgets, bbWC_setDimensions, handle);
+
+    handle.i32x2.x = 64;
+    handle.i32x2.y = 1;
+    bbWidget_onCommand(widget, &app->widgets, bbWC_setBounds, handle);
+
+
+    bbWidget_constructor(&widget,
+                         SPELLMENU,
+                         LAYOUT,
+                         SPELLMENU,
+                         58*SCREEN_PPP,
+                         100*SCREEN_PPP);
+
+    bbWidget_constructor(&widget,
+                         SPELLSELECT1,
+                         SPELLMENU,
+                         SPELLSELECT1,
+                         parent.x + 11*SCREEN_PPP + 35*SCREEN_PPP*0,
+                         parent.y + 80*SCREEN_PPP + 35*SCREEN_PPP*0);
+
+    bbWidget_constructor(&widget,
+                         SPELLSELECT2,
+                         SPELLMENU,
+                         SPELLSELECT2,
+                         parent.x + 11*SCREEN_PPP + 35*SCREEN_PPP*1,
+                         parent.y + 80*SCREEN_PPP + 35*SCREEN_PPP*0));
+
+    bbWidget_constructor(&widget,
+                         SPELLSELECT3,
+                         SPELLMENU,
+                         SPELLSELECT3,
+                         parent.x + 11*SCREEN_PPP + 35*SCREEN_PPP*2,
+                         parent.y + 80*SCREEN_PPP + 35*SCREEN_PPP*0));
+
+    bbWidget_constructor(&widget,
+                         SPELLSELECT4,
+                         SPELLMENU,
+                         SPELLSELECT4,
+                         parent.x + 11*SCREEN_PPP + 35*SCREEN_PPP*3,
+                         parent.y + 80*SCREEN_PPP + 35*SCREEN_PPP*0));
+
+    bbWidget_constructor(&widget,
+                         CONNECTMENU,
+                         LAYOUT,
+                         CONNECTMENU,
+                         58*SCREEN_PPP,
+                         100*SCREEN_PPP);
+
+    handle.i32x2.x = 187*SCREEN_PPP;
+    handle.i32x2.y = 21*SCREEN_PPP;
+
+    bbWidget_constructor(&widget,
+                         TEXTBOX,
+                         CONNECTMENU,
+                         IP_ADDRESS,
+                         169*SCREEN_PPP,
+                         166*SCREEN_PPP);
+
+	bbWidget_onCommand(widget, widgets, bbWC_setDimensions, HANDLE);
+
+
+    bbWidget_constructor(&widget,
+                         TEXTBOX,
+                         CONNECTMENU,
+                         IP_PORT,
+                         169*SCREEN_PPP,
+                         204*SCREEN_PPP);
+
+	bbWidget_onCommand(widget, widgets, bbWC_setDimensions, HANDLE);
+
+    bbWidget_constructor(&widget,
+                         CONNECTBUTTON,
+                         CONNECTMENU,
+                         CONNECTBUTTON,
+                         120*SCREEN_PPP,
+                         234*SCREEN_PPP);
+
+    bbWidget_constructor(&widget,
+                         DISCONNECTBUTTON,
+                         CONNECTMENU,
+                         DISCONNECTBUTTON,
+                         207*SCREEN_PPP,
+                         234*SCREEN_PPP);
+
+    bbWidget_constructor(&widget,
+                         NEWSERVER,
+                         CONNECTMENU,
+                         NEWSERVER,
+                         294*SCREEN_PPP,
+                         234*SCREEN_PPP);
+
+    bbWidget_constructor(&widget,
+                         TOPLEFT,
+                         LAYOUT,
+                         TOPLEFT,
+                         11*SCREEN_PPP,
+                         11*SCREEN_PPP);
+
+    bbWidget_constructor(&widget,
+                         CURRENTSPELL,
+                         TOPLEFT,
+                         CURRENTSPELL,
+                         11*SCREEN_PPP,
+                         11*SCREEN_PPP);
+
+
+    bbWidget_constructor(&widget,
+                         CONNECTICON,
+                         TOPLEFT,
+                         CONNECTICON,
+                         46*SCREEN_PPP,
+                         11*SCREEN_PPP);
+
+    bbWidget_constructor(&widget,
+                         HIDEMISC,
+                         LAYOUT,
+                         HIDEMISC,
+                         81*SCREEN_PPP,
+                         11*SCREEN_PPP);
+
+
+
+}
+
