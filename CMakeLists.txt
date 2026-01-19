@@ -106,6 +106,7 @@ add_executable(myprogram
         ./engine/threadsafe/bbThreadedQueue.c
         ./engine/threadsafe/bbThreadedPool.c
         ./engine/threadsafe/bbThreadedQueue_search.c
+        manual/work_in_progress.c
 
 )
 
