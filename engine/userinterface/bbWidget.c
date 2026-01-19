@@ -17,6 +17,7 @@
 #include "engine/logic/bbBloatedPool.h"
 #include "engine/userinterface/bbWidgetFunctions.h"
 #include "engine/viewport/bbViewport.h"
+#include "engine/data/bbHome.h"
 
 bbFlag bbWidgets_init(bbWidgets* widgets){
 	bbVPool_newBloated(&widgets->pool, sizeof(bbWidget), 1024, 1024);
@@ -86,6 +87,74 @@ bbFlag bbWidget_unhide(bbWidget* widget, bbWidgets* widgets)
 	bbFlag (*funcPtr)(bbWidget* widget, bbWidgets* widgets);
 	funcPtr = widgets->functions->Unhide[funcInt];
 	return funcPtr(widget, widgets);
+}
+
+bbFlag bbWidget_newEmpty2(bbWidget** self, bbWidgets* widgets, bbWidget* parent, char* name)
+{
+	bbWidget* widget;
+	bbPool_Handle widgetHandle;
+	bbVPool_alloc(widgets->pool, (void**)&widget);
+	bbVPool_reverseLookup(widgets->pool, widget, &widgetHandle);
+
+	widget->tree.visible = true;
+	widget->tree.childrenvisible = true;
+
+	if (parent == NULL)
+	{
+		widgets->tree->root = widgetHandle;
+	} else
+	{
+		bbTreeNode_setParent(widgets->tree, widget, parent);
+	}
+
+	widget->rect.left = 0;
+	widget->rect.top = 0;
+	widget->rect.width = 0;
+	widget->rect.height = 0;
+
+
+	widget->mtable.isOver = -1;
+	widget->mtable.Enter = -1;
+	widget->mtable.Leave = -1;
+	widget->mtable.LeftDown = -1;
+	widget->mtable.LeftUp = -1;
+	widget->mtable.LeftDrag = -1;
+	widget->mtable.RightDown = -1;
+	widget->mtable.RightUp = -1;
+	widget->mtable.RightDrag = -1;
+	widget->mtable.Drop = -1;
+	widget->mtable.MouseIcon = -1;
+	widget->mtable.DragIcon = -1;
+	widget->mtable.hover = false;
+	widget->mtable.selected = false;
+
+	widget->ftable.Constructor = -1;
+	widget->ftable.Update = -1;
+	widget->ftable.Destructor = -1;
+	widget->ftable.OnCommand = -1;
+	widget->ftable.OnTimer = -1;
+	widget->ftable.Hide = -1;
+	widget->ftable.Unhide = -1;
+
+	for (I32 i = 0; i < FRAMES_PER_WIDGET; i++) {
+		widget->frames[i].drawfunction = -1;
+		widget->frames[i].handle.u64 = 0;
+		widget->frames[i].startTime = 0;
+		widget->frames[i].offset.x = 0;
+		widget->frames[i].offset.y = 0;
+		widget->frames[i].framerate = 1.f;
+		widget->frames[i].type = Sprite;
+	}
+
+	widget->type = bbWidgetType_None;
+	widget->state = bbWidgetState_Default;
+	widget->isFrozen = false;
+
+	bbDictionary_add(widgets->dict, name, widgetHandle);
+
+	*self = widget;
+	return Success;
+
 }
 
 bbFlag bbWidget_newEmpty(bbWidget** self, bbWidgets* widgets, bbWidget* parent){
@@ -175,7 +244,7 @@ bbFlag bbWidget_newLayout(bbWidget** self, bbGraphicsApp* graphics, bbWidgets* w
 
 	int funcInt = bbMouseFunctions_getInt(&widgets->mouse->functions,
                                        MouseIsOver, "ALWAYS");
-	bbDebug("funcInt = %d\n", funcInt);
+	//bbDebug("funcInt = %d\n", funcInt);
 	widget->mtable.isOver = funcInt;
 
     widget->mtable.Enter = -1;
@@ -284,5 +353,33 @@ bbFlag bbWidget_constructor(bbWidget** self, bbWidgets* widgets, bbGraphicsApp* 
 	function(&widget, graphics,widgets,location, parent);
 
     *self = widget;
+	return Success;
+}
+
+bbFlag bbWidget_constructor2(bbWidget** self,
+							 bbWidgets* widgets,
+							 char* type,
+							 char* parent,
+							 char* name,
+							 I32 position_x,
+							 I32 position_y)
+{
+	bbHere()
+	bbWidget* widget;
+
+	bbPool_Handle parentHandle;
+	bbDictionary_lookup(widgets->dict, parent, &parentHandle);
+	bbWidget* parentWidget;
+	bbVPool_lookup(widgets->pool,(void**)&parentWidget,parentHandle);
+
+	bbScreenPoints screen_points;
+	screen_points.x = position_x;
+	screen_points.y = position_y;
+	bbGraphicsApp* graphics = &home.constant.graphics;
+
+	bbWidget_Constructor2* function;
+	bbWidgetFunctions_getFunction((void**)&function,widgets->functions,WidgetConstructor2, type);
+	function(&widget, widgets, parentWidget, name, screen_points, graphics);
+	*self = widget;
 	return Success;
 }

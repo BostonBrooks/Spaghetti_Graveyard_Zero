@@ -54,3 +54,39 @@ bbFlag SPHERE_Constructor (bbWidget** self, void* graphics,
     return Success;
 }
 
+bbFlag SPHERE_Constructor2 (bbWidget** self,
+                            bbWidgets* widgets,
+                            bbWidget* parent,
+                            char* name,
+                            bbScreenPoints screen_coords,
+                            bbGraphicsApp* graphics
+                            )
+{
+bbHere()
+    bbWidget* widget;
+    bbWidget_newEmpty2(&widget, widgets, parent, name);
+
+    bbScreenPointsRect rect;
+
+    rect.left = screen_coords.x;
+    rect.top = screen_coords.y;
+    rect.width = SCREEN_PPP * 52;
+    rect.height = SCREEN_PPP * 52;
+
+    widget->rect = rect;
+
+    bbPool_Handle drawfunctionHandle;
+    bbDictionary_lookup(graphics->drawfunctions->dictionary, "WIDGETSPRITE",
+                        &drawfunctionHandle);
+    widget->frames[0].drawfunction = drawfunctionHandle.u64;
+
+    bbDictionary_lookup(graphics->sprites->dictionary, "SPHERE",
+                    &widget->frames[0].handle);
+
+    I32 funcInt;
+    funcInt = bbMouseFunctions_getInt(&widgets->mouse->functions,MouseIsOver, "TELEPORT");
+    widget->mtable.isOver = funcInt;
+
+    *self = widget;
+    return Success;
+}

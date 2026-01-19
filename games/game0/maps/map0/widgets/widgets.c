@@ -28,6 +28,9 @@
 
 bbFlag bbWidgetFunctions_populate(bbWidgetFunctions* self)
 {
+    bbWidgetFunctions_add(self, WidgetConstructor2,
+                          SPHERE_Constructor2, "SPHERE");
+
     //typedef bbFlag bbWidget_Constructor (bbWidget** reference, void* graphics,
     //                                     bbWidgets* widgets, bbScreenPoints
     //                                     screen_coords, bbWidget* parent);

@@ -1,6 +1,5 @@
 #include "engine/userinterface/bbWidgetFunctions.h"
 #include "engine/includes/CSFML.h"
-#include "engine/userinterface/bbWidgetFunctions.h"
 #include <stdlib.h>
 
 
@@ -12,10 +11,14 @@ bbFlag bbWidgetFunctions_new(bbWidgetFunctions** self)
 //changes made fixed bug?
 //functions->Constructors = calloc(magic_number, sizeof(bbWidget_Constructor));
     functions->Constructors = calloc(magic_number, sizeof(U64));
-
     bbAssert(functions->Constructors != NULL, "bad calloc\n");
     bbDictionary_new(&functions->Constructor_dict, magic_number);
     functions->Constructor_available = 0;
+
+    functions->Constructors2 = calloc(magic_number, sizeof(U64));
+    bbAssert(functions->Constructors2 != NULL, "bad calloc\n");
+    bbDictionary_new(&functions->Constructor2_dict, magic_number);
+    functions->Constructor2_available = 0;
 
     //functions->Update = calloc(magic_number, sizeof(bbWidget_Update));
     functions->Update = calloc(magic_number, sizeof(U64));
@@ -79,6 +82,19 @@ bbFlag bbWidgetFunctions_add(bbWidgetFunctions* functions, bbWidgetFunctionType 
         handle.u64 = available;
 
         bbDictionary_add(functions->Constructor_dict, key, handle);
+
+        return Success;
+
+    case WidgetConstructor2:
+
+
+        available = functions->Constructor2_available++;
+        bbAssert(available < magic_number, "out of bounds error\n");
+
+        functions->Constructors2[available] = fnPointer;
+        handle.u64 = available;
+
+        bbDictionary_add(functions->Constructor2_dict, key, handle);
 
         return Success;
 
@@ -150,9 +166,12 @@ I32 bbWidgetFunctions_getInt(bbWidgetFunctions* functions,
                              bbWidgetFunctionType fnType, char* key){
     bbDictionary* dict;
     switch (fnType){
-        case WidgetConstructor:
-            dict = functions->Constructor_dict;
-            break;
+    case WidgetConstructor:
+        dict = functions->Constructor_dict;
+        break;
+    case WidgetConstructor2:
+        dict = functions->Constructor2_dict;
+        break;
         case WidgetUpdate:
             dict = functions->Update_dict;
             break;
@@ -184,10 +203,14 @@ bbFlag bbWidgetFunctions_getFunction(void** function, bbWidgetFunctions* functio
     bbPool_Handle handle;
 
     switch (fnType){
-        case WidgetConstructor:
-            bbDictionary_lookup(functions->Constructor_dict,key,&handle);
-            *function = functions->Constructors[handle.u64];
-            return Success;
+    case WidgetConstructor:
+        bbDictionary_lookup(functions->Constructor_dict,key,&handle);
+        *function = functions->Constructors[handle.u64];
+        return Success;
+    case WidgetConstructor2:
+        bbDictionary_lookup(functions->Constructor2_dict,key,&handle);
+        *function = functions->Constructors2[handle.u64];
+        return Success;
         case WidgetUpdate:
             bbDictionary_lookup(functions->Update_dict,key,&handle);
             *function = functions->Update[handle.u64];
@@ -209,5 +232,5 @@ bbFlag bbWidgetFunctions_getFunction(void** function, bbWidgetFunctions* functio
         *function = functions->Unhide[handle.u64];
         return Success;
     }
-
+return None;
 }

@@ -102,8 +102,20 @@ typedef struct bbWidgets {
 
 bbFlag bbWidget_newEmpty(bbWidget** self, bbWidgets* widgets, bbWidget* parent);
 
+bbFlag bbWidget_newEmpty2(bbWidget** self, bbWidgets* widgets, bbWidget* parent, char* name);
+
+
 //TODO key is for locating constructor, add a second key for adding the widget to the dictionary
 bbFlag bbWidget_constructor(bbWidget** self, bbWidgets* widgets, bbGraphicsApp* graphics, bbScreenPoints location, bbWidget* parent, char* key);
+
+bbFlag bbWidget_constructor2(bbWidget** self,
+							 bbWidgets* widgets,
+							 char* type,
+							 char* parent,
+							 char* name,
+							 I32 position_x,
+							 I32 position_y);
+
 bbFlag bbWidget_onCommand(bbWidget* widget, bbWidgets* widgets, bbWidgetCommandType type, bbPool_Handle data);
 bbFlag bbWidget_draw(bbWidget* widget, drawFuncClosure* cl);
 bbFlag bbWidget_newLayout(bbWidget** self, bbGraphicsApp* graphics, bbWidgets* widgets, bbWidget* parent);

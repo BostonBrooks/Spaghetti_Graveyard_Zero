@@ -57,7 +57,7 @@ int main(void)
         bbMouse_isOver(&home.private.UI.mouse, &home.private.UI.widgets);
         bbMouse_Update(&home.private.UI.mouse, &home.private.UI.widgets, &home.constant.graphics);
 
-        if (home.private.mapTime % 60 == 0 && home.shared.playmode != PlayMode_pause) bbPrintf("mapTime = %llu\n", home.private.mapTime/60);
+        if (home.private.mapTime % 60 == 0 && home.shared.playmode != PlayMode_pause) {bbPrintf("mapTime = %llu\n", home.private.mapTime/60)};
         bbUIApp_draw(&home.private.UI);
 
         bbFlag flag = bbInput_poll(&home.private.UI.input, home.private.UI.window);

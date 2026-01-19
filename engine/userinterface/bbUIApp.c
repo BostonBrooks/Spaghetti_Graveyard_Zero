@@ -45,6 +45,7 @@ bbFlag bbUIAPP_initSpells(bbUIApp* app)
 
 bbFlag bbUIApp_spawnWidgets(bbUIApp* app)
 {
+	bbHere()
     bbWidget *layout;
     bbScreenPoints SP;
     SP.x = 600*SCREEN_PPP;
@@ -146,6 +147,20 @@ bbFlag bbUIApp_spawnWidgets(bbUIApp* app)
     bbWidget_constructor(&widget0, &app->widgets, &home.constant.graphics,
                          SP0, layout, "CARD");
 
+
+
+
+	bbVPool_reverseLookup(app->widgets.pool, layout, &handle);
+	bbDictionary_add(app->widgets.dict, "LAYOUT", handle);
+
+	bbWidget_constructor2(&widget0,
+							 &app->widgets,
+							 "SPHERE",
+							 "LAYOUT",
+							 "SPHERE2",
+							 100*SCREEN_PPP,
+							 100*SCREEN_PPP);
+
 	SP0.x = 0; SP0.y = 0;
 	//bbWidget_constructor(&widget0, &app->widgets, &home.constant.graphics,
 	//					 SP0, layout, "ANIMATIONTEST");
@@ -160,6 +175,7 @@ bbFlag bbUIApp_init(bbUIApp* app)
     bbMouseFunctions_init(&app->mouse.functions);
     bbMouseFunctions_populate(&app->mouse.functions);
     bbInput_new(&app->input,app->window, &app->mouse, &app->widgets);
+	bbHere()
 	bbUIApp_spawnWidgets(app);
 
 	//TODO set active spell
