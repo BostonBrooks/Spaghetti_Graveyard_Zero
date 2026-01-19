@@ -118,7 +118,7 @@ bbFlag bbUIApp_spawnWidgets(bbUIApp* app)
 	SP0.x = 58*SCREEN_PPP; SP0.y = 100*SCREEN_PPP;
 	bbWidget_constructor(&widget1, &app->widgets, &home.constant.graphics,
 						 SP0, layout,"CONNECTMENU");
-
+/*
 	SP0.x = 11*SCREEN_PPP; SP0.y = 11*SCREEN_PPP;
 	bbWidget_constructor(&widget1, &app->widgets, &home.constant.graphics,
 						 SP0, layout,"TOPLEFT");
@@ -131,21 +131,11 @@ bbFlag bbUIApp_spawnWidgets(bbUIApp* app)
 	bbWidget_constructor(&widget0, &app->widgets, &home.constant.graphics,
 						 SP0, widget1, "CONNECTICON");
 
-	SP0.x = rand()%(720*SCREEN_PPP); SP0.y = rand()%(480*SCREEN_PPP);
-	bbWidget_constructor(&widget0, &app->widgets, &home.constant.graphics,
-                         SP0, layout, "SPHERE");
+*/
 
-	SP0.x = 500*SCREEN_PPP; SP0.y = 23*SCREEN_PPP;
-	bbWidget_constructor(&widget0, &app->widgets, &home.constant.graphics,
-                         SP0, layout, "BUTTON");
 
-    SP0.x = 500*SCREEN_PPP; SP0.y = 125*SCREEN_PPP;
-    bbWidget_constructor(&widget0, &app->widgets, &home.constant.graphics,
-                         SP0, layout, "BOX");
 
-    SP0.x = 570*SCREEN_PPP; SP0.y = 125*SCREEN_PPP;
-    bbWidget_constructor(&widget0, &app->widgets, &home.constant.graphics,
-                         SP0, layout, "CARD");
+
 
 
 
@@ -154,12 +144,44 @@ bbFlag bbUIApp_spawnWidgets(bbUIApp* app)
 	bbDictionary_add(app->widgets.dict, "LAYOUT", handle);
 
 	bbWidget_constructor2(&widget0,
+					 &app->widgets,
+					 "TOPLEFT",
+					 "LAYOUT",
+					 "TOPLEFT2",
+					 11*SCREEN_PPP,
+					 11*SCREEN_PPP);
+
+	bbWidget_constructor2(&widget0,
+						 &app->widgets,
+						 "BUTTON",
+						 "LAYOUT",
+						 "BUTTON2",
+						 500*SCREEN_PPP,
+						 23*SCREEN_PPP);
+
+	bbWidget_constructor2(&widget0,
 							 &app->widgets,
 							 "SPHERE",
 							 "LAYOUT",
 							 "SPHERE2",
-							 100*SCREEN_PPP,
+							 rand()%(720*SCREEN_PPP),
+							 rand()%(480*SCREEN_PPP));
+
+	bbWidget_constructor2(&widget0,
+							 &app->widgets,
+							 "CARD",
+							 "LAYOUT",
+							 "CARD2",
+							 620*SCREEN_PPP,
 							 100*SCREEN_PPP);
+
+	bbWidget_constructor2(&widget0,
+						 &app->widgets,
+						 "BOX",
+						 "LAYOUT",
+						 "BOX",
+						 500*SCREEN_PPP,
+						 125*SCREEN_PPP);
 
 	SP0.x = 0; SP0.y = 0;
 	//bbWidget_constructor(&widget0, &app->widgets, &home.constant.graphics,

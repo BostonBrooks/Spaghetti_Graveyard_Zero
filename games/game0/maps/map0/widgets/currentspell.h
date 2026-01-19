@@ -52,3 +52,50 @@ bbFlag CurrentSpell_Constructor (bbWidget** self, void* Graphics,
     *self = widget;
     return Success;
 }
+
+bbFlag CURRENTSPELL_Constructor2 (bbWidget** self,
+                            bbWidgets* widgets,
+                            bbWidget* parent,
+                            char* name,
+                            bbScreenPoints screen_coords,
+                            bbGraphicsApp* graphics
+                            )
+{
+
+    bbWidget* widget;
+    bbWidget_newEmpty2(&widget, widgets, parent, name);
+
+    bbScreenPointsRect rect;
+
+    rect.left = screen_coords.x;
+    rect.top = screen_coords.y;
+    rect.width = SCREEN_PPP * 36;
+    rect.height = SCREEN_PPP * 36;
+
+    widget->rect = rect;
+
+    bbPool_Handle drawfunctionHandle;
+    bbDictionary_lookup(graphics->drawfunctions->dictionary, "WIDGETSPRITE",
+                        &drawfunctionHandle);
+    widget->frames[0].drawfunction = drawfunctionHandle.u64;
+
+    bbDictionary_lookup(graphics->sprites->dictionary, "SPELLSLOT",
+                        &widget->frames[0].handle);
+
+    int funcInt;
+
+    funcInt = bbMouseFunctions_getInt(&widgets->mouse->functions,MouseIsOver,
+                                      "HOVER");
+
+    widget->mtable.isOver = funcInt;
+    widget->mtable.MouseIcon = 141;
+
+    funcInt = bbMouseFunctions_getInt(&widgets->mouse->functions,MouseLeftDown,
+                                  "CURRENTSPELL");
+    widget->mtable.LeftDown = funcInt;
+
+    widgets->currentSpell = widget;
+
+    *self = widget;
+    return Success;
+}

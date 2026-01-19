@@ -85,3 +85,53 @@ bbFlag Button_Constructor (bbWidget** self, void* graphics,
 
     return Success;
 }
+
+bbFlag BUTTON_Constructor2 (bbWidget** self,
+                            bbWidgets* widgets,
+                            bbWidget* parent,
+                            char* name,
+                            bbScreenPoints screen_coords,
+                            bbGraphicsApp* graphics
+                            )
+{
+    bbWidget* widget;
+    bbWidget_newEmpty2(&widget, widgets, parent, name);
+
+    bbScreenPointsRect rect;
+
+    rect.left = screen_coords.x;
+    rect.top = screen_coords.y;
+    rect.width = SCREEN_PPP * 75;
+    rect.height = SCREEN_PPP * 25;
+
+    widget->rect = rect;
+    bbPool_Handle drawfunctionHandle;
+    bbDictionary_lookup(graphics->drawfunctions->dictionary, "WIDGETSPRITE",
+                        &drawfunctionHandle);
+    widget->frames[0].drawfunction = drawfunctionHandle.u64;
+
+    bbDictionary_lookup(graphics->sprites->dictionary, "BUTTON_DEFAULT",
+                        &widget->frames[0].handle);
+
+    int funcInt;
+
+    funcInt = bbMouseFunctions_getInt(&widgets->mouse->functions,MouseIsOver, "BUTTON");
+    widget->mtable.isOver = funcInt;
+    funcInt = bbMouseFunctions_getInt(&widgets->mouse->functions,MouseEnter, "BUTTON");
+    widget->mtable.Enter = funcInt;
+    funcInt = bbMouseFunctions_getInt(&widgets->mouse->functions,MouseLeave, "BUTTON");
+    widget->mtable.Leave = funcInt;
+    funcInt = bbMouseFunctions_getInt(&widgets->mouse->functions,
+                                      MouseLeftDown,"BUTTON");
+    widget->mtable.LeftDown = funcInt;
+    funcInt = bbMouseFunctions_getInt(&widgets->mouse->functions,
+                                      MouseLeftUp,"BUTTON");
+    widget->mtable.LeftUp = funcInt;
+    widget->mtable.LeftDrag = -1;
+
+    widget->mtable.MouseIcon = 87;
+    widget->mtable.DragIcon = -1;
+
+    *self = widget;
+    return Success;
+}

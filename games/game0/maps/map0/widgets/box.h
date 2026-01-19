@@ -66,12 +66,74 @@ bbFlag Box_Constructor (bbWidget** self, void* graphics,
     widget->frames[0].offset.x = 0;
     widget->frames[0].offset.y = 0;
 
-    bbPool_Handle handle;
-    bbVPool_reverseLookup(widgets->pool, widget, &handle);
-    bbDictionary_add(widgets->dict, "BOX", handle);
-
     *self = widget;
 
 
+    return Success;
+}
+
+bbFlag BOX_Constructor2 (bbWidget** self,
+                            bbWidgets* widgets,
+                            bbWidget* parent,
+                            char* name,
+                            bbScreenPoints screen_coords,
+                            bbGraphicsApp* graphics
+                            )
+{
+
+    bbWidget* widget;
+    bbWidget_newEmpty2(&widget, widgets, parent, name);
+
+    bbScreenPointsRect rect;
+
+    rect.left = screen_coords.x;
+    rect.top = screen_coords.y;
+    rect.width = SCREEN_PPP * 52;
+    rect.height = SCREEN_PPP * 52;
+
+    widget->rect = rect;
+
+    bbPool_Handle drawfunctionHandle;
+    bbDictionary_lookup(graphics->drawfunctions->dictionary, "WIDGETSPRITE",
+                        &drawfunctionHandle);
+    widget->frames[0].drawfunction = drawfunctionHandle.u64;
+
+    bbDictionary_lookup(graphics->sprites->dictionary, "BOX",
+                        &widget->frames[0].handle);
+
+
+    int funcInt;
+
+    funcInt = bbMouseFunctions_getInt(&widgets->mouse->functions,MouseIsOver,
+                                      "BOX");
+    widget->mtable.isOver = funcInt;
+    funcInt = bbMouseFunctions_getInt(&widgets->mouse->functions,MouseEnter,
+                                      "BOX");
+    widget->mtable.Enter = funcInt;
+    funcInt = bbMouseFunctions_getInt(&widgets->mouse->functions,MouseLeave,
+                                      "BOX");
+    widget->mtable.Leave = funcInt;
+    funcInt = bbMouseFunctions_getInt(&widgets->mouse->functions,
+                                      MouseLeftDown,"BOX");
+    widget->mtable.LeftDown = funcInt;
+    funcInt = bbMouseFunctions_getInt(&widgets->mouse->functions,
+                                      MouseLeftUp,"BOX");
+    widget->mtable.LeftUp = funcInt;
+
+    funcInt = bbMouseFunctions_getInt(&widgets->mouse->functions,
+                                      MouseLeftDrag,"BOX");
+    widget->mtable.LeftDrag = funcInt;
+
+    widget->mtable.MouseIcon = 87;
+    widget->mtable.DragIcon = -1;
+
+    widget->frames[0].offset.x = 0;
+    widget->frames[0].offset.y = 0;
+
+    bbPool_Handle handle;
+    bbVPool_reverseLookup(widgets->pool, widget, &handle);
+    bbDictionary_add(widgets->dict, name, handle);
+
+    *self = widget;
     return Success;
 }

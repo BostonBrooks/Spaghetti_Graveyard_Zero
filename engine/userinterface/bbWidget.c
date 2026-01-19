@@ -378,7 +378,13 @@ bbFlag bbWidget_constructor2(bbWidget** self,
 	bbGraphicsApp* graphics = &home.constant.graphics;
 
 	bbWidget_Constructor2* function;
-	bbWidgetFunctions_getFunction((void**)&function,widgets->functions,WidgetConstructor2, type);
+	bbFlag flag = bbWidgetFunctions_getFunction((void**)&function,widgets->functions,WidgetConstructor2, type);
+	if (flag == None)
+	{
+		bbDebug("Constructor not found\n");
+		return None;
+	}
+
 	function(&widget, widgets, parentWidget, name, screen_points, graphics);
 	*self = widget;
 	return Success;

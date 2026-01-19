@@ -29,7 +29,25 @@
 bbFlag bbWidgetFunctions_populate(bbWidgetFunctions* self)
 {
     bbWidgetFunctions_add(self, WidgetConstructor2,
-                          SPHERE_Constructor2, "SPHERE");
+    SPHERE_Constructor2, "SPHERE");
+
+    bbWidgetFunctions_add(self, WidgetConstructor2,
+                          CARD_Constructor2, "CARD");
+
+    bbWidgetFunctions_add(self, WidgetConstructor2,
+    BOX_Constructor2, "BOX");
+
+    bbWidgetFunctions_add(self, WidgetConstructor2,
+    BUTTON_Constructor2, "BUTTON");
+
+    bbWidgetFunctions_add(self, WidgetConstructor2,
+    TOPLEFT_Constructor2, "TOPLEFT");
+
+    bbWidgetFunctions_add(self, WidgetConstructor2,
+    CURRENTSPELL_Constructor2, "CURRENTSPELL");
+
+    bbWidgetFunctions_add(self, WidgetConstructor2,
+                          CONNECTICON_Constructor2, "CONNECTICON");
 
     //typedef bbFlag bbWidget_Constructor (bbWidget** reference, void* graphics,
     //                                     bbWidgets* widgets, bbScreenPoints

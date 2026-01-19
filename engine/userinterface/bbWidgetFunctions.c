@@ -232,5 +232,6 @@ bbFlag bbWidgetFunctions_getFunction(void** function, bbWidgetFunctions* functio
         *function = functions->Unhide[handle.u64];
         return Success;
     }
-return None;
+    *function = NULL;
+    return None;
 }
