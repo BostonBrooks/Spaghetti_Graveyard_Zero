@@ -54,8 +54,10 @@ bbFlag bbUIApp_spawnWidgets(bbUIApp* app)
     bbWidget_newLayout(&layout, &home.constant.graphics, &app->widgets, NULL);
     bbWidget* viewportWidget;
     //Does not need to be listed in constructor table
-    bbWidget_newViewport(&viewportWidget, &home.constant.graphics, &app->widgets, layout,
-                         &home.private.viewportApp.viewport);
+
+
+	bbWidget_newViewport(&viewportWidget, &home.constant.graphics, &app->widgets, layout,
+						 &home.private.viewportApp.viewport);
 
 
     bbWidget* widget0;
@@ -64,22 +66,15 @@ bbFlag bbUIApp_spawnWidgets(bbUIApp* app)
     bbScreenPoints SP0;
 
 
-    SP0.x = 58*SCREEN_PPP; SP0.y = 100*SCREEN_PPP;
-    bbWidget_constructor(&widget1, &app->widgets, &home.constant.graphics,
-                         SP0, layout,"SPELLMENU");
 
-
-    SP0.x = 97*SCREEN_PPP; SP0.y = 422*SCREEN_PPP;
-    bbWidget_constructor(&widget0, &app->widgets, &home.constant.graphics,
-                        SP0, layout,"SPELLBAR");
-
-
+	bbPool_Handle handle;
+/*
 
     SP0.x = 497*SCREEN_PPP; SP0.y = 12*SCREEN_PPP;
     bbWidget_constructor(&app->widgets.dialog, &app->widgets, &home.constant.graphics,
                          SP0, layout, "TEXTBOX");
 
-    bbPool_Handle handle;
+
     bbVPool_reverseLookup(app->widgets.pool, app->widgets.dialog, &handle);
     bbDictionary_add(app->widgets.dict, "DIALOG", handle);
 
@@ -114,7 +109,7 @@ bbFlag bbUIApp_spawnWidgets(bbUIApp* app)
 	bounds.i32x2.y = 1;
 	bbWidget_onCommand(app->widgets.command, &app->widgets, bbWC_setBounds, bounds);
 
-
+*/
 	/*
 	SP0.x = 58*SCREEN_PPP; SP0.y = 100*SCREEN_PPP;
 	bbWidget_constructor(&widget1, &app->widgets, &home.constant.graphics,
@@ -124,6 +119,39 @@ bbFlag bbUIApp_spawnWidgets(bbUIApp* app)
 
 	bbVPool_reverseLookup(app->widgets.pool, layout, &handle);
 	bbDictionary_add(app->widgets.dict, "LAYOUT", handle);
+
+	bbWidget_constructor2(&widget0,
+			 &app->widgets,
+			 "GAME",
+			 "LAYOUT",
+			 "GAME2",
+			 0,
+			 0);
+/*
+	SP0.x = 58*SCREEN_PPP; SP0.y = 100*SCREEN_PPP;
+	bbWidget_constructor(&widget1, &app->widgets, &home.constant.graphics,
+						 SP0, layout,"SPELLMENU");
+*/
+	bbWidget_constructor2(&widget0,
+		 &app->widgets,
+		 "SPELLMENU",
+		 "LAYOUT",
+		 "SPELLMENU",
+		 58*SCREEN_PPP,
+		 100*SCREEN_PPP);
+
+/*
+	SP0.x = 97*SCREEN_PPP; SP0.y = 422*SCREEN_PPP;
+	bbWidget_constructor(&widget0, &app->widgets, &home.constant.graphics,
+						SP0, layout,"SPELLBAR");
+*/
+	bbWidget_constructor2(&widget0,
+			 &app->widgets,
+			 "SPELLBAR",
+			 "LAYOUT",
+			 "SPELLBAR2",
+			 97*SCREEN_PPP,
+			 422*SCREEN_PPP);
 
 	bbWidget_constructor2(&widget0,
 				 &app->widgets,

@@ -23,6 +23,7 @@
 #include "games/game0/maps/map0/widgets/topleft.h"
 #include "games/game0/maps/map0/widgets/connectbuttons.h"
 #include "games/game0/maps/map0/widgets/animationtest.h"
+#include "games/game0/maps/map0/widgets/gamewidget.h"
 
 
 
@@ -56,7 +57,45 @@ bbFlag bbWidgetFunctions_populate(bbWidgetFunctions* self)
     TEXTBOX_Constructor2, "TEXTBOX");
 
     bbWidgetFunctions_add(self, WidgetConstructor2,
-                          CONNECTMENU_Constructor2, "CONNECTMENU");
+    CONNECTMENU_Constructor2, "CONNECTMENU");
+
+    bbWidgetFunctions_add(self, WidgetConstructor2,
+    CONNECTBUTTON_Constructor2, "CONNECTBUTTON");
+
+    bbWidgetFunctions_add(self, WidgetConstructor2,
+    DISCONNECTBUTTON_Constructor2, "DISCONNECTBUTTON");
+
+    bbWidgetFunctions_add(self, WidgetConstructor2,
+    NEWSERVER_Constructor2, "NEWSERVER");
+
+
+    bbWidgetFunctions_add(self, WidgetConstructor2,
+    SPELLSLOT_Constructor2, "SPELLSLOT");
+
+    bbWidgetFunctions_add(self, WidgetConstructor2,
+    SPELLBAR_Constructor2, "SPELLBAR");
+
+    bbWidgetFunctions_add(self, WidgetConstructor2,
+    SPELLSELECT1_Constructor2, "SPELLSELECT1");
+
+    bbWidgetFunctions_add(self, WidgetConstructor2,
+    SPELLSELECT2_Constructor2, "SPELLSELECT2");
+
+    bbWidgetFunctions_add(self, WidgetConstructor2,
+    SPELLSELECT3_Constructor2, "SPELLSELECT3");
+
+    bbWidgetFunctions_add(self, WidgetConstructor2,
+    SPELLSELECT4_Constructor2, "SPELLSELECT4");
+
+    bbWidgetFunctions_add(self, WidgetConstructor2,
+    SPELLSELECT_Constructor2, "SPELLSELECT");
+
+    bbWidgetFunctions_add(self, WidgetConstructor2,
+    SPELLMENU_Constructor2, "SPELLMENU");
+
+
+    bbWidgetFunctions_add(self, WidgetConstructor2,
+                          GAME_Constructor2, "GAME");
 
     //typedef bbFlag bbWidget_Constructor (bbWidget** reference, void* graphics,
     //                                     bbWidgets* widgets, bbScreenPoints
