@@ -31,6 +31,10 @@ int main(void)
     spawnEverything();
 
     home.private.mapTime = 0;
+
+
+    bbCore_incrementClock(&core, true);
+    bbCore_react(&core);
     while (1)
     {
 /* We're not playing with network or networktime right now
