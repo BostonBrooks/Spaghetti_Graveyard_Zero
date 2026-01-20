@@ -23,6 +23,7 @@
 #include "games/game0/maps/map0/widgets/topleft.h"
 #include "games/game0/maps/map0/widgets/connectbuttons.h"
 #include "games/game0/maps/map0/widgets/animationtest.h"
+#include "games/game0/maps/map0/widgets/gamewidget.h"
 
 
 
@@ -56,7 +57,19 @@ bbFlag bbWidgetFunctions_populate(bbWidgetFunctions* self)
     TEXTBOX_Constructor2, "TEXTBOX");
 
     bbWidgetFunctions_add(self, WidgetConstructor2,
-                          CONNECTMENU_Constructor2, "CONNECTMENU");
+    CONNECTMENU_Constructor2, "CONNECTMENU");
+
+    bbWidgetFunctions_add(self, WidgetConstructor2,
+    CONNECTBUTTON_Constructor2, "CONNECTBUTTON");
+
+    bbWidgetFunctions_add(self, WidgetConstructor2,
+    DISCONNECTBUTTON_Constructor2, "DISCONNECTBUTTON");
+
+    bbWidgetFunctions_add(self, WidgetConstructor2,
+    NEWSERVER_Constructor2, "NEWSERVER");
+
+    bbWidgetFunctions_add(self, WidgetConstructor2,
+                          GAME_Constructor2, "GAME");
 
     //typedef bbFlag bbWidget_Constructor (bbWidget** reference, void* graphics,
     //                                     bbWidgets* widgets, bbScreenPoints
