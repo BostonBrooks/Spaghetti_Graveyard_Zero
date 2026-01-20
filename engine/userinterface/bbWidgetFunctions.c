@@ -69,7 +69,7 @@ bbFlag bbWidgetFunctions_add(bbWidgetFunctions* functions, bbWidgetFunctionType 
 
     U32 available;
     bbPool_Handle handle;
-    I32 magic_number = 256;
+    I32 magic_number = nextPrime(256);
     switch (fnType)
     {
     case WidgetConstructor:
