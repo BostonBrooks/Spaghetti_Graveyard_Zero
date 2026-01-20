@@ -37,8 +37,9 @@ Old Layout
 New Layout:
 
 LAYOUT
+     //I had wanted VIEWPORT to be in GAME, but it cause a glitch
+    VIEWPORT
     GAME
-        VIEWPORT
         DIALOG
         PROMPT
         COMMAND

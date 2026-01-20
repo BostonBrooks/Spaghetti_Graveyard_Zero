@@ -66,7 +66,7 @@ if gcc   -fsanitize=address -fno-omit-frame-pointer -g -I ../\
 then
     echo "Compile Succeeded:"
     cd ../games/game0/
-    ./game.out
+    gdb ./game.out
 else
     echo "Compile Failed!"
     #exit

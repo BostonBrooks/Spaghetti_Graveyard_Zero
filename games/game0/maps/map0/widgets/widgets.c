@@ -68,6 +68,15 @@ bbFlag bbWidgetFunctions_populate(bbWidgetFunctions* self)
     bbWidgetFunctions_add(self, WidgetConstructor2,
     NEWSERVER_Constructor2, "NEWSERVER");
 
+
+    bbWidgetFunctions_add(self, WidgetConstructor2,
+    SPELLSLOT_Constructor2, "SPELLSLOT");
+
+    bbWidgetFunctions_add(self, WidgetConstructor2,
+    SPELLBAR_Constructor2, "SPELLBAR");
+
+
+
     bbWidgetFunctions_add(self, WidgetConstructor2,
                           GAME_Constructor2, "GAME");
 
