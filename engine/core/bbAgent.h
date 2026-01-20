@@ -54,13 +54,8 @@ typedef struct
 
 } bbAgent;
 
-typedef struct
-{
-    bbSquareCoords coords;
-    bbList list;
-} bbAgentsSquare;
 
-typedef bbFlag bbAgent_Update (bbAgent* agent, void* unused);
+typedef bbFlag bbAgent_Update (bbAgent* agent, void* agents);
 typedef bbFlag bbAgent_OnCommand (bbAgent* agent, bbAgentCommandType type, bbPool_Handle data);
 typedef bbFlag bbAgent_Constructor (bbAgent* agent, struct bbAgents* agents, bbMapCoords coords);
 
@@ -86,27 +81,23 @@ typedef struct
 typedef struct bbAgents
 {
     bbVPool* pool;
-    //here goes bbAgents that don't fit into any squares
     bbList list;
     
     bbAgentFunctions functions;
     
     bbDictionary* agent_type_dict;
     bbAgentType agent_types[2];
-    
-    
-    
 
-    I32 squares_i;
-    I32 squares_j;
-    bbAgentsSquare squares[];
 
+    //I was going to put agents into squares but then I decided not to :P
+    //if an agent is looking for something to react to, it can search through bbUnit squares
 } bbAgents;
 
 
 
 
-bbFlag bbAgents_new(bbAgents* agents);
+bbFlag bbAgents_new(bbAgents* agents, I32 squares_i, I32 squares_j);
+
 
 bbFlag bbAgent_constructor(bbAgent** self,
                            bbAgents* agents,
@@ -115,11 +106,12 @@ bbFlag bbAgent_constructor(bbAgent** self,
                            char* name,
                            bbMapCoords coords);
 
+bbFlag bbAgent_new(bbAgent** self, bbAgents* agents, bbMapCoords coords, char* key);
 bbFlag bbAgent_onCommand(bbAgent* self, bbAgents* agents, bbAgentCommandType type, bbPool_Handle data);
 bbFlag bbAgent_update(bbAgent* self, bbAgents* agents);
 
 
-bbFlag bbAgentFunctions_new(bbAgentFunctions** self);
+bbFlag bbAgentFunctions_init(bbAgentFunctions* self);
 bbFlag bbAgentFunctions_populate(bbAgentFunctions* self);
 bbFlag bbAgentFunctions_add(bbAgentFunctions* functions, bbAgentFunctionType fnType, void* fnPointer, char* key );
 bbFlag bbAgentFunctions_getFunction(void** function, bbAgentFunctions* functions, bbAgentFunctionType fnType, char* key);
