@@ -42,14 +42,14 @@ typedef struct
 
 typedef struct
 {
-    //ints are easier to serialise
+    //ints are easier to serialize
     I32 type;
     bbAgentState state;
     bbPool_Handle targetUnit;
     bbMapCoords targetCoords;
     bbMapCoords position;
     bbPool_Handle unit;
-    I32 moveable;
+    bbPool_Handle moveable;
     
 
 } bbAgent;
@@ -57,7 +57,7 @@ typedef struct
 
 typedef bbFlag bbAgent_Update (bbAgent* agent, void* agents);
 typedef bbFlag bbAgent_OnCommand (bbAgent* agent, bbAgentCommandType type, bbPool_Handle data);
-typedef bbFlag bbAgent_Constructor (bbAgent* agent, struct bbAgents* agents, bbMapCoords coords);
+typedef bbFlag bbAgent_Constructor (bbAgent** agent, struct bbAgents* agents, bbMapCoords coords, char* name);
 
 typedef struct
 {
@@ -84,7 +84,7 @@ typedef struct bbAgents
     bbList list;
     
     bbAgentFunctions functions;
-    
+    bbDictionary*  named_agents;
     bbDictionary* agent_type_dict;
     bbAgentType agent_types[2];
 
@@ -106,7 +106,13 @@ bbFlag bbAgent_constructor(bbAgent** self,
                            char* name,
                            bbMapCoords coords);
 
-bbFlag bbAgent_new(bbAgent** self, bbAgents* agents, bbMapCoords coords, char* key);
+bbFlag bbAgent_newEmpty(bbAgent** self,
+                           bbAgents* agents,
+                           //not all units need to be named
+                           char* name,
+                           bbMapCoords coords);
+
+//bbFlag bbAgent_new(bbAgent** self, bbAgents* agents, bbMapCoords coords, char* key);
 bbFlag bbAgent_onCommand(bbAgent* self, bbAgents* agents, bbAgentCommandType type, bbPool_Handle data);
 bbFlag bbAgent_update(bbAgent* self, bbAgents* agents);
 

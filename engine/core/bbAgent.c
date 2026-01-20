@@ -1,5 +1,7 @@
 #include "engine/core/bbAgent.h"
 
+
+
 bbFlag bbAgentFunctions_init(bbAgentFunctions* functions)
 {
     I32 magic_number = nextPrime(256);
@@ -98,3 +100,26 @@ bbFlag bbAgent_update(bbAgent* agent, bbAgents* agents)
     return function(agent, (void*) agents);
 }
 
+bbFlag bbAgent_constructor(bbAgent** self,
+                           bbAgents* agents,
+                           char* type,
+                           //not all units need to be named
+                           char* name,
+                           bbMapCoords coords)
+{
+    bbAgent* agent;
+    bbAgent_Constructor* constructor;
+    bbPool_Handle handle;
+    bbDictionary_lookup(agents->functions.Constructor_dict, type, &handle);
+    constructor = agents->functions.Constructor[handle.u64];
+    constructor(&agent, agents, coords, name);
+    return Success;
+}
+
+bbFlag bbAgent_onCommand(bbAgent* agent, bbAgents* agents, bbAgentCommandType type, bbPool_Handle data)
+{
+    I32 agentTypeInt = agent->type;
+    bbAgentType* agentType = &agents->agent_types[agentTypeInt];
+    bbAgent_OnCommand* function = agents->functions.OnCommand[agentTypeInt];
+    return function(agent, type, data);
+}
