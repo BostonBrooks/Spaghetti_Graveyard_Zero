@@ -127,10 +127,18 @@ bbFlag bbUIApp_spawnWidgets(bbUIApp* app)
 			 "GAME2",
 			 0,
 			 0);
-
+/*
 	SP0.x = 58*SCREEN_PPP; SP0.y = 100*SCREEN_PPP;
 	bbWidget_constructor(&widget1, &app->widgets, &home.constant.graphics,
 						 SP0, layout,"SPELLMENU");
+*/
+	bbWidget_constructor2(&widget0,
+		 &app->widgets,
+		 "SPELLMENU",
+		 "LAYOUT",
+		 "SPELLMENU",
+		 58*SCREEN_PPP,
+		 100*SCREEN_PPP);
 
 /*
 	SP0.x = 97*SCREEN_PPP; SP0.y = 422*SCREEN_PPP;

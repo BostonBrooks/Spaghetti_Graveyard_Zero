@@ -75,6 +75,23 @@ bbFlag bbWidgetFunctions_populate(bbWidgetFunctions* self)
     bbWidgetFunctions_add(self, WidgetConstructor2,
     SPELLBAR_Constructor2, "SPELLBAR");
 
+    bbWidgetFunctions_add(self, WidgetConstructor2,
+    SPELLSELECT1_Constructor2, "SPELLSELECT1");
+
+    bbWidgetFunctions_add(self, WidgetConstructor2,
+    SPELLSELECT2_Constructor2, "SPELLSELECT2");
+
+    bbWidgetFunctions_add(self, WidgetConstructor2,
+    SPELLSELECT3_Constructor2, "SPELLSELECT3");
+
+    bbWidgetFunctions_add(self, WidgetConstructor2,
+    SPELLSELECT4_Constructor2, "SPELLSELECT4");
+
+    bbWidgetFunctions_add(self, WidgetConstructor2,
+    SPELLSELECT_Constructor2, "SPELLSELECT");
+
+    bbWidgetFunctions_add(self, WidgetConstructor2,
+    SPELLMENU_Constructor2, "SPELLMENU");
 
 
     bbWidgetFunctions_add(self, WidgetConstructor2,
