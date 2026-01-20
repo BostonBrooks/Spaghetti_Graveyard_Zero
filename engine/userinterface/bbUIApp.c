@@ -202,8 +202,10 @@ bbFlag bbUIApp_spawnWidgets(bbUIApp* app)
 						 125*SCREEN_PPP);
 
 	SP0.x = 0; SP0.y = 0;
-	//bbWidget_constructor(&widget0, &app->widgets, &home.constant.graphics,
-	//					 SP0, layout, "ANIMATIONTEST");
+	bbWidget_constructor(&widget0, &app->widgets, &home.constant.graphics,
+						 SP0, layout, "ANIMATIONTEST");
+
+	return Success;
 }
 
 bbFlag bbUIApp_init(bbUIApp* app)
