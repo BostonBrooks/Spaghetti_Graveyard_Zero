@@ -17,6 +17,7 @@ if gcc   -fsanitize=address -fno-omit-frame-pointer -g -I ../\
        ../engine/core/bbCore.c\
        ../engine/core/bbCoreInputs.c\
        ../engine/core/bbInstruction.c\
+       ../engine/core/bbAgent.c\
        ../engine/avoidance/bbAvoidables.c\
        ../engine/geometry/bbCoordinates.c\
        ../engine/geometry/bbViewportCoords.c\
@@ -60,6 +61,7 @@ if gcc   -fsanitize=address -fno-omit-frame-pointer -g -I ../\
        ../games/game0/maps/map0/mouse/mouse.c\
        ../games/game0/maps/map0/spells/spells.c\
        ../games/game0/maps/map0/widgets/widgets.c\
+       ../games/game0/maps/map0/agents/agents.c\
        \
   -lcsfml-system -lcsfml-graphics -lcsfml-window  -lcsfml-network -lm -w\
   -o ../games/game0/game.out;

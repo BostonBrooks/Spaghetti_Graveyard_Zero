@@ -93,6 +93,8 @@ typedef struct bbAgents
     bbDictionary*  named_agents;
     bbDictionary* agent_type_dict;
 
+    bbAgent* player;
+
 
     //I was going to put agents into squares but then I decided not to :P
     //if an agent is looking for something to react to, it can search through bbUnit squares

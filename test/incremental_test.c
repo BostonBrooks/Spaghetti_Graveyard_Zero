@@ -29,11 +29,12 @@ int main(void)
     //fix this after migrating from Incremental_test.c to bbUIApp_test.c
     bbUIApp_init(&home.private.UI);
     bbViewportApp_init(&home.private.viewportApp);
+    bbAgents_new(&home.shared.agents, 12, 12,256);
     spawnEverything();
+
 
     home.private.mapTime = 0;
 
-    //bbAgents_new(&home.shared.agents, 12, 12,256);
 
     bbCore_incrementClock(&core, true);
     bbCore_react(&core);

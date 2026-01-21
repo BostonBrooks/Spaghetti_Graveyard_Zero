@@ -42,15 +42,9 @@ bbFlag spawnEverything(void)
             MC.i += rand()%(100 * POINTS_PER_PIXEL);
             MC.j += rand()%(100 * POINTS_PER_PIXEL);
 
-            bbUnit* unit;
-            bbUnit_new(&unit,app->units, &home.constant.graphics,MC);
-            bbPool_Handle handle;
-            bbVPool_reverseLookup(app->units->pool,unit,  &handle);
-            bbMoveables_attachUnit(&home.shared.core->moveables, handle);
+            bbAgent* agent;
+            bbAgent_constructor(&agent, home.shared.agents, "TEST", "TEST", MC);
 
-//test
-            bbUnit* testunit;
-            bbVPool_lookup(home.private.viewportApp.units->pool, (void**)&testunit, handle);
         }
     }
 
@@ -58,4 +52,15 @@ bbFlag spawnEverything(void)
     bbUnit_newCat(&player, app->units, &home.constant.graphics,
                home.private.viewportApp.viewport.viewpoint);
     home.shared.player = player;
+
+    bbMapCoords MC;
+    MC.i = 10200;
+    MC.j = 10200;
+    MC.k = 0;
+
+    bbAgent* agent;
+    bbAgent_constructor(&home.shared.agents->player, home.shared.agents, "PLAYER", "PLAYER", MC);
+
+    return Success;
 }
+
