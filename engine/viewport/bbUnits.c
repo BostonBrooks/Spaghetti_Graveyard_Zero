@@ -23,7 +23,7 @@ bbFlag bbUnit_new(bbUnit** self,bbUnits* units, bbGraphicsApp* graphics,
                         &drawfunctionHandle);
 
     unit->drawable.frames[0].drawfunction = drawfunctionHandle.u64;
-    unit->drawable.frames[0].handle.u64 = 9;
+    unit->drawable.frames[0].handle.u64 = 10; //ZOMBIE
     unit->drawable.frames[0].startTime = -(rand()%6);
     unit->drawable.frames[0].framerate = 1;
     unit->drawable.rotation = 0;

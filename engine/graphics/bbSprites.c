@@ -76,6 +76,7 @@ bbFlag bbSprites_new(bbSprites** self, bbTextures* textures, char* filePath,
 
 	bbSprites* sprites = malloc(sizeof(bbSprites) + num * sizeof (sfSprite*));
 
+
 	sprites->numSprites = num;
     bbDictionary_new(&sprites->dictionary, nextPrime(num));
 
