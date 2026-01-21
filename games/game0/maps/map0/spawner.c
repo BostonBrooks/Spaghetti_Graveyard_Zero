@@ -43,7 +43,7 @@ bbFlag spawnEverything(void)
             MC.j += rand()%(100 * POINTS_PER_PIXEL);
 
             bbAgent* agent;
-            bbAgent_constructor(&agent, home.shared.agents, "TEST", "TEST", MC);
+            bbAgent_constructor(&agent, home.shared.agents, "SKELETON", "SKELETON", MC);
 
         }
     }

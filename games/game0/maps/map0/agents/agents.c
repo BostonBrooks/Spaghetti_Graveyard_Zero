@@ -5,7 +5,7 @@
 #include "engine/logic/bbVPool.h"
 
 //typedef bbFlag bbAgent_Constructor (bbAgent** agent, struct bbAgents* agents, bbMapCoords coords, char* name);
-bbFlag bbAgent_Constructor_TEST(bbAgent** self, struct bbAgents* agents, bbMapCoords coords, char* name)
+bbFlag bbAgent_Constructor_SKELETON(bbAgent** self, struct bbAgents* agents, bbMapCoords coords, char* name)
 {
     bbHere();
     bbAgent* agent;
@@ -70,7 +70,7 @@ bbFlag bbAgent_Constructor_PLAYER(bbAgent** self, struct bbAgents* agents, bbMap
 
 bbFlag bbAgentFunctions_populate(bbAgentFunctions* self)
 {
-    bbAgentFunctions_add(self, AgentConstructor,bbAgent_Constructor_TEST, "TEST");
+    bbAgentFunctions_add(self, AgentConstructor,bbAgent_Constructor_SKELETON, "SKELETON");
     bbAgentFunctions_add(self, AgentConstructor,bbAgent_Constructor_PLAYER, "PLAYER");
     return Success;
 }
