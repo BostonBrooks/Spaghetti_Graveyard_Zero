@@ -157,7 +157,7 @@ bbFlag bbAgent_constructor(bbAgent** self,
     bbFlag flag = bbDictionary_lookup(agents->functions.Constructor_dict, type, &handle);
     if (flag == None) return None;
     constructor = agents->functions.Constructor[handle.u64];
-    constructor(&agent, agents, coords, name);
+    constructor(&agent, (void*)agents, coords, name);
     return Success;
 }
 

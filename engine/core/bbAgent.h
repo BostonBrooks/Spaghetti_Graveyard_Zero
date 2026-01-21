@@ -58,7 +58,7 @@ typedef struct
 
 typedef bbFlag bbAgent_Update (bbAgent* agent, void* agents);
 typedef bbFlag bbAgent_OnCommand (bbAgent* agent, bbAgentCommandType type, bbPool_Handle data);
-typedef bbFlag bbAgent_Constructor (bbAgent** agent, struct bbAgents* agents, bbMapCoords coords, char* name);
+typedef bbFlag bbAgent_Constructor (bbAgent** agent, void* agents, bbMapCoords coords, char* name);
 
 typedef struct
 {

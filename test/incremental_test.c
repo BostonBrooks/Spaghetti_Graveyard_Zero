@@ -33,7 +33,7 @@ int main(void)
 
     home.private.mapTime = 0;
 
-    bbAgents_new(&home.shared.agents, 12, 12,256);
+    //bbAgents_new(&home.shared.agents, 12, 12,256);
 
     bbCore_incrementClock(&core, true);
     bbCore_react(&core);
