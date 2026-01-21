@@ -4,7 +4,7 @@
 #include "engine/data/bbHome.h"
 #include "engine/logic/bbBloatedPool.h"
 #include "engine/geometry/bbCoordinates.h"
-
+extern bbMapCoords testGoalPoint;
 
 bbMilliCoords getForce(bbMoveables* moveables, bbMoveable* moveableA, bbMoveable* moveableB)
 {
@@ -101,7 +101,12 @@ bbFlag bbMoveables_attachUnit(bbMoveables* moveables, bbPool_Handle handle)
     {
         if (moveables->moveables[i].type == MoveableType_Unused)
         {
-            moveables->moveables[i].type = MoveableType_None;
+
+            bbUnit* unit;
+            bbVPool_lookup(home.private.viewportApp.units->pool, (void**)&unit, handle);
+
+
+            moveables->moveables[i].type = unit->moveableType;
             moveables->moveables[i].unit = handle;
 
             return Success;
@@ -129,7 +134,12 @@ bbFlag bbMoveables_getInput(bbMoveables* moveables)
         moveable->coordsOriginal = mC;
 
         //mapCoords = unit->goalPoint;
-        mapCoords = home.private.viewportApp.viewport.viewpoint;
+        if (moveable->type == MoveableType_MovingToViewpoint)
+            mapCoords = home.private.viewportApp.viewport.viewpoint;
+        if (moveable->type == MoveableType_MovingToGoalPoint)
+        {
+            mapCoords = testGoalPoint;
+        }
         mC = bbMapCoords_getMilliCoords(mapCoords);
         moveable->goalPoint = mC;
 
@@ -149,7 +159,11 @@ bbFlag bbMoveables_updateOnce(bbMoveables* moveables)
         {
             bbMoveable* moveable = &moveables->moveables[i];
 
-            if (moveable->type != MoveableType_Moving) continue;
+            if (
+                moveable->type != MoveableType_MovingToViewpoint
+                &&
+                moveable->type != MoveableType_MovingToGoalPoint
+                ) continue;
 
             bbMilliCoords currentLocation = moveable->coordsA;
             bbMilliCoords goalPoint = moveable->goalPoint;
@@ -182,7 +196,11 @@ bbFlag bbMoveables_updateOnce(bbMoveables* moveables)
         {
             bbMoveable* moveable = &moveables->moveables[i];
 
-            if (moveable->type != MoveableType_Moving) continue;
+            if (
+                moveable->type != MoveableType_MovingToViewpoint
+                &&
+                moveable->type != MoveableType_MovingToGoalPoint
+                ) continue;
 
             bbMilliCoords currentLocation = moveable->coordsB;
             bbMilliCoords goalPoint = moveable->goalPoint;
@@ -228,7 +246,11 @@ bbFlag bbMoveables_putOutput(bbMoveables* moveables)
         {
             bbMoveable* moveable = &moveables->moveables[i];
 
-            if (moveable->type != MoveableType_Moving) continue;
+            if (
+                moveable->type != MoveableType_MovingToViewpoint
+                &&
+                moveable->type != MoveableType_MovingToGoalPoint
+                ) continue;
 
             bbUnit* unit;
             bbVPool_lookup(home.private.viewportApp.units->pool, (void**)&unit, moveable->unit);
@@ -248,7 +270,11 @@ bbFlag bbMoveables_putOutput(bbMoveables* moveables)
         {
             bbMoveable* moveable = &moveables->moveables[i];
 
-            if (moveable->type != MoveableType_Moving) continue;
+            if (
+                moveable->type != MoveableType_MovingToViewpoint
+                &&
+                moveable->type != MoveableType_MovingToGoalPoint
+                ) continue;
 
             bbUnit* unit;
             bbVPool_lookup(home.private.viewportApp.units->pool, (void**)&unit, moveable->unit);
@@ -277,7 +303,11 @@ bbFlag bbMoveables_putOutput_Core(bbMoveables* moveables)
         {
             bbMoveable* moveable = &moveables->moveables[i];
 
-            if (moveable->type != MoveableType_Moving) continue;
+            if (
+                moveable->type != MoveableType_MovingToViewpoint
+                &&
+                moveable->type != MoveableType_MovingToGoalPoint
+                ) continue;
 
             bbMapCoords mapCoords; bbMilliCoords mC;
 
@@ -303,7 +333,11 @@ bbFlag bbMoveables_putOutput_Core(bbMoveables* moveables)
         {
             bbMoveable* moveable = &moveables->moveables[i];
 
-            if (moveable->type != MoveableType_Moving) continue;
+            if (
+                moveable->type != MoveableType_MovingToViewpoint
+                &&
+                moveable->type != MoveableType_MovingToGoalPoint
+                ) continue;
 
             bbMapCoords mapCoords; bbMilliCoords mC;
 

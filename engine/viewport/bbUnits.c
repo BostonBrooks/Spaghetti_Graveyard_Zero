@@ -35,7 +35,7 @@ bbFlag bbUnit_new(bbUnit** self,bbUnits* units, bbGraphicsApp* graphics,
 
     bbList_sortL(&unitSquare.list, unit);
 
-    unit->moveableType = MoveableType_Moving;
+    unit->moveableType = MoveableType_MovingToViewpoint;
 
     *self = unit;
     return Success;

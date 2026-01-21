@@ -19,6 +19,8 @@ bbFlag bbAgent_Constructor_SKELETON(bbAgent** self, struct bbAgents* agents, bbM
 
     bbUnit* unit;
     bbUnit_new(&unit, home.private.viewportApp.units, &home.constant.graphics,coords);
+
+    unit->moveableType = MoveableType_MovingToViewpoint;
     bbPool_Handle handle;
     bbVPool_reverseLookup(home.private.viewportApp.units->pool, unit, &handle);
 
@@ -50,6 +52,7 @@ bbFlag bbAgent_Constructor_PLAYER(bbAgent** self, struct bbAgents* agents, bbMap
     bbUnit* unit;
     bbUnit_new(&unit, home.private.viewportApp.units, &home.constant.graphics,coords);
     unit->drawable.frames[0].handle.u64 = 7;
+    unit->moveableType = MoveableType_MovingToGoalPoint;
 
     bbPool_Handle handle;
     bbVPool_reverseLookup(home.private.viewportApp.units->pool, unit, &handle);

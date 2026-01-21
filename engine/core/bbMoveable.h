@@ -17,7 +17,9 @@ typedef enum
     //Can be pushed around
     MoveableType_Stationary,
     //Can move and push things around
-    MoveableType_Moving,
+    MoveableType_MovingToViewpoint,
+
+    MoveableType_MovingToGoalPoint
 
 } bbMoveable_type;
 

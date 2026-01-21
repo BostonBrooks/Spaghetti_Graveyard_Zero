@@ -129,7 +129,48 @@ bbFlag bbInstruction_unsetGoalPoint_fn(bbCore* core, bbInstruction* instruction)
     return Success;
 }
 
+bbFlag bbInstruction_ViewpointToPlayer_fn(bbCore* core, bbInstruction* instruction)
+{
+    bbAgent* agent = home.shared.agents->player;
+    bbPool_Handle handle = agent->unit;
 
+    bbUnit* unit;
+    bbVPool_lookup(home.private.viewportApp.units->pool,(void**)&unit, handle);
+    bbMapCoords newViewpoint = unit->drawable.coords;
+
+
+    bbMapCoords oldViewpoint;
+    oldViewpoint.i = home.private.viewportApp.viewport.viewpoint.i;
+    oldViewpoint.j = home.private.viewportApp.viewport.viewpoint.j;
+    oldViewpoint.k = home.private.viewportApp.viewport.viewpoint.k;
+
+    home.private.viewportApp.viewport.viewpoint = newViewpoint;
+
+    bbInstruction* undoInstruction;
+    bbVPool_alloc(core->pool, (void**)&undoInstruction);
+    undoInstruction->type = bbInstruction_unupdateViewpoint;
+    undoInstruction->data.mapCoords.i = oldViewpoint.i;
+    undoInstruction->data.mapCoords.j = oldViewpoint.j;
+    undoInstruction->data.mapCoords.k = oldViewpoint.k;
+    undoInstruction->isInput = instruction->isInput;
+
+    if (!instruction->isInput)
+    {
+        bbVPool_free(core->pool, instruction);
+        undoInstruction->redo = core->pool->null;
+    } else
+    {
+        bbPool_Handle handle;
+        bbVPool_reverseLookup(core->pool, instruction, &handle);
+        undoInstruction->redo = handle;
+
+        instruction->listElement.prev = core->pool->null;
+        instruction->listElement.next = core->pool->null;
+    }
+
+
+    bbList_pushL(&core->undoStack, undoInstruction);
+}
 
 bbFlag bbInstruction_updateViewpoint_fn(bbCore* core, bbInstruction* instruction)
 {
