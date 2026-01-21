@@ -47,7 +47,7 @@ bbFlag bbAgent_Constructor_PLAYER(bbAgent** self, struct bbAgents* agents, bbMap
 
     bbUnit* unit;
     bbUnit_new(&unit, home.private.viewportApp.units, &home.constant.graphics,coords);
-    unit->drawable.frames[0].handle.u64 = 9;
+    unit->drawable.frames[0].handle.u64 = 10;
     unit->moveableType = MoveableType_MovingToGoalPoint;
 
     bbPool_Handle handle;
