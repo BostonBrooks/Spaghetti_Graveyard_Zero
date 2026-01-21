@@ -133,7 +133,6 @@ bbFlag bbInstruction_ViewpointToPlayer_fn(bbCore* core, bbInstruction* instructi
 {
     bbAgent* agent = home.shared.agents->player;
 
-    bbDebug("agent = %p\n", agent);
     bbPool_Handle handle = agent->unit;
 
     bbUnit* unit;

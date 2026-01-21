@@ -36,10 +36,6 @@ bbMilliCoords getForce(bbMoveables* moveables, bbMoveable* moveableA, bbMoveable
     mC.j = ((delta_j)/(distanceReduced2*distanceReduced*distanceReduced));
     mC.k = 0;
 
-    if (distance < 4*MILLS_PER_TILE)
-    {
-        bbDebug("force.i = %lld, force.j = %lld, distance = %f\n", mC.i, mC.j, distance);
-    }
     return mC;
 }
 
@@ -173,20 +169,19 @@ bbFlag bbMoveables_updateOnce(bbMoveables* moveables)
 
             double distance = sqrt(distance_i * distance_i + distance_j * distance_j);
 
-            if (distance < 1024)
+            if (distance < 2048)
             {
                 moveable->coordsB = goalPoint;
+            } else
+            {
+                double delta_i = distance_i / distance * 2048;
+                double delta_j = distance_j / distance * 2048;
+
+                bbMilliCoords forces = sumForces(moveables, moveable);
+
+                moveable->coordsB.i = currentLocation.i + delta_i + forces.i;
+                moveable->coordsB.j = currentLocation.j + delta_j + forces.j;
             }
-
-            double delta_i = distance_i / distance * 1024;
-            double delta_j = distance_j / distance * 1024;
-
-            bbMilliCoords forces = sumForces(moveables, moveable);
-
-            moveable->coordsB.i = currentLocation.i + delta_i + forces.i;
-            moveable->coordsB.j = currentLocation.j + delta_j + forces.j;
-
-
         }
         moveables->useCoordsA = false;
         return Success;
@@ -213,15 +208,17 @@ bbFlag bbMoveables_updateOnce(bbMoveables* moveables)
             if (distance < 2048)
             {
                 moveable->coordsA = goalPoint;
+
+            } else
+            {
+                double delta_i = distance_i / distance * 2048;
+                double delta_j = distance_j / distance * 2048;
+
+                bbMilliCoords forces = sumForces(moveables, moveable);
+
+                moveable->coordsA.i = currentLocation.i + delta_i + forces.i;
+                moveable->coordsA.j = currentLocation.j + delta_j + forces.j;
             }
-
-            double delta_i = distance_i / distance * 2048;
-            double delta_j = distance_j / distance * 2048;
-
-            bbMilliCoords forces = sumForces(moveables, moveable);
-
-            moveable->coordsA.i = currentLocation.i + delta_i + forces.i;
-            moveable->coordsA.j = currentLocation.j + delta_j + forces.j;
         }
         moveables->useCoordsA = true;
         return Success;
