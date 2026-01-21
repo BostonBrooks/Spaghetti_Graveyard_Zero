@@ -62,7 +62,10 @@ bbFlag bbCore_react(bbCore* core)
         {
             bbInstruction_moveRotateUnit_fn(core, instruction);
         }
-
+        if (instruction->type == bbInstruction_ViewpointToPlayer)
+        {
+            bbInstruction_ViewpointToPlayer_fn(core, instruction);
+        }
 
     }
 

@@ -132,6 +132,8 @@ bbFlag bbInstruction_unsetGoalPoint_fn(bbCore* core, bbInstruction* instruction)
 bbFlag bbInstruction_ViewpointToPlayer_fn(bbCore* core, bbInstruction* instruction)
 {
     bbAgent* agent = home.shared.agents->player;
+
+    bbDebug("agent = %p\n", agent);
     bbPool_Handle handle = agent->unit;
 
     bbUnit* unit;
@@ -204,8 +206,8 @@ bbFlag bbInstruction_updateViewpoint_fn(bbCore* core, bbInstruction* instruction
     //     home.private.viewportApp.viewport.viewpoint.i,
     //     home.private.viewportApp.viewport.viewpoint.j,
     //     home.private.viewportApp.viewport.viewpoint.k);
-    bbUnit_setLocation((bbDrawable*)home.shared.player, home.private.viewportApp.units,
-                       home.private.viewportApp.viewport.viewpoint);
+    //bbUnit_setLocation((bbDrawable*)home.shared.player, home.private.viewportApp.units,
+    //                   home.private.viewportApp.viewport.viewpoint);
 
     //TODO post undoInstruction
     bbInstruction* undoInstruction;
@@ -243,8 +245,8 @@ bbFlag bbInstruction_unupdateViewpoint_fn(bbCore* core, bbInstruction* instructi
     home.private.viewportApp.viewport.viewpoint.j = instruction->data.mapCoords.j;
     home.private.viewportApp.viewport.viewpoint.k = instruction->data.mapCoords.k;
 
-    bbUnit_setLocation((bbDrawable*)home.shared.player, home.private.viewportApp.units,
-                       home.private.viewportApp.viewport.viewpoint);
+    //bbUnit_setLocation((bbDrawable*)home.shared.player, home.private.viewportApp.units,
+    //                   home.private.viewportApp.viewport.viewpoint);
     if (instruction->isInput)
     {
         bbInstruction* redoInstruction;

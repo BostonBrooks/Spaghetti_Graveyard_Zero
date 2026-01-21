@@ -7,7 +7,6 @@
 //typedef bbFlag bbAgent_Constructor (bbAgent** agent, struct bbAgents* agents, bbMapCoords coords, char* name);
 bbFlag bbAgent_Constructor_SKELETON(bbAgent** self, struct bbAgents* agents, bbMapCoords coords, char* name)
 {
-    bbHere();
     bbAgent* agent;
     bbVPool_alloc(agents->pool, (void**)&agent);
 
@@ -30,8 +29,6 @@ bbFlag bbAgent_Constructor_SKELETON(bbAgent** self, struct bbAgents* agents, bbM
 
 
     bbFlag flag = bbMoveables_attachUnit(&home.shared.core->moveables, handle);
-
-    bbFlag_print(flag);
     *self = agent;
 
     return Success;
@@ -39,7 +36,6 @@ bbFlag bbAgent_Constructor_SKELETON(bbAgent** self, struct bbAgents* agents, bbM
 
 bbFlag bbAgent_Constructor_PLAYER(bbAgent** self, struct bbAgents* agents, bbMapCoords coords, char* name)
 {
-    bbHere();
     bbAgent* agent;
     bbVPool_alloc(agents->pool, (void**)&agent);
 
@@ -51,7 +47,7 @@ bbFlag bbAgent_Constructor_PLAYER(bbAgent** self, struct bbAgents* agents, bbMap
 
     bbUnit* unit;
     bbUnit_new(&unit, home.private.viewportApp.units, &home.constant.graphics,coords);
-    unit->drawable.frames[0].handle.u64 = 7;
+    unit->drawable.frames[0].handle.u64 = 9;
     unit->moveableType = MoveableType_MovingToGoalPoint;
 
     bbPool_Handle handle;
@@ -64,7 +60,7 @@ bbFlag bbAgent_Constructor_PLAYER(bbAgent** self, struct bbAgents* agents, bbMap
 
     bbFlag flag = bbMoveables_attachUnit(&home.shared.core->moveables, handle);
 
-    bbFlag_print(flag);
+    home.shared.agents->player = agent;
 
     *self = agent;
 

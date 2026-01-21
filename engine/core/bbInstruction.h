@@ -22,7 +22,8 @@ typedef enum
     bbInstruction_moveUnit,
     bbInstruction_unmoveUnit,
     bbInstruction_moveRotateUnit,
-    bbInstruction_unmoveRotateUnit
+    bbInstruction_unmoveRotateUnit,
+    bbInstruction_ViewpointToPlayer
 
 } bbInstruction_type;
 
@@ -63,6 +64,7 @@ bbFlag bbInstruction_setGoalPoint_fn(bbCore* core, bbInstruction* instruction);
 bbFlag bbInstruction_unsetGoalPoint_fn(bbCore* core, bbInstruction* instruction);
 
 bbFlag bbInstruction_updateViewpoint_fn(bbCore* core, bbInstruction* instruction);
+bbFlag bbInstruction_ViewpointToPlayer_fn(bbCore* core, bbInstruction* instruction);
 bbFlag bbInstruction_unupdateViewpoint_fn(bbCore* core, bbInstruction* instruction);
 
 bbFlag bbInstruction_incrementClock_fn(bbCore* core, bbInstruction* instruction);

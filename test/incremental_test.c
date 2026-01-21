@@ -55,7 +55,7 @@ int main(void)
   */
         if (home.shared.playmode == PlayMode_play)
         {
-            bbCore_updateViewpoint(&core, true);
+            bbCore_updateViewpointToPlayer(&core, true);
             bbCore_react(&core);
 
             bbCore_updateMoveables(&core, true);

@@ -48,18 +48,18 @@ bbFlag spawnEverything(void)
         }
     }
 
-    bbUnit* player;
-    bbUnit_newCat(&player, app->units, &home.constant.graphics,
-               home.private.viewportApp.viewport.viewpoint);
-    home.shared.player = player;
+    //bbUnit* player;
+    //bbUnit_newCat(&player, app->units, &home.constant.graphics,
+    ///           home.private.viewportApp.viewport.viewpoint);
+    home.shared.player = NULL;
 
     bbMapCoords MC;
-    MC.i = 10200;
-    MC.j = 10200;
+    MC.i = 10000;
+    MC.j = 10000;
     MC.k = 0;
 
     bbAgent* agent;
-    bbAgent_constructor(&home.shared.agents->player, home.shared.agents, "PLAYER", "PLAYER", MC);
+    bbAgent_constructor(&agent, home.shared.agents, "PLAYER", "PLAYER", MC);
 
     return Success;
 }
