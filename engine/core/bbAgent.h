@@ -5,6 +5,7 @@
 
 typedef enum
 {
+    AgentState_frozen,
     AgentState_towardUnit,
     AgentState_towardCoords
 } bbAgentState;
@@ -21,6 +22,7 @@ typedef enum
     AgentConstructor,
     AgentOnCommand,
     AgentUpdate,
+    AgentType
 } bbAgentFunctionType;
 
 
@@ -33,10 +35,7 @@ typedef struct
 
 typedef struct
 {
-    char* name;
-    
-    // Used as bbAgent_Constructor
-    I32 constructor;
+    char name[64];
     bbAgentFunctionsTable functions;
 } bbAgentType;
 
@@ -50,6 +49,8 @@ typedef struct
     bbMapCoords position;
     bbPool_Handle unit;
     bbPool_Handle moveable;
+
+    bbPool_ListElement listElement;
     
 
 } bbAgent;
@@ -74,6 +75,11 @@ typedef struct
     bbAgent_OnCommand** OnCommand;
     bbDictionary* OnCommand_dict;
     I32 OnCommand_available;
+
+    //this isn't so much a function as a set of attributes
+    bbAgentType* Type;
+    bbDictionary* Type_dict;
+    I32 Type_available;
     
     
 } bbAgentFunctions;
@@ -86,7 +92,6 @@ typedef struct bbAgents
     bbAgentFunctions functions;
     bbDictionary*  named_agents;
     bbDictionary* agent_type_dict;
-    bbAgentType agent_types[2];
 
 
     //I was going to put agents into squares but then I decided not to :P
@@ -96,7 +101,7 @@ typedef struct bbAgents
 
 
 
-bbFlag bbAgents_new(bbAgents* agents, I32 squares_i, I32 squares_j);
+bbFlag bbAgents_new(bbAgents** agents, I32 squares_i, I32 squares_j, I32 numAgentTypes);
 
 
 bbFlag bbAgent_constructor(bbAgent** self,
@@ -116,6 +121,7 @@ bbFlag bbAgent_newEmpty(bbAgent** self,
 bbFlag bbAgent_onCommand(bbAgent* self, bbAgents* agents, bbAgentCommandType type, bbPool_Handle data);
 bbFlag bbAgent_update(bbAgent* self, bbAgents* agents);
 
+bbFlag bbAgentTypes_init(bbAgents* agents);
 
 bbFlag bbAgentFunctions_init(bbAgentFunctions* self);
 bbFlag bbAgentFunctions_populate(bbAgentFunctions* self);

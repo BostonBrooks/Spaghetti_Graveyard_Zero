@@ -3,6 +3,7 @@
 #include "engine/core/bbCoreInputs.h"
 #include "engine/data/bbHome.h"
 #include "engine/network/bbNetworkApp.h"
+#include "engine/core/bbAgent.h"
 
 
 //Global variables used for testing only :(
@@ -32,6 +33,7 @@ int main(void)
 
     home.private.mapTime = 0;
 
+    bbAgents_new(&home.shared.agents, 12, 12,256);
 
     bbCore_incrementClock(&core, true);
     bbCore_react(&core);

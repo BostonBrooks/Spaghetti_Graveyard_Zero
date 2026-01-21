@@ -1,6 +1,7 @@
 #ifndef BBHOME_H
 #define BBHOME_H
 
+#include "engine/core/bbAgent.h"
 #include "engine/core/bbCore.h"
 #include "engine/userinterface/bbWidget.h"
 #include "engine/userinterface/bbSpell.h"
@@ -51,6 +52,7 @@ typedef struct {
     bbUnit* player;
     //bbMessages* messages;
     bbPlaymodeType playmode;
+    bbAgents* agents;
 } bbShared;
 
 typedef struct {

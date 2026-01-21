@@ -107,6 +107,7 @@ add_executable(myprogram
         ./engine/threadsafe/bbThreadedPool.c
         ./engine/threadsafe/bbThreadedQueue_search.c
         ./engine/core/bbAgent.c
+        games/game0/maps/map0/agents/agents.c
 
 )
 
