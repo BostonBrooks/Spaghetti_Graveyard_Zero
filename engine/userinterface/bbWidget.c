@@ -27,6 +27,8 @@ bbFlag bbWidgets_init(bbWidgets* widgets){
     bbWidgetFunctions_new(&widgets->functions);
 
 	bbWidgetFunctions_populate(widgets->functions);
+
+	return  Success;
 }
 
 
