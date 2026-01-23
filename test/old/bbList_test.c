@@ -4,6 +4,8 @@
 #include <stddef.h>
 #include <stdlib.h>
 
+#include "engine/logic/bbBloatedPool.h"
+
 typedef struct {
 	char str[33];
 	bbPool_ListElement listElement;
