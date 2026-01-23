@@ -4,6 +4,8 @@
 #include <stddef.h>
 #include <stdlib.h>
 
+#include "engine/logic/bbBloatedPool.h"
+
 typedef struct {
     char str[33];
     bbPool_ListElement listElement;
@@ -24,7 +26,7 @@ int main(void){
     printf("Push Right:\n");
     for (I32 i = 0; i < 8; i++) {
 
-        bbVPool_alloc(pool, &aStruct);
+        bbVPool_alloc(pool, (void**)&aStruct);
         structs[i] = aStruct;
         sprintf(aStruct->str, "i = %d", i);
         aStruct->listElement.prev = pool->null;

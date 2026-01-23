@@ -59,6 +59,8 @@ bbPool_ListElement* getListElement (bbList list, void* element){
     return element + list.offsetOf;
 }
 */
+
+//the third element is used to share the same head/tail/offsetof/pool as an existing list
 bbFlag bbList_init(bbList* list, bbVPool* pool, void* listPtr, size_t offsetOf,
 				   I32 (*compare)(void* A, void* B));
 
@@ -123,4 +125,5 @@ bbFlag bbList_isEmpty(bbList* list);
 
 bbFlag bbList_alloc(bbList* list, void** element);
 
+bbFlag bbList_getNth(bbList* list, void** element, I32 N);
 #endif //BBLIST_H
