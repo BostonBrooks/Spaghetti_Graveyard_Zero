@@ -31,7 +31,6 @@ typedef struct {
     //Old stuff being migrated to bbUIApp
     sfRenderWindow* window;
     //bbSpells spells;
-    bbWidgets widgets;
     bbMouse mouse;
     bbInput input;
     //bbViewport* viewport;

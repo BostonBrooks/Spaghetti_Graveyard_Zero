@@ -159,7 +159,7 @@ bbFlag bbInput_poll(bbInput* input, sfRenderWindow* window){
         case sfEvtKeyPressed:{
 
             bbWidgets* widgets = input->widgets;
-            bbWidget* widget = home.private.widgets.textbox;
+            bbWidget* widget = home.private.UI.widgets.textbox;
 
             sfKeyCode keyCode = event.key.code;
             unsigned char key;

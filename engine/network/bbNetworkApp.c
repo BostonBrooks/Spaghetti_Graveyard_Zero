@@ -151,7 +151,7 @@ bbFlag bbConnect(void* network)
     bbDebug("Connect to server in thread %s\n", thread);
 
     bbPool_Handle handle;
-    bbWidgets* widgets = &home.private.widgets;
+    bbWidgets* widgets = &home.private.UI.widgets;
     bbWidget *widget;
     bbDictionary_lookup(widgets->dict, "DISCONNECT",&handle);
     bbVPool_lookup(widgets->pool, (void**)&widget, handle);
@@ -173,7 +173,7 @@ bbFlag bbDisconnect(void* network)
     bbDebug("Disconnect from server in thread %s\n", thread);
 
     bbPool_Handle handle;
-    bbWidgets* widgets = &home.private.widgets;
+    bbWidgets* widgets = &home.private.UI.widgets;
     bbWidget *widget;
     bbDictionary_lookup(widgets->dict, "CONNECT",&handle);
     bbVPool_lookup(widgets->pool, (void**)&widget, handle);

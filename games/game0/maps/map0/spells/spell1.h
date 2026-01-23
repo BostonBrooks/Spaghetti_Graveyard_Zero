@@ -129,7 +129,7 @@ bbFlag bbSpell_Spell1_ReceiveStr(bbSpell* spell, void* Spells, char* answer)
     sprintf(promptStr, "Correct!\nClick to fire spell1\n");
 
     handle.ptr = promptStr;
-    bbWidget_onCommand(home.private.widgets.prompt,&home.private.widgets,
+    bbWidget_onCommand(home.private.UI.widgets.prompt,&home.private.UI.widgets,
                        bbWC_setStr,
                        handle);
 

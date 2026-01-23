@@ -13,7 +13,7 @@
 
 //Draw a red dot to indicate which textbox is selected
 bbFlag bbDF_textboxIndicator(void* drawable, void* frameDescriptor, void* cl){
-    if (drawable != home.private.widgets.textbox) return Success;
+    if (drawable != home.private.UI.widgets.textbox) return Success;
     bbWidget* widget = drawable;
     bbFrame* frame = frameDescriptor;
     drawFuncClosure* closure = cl;

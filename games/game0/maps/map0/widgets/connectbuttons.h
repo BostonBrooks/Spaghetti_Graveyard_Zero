@@ -18,11 +18,11 @@ bbFlag testOnUnClick(void* self)
 bbFlag connectOnClick(void* self)
 {
 bbHere()
-    /*
+
     bbWidget* widget = self;
     widget->isFrozen = true;
     bbPool_Handle handle;
-    bbWidgets* widgets = &home.private.widgets;
+    bbWidgets* widgets = &home.private.UI.widgets;
     bbWidget *addressWidget, *portWidget;
     bbDictionary_lookup(widgets->dict, "IP_ADDRESS",&handle);
     bbVPool_lookup(widgets->pool, (void**)&addressWidget, handle);
@@ -36,7 +36,7 @@ bbHere()
 
     sfText_setString(addressWidget->typeData.textBox.text, address);
     sfText_setString(portWidget->typeData.textBox.text, port);
-*/
+
     return Success;
 }
 

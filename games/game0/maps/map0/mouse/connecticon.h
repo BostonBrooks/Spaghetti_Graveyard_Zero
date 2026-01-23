@@ -20,8 +20,8 @@ Graphics)
     bbVPool_lookup(pool, (void**)&connectMenu,handle);
     bool visible = connectMenu->tree.visible;
 
-    if (visible) bbWidget_hide(connectMenu, &home.private.widgets);
-    else bbWidget_unhide(connectMenu, &home.private.widgets);
+    if (visible) bbWidget_hide(connectMenu, &home.private.UI.widgets);
+    else bbWidget_unhide(connectMenu, &home.private.UI.widgets);
 
 
     return Success;

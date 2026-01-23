@@ -34,6 +34,6 @@ Graphics)
 
     bbVPool_reverseLookup(pool, widget, &handle);
     widget->mtable.hover = true;
-    home.private.widgets.textbox = widget;
+    home.private.UI.widgets.textbox = widget;
     return Success;
 }
