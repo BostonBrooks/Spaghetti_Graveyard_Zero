@@ -20,7 +20,8 @@ bbFlag connectOnClick(void* self)
 bbHere()
 
     bbWidget* widget = self;
-    widget->isFrozen = true;
+    // TODO: bbFlag bbConnect(void* network); in bbNetworkApp.c
+    // widget->isFrozen = true;
     bbPool_Handle handle;
     bbWidgets* widgets = &home.private.UI.widgets;
     bbWidget *addressWidget, *portWidget;
