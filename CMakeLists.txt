@@ -108,6 +108,8 @@ add_executable(myprogram
         ./engine/threadsafe/bbThreadedQueue_search.c
         ./engine/core/bbAgent.c
         games/game0/maps/map0/agents/agents.c
+        engine/logic/bbList_getNth.c
+        test/old/bbList_getNth_test.c
 
 )
 
