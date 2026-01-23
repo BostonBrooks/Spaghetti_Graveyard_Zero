@@ -22,6 +22,7 @@ bbFlag bbNetworkTime_init(bbNetworkTime* network_time)
     network_time->packets_sent = 0;
     bbThreadedQueue_init(&network_time->pending, NULL, sizeof(bbNetworkTime_record),
     queue_size, offsetof(bbNetworkTime_record, list_element));
+
     bbThreadedQueue_init(&network_time->completed,network_time->pending.pool, sizeof(bbNetworkTime_record),
         queue_size, offsetof(bbNetworkTime_record, list_element));
 
@@ -133,6 +134,7 @@ bbFlag bbNetworkApp_checkTime(bbNetworkTime* network_time)
     while (1)
     {
         bbNetworkTime_record* record;
+        bbDebug("head = %d, tail = %d\n", network_time->completed.head, network_time->completed.tail);
         flag = bbThreadedQueue_popR(&network_time->completed, (void**)&record);
         if (flag != Success) return Success;
 
