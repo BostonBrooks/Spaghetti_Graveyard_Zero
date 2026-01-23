@@ -15,6 +15,8 @@
 #include <stddef.h>
 #include <stdlib.h>
 
+#include "engine/logic/bbLeanPool.h"
+
 
 typedef struct {
     int value;
