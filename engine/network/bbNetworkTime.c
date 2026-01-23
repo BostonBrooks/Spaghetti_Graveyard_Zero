@@ -147,8 +147,18 @@ bbFlag bbNetworkApp_checkTime(bbNetworkTime* network_time)
 
         bbNetworkTime_maths* maths;
         bbList_alloc(&network_time->mathsChronological,(void**)&maths);
+        maths->sorted.prev = network_time->mathsSorted.pool->null;
+        maths->sorted.next = network_time->mathsSorted.pool->null;
+
         maths->time_difference = difference;
         bbList_pushL(&network_time->mathsChronological, maths);
+
+        bbDebug("prev.index = %d, prev.collision =%d, next.index = %d, next.collision = %d\n",
+                      maths->sorted.prev.bloated.index,
+                      maths->sorted.prev.bloated.collision,
+                      maths->sorted.next.bloated.index,
+                      maths->sorted.next.bloated.collision);
+
         bbList_sortL(&network_time->mathsSorted,maths);
         network_time->numMathsElements++;
 
@@ -158,7 +168,20 @@ bbFlag bbNetworkApp_checkTime(bbNetworkTime* network_time)
             bbList_popR(&network_time->mathsChronological,(void**)&maths);
             bbList_remove(&network_time->mathsSorted,maths);
 
+            I64 average = 0;
+            bbNetworkTime_maths* maths;
+            bbList_getNth(&network_time->mathsSorted,(void**)&maths, 15);
+            average += maths->time_difference;
+            bbList_getNth(&network_time->mathsSorted,(void**)&maths, 16);
+            average += maths->time_difference;
+            bbList_getNth(&network_time->mathsSorted,(void**)&maths, 17);
+            average += maths->time_difference;
+            bbList_getNth(&network_time->mathsSorted,(void**)&maths, 18);
+            average += maths->time_difference;
 
+            average /= 4;
+
+            bbDebug("time_difference = %lld\n", average);
 
             bbVPool_free(network_time->mathsPool,(void*)maths);
             network_time->numMathsElements--;
