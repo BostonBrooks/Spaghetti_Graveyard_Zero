@@ -40,7 +40,7 @@ int main(void)
     bbCore_react(&core);
     while (1)
     {
-/* We're not playing with network or networktime right now
+// We're not playing with network or networktime right now
         if (home.private.network.send_ready && home.private.network.receive_ready)
         {
             char str[64];
@@ -52,7 +52,7 @@ int main(void)
             bbNetworkApp_checkTime(&home.private.network);
 
         }
-  */
+  +
         if (home.shared.playmode == PlayMode_play)
         {
             bbCore_updateViewpointToPlayer(&core, true);
