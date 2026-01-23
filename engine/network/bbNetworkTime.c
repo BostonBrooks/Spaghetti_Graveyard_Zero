@@ -134,7 +134,6 @@ bbFlag bbNetworkApp_checkTime(bbNetworkTime* network_time)
     while (1)
     {
         bbNetworkTime_record* record;
-        bbDebug("head = %d, tail = %d\n", network_time->completed.head, network_time->completed.tail);
         flag = bbThreadedQueue_popR(&network_time->completed, (void**)&record);
         if (flag != Success) return Success;
 
@@ -145,19 +144,25 @@ bbFlag bbNetworkApp_checkTime(bbNetworkTime* network_time)
         printf("round trip time = %llu, time difference = %lld\n", RTT, difference);
 
         bbThreadedQueue_free(&network_time->completed, (void**)&record);
-/*
+
         bbNetworkTime_maths* maths;
         bbList_alloc(&network_time->mathsChronological,(void**)&maths);
         maths->time_difference = difference;
         bbList_pushL(&network_time->mathsChronological, maths);
+        bbList_sortL(&network_time->mathsSorted,maths);
         network_time->numMathsElements++;
 
+        bbDebug("network_time->numMathsElements = %d\n",network_time->numMathsElements);
         if (network_time->numMathsElements > 32)
         {
-            bbList_popL(&network_time->mathsChronological,(void**)&maths);
-            bbVPool_free(network_time->mathsPool,(void**)&maths);
+            bbList_popR(&network_time->mathsChronological,(void**)&maths);
+            bbList_remove(&network_time->mathsSorted,maths);
+
+
+
+            bbVPool_free(network_time->mathsPool,(void*)maths);
             network_time->numMathsElements--;
         }
-        */
+
     }
 }
