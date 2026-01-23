@@ -49,10 +49,10 @@ int main(void)
             bbNetwork_sendStr(&home.private.network, str);
             bbNetworkTime_ping(&home.private.network);
             bbNetworkApp_checkInbox(&home.private.network);
-            bbNetworkApp_checkTime(&home.private.network);
+            bbNetworkApp_checkTime((bbNetworkTime*)&home.private.network.extra_data);
 
         }
-  +
+
         if (home.shared.playmode == PlayMode_play)
         {
             bbCore_updateViewpointToPlayer(&core, true);

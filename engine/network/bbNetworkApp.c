@@ -125,25 +125,6 @@ bbFlag bbNetworkApp_checkInbox(bbNetwork* network)
         bbThreadedQueue_free(&network->inbox, (void**)&packet);
     }
 }
-bbFlag bbNetworkApp_checkTime(bbNetwork* network)
-{
-    bbFlag flag;
-    while (1)
-    {
-        bbNetworkTime* network_time = network->extra_data;
-        bbNetworkTime_record* record;
-        flag = bbThreadedQueue_popR(&network_time->completed, (void**)&record);
-        if (flag != Success) return Success;
-
-        U64 RTT = (record->local_receive_time - record->local_send_time) - (record->server_receive_time - record->
-            server_send_time);
-        I64 difference = ((I64)record->server_receive_time - (I64)record->local_send_time
-            + (I64)record->server_send_time - (I64)record->local_receive_time) / 2;
-        printf("round trip time = %llu, time difference = %lld\n", RTT, difference);
-
-        bbThreadedQueue_free(&network_time->completed, (void**)&record);
-    }
-}
 
 
 bbFlag bbConnect(void* network)

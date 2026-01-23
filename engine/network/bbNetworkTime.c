@@ -1,10 +1,19 @@
 #include "engine/network/bbNetworkTime.h"
 
+#include "engine/logic/bbBloatedPool.h"
 #include "engine/network/bbNetwork.h"
 #include "engine/logic/bbTerminal.h"
 #include "engine/threadsafe/bbThreadedPool.h"
 #include "engine/threadsafe/bbThreadedQueue.h"
 #include "engine/threadsafe/bbTheadedQueue_search.h"
+
+I32 sortByTimeDifference(void* a, void* b)
+{
+    bbNetworkTime_maths* A = a;
+    bbNetworkTime_maths* B = b;
+    return (A->time_difference > B->time_difference);
+}
+
 
 bbFlag bbNetworkTime_init(bbNetworkTime* network_time)
 {
@@ -15,6 +24,12 @@ bbFlag bbNetworkTime_init(bbNetworkTime* network_time)
     queue_size, offsetof(bbNetworkTime_record, list_element));
     bbThreadedQueue_init(&network_time->completed,network_time->pending.pool, sizeof(bbNetworkTime_record),
         queue_size, offsetof(bbNetworkTime_record, list_element));
+
+    network_time->numMathsElements = 0;
+    bbVPool_newBloated(&network_time->mathsPool,sizeof(bbNetworkTime_maths), 100,100);
+    bbList_init(&network_time->mathsChronological, network_time->mathsPool, NULL,offsetof(bbNetworkTime_maths, chronological),NULL);
+    bbList_init(&network_time->mathsSorted, network_time->mathsPool, NULL,offsetof(bbNetworkTime_maths, sorted),sortByTimeDifference);
+
 
     return Success;
 }
@@ -110,4 +125,37 @@ bbFlag bbNetworkTime_get(bbNetworkTime* network_time, sfTime* time)
 {
     *time = sfClock_getElapsedTime(network_time->localClock);
     return Success;
+}
+
+bbFlag bbNetworkApp_checkTime(bbNetworkTime* network_time)
+{
+    bbFlag flag;
+    while (1)
+    {
+        bbNetworkTime_record* record;
+        flag = bbThreadedQueue_popR(&network_time->completed, (void**)&record);
+        if (flag != Success) return Success;
+
+        U64 RTT = (record->local_receive_time - record->local_send_time) - (record->server_receive_time - record->
+            server_send_time);
+        I64 difference = ((I64)record->server_receive_time - (I64)record->local_send_time
+            + (I64)record->server_send_time - (I64)record->local_receive_time) / 2;
+        printf("round trip time = %llu, time difference = %lld\n", RTT, difference);
+
+        bbThreadedQueue_free(&network_time->completed, (void**)&record);
+/*
+        bbNetworkTime_maths* maths;
+        bbList_alloc(&network_time->mathsChronological,(void**)&maths);
+        maths->time_difference = difference;
+        bbList_pushL(&network_time->mathsChronological, maths);
+        network_time->numMathsElements++;
+
+        if (network_time->numMathsElements > 32)
+        {
+            bbList_popL(&network_time->mathsChronological,(void**)&maths);
+            bbVPool_free(network_time->mathsPool,(void**)&maths);
+            network_time->numMathsElements--;
+        }
+        */
+    }
 }

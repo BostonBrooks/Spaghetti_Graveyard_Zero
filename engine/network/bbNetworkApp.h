@@ -15,6 +15,5 @@ bbFlag bbNetworkApp_sendTime(bbNetwork* network);
 bbFlag bbNetworkApp_sendNetworkPacket(bbNetwork* network, void* packet);
 
 bbFlag bbNetworkApp_checkInbox(bbNetwork* network);
-bbFlag bbNetworkApp_checkTime(bbNetwork* network);
 
 #endif // BBNWETWORKAPP_H

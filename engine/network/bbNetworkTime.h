@@ -28,6 +28,12 @@ typedef struct
 #include "engine/network/bbNetworkPacket.h"
 #include "engine/network/bbNetwork.h"
 
+typedef struct
+{
+    I64 time_difference;
+    bbPool_ListElement chronological;
+    bbPool_ListElement sorted;
+} bbNetworkTime_maths;
 
 typedef struct
 {
@@ -38,7 +44,7 @@ typedef struct
     U64 local_receive_time;
     I64 time_difference;
     U64 round_trip_time;
-    bbPool_List list_element;
+    bbPool_ListElement list_element;
 } bbNetworkTime_record;
 
 // keep data to track difference between clocks
@@ -50,10 +56,13 @@ typedef struct
     bbThreadedQueue pending;
     bbThreadedQueue completed;
 
-
+    I32 numMathsElements;
+    bbVPool* mathsPool;
+    bbList mathsChronological;
+    bbList mathsSorted;
 } bbNetworkTime;
 
-
+bbFlag bbNetworkTime_doMaths (bbNetworkTime* network_time, bbNetworkTime_record* record);
 
 // get in synch with server
 bbFlag bbNetworkTime_init(bbNetworkTime* network_time);
@@ -95,5 +104,9 @@ bbFlag bbNetworkTime_ping(void* network);
  * bbdebug round trip time (RTT)
  *
  */
+
+
+
+bbFlag bbNetworkApp_checkTime(bbNetworkTime* network_time);
 
 #endif //BBNETWORKTIME_H
