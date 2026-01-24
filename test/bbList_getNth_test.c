@@ -19,6 +19,28 @@ I32 testCompare(void* a, void* b)
 
     return (A->integer > B->integer);
 }
+
+
+bbFlag bbList_allocTest(bbList* list, void** element)
+{
+    void* lelement;
+    bbFlag flag = bbVPool_alloc(list->pool, &lelement);
+    if (flag == Success)
+    {
+        bbPool_ListElement* elementList = lelement + list->offsetOf;
+        elementList->next = list->pool->null;
+        elementList->prev = list->pool->null;
+        *element = lelement;
+
+        testElement* testElement = *element;
+        bbDebug("integer = %d\n", testElement->integer);
+        return Success;
+
+    }
+    *element = NULL;
+    return flag;
+}
+
 int main (void)
 {
     bbList* list;
@@ -44,9 +66,19 @@ int main (void)
         bbHere()
         bbVPool_free(list->pool, (void**)&test_element);
         bbHere()
-        bbList_alloc(list, (void**)&test_element);
+        bbFlag flag = bbList_allocTest(list, (void**)&test_element);
+        bbFlag_print(flag);
+        bbDebug("test_element = %p\n", test_element);
         bbHere()
-        test_element->integer = rand();
+        //test_element->integer = rand();
+bbHere();
+        //this line causes the crash:
+        bbDebug("integer = %d\n", test_element->integer);
+
+        bbPool_Handle handle;
+
+
+        bbVPool_reverseLookup(list->pool, test_element, &handle);
         bbHere()
         bbList_sortL(list,test_element);
         bbHere()
