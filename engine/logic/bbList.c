@@ -452,6 +452,9 @@ bbFlag bbList_alloc(bbList* list, void** element)
 		elementList->next = list->pool->null;
 		elementList->prev = list->pool->null;
 		*element = lelement;
+		return Success;
+
 	}
+	*element = NULL;
 	return flag;
 }
