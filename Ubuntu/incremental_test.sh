@@ -62,6 +62,7 @@ if gcc   -fsanitize=address -fno-omit-frame-pointer -g -I ../\
        ../games/game0/maps/map0/spells/spells.c\
        ../games/game0/maps/map0/widgets/widgets.c\
        ../games/game0/maps/map0/agents/agents.c\
+       ../engine/logic/bbList_getNth.c\
        \
   -lcsfml-system -lcsfml-graphics -lcsfml-window  -lcsfml-network -lm -w\
   -o ../games/game0/game.out;

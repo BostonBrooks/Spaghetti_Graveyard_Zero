@@ -142,8 +142,13 @@ bbFlag bbLeanPool_clear(bbLeanPool* pool){
 }
 
 bbFlag bbLeanPool_allocImpl(bbLeanPool* pool, void** address, char* file, int line){
-	
 
+	if (pool->inUse >= pool->num)
+	{
+		bbHere()
+		*address = NULL;
+		return None;
+	}
 	bbAssert(address != NULL, "null return address\n");
 	bbAssert(pool->available.head.ptr != NULL, "pool full\n");
 	bbLeanPool_Header* header = pool->available.head.ptr;
@@ -168,9 +173,9 @@ bbFlag bbLeanPool_allocImpl(bbLeanPool* pool, void** address, char* file, int li
 		nextHeader->next.ptr = nextHeader;
 	}
 
-
+	//bbDebug("address = %p\n", headHeader);
 	bbAssert((void*)headHeader >= (void*)&pool->elements[0], "Address out of bounds\n");
-	bbAssert((void*)headHeader <= (void*)&pool->elements[pool->num-1], "Address out of bounds\n");
+	bbAssert((void*)headHeader <= (void*)&pool->elements[(pool->num-1)*pool->sizeOf], "Address out of bounds\n");
 
 	*address = headHeader;
 
@@ -184,7 +189,7 @@ bbFlag bbLeanPool_free(bbLeanPool* pool, void* address){
 	bbLeanPool_Header* available = pool->available.head.ptr;
 
 	bbAssert(address >= &pool->elements[0], "Address out of bounds\n");
-	bbAssert(address <= &pool->elements[pool->num-1], "Address out of bounds\n");
+	bbAssert(address <= &pool->elements[(pool->num-1)*pool->sizeOf], "Address out of bounds\n");
 
     pool->inUse -= 1;
 	// if pool is empty

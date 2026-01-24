@@ -64,7 +64,8 @@ int main (void)
         bbHere()
         bbList_remove(list, test_element);
         bbHere()
-        bbVPool_free(list->pool, (void**)&test_element);
+        //        bbVPool_free(list->pool, (void**)&test_element);
+        bbVPool_free(list->pool, (void*)test_element);
         bbHere()
         bbFlag flag = bbList_allocTest(list, (void**)&test_element);
         bbFlag_print(flag);
