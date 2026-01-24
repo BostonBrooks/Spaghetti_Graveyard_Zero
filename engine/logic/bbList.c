@@ -369,11 +369,14 @@ bbFlag bbList_insertBefore(bbList* list, void* Node, void* Key){
 }
 
 bbFlag bbList_remove(bbList* list, void* element){
+
     bbPool_Handle elementHandle;
     bbPool_ListElement* elementList = element + list->offsetOf;
     bbVPool_reverseLookup(list->pool, element, &elementHandle);
 
+	//Since it's a circular list, if an element points to itself, it's the only element in the list.
     if (isEqual(elementHandle, elementList->next)){
+
         bbAssert(isEqual(elementHandle, elementList->prev)
                  && isEqual(elementHandle, list->listPtr->head)
                  && isEqual(elementHandle, list->listPtr->tail),
@@ -391,6 +394,7 @@ bbFlag bbList_remove(bbList* list, void* element){
 
     }
 
+	//The element before points to the element after and the element after points to the element before
     bbPool_Handle PrevHandle = elementList->prev;
     void* Prev;
     bbVPool_lookup(list->pool, &Prev, PrevHandle);
@@ -404,11 +408,12 @@ bbFlag bbList_remove(bbList* list, void* element){
     NextList->prev = PrevHandle;
     PrevList->next = NextHandle;
 
+	//An element not in a list points to null
     elementList->next = list->pool->null;
     elementList->prev = list->pool->null;
 
 
-
+//remove an element from a list that's being iterated
     if(isEqual(elementHandle, list->current)){
         list->prev = PrevHandle;
         list->current = list->pool->null;
@@ -419,6 +424,7 @@ bbFlag bbList_remove(bbList* list, void* element){
         list->next = NextHandle;
     }
 
+	//is element first or last element in the list
     if(isEqual(list->listPtr->head, elementHandle)){
         list->listPtr->head = NextHandle;
         list->prev = list->pool->null;
