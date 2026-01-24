@@ -168,6 +168,10 @@ bbFlag bbLeanPool_allocImpl(bbLeanPool* pool, void** address, char* file, int li
 		nextHeader->next.ptr = nextHeader;
 	}
 
+
+	bbAssert((void*)headHeader >= (void*)&pool->elements[0], "Address out of bounds\n");
+	bbAssert((void*)headHeader <= (void*)&pool->elements[pool->num-1], "Address out of bounds\n");
+
 	*address = headHeader;
 
 	return Success;
