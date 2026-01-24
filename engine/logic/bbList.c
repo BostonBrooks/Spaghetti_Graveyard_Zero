@@ -13,7 +13,7 @@
 bbFlag bbList_new(bbList** list, bbVPool* pool, void* listPtr, size_t offsetOf,
 				  I32 (*compare)(void* A, void* B)){
 
-	bbList* List = malloc(sizeof(*list));
+	bbList* List = malloc(sizeof(bbList));
 	bbAssert(NULL != list, "malloc failed\n");
 
 	bbFlag flag = bbList_init(List, pool, listPtr, offsetOf, compare);

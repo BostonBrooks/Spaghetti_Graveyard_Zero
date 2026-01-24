@@ -179,6 +179,9 @@ bbFlag bbLeanPool_free(bbLeanPool* pool, void* address){
 	bbLeanPool_Header* element = address;
 	bbLeanPool_Header* available = pool->available.head.ptr;
 
+	bbAssert(address >= &pool->elements[0], "Address out of bounds\n");
+	bbAssert(address <= &pool->elements[pool->num-1], "Address out of bounds\n");
+
     pool->inUse -= 1;
 	// if pool is empty
 	if (available == NULL){
