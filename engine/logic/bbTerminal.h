@@ -50,7 +50,7 @@ static const int stringLength = 512;
 #endif
 
 
-#define SHOW_THREAD
+//#define SHOW_THREAD
 #ifdef SHOW_THREAD
 
 //thread tells some of the debugging functions what to name each thread

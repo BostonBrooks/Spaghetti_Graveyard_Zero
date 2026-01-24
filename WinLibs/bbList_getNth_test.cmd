@@ -14,13 +14,15 @@ echo Attempting to compile:
 SET PATH=C:\winlibs\mingw64\bin
 gcc   -D SFML_STATIC -I ../^
        ../engine/logic/bbList_getNth.c^
-       ../test/old/bbList_getNth_test.c^
+       ../test/bbList_getNth_test.c^
        ../engine/logic/bbVPool.c^
        ../engine/logic/bbBloatedPool.c^
+       ../engine/logic/bbLeanPool.c^
        ../engine/logic/bbList.c^
+       ../engine/logic/bbList_sort.c^
       ^
   -lcsfml-system -lcsfml-graphics -lcsfml-window  -lcsfml-network -g -lm -w^
     -o ./test.exe
 IF %errorlevel% == 0 (    echo Compile Succeeded:
-                          test.exe)^
+                          gdb ./test.exe)^
  ELSE (echo compile failed!)

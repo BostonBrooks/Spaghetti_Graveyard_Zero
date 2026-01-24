@@ -141,7 +141,7 @@ bbFlag bbNetworkApp_checkTime(bbNetworkTime* network_time)
             server_send_time);
         I64 difference = ((I64)record->server_receive_time - (I64)record->local_send_time
             + (I64)record->server_send_time - (I64)record->local_receive_time) / 2;
-        printf("round trip time = %llu, time difference = %lld\n", RTT, difference);
+        //printf("round trip time = %llu, time difference = %lld\n", RTT, difference);
 
         bbThreadedQueue_free(&network_time->completed, (void**)&record);
 
@@ -153,16 +153,9 @@ bbFlag bbNetworkApp_checkTime(bbNetworkTime* network_time)
         maths->time_difference = difference;
         bbList_pushL(&network_time->mathsChronological, maths);
 
-        bbDebug("prev.index = %d, prev.collision =%d, next.index = %d, next.collision = %d\n",
-                      maths->sorted.prev.bloated.index,
-                      maths->sorted.prev.bloated.collision,
-                      maths->sorted.next.bloated.index,
-                      maths->sorted.next.bloated.collision);
-
         bbList_sortL(&network_time->mathsSorted,maths);
         network_time->numMathsElements++;
 
-        bbDebug("network_time->numMathsElements = %d\n",network_time->numMathsElements);
         if (network_time->numMathsElements > 32)
         {
             bbList_popR(&network_time->mathsChronological,(void**)&maths);
