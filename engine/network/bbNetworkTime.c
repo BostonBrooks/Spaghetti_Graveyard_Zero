@@ -121,12 +121,6 @@ bbFlag bbNetworkTime_ping(void* Network)
     return Success;
 }
 
-//TODO what time is it on the server?
-bbFlag bbNetworkTime_get(bbNetworkTime* network_time, sfTime* time)
-{
-    *time = sfClock_getElapsedTime(network_time->localClock);
-    return Success;
-}
 
 bbFlag bbNetworkTime_updateTimeDiff(bbNetworkTime* network_time)
 {
