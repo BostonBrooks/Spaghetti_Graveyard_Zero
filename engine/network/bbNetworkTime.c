@@ -17,7 +17,7 @@ I32 sortByTimeDifference(void* a, void* b)
 
 bbFlag bbNetworkTime_init(bbNetworkTime* network_time)
 {
-    I32 queue_size = 5;
+    I32 queue_size = 32;
     network_time->localClock = sfClock_create();
     network_time->packets_sent = 0;
     bbThreadedQueue_init(&network_time->pending, NULL, sizeof(bbNetworkTime_record),
@@ -175,7 +175,7 @@ bbFlag bbNetworkTime_updateTimeDiff(bbNetworkTime* network_time)
 
             average /= 4;
 
-            bbDebug("time_difference = %lld\n", average);
+            bbPrintf("time_difference = %ld\n", average);
 
             network_time->numMathsElements--;
         }

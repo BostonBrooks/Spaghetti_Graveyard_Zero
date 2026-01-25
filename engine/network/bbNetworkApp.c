@@ -120,7 +120,8 @@ bbFlag bbNetworkApp_checkInbox(bbNetwork* network)
         if (flag != Success) return Success;
         if (packet->type == PACKETTYPE_STRING)
         {
-            printf("packet received: %s\n", packet->data.str);
+            //TODO uncomment this line
+            //printf("packet received: %s\n", packet->data.str);
         }
         bbThreadedQueue_free(&network->inbox, (void**)&packet);
     }
