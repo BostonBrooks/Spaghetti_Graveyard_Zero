@@ -59,7 +59,7 @@ int main(void)
         sfSleep(sfSeconds(0.2));
 
         bbNetworkApp_checkInbox(&network);
-        bbNetworkApp_checkTime(&network);
+        bbNetworkTime_updateTimeDiff(network.extra_data);
     }
 
     exit(EXIT_SUCCESS);

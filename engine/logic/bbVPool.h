@@ -6,8 +6,15 @@
 #include "engine/logic/bbPoolHandle.h"
 #include "engine/logic/bbFlag.h"
 
+typedef enum
+{
+	VPoolType_lean,
+	vPoolType_bloated
+} bbVPool_type;
+
 typedef struct {
 	bbPool_Handle null;
+	bbVPool_type type;
 	U32 sizeOf;
 	void* pool;
 	//I32 (*new)(void** pool, I32 sizeOf, I32 num);
@@ -22,7 +29,20 @@ typedef struct {
 
 } bbVPool;
 
+#define bbVPool_elementInBounds(pool, address){\
+    if(pool->type == VPoolType_lean){\
+      bbLeanPool* Pool = pool->pool;\
+        bbAssert( (void*)address >= (void*)&Pool->elements[0], "Address out of bounds\n");\
+        bbAssert( (void*)address <= (void*)&Pool->elements[(Pool->num-1)*Pool->sizeOf], "Address out of bounds\n");\
+    }\
+}\
 
+#define bbVPool_handleValid(pool, handle){\
+    if(pool->type == VPoolType_lean){\
+        bbLeanPool* vPool = pool->pool;\
+        bbLeanPool_handleValid(vPool, handle);\
+    }\
+}
 
 #define bbVPool_alloc(pool, address)\
 bbVPool_allocImpl(pool, address, __FILE_NAME__, __LINE__);

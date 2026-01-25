@@ -204,8 +204,8 @@ bbFlag bbList_popL(bbList* list, void** element){
 bbFlag bbList_popR(bbList* list, void** element){
 
 	//cases: empty, 1 element, more than 1 element;
-	if (isNULL(list->listPtr->head)){
-		bbAssert(isNULL(list->listPtr->tail), "head / tail mismatch");
+	if (isNULL(list->listPtr->head) || isNULL(list->listPtr->tail)){
+		bbAssert(isNULL(list->listPtr->head) && isNULL(list->listPtr->head), "head / tail mismatch");
 		if (element != NULL){
 			*element = NULL;
 		}
@@ -227,6 +227,9 @@ bbFlag bbList_popR(bbList* list, void** element){
 		if (element != NULL){
 			*element = tail;
 		}
+
+		tailListElement->prev = list->pool->null;
+		tailListElement->next = list->pool->null;
 		return Success;
 	}
 
@@ -457,4 +460,65 @@ bbFlag bbList_alloc(bbList* list, void** element)
 	}
 	*element = NULL;
 	return flag;
+}
+
+bbFlag bbList_checkIntegrity(bbList* list)
+{
+	bbAssert (bbVPool_handleIsEqual(list->pool, list->list.head, list->pool->null)
+		      == bbVPool_handleIsEqual(list->pool, list->list.tail, list->pool->null),
+		      	"head/tail mismatch\n");
+
+	if (bbVPool_handleIsEqual(list->pool, list->list.head, list->pool->null)) return Empty;
+
+	void* element;
+	bbPool_ListElement* list_element;
+	bbPool_Handle elementHandle = list->list.head;
+	bbVPool_lookup(list->pool, &element, elementHandle);
+
+	void* first_element = element;
+
+	I32 i = 0;
+	while (1)
+	{
+		list_element = element + list->offsetOf;
+        elementHandle = list_element->next;
+		if (elementHandle.u64 == list->list.head.u64) break;
+		bbFlag flag = bbVPool_lookup(list->pool, (void**)&element,elementHandle);
+		//bbFlag_print(flag);
+
+		if (element == first_element)
+		{
+			bbHere()
+			break;
+		}
+
+		if (i%60 == 0) bbDebug("i = %d\n", i);
+		i++;
+	}
+
+
+
+	elementHandle = list->list.tail;
+	bbVPool_lookup(list->pool, &element, elementHandle);
+
+	first_element = element;
+
+    i = 0;
+	while (1)
+	{
+		list_element = element + list->offsetOf;
+		elementHandle = list_element->prev;
+		if (elementHandle.u64 == list->list.tail.u64) break;
+		bbFlag flag = bbVPool_lookup(list->pool, (void**)&element,elementHandle);
+		//bbFlag_print(flag);
+		if (element == first_element)
+		{
+			bbHere()
+			break;
+		}
+		if (i%60 == 0) bbDebug("i = %d\n", i);
+		i++;
+
+	}
+	return Success;
 }

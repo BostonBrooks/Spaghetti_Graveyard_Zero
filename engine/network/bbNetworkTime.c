@@ -160,7 +160,7 @@ bbFlag bbNetworkApp_checkTime(bbNetworkTime* network_time)
         {
             bbList_popR(&network_time->mathsChronological,(void**)&maths);
             bbList_remove(&network_time->mathsSorted,maths);
-
+            bbVPool_free(network_time->mathsPool,(void*)maths);
             I64 average = 0;
             bbNetworkTime_maths* maths;
             bbList_getNth(&network_time->mathsSorted,(void**)&maths, 15);
@@ -176,7 +176,6 @@ bbFlag bbNetworkApp_checkTime(bbNetworkTime* network_time)
 
             bbDebug("time_difference = %lld\n", average);
 
-            bbVPool_free(network_time->mathsPool,(void*)maths);
             network_time->numMathsElements--;
         }
 

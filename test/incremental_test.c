@@ -49,7 +49,7 @@ int main(void)
             bbNetwork_sendStr(&home.private.network, str);
             bbNetworkTime_ping(&home.private.network);
             bbNetworkApp_checkInbox(&home.private.network);
-            bbNetworkApp_checkTime(home.private.network.extra_data);
+            bbNetworkTime_updateTimeDiff(home.private.network.extra_data);
 
         }
 

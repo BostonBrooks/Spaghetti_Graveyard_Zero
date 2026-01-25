@@ -39,7 +39,17 @@ handle);
 bbFlag bbLeanPool_printHeader(bbLeanPool* pool, void* address);
 I32 bbLeanPool_handleIsEqual(bbLeanPool* USUSED, bbPool_Handle A, bbPool_Handle B);
 
+#define bbLeanPool_elementInBounds(pool, address){\
+    bbLeanPool* Pool = (bbLeanPool*)(pool);\
+    bbAssert( (void*)address >= (void*)&Pool->elements[0], "Address out of bounds\n");\
+    bbAssert( (void*)address <= (void*)&Pool->elements[(Pool->num-1)*Pool->sizeOf], "Address out of bounds\n");\
+}\
 
+#define bbLeanPool_handleValid(pool, handle){\
+	if(handle.ptr != NULL){\
+        bbLeanPool_elementInBounds(pool, handle.ptr);\
+    }\
+}
 
 #endif // BBLEANPOOL_H
 

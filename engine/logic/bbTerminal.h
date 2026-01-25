@@ -119,6 +119,9 @@ __FILE_NAME__, __func__, __LINE__, thread);
     case Success:\
         bbDebug ("Flag = Success\n");\
         break;\
+    case Fail:\
+        bbDebug ("Flag = Fail\n");\
+        break;\
     case None:\
         bbDebug ("Flag = None\n");\
         break;\
@@ -146,8 +149,7 @@ __FILE_NAME__, __func__, __LINE__, thread);
     case Tail:\
         bbDebug ("Flag = Tail\n");\
         break;            \
-    dafault:              \
-        bbDebug ("Flag = unknown\n");\
+\
     }\
 }\
 

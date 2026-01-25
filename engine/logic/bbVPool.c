@@ -31,7 +31,21 @@ bbFlag bbVPool_free(bbVPool* pool, void* address) {
 	return pool->free(pool->pool, address);
 }
 bbFlag bbVPool_lookup(bbVPool* pool, void** address, bbPool_Handle handle) {
-	return pool->lookup(pool->pool, address, handle);
+
+	if(pool->type == VPoolType_lean)
+	{
+		if (handle.ptr == NULL)
+		{
+			bbHere()
+			*address=NULL;
+			return None;
+		}
+	}
+
+
+	bbFlag flag = pool->lookup(pool->pool, address, handle);
+
+	return flag;
 }
 bbFlag bbVPool_reverseLookup(bbVPool* pool, void* address, bbPool_Handle* handle){
 	return pool->reverseLookup(pool->pool, address, handle);

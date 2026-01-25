@@ -6,6 +6,8 @@
 #include <stddef.h>
 #include <stdlib.h>
 
+#include "bbLeanPool.h"
+
 
 #define isEqual(A, B) bbVPool_handleIsEqual(list->pool, A, B)
 #define isNULL(A) bbVPool_handleIsEqual(list->pool, A, list->pool->null)
@@ -475,6 +477,13 @@ bbFlag bbList_sort(bbList* list) {
 }
 
 bbFlag bbList_sortL(bbList* list, void* element){
+
+	bbVPool* pool = list->pool;
+	bbVPool_handleValid(pool, list->listPtr->head);
+	bbVPool_handleValid(pool, list->listPtr->tail);
+
+
+
     bbPool_Handle elementHandle;
     bbVPool_reverseLookup(list->pool, element, &elementHandle);
     bbPool_ListElement* elementList = element + list->offsetOf;
@@ -482,8 +491,9 @@ bbFlag bbList_sortL(bbList* list, void* element){
     bbAssert(isNULL(elementList->prev), "element already in a list\n");
     bbAssert(isNULL(elementList->next), "element already in a list\n");
 
-    if(isNULL(list->listPtr->head)){
-        bbAssert(isNULL(list->listPtr->tail), "head / tail mismatch\n");
+	//this should deal with empty list
+    if(isNULL(list->listPtr->head) || isNULL(list->listPtr->tail)){
+        bbAssert(isNULL(list->listPtr->head) && isNULL(list->listPtr->tail), "head / tail mismatch\n");
         bbList_pushL(list, element);
         return Success;
     }
@@ -493,9 +503,22 @@ bbFlag bbList_sortL(bbList* list, void* element){
     bbPool_ListElement *nextList;
     while(1) {
 
-        bbVPool_lookup(list->pool, &next, nextHandle);
+        bbFlag flag = bbVPool_lookup(list->pool, &next, nextHandle);
+
         nextList = next + list->offsetOf;
 
+    	bbVPool* pool = list->pool;
+
+    	bbVPool_elementInBounds(pool, element)
+    	//bbDebug("next = %llu\n", next);
+
+    	if (next == NULL)
+    	{
+    		bbList_pushR(list, element);
+    		return Success;
+    	}
+
+    	bbVPool_elementInBounds(pool, next);
         if (list->compare(element, next)) {
             bbList_insertBefore(list, element, next);
             return Success;
@@ -505,6 +528,7 @@ bbFlag bbList_sortL(bbList* list, void* element){
             return Success;
         }
         nextHandle = nextList->next;
+
     }
 
 
@@ -531,6 +555,12 @@ bbFlag bbList_sortR(bbList* list, void* element) {
     while(1) {
         bbVPool_lookup(list->pool, &prev, prevHandle);
         prevList = prev + list->offsetOf;
+
+    	if (prev == NULL)
+    	{
+    		bbList_pushL(list, element);
+    		return Success;
+    	}
 
         if (!list->compare(element, prev)) {
             bbList_insertAfter(list, element, prev);

@@ -39,6 +39,9 @@ I32 bbLeanPool_toInt(bbLeanPool* pool, void* element)
 
 }
 
+
+
+
 bbFlag bbVPool_newLean(bbVPool** Pool, I32 sizeOf, I32 num){
 	bbLeanPool* LeanPool;
 	bbLeanPool_new(&LeanPool, sizeOf, num);
@@ -46,6 +49,7 @@ bbFlag bbVPool_newLean(bbVPool** Pool, I32 sizeOf, I32 num){
 	bbVPool* pool = malloc(sizeof(bbVPool));
 	bbAssert(pool != NULL, "bad malloc\n");
 	pool->pool = LeanPool;
+	pool->type = VPoolType_lean;
 	pool->null = LeanPool->null;
 	pool->sizeOf = LeanPool->sizeOf;
 	pool->delete = (bbFlag (*)(void* pool)) bbLeanPool_delete;

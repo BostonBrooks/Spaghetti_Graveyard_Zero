@@ -126,4 +126,6 @@ bbFlag bbList_isEmpty(bbList* list);
 bbFlag bbList_alloc(bbList* list, void** element);
 
 bbFlag bbList_getNth(bbList* list, void** element, I32 N);
+
+bbFlag bbList_checkIntegrity(bbList* list);
 #endif //BBLIST_H

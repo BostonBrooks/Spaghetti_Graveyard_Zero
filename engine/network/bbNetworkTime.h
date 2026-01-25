@@ -62,8 +62,6 @@ typedef struct
     bbList mathsSorted;
 } bbNetworkTime;
 
-bbFlag bbNetworkTime_doMaths (bbNetworkTime* network_time, bbNetworkTime_record* record);
-
 // get in synch with server
 bbFlag bbNetworkTime_init(bbNetworkTime* network_time);
 
@@ -84,29 +82,8 @@ bbFlag bbNetworkTime_filterInbox (void* network, void* Struct);
 ///react to outgoing message immediately before sending
 bbFlag bbNetworkTime_filterOutbox (void* network, void* Struct);
 
-
 bbFlag bbNetworkTime_ping(void* network);
-/* What am I doing?
- * bbNetwork.extra_data points to bbNetworkTime
- *
- * main thread puts a timestamp request in outbox
- *
- * filter_outbox creates a bbNetwork_record and records time,
- * then sends on the request to the server, filling out bbNetwork_timestamp.packetN
- *
- *                                                                         server adds receive time and send time
- *                                                                         sends the packet back to the client
- * filter_inbox adds server receive and send times, and current time to bbNetwork_record
- * filter_inbox must search bbNetworkTime.pending to get the record with matching packetN
- * and push that to bbNetworkTime.completed
- *
- *
- * bbdebug round trip time (RTT)
- *
- */
 
-
-
-bbFlag bbNetworkApp_checkTime(bbNetworkTime* network_time);
+bbFlag bbNetworkTime_updateTimeDiff(bbNetworkTime* network_time);
 
 #endif //BBNETWORKTIME_H
