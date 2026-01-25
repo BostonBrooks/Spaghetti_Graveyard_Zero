@@ -131,7 +131,6 @@ int main(void){
                     packetStruct.data.timestamp.send_time = time;
 
 
-
                     sfPacket_clear(packet);
                     bbNetworkPacket_fromStruct(packet, &packetStruct);
                     status = sfTcpSocket_sendPacket(sockets[i], packet);

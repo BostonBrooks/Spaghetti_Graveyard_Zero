@@ -152,15 +152,9 @@ bbFlag bbNetworkTime_updateTimeDiff(bbNetworkTime* network_time)
 
         if (network_time->numMathsElements > 32)
         {
-            if (network_time->timeCalibrated == false)
-            {
-                I64 time;
-                bbFlag flag1 = bbNetworkTime_get(network_time,&time);
-                network_time->network_tick_time = time/(1000000/60);
-            }
 
 
-            network_time->timeCalibrated = true;
+
             bbList_popR(&network_time->mathsChronological,(void**)&maths);
             bbList_remove(&network_time->mathsSorted,maths);
             bbVPool_free(network_time->mathsPool,(void*)maths);
@@ -182,6 +176,15 @@ bbFlag bbNetworkTime_updateTimeDiff(bbNetworkTime* network_time)
             bbDebug("time_difference = %lld\n", average);
 
             network_time->numMathsElements--;
+
+            if (network_time->timeCalibrated == false)
+            {
+                I64 time;
+                bbFlag flag1 = bbNetworkTime_get(network_time,&time);
+                network_time->network_tick_time = time/(1000000/60);
+
+                network_time->timeCalibrated = true;
+            }
         }
 
     }
@@ -203,12 +206,21 @@ bbFlag bbNetworkTime_waitInt(bbNetworkTime* network_time, U64 tick)
 {
     I64 current_time;
     bbNetworkTime_get(network_time,&current_time);
+
+
+
     I64 target_time = tick * (1000000/60);
 
     I64 wait_time = target_time - current_time;
 
-    if (wait_time <= 0) return Success;
+    bbDebug("current_time = %lld, target_time = %lld, wait_time = %lld\n",
+        current_time, target_time, wait_time);
 
+    if (wait_time <= 0)
+    {
+        network_time->network_tick_time = tick;
+        return Success;
+    }
     sfSleep(sfMicroseconds(wait_time));
 
     network_time->network_tick_time = tick;
