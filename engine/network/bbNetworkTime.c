@@ -1,6 +1,5 @@
 #include "engine/network/bbNetworkTime.h"
 
-#include "engine/data/bbHome.h"
 #include "engine/logic/bbBloatedPool.h"
 #include "engine/network/bbNetwork.h"
 #include "engine/logic/bbTerminal.h"
@@ -122,7 +121,12 @@ bbFlag bbNetworkTime_ping(void* Network)
     return Success;
 }
 
-
+//TODO what time is it on the server?
+bbFlag bbNetworkTime_get(bbNetworkTime* network_time, sfTime* time)
+{
+    *time = sfClock_getElapsedTime(network_time->localClock);
+    return Success;
+}
 
 bbFlag bbNetworkTime_updateTimeDiff(bbNetworkTime* network_time)
 {
