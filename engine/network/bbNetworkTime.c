@@ -128,7 +128,7 @@ bbFlag bbNetworkTime_get(bbNetworkTime* network_time, sfTime* time)
     return Success;
 }
 
-bbFlag bbNetworkApp_checkTime(bbNetworkTime* network_time)
+bbFlag bbNetworkTime_updateTimeDiff(bbNetworkTime* network_time)
 {
     bbFlag flag;
     while (1)
@@ -161,6 +161,7 @@ bbFlag bbNetworkApp_checkTime(bbNetworkTime* network_time)
             bbList_popR(&network_time->mathsChronological,(void**)&maths);
             bbList_remove(&network_time->mathsSorted,maths);
             bbVPool_free(network_time->mathsPool,(void*)maths);
+
             I64 average = 0;
             bbNetworkTime_maths* maths;
             bbList_getNth(&network_time->mathsSorted,(void**)&maths, 15);
