@@ -17,6 +17,11 @@ bbHome home;
 int main(void)
 {
 
+    sfClock* testClock1;
+    testClock1 = sfClock_create();
+    U64 run_time;
+    U64 rest_time;
+
     home.shared.playmode = PlayMode_pause;
     bbCore core;
     bbCore_init(&core);
@@ -38,8 +43,14 @@ int main(void)
 
     bbCore_incrementClock(&core, true);
     bbCore_react(&core);
+
+    rest_time = sfTime_asMicroseconds(sfClock_restart(testClock1));
+
+    bbDebug("setup time = %llu", rest_time);
+
     while (1)
     {
+        sfClock_restart(testClock1);
 // We're not playing with network or networktime right now
         if (home.private.network.send_ready && home.private.network.receive_ready)
         {
@@ -82,6 +93,27 @@ int main(void)
             bbCore_rewindUntilTime(&core,  home.private.mapTime - 1);
             bbCore_clearFuture(&core);
         }
+
+        bbNetworkTime* network_time = home.private.network.extra_data;
+
+        run_time = sfTime_asMicroseconds(  sfClock_restart(testClock1));
+
+        if (network_time->timeCalibrated)
+        {
+            I64 time1, time2;
+
+            bbNetworkTime_waitInt(network_time, network_time->network_tick_time + 1);
+
+        }
+
+        rest_time = sfTime_asMicroseconds(  sfClock_restart(testClock1));
+        double framerate = (double) 1000000 / (double) (run_time+rest_time);
+        double load = (double) run_time / (double) (run_time+rest_time);
+        bbDebug("run_time = %llu, rest_time = %llu,\n"
+                "framerate = %f, load = %f\n",
+                run_time, rest_time, framerate, load);
+
+
     }
 
     printf("We made it to the end!\n");

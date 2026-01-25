@@ -19,7 +19,7 @@ bbFlag bbUIApp_newWindow(bbUIApp* app)
     sfRenderWindow* window = sfRenderWindow_create(mode, "early demo", sfResize | sfClose, NULL);
     sfRenderWindow_drawSprite(window, app->SplashSprite, NULL);
     sfRenderWindow_display(window);
-    sfRenderWindow_setFramerateLimit(window, 60);
+    //sfRenderWindow_setFramerateLimit(window, 60);
     sfRenderWindow_setMouseCursorVisible(window, sfFalse);
     app->window = window;
 

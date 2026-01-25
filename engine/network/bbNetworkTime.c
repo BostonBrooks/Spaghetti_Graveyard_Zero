@@ -1,5 +1,6 @@
 #include "engine/network/bbNetworkTime.h"
 
+#include "engine/data/bbHome.h"
 #include "engine/logic/bbBloatedPool.h"
 #include "engine/network/bbNetwork.h"
 #include "engine/logic/bbTerminal.h"
@@ -17,7 +18,7 @@ I32 sortByTimeDifference(void* a, void* b)
 
 bbFlag bbNetworkTime_init(bbNetworkTime* network_time)
 {
-    I32 queue_size = 5;
+    I32 queue_size = 32;
     network_time->localClock = sfClock_create();
     network_time->packets_sent = 0;
     bbThreadedQueue_init(&network_time->pending, NULL, sizeof(bbNetworkTime_record),
@@ -30,7 +31,7 @@ bbFlag bbNetworkTime_init(bbNetworkTime* network_time)
     bbVPool_newBloated(&network_time->mathsPool,sizeof(bbNetworkTime_maths), 100,100);
     bbList_init(&network_time->mathsChronological, network_time->mathsPool, NULL,offsetof(bbNetworkTime_maths, chronological),NULL);
     bbList_init(&network_time->mathsSorted, network_time->mathsPool, NULL,offsetof(bbNetworkTime_maths, sorted),sortByTimeDifference);
-
+    network_time->timeCalibrated = false;
 
     return Success;
 }
@@ -121,12 +122,7 @@ bbFlag bbNetworkTime_ping(void* Network)
     return Success;
 }
 
-//TODO what time is it on the server?
-bbFlag bbNetworkTime_get(bbNetworkTime* network_time, sfTime* time)
-{
-    *time = sfClock_getElapsedTime(network_time->localClock);
-    return Success;
-}
+
 
 bbFlag bbNetworkTime_updateTimeDiff(bbNetworkTime* network_time)
 {
@@ -158,6 +154,15 @@ bbFlag bbNetworkTime_updateTimeDiff(bbNetworkTime* network_time)
 
         if (network_time->numMathsElements > 32)
         {
+            if (network_time->timeCalibrated == false)
+            {
+                I64 time;
+                bbFlag flag1 = bbNetworkTime_get(network_time,&time);
+                network_time->network_tick_time = time/(1000000/60);
+            }
+
+
+            network_time->timeCalibrated = true;
             bbList_popR(&network_time->mathsChronological,(void**)&maths);
             bbList_remove(&network_time->mathsSorted,maths);
             bbVPool_free(network_time->mathsPool,(void*)maths);
@@ -175,10 +180,40 @@ bbFlag bbNetworkTime_updateTimeDiff(bbNetworkTime* network_time)
 
             average /= 4;
 
+            network_time->timeDifference = average;
             bbDebug("time_difference = %lld\n", average);
 
             network_time->numMathsElements--;
         }
 
     }
+}
+
+bbFlag bbNetworkTime_get(bbNetworkTime* network_time, I64* time)
+{
+    if (network_time->timeCalibrated == false)
+    {
+        *time = 0;
+        return None;
+    }
+    U64 local_time = sfTime_asMicroseconds(sfClock_getElapsedTime(network_time->localClock));
+    *time = local_time + network_time->timeDifference;
+    return Success;
+}
+
+bbFlag bbNetworkTime_waitInt(bbNetworkTime* network_time, U64 tick)
+{
+    I64 current_time;
+    bbNetworkTime_get(network_time,&current_time);
+    I64 target_time = tick * (1000000/60);
+
+    I64 wait_time = target_time - current_time;
+
+    if (wait_time <= 0) return Success;
+
+    sfSleep(sfMicroseconds(wait_time));
+
+    network_time->network_tick_time = tick;
+    return Success;
+
 }
