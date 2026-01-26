@@ -11,6 +11,9 @@ bbFlag bbNetworkPacket_toStruct (sfPacket* packet, void* Struct)
 {
     bbNetworkPacket* struct1 = Struct;
 
+
+    struct1->type = sfPacket_readInt32(packet);
+
     U64 sendTick_lower = sfPacket_readUint32(packet);
     U64 sendTick_upper = sfPacket_readUint32(packet);
 
@@ -21,7 +24,7 @@ bbFlag bbNetworkPacket_toStruct (sfPacket* packet, void* Struct)
 
     struct1->actTick = actTick_upper * 0x100000000 + actTick_lower;
 
-    struct1->type = sfPacket_readInt32(packet);
+    struct1->player = sfPacket_readUint8(packet);
 
     switch (struct1->type)
     {
@@ -57,6 +60,8 @@ bbFlag bbNetworkPacket_fromStruct (sfPacket* packet, void* Struct)
 {
     bbNetworkPacket* struct1 = Struct;
 
+    sfPacket_writeInt32(packet, struct1->type);
+
     U64 sendTick_lower = struct1->sendTick & 0xFFFFFFFF;
     U64 sendTick_upper = struct1->sendTick / 0x100000000;
 
@@ -69,17 +74,15 @@ bbFlag bbNetworkPacket_fromStruct (sfPacket* packet, void* Struct)
     sfPacket_writeUint32(packet, (U32)actTick_lower);
     sfPacket_writeUint32(packet, (U32)actTick_upper);
 
-
+    sfPacket_writeUint8(packet, struct1->player);
 
     switch (struct1->type)
     {
     case PACKETTYPE_STRING:
-        sfPacket_writeInt32(packet, struct1->type);
         sfPacket_writeString(packet, struct1->data.str);
         break;
     case PACKETTYPE_TIMESTAMP:
     case PACKETTYPE_REQUESTTIMESTAMP:
-        sfPacket_writeInt32(packet, struct1->type);
 
         U64 packetN_lower = struct1->data.timestamp.packetN & 0xFFFFFFFF;
         U64 packetN_upper = struct1->data.timestamp.packetN / 0x100000000;
@@ -99,7 +102,6 @@ bbFlag bbNetworkPacket_fromStruct (sfPacket* packet, void* Struct)
         break;
     case PACKETTYPE_SETGOALPOINT:
 
-        sfPacket_writeInt32(packet, struct1->type);
         sfPacket_writeInt32(packet, struct1->data.map_coords.i);
         sfPacket_writeInt32(packet, struct1->data.map_coords.j);
         sfPacket_writeInt32(packet, struct1->data.map_coords.k);

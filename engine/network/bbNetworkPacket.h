@@ -27,9 +27,10 @@ typedef union
 typedef struct
 {
     bbPool_ListElement listElement;
+    I32 type;
     U64 sendTick;
     U64 actTick;
-    I32 type;
+    U8 player;
     bbNetworkPacket_data data;
 
 } bbNetworkPacket;

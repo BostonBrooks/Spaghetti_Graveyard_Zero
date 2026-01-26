@@ -110,6 +110,7 @@ add_executable(myprogram
         games/game0/maps/map0/agents/agents.c
         engine/logic/bbList_getNth.c
         test/bbList_getNth_test.c
+        engine/core/bbNetCode.h
 
 )
 
