@@ -85,6 +85,8 @@ bbFlag bbNetworkTime_filterInbox (void* Network, void* Struct)
     {
         bbDebug("packet coords i = %d, j = %d, k = %d\n",
             packet->data.map_coords.i, packet->data.map_coords.j, packet->data.map_coords.k);
+
+       return Success;
     }
 
     if (packet->type == PACKETTYPE_TIMESTAMP)

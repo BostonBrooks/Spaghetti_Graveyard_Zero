@@ -137,13 +137,14 @@ bbFlag bbNetworkApp_checkInbox(bbNetwork* network)
         if (flag != Success) return Success;
 
 
+
         if (packet->type == PACKETTYPE_STRING)
         {
             printf("packet received: %s\n", packet->data.str);
         }
         if (packet->type == PACKETTYPE_SETGOALPOINT)
         {
-            printf("coords received: i = %d, j = %d, k = %d\n",
+            bbDebug("coords received: i = %d, j = %d, k = %d\n",
                 packet->data.map_coords.i, packet->data.map_coords.j, packet->data.map_coords.k);
         }
 
