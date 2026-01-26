@@ -1,5 +1,6 @@
 #include "engine/geometry/bbCoordinates.h"
 #include "engine/logic/bbPoolHandle.h"
+#include "engine/network/bbNetworkPacket.h"
 
 typedef enum
 {
@@ -22,3 +23,10 @@ typedef struct
 } bbNetworkCode;
 
 
+typedef struct
+{
+    bbVPool* pool;
+    bbList priorityQueue;
+} bbNetworkCodes;
+
+bbFlag bbNetworkCodes_receiveNetworkPacket(bbNetworkCodes* networkCodes, bbNetworkPacket* packet);
