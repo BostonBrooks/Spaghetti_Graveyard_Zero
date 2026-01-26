@@ -173,17 +173,20 @@ bbFlag bbNetworkTime_updateTimeDiff(bbNetworkTime* network_time)
             average /= 4;
 
             network_time->timeDifference = average;
-            bbDebug("time_difference = %lld\n", average);
+
+            //bbDebug("timedifference = %ld\n", average);
 
             network_time->numMathsElements--;
 
             if (network_time->timeCalibrated == false)
             {
+                network_time->timeCalibrated = true;
                 I64 time;
                 bbFlag flag1 = bbNetworkTime_get(network_time,&time);
                 network_time->network_tick_time = time/(1000000/60);
 
-                network_time->timeCalibrated = true;
+                //bbDebug("time = %lld, tick time = %llu\n", time, network_time->network_tick_time);
+
             }
         }
 
@@ -213,14 +216,18 @@ bbFlag bbNetworkTime_waitInt(bbNetworkTime* network_time, U64 tick)
 
     I64 wait_time = target_time - current_time;
 
-    bbDebug("current_time = %lld, target_time = %lld, wait_time = %lld\n",
-        current_time, target_time, wait_time);
+
 
     if (wait_time <= 0)
     {
         network_time->network_tick_time = tick;
+        //bbDebug("current_time = %lld, target_time = %lld, wait_time = %lld XXXXX wait_time negative\n",
+        //        current_time, target_time, wait_time);
         return Success;
     }
+
+    //bbDebug("current_time = %lld, target_time = %lld, wait_time = %lld\n",
+    //      current_time, target_time, wait_time);
     sfSleep(sfMicroseconds(wait_time));
 
     network_time->network_tick_time = tick;

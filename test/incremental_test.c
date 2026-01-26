@@ -100,9 +100,8 @@ int main(void)
 
         if (network_time->timeCalibrated)
         {
-            I64 time1, time2;
 
-            bbNetworkTime_waitInt(network_time, network_time->network_tick_time + 3);
+            bbNetworkTime_waitInt(network_time, network_time->network_tick_time + 1);
 
         }
 

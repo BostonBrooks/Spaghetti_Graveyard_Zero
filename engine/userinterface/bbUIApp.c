@@ -202,9 +202,9 @@ bbFlag bbUIApp_spawnWidgets(bbUIApp* app)
 						 125*SCREEN_PPP);
 
 	//Only used when testing animations
-	//SP0.x = 0; SP0.y = 0;
-	//bbWidget_constructor(&widget0, &app->widgets, &home.constant.graphics,
-	//					 SP0, layout, "ANIMATIONTEST");
+	SP0.x = 0; SP0.y = 0;
+	bbWidget_constructor(&widget0, &app->widgets, &home.constant.graphics,
+					 SP0, layout, "ANIMATIONTEST");
 
 	return Success;
 }
