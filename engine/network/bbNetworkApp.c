@@ -90,6 +90,22 @@ bbFlag bbNetworkApp_connect(bbNetwork* network, char* address, char* port)
 
 }
 
+bbFlag bbNetworkApp_sendGoalpoint(void* Network, bbMapCoords* coords)
+{
+    bbNetwork* network = (bbNetwork*)Network;
+    bbNetworkPacket* packet;
+    bbThreadedQueue_alloc(&network->outbox, (void**)&packet);
+    packet->actTick = 1337;
+    packet->sendTick = 8008135;
+    packet->type = PACKETTYPE_SETGOALPOINT;
+    packet->data.map_coords.i = coords->i;
+    packet->data.map_coords.j = coords->j;
+    packet->data.map_coords.k = coords->k;
+    bbThreadedQueue_pushL(&network->outbox, (void*)packet);
+
+    return Success;
+}
+
 bbFlag bbNetworkApp_sendString(bbNetwork* network, char* string)
 {
     bbNetworkPacket* packet;
@@ -124,6 +140,11 @@ bbFlag bbNetworkApp_checkInbox(bbNetwork* network)
         if (packet->type == PACKETTYPE_STRING)
         {
             printf("packet received: %s\n", packet->data.str);
+        }
+        if (packet->type == PACKETTYPE_SETGOALPOINT)
+        {
+            printf("coords received: i = %d, j = %d, k = %d\n",
+                packet->data.map_coords.i, packet->data.map_coords.j, packet->data.map_coords.k);
         }
 
         bbThreadedQueue_free(&network->inbox, (void**)&packet);

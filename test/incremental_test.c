@@ -58,6 +58,13 @@ int main(void)
             sprintf(str, "maptime = %llu", home.private.mapTime );
 
             //bbNetwork_sendStr(&home.private.network, str);
+
+            bbMapCoords MC;
+            MC.i = 193;
+            MC.j = -193;
+            MC.k = 391;
+
+            bbNetworkApp_sendGoalpoint(&home.private.network, &MC);
             bbNetworkTime_ping(&home.private.network);
             bbNetworkApp_checkInbox(&home.private.network);
             bbNetworkTime_updateTimeDiff(home.private.network.extra_data);

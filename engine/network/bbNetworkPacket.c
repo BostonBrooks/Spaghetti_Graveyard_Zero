@@ -45,6 +45,11 @@ bbFlag bbNetworkPacket_toStruct (sfPacket* packet, void* Struct)
             struct1->data.timestamp.send_time = send_time_upper * 0x100000000 + send_time_lower;
 
         break;
+    case PACKETTYPE_SETGOALPOINT:
+        struct1->data.map_coords.i = sfPacket_readInt32(packet);
+        struct1->data.map_coords.j = sfPacket_readInt32(packet);
+        struct1->data.map_coords.k = sfPacket_readInt32(packet);
+        break;
     }
     return Success;
 }
@@ -63,6 +68,8 @@ bbFlag bbNetworkPacket_fromStruct (sfPacket* packet, void* Struct)
 
     sfPacket_writeUint32(packet, (U32)actTick_lower);
     sfPacket_writeUint32(packet, (U32)actTick_upper);
+
+
 
     switch (struct1->type)
     {
@@ -90,6 +97,13 @@ bbFlag bbNetworkPacket_fromStruct (sfPacket* packet, void* Struct)
         sfPacket_writeUint32(packet, (U32)send_time_lower);
         sfPacket_writeUint32(packet, (U32)send_time_upper);
         break;
+    case PACKETTYPE_SETGOALPOINT:
+
+        sfPacket_writeInt32(packet, struct1->type);
+        sfPacket_writeInt32(packet, struct1->data.map_coords.i);
+        sfPacket_writeInt32(packet, struct1->data.map_coords.j);
+        sfPacket_writeInt32(packet, struct1->data.map_coords.k);
+        break;
     }
     return Success;
 }
@@ -106,5 +120,6 @@ bbFlag bbNetwork_sendStr(void* Network, char* str)
 
     return Success;
 }
+
 
 

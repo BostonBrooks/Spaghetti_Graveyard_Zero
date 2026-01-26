@@ -119,9 +119,17 @@ int main(void){
 
                 bbNetworkPacket_toStruct(packet, &packetStruct);
 
-                bbDebug("type = %d, packetN = %llu, string  = %s\n",
-                    packetStruct.type, packetStruct.data.timestamp.packetN, packetStruct.data.str);
-
+                if (packetStruct.type == PACKETTYPE_SETGOALPOINT)
+                {
+                    bbDebug("Set Goalpoint i = %d, j = %d, k = %d\n",
+                        packetStruct.data.map_coords.i,
+                        packetStruct.data.map_coords.j,
+                        packetStruct.data.map_coords.k);
+                } else
+                {
+                    bbDebug("type = %d, packetN = %llu, string  = %s\n",
+                        packetStruct.type, packetStruct.data.timestamp.packetN, packetStruct.data.str);
+                }
                 if (packetStruct.type == PACKETTYPE_REQUESTTIMESTAMP)
                 {
                     packetStruct.type = PACKETTYPE_TIMESTAMP;

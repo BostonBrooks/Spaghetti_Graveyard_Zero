@@ -16,4 +16,7 @@ bbFlag bbNetworkApp_sendNetworkPacket(bbNetwork* network, void* packet);
 
 bbFlag bbNetworkApp_checkInbox(bbNetwork* network);
 
+
+bbFlag bbNetworkApp_sendGoalpoint(void* Network, bbMapCoords* coords);
+
 #endif // BBNWETWORKAPP_H
