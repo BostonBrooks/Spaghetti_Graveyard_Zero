@@ -112,6 +112,40 @@ bbFlag bbDF_widgetAnimation(void* drawable, void* frameDescriptor, void* cl){
     return Success;
 }
 
+bbFlag bbDF_widgetAnimationNetTime(void* drawable, void* frameDescriptor, void* cl){
+
+    bbWidget* widget = drawable;
+    bbFrame* frame_descriptor = frameDescriptor;
+    drawFuncClosure* closure = cl;
+    bbGraphicsApp* graphics = closure->graphics;
+
+    bbAnimation* animation = graphics->animations->animations[frame_descriptor->handle.u64];
+
+    I32 angle = 0;
+    I32 frames = animation->frames;
+    bbNetworkTime* network_time = home.private.network.extra_data;
+    U64 time = network_time->network_tick_time;
+
+    //bbDebug("key = %s, maptime = %d, starttime= %d, framerate = %f, frames = %d\n",
+    //		animation->key, mapTime, frame_descriptor->startTime,animation->framerate, animation->frames );
+    I32 frame = bbArith64_mod((I64)((time - (I64)frame_descriptor->startTime) *
+                      (double)animation->framerate * (double)frame_descriptor->framerate), animation->frames);
+    I32 sprite_int = animation->Sprites[angle*frames+frame].u64;
+    sfSprite* sprite = animation->sprites->sprites[sprite_int];
+
+
+
+    bbScreenPoints SP;
+    SP.x = widget->rect.left + frame_descriptor->offset.x;
+    SP.y = widget->rect.top + frame_descriptor->offset.y;
+    sfVector2f position = bbScreenPoints_getV2f(SP);
+
+    sfSprite_setPosition(sprite, position);
+    sfRenderWindow_drawSprite(closure->target, sprite, NULL);
+
+    return Success;
+}
+
 //Look up default draw function for a given animation
 bbFlag bbDF_widgetAnimationDefault(void* drawable, void* frameDescriptor, void* cl){
     bbWidget* widget = drawable;
@@ -257,7 +291,7 @@ bbFlag bbDF_widgetTextBox(void* drawable, void* frameDescriptor, void* cl)
 
 
 bbFlag bbDrawfunctions_new(bbDrawfunctions** drawfunctions){
-    I32 num = 16;
+    I32 num = 17;
     bbDrawfunctions* functions = malloc(sizeof(bbDrawfunctions) + num * sizeof(bbDrawFunction*));
     bbAssert(functions!=NULL, "bad malloc");
     bbDictionary_new(&functions->dictionary, nextPrime(num));
@@ -331,6 +365,10 @@ bbFlag bbDrawfunctions_new(bbDrawfunctions** drawfunctions){
     handle.u64 = 15;
     bbDictionary_add(functions->dictionary, "DRAWABLEANIMATIONWANGLE", handle);
 
+
+    functions->functions[16] = bbDF_widgetAnimationNetTime;
+    handle.u64 = 16;
+    bbDictionary_add(functions->dictionary, "WIDGETANIMATIONNETTIME", handle);
 
     *drawfunctions = functions;
     return Success;

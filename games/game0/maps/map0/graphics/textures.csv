@@ -1,4 +1,4 @@
-Number of Textures:,31,,,,
+Number of Textures:,32,,,,
 Label:,Integer Address:,File:,Smooth:,Comment:,
 NULL,0,./graphics/NULL.png,F,Exception,
 LAYOUT_480,1,./graphics/Layout_480.png,F,The root of the widget tree,
@@ -31,5 +31,5 @@ LAYERBOUNDARY,27,./graphics/LayerBoundary.png,F,drawn between menu and gamescree
 TOPLEFT,28,./graphics/TopLeftMenu.png,F, menu at the top left of the screen
 SKELETON,29,./graphics/Flare_RPG/skeleton.png,T, a skeleton
 ZOMBIE,30,./graphics/Flare_RPG/zombie.png,T, a zombie
-
+CLOCK,31,./graphics/Clockface.png,T, a clock hand
 

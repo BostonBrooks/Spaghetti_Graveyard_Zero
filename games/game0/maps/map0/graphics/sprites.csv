@@ -1,4 +1,4 @@
-Number of Sprites:,479,,,,,,,,,,,,
+Number of Sprites:,539,,,,,,,,,,,,
 Label:,Integer Address:,Texture:,Left:,Top:,Width:,Height:,Origin X:,Origin Y:,Scale X:,Scale Y:,Scale By:,Comment:,
 NULL,0,NULL,0,0,128,128,0,0,1,1,None,Exception,
 LAYOUT_480,1,LAYOUT_480,0,0,720,480,0,0,1,1,None,The root of the widget tree,
@@ -479,3 +479,63 @@ ZOMBIEH8,475,ZOMBIE,1063,937,63,70,23,55.2558139534885,2,2,None,A,zombie,,,,,,,,
 ZOMBIEH9,476,ZOMBIE,1191,937,63,70,23,55.1627906976744,2,2,None,A,zombie,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 ZOMBIEH10,477,ZOMBIE,1319,937,63,70,23,55.0697674418605,2,2,None,A,zombie,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 ZOMBIEH11,478,ZOMBIE,1447,937,63,70,23,54.9767441860465,2,2,None,A,zombie,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+CLOCK0,479,CLOCK,0,0,107,111,52,55,1,1,Widget,a clock hand
+CLOCK1,480,CLOCK,109,0,107,111,52,55,1,1,Widget,a clock hand
+CLOCK2,481,CLOCK,218,0,107,111,52,55,1,1,Widget,a clock hand
+CLOCK3,482,CLOCK,327,0,107,111,52,55,1,1,Widget,a clock hand
+CLOCK4,483,CLOCK,436,0,107,111,52,55,1,1,Widget,a clock hand
+CLOCK5,484,CLOCK,545,0,107,111,52,55,1,1,Widget,a clock hand
+CLOCK6,485,CLOCK,654,0,107,111,52,55,1,1,Widget,a clock hand
+CLOCK7,486,CLOCK,763,0,107,111,52,55,1,1,Widget,a clock hand
+CLOCK8,487,CLOCK,0,112,107,111,52,55,1,1,Widget,a clock hand
+CLOCK9,488,CLOCK,109,112,107,111,52,55,1,1,Widget,a clock hand
+CLOCK10,489,CLOCK,218,112,107,111,52,55,1,1,Widget,a clock hand
+CLOCK11,490,CLOCK,327,112,107,111,52,55,1,1,Widget,a clock hand
+CLOCK12,491,CLOCK,436,112,107,111,52,55,1,1,Widget,a clock hand
+CLOCK13,492,CLOCK,545,112,107,111,52,55,1,1,Widget,a clock hand
+CLOCK14,493,CLOCK,654,112,107,111,52,55,1,1,Widget,a clock hand
+CLOCK15,494,CLOCK,763,112,107,111,52,55,1,1,Widget,a clock hand
+CLOCK16,495,CLOCK,0,224,107,111,52,55,1,1,Widget,a clock hand
+CLOCK17,496,CLOCK,109,224,107,111,52,55,1,1,Widget,a clock hand
+CLOCK18,497,CLOCK,218,224,107,111,52,55,1,1,Widget,a clock hand
+CLOCK19,498,CLOCK,327,224,107,111,52,55,1,1,Widget,a clock hand
+CLOCK20,499,CLOCK,436,224,107,111,52,55,1,1,Widget,a clock hand
+CLOCK21,500,CLOCK,545,224,107,111,52,55,1,1,Widget,a clock hand
+CLOCK22,501,CLOCK,654,224,107,111,52,55,1,1,Widget,a clock hand
+CLOCK23,502,CLOCK,763,224,107,111,52,55,1,1,Widget,a clock hand
+CLOCK24,503,CLOCK,0,336,107,111,52,55,1,1,Widget,a clock hand
+CLOCK25,504,CLOCK,109,336,107,111,52,55,1,1,Widget,a clock hand
+CLOCK26,505,CLOCK,218,336,107,111,52,55,1,1,Widget,a clock hand
+CLOCK27,506,CLOCK,327,336,107,111,52,55,1,1,Widget,a clock hand
+CLOCK28,507,CLOCK,436,336,107,111,52,55,1,1,Widget,a clock hand
+CLOCK29,508,CLOCK,545,336,107,111,52,55,1,1,Widget,a clock hand
+CLOCK30,509,CLOCK,654,336,107,111,52,55,1,1,Widget,a clock hand
+CLOCK31,510,CLOCK,763,336,107,111,52,55,1,1,Widget,a clock hand
+CLOCK32,511,CLOCK,0,448,107,111,52,55,1,1,Widget,a clock hand
+CLOCK33,512,CLOCK,109,448,107,111,52,55,1,1,Widget,a clock hand
+CLOCK34,513,CLOCK,218,448,107,111,52,55,1,1,Widget,a clock hand
+CLOCK35,514,CLOCK,327,448,107,111,52,55,1,1,Widget,a clock hand
+CLOCK36,515,CLOCK,436,448,107,111,52,55,1,1,Widget,a clock hand
+CLOCK37,516,CLOCK,545,448,107,111,52,55,1,1,Widget,a clock hand
+CLOCK38,517,CLOCK,654,448,107,111,52,55,1,1,Widget,a clock hand
+CLOCK39,518,CLOCK,763,448,107,111,52,55,1,1,Widget,a clock hand
+CLOCK40,519,CLOCK,0,560,107,111,52,55,1,1,Widget,a clock hand
+CLOCK41,520,CLOCK,109,560,107,111,52,55,1,1,Widget,a clock hand
+CLOCK42,521,CLOCK,218,560,107,111,52,55,1,1,Widget,a clock hand
+CLOCK43,522,CLOCK,327,560,107,111,52,55,1,1,Widget,a clock hand
+CLOCK44,523,CLOCK,436,560,107,111,52,55,1,1,Widget,a clock hand
+CLOCK45,524,CLOCK,545,560,107,111,52,55,1,1,Widget,a clock hand
+CLOCK46,525,CLOCK,654,560,107,111,52,55,1,1,Widget,a clock hand
+CLOCK47,526,CLOCK,763,560,107,111,52,55,1,1,Widget,a clock hand
+CLOCK48,527,CLOCK,0,672,107,111,52,55,1,1,Widget,a clock hand
+CLOCK49,528,CLOCK,109,672,107,111,52,55,1,1,Widget,a clock hand
+CLOCK50,529,CLOCK,218,672,107,111,52,55,1,1,Widget,a clock hand
+CLOCK51,530,CLOCK,327,672,107,111,52,55,1,1,Widget,a clock hand
+CLOCK52,531,CLOCK,436,672,107,111,52,55,1,1,Widget,a clock hand
+CLOCK53,532,CLOCK,545,672,107,111,52,55,1,1,Widget,a clock hand
+CLOCK54,533,CLOCK,654,672,107,111,52,55,1,1,Widget,a clock hand
+CLOCK55,534,CLOCK,763,672,107,111,52,55,1,1,Widget,a clock hand
+CLOCK56,535,CLOCK,0,784,107,111,52,55,1,1,Widget,a clock hand
+CLOCK57,536,CLOCK,109,784,107,111,52,55,1,1,Widget,a clock hand
+CLOCK58,537,CLOCK,218,784,107,111,52,55,1,1,Widget,a clock hand
+CLOCK59,538,CLOCK,327,784,107,111,52,55,1,1,Widget,a clock hand
