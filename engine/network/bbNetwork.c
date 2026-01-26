@@ -138,6 +138,13 @@ void* bbNetwork_receiveThread(void* args)
             }
         }
 
+        if (test->type == PACKETTYPE_SETGOALPOINT)
+        {
+            bbDebug("in receive thread: i = %d, j = %d, k = %d\n",
+                test->data.map_coords.i,
+                test->data.map_coords.j,
+                test->data.map_coords.k);
+        }
         bbThreadedQueue_pushL(queue, test);
 
         sfPacket_clear(packet);
