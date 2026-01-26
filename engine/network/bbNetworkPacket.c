@@ -10,6 +10,17 @@ extern _Thread_local char* thread;
 bbFlag bbNetworkPacket_toStruct (sfPacket* packet, void* Struct)
 {
     bbNetworkPacket* struct1 = Struct;
+
+    U64 sendTick_lower = sfPacket_readUint32(packet);
+    U64 sendTick_upper = sfPacket_readUint32(packet);
+
+    struct1->sendTick = sendTick_upper * 0x100000000 + sendTick_lower;
+
+    U64 actTick_lower = sfPacket_readUint32(packet);
+    U64 actTick_upper = sfPacket_readUint32(packet);
+
+    struct1->actTick = actTick_upper * 0x100000000 + actTick_lower;
+
     struct1->type = sfPacket_readInt32(packet);
 
     switch (struct1->type)
@@ -40,6 +51,19 @@ bbFlag bbNetworkPacket_toStruct (sfPacket* packet, void* Struct)
 bbFlag bbNetworkPacket_fromStruct (sfPacket* packet, void* Struct)
 {
     bbNetworkPacket* struct1 = Struct;
+
+    U64 sendTick_lower = struct1->sendTick & 0xFFFFFFFF;
+    U64 sendTick_upper = struct1->sendTick / 0x100000000;
+
+    sfPacket_writeUint32(packet, (U32)sendTick_lower);
+    sfPacket_writeUint32(packet, (U32)sendTick_upper);
+
+    U64 actTick_lower = struct1->actTick & 0xFFFFFFFF;
+    U64 actTick_upper = struct1->actTick / 0x100000000;
+
+    sfPacket_writeUint32(packet, (U32)actTick_lower);
+    sfPacket_writeUint32(packet, (U32)actTick_upper);
+
     switch (struct1->type)
     {
     case PACKETTYPE_STRING:

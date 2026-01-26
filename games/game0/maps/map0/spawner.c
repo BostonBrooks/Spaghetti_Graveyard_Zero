@@ -31,8 +31,8 @@ bbFlag spawnEverything(void)
         }
     }
 
-    for (I32 i = 0; i<12;i++) {
-        for (I32 j = 0; j < 12; j++) {
+    for (I32 i = 0; i<8;i++) {
+        for (I32 j = 0; j < 8; j++) {
             bbMapCoords MC;
 
             MC.i = i * (POINTS_PER_SQUARE);

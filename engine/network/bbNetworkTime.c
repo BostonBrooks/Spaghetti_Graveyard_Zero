@@ -17,7 +17,7 @@ I32 sortByTimeDifference(void* a, void* b)
 
 bbFlag bbNetworkTime_init(bbNetworkTime* network_time)
 {
-    I32 queue_size = 32;
+    I32 queue_size = 64;
     network_time->localClock = sfClock_create();
     network_time->packets_sent = 0;
     bbThreadedQueue_init(&network_time->pending, NULL, sizeof(bbNetworkTime_record),
@@ -77,6 +77,11 @@ bbFlag bbNetworkTime_filterInbox (void* Network, void* Struct)
     bbNetwork* network = Network;
     bbNetworkTime* network_time = (bbNetworkTime*)network->extra_data;
     bbNetworkPacket* packet = Struct;
+
+
+    bbDebug("sendTick = %llu, actTick = %llu\n", packet->sendTick, packet->actTick);
+
+
     if (packet->type == PACKETTYPE_TIMESTAMP)
 
         {
@@ -114,6 +119,8 @@ bbFlag bbNetworkTime_ping(void* Network)
     bbNetworkPacket* packet;
     bbThreadedQueue_alloc(&network->outbox, (void**)&packet);
 
+    packet->sendTick = 696969696;
+    packet->actTick = 31415;
     packet->type = PACKETTYPE_REQUESTTIMESTAMP;
 
     bbThreadedQueue_pushL(&network->outbox,packet);

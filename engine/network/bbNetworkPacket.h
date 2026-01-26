@@ -4,6 +4,7 @@
 #include <SFML/Network.h>
 
 #include "bbNetworkTime.h"
+#include "engine/geometry/bbCoordinates.h"
 #include "engine/logic/bbFlag.h"
 #include "engine/logic/bbPoolHandle.h"
 #include "engine/network/bbNetworkTime.h"
@@ -11,21 +12,25 @@
 #define PACKETTYPE_STRING            0
 #define PACKETTYPE_TIMESTAMP         1
 #define PACKETTYPE_REQUESTTIMESTAMP  2
+#define PACKETTYPE_SETGOALPOINT      3
 
 
 typedef union
 {
     bbNetwork_timestamp timestamp;
     char str[64];
+    bbMapCoords map_coords;
 } bbNetworkPacket_data;
 
 
 
 typedef struct
 {
+    bbPool_ListElement listElement;
+    U64 sendTick;
+    U64 actTick;
     I32 type;
     bbNetworkPacket_data data;
-    bbPool_ListElement listElement;
 
 } bbNetworkPacket;
 

@@ -104,6 +104,7 @@ bbFlag bbNetworkApp_sendTime(bbNetwork* network){
     bbNetworkPacket* packet;
     bbThreadedQueue_alloc(&network->outbox, (void**)&packet);
     packet->type = PACKETTYPE_REQUESTTIMESTAMP;
+
     bbThreadedQueue_pushL(&network->outbox,packet);
 
     return Success;
@@ -118,11 +119,13 @@ bbFlag bbNetworkApp_checkInbox(bbNetwork* network)
         bbNetworkPacket* packet;
         flag = bbThreadedQueue_popR(&network->inbox, (void**)&packet);
         if (flag != Success) return Success;
+
+
         if (packet->type == PACKETTYPE_STRING)
         {
-            //TODO uncomment this line
-            //printf("packet received: %s\n", packet->data.str);
+            printf("packet received: %s\n", packet->data.str);
         }
+
         bbThreadedQueue_free(&network->inbox, (void**)&packet);
     }
 }

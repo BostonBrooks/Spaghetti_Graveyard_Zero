@@ -57,7 +57,7 @@ int main(void)
             char str[64];
             sprintf(str, "maptime = %llu", home.private.mapTime );
 
-            bbNetwork_sendStr(&home.private.network, str);
+            //bbNetwork_sendStr(&home.private.network, str);
             bbNetworkTime_ping(&home.private.network);
             bbNetworkApp_checkInbox(&home.private.network);
             bbNetworkTime_updateTimeDiff(home.private.network.extra_data);
