@@ -63,7 +63,7 @@ bbFlag bbThreadedQueue_free(bbThreadedQueue* queue, void** element)
 bbFlag bbThreadedQueue_pushL(bbThreadedQueue* queue, void* element)
 {
 
-    //what if, as a protection, bbThreadedQueue_pushL sets element to NULL
+
     bbMutexLock(&queue->mutex);
 
     bbFlag flag;
@@ -77,6 +77,7 @@ bbFlag bbThreadedQueue_pushL(bbThreadedQueue* queue, void* element)
     bbPool_Handle handle_element;
     flag = bbVPool_reverseLookup(queue->pool, element, &handle_element);
 
+    //list empty
     if (queue->head == -1 || queue->tail == -1)
     {
         bbAssert(queue->head == -1 && queue->tail == -1, "head/tail mismatch");
@@ -96,6 +97,7 @@ bbFlag bbThreadedQueue_pushL(bbThreadedQueue* queue, void* element)
         return Success;
     }
 
+
     void* head; bbPool_Handle headhandle;
     headhandle.u64 = queue->head;
     bbVPool_lookup(queue->pool, &head, headhandle);
@@ -107,7 +109,9 @@ bbFlag bbThreadedQueue_pushL(bbThreadedQueue* queue, void* element)
     head_listElement->prev = handle_element;
     queue->head = handle_element.u64;
 
-    bbAssert( queue->head != -1 && queue->tail != -1, "head/tail error\n");
+    bbAssert( queue->head != -1, "list not empty but has null head\n");
+//I don't see why this fails
+    bbAssert( queue->tail != -1, "list not empty but has null tail\n");
 
     bbMutexUnlock(&queue->mutex);
     return Success;
