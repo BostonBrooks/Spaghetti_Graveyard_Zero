@@ -67,7 +67,7 @@ int main(void){
 
         if (sfSocketSelector_isTcpListenerReady(selector,listener) == sfTrue) {
 
-            bbHere()
+
             sfTcpSocket *socket = NULL;
             //socket = sfTcpSocket_create();
             status = sfTcpListener_accept(listener, &socket);
@@ -101,7 +101,7 @@ int main(void){
             if(sfSocketSelector_isTcpSocketReady(selector, sockets[i]) ==
             sfTrue){
 
-                bbHere()
+
 
                 status = sfTcpSocket_receivePacket(sockets[i], packet);
                 sfSocketStatus_print(status)
@@ -113,7 +113,7 @@ int main(void){
                     sockets[i] = NULL;
                     continue;
                 }
-                bbHere()
+
 
                 bbNetworkPacket packetStruct;
 
@@ -121,14 +121,14 @@ int main(void){
 
                 if (packetStruct.type == PACKETTYPE_SETGOALPOINT)
                 {
-                    bbDebug("Set Goalpoint i = %d, j = %d, k = %d\n",
-                        packetStruct.data.map_coords.i,
-                        packetStruct.data.map_coords.j,
-                        packetStruct.data.map_coords.k);
+                    //bbDebug("Set Goalpoint i = %d, j = %d, k = %d\n",
+                    //    packetStruct.data.map_coords.i,
+                    //    packetStruct.data.map_coords.j,
+                    //packetStruct.data.map_coords.k);
                 } else
                 {
-                    bbDebug("type = %d, packetN = %llu, string  = %s\n",
-                        packetStruct.type, packetStruct.data.timestamp.packetN, packetStruct.data.str);
+                    //bbDebug("type = %d, packetN = %llu, string  = %s\n",
+                    //    packetStruct.type, packetStruct.data.timestamp.packetN, packetStruct.data.str);
                 }
                 if (packetStruct.type == PACKETTYPE_REQUESTTIMESTAMP)
                 {
@@ -156,7 +156,7 @@ int main(void){
                     status = sfTcpSocket_sendPacket(sockets[j], packet);
 
                     if (status != sfSocketDone){
-                        printf("Failed to echo user %d's message!\n", j);
+                        printf("Failed to echo user %d's message to user %d!\n",i, j);
                     } else
                     {
                         printf("Sent packet\n");

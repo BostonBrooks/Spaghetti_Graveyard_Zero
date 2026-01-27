@@ -144,8 +144,8 @@ bbFlag bbNetworkApp_checkInbox(bbNetwork* network)
         }
         if (packet->type == PACKETTYPE_SETGOALPOINT)
         {
-            bbDebug("coords received: i = %d, j = %d, k = %d\n",
-                packet->data.map_coords.i, packet->data.map_coords.j, packet->data.map_coords.k);
+            //bbDebug("coords received: i = %d, j = %d, k = %d\n",
+            //    packet->data.map_coords.i, packet->data.map_coords.j, packet->data.map_coords.k);
         }
 
         bbThreadedQueue_free(&network->inbox, (void**)&packet);

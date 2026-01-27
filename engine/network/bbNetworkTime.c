@@ -79,12 +79,12 @@ bbFlag bbNetworkTime_filterInbox (void* Network, void* Struct)
     bbNetworkPacket* packet = Struct;
 
 
-    bbDebug("sendTick = %llu, actTick = %llu\n", packet->sendTick, packet->actTick);
+    //bbDebug("sendTick = %llu, actTick = %llu\n", packet->sendTick, packet->actTick);
 
     if (packet->type == PACKETTYPE_SETGOALPOINT)
     {
-        bbDebug("packet coords i = %d, j = %d, k = %d\n",
-            packet->data.map_coords.i, packet->data.map_coords.j, packet->data.map_coords.k);
+        //bbDebug("packet coords i = %d, j = %d, k = %d\n",
+        //    packet->data.map_coords.i, packet->data.map_coords.j, packet->data.map_coords.k);
 
        return Success;
     }
@@ -145,10 +145,25 @@ bbFlag bbNetworkTime_updateTimeDiff(bbNetworkTime* network_time)
         flag = bbThreadedQueue_popR(&network_time->completed, (void**)&record);
         if (flag != Success) return Success;
 
-        U64 RTT = (record->local_receive_time - record->local_send_time) - (record->server_receive_time - record->
-            server_send_time);
-        I64 difference = ((I64)record->server_receive_time - (I64)record->local_send_time
-            + (I64)record->server_send_time - (I64)record->local_receive_time) / 2;
+
+
+
+        //T1 = client send
+        //T2 = server receive
+        //T3 = server send
+        //T4 = client receive
+        //RTT = (T4-T1)-(T3-T2)
+        //RTT = (client receive - client send) - (server send - server receive)
+
+        U64 RTT = (record->local_receive_time - record->local_send_time) - (record->server_send_time - record->
+            server_receive_time);
+
+        //difference = ((T2-T1)+(T3-T4))/2;
+
+        //difference = ((server receive-client send)+(server send-client receive))/2;
+
+        I64 difference = (((I64)record->server_receive_time - (I64)record->local_send_time)+(
+            + (I64)record->server_send_time - (I64)record->local_receive_time)) / 2;
         //printf("round trip time = %llu, time difference = %lld\n", RTT, difference);
 
         bbThreadedQueue_free(&network_time->completed, (void**)&record);

@@ -108,16 +108,16 @@ int main(void)
         if (network_time->timeCalibrated)
         {
 
-            bbNetworkTime_waitInt(network_time, network_time->network_tick_time + 1);
-
+            bbNetworkTime_waitInt(network_time, network_time->network_tick_time + 5);
+            bbDebug("tick time = %llu\n",network_time->network_tick_time);
         }
 
         rest_time = sfTime_asMicroseconds(  sfClock_restart(testClock1));
         double framerate = (double) 1000000 / (double) (run_time+rest_time);
         double load = (double) run_time / (double) (run_time+rest_time);
-        bbDebug("run_time = %llu, rest_time = %llu, "
-                "framerate = %f, load = %f\n",
-                run_time, rest_time, framerate, load);
+       // bbDebug("run_time = %llu, rest_time = %llu, "
+       //         "framerate = %f, load = %f\n",
+        //        run_time, rest_time, framerate, load);
 
 
     }
