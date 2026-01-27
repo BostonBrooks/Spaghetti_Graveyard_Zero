@@ -12,6 +12,7 @@
 #include "engine/logic/bbFlag.h"
 #include "engine/logic/bbIntTypes.h"
 #include "engine/logic/bbPoolHandle.h"
+#include "engine/threadsafe/bbThreadedPool.h"
 
 //Keep the last 32 of these and find the average of the middle 5
 typedef struct
@@ -44,9 +45,9 @@ typedef struct
     pthread_t clock_thread;
     bbThreadedQueue pending_pingRecords;
 
-    bbVPool maths_pool;
-    bbList* maths_list_chronological;
-    bbList* maths_list_sorted;
+    bbVPool* maths_pool;
+    bbList maths_list_chronological;
+    bbList maths_list_sorted;
     I32 maths_list_length;
 
     I64 time_difference;
@@ -58,7 +59,7 @@ typedef struct
 } bbNetworkClock;
 
 ///Launch network clock in new thread
-bbFlag bbNetworkClock_init(bbNetworkClock* network_clock);
+bbFlag bbNetworkClock_init(bbNetworkClock* network_clock, bbNetworkTime* network_time);
 
 ///Get the server's current clock tick
 bbFlag bbNetworkClock_getTick(bbNetworkClock* network_clock, U64* tick);
