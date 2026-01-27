@@ -122,8 +122,12 @@ bbFlag bbNetworkTime_filterInbox (void* Network, void* Struct)
             ping_record->server_send_time = record->server_send_time;
             ping_record->server_receive_time = record->server_receive_time;
             ping_record->local_receive_time = record->local_receive_time;
-            ping_record->time_difference = 696969696;
-            ping_record->round_trip_time = 3141592;
+            ping_record->time_difference =
+                (((I64)record->server_receive_time - (I64)record->local_send_time)
+                    +((I64)record->server_send_time - (I64)record->local_receive_time)) / 2;
+            ping_record->round_trip_time =
+                (record->local_receive_time - record->local_send_time)
+            - (record->server_send_time - record->server_receive_time);
 
             bbThreadedQueue_pushL(&network_clock->pending_pingRecords,ping_record);
             bbThreadedQueue_pushL(&network_time->completed,record);
@@ -205,15 +209,15 @@ bbFlag bbNetworkTime_updateTimeDiff(bbNetworkTime* network_time)
             bbVPool_free(network_time->mathsPool,(void*)maths);
 
             I64 average = 0;
-            bbNetworkTime_maths* maths;
-            bbList_getNth(&network_time->mathsSorted,(void**)&maths, 15);
-            average += maths->time_difference;
-            bbList_getNth(&network_time->mathsSorted,(void**)&maths, 16);
-            average += maths->time_difference;
-            bbList_getNth(&network_time->mathsSorted,(void**)&maths, 17);
-            average += maths->time_difference;
-            bbList_getNth(&network_time->mathsSorted,(void**)&maths, 18);
-            average += maths->time_difference;
+            bbNetworkTime_maths* maths1;
+            bbList_getNth(&network_time->mathsSorted,(void**)&maths1, 15);
+            average += maths1->time_difference;
+            bbList_getNth(&network_time->mathsSorted,(void**)&maths1, 16);
+            average += maths1->time_difference;
+            bbList_getNth(&network_time->mathsSorted,(void**)&maths1, 17);
+            average += maths1->time_difference;
+            bbList_getNth(&network_time->mathsSorted,(void**)&maths1, 18);
+            average += maths1->time_difference;
 
             average /= 4;
 
