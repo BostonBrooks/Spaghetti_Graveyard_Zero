@@ -1,5 +1,6 @@
 #include "engine/network/bbNetworkTime.h"
 
+#include "engine/network/bbNetworkClock.h"
 #include "engine/logic/bbBloatedPool.h"
 #include "engine/network/bbNetwork.h"
 #include "engine/logic/bbTerminal.h"
@@ -110,6 +111,21 @@ bbFlag bbNetworkTime_filterInbox (void* Network, void* Struct)
             //    record->packetN, record->local_send_time, record->server_receive_time, record->server_send_time, record->local_receive_time);
 
 
+
+            bbNetworkClock* network_clock = network_time->networkClock;
+            bbNetworkClock_pingRecord* ping_record;
+            bbThreadedQueue_alloc(&network_clock->pending_pingRecords,(void**)&ping_record);
+
+            ping_record->packetN = record->packetN;
+            ping_record->local_send_time = record->local_send_time;
+            ping_record->local_receive_time = record->local_receive_time;
+            ping_record->server_send_time = record->server_send_time;
+            ping_record->server_receive_time = record->server_receive_time;
+            ping_record->local_receive_time = record->local_receive_time;
+            ping_record->time_difference = 696969696;
+            ping_record->round_trip_time = 3141592;
+
+            bbThreadedQueue_pushL(&network_clock->pending_pingRecords,ping_record);
             bbThreadedQueue_pushL(&network_time->completed,record);
         }
         // "None" implies that the packet does not have to be placed in the network inbox

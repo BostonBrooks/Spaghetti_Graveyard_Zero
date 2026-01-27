@@ -2,7 +2,7 @@
 
 #include "engine/logic/bbBloatedPool.h"
 
-I32 sortByTimeDifference(void* a, void* b)
+I32 bbNetworkClock_mathsSort(void* a, void* b)
 {
     bbNetworkClock_maths* A = a;
     bbNetworkClock_maths* B = b;
@@ -20,6 +20,8 @@ void* bbNetwork_clockThread(void* Network_clock)
         bbDebug("Round trip time = %lu, time_difference = %ld\n",
             ping_record->round_trip_time,
             ping_record->time_difference);
+
+        bbThreadedQueue_free(&network_clock->pending_pingRecords,(void**)&ping_record);
     }
 }
 
@@ -48,7 +50,7 @@ bbFlag bbNetworkClock_init(bbNetworkClock* network_clock, bbNetworkTime* network
             network_clock->maths_pool,
             NULL,
             offsetof(bbNetworkClock_maths,sorted),
-            sortByTimeDifference);
+            bbNetworkClock_mathsSort);
 
     network_clock->maths_list_length = 0;
     network_clock->time_difference = 0;

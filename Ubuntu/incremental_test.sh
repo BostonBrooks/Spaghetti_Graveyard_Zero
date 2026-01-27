@@ -43,6 +43,7 @@ if gcc   -fsanitize=address -fno-omit-frame-pointer -g -I ../\
        ../engine/network/bbNetwork.c\
        ../engine/network/bbNetworkTime.c\
        ../engine/network/bbNetworkApp.c\
+       ../engine/network/bbNetworkClock.c\
        ../engine/threadsafe/bbThreadedPool.c\
        ../engine/threadsafe/bbThreadedQueue_search.c\
        ../engine/threadsafe/bbThreadedQueue.c\
