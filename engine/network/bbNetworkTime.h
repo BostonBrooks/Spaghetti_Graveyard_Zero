@@ -50,6 +50,7 @@ typedef struct
 // keep data to track difference between clocks
 typedef struct
 {
+    void* networkClock;
     sfClock* localClock;
     U64 packets_sent;
     U64 network_tick_time;
